@@ -1,22 +1,20 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Ear Training Home";
 }
 
 <div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <h1>Ear Training</h1>
+    <p class="lead">Ear Training is a free resource to assist in developing music ear skills</p>
 </div>
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Getting started</h2>
+        <h2>Find the DO</h2>
         <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+            Listen to a (tonic) note, and find the DO. As in solfeg syllables DO, RE, etc.
         </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <p><a class="btn btn-default" href="@Url.Action("Index", "DO")">Find the DO &raquo;</a></p>
+        <p></p>
     </div>
     <div class="col-md-4">
         <h2>Get more libraries</h2>
