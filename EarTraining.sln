@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2041
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EarTraining", "EarTraining\EarTraining.csproj", "{CA91EAB2-0EF2-4B79-8E7F-E8D23E55EA02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EarTraining.Tests", "EarTraining.Tests\EarTraining.Tests.csproj", "{5FBFC603-0D71-4AEB-AAD9-2F6D0A301627}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CA91EAB2-0EF2-4B79-8E7F-E8D23E55EA02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA91EAB2-0EF2-4B79-8E7F-E8D23E55EA02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA91EAB2-0EF2-4B79-8E7F-E8D23E55EA02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA91EAB2-0EF2-4B79-8E7F-E8D23E55EA02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FBFC603-0D71-4AEB-AAD9-2F6D0A301627}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FBFC603-0D71-4AEB-AAD9-2F6D0A301627}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FBFC603-0D71-4AEB-AAD9-2F6D0A301627}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FBFC603-0D71-4AEB-AAD9-2F6D0A301627}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D6BA94AB-C9DE-4F63-A20D-80A85F91EAF3}
+	EndGlobalSection
+EndGlobal
