@@ -10,20 +10,16 @@ namespace EarTraining.Controllers
         // GET: DO
         public ActionResult Index()
         {
-            //string filePath = @"C:\temp\test.wav";
-            //WaveGenerator wave = new WaveGenerator(WaveExampleType.ExampleSineWave);
-            //wave.SaveToFile(filePath);
-
-            //SoundPlayer player = new SoundPlayer(filePath);
-            //player.Play();
+            Pitch pitch = new Pitches().Random();
+            ViewBag.Pitch = pitch;
 
             return View();
         }
 
-        public FileResult GetFileStreamResult()
+        public FileResult GetFileStreamResult(double hertz)
         {
             byte[] buff;
-            WaveGenerator wave = new WaveGenerator(WaveExampleType.ExampleSineWave);
+            WaveGenerator wave = new WaveGenerator(WaveExampleType.ExampleSineWave, hertz);
             buff = wave.GetBytes();
             MemoryStream stream = new MemoryStream(buff);
             return new FileStreamResult(stream, "audio/wav");

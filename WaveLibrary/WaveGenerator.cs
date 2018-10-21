@@ -10,7 +10,7 @@ namespace WaveLibrary
         private WaveFormatChunk format;
         private WaveDataChunk data;
 
-        public WaveGenerator(WaveExampleType type)
+        public WaveGenerator(WaveExampleType type, double frequency)
         {
             // Init chunks
             header = new WaveHeader();
@@ -29,11 +29,11 @@ namespace WaveLibrary
                     data.shortArray = new short[numSamples];
 
                     int amplitude = 32760;  // Max amplitude for 16-bit audio
-                    double freq = 440.0f;   // Concert A: 440Hz
+                    //double freq = 440.0f;   // Concert A: 440Hz
 
                     // The "angle" used in the function, adjusted for the number of channels and sample rate.
                     // This value is like the period of the wave.
-                    double t = (Math.PI * 2 * freq) / (format.dwSamplesPerSec * format.wChannels);
+                    double t = (Math.PI * 2 * frequency) / (format.dwSamplesPerSec * format.wChannels);
 
                     for (uint i = 0; i < numSamples - 1; i++)
                     {
