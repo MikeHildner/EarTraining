@@ -7,3 +7,7 @@
 <div class="row">
     Find the DO.
 </div>
+<audio controls preload='none'>
+    @*<source src='/Components/PlayFile?FilePath=[filename.wav]' type='audio/wav'>*@
+    <source src='@Url.Action("GetFileStreamResult", "DO")' type='audio/wav'>
+</audio>
