@@ -15,12 +15,6 @@
         <p>Each time this page is refreshed, a new DO is assigned</p>
         <input type="button" value="Get a New DO" onclick="location.href='@Url.Action("Index", "DO")'" />
     </div>
-    <div class="col-md-12">
-        <hr />
-    </div>
-    <div class="col-md-12">
-        Your DO is @ViewBag.Pitch.PitchName - @ViewBag.Pitch.Hertz Hz
-    </div>
 </div>
 <div class="row">
     <div class="col-md-12">
@@ -28,5 +22,13 @@
             @*<source src='/Components/PlayFile?FilePath=[filename.wav]' type='audio/wav'>*@
             <source src='@Url.Action("GetFileStreamResult", "DO", new { hertz = ViewBag.Pitch.Hertz })' type='audio/wav'>
         </audio>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <hr />
+    </div>
+    <div class="col-md-12">
+        Your DO is @ViewBag.Pitch.PitchName - @ViewBag.Pitch.Hertz Hz
     </div>
 </div>
