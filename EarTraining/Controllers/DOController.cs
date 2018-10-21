@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Media;
 using System.Web.Mvc;
+using WaveLibrary;
 
 namespace EarTraining.Controllers
 {
@@ -11,6 +9,13 @@ namespace EarTraining.Controllers
         // GET: DO
         public ActionResult Index()
         {
+            string filePath = @"C:\temp\test.wav";
+            WaveGenerator wave = new WaveGenerator(WaveExampleType.ExampleSineWave);
+            wave.Save(filePath);
+
+            SoundPlayer player = new SoundPlayer(filePath);
+            player.Play();
+
             return View();
         }
     }

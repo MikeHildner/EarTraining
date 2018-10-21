@@ -15,7 +15,7 @@ namespace EarTraining.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Supplemental Eartraining Drills";
 
             return View();
         }
