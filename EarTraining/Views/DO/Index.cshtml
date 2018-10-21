@@ -6,7 +6,20 @@
 
 <div class="row">
     <div class="col-md-12">
-        Find the DO. Your DO is @ViewBag.Pitch.PitchName - @ViewBag.Pitch.Hertz Hz
+        Task: Find the DO. Play the audio below, and find the DO
+    </div>
+    <div class="col-md-12">
+        <hr />
+    </div>
+    <div class="col-md-12">
+        <p>Each time this page is refreshed, a new DO is assigned</p>
+        <input type="button" value="Get a New DO" onclick="location.href='@Url.Action("Index", "DO")'" />
+    </div>
+    <div class="col-md-12">
+        <hr />
+    </div>
+    <div class="col-md-12">
+        Your DO is @ViewBag.Pitch.PitchName - @ViewBag.Pitch.Hertz Hz
     </div>
 </div>
 <div class="row">
