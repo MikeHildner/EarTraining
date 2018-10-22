@@ -6,14 +6,23 @@
 
 <div class="row">
     <div class="col-md-12">
-        Task: Find the DO. Play the audio below, and find the DO
+        Task: Find the DO. Play the audio below, and find the DO.
     </div>
+</div>
+<div class="row">
     <div class="col-md-12">
         <hr />
     </div>
+</div>
+<div class="row">
     <div class="col-md-12">
-        <p>Each time this page is refreshed, a new DO is assigned</p>
+        <p>Each time this page is refreshed, a new DO is assigned.</p>
         <input type="button" value="Get a New DO" onclick="location.href='@Url.Action("Index", "DO")'" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <hr />
     </div>
 </div>
 <div class="row">
@@ -29,6 +38,7 @@
         <hr />
     </div>
     <div class="col-md-12">
-        Your DO is @ViewBag.Pitch.PitchName - @ViewBag.Pitch.Hertz Hz
+        <p>Hover over the below to reveal your DO.</p>
+        <p class="spoiler">Your DO is <b>@ViewBag.Pitch.PitchName</b> - @ViewBag.Pitch.Hertz Hz</p>
     </div>
 </div>
