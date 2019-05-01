@@ -150,6 +150,7 @@
     <Compile Include="Controllers\DOController.cs" />
     <Compile Include="Controllers\DonateController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\L1C1Controller.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -198,6 +199,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\DO\Index.cshtml" />
     <Content Include="Views\Donate\Index.cshtml" />
+    <Content Include="Views\L1C1\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

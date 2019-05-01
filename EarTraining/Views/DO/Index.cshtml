@@ -28,7 +28,6 @@
 <div class="row">
     <div class="col-md-12">
         <audio controls preload='none'>
-            @*<source src='/Components/PlayFile?FilePath=[filename.wav]' type='audio/wav'>*@
             <source src='@Url.Action("GetFileStreamResult", "DO", new { hertz = ViewBag.Pitch.Hertz })' type='audio/wav'>
         </audio>
     </div>

@@ -93,10 +93,9 @@ namespace WaveLibrary
 
         public byte[] GetBytes()
         {
-            // Create a file (it always overwrites)
             MemoryStream memoryStream = new MemoryStream();
 
-            // Use BinaryWriter to write the bytes to the file
+            // Use BinaryWriter to write the bytes to the stream.
             BinaryWriter writer = new BinaryWriter(memoryStream);
 
             // Write the header
