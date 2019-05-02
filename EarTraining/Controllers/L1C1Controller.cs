@@ -138,7 +138,6 @@ namespace EarTraining.Controllers
         {
             var solfeg = new Solfeg(frequency);
             double gain = 0.2;
-            SignalGeneratorType sgType = SignalGeneratorType.Sin;
             var noteDuration = TimeSpan.FromSeconds(5);
 
             var note1 = NAudioHelper.GetSampleProvider(gain, solfeg.DoFrequency, SignalGeneratorType.Sin, noteDuration);
