@@ -86,17 +86,28 @@ namespace EarTrainingLibrary.Utility
             }
         }
 
+        public double LowTiFrequency
+        {
+            get
+            {
+                return GetFrequencyByHalfStepsFromDo(-1);
+            }
+        }
+
         public double GetFrequencyByHalfStepsFromDo(int halfStepsFromDo)
         {
+            double frequencyRatio = Math.Pow(2, Math.Abs(halfStepsFromDo) / 12d);
+            double thisFrequency;
+
             if (halfStepsFromDo >= 0)
             {
-                double frequencyRatio = Math.Pow(2, halfStepsFromDo / 12d);
-                double thisFrequency = _doFrequency * frequencyRatio;
+                thisFrequency = _doFrequency * frequencyRatio;
                 return thisFrequency;
             }
             else
             {
-                throw new NotSupportedException("Negative half steps are not yet supported.");
+                thisFrequency = _doFrequency / frequencyRatio;
+                return thisFrequency;
             }
         }
     }

@@ -11,6 +11,7 @@ namespace EarTrainingLibrary.Enums
         DoDoReDo,
         DoDoFaMi,
         DoDoLaSo,
-        DoDoTiDo
+        DoDoTiHighDo,
+        DoDoLowTiDo
     }
 }

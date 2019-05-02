@@ -39,7 +39,12 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <audio controls preload='none'>
+        <input type="button" value="Get a New Resolution" onclick="setAudResolutionSrc()" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <audio id="audResolution" controls preload='none'>
             <source src='@Url.Action("GetResolution", "L1C1", new { frequency = ViewBag.Pitch.Hertz })' type='audio/wav'>
         </audio>
     </div>
@@ -50,6 +55,62 @@
     </div>
     <div class="col-md-12">
         <p>Hover over the below to reveal the resolution</p>
-        <p class="spoiler">Your resolution is <b>@ViewBag.ResolutionName</b></p>
+        <p class="spoiler" id="resolution">Your resolution goes here<b>@ViewBag.ResolutionName</b></p>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-md-12">
+        <p>Mixing Test</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <audio controls preload='none'>
+            <source src='@Url.Action("MixingTest", "L1C1", new { frequency = ViewBag.Pitch.Hertz })' type='audio/wav'>
+        </audio>
+    </div>
+</div>
+
+@section  scripts {
+    <script>
+        $(document).ready(function () {
+            setAudResolutionSrc();
+        });
+
+        function setAudResolutionSrc() {
+            var baseSrc = '@Url.Action("GetResolution", "L1C1", new { frequency = ViewBag.Pitch.Hertz })';
+            var randomInt = getRandomInt(0, 4);
+            var src = baseSrc + '&type=' + randomInt;
+            $('#audResolution').attr('src', src);
+
+            var msg = 'Your resolution is ';
+            switch (randomInt) {
+                case 0:
+                    msg = msg + 'DO DO RE DO';
+                    break;
+                case 1:
+                    msg = msg + 'DO DO FA MI';
+                    break;
+                case 2:
+                    msg = msg + 'DO DO LA SO';
+                    break;
+                case 3:
+                    msg = msg + 'DO DO TI DO';
+                    break;
+                case 4:
+                    msg = msg + 'DO DO TI DO';
+                    break;
+            }
+
+            $('#resolution').text(msg);
+    }
+
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+    </script>
+}
