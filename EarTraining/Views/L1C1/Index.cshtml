@@ -16,10 +16,22 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <p>Each time this page is refreshed, a new resolution is assigned.</p>
-        <input type="button" value="Get a New Resolution" onclick="location.href='@Url.Action("Index", "L1C1")'" />
+        <p>Each time this page is refreshed, a new DO is assigned.</p>
+        <input type="button" value="Get a New DO" onclick="location.href='@Url.Action("Index", "L1C1")'" />
     </div>
 </div>
+<div class="row">
+    <div class="col-md-12">
+        <audio controls preload='none'>
+            <source src='@Url.Action("GetDO", "L1C1", new { frequency = ViewBag.Pitch.Hertz })' type='audio/wav'>
+        </audio>
+        <div class="col-md-12">
+            <p>Hover over the below to reveal the DO</p>
+            <p class="spoiler">Your DO is <b>@ViewBag.Pitch.PitchName</b> - @ViewBag.Pitch.Hertz Hz</p>
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-md-12">
         <hr />
@@ -28,7 +40,7 @@
 <div class="row">
     <div class="col-md-12">
         <audio controls preload='none'>
-            <source src='@Url.Action("GetFileStreamResult", "L1C1", new { hertz = ViewBag.Pitch.Hertz })' type='audio/wav'>
+            <source src='@Url.Action("GetResolution", "L1C1", new { frequency = ViewBag.Pitch.Hertz })' type='audio/wav'>
         </audio>
     </div>
 </div>
@@ -38,6 +50,6 @@
     </div>
     <div class="col-md-12">
         <p>Hover over the below to reveal the resolution</p>
-        <p class="spoiler">Your DO is <b>@ViewBag.ResolutionName</b> - <b>@ViewBag.Pitch.PitchName</b> - @ViewBag.Pitch.Hertz Hz</p>
+        <p class="spoiler">Your resolution is <b>@ViewBag.ResolutionName</b></p>
     </div>
 </div>
