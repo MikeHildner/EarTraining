@@ -114,11 +114,15 @@ namespace EarTraining.Controllers
             return ms;
         }
 
-        //public FileResult MixingTest(double frequency)
-        //{
-        //    var solfeg = new Solfeg(frequency);
-        //    double gain = 0.2;
-        //    var noteDuration = TimeSpan.FromSeconds(5);
+        public FileResult MixingTest(double frequency)
+        {
+            var solfeg = new Solfeg(frequency);
+            double gain = 0.2;
+            SignalGeneratorType sgType = SignalGeneratorType.Sin;
+            var noteDuration = TimeSpan.FromSeconds(5);
+
+            var note1 = NAudioHelper.GetSampleProvider(gain, solfeg.DoFrequency, SignalGeneratorType.Sin, noteDuration);
+            var note2 = NAudioHelper.GetSampleProvider(gain, solfeg.MiFrequency, SignalGeneratorType.SawTooth, noteDuration);
 
         //    var note1 = NAudioHelper.GetSampleProvider(gain, solfeg.DoFrequency, SignalGeneratorType.SawTooth, noteDuration);
         //    var note2 = NAudioHelper.GetSampleProvider(gain, solfeg.MaFrequency, SignalGeneratorType.SawTooth, noteDuration);
