@@ -2,10 +2,10 @@
     ViewBag.Title = "Eartraining Home";
 }
 
-<div class="jumbotron">
+@*<div class="jumbotron">
     <h1>Eartraining</h1>
     <p class="lead">Eartraining is a free resource to assist in developing music ear skills</p>
-</div>
+</div>*@
 
 <div class="row">
     <div class="col-md-4">
@@ -21,17 +21,31 @@
         <p>
             Solfeg resolutions.
         </p>
-        <p><a class="btn btn-default" href="@Url.Action("Index", "L1C1")">Level 1, Chapter 1 &raquo;</a></p>
+        <p><a class="btn btn-default" href="@Url.Action("Index", "L1C1" )">Level 1, Chapter 1 &raquo;</a></p>
         <p></p>
     </div>
-    @*<div class="col-md-4">
-            <h2>Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </div>*@
+    <div class="col-md-4">
+        <h2>Major or Minor Triad</h2>
+        <p>
+            Determine if chord is a major or minor triad.
+        </p>
+        <p><a class="btn btn-default" href="@Url.Action("Index", "MajorOrMinorTriad" )">Major or Minor Triad &raquo;</a></p>
+        <p></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Triad Identification</h2>
+        <p>
+            Determine the triad. e.g. I, IV, vi etc.
+        </p>
+        <p><a class="btn btn-default" href="@Url.Action("Index", "TriadIdentification" )">Triad Identification &raquo;</a></p>
+        <p></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Solfeg Pitch Identification</h2>
+        <p>
+            Determine the solfeg pitch. e.g. Do, Re, Mi etc.
+        </p>
+        <p><a class="btn btn-default" href="@Url.Action("Index", "PitchIdentification")">Pitch Identification &raquo;</a></p>
+        <p></p>
+    </div>
 </div>

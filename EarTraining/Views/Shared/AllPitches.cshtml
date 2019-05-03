@@ -1,0 +1,81 @@
+﻿<h4>All Pitches</h4>
+<div class="row">
+    <div class="col-md-4">
+        <p><b>Do</b> - Tonic</p>
+        <audio controls preload='none'>
+            <source src='@Url.Action("GetPitch", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz, type = 0 })' type='audio/wav'>
+        </audio>
+    </div>
+    <div class="col-md-4">
+        <p><b>Ra</b> - Lowered 2nd</p>
+        <audio controls preload='none'>
+            <source src='@Url.Action("GetPitch", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz, type = 1 })' type='audio/wav'>
+        </audio>
+    </div>
+    <div class="col-md-4">
+        <p><b>Re</b> - 2nd</p>
+        <audio controls preload='none'>
+            <source src='@Url.Action("GetPitch", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz, type = 2 })' type='audio/wav'>
+        </audio>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <p><b>Ma</b> - Minor 3rd</p>
+        <audio controls preload='none'>
+            <source src='@Url.Action("GetPitch", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz, type = 3 })' type='audio/wav'>
+        </audio>
+    </div>
+    <div class="col-md-4">
+        <p><b>Mi</b> - Major 3rd</p>
+        <audio controls preload='none'>
+            <source src='@Url.Action("GetPitch", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz, type = 4 })' type='audio/wav'>
+        </audio>
+    </div>
+    <div class="col-md-4">
+        <p><b>Fa</b> - Perfect 4th</p>
+        <audio controls preload='none'>
+            <source src='@Url.Action("GetPitch", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz, type = 5 })' type='audio/wav'>
+        </audio>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <p><b>Se</b> - Diminished 5th</p>
+        <audio controls preload='none'>
+            <source src='@Url.Action("GetPitch", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz, type = 6 })' type='audio/wav'>
+        </audio>
+    </div>
+    <div class="col-md-4">
+        <p><b>So</b> - Perfect 5th</p>
+        <audio controls preload='none'>
+            <source src='@Url.Action("GetPitch", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz, type = 7 })' type='audio/wav'>
+        </audio>
+    </div>
+    <div class="col-md-4">
+        <p><b>Le</b> - Minor 6th</p>
+        <audio controls preload='none'>
+            <source src='@Url.Action("GetPitch", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz, type = 8 })' type='audio/wav'>
+        </audio>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <p><b>La</b> - Major 6th</p>
+        <audio controls preload='none'>
+            <source src='@Url.Action("GetPitch", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz, type = 9 })' type='audio/wav'>
+        </audio>
+    </div>
+    <div class="col-md-4">
+        <p><b>Te</b> - Minor 7th</p>
+        <audio controls preload='none'>
+            <source src='@Url.Action("GetPitch", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz, type = 10 })' type='audio/wav'>
+        </audio>
+    </div>
+    <div class="col-md-4">
+        <p><b>Ti</b> - Major 7th</p>
+        <audio controls preload='none'>
+            <source src='@Url.Action("GetPitch", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz, type = 11 })' type='audio/wav'>
+        </audio>
+    </div>
+</div>

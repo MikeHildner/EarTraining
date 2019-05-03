@@ -157,6 +157,9 @@
     <Compile Include="Controllers\DonateController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\L1C1Controller.cs" />
+    <Compile Include="Controllers\MajorOrMinorTriadController.cs" />
+    <Compile Include="Controllers\PitchIdentificationController.cs" />
+    <Compile Include="Controllers\TriadIdentificationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -188,6 +191,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\site.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -206,6 +210,10 @@
     <Content Include="Views\DO\Index.cshtml" />
     <Content Include="Views\Donate\Index.cshtml" />
     <Content Include="Views\L1C1\Index.cshtml" />
+    <Content Include="Views\MajorOrMinorTriad\Index.cshtml" />
+    <Content Include="Views\TriadIdentification\Index.cshtml" />
+    <Content Include="Views\PitchIdentification\Index.cshtml" />
+    <Content Include="Views\Shared\AllPitches.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

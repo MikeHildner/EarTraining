@@ -24,22 +24,10 @@ namespace EarTraining.Controllers
 
         public FileResult GetDO(double frequency)
         {
-            var doNote = new SignalGenerator()
-            {
-                Gain = 0.2,
-                Frequency = frequency,
-                Type = SignalGeneratorType.Sin
-            };
-
-            var phrase = doNote.Take(TimeSpan.FromSeconds(1));
-
-            var stwp = new SampleToWaveProvider(phrase);
-
-            MemoryStream ms = new MemoryStream();
-            WaveFileWriter.WriteWavFileToStream(ms, stwp);
-            ms.Position = 0;
-            return new FileStreamResult(ms, "audio/wav");
+            Stream stream = Solfeg.GetDONote(frequency);
+            return new FileStreamResult(stream, "audio/wav");
         }
+
         public FileResult GetResolution(double frequency, int type)
         {
             ResolutionType rt = (ResolutionType)type;
@@ -52,8 +40,8 @@ namespace EarTraining.Controllers
             double bpm = 100;
             double quarterNotemillis = (bpm / 60) * 1000;
             TimeSpan noteDuration = TimeSpan.FromMilliseconds(quarterNotemillis);
-            SignalGeneratorType sgType = SignalGeneratorType.Sin;
             double gain = 0.2;
+            SignalGeneratorType sgType = SignalGeneratorType.Sin;
 
             ISampleProvider shortRest = new SignalGenerator()
             {
@@ -117,14 +105,6 @@ namespace EarTraining.Controllers
                 .FollowedBy(shortRest)
                 .FollowedBy(note4);
 
-    //        var phrase = note1.Take(noteDuration)
-    //.FollowedBy(shortRest)
-    //.FollowedBy(note2.Take(noteDuration))
-    //.FollowedBy(shortRest)
-    //.FollowedBy(note3.Take(noteDuration))
-    //.FollowedBy(shortRest)
-    //.FollowedBy(note4.Take(noteDuration));
-
             var stwp = new SampleToWaveProvider(phrase);
 
             MemoryStream ms = new MemoryStream();
@@ -134,27 +114,25 @@ namespace EarTraining.Controllers
             return ms;
         }
 
-        public FileResult MixingTest(double frequency)
-        {
-            var solfeg = new Solfeg(frequency);
-            double gain = 0.2;
-            SignalGeneratorType sgType = SignalGeneratorType.Sin;
-            var noteDuration = TimeSpan.FromSeconds(5);
+        //public FileResult MixingTest(double frequency)
+        //{
+        //    var solfeg = new Solfeg(frequency);
+        //    double gain = 0.2;
+        //    var noteDuration = TimeSpan.FromSeconds(5);
 
-            var note1 = NAudioHelper.GetSampleProvider(gain, solfeg.DoFrequency, SignalGeneratorType.Sin, noteDuration);
-            var note2 = NAudioHelper.GetSampleProvider(gain, solfeg.MiFrequency, SignalGeneratorType.SawTooth, noteDuration);
+        //    var note1 = NAudioHelper.GetSampleProvider(gain, solfeg.DoFrequency, SignalGeneratorType.SawTooth, noteDuration);
+        //    var note2 = NAudioHelper.GetSampleProvider(gain, solfeg.MaFrequency, SignalGeneratorType.SawTooth, noteDuration);
 
-            MixingSampleProvider msp = new MixingSampleProvider(note1.WaveFormat);
-            msp.AddMixerInput(note1);
-            msp.AddMixerInput(note2);
-            
+        //    MixingSampleProvider msp = new MixingSampleProvider(note1.WaveFormat);
+        //    msp.AddMixerInput(note1);
+        //    msp.AddMixerInput(note2);
 
-            var wp = msp.ToWaveProvider();
-            MemoryStream ms = new MemoryStream();
-            WaveFileWriter.WriteWavFileToStream(ms, wp);
-            ms.Position = 0;
+        //    var wp = msp.ToWaveProvider();
+        //    MemoryStream ms = new MemoryStream();
+        //    WaveFileWriter.WriteWavFileToStream(ms, wp);
+        //    ms.Position = 0;
 
-            return new FileStreamResult(ms, "audio/wav");
-        }
+        //    return new FileStreamResult(ms, "audio/wav");
+        //}
     }
 }

@@ -1,5 +1,8 @@
-﻿using System;
+﻿using NAudio.Wave;
+using NAudio.Wave.SampleProviders;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,12 +26,30 @@ namespace EarTrainingLibrary.Utility
             }
         }
 
+        public double RaFrequency
+        {
+            get
+            {
+                double frequency = GetFrequencyByHalfStepsFromDo(1);
+                return frequency;
+            }
+        }
+
         public double ReFrequency
         {
             get
             {
-                double reFrequency = GetFrequencyByHalfStepsFromDo(2);
-                return reFrequency;
+                double frequency = GetFrequencyByHalfStepsFromDo(2);
+                return frequency;
+            }
+        }
+
+        public double MaFrequency
+        {
+            get
+            {
+                double frequency = GetFrequencyByHalfStepsFromDo(3);
+                return frequency;
             }
         }
 
@@ -36,8 +57,8 @@ namespace EarTrainingLibrary.Utility
         {
             get
             {
-                double reFrequency = GetFrequencyByHalfStepsFromDo(4);
-                return reFrequency;
+                double frequency = GetFrequencyByHalfStepsFromDo(4);
+                return frequency;
             }
         }
 
@@ -45,8 +66,17 @@ namespace EarTrainingLibrary.Utility
         {
             get
             {
-                double reFrequency = GetFrequencyByHalfStepsFromDo(5);
-                return reFrequency;
+                double frequency = GetFrequencyByHalfStepsFromDo(5);
+                return frequency;
+            }
+        }
+
+        public double SeFrequency
+        {
+            get
+            {
+                double frequency = GetFrequencyByHalfStepsFromDo(6);
+                return frequency;
             }
         }
 
@@ -54,8 +84,17 @@ namespace EarTrainingLibrary.Utility
         {
             get
             {
-                double reFrequency = GetFrequencyByHalfStepsFromDo(7);
-                return reFrequency;
+                double frequency = GetFrequencyByHalfStepsFromDo(7);
+                return frequency;
+            }
+        }
+
+        public double LeFrequency
+        {
+            get
+            {
+                double frequency = GetFrequencyByHalfStepsFromDo(8);
+                return frequency;
             }
         }
 
@@ -63,8 +102,17 @@ namespace EarTrainingLibrary.Utility
         {
             get
             {
-                double reFrequency = GetFrequencyByHalfStepsFromDo(9);
-                return reFrequency;
+                double frequency = GetFrequencyByHalfStepsFromDo(9);
+                return frequency;
+            }
+        }
+
+        public double TeFrequency
+        {
+            get
+            {
+                double frequency = GetFrequencyByHalfStepsFromDo(10);
+                return frequency;
             }
         }
 
@@ -72,8 +120,8 @@ namespace EarTrainingLibrary.Utility
         {
             get
             {
-                double reFrequency = GetFrequencyByHalfStepsFromDo(11);
-                return reFrequency;
+                double frequency = GetFrequencyByHalfStepsFromDo(11);
+                return frequency;
             }
         }
 
@@ -81,8 +129,8 @@ namespace EarTrainingLibrary.Utility
         {
             get
             {
-                double reFrequency = GetFrequencyByHalfStepsFromDo(12);
-                return reFrequency;
+                double frequency = GetFrequencyByHalfStepsFromDo(12);
+                return frequency;
             }
         }
 
@@ -110,5 +158,25 @@ namespace EarTrainingLibrary.Utility
                 return thisFrequency;
             }
         }
+
+        public static Stream GetDONote(double frequency)
+        {
+            var doNote = new SignalGenerator()
+            {
+                Gain = 0.2,
+                Frequency = frequency,
+                Type = SignalGeneratorType.Sin
+            };
+
+            var phrase = doNote.Take(TimeSpan.FromSeconds(1));
+
+            var stwp = new SampleToWaveProvider(phrase);
+
+            MemoryStream ms = new MemoryStream();
+            WaveFileWriter.WriteWavFileToStream(ms, stwp);
+            ms.Position = 0;
+            return ms;
+        }
+
     }
 }

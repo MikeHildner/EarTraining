@@ -1,0 +1,163 @@
+﻿@{
+    ViewBag.Title = "Pitch Identification";
+}
+<h2>@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        Determine the solfeg pitch.
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <p>Each time this page is refreshed, a new DO is assigned.</p>
+        <input type="button" value="Get a New DO" onclick="location.href='@Url.Action("Index", "PitchIdentification")'" />
+        <audio controls preload='none'>
+            <source src='@Url.Action("GetDO", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz })' type='audio/wav'>
+        </audio>
+        <p>Hover over the below to reveal the DO</p>
+        <p class="spoiler">Your DO is <b>@ViewBag.Pitch.PitchName</b> - @ViewBag.Pitch.Hertz Hz</p>
+    </div>
+    <div class="col-md-6">
+        <p>Major scale pitch identification.</p>
+        <input type="button" value="Get a New Pitch" onclick="setMajorAudPitchSrc()" />
+        <audio id="majorAudPitch" controls preload='none'>
+            <source src='@Url.Action("GetPitch", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz })' type='audio/wav'>
+        </audio>
+        <p>Hover over the below to reveal the pitch</p>
+        <p class="spoiler" id="majorPitch">Your pitch here<b>@ViewBag.Pitch</b></p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <hr />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <p>Each time this page is refreshed, a new DO is assigned.</p>
+        <input type="button" value="Get a New DO" onclick="location.href='@Url.Action("Index", "PitchIdentification")'" />
+        <audio controls preload='none'>
+            <source src='@Url.Action("GetDO", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz })' type='audio/wav'>
+        </audio>
+        <p>Hover over the below to reveal the DO</p>
+        <p class="spoiler">Your DO is <b>@ViewBag.Pitch.PitchName</b> - @ViewBag.Pitch.Hertz Hz</p>
+    </div>
+    <div class="col-md-6">
+        <p>Minor scale pitch identification.</p>
+        <input type="button" value="Get a New Pitch" onclick="setMinorAudPitchSrc()" />
+        <audio id="minorAudPitch" controls preload='none'>
+            <source src='@Url.Action("GetPitch", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz })' type='audio/wav'>
+        </audio>
+        <p>Hover over the below to reveal the pitch</p>
+        <p class="spoiler" id="minorPitch">Your pitch here<b>@ViewBag.Pitch</b></p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <hr />
+    </div>
+</div>
+
+@{
+    Html.RenderPartial("AllPitches");
+}
+
+@section  scripts {
+    <script>
+        $(document).ready(function () {
+            setMajorAudPitchSrc();
+            setMinorAudPitchSrc();
+        });
+
+        function setMajorAudPitchSrc() {
+            var baseSrc = '@Url.Action("GetPitch", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz })';
+            var randomInt = getRandomInt(0, 12, [1,3,6,8,10]);
+            var src = baseSrc + '&type=' + randomInt;
+            $('#majorAudPitch').attr('src', src);
+
+            var msg = 'Your pitch is ';
+            switch (randomInt) {
+                case 0:
+                    msg = msg + 'Do';
+                    break;
+                case 2:
+                    msg = msg + 'Re';
+                    break;
+                case 4:
+                    msg = msg + 'Mi';
+                    break;
+                case 5:
+                    msg = msg + 'Fa';
+                    break;
+                case 7:
+                    msg = msg + 'So';
+                    break;
+                case 9:
+                    msg = msg + 'La';
+                    break;
+                case 11:
+                    msg = msg + 'Ti';
+                    break;
+                case 12:
+                    msg = msg + 'Do';
+                    break;
+                default:
+                    alert('Pitch ' + randomInt + ' is not valid for a major scale.');
+                    break;
+
+            }
+
+            $('#majorPitch').text(msg);
+        }
+
+        function setMinorAudPitchSrc() {
+            var baseSrc = '@Url.Action("GetPitch", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz })';
+            var randomInt = getRandomInt(0, 12, [1,4,6,9,11]);
+            var src = baseSrc + '&type=' + randomInt;
+            $('#minorAudPitch').attr('src', src);
+
+            var msg = 'Your pitch is ';
+            switch (randomInt) {
+                case 0:
+                    msg = msg + 'Do';
+                    break;
+                case 2:
+                    msg = msg + 'Re';
+                    break;
+                case 3:
+                    msg = msg + 'Ma';
+                    break;
+                case 5:
+                    msg = msg + 'Fa';
+                    break;
+                case 7:
+                    msg = msg + 'So';
+                    break;
+                case 8:
+                    msg = msg + 'Le';
+                    break;
+                case 10:
+                    msg = msg + 'Te';
+                    break;
+                case 12:
+                    msg = msg + 'Do';
+                    break;
+                default:
+                    alert('Pitch ' + randomInt + ' is not valid for a minor scale.');
+                    break;
+            }
+
+            $('#minorPitch').text(msg);
+        }
+
+    </script>
+}

@@ -45,10 +45,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\ChordType.cs" />
     <Compile Include="Enums\ResolutionType.cs" />
     <Compile Include="NAudio\NAudioHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\ExtensionMethods.cs" />
     <Compile Include="Utility\Solfeg.cs" />
+    <Compile Include="Enums\SolfegPitch.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
