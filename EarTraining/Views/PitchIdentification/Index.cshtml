@@ -21,7 +21,7 @@
             <source src='@Url.Action("GetDO", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz })' type='audio/wav'>
         </audio>
         <p>Hover over the below to reveal the DO</p>
-        <p class="spoiler">Your DO is <b>@ViewBag.Pitch.PitchName</b> - @ViewBag.Pitch.Hertz Hz</p>
+        <p class="spoiler">Your DO is @ViewBag.Pitch.PitchName< - @ViewBag.Pitch.Hertz Hz</p>
     </div>
     <div class="col-md-6">
         <p>Major scale pitch identification.</p>
@@ -30,7 +30,7 @@
             <source src='@Url.Action("GetPitch", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz })' type='audio/wav'>
         </audio>
         <p>Hover over the below to reveal the pitch</p>
-        <p class="spoiler" id="majorPitch">Your pitch here<b>@ViewBag.Pitch</b></p>
+        <p class="spoiler" id="majorPitch">Your pitch here @ViewBag.Pitch></p>
     </div>
 </div>
 
@@ -48,7 +48,7 @@
             <source src='@Url.Action("GetDO", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz })' type='audio/wav'>
         </audio>
         <p>Hover over the below to reveal the DO</p>
-        <p class="spoiler">Your DO is <b>@ViewBag.Pitch.PitchName</b> - @ViewBag.Pitch.Hertz Hz</p>
+        <p class="spoiler">Your DO is @ViewBag.Pitch.PitchName - @ViewBag.Pitch.Hertz Hz</p>
     </div>
     <div class="col-md-6">
         <p>Minor scale pitch identification.</p>
@@ -57,7 +57,7 @@
             <source src='@Url.Action("GetPitch", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz })' type='audio/wav'>
         </audio>
         <p>Hover over the below to reveal the pitch</p>
-        <p class="spoiler" id="minorPitch">Your pitch here<b>@ViewBag.Pitch</b></p>
+        <p class="spoiler" id="minorPitch">Your pitch here @ViewBag.Pitch</p>
     </div>
 </div>
 
@@ -87,28 +87,28 @@
             var msg = 'Your pitch is ';
             switch (randomInt) {
                 case 0:
-                    msg = msg + 'Do';
+                    msg = msg + 'DO';
                     break;
                 case 2:
-                    msg = msg + 'Re';
+                    msg = msg + 'RE';
                     break;
                 case 4:
-                    msg = msg + 'Mi';
+                    msg = msg + 'MI';
                     break;
                 case 5:
-                    msg = msg + 'Fa';
+                    msg = msg + 'FA';
                     break;
                 case 7:
-                    msg = msg + 'So';
+                    msg = msg + 'SO';
                     break;
                 case 9:
-                    msg = msg + 'La';
+                    msg = msg + 'LA';
                     break;
                 case 11:
-                    msg = msg + 'Ti';
+                    msg = msg + 'TI';
                     break;
                 case 12:
-                    msg = msg + 'Do';
+                    msg = msg + 'DO';
                     break;
                 default:
                     alert('Pitch ' + randomInt + ' is not valid for a major scale.');
@@ -134,22 +134,22 @@
                     msg = msg + 'Re';
                     break;
                 case 3:
-                    msg = msg + 'Ma';
+                    msg = msg + 'RI / ME';
                     break;
                 case 5:
-                    msg = msg + 'Fa';
+                    msg = msg + 'FA';
                     break;
                 case 7:
-                    msg = msg + 'So';
+                    msg = msg + 'SO';
                     break;
                 case 8:
-                    msg = msg + 'Le';
+                    msg = msg + 'SI / LE';
                     break;
                 case 10:
-                    msg = msg + 'Te';
+                    msg = msg + 'LI / TE';
                     break;
                 case 12:
-                    msg = msg + 'Do';
+                    msg = msg + 'DO';
                     break;
                 default:
                     alert('Pitch ' + randomInt + ' is not valid for a minor scale.');
