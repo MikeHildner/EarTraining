@@ -42,13 +42,6 @@
 
 <div class="row">
     <div class="col-md-6">
-        <p>Each time this page is refreshed, a new DO is assigned.</p>
-        <input type="button" value="Get a New DO" onclick="location.href='@Url.Action("Index", "PitchIdentification")'" />
-        <audio controls preload='none'>
-            <source src='@Url.Action("GetDO", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz })' type='audio/wav'>
-        </audio>
-        <p>Hover over the below to reveal the DO</p>
-        <p class="spoiler">Your DO is @ViewBag.Pitch.PitchName - @ViewBag.Pitch.Hertz Hz</p>
     </div>
     <div class="col-md-6">
         <p>Minor scale pitch identification.</p>
@@ -58,6 +51,20 @@
         </audio>
         <p>Hover over the below to reveal the pitch</p>
         <p class="spoiler" id="minorPitch">Your pitch here @ViewBag.Pitch</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+    </div>
+    <div class="col-md-6">
+        <p>Blues scale pitch identification.</p>
+        <input type="button" value="Get a New Pitch" onclick="setBluesAudPitchSrc()" />
+        <audio id="bluesAudPitch" controls preload='none'>
+            <source src='@Url.Action("GetPitch", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz })' type='audio/wav'>
+        </audio>
+        <p>Hover over the below to reveal the pitch</p>
+        <p class="spoiler" id="bluesPitch">Your pitch here @ViewBag.Pitch</p>
     </div>
 </div>
 
@@ -76,6 +83,7 @@
         $(document).ready(function () {
             setMajorAudPitchSrc();
             setMinorAudPitchSrc();
+            setBluesAudPitchSrc();
         });
 
         function setMajorAudPitchSrc() {
@@ -157,6 +165,43 @@
             }
 
             $('#minorPitch').text(msg);
+        }
+
+        function setBluesAudPitchSrc() {
+            var baseSrc = '@Url.Action("GetPitch", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz })';
+            var randomInt = getRandomInt(0, 12, [1,2,4,8,9,11]);
+            var src = baseSrc + '&type=' + randomInt;
+            $('#bluesAudPitch').attr('src', src);
+
+            var msg = 'Your pitch is ';
+            switch (randomInt) {
+                case 0:
+                    msg = msg + 'Do';
+                    break;
+                case 3:
+                    msg = msg + 'RI / ME';
+                    break;
+                case 5:
+                    msg = msg + 'FA';
+                    break;
+                case 6:
+                    msg = msg + 'FI / SE';
+                    break;
+                case 7:
+                    msg = msg + 'SO';
+                    break;
+                case 10:
+                    msg = msg + 'LI / TE';
+                    break;
+                case 12:
+                    msg = msg + 'DO';
+                    break;
+                default:
+                    alert('Pitch ' + randomInt + ' is not valid for a blues scale.');
+                    break;
+            }
+
+            $('#bluesPitch').text(msg);
         }
 
     </script>
