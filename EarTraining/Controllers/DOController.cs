@@ -5,7 +5,7 @@ using WaveLibrary;
 
 namespace EarTraining.Controllers
 {
-    public class DOController : Controller
+    public class DOController : BaseController
     {
         // GET: DO
         public ActionResult Index()

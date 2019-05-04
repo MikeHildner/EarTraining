@@ -13,7 +13,7 @@ using WaveLibrary;
 
 namespace EarTraining.Controllers
 {
-    public class TriadIdentificationController : Controller
+    public class TriadIdentificationController : BaseController
     {
         // GET: TriadIdentification
         public ActionResult Index()

@@ -12,7 +12,7 @@ using WaveLibrary;
 
 namespace EarTraining.Controllers
 {
-    public class MajorOrMinorTriadController : Controller
+    public class MajorOrMinorTriadController : BaseController
     {
         // GET: MajorOrMinorTriad
         public ActionResult Index()

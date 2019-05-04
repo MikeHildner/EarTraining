@@ -13,7 +13,7 @@ using WaveLibrary;
 
 namespace EarTraining.Controllers
 {
-    public class PitchIdentificationController : Controller
+    public class PitchIdentificationController : BaseController
     {
         // GET: PitchIdentification
         public ActionResult Index()

@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Unauthorized";
+}
+
+<h2>Sorry, you're not authorized to view this material.</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <fieldset>
+            <legend>Please login to access the site.</legend>
+            <div>
+                <label for="userName">User Name:</label>
+                <input type="text" name="userName" value="" />
+            </div>
+            <div>
+                <label for="password">Password:&nbsp;&nbsp;</label>
+                <input type="password" name="password" value="" />
+            </div>
+        </fieldset>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Login" class="btn btn-default" />
+            </div>
+        </div>
+        <p>@ViewBag.Message</p>
+    </div>
+}
+
