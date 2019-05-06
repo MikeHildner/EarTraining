@@ -13,7 +13,7 @@ using WaveLibrary;
 
 namespace EarTraining.Controllers
 {
-    public class PitchIdentificationController : Controller
+    public class PitchIdentificationController : BaseController
     {
         // GET: PitchIdentification
         public ActionResult Index()
@@ -46,13 +46,13 @@ namespace EarTraining.Controllers
                 case SolfegPitch.Do:
                     pitchFrequency = solfeg.DoFrequency;
                     break;
-                case SolfegPitch.Ra:
+                case SolfegPitch.DiRa:
                     pitchFrequency = solfeg.RaFrequency;
                     break;
                 case SolfegPitch.Re:
                     pitchFrequency = solfeg.ReFrequency;
                     break;
-                case SolfegPitch.Ma:
+                case SolfegPitch.RiMe:
                     pitchFrequency = solfeg.MaFrequency;
                     break;
                 case SolfegPitch.Mi:
@@ -61,19 +61,19 @@ namespace EarTraining.Controllers
                 case SolfegPitch.Fa:
                     pitchFrequency = solfeg.FaFrequency;
                     break;
-                case SolfegPitch.Se:
+                case SolfegPitch.FiSe:
                     pitchFrequency = solfeg.SeFrequency;
                     break;
                 case SolfegPitch.So:
                     pitchFrequency = solfeg.SoFrequency;
                     break;
-                case SolfegPitch.Le:
+                case SolfegPitch.SiLe:
                     pitchFrequency = solfeg.LeFrequency;
                     break;
                 case SolfegPitch.La:
                     pitchFrequency = solfeg.LaFrequency;
                     break;
-                case SolfegPitch.Te:
+                case SolfegPitch.LiTe:
                     pitchFrequency = solfeg.TeFrequency;
                     break;
                 case SolfegPitch.Ti:
