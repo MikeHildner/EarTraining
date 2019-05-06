@@ -39,13 +39,13 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <p>Listen to the I triad.</p>
+        <p>Listen to the I triad (root position).</p>
     </div>
 </div>
 <div class="row">
     <div class="col-md-12">
         <audio controls preload='none'>
-            <source src='@Url.Action("GetChord", "TriadIdentification", new { frequency = ViewBag.Pitch.Hertz, type = 0 })' type='audio/wav'>
+            <source src='@Url.Action("GetChord", "TriadIdentification", new { frequency = ViewBag.Pitch.Hertz, type = 0, inversion = 0 })' type='audio/wav'>
         </audio>
     </div>
 </div>
@@ -91,6 +91,8 @@
             var baseSrc = '@Url.Action("GetChord", "TriadIdentification", new { frequency = ViewBag.Pitch.Hertz })';
             var randomInt = getRandomInt(0, 3);
             var src = baseSrc + '&type=' + randomInt;
+            var randomInt = getRandomInt(0, 2);
+            src = src + '&inversion=' + randomInt;
             $('#audChord').attr('src', src);
 
             var msg = 'Your chord is @ViewBag.Chord ';
