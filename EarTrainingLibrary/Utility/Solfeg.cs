@@ -142,6 +142,15 @@ namespace EarTrainingLibrary.Utility
             }
         }
 
+        public double HighReFrequency
+        {
+            get
+            {
+                double frequency = GetFrequencyByHalfStepsFromDo(14);
+                return frequency;
+            }
+        }
+
         public double GetFrequencyByHalfStepsFromDo(int halfStepsFromDo)
         {
             double frequencyRatio = Math.Pow(2, Math.Abs(halfStepsFromDo) / 12d);

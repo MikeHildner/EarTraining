@@ -30,7 +30,7 @@ namespace EarTraining.Controllers
             return new FileStreamResult(stream, "audio/wav");
         }
 
-        public FileResult GetChord(double frequency, int type, int inverstion)
+        public FileResult GetChord(double frequency, int type)
         {
             ChordType chordType = (ChordType)type;
 
