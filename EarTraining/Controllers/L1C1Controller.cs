@@ -1,10 +1,12 @@
 ﻿using EarTrainingLibrary.Enums;
 using EarTrainingLibrary.NAudio;
 using EarTrainingLibrary.Utility;
+using NAudio.Lame;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
 using System;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Web.Mvc;
 using WaveLibrary;
@@ -31,8 +33,14 @@ namespace EarTraining.Controllers
         public FileResult GetResolution(double frequency, int type)
         {
             ResolutionType rt = (ResolutionType)type;
+            var retMs = new MemoryStream();
             MemoryStream ms = GetResolution(frequency, rt);
-            return new FileStreamResult(ms, "audio/wav");
+            var rdr = new WaveFileReader(ms);
+            CheckAddBinPath();
+            var wtr = new LameMP3FileWriter(retMs, rdr.WaveFormat, 128);
+            rdr.CopyTo(wtr);
+            retMs.Position = 0;
+            return new FileStreamResult(retMs, "audio/mpeg");
         }
 
         private MemoryStream GetResolution(double frequency, ResolutionType resolutionType)
@@ -112,6 +120,21 @@ namespace EarTraining.Controllers
             ms.Position = 0;
 
             return ms;
+        }
+
+        public static void CheckAddBinPath()
+        {
+            // find path to 'bin' folder
+            var binPath = Path.Combine(new string[] { AppDomain.CurrentDomain.BaseDirectory, "bin" });
+            // get current search path from environment
+            var path = Environment.GetEnvironmentVariable("PATH") ?? "";
+
+            // add 'bin' folder to search path if not already present
+            if (!path.Split(Path.PathSeparator).Contains(binPath, StringComparer.CurrentCultureIgnoreCase))
+            {
+                path = string.Join(Path.PathSeparator.ToString(), new string[] { path, binPath });
+                Environment.SetEnvironmentVariable("PATH", path);
+            }
         }
     }
 }
