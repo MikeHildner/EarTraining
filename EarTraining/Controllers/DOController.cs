@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using EarTrainingLibrary.Utility;
+using System.IO;
 using System.Media;
 using System.Web.Mvc;
 using WaveLibrary;
@@ -16,13 +17,16 @@ namespace EarTraining.Controllers
             return View();
         }
 
-        public FileResult GetFileStreamResult(double hertz)
+        public FileResult GetDO(double frequency)
         {
             byte[] buff;
-            WaveGenerator wave = new WaveGenerator(WaveExampleType.ExampleSineWave, hertz);
+            WaveGenerator wave = new WaveGenerator(WaveExampleType.ExampleSineWave, frequency);
             buff = wave.GetBytes();
-            MemoryStream stream = new MemoryStream(buff);
-            return new FileStreamResult(stream, "audio/wav");
+            MemoryStream wavStream = new MemoryStream(buff);
+            //Stream mp3Stream = wavStream.WavToMp3();
+            //return new FileStreamResult(mp3Stream, "audio/mpeg");
+            MemoryStream mp4Stream = wavStream.WavToMp4();
+            return new FileStreamResult(mp4Stream, "audio/mpeg");
         }
     }
 }

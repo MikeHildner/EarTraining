@@ -1,0 +1,105 @@
+﻿@{
+    ViewBag.Title = "Level 1 Chapter 3";
+}
+<h2>@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        I IV V Diatonic Triad Recognition
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <p>Each time this page is refreshed, a new DO is assigned.</p>
+        <input type="button" value="Get a New DO" onclick="location.href='@Url.Action("Index", "L1C3")'" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <audio controls preload='none'>
+            <source src='@Url.Action("GetDO", "DO", new { frequency = ViewBag.Pitch.Hertz })' type='audio/mpeg'>
+        </audio>
+        <div class="col-md-12">
+            <p>Hover over the below to reveal the DO</p>
+            <p class="spoiler">Your DO is @ViewBag.Pitch.PitchName - @ViewBag.Pitch.Hertz Hz</p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <input type="button" value="Get a New Triad" onclick="setAudioSrc()" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <audio id="audio" controls preload='none'>
+            <source src='@Url.Action("GetTriad", "L1C1", new { frequency = ViewBag.Pitch.Hertz })' type='audio/mpeg'>
+        </audio>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <hr />
+    </div>
+    <div class="col-md-12">
+        <p>Hover over the below to reveal the triad</p>
+        <p class="spoiler" id="triad">Your triad here @ViewBag.Triad</p>
+    </div>
+</div>
+
+@section  scripts {
+    <script>
+        $(document).ready(function () {
+            setAudioSrc();
+        });
+
+        function setAudioSrc() {
+            var baseSrc = '@Url.Action("GetTriad", "L1C3", new { frequency = ViewBag.Pitch.Hertz })';
+            var triadtype = getRandomInt(0, 2);
+            var src = baseSrc + '&triadtype=' + triadtype;
+            var inversion = getRandomInt(0, 2);
+            var src = src + '&inversion=' + inversion;
+            $('#audio').attr('src', src);
+
+            var msg = 'Your triad is @ViewBag.Triad - ';
+            switch (triadtype) {
+                case 0:
+                    msg = msg + 'I - ';
+                    break;
+                case 1:
+                    msg = msg + 'IV - ';
+                    break;
+                case 2:
+                    msg = msg + 'V - ';
+                    break;
+            }
+
+            switch (inversion) {
+                case 0:
+                    msg = msg + 'Root position';
+                    break;
+                case 1:
+                    msg = msg + 'First inversion';
+                    break;
+                case 2:
+                    msg = msg + 'Second inversion';
+                    break;
+            }
+
+            $('#triad').text(msg);
+    }
+
+    </script>
+}
+

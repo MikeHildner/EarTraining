@@ -52,9 +52,16 @@
     <Reference Include="NAudio.Lame, Version=1.0.9.26885, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NAudio.Lame.1.0.9\lib\net40\NAudio.Lame.dll</HintPath>
     </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.6.3\lib\net45\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -160,6 +167,7 @@
     <Compile Include="Controllers\DonateController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\L1C1Controller.cs" />
+    <Compile Include="Controllers\L1C3Controller.cs" />
     <Compile Include="Controllers\MajorOrMinorTriadController.cs" />
     <Compile Include="Controllers\PitchIdentificationController.cs" />
     <Compile Include="Controllers\TriadIdentificationController.cs" />
@@ -181,6 +189,9 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
@@ -218,10 +229,13 @@
     <Content Include="Views\PitchIdentification\Index.cshtml" />
     <Content Include="Views\Shared\AllPitches.cshtml" />
     <Content Include="Views\Auth\Unauthorized.cshtml" />
+    <Content Include="Views\L1C3\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="FFmpeg\" />
     <Folder Include="Models\" />
+    <Folder Include="Temp\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

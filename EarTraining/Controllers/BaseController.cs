@@ -3,6 +3,6 @@ using System.Web.Mvc;
 
 namespace EarTraining.Controllers
 {
-    [EarTrainingAuthorize]
+    //[EarTrainingAuthorize]
     public class BaseController : Controller { }
 }

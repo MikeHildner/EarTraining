@@ -181,10 +181,12 @@ namespace EarTrainingLibrary.Utility
 
             var stwp = new SampleToWaveProvider(phrase);
 
-            MemoryStream ms = new MemoryStream();
-            WaveFileWriter.WriteWavFileToStream(ms, stwp);
-            ms.Position = 0;
-            return ms;
+            MemoryStream wavStream = new MemoryStream();
+            WaveFileWriter.WriteWavFileToStream(wavStream, stwp);
+            wavStream.Position = 0;
+
+            Stream mp3Stream = wavStream.WavToMp3();
+            return mp3Stream;
         }
 
     }

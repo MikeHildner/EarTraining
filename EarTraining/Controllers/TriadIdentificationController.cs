@@ -32,7 +32,7 @@ namespace EarTraining.Controllers
 
         public FileResult GetChord(double frequency, int type)
         {
-            ChordType chordType = (ChordType)type;
+            TriadType triadType = (TriadType)type;
 
             TimeSpan noteDuration = TimeSpan.FromSeconds(1);
             double gain = 0.2;
@@ -41,30 +41,30 @@ namespace EarTraining.Controllers
 
             List<ISampleProvider> notes;
 
-            switch(chordType)
+            switch(triadType)
             {
-                case ChordType.OneMajorTriad:
+                case TriadType.OneMajorTriad:
                     notes = new List<ISampleProvider>(3);
                     notes.Add(NAudioHelper.GetSampleProvider(gain, solfeg.DoFrequency, sgType, noteDuration));
                     notes.Add(NAudioHelper.GetSampleProvider(gain, solfeg.MiFrequency, sgType, noteDuration));
                     notes.Add(NAudioHelper.GetSampleProvider(gain, solfeg.SoFrequency, sgType, noteDuration));
                     break;
 
-                case ChordType.FourMajorTriad:
+                case TriadType.FourMajorTriad:
                     notes = new List<ISampleProvider>(3);
                     notes.Add(NAudioHelper.GetSampleProvider(gain, solfeg.DoFrequency, sgType, noteDuration));
                     notes.Add(NAudioHelper.GetSampleProvider(gain, solfeg.FaFrequency, sgType, noteDuration));
                     notes.Add(NAudioHelper.GetSampleProvider(gain, solfeg.LaFrequency, sgType, noteDuration));
                     break;
 
-                case ChordType.FiveMajorTriad:
+                case TriadType.FiveMajorTriad:
                     notes = new List<ISampleProvider>(3);
                     notes.Add(NAudioHelper.GetSampleProvider(gain, solfeg.LowTiFrequency, sgType, noteDuration));
                     notes.Add(NAudioHelper.GetSampleProvider(gain, solfeg.ReFrequency, sgType, noteDuration));
                     notes.Add(NAudioHelper.GetSampleProvider(gain, solfeg.SoFrequency, sgType, noteDuration));
                     break;
 
-                case ChordType.SixMinorTriad:
+                case TriadType.SixMinorTriad:
                     notes = new List<ISampleProvider>(3);
                     notes.Add(NAudioHelper.GetSampleProvider(gain, solfeg.DoFrequency, sgType, noteDuration));
                     notes.Add(NAudioHelper.GetSampleProvider(gain, solfeg.MiFrequency, sgType, noteDuration));
@@ -72,10 +72,8 @@ namespace EarTraining.Controllers
                     break;
 
                 default:
-                    throw new NotSupportedException($"Chord type {chordType} is not supported.");
+                    throw new NotSupportedException($"Chord type {triadType} is not supported.");
             }
-
-            notes.Shuffle();
 
             MixingSampleProvider msp = new MixingSampleProvider(notes[0].WaveFormat);
             foreach (var note in notes)

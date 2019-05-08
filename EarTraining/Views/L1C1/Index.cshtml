@@ -2,11 +2,10 @@
     ViewBag.Title = "Level 1, Chapter 1";
 }
 <h2>@ViewBag.Title</h2>
-<h3>@ViewBag.Message</h3>
 
 <div class="row">
     <div class="col-md-12">
-        Listen, sing and determine the resolutions.
+        Solfeg resolutions.
     </div>
 </div>
 <div class="row">
@@ -23,7 +22,7 @@
 <div class="row">
     <div class="col-md-12">
         <audio controls preload='none'>
-            <source src='@Url.Action("GetDO", "L1C1", new { frequency = ViewBag.Pitch.Hertz })' type='audio/wav'>
+            <source src='@Url.Action("GetDO", "L1C1", new { frequency = ViewBag.Pitch.Hertz })' type='audio/mpeg'>
         </audio>
         <div class="col-md-12">
             <p>Hover over the below to reveal the DO</p>
@@ -43,19 +42,19 @@
     <div class="col-md-4">
         <p>DO DO RE DO</p>
         <audio controls preload='none'>
-            <source src='@Url.Action("GetResolution", "L1C1", new { frequency = ViewBag.Pitch.Hertz, type = 0 })' type='audio/wav'>
+            <source src='@Url.Action("GetResolution", "L1C1", new { frequency = ViewBag.Pitch.Hertz, type = 0 })' type='audio/mpeg'>
         </audio>
     </div>
     <div class="col-md-4">
         <p>DO DO FA MI</p>
         <audio controls preload='none'>
-            <source src='@Url.Action("GetResolution", "L1C1", new { frequency = ViewBag.Pitch.Hertz, type = 1 })' type='audio/wav'>
+            <source src='@Url.Action("GetResolution", "L1C1", new { frequency = ViewBag.Pitch.Hertz, type = 1 })' type='audio/mpeg'>
         </audio>
     </div>
     <div class="col-md-4">
         <p>DO DO LA SO</p>
         <audio controls preload='none'>
-            <source src='@Url.Action("GetResolution", "L1C1", new { frequency = ViewBag.Pitch.Hertz, type = 2 })' type='audio/wav'>
+            <source src='@Url.Action("GetResolution", "L1C1", new { frequency = ViewBag.Pitch.Hertz, type = 2 })' type='audio/mpeg'>
         </audio>
     </div>
 </div>
@@ -63,13 +62,13 @@
     <div class="col-md-4">
         <p>DO DO TI (High)DO</p>
         <audio controls preload='none'>
-            <source src='@Url.Action("GetResolution", "L1C1", new { frequency = ViewBag.Pitch.Hertz, type = 3 })' type='audio/wav'>
+            <source src='@Url.Action("GetResolution", "L1C1", new { frequency = ViewBag.Pitch.Hertz, type = 3 })' type='audio/mpeg'>
         </audio>
     </div>
     <div class="col-md-4">
         <p>DO DO (Low)TI DO</p>
         <audio controls preload='none'>
-            <source src='@Url.Action("GetResolution", "L1C1", new { frequency = ViewBag.Pitch.Hertz, type = 4 })' type='audio/wav'>
+            <source src='@Url.Action("GetResolution", "L1C1", new { frequency = ViewBag.Pitch.Hertz, type = 4 })' type='audio/mpeg'>
         </audio>
     </div>
 </div>
