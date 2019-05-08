@@ -1,11 +1,11 @@
 ﻿@{
-    ViewBag.Title = "Level 1 Chapter 3";
+    ViewBag.Title = "Level 1 Chapter 4";
 }
 <h2>@ViewBag.Title</h2>
 
 <div class="row">
     <div class="col-md-12">
-        I IV V Diatonic Triad Recognition
+        2 and 3 Chord Progression
     </div>
 </div>
 <div class="row">
@@ -16,7 +16,7 @@
 <div class="row">
     <div class="col-md-12">
         <p>Each time this page is refreshed, a new DO is assigned.</p>
-        <input type="button" value="Get a New DO" onclick="location.href='@Url.Action("Index", "L1C3")'" />
+        <input type="button" value="Get a New DO" onclick="location.href='@Url.Action("Index", "L1C4")'" />
     </div>
 </div>
 <div class="row">
@@ -33,12 +33,18 @@
 
 <div class="row">
     <div class="col-md-12">
+        2 Chord Progressions
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
         <hr />
     </div>
 </div>
 <div class="row">
     <div class="col-md-12">
-        <input type="button" value="Get a New Triad" onclick="setAudioSrc()" />
+        <input type="button" value="Get a New Progression" onclick="setAudioSrc()" />
     </div>
 </div>
 <div class="row">
@@ -53,8 +59,8 @@
         <hr />
     </div>
     <div class="col-md-12">
-        <p>Hover over the below to reveal the triad</p>
-        <p class="spoiler" id="triad">Your triad here @ViewBag.Triad</p>
+        <p>Hover over the below to reveal the progression</p>
+        <p class="spoiler" id="progression">Your progression here</p>
     </div>
 </div>
 
@@ -65,41 +71,23 @@
         });
 
         function setAudioSrc() {
-            var baseSrc = '@Url.Action("GetTriad", "L1C3", new { frequency = ViewBag.Pitch.Hertz })';
-            var triadtype = getRandomInt(0, 2);
-            var src = baseSrc + '&triadtype=' + triadtype;
-            var inversion = getRandomInt(0, 2);
-            var src = src + '&inversion=' + inversion;
+            var baseSrc = '@Url.Action("GetProgression", "L1C4", new { frequency = ViewBag.Pitch.Hertz })';
+            var progressiontype = getRandomInt(0, 1);
+            var src = baseSrc + '&progressiontype=' + progressiontype;
             $('#audio').attr('src', src);
 
-            var msg = 'Your triad is @ViewBag.Triad - ';
-            switch (triadtype) {
+            var msg = 'Your progression is ';
+            switch (progressiontype) {
                 case 0:
-                    msg = msg + 'I - ';
+                    msg = msg + 'IV - I';
                     break;
                 case 1:
-                    msg = msg + 'IV - ';
-                    break;
-                case 2:
-                    msg = msg + 'V - ';
+                    msg = msg + 'V - I';
                     break;
             }
 
-            switch (inversion) {
-                case 0:
-                    msg = msg + 'Root position';
-                    break;
-                case 1:
-                    msg = msg + 'First inversion';
-                    break;
-                case 2:
-                    msg = msg + 'Second inversion';
-                    break;
-            }
-
-            $('#triad').text(msg);
-    }
+            $('#progression').text(msg);
+        }
 
     </script>
 }
-

@@ -10,6 +10,8 @@ namespace EarTrainingLibrary.Enums
     {
         RootPosition = 0,
         HighFirstInversion = 1,
-        HighSecondInversion = 2
+        HighSecondInversion = 2,
+        LowSecondInversion = 3,
+        LowFirstInversion = 4
     }
 }

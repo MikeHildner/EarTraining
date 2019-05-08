@@ -34,7 +34,6 @@ namespace EarTraining.Controllers
             SignalGeneratorType sgType = SignalGeneratorType.SawTooth;
             var solfeg = new Solfeg(frequency);
 
-            double[] frequencies = new double[3];
             ISampleProvider[] samples;
             switch(triadType)
             {
@@ -67,8 +66,5 @@ namespace EarTraining.Controllers
 
             return new FileStreamResult(mp4Stream, "audio/mpeg");
         }
-
-
-
     }
 }

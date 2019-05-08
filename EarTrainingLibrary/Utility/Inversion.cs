@@ -22,14 +22,25 @@ namespace EarTrainingLibrary.Utility
                     break;
 
                 case InversionType.HighFirstInversion:
-                    // Take the bottom note up an octave;
+                    // Take the bottom note up an octave.
                     frequencies[0] *= 2;
                     break;
 
                 case InversionType.HighSecondInversion:
-                    // Take the bottom two notes up an octave;
+                    // Take the bottom two notes up an octave.
                     frequencies[0] *= 2;
                     frequencies[1] *= 2;
+                    break;
+
+                case InversionType.LowSecondInversion:
+                    // Take the top note down an octave.
+                    frequencies[2] /= 2;
+                    break;
+
+                case InversionType.LowFirstInversion:
+                    // Take the top two notes down an octave.
+                    frequencies[1] /= 2;
+                    frequencies[2] /= 2;
                     break;
 
                 default:
