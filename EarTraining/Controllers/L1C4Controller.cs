@@ -12,7 +12,7 @@ using WaveLibrary;
 
 namespace EarTraining.Controllers
 {
-    public class L1C4Controller : Controller
+    public class L1C4Controller : BaseController
     {
         // GET: L1C4
         public ActionResult Index()
@@ -45,6 +45,11 @@ namespace EarTraining.Controllers
                 case ProgressionType.Five1stToOneRoot:
                     samples1 = Inversion.CreateInversion(InversionType.LowFirstInversion, gain, noteDuration, sgType, solfeg.SoFrequency, solfeg.TiFrequency, solfeg.HighReFrequency);
                     samples2 = Inversion.CreateInversion(InversionType.RootPosition, gain, noteDuration, sgType, solfeg.DoFrequency, solfeg.MiFrequency, solfeg.SoFrequency);
+                    break;
+
+                case ProgressionType.FiveRootToFourRoot:
+                    samples1 = Inversion.CreateInversion(InversionType.RootPosition, gain, noteDuration, sgType, solfeg.SoFrequency, solfeg.TiFrequency, solfeg.HighReFrequency);
+                    samples2 = Inversion.CreateInversion(InversionType.RootPosition, gain, noteDuration, sgType, solfeg.FaFrequency, solfeg.LaFrequency, solfeg.SoFrequency);
                     break;
 
                 default:

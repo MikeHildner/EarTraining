@@ -45,7 +45,7 @@ namespace EarTraining.Controllers
             double quarterNotemillis = (bpm / 60) * 1000;
             TimeSpan noteDuration = TimeSpan.FromMilliseconds(quarterNotemillis);
             double gain = 0.2;
-            SignalGeneratorType sgType = SignalGeneratorType.Sin;
+            SignalGeneratorType sgType = SignalGeneratorType.SawTooth;
 
             ISampleProvider shortRest = new SignalGenerator()
             {

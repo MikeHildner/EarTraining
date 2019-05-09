@@ -36,7 +36,7 @@ namespace EarTraining.Controllers
 
             TimeSpan noteDuration = TimeSpan.FromSeconds(1);
             double gain = 0.2;
-            SignalGeneratorType sgType = SignalGeneratorType.Sin;
+            SignalGeneratorType sgType = SignalGeneratorType.SawTooth;
             var solfeg = new Solfeg(frequency);
 
             double pitchFrequency;

@@ -174,7 +174,7 @@ namespace EarTrainingLibrary.Utility
             {
                 Gain = 0.2,
                 Frequency = frequency,
-                Type = SignalGeneratorType.Sin
+                Type = SignalGeneratorType.SawTooth
             };
 
             var phrase = doNote.Take(TimeSpan.FromSeconds(1));

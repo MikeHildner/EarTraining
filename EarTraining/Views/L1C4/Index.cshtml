@@ -72,7 +72,7 @@
 
         function setAudioSrc() {
             var baseSrc = '@Url.Action("GetProgression", "L1C4", new { frequency = ViewBag.Pitch.Hertz })';
-            var progressiontype = getRandomInt(0, 1);
+            var progressiontype = getRandomInt(0, 2);
             var src = baseSrc + '&progressiontype=' + progressiontype;
             $('#audio').attr('src', src);
 
@@ -83,6 +83,9 @@
                     break;
                 case 1:
                     msg = msg + 'V - I';
+                    break;
+                case 2:
+                    msg = msg + 'V - IV';
                     break;
             }
 
