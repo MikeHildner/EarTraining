@@ -64,6 +64,41 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="col-md-12">
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h4>Cheats</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <p>IV(2nd) - I(root)</p>
+        <audio id="audio" controls preload='none'>
+            <source src='@Url.Action("GetProgression", "L1C4", new { frequency = ViewBag.Pitch.Hertz, progressionType = 0 })' type='audio/mpeg'>
+        </audio>
+    </div>
+    <div class="col-md-4">
+        <p>V(1st) - I(root)</p>
+        <audio id="audio" controls preload='none'>
+            <source src='@Url.Action("GetProgression", "L1C4", new { frequency = ViewBag.Pitch.Hertz, progressionType = 1 })' type='audio/mpeg'>
+        </audio>
+    </div>
+    <div class="col-md-4">
+        <p>V(root) - IV(root)</p>
+        <audio id="audio" controls preload='none'>
+            <source src='@Url.Action("GetProgression", "L1C4", new { frequency = ViewBag.Pitch.Hertz, progressionType = 2 })' type='audio/mpeg'>
+        </audio>
+    </div>
+</div>
 @section  scripts {
     <script>
         $(document).ready(function () {
@@ -79,13 +114,13 @@
             var msg = 'Your progression is ';
             switch (progressiontype) {
                 case 0:
-                    msg = msg + 'IV - I';
+                    msg = msg + 'IV(2nd) - I(root)';
                     break;
                 case 1:
-                    msg = msg + 'V - I';
+                    msg = msg + 'V(1st) - I(root)';
                     break;
                 case 2:
-                    msg = msg + 'V - IV';
+                    msg = msg + 'V(root) - IV(root)';
                     break;
             }
 

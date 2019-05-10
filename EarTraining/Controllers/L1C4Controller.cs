@@ -49,7 +49,7 @@ namespace EarTraining.Controllers
 
                 case ProgressionType.FiveRootToFourRoot:
                     samples1 = Inversion.CreateInversion(InversionType.RootPosition, gain, noteDuration, sgType, solfeg.SoFrequency, solfeg.TiFrequency, solfeg.HighReFrequency);
-                    samples2 = Inversion.CreateInversion(InversionType.RootPosition, gain, noteDuration, sgType, solfeg.FaFrequency, solfeg.LaFrequency, solfeg.SoFrequency);
+                    samples2 = Inversion.CreateInversion(InversionType.RootPosition, gain, noteDuration, sgType, solfeg.FaFrequency, solfeg.LaFrequency, solfeg.HighDoFrequency);
                     break;
 
                 default:
