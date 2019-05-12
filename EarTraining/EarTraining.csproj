@@ -171,6 +171,7 @@
     <Compile Include="Controllers\L1C4Controller.cs" />
     <Compile Include="Controllers\MajorOrMinorTriadController.cs" />
     <Compile Include="Controllers\PitchIdentificationController.cs" />
+    <Compile Include="Controllers\SolfegController.cs" />
     <Compile Include="Controllers\TriadIdentificationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -232,6 +233,7 @@
     <Content Include="Views\Auth\Unauthorized.cshtml" />
     <Content Include="Views\L1C3\Index.cshtml" />
     <Content Include="Views\L1C4\Index.cshtml" />
+    <Content Include="Views\Solfeg\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
