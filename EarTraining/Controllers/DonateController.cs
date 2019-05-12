@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace EarTraining.Controllers
 {
-    public class DonateController : Controller
+    public class DonateController : BaseController
     {
         // GET: Donate
         public ActionResult Index()

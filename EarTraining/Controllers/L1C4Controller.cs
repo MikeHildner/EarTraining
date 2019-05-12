@@ -38,7 +38,7 @@ namespace EarTraining.Controllers
             switch (progressionType)
             {
                 case ProgressionType.Four2ndToOneRoot:
-                    samples1 = Inversion.CreateInversion(InversionType.LowSecondInversion, gain, noteDuration, sgType, solfeg.FaFrequency, solfeg.LaFrequency, solfeg.DoFrequency);
+                    samples1 = Inversion.CreateInversion(InversionType.LowSecondInversion, gain, noteDuration, sgType, solfeg.FaFrequency, solfeg.LaFrequency, solfeg.HighDoFrequency);
                     samples2 = Inversion.CreateInversion(InversionType.RootPosition, gain, noteDuration, sgType, solfeg.DoFrequency, solfeg.MiFrequency, solfeg.SoFrequency);
                     break;
 
@@ -50,6 +50,12 @@ namespace EarTraining.Controllers
                 case ProgressionType.FiveRootToFourRoot:
                     samples1 = Inversion.CreateInversion(InversionType.RootPosition, gain, noteDuration, sgType, solfeg.SoFrequency, solfeg.TiFrequency, solfeg.HighReFrequency);
                     samples2 = Inversion.CreateInversion(InversionType.RootPosition, gain, noteDuration, sgType, solfeg.FaFrequency, solfeg.LaFrequency, solfeg.HighDoFrequency);
+                    break;
+
+                case ProgressionType.OneRootToFour2nd:
+                    samples1 = Inversion.CreateInversion(InversionType.RootPosition, gain, noteDuration, sgType, solfeg.DoFrequency, solfeg.MiFrequency, solfeg.SoFrequency);
+                    samples2 = Inversion.CreateInversion(InversionType.LowSecondInversion, gain, noteDuration, sgType, solfeg.FaFrequency, solfeg.LaFrequency, solfeg.HighDoFrequency);
+                    
                     break;
 
                 default:

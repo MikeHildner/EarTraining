@@ -57,6 +57,73 @@
         <p class="spoiler" id="triad">Your triad here @ViewBag.Triad</p>
     </div>
 </div>
+<div class="row">
+    <div class="col-md-12">
+        <h4>Cheats</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <p>I(root)</p>
+        <audio id="audio" controls preload='none'>
+            <source src='@Url.Action("GetTriad", "L1C3", new { frequency = ViewBag.Pitch.Hertz, triadtype = 0, inversion = 0 })' type='audio/mpeg'>
+        </audio>
+    </div>
+    <div class="col-md-4">
+        <p>IV(root)</p>
+        <audio id="audio" controls preload='none'>
+            <source src='@Url.Action("GetTriad", "L1C3", new { frequency = ViewBag.Pitch.Hertz, triadtype = 1, inversion = 0 })' type='audio/mpeg'>
+        </audio>
+    </div>
+    <div class="col-md-4">
+        <p>V(root)</p>
+        <audio id="audio" controls preload='none'>
+            <source src='@Url.Action("GetTriad", "L1C3", new { frequency = ViewBag.Pitch.Hertz, triadtype = 2, inversion = 0 })' type='audio/mpeg'>
+        </audio>
+    </div>
+    <div class="col-md-4">
+        <p>I(1st)</p>
+        <audio id="audio" controls preload='none'>
+            <source src='@Url.Action("GetTriad", "L1C3", new { frequency = ViewBag.Pitch.Hertz, triadtype = 0, inversion = 1 })' type='audio/mpeg'>
+        </audio>
+    </div>
+    <div class="col-md-4">
+        <p>IV(1st)</p>
+        <audio id="audio" controls preload='none'>
+            <source src='@Url.Action("GetTriad", "L1C3", new { frequency = ViewBag.Pitch.Hertz, triadtype = 1, inversion = 1 })' type='audio/mpeg'>
+        </audio>
+    </div>
+    <div class="col-md-4">
+        <p>V(1st)</p>
+        <audio id="audio" controls preload='none'>
+            <source src='@Url.Action("GetTriad", "L1C3", new { frequency = ViewBag.Pitch.Hertz, triadtype = 2, inversion = 1 })' type='audio/mpeg'>
+        </audio>
+    </div>
+    <div class="col-md-4">
+        <p>I(2nd)</p>
+        <audio id="audio" controls preload='none'>
+            <source src='@Url.Action("GetTriad", "L1C3", new { frequency = ViewBag.Pitch.Hertz, triadtype = 0, inversion = 2 })' type='audio/mpeg'>
+        </audio>
+    </div>
+    <div class="col-md-4">
+        <p>IV(2nd)</p>
+        <audio id="audio" controls preload='none'>
+            <source src='@Url.Action("GetTriad", "L1C3", new { frequency = ViewBag.Pitch.Hertz, triadtype = 1, inversion = 2 })' type='audio/mpeg'>
+        </audio>
+    </div>
+    <div class="col-md-4">
+        <p>V(2nd)</p>
+        <audio id="audio" controls preload='none'>
+            <source src='@Url.Action("GetTriad", "L1C3", new { frequency = ViewBag.Pitch.Hertz, triadtype = 2, inversion = 2 })' type='audio/mpeg'>
+        </audio>
+    </div>
+
+</div>
 
 @section  scripts {
     <script>

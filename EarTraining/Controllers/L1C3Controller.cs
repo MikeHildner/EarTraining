@@ -42,7 +42,7 @@ namespace EarTraining.Controllers
                     break;
 
                 case TriadType.FourMajorTriad:
-                    samples = Inversion.CreateInversion(inversionType, gain, noteDuration, sgType, solfeg.FaFrequency, solfeg.LaFrequency, solfeg.SoFrequency);
+                    samples = Inversion.CreateInversion(inversionType, gain, noteDuration, sgType, solfeg.FaFrequency, solfeg.LaFrequency, solfeg.HighDoFrequency);
                     break;
 
                 case TriadType.FiveMajorTriad:

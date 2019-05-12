@@ -8,9 +8,9 @@ namespace EarTrainingLibrary.Enums
 {
     public enum TriadType
     {
-        OneMajorTriad,
-        FourMajorTriad,
-        FiveMajorTriad,
-        SixMinorTriad
+        OneMajorTriad = 0,
+        FourMajorTriad = 1,
+        FiveMajorTriad = 2,
+        SixMinorTriad = 3
     }
 }
