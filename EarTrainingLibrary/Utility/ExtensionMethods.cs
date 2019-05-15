@@ -35,15 +35,23 @@ namespace EarTrainingLibrary.Utility
             }
         }
 
-        public static Stream WavToMp3(this Stream wavStream)
+        public static MemoryStream WavToMp3(this Stream wavStream)
         {
-            var retMs = new MemoryStream();
+            var mp3Stream = new MemoryStream();
             var rdr = new WaveFileReader(wavStream);
             CheckAddBinPath();
-            var wtr = new LameMP3FileWriter(retMs, rdr.WaveFormat, 128);
+            var wtr = new LameMP3FileWriter(mp3Stream, rdr.WaveFormat, 128);
             rdr.CopyTo(wtr);
-            retMs.Position = 0;
-            return retMs;
+            mp3Stream.Position = 0;
+
+            // Write the mp3 stream to disk.
+            string tempFolder = HostingEnvironment.MapPath("~/Temp");
+            CleanFolder(tempFolder);
+            string guid = Guid.NewGuid().ToString();
+            string mp3FileName = Path.Combine(tempFolder, guid + ".mp3");
+            wavStream.CopyTo(new FileStream(mp3FileName, FileMode.Create));
+
+            return mp3Stream;
         }
 
         public static MemoryStream WavToMp4(this Stream wavStream)
@@ -54,6 +62,8 @@ namespace EarTrainingLibrary.Utility
                 CleanFolder(tempFolder);
                 string guid = Guid.NewGuid().ToString();
                 string wavFileName = Path.Combine(tempFolder, guid + ".wav");
+
+                // Write the wav stream to disk.
                 wavStream.CopyTo(new FileStream(wavFileName, FileMode.Create));
                 string mp4FileName = Path.Combine(tempFolder, guid + ".mp4");
 
@@ -63,6 +73,7 @@ namespace EarTrainingLibrary.Utility
                 process.WaitForExit();
 
                 var mp4Stream = new MemoryStream();
+
                 using (FileStream file = new FileStream(mp4FileName, FileMode.Open, FileAccess.Read))
                 {
                     byte[] bytes = new byte[file.Length];

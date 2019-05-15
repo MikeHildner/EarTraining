@@ -28,6 +28,8 @@ namespace EarTraining.Controllers
             MemoryStream wavStream = new MemoryStream();
             WaveFileWriter.WriteWavFileToStream(wavStream, stwp);
             wavStream.Position = 0;
+            // Just doing this so we can write the mp3 to disk.
+            MemoryStream mp3Stream = wavStream.WavToMp3();
             MemoryStream mp4Stream = wavStream.WavToMp4();
             return new FileStreamResult(mp4Stream, "audio/mpeg");
 
