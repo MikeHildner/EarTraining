@@ -33,9 +33,17 @@
         @RenderBody()
         <hr />
         <footer>
+            <br /><br />
+            <h5><u>Site Information</u></h5>
             <p>Please see the @Html.ActionLink("about page", "About", "Home") for an explanation of this site and eartraining information.</p>
-            <p>This site does not use cookies.</p>
-            <p>Privacy Policy: None, as this site does not record or share any information.</p>
+            <div>
+                <p><b>Privacy Information:</b></p>
+                <ul>
+                    <li>This site does not use cookies.</li>
+                    <li>This site does not record or share any personal user information.</li>
+                </ul>
+            </div>
+            <hr />
             <p>&copy; @DateTime.Now.Year - @ViewBag.StageName</p>
         </footer>
     </div>
