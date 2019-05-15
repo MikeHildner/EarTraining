@@ -35,7 +35,21 @@ namespace EarTrainingLibrary.Utility
             }
         }
 
-        public static MemoryStream WavToMp3(this Stream wavStream)
+        public static MemoryStream WavToMp3Stream(this Stream wavStream)
+        {
+            var mp3Stream = new MemoryStream();
+            var rdr = new WaveFileReader(wavStream);
+            CheckAddBinPath();
+            var wtr = new LameMP3FileWriter(mp3Stream, rdr.WaveFormat, 128);
+            rdr.CopyTo(wtr);
+
+            mp3Stream.Position = 0;
+            wavStream.Position = 0;
+
+            return mp3Stream;
+        }
+
+        public static MemoryStream WavToMp3File(this Stream wavStream, out string fileName)
         {
             var mp3Stream = new MemoryStream();
             var rdr = new WaveFileReader(wavStream);
@@ -48,48 +62,58 @@ namespace EarTrainingLibrary.Utility
             string tempFolder = HostingEnvironment.MapPath("~/Temp");
             CleanFolder(tempFolder);
             string guid = Guid.NewGuid().ToString();
-            string mp3FileName = Path.Combine(tempFolder, guid + ".mp3");
-            wavStream.CopyTo(new FileStream(mp3FileName, FileMode.Create));
+            var fileNameOnly = guid + ".mp3";
+            string mp3FileName = Path.Combine(tempFolder, fileNameOnly);
 
+            using (FileStream file = new FileStream(mp3FileName, FileMode.Create))
+            {
+                mp3Stream.CopyTo(file);
+            }
+
+            mp3Stream.Position = 0;
+            wavStream.Position = 0;
+
+            fileName =  fileNameOnly;
             return mp3Stream;
         }
 
-        public static MemoryStream WavToMp4(this Stream wavStream)
-        {
-            try
-            {
-                string tempFolder = HostingEnvironment.MapPath("~/Temp");
-                CleanFolder(tempFolder);
-                string guid = Guid.NewGuid().ToString();
-                string wavFileName = Path.Combine(tempFolder, guid + ".wav");
+        //public static MemoryStream WavToMp4(this Stream wavStream)
+        //{
+        //    try
+        //    {
+        //        string tempFolder = HostingEnvironment.MapPath("~/Temp");
+        //        CleanFolder(tempFolder);
+        //        string guid = Guid.NewGuid().ToString();
+        //        string wavFileName = Path.Combine(tempFolder, guid + ".wav");
 
-                // Write the wav stream to disk.
-                wavStream.CopyTo(new FileStream(wavFileName, FileMode.Create));
-                string mp4FileName = Path.Combine(tempFolder, guid + ".mp4");
+        //        // Write the wav stream to disk.
+        //        wavStream.CopyTo(new FileStream(wavFileName, FileMode.Create));
+        //        string mp4FileName = Path.Combine(tempFolder, guid + ".mp4");
 
-                CheckAddBinPath();
+        //        CheckAddBinPath();
 
-                var process = Process.Start("ffmpeg.exe", $"-i {wavFileName} {mp4FileName}");
-                process.WaitForExit();
+        //        var cmdLine = $"ffmpeg.exe -i {wavFileName} {mp4FileName}";
+        //        var process = Process.Start("ffmpeg.exe", $"-i {wavFileName} {mp4FileName}");
+        //        process.WaitForExit();
 
-                var mp4Stream = new MemoryStream();
+        //        var mp4Stream = new MemoryStream();
 
-                using (FileStream file = new FileStream(mp4FileName, FileMode.Open, FileAccess.Read))
-                {
-                    byte[] bytes = new byte[file.Length];
-                    file.Read(bytes, 0, (int)file.Length);
-                    mp4Stream.Write(bytes, 0, (int)file.Length);
-                    mp4Stream.Position = 0;
-                }
+        //        using (FileStream file = new FileStream(mp4FileName, FileMode.Open, FileAccess.Read))
+        //        {
+        //            byte[] bytes = new byte[file.Length];
+        //            file.Read(bytes, 0, (int)file.Length);
+        //            mp4Stream.Write(bytes, 0, (int)file.Length);
+        //            mp4Stream.Position = 0;
+        //        }
 
-                return mp4Stream;
-            }
-            catch (Exception ex)
-            {
-                _log.Error(ex, ex.Message);
-                throw;
-            }
-        }
+        //        return mp4Stream;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _log.Error(ex, ex.Message);
+        //        throw;
+        //    }
+        //}
 
         private static void CleanFolder(string tempFolder)
         {

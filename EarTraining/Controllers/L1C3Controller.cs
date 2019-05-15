@@ -24,7 +24,7 @@ namespace EarTraining.Controllers
             return View();
         }
 
-        public FileResult GetTriad(double frequency, int triadtype, int inversion)
+        public ActionResult GetTriad(double frequency, int triadtype, int inversion)
         {
             var triadType = (TriadType)triadtype;
             var inversionType = (InversionType)inversion;
@@ -62,9 +62,9 @@ namespace EarTraining.Controllers
             MemoryStream wavStream = new MemoryStream();
             WaveFileWriter.WriteWavFileToStream(wavStream, wp);
             wavStream.Position = 0;
-            MemoryStream mp4Stream = wavStream.WavToMp4();
 
-            return new FileStreamResult(mp4Stream, "audio/mpeg");
+            MemoryStream mp3Stream = wavStream.WavToMp3File(out string fileName);
+            return Redirect($"~/Temp/{fileName}");
         }
     }
 }

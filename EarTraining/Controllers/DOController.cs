@@ -21,26 +21,16 @@ namespace EarTraining.Controllers
             return View();
         }
 
-        public FileResult GetDO(double frequency)
+        public ActionResult GetDO(double frequency)
         {
             ISampleProvider note = NAudioHelper.GetSampleProvider(0.2, frequency, SignalGeneratorType.SawTooth, TimeSpan.FromSeconds(1));
             var stwp = new SampleToWaveProvider(note);
             MemoryStream wavStream = new MemoryStream();
             WaveFileWriter.WriteWavFileToStream(wavStream, stwp);
             wavStream.Position = 0;
-            // Just doing this so we can write the mp3 to disk.
-            MemoryStream mp3Stream = wavStream.WavToMp3();
-            MemoryStream mp4Stream = wavStream.WavToMp4();
-            return new FileStreamResult(mp4Stream, "audio/mpeg");
 
-            //byte[] buff;
-            //WaveGenerator wave = new WaveGenerator(WaveExampleType.ExampleSineWave, frequency);
-            //buff = wave.GetBytes();
-            //MemoryStream wavStream = new MemoryStream(buff);
-            //Stream mp3Stream = wavStream.WavToMp3();
-            //return new FileStreamResult(mp3Stream, "audio/mpeg");
-            //MemoryStream mp4Stream = wavStream.WavToMp4();
-            //return new FileStreamResult(mp4Stream, "audio/mpeg");
+            wavStream.WavToMp3File(out string fileName);
+            return Redirect($"~/Temp/{fileName}");
         }
     }
 }

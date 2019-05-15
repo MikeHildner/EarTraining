@@ -18,7 +18,7 @@
         <p>Each time this page is refreshed, a new DO is assigned.</p>
         <input type="button" value="Get a New DO" onclick="location.href='@Url.Action("Index", "PitchIdentification")'" />
         <audio controls preload='none'>
-            <source src='@Url.Action("GetDO", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz })' type='audio/wav'>
+            <source src='@Url.Action("GetDO", "DO", new { frequency = ViewBag.Pitch.Hertz })' type='audio/mpeg'>
         </audio>
         <p>Hover over the below to reveal the DO</p>
         <p class="spoiler">Your DO is @ViewBag.Pitch.PitchName< - @ViewBag.Pitch.Hertz Hz</p>
@@ -27,7 +27,7 @@
         <p>Major scale pitch identification.</p>
         <input type="button" value="Get a New Pitch" onclick="setMajorAudPitchSrc()" />
         <audio id="majorAudPitch" controls preload='none'>
-            <source src='@Url.Action("GetPitch", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz })' type='audio/wav'>
+            <source src='@Url.Action("GetPitch", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz })' type='audio/mpeg'>
         </audio>
         <p>Hover over the below to reveal the pitch</p>
         <p class="spoiler" id="majorPitch">Your pitch here @ViewBag.Pitch></p>
@@ -47,7 +47,7 @@
         <p>Minor scale pitch identification.</p>
         <input type="button" value="Get a New Pitch" onclick="setMinorAudPitchSrc()" />
         <audio id="minorAudPitch" controls preload='none'>
-            <source src='@Url.Action("GetPitch", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz })' type='audio/wav'>
+            <source src='@Url.Action("GetPitch", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz })' type='audio/mpeg'>
         </audio>
         <p>Hover over the below to reveal the pitch</p>
         <p class="spoiler" id="minorPitch">Your pitch here @ViewBag.Pitch</p>
@@ -61,7 +61,7 @@
         <p>Blues scale pitch identification.</p>
         <input type="button" value="Get a New Pitch" onclick="setBluesAudPitchSrc()" />
         <audio id="bluesAudPitch" controls preload='none'>
-            <source src='@Url.Action("GetPitch", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz })' type='audio/wav'>
+            <source src='@Url.Action("GetPitch", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz })' type='audio/mpeg'>
         </audio>
         <p>Hover over the below to reveal the pitch</p>
         <p class="spoiler" id="bluesPitch">Your pitch here @ViewBag.Pitch</p>

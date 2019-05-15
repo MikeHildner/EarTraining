@@ -23,13 +23,7 @@ namespace EarTraining.Controllers
             return View();
         }
 
-        public FileResult GetDO(double frequency)
-        {
-            Stream stream = Solfeg.GetDONote(frequency);
-            return new FileStreamResult(stream, "audio/wav");
-        }
-
-        public FileResult GetChord(double frequency, int type)
+        public ActionResult GetChord(double frequency, int type)
         {
             TimeSpan noteDuration = TimeSpan.FromSeconds(1);
             double gain = 0.2;
@@ -47,11 +41,12 @@ namespace EarTraining.Controllers
             msp.AddMixerInput(note3);
 
             var wp = msp.ToWaveProvider();
-            MemoryStream ms = new MemoryStream();
-            WaveFileWriter.WriteWavFileToStream(ms, wp);
-            ms.Position = 0;
+            MemoryStream wavStream = new MemoryStream();
+            WaveFileWriter.WriteWavFileToStream(wavStream, wp);
+            wavStream.Position = 0;
 
-            return new FileStreamResult(ms, "audio/wav");
+            wavStream.WavToMp3File(out string fileName);
+            return Redirect($"~/Temp/{fileName}");
         }
     }
 }

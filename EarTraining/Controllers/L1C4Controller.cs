@@ -23,7 +23,7 @@ namespace EarTraining.Controllers
             return View();
         }
 
-        public FileResult GetProgression(double frequency, int progressiontype)
+        public ActionResult GetProgression(double frequency, int progressiontype)
         {
             var progressionType = (ProgressionType)progressiontype;
 
@@ -86,9 +86,9 @@ namespace EarTraining.Controllers
             MemoryStream wavStream = new MemoryStream();
             WaveFileWriter.WriteWavFileToStream(wavStream, stwp);
             wavStream.Position = 0;
-            MemoryStream mp4Stream = wavStream.WavToMp4();
 
-            return new FileStreamResult(mp4Stream, "audio/mpeg");
+            MemoryStream mp3Stream = wavStream.WavToMp3File(out string fileName);
+            return Redirect($"~/Temp/{fileName}");
         }
     }
 }

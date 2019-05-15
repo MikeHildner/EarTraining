@@ -24,13 +24,8 @@ namespace EarTraining.Controllers
             return View();
         }
 
-        public FileResult GetDO(double frequency)
-        {
-            Stream stream = Solfeg.GetDONote(frequency);
-            return new FileStreamResult(stream, "audio/wav");
-        }
 
-        public FileResult GetPitch(double frequency, int type)
+        public ActionResult GetPitch(double frequency, int type)
         {
             SolfegPitch solfegPitch = (SolfegPitch)type;
 
@@ -90,11 +85,12 @@ namespace EarTraining.Controllers
 
             var stwp = new SampleToWaveProvider(note);
 
-            MemoryStream ms = new MemoryStream();
-            WaveFileWriter.WriteWavFileToStream(ms, stwp);
-            ms.Position = 0;
+            MemoryStream wavStream = new MemoryStream();
+            WaveFileWriter.WriteWavFileToStream(wavStream, stwp);
+            wavStream.Position = 0;
 
-            return new FileStreamResult(ms, "audio/wav");
+            wavStream.WavToMp3File(out string fileName);
+            return Redirect($"~/Temp/{fileName}");
         }
     }
 }

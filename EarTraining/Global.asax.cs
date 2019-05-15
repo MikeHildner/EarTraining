@@ -17,5 +17,10 @@ namespace EarTraining
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        protected void Application_PreSendRequestHeaders(object sender, EventArgs e)
+        {
+            //HttpContext.Current.Response.Headers.Remove("Cache-Control");
+        }
     }
 }

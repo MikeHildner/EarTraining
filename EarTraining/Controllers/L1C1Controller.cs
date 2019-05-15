@@ -24,22 +24,18 @@ namespace EarTraining.Controllers
             return View();
         }
 
-        public FileResult GetDO(double frequency)
-        {
-            Stream stream = Solfeg.GetDONote(frequency);
-            
-            return new FileStreamResult(stream, "audio/mpeg");
-        }
-
-        public FileResult GetResolution(double frequency, int type)
+        public ActionResult GetResolution(double frequency, int type)
         {
             ResolutionType rt = (ResolutionType)type;
             var retMs = new MemoryStream();
-            Stream mp3Stream = GetResolution(frequency, rt);
-            return new FileStreamResult(mp3Stream, "audio/mpeg");
+            MemoryStream wavStream = GetResolution(frequency, rt);
+
+            wavStream.WavToMp3File(out string fileName);
+            return Redirect($"~/Temp/{fileName}");
+
         }
 
-        private Stream GetResolution(double frequency, ResolutionType resolutionType)
+        private MemoryStream GetResolution(double frequency, ResolutionType resolutionType)
         {
             double bpm = 100;
             double quarterNotemillis = (bpm / 60) * 1000;
@@ -114,8 +110,7 @@ namespace EarTraining.Controllers
             MemoryStream wavStream = new MemoryStream();
             WaveFileWriter.WriteWavFileToStream(wavStream, stwp);
             wavStream.Position = 0;
-            Stream mp3Stream = wavStream.WavToMp3();
-            return mp3Stream;
+            return wavStream;
         }
     }
 }

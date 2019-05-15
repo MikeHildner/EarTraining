@@ -168,7 +168,7 @@ namespace EarTrainingLibrary.Utility
             }
         }
 
-        public static Stream GetDONote(double frequency)
+        public static MemoryStream GetDONote(double frequency)
         {
             var doNote = new SignalGenerator()
             {
@@ -185,7 +185,8 @@ namespace EarTrainingLibrary.Utility
             WaveFileWriter.WriteWavFileToStream(wavStream, stwp);
             wavStream.Position = 0;
 
-            Stream mp3Stream = wavStream.WavToMp3();
+            MemoryStream mp3Stream = wavStream.WavToMp3Stream();
+
             return mp3Stream;
         }
 
