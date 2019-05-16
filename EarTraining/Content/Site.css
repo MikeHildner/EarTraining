@@ -31,3 +31,7 @@ textarea {
 .spoiler:hover {
     background-color: white;
 }
+
+.underline {
+    text-decoration: underline;
+}
