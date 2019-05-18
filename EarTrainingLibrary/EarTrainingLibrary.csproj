@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\InversionType.cs" />
+    <Compile Include="Enums\L1C2DrillType.cs" />
     <Compile Include="Enums\ProgressionType.cs" />
     <Compile Include="Enums\TriadType.cs" />
     <Compile Include="Enums\ResolutionType.cs" />

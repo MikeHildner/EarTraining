@@ -166,6 +166,7 @@
     <Compile Include="Controllers\DonateController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\L1C1Controller.cs" />
+    <Compile Include="Controllers\L1C2Controller.cs" />
     <Compile Include="Controllers\L1C3Controller.cs" />
     <Compile Include="Controllers\L1C4Controller.cs" />
     <Compile Include="Controllers\MajorOrMinorTriadController.cs" />
@@ -272,6 +273,7 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\L1C2\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
