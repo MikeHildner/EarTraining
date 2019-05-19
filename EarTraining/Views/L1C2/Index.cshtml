@@ -66,7 +66,7 @@
                                 </audio>
                             </div>
                             <div class="col-md-4">
-                                <p>LA LA LA FA MI</p>
+                                <p>LA LA FA FA MI</p>
                                 <audio controls preload='none'>
                                     <source src='@Url.Action("GetDrill", "L1C2", new { frequency = ViewBag.Pitch.Hertz, type = 4 })' type='audio/mpeg'>
                                 </audio>
@@ -78,21 +78,60 @@
                                 </audio>
                             </div>
                         </div>
-                        <hr />
-                        <h4>Drill</h4>
+                    </div>
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <h4>Prompts</h4>
                         <div class="row">
                             <div class="col-md-4">
-                                <input type="button" value="Get a New Interval" onclick="setAudDrill1Src()" />
-                                <audio id="audDrill1" controls preload='none'>
-                                    <source src='' type='audio/mpeg'>
+                                <p>MI MI DO DO DO</p>
+                                <audio controls preload='none'>
+                                    <source src='@Url.Action("GetDrill", "L1C2", new { frequency = ViewBag.Pitch.Hertz, type = 6 })' type='audio/mpeg'>
                                 </audio>
-                                <p><span class="spoiler" id="drill1">Putting some text in here just to make it long enough</span></p>
+                            </div>
+                            <div class="col-md-4">
+                                <p>LA LA FA FA MI</p>
+                                <audio controls preload='none'>
+                                    <source src='@Url.Action("GetDrill", "L1C2", new { frequency = ViewBag.Pitch.Hertz, type = 7 })' type='audio/mpeg'>
+                                </audio>
+                            </div>
+                            <div class="col-md-4">
+                                <p>TI TI SO SO SO</p>
+                                <audio controls preload='none'>
+                                    <source src='@Url.Action("GetDrill", "L1C2", new { frequency = ViewBag.Pitch.Hertz, type = 8 })' type='audio/mpeg'>
+                                </audio>
+                            </div>
+                            <div class="col-md-4">
+                                <p>SO SO TI TI DO</p>
+                                <audio controls preload='none'>
+                                    <source src='@Url.Action("GetDrill", "L1C2", new { frequency = ViewBag.Pitch.Hertz, type = 9 })' type='audio/mpeg'>
+                                </audio>
+                            </div>
+                            <div class="col-md-4">
+                                <p>FA FA LA LA SO</p>
+                                <audio controls preload='none'>
+                                    <source src='@Url.Action("GetDrill", "L1C2", new { frequency = ViewBag.Pitch.Hertz, type = 10 })' type='audio/mpeg'>
+                                </audio>
+                            </div>
+                            <div class="col-md-4">
+                                <p>DO DO MI MI MI</p>
+                                <audio controls preload='none'>
+                                    <source src='@Url.Action("GetDrill", "L1C2", new { frequency = ViewBag.Pitch.Hertz, type = 11 })' type='audio/mpeg'>
+                                </audio>
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                        Not yet implemented.
+                    <hr />
+                    <h4>Drill</h4>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <input type="button" value="Get a New Interval" onclick="setAudDrill1Src()" />
+                            <audio id="audDrill1" controls preload='none'>
+                                <source src='' type='audio/mpeg'>
+                            </audio>
+                            <p><span class="spoiler" id="drill1">Putting some text in here just to make it long enough</span></p>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -107,29 +146,47 @@
 
         function setAudDrill1Src() {
             var baseSrc = '@Url.Action("GetDrill", "L1C2", new { frequency = ViewBag.Pitch.Hertz })';
-            var randomInt = getRandomInt(0, 5);
+            var randomInt = getRandomInt(0, 11);
             var src = baseSrc + '&type=' + randomInt;
             $('#audDrill1').attr('src', src);
 
             var msg = '';
             switch (randomInt) {
                 case 0:
-                    msg = msg + 'DO DO MI MI MI';
+                    msg = msg + 'DO DO MI MI MI (Min 3rd)';
                     break;
                 case 1:
-                    msg = msg + 'FA FA LA LA SO';
+                    msg = msg + 'FA FA LA LA SO (Min 3rd)';
                     break;
                 case 2:
-                    msg = msg + 'SO SO TI TI DO';
+                    msg = msg + 'SO SO TI TI DO (Min3 rd)';
                     break;
                 case 3:
-                    msg = msg + 'TI TI SO SO SO';
+                    msg = msg + 'TI TI SO SO SO (Min 3rd)';
                     break;
                 case 4:
-                    msg = msg + 'LA LA FA FA MI';
+                    msg = msg + 'LA LA FA FA MI (Min 3rd)';
                     break;
-                case 3:
-                    msg = msg + 'MI MI DO DO DO';
+                case 5:
+                    msg = msg + 'MI MI DO DO DO (Min 3rd)';
+                    break;
+                case 6:
+                    msg = msg + 'MI MI DO DO DO (Maj 6th)';
+                    break;
+                case 7:
+                    msg = msg + 'LA LA LA FA MI (Maj 6th)';
+                    break;
+                case 8:
+                    msg = msg + 'TI TI SO SO SO (Maj 6th)';
+                    break;
+                case 9:
+                    msg = msg + 'SO SO TI TI DO (Maj 6th)';
+                    break;
+                case 10:
+                    msg = msg + 'FA FA LA LA SO (Maj 6th)';
+                    break;
+                case 11:
+                    msg = msg + 'DO DO MI MI MI (Maj 6th)';
                     break;
             }
 

@@ -8,11 +8,17 @@ namespace EarTrainingLibrary.Enums
 {
     public enum L1C2DrillType
     {
-        DoDoMiMiMi = 0,
-        FaFaLaLaSo = 1,
-        SoSoTiTiDo = 2,
-        TiTiSoSoSo = 3,
-        LaLaFaFaMi = 4,
-        MiMiDoDoDo = 5
+        DoDoMiMiMi3 = 0,
+        FaFaLaLaSo3 = 1,
+        SoSoTiTiDo3 = 2,
+        TiTiSoSoSo3 = 3,
+        LaLaFaFaMi3 = 4,
+        MiMiDoDoDo3 = 5,
+        MiMiDoDoDo6 = 6,
+        LaLaFaFaMi6 = 7,
+        TiTiSoSoSo6 = 8,
+        SoSoTiTiDo6 = 9,
+        FaFaLaLaSo6 = 10,
+        DoDoMiMiMi6 = 11
     }
 }

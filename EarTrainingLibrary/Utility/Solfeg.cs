@@ -151,6 +151,22 @@ namespace EarTrainingLibrary.Utility
             }
         }
 
+        public double LowLaFrequency
+        {
+            get
+            {
+                return GetFrequencyByHalfStepsFromDo(-3);
+            }
+        }
+
+        public double LowSoFrequency
+        {
+            get
+            {
+                return GetFrequencyByHalfStepsFromDo(-5);
+            }
+        }
+
         public double GetFrequencyByHalfStepsFromDo(int halfStepsFromDo)
         {
             double frequencyRatio = Math.Pow(2, Math.Abs(halfStepsFromDo) / 12d);
