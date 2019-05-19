@@ -1,0 +1,17 @@
+﻿@using NAudio.Wave.SampleProviders
+
+@{
+    ViewBag.Title = "Settings";
+}
+
+<h2>Settings</h2>
+<h5>Signal Generator Type</h5>
+@foreach (var sgt in Enum.GetValues(typeof(SignalGeneratorType)))
+{
+    var s = sgt.ToString();
+    var i = (int)sgt;
+
+    <input type="radio" name="group" /> @s
+    <br />
+}
+
