@@ -60,7 +60,7 @@ namespace EarTrainingLibrary.Utility
 
             // Write the mp3 stream to disk.
             string tempFolder = HostingEnvironment.MapPath("~/Temp");
-            CleanFolder(tempFolder);
+            //CleanFolder(tempFolder);
             string guid = Guid.NewGuid().ToString();
             var fileNameOnly = guid + ".mp3";
             string mp3FileName = Path.Combine(tempFolder, fileNameOnly);
@@ -114,17 +114,6 @@ namespace EarTrainingLibrary.Utility
         //        throw;
         //    }
         //}
-
-        private static void CleanFolder(string tempFolder)
-        {
-            DirectoryInfo dirInfo = new DirectoryInfo(tempFolder);
-            DateTime cutoff = DateTime.Now.AddMinutes(-15);
-            IEnumerable<FileInfo> files = dirInfo.GetFiles().Where(w => w.LastWriteTime < cutoff);
-            foreach (var file in files)
-            {
-                File.Delete(file.FullName);
-            }
-        }
 
         public static void CheckAddBinPath()
         {

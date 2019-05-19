@@ -41,5 +41,11 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/site")
     @RenderSection("scripts", required: false)
+
+    <script>
+        $.ajax({
+            url: '@Url.Content("~/")' + 'base/DeleteOldFiles'
+        });
+    </script>
 </body>
 </html>

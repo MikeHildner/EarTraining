@@ -279,7 +279,6 @@
     <Folder Include="FFmpeg\" />
     <Folder Include="Models\" />
     <Folder Include="Temp\" />
-    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -2,6 +2,7 @@
 using EarTrainingLibrary.Utility;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Hosting;
 using System.Web.Mvc;
 
 namespace EarTraining.Controllers
@@ -19,6 +20,13 @@ namespace EarTraining.Controllers
 
             //stageNames.Shuffle();
             //ViewBag.StageName = stageNames.First();
+        }
+
+        //[HttpDelete]
+        public void DeleteOldFiles()
+        {
+            string tempFolder = HostingEnvironment.MapPath("~/Temp");
+            EarTrainingLibrary.Utility.FileSystem.CleanFolder(tempFolder);
         }
     }
 }
