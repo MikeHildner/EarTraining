@@ -33,12 +33,12 @@
             <div class="col-xs-12 ">
                 <nav>
                     <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Major 3rd Intervals</a>
-                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Minor 6th Intervals</a>
+                        <a class="nav-item nav-link active" id="nav-maj3rd-tab" data-toggle="tab" href="#nav-maj3rd" role="tab" aria-controls="nav-maj3rd" aria-selected="true">Major 3rd Intervals</a>
+                        <a class="nav-item nav-link" id="nav-min6th-tab" data-toggle="tab" href="#nav-min6th" role="tab" aria-controls="nav-min6th" aria-selected="false">Minor 6th Intervals</a>
                     </div>
                 </nav>
                 <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <div class="tab-pane fade show active" id="nav-maj3rd" role="tabpanel" aria-labelledby="nav-maj3rd-tab">
                         <h4>Prompts</h4>
                         <div class="row">
                             <div class="col-md-4">
@@ -79,7 +79,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <div class="tab-pane fade" id="nav-min6th" role="tabpanel" aria-labelledby="nav-min6th-tab">
                         <h4>Prompts</h4>
                         <div class="row">
                             <div class="col-md-4">
@@ -146,47 +146,68 @@
 
         function setAudDrill1Src() {
             var baseSrc = '@Url.Action("GetDrill", "L1C2", new { frequency = ViewBag.Pitch.Hertz })';
-            var randomInt = getRandomInt(0, 11);
+
+            // Find the active tab.
+            var activeTab = $('div.tab-pane.active');
+            var activeTabId = activeTab.attr('id');
+
+            // Get the drills based on what tab we're on.
+            var randomInt;
+
+            switch (activeTabId) {
+                case 'nav-maj3rd':
+                    randomInt = getRandomInt(0, 5);
+                    break;
+                case 'nav-min6th':
+                    randomInt = getRandomInt(6, 11);
+                    break;
+
+                default:
+                    var msg = 'activeTabId ' + activeTabId + ' is not supported';
+                    console.log(msg);
+                    alert(msg);
+            }
+
             var src = baseSrc + '&type=' + randomInt;
             $('#audDrill1').attr('src', src);
 
             var msg = '';
             switch (randomInt) {
                 case 0:
-                    msg = msg + 'DO DO MI MI MI (Min 3rd)';
+                    msg = msg + 'DO DO MI MI MI (Maj 3rd)';
                     break;
                 case 1:
-                    msg = msg + 'FA FA LA LA SO (Min 3rd)';
+                    msg = msg + 'FA FA LA LA SO (Maj 3rd)';
                     break;
                 case 2:
                     msg = msg + 'SO SO TI TI DO (Min3 rd)';
                     break;
                 case 3:
-                    msg = msg + 'TI TI SO SO SO (Min 3rd)';
+                    msg = msg + 'TI TI SO SO SO (Maj 3rd)';
                     break;
                 case 4:
-                    msg = msg + 'LA LA FA FA MI (Min 3rd)';
+                    msg = msg + 'LA LA FA FA MI (Maj 3rd)';
                     break;
                 case 5:
-                    msg = msg + 'MI MI DO DO DO (Min 3rd)';
+                    msg = msg + 'MI MI DO DO DO (Maj 3rd)';
                     break;
                 case 6:
-                    msg = msg + 'MI MI DO DO DO (Maj 6th)';
+                    msg = msg + 'MI MI DO DO DO (Min 6th)';
                     break;
                 case 7:
-                    msg = msg + 'LA LA LA FA MI (Maj 6th)';
+                    msg = msg + 'LA LA LA FA MI (Min 6th)';
                     break;
                 case 8:
-                    msg = msg + 'TI TI SO SO SO (Maj 6th)';
+                    msg = msg + 'TI TI SO SO SO (Min 6th)';
                     break;
                 case 9:
-                    msg = msg + 'SO SO TI TI DO (Maj 6th)';
+                    msg = msg + 'SO SO TI TI DO (Min 6th)';
                     break;
                 case 10:
-                    msg = msg + 'FA FA LA LA SO (Maj 6th)';
+                    msg = msg + 'FA FA LA LA SO (Min 6th)';
                     break;
                 case 11:
-                    msg = msg + 'DO DO MI MI MI (Maj 6th)';
+                    msg = msg + 'DO DO MI MI MI (Min 6th)';
                     break;
             }
 
