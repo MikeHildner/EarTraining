@@ -145,6 +145,18 @@
     <script>
         $(document).ready(function () {
             setAudDrill1Src();
+
+            $('#nav-maj3rd-tab').click(function () {
+                $('#nav-maj3rd').addClass('active');
+                $('#nav-min6th').removeClass('active');
+                setAudDrill1Src();
+            });
+
+            $('#nav-min6th-tab').click(function () {
+                $('#nav-min6th').addClass('active');
+                $('#nav-maj3rd').removeClass('active');
+                setAudDrill1Src();
+            });
         });
 
         function setAudDrill1Src() {
@@ -183,7 +195,7 @@
                     msg = msg + 'FA FA LA LA SO (Maj 3rd)';
                     break;
                 case 2:
-                    msg = msg + 'SO SO TI TI DO (Min3 rd)';
+                    msg = msg + 'SO SO TI TI DO (Maj3 rd)';
                     break;
                 case 3:
                     msg = msg + 'TI TI SO SO SO (Maj 3rd)';
