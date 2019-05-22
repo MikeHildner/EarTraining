@@ -25,6 +25,18 @@
         </audio>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-md-12">
+        <figure>
+            <figcaption><img class="piano" /></figcaption>
+            <audio controls preload='none'>
+                <source src='@Url.Action("GetDOEx", "DO", new { doNoteName = ViewBag.Pitch.PitchName })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-md-12">
         <p>Hover over the below to reveal your DO.</p>

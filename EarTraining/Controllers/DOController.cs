@@ -32,5 +32,17 @@ namespace EarTraining.Controllers
             wavStream.WavToMp3File(out string fileName);
             return Redirect($"~/Temp/{fileName}");
         }
+
+        public ActionResult GetDOEx(string doNoteName)
+        {
+            ISampleProvider note = NAudioHelper.GetSampleProvider(doNoteName, TimeSpan.FromSeconds(1));
+            var stwp = new SampleToWaveProvider(note);
+            MemoryStream wavStream = new MemoryStream();
+            WaveFileWriter.WriteWavFileToStream(wavStream, stwp);
+            wavStream.Position = 0;
+
+            wavStream.WavToMp3File(out string fileName);
+            return Redirect($"~/Temp/{fileName}");
+        }
     }
 }

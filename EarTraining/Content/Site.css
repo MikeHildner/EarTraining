@@ -36,3 +36,9 @@ textarea {
 .underline {
     text-decoration: underline;
 }
+
+img.piano {
+    content:url(Images/Piano.svg); 
+    width: 16px;
+    height: 16px;
+}

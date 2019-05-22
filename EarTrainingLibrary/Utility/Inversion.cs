@@ -14,7 +14,6 @@ namespace EarTrainingLibrary.Utility
     {
         public static ISampleProvider[] CreateInversion(InversionType inversionType, double gain, TimeSpan duration, SignalGeneratorType sgType, params double[] frequencies)
         {
-            var outSamples = new ISampleProvider[frequencies.Length];
             switch(inversionType)
             {
                 case InversionType.RootPosition:
@@ -47,12 +46,55 @@ namespace EarTrainingLibrary.Utility
                     throw new NotSupportedException($"InversionType {inversionType} is not supported.");
             }
 
+            var outSamples = new ISampleProvider[frequencies.Length];
             for (int i = 0; i < frequencies.Length; i++)
             {
                 outSamples[i] = NAudioHelper.GetSampleProvider(gain, frequencies[i], sgType, duration);
             }
 
             return outSamples;
+        }
+
+        public static ISampleProvider[] CreateTriadInversionEx(InversionType inversionType, TimeSpan duration, int firstNoteNumber, int secondNoteNumber, int thirdNoteNumber)
+        {
+            switch (inversionType)
+            {
+                case InversionType.RootPosition:
+                    // Do nothing - just make what we were given.
+                    break;
+
+                case InversionType.HighFirstInversion:
+                    // Take the bottom note up an octave.
+                    firstNoteNumber += 12;
+                    break;
+
+                case InversionType.HighSecondInversion:
+                    // Take the bottom two notes up an octave.
+                    firstNoteNumber += 12;
+                    secondNoteNumber += 12;
+                    break;
+
+                case InversionType.LowSecondInversion:
+                    // Take the top note down an octave.
+                    thirdNoteNumber -= 12;
+                    break;
+
+                case InversionType.LowFirstInversion:
+                    // Take the top two notes down an octave.
+                    secondNoteNumber -= 12;
+                    thirdNoteNumber -= 12;
+                    break;
+
+                default:
+                    throw new NotSupportedException($"InversionType {inversionType} is not supported.");
+            }
+
+            var samples = new ISampleProvider[3];
+            samples[0] = NAudioHelper.GetSampleProvider(firstNoteNumber, duration);
+            samples[1] = NAudioHelper.GetSampleProvider(secondNoteNumber, duration);
+            samples[2] = NAudioHelper.GetSampleProvider(thirdNoteNumber, duration);
+
+            return samples;
         }
     }
 }

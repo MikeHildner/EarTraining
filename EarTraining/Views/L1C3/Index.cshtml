@@ -41,6 +41,18 @@
         </audio>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-md-12">
+        <figure>
+            <figcaption><img class="piano" /></figcaption>
+            <audio id="audioEx" controls preload='none'>
+                <source src='' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-md-12">
         <hr />
@@ -50,6 +62,7 @@
         <p class="spoiler" id="triad">Your triad here @ViewBag.Triad</p>
     </div>
 </div>
+
 <div class="row">
     <div class="col-md-12">
         <h4>Prompts</h4>
@@ -125,12 +138,15 @@
         });
 
         function setAudioSrc() {
-            var baseSrc = '@Url.Action("GetTriad", "L1C3", new { frequency = ViewBag.Pitch.Hertz })';
+            var audioSrc = '@Url.Action("GetTriad", "L1C3", new { frequency = ViewBag.Pitch.Hertz })';
+            var audioExSrc = '@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName })';
             var triadtype = getRandomInt(0, 2);
-            var src = baseSrc + '&triadtype=' + triadtype;
             var inversion = getRandomInt(0, 2);
-            var src = src + '&inversion=' + inversion;
-            $('#audio').attr('src', src);
+            audioSrc = audioSrc + '&triadtype=' + triadtype + '&inversion=' + inversion;;
+            audioExSrc = audioExSrc + '&triadtype=' + triadtype + '&inversion=' + inversion;;
+
+            $('#audio').attr('src', audioSrc);
+            $('#audioEx').attr('src', audioExSrc);
 
             var msg = 'Your triad is @ViewBag.Triad - ';
             switch (triadtype) {

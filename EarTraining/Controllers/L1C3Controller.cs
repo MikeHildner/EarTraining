@@ -66,5 +66,50 @@ namespace EarTraining.Controllers
             MemoryStream mp3Stream = wavStream.WavToMp3File(out string fileName);
             return Redirect($"~/Temp/{fileName}");
         }
+
+        public ActionResult GetTriadEx(string doNoteName, int triadtype, int inversion)
+        {
+            var triadType = (TriadType)triadtype;
+            var inversionType = (InversionType)inversion;
+
+            TimeSpan noteDuration = TimeSpan.FromSeconds(1);
+
+            string doFileName = NAudioHelper.GetFileNameFromNoteName(doNoteName);
+            doFileName = Path.GetFileName(doFileName);
+            int doNoteNumber = int.Parse(doFileName.Split('.')[0]);
+
+            ISampleProvider[] samples;
+            switch (triadType)
+            {
+                case TriadType.OneMajorTriad:
+                    samples = Inversion.CreateTriadInversionEx(inversionType, noteDuration, doNoteNumber, doNoteNumber + 4, doNoteNumber + 7);
+                    break;
+
+                    // TODO: Currently sending I major triad. Fix up for IV and V chords.
+                case TriadType.FourMajorTriad:
+                    samples = Inversion.CreateTriadInversionEx(inversionType, noteDuration, doNoteNumber, doNoteNumber + 4, doNoteNumber + 7);
+                    break;
+
+                case TriadType.FiveMajorTriad:
+                    samples = Inversion.CreateTriadInversionEx(inversionType, noteDuration, doNoteNumber, doNoteNumber + 4, doNoteNumber + 7);
+                    break;
+
+                default:
+                    throw new NotSupportedException($"TriadType {triadType} is not supported.");
+            }
+
+            MixingSampleProvider msp = new MixingSampleProvider(samples[0].WaveFormat);
+            msp.AddMixerInput(samples[0]);
+            msp.AddMixerInput(samples[1]);
+            msp.AddMixerInput(samples[2]);
+
+            IWaveProvider wp = msp.ToWaveProvider();
+            MemoryStream wavStream = new MemoryStream();
+            WaveFileWriter.WriteWavFileToStream(wavStream, wp);
+            wavStream.Position = 0;
+
+            MemoryStream mp3Stream = wavStream.WavToMp3File(out string fileName);
+            return Redirect($"~/Temp/{fileName}");
+        }
     }
 }
