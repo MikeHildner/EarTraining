@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveLibrary", "WaveLibrary\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EarTrainingLibrary", "EarTrainingLibrary\EarTrainingLibrary.csproj", "{C70841CA-B03E-4606-A63A-38DADCA6D7F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIOWAAiffToWav", "UIOWAAiffToWav\UIOWAAiffToWav.csproj", "{88D2B107-92F3-4C39-9F10-5FE5A1017774}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{C70841CA-B03E-4606-A63A-38DADCA6D7F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C70841CA-B03E-4606-A63A-38DADCA6D7F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C70841CA-B03E-4606-A63A-38DADCA6D7F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88D2B107-92F3-4C39-9F10-5FE5A1017774}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88D2B107-92F3-4C39-9F10-5FE5A1017774}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88D2B107-92F3-4C39-9F10-5FE5A1017774}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88D2B107-92F3-4C39-9F10-5FE5A1017774}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
