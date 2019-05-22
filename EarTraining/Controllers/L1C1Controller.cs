@@ -38,7 +38,7 @@ namespace EarTraining.Controllers
         private MemoryStream GetResolution(double frequency, ResolutionType resolutionType)
         {
             double bpm = 100;
-            double quarterNotemillis = (bpm / 60) * 1000;
+            double quarterNotemillis = (60 / bpm) * 1000;
             TimeSpan noteDuration = TimeSpan.FromMilliseconds(quarterNotemillis);
             double gain = 0.2;
             SignalGeneratorType sgType = SignalGeneratorType.SawTooth;
