@@ -13,16 +13,16 @@
     </div>
 </div>
 @*<div class="row">
-    <div class="col-md-12">
-        <audio controls preload='none'>
-            <source src='@Url.Action("GetDO", "DO", new { frequency = ViewBag.Pitch.Hertz })' type='audio/mpeg'>
-        </audio>
         <div class="col-md-12">
-            <p>Hover over the below to reveal the DO</p>
-            <p class="spoiler">Your DO is @ViewBag.Pitch.PitchName - @ViewBag.Pitch.Hertz Hz</p>
+            <audio controls preload='none'>
+                <source src='@Url.Action("GetDO", "DO", new { frequency = ViewBag.Pitch.Hertz })' type='audio/mpeg'>
+            </audio>
+            <div class="col-md-12">
+                <p>Hover over the below to reveal the DO</p>
+                <p class="spoiler">Your DO is @ViewBag.Pitch.PitchName - @ViewBag.Pitch.Hertz Hz</p>
+            </div>
         </div>
-    </div>
-</div>*@
+    </div>*@
 
 <div class="row">
     <div class="col-md-12">
@@ -32,6 +32,10 @@
                 <source src='@Url.Action("GetDOEx", "DO", new { doNoteName = ViewBag.Pitch.PitchName })' type='audio/mpeg'>
             </audio>
         </figure>
+    </div>
+    <div class="col-md-12">
+        <p>Hover over the below to reveal the DO</p>
+        <p class="spoiler">Your DO is @ViewBag.Pitch.PitchName - @ViewBag.Pitch.Hertz Hz</p>
     </div>
 </div>
 
@@ -47,12 +51,12 @@
 </div>
 
 @*<div class="row">
-    <div class="col-md-12">
-        <audio id="audio" controls preload='none'>
-            <source src='' type='audio/mpeg'>
-        </audio>
-    </div>
-</div>*@
+        <div class="col-md-12">
+            <audio id="audio" controls preload='none'>
+                <source src='' type='audio/mpeg'>
+            </audio>
+        </div>
+    </div>*@
 
 <div class="row">
     <div class="col-md-12">
@@ -91,7 +95,7 @@
         <figure>
             <figcaption><img class="piano" /></figcaption>
             <audio id="audio" controls preload='none'>
-                <source src='@Url.Action("GetTriadEx", "L1C3", new { frequency = ViewBag.Pitch.PitchName, triadtype = 0, inversion = 0 })' type='audio/mpeg'>
+                <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 0, inversion = 0 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
@@ -100,7 +104,7 @@
         <figure>
             <figcaption><img class="piano" /></figcaption>
             <audio id="audio" controls preload='none'>
-                <source src='@Url.Action("GetTriadEx", "L1C3", new { frequency = ViewBag.Pitch.PitchName, triadtype = 1, inversion = 0 })' type='audio/mpeg'>
+                <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 1, inversion = 0 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
@@ -109,7 +113,7 @@
         <figure>
             <figcaption><img class="piano" /></figcaption>
             <audio id="audio" controls preload='none'>
-                <source src='@Url.Action("GetTriadEx", "L1C3", new { frequency = ViewBag.Pitch.PitchName, triadtype = 2, inversion = 0 })' type='audio/mpeg'>
+                <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 2, inversion = 0 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
@@ -118,7 +122,7 @@
         <figure>
             <figcaption><img class="piano" /></figcaption>
             <audio id="audio" controls preload='none'>
-                <source src='@Url.Action("GetTriadEx", "L1C3", new { frequency = ViewBag.Pitch.PitchName, triadtype = 0, inversion = 1 })' type='audio/mpeg'>
+                <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 0, inversion = 1 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
@@ -127,7 +131,7 @@
         <figure>
             <figcaption><img class="piano" /></figcaption>
             <audio id="audio" controls preload='none'>
-                <source src='@Url.Action("GetTriadEx", "L1C3", new { frequency = ViewBag.Pitch.PitchName, triadtype = 1, inversion = 1 })' type='audio/mpeg'>
+                <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 1, inversion = 1 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
@@ -136,7 +140,7 @@
         <figure>
             <figcaption><img class="piano" /></figcaption>
             <audio id="audio" controls preload='none'>
-                <source src='@Url.Action("GetTriadEx", "L1C3", new { frequency = ViewBag.Pitch.PitchName, triadtype = 2, inversion = 1 })' type='audio/mpeg'>
+                <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 2, inversion = 1 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
@@ -145,7 +149,7 @@
         <figure>
             <figcaption><img class="piano" /></figcaption>
             <audio id="audio" controls preload='none'>
-                <source src='@Url.Action("GetTriadEx", "L1C3", new { frequency = ViewBag.Pitch.PitchName, triadtype = 0, inversion = 2 })' type='audio/mpeg'>
+                <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 0, inversion = 2 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
@@ -154,7 +158,7 @@
         <figure>
             <figcaption><img class="piano" /></figcaption>
             <audio id="audio" controls preload='none'>
-                <source src='@Url.Action("GetTriadEx", "L1C3", new { frequency = ViewBag.Pitch.PitchName, triadtype = 1, inversion = 2 })' type='audio/mpeg'>
+                <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 1, inversion = 2 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
@@ -163,7 +167,7 @@
         <figure>
             <figcaption><img class="piano" /></figcaption>
             <audio id="audio" controls preload='none'>
-                <source src='@Url.Action("GetTriadEx", "L1C3", new { frequency = ViewBag.Pitch.PitchName, triadtype = 2, inversion = 2 })' type='audio/mpeg'>
+                <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 2, inversion = 2 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
