@@ -201,7 +201,6 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <Content Include="Samples\0.A0.wav" />
     <Content Include="Samples\1.Bb0.wav" />
     <Content Include="Samples\10.G1.wav" />
@@ -306,6 +305,8 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
+    <None Include="Properties\PublishProfiles\Ear Training Beta.pubxml" />
+    <None Include="Properties\PublishProfiles\Ear Training Prod.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

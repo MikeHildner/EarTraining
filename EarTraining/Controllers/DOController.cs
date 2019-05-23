@@ -35,7 +35,7 @@ namespace EarTraining.Controllers
 
         public ActionResult GetDOEx(string doNoteName)
         {
-            ISampleProvider note = NAudioHelper.GetSampleProvider(doNoteName, TimeSpan.FromSeconds(1));
+            ISampleProvider note = NAudioHelper.GetSampleProvider(doNoteName, TimeSpan.FromSeconds(3));
             var stwp = new SampleToWaveProvider(note);
             MemoryStream wavStream = new MemoryStream();
             WaveFileWriter.WriteWavFileToStream(wavStream, stwp);

@@ -72,7 +72,7 @@ namespace EarTraining.Controllers
             var triadType = (TriadType)triadtype;
             var inversionType = (InversionType)inversion;
 
-            TimeSpan noteDuration = TimeSpan.FromSeconds(1);
+            TimeSpan noteDuration = TimeSpan.FromSeconds(3);
 
             string doFileName = NAudioHelper.GetFileNameFromNoteName(doNoteName);
             doFileName = Path.GetFileName(doFileName);

@@ -22,8 +22,8 @@ namespace UIOWAAiffToWav
             // I want an immediate attack and smaller files, so chop off the dead space at the beginning
             // and shorten the duration of the sample.
 
-            string[] aiffFiles = Directory.GetFiles(@"E:\Source\Repos\EarTraining\EarTraining\UIOWA_AIFFs");
-            var skipDuration = TimeSpan.FromMilliseconds(500);
+            string[] aiffFiles = Directory.GetFiles(@"C:\Users\Mike\source\repos\EarTraining\EarTraining\UIOWA_AIFFs");
+            var skipDuration = TimeSpan.FromMilliseconds(1000);
             var takeDuration = TimeSpan.FromSeconds(4);
 
             foreach (var aiffFile in aiffFiles)
@@ -42,7 +42,7 @@ namespace UIOWAAiffToWav
                 string newFileName = Path.GetFileNameWithoutExtension(aiffFile);
                 newFileName = newFileName.Replace("Piano.ff.", string.Empty);
                 newFileName = NumberFromNoteName(newFileName);
-                newFileName = Path.Combine(@"e:\temp", newFileName + ".wav");
+                newFileName = Path.Combine(@"c:\temp", newFileName + ".wav");
 
                 // Write to disk.
                 using (var file = new FileStream(newFileName, FileMode.Create))
