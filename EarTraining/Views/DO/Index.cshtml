@@ -13,16 +13,10 @@
         <input type="button" value="Get a New DO" onclick="location.href='@Url.Action("Index", "DO")'" />
     </div>
 </div>
+
 <div class="row">
     <div class="col-md-12">
         <hr />
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        <audio controls preload='none'>
-            <source src='@Url.Action("GetDO", "DO", new { frequency = ViewBag.Pitch.Hertz })' type='audio/mpeg'>
-        </audio>
     </div>
 </div>
 
