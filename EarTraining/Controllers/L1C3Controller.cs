@@ -79,19 +79,21 @@ namespace EarTraining.Controllers
             int doNoteNumber = int.Parse(doFileName.Split('.')[0]);
 
             ISampleProvider[] samples;
+            int newDoNoteNumber;  // Used for other chords besides the I.
             switch (triadType)
             {
                 case TriadType.OneMajorTriad:
-                    samples = Inversion.CreateTriadInversionEx(inversionType, noteDuration, doNoteNumber, doNoteNumber + 4, doNoteNumber + 7);
+                    samples = Inversion.CreateTriadInversionEx(inversionType, noteDuration, doNoteNumber, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpPerfect5th);
                     break;
 
-                    // TODO: Currently sending I major triad. Fix up for IV and V chords.
                 case TriadType.FourMajorTriad:
-                    samples = Inversion.CreateTriadInversionEx(inversionType, noteDuration, doNoteNumber, doNoteNumber + 4, doNoteNumber + 7);
+                    newDoNoteNumber = doNoteNumber + Interval.UpPerfect4th;
+                    samples = Inversion.CreateTriadInversionEx(inversionType, noteDuration, newDoNoteNumber, newDoNoteNumber + 4, newDoNoteNumber + 7);
                     break;
 
                 case TriadType.FiveMajorTriad:
-                    samples = Inversion.CreateTriadInversionEx(inversionType, noteDuration, doNoteNumber, doNoteNumber + 4, doNoteNumber + 7);
+                    newDoNoteNumber = doNoteNumber + Interval.UpPerfect5th;
+                    samples = Inversion.CreateTriadInversionEx(inversionType, noteDuration, newDoNoteNumber, newDoNoteNumber + 4, newDoNoteNumber + 7);
                     break;
 
                 default:
