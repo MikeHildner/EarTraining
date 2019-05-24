@@ -18,5 +18,6 @@ namespace EarTrainingLibrary.Enums
         public static int UpMajor6th { get { return 9; } }
         public static int UpMajor7th { get { return 11; } }
         public static int Up1Octave { get { return 12; } }
+        public static int UpMajor9th { get { return 14; } }
     }
 }

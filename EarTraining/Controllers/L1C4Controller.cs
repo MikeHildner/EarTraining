@@ -1,4 +1,5 @@
 ﻿using EarTrainingLibrary.Enums;
+using EarTrainingLibrary.NAudio;
 using EarTrainingLibrary.Utility;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
@@ -23,14 +24,15 @@ namespace EarTraining.Controllers
             return View();
         }
 
-        public ActionResult GetProgression(double frequency, int progressiontype)
+        public ActionResult GetProgressionEx(string doNoteName, int progressiontype)
         {
             var progressionType = (ProgressionType)progressiontype;
 
             TimeSpan noteDuration = TimeSpan.FromSeconds(1);
-            double gain = 0.2;
-            SignalGeneratorType sgType = SignalGeneratorType.SawTooth;
-            var solfeg = new Solfeg(frequency);
+
+            string doFileName = NAudioHelper.GetFileNameFromNoteName(doNoteName);
+            doFileName = Path.GetFileName(doFileName);
+            int doNoteNumber = int.Parse(doFileName.Split('.')[0]);
 
             ISampleProvider[] samples1;
             ISampleProvider[] samples2;
@@ -38,24 +40,24 @@ namespace EarTraining.Controllers
             switch (progressionType)
             {
                 case ProgressionType.Four2ndToOneRoot:
-                    samples1 = Inversion.CreateInversion(InversionType.LowSecondInversion, gain, noteDuration, sgType, solfeg.FaFrequency, solfeg.LaFrequency, solfeg.HighDoFrequency);
-                    samples2 = Inversion.CreateInversion(InversionType.RootPosition, gain, noteDuration, sgType, solfeg.DoFrequency, solfeg.MiFrequency, solfeg.SoFrequency);
+                    samples1 = Inversion.CreateTriadInversionEx(InversionType.LowSecondInversion, noteDuration, doNoteNumber + Interval.UpPerfect4th, doNoteNumber + Interval.UpMajor6th, doNoteNumber + Interval.Up1Octave);
+                    samples2 = Inversion.CreateTriadInversionEx(InversionType.RootPosition, noteDuration, doNoteNumber, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpPerfect5th);
                     break;
 
                 case ProgressionType.Five1stToOneRoot:
-                    samples1 = Inversion.CreateInversion(InversionType.LowFirstInversion, gain, noteDuration, sgType, solfeg.SoFrequency, solfeg.TiFrequency, solfeg.HighReFrequency);
-                    samples2 = Inversion.CreateInversion(InversionType.RootPosition, gain, noteDuration, sgType, solfeg.DoFrequency, solfeg.MiFrequency, solfeg.SoFrequency);
+                    samples1 = Inversion.CreateTriadInversionEx(InversionType.LowFirstInversion, noteDuration, doNoteNumber + Interval.UpPerfect5th, doNoteNumber + Interval.UpMajor7th, doNoteNumber + Interval.UpMajor9th);
+                    samples2 = Inversion.CreateTriadInversionEx(InversionType.RootPosition, noteDuration, doNoteNumber, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpPerfect5th);
                     break;
 
                 case ProgressionType.FiveRootToFourRoot:
-                    samples1 = Inversion.CreateInversion(InversionType.RootPosition, gain, noteDuration, sgType, solfeg.SoFrequency, solfeg.TiFrequency, solfeg.HighReFrequency);
-                    samples2 = Inversion.CreateInversion(InversionType.RootPosition, gain, noteDuration, sgType, solfeg.FaFrequency, solfeg.LaFrequency, solfeg.HighDoFrequency);
+                    samples1 = Inversion.CreateTriadInversionEx(InversionType.RootPosition, noteDuration, doNoteNumber + Interval.UpPerfect5th, doNoteNumber + Interval.UpMajor7th, doNoteNumber + Interval.UpMajor9th);
+                    samples2 = Inversion.CreateTriadInversionEx(InversionType.RootPosition, noteDuration, doNoteNumber + Interval.UpPerfect4th, doNoteNumber + Interval.UpMajor6th, doNoteNumber + Interval.Up1Octave);
                     break;
 
                 case ProgressionType.OneRootToFour2nd:
-                    samples1 = Inversion.CreateInversion(InversionType.RootPosition, gain, noteDuration, sgType, solfeg.DoFrequency, solfeg.MiFrequency, solfeg.SoFrequency);
-                    samples2 = Inversion.CreateInversion(InversionType.LowSecondInversion, gain, noteDuration, sgType, solfeg.FaFrequency, solfeg.LaFrequency, solfeg.HighDoFrequency);
-                    
+                    samples1 = Inversion.CreateTriadInversionEx(InversionType.RootPosition, noteDuration, doNoteNumber, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpPerfect5th);
+                    samples2 = Inversion.CreateTriadInversionEx(InversionType.LowSecondInversion, noteDuration, doNoteNumber + Interval.UpPerfect4th, doNoteNumber + Interval.UpMajor6th, doNoteNumber + Interval.Up1Octave);
+
                     break;
 
                 default:
@@ -78,7 +80,7 @@ namespace EarTraining.Controllers
             msp2.AddMixerInput(samples2[2]);
 
             var phrase = msp1
-                .FollowedBy(shortRest)
+                //.FollowedBy(shortRest)
                 .FollowedBy(msp2);
 
             var stwp = new SampleToWaveProvider(phrase);
