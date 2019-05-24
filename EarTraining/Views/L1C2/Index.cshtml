@@ -13,23 +13,27 @@
     </div>
 </div>
 <hr />
+
 <div class="row">
     <div class="col-md-12">
-        <audio controls preload='none'>
-            <source src='@Url.Action("GetDO", "DO", new { frequency = ViewBag.Pitch.Hertz })' type='audio/mpeg'>
-        </audio>
+        <figure>
+            <figcaption><img class="piano" /></figcaption>
+            <audio controls preload='none'>
+                <source src='@Url.Action("GetDOEx", "DO", new { doNoteName = ViewBag.Pitch.PitchName })' type='audio/mpeg'>
+            </audio>
+        </figure>
     </div>
 </div>
+
 <div class="row">
-    <div class="col-md-12">
-        <hr />
-    </div>
     <div class="col-md-12">
         <p>Hover over the below to reveal your DO.</p>
         <p class="spoiler">Your DO is @ViewBag.Pitch.PitchName - @ViewBag.Pitch.Hertz Hz</p>
     </div>
 </div>
+
 <hr />
+
 <section id="tabs">
     <div class="container">
         <div class="row">
@@ -46,39 +50,57 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <p>DO DO MI MI MI</p>
-                                <audio controls preload='none'>
-                                    <source src='@Url.Action("GetDrill", "L1C2", new { frequency = ViewBag.Pitch.Hertz, type = 0 })' type='audio/mpeg'>
-                                </audio>
+                                <figure>
+                                    <figcaption><img class="piano" /></figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 0 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
                             </div>
                             <div class="col-md-4">
                                 <p>FA FA LA LA SO</p>
-                                <audio controls preload='none'>
-                                    <source src='@Url.Action("GetDrill", "L1C2", new { frequency = ViewBag.Pitch.Hertz, type = 1 })' type='audio/mpeg'>
-                                </audio>
+                                <figure>
+                                    <figcaption><img class="piano" /></figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 1 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
                             </div>
                             <div class="col-md-4">
                                 <p>SO SO TI TI DO</p>
-                                <audio controls preload='none'>
-                                    <source src='@Url.Action("GetDrill", "L1C2", new { frequency = ViewBag.Pitch.Hertz, type = 2 })' type='audio/mpeg'>
-                                </audio>
+                                <figure>
+                                    <figcaption><img class="piano" /></figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 2 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
                             </div>
                             <div class="col-md-4">
                                 <p>TI TI SO SO SO</p>
-                                <audio controls preload='none'>
-                                    <source src='@Url.Action("GetDrill", "L1C2", new { frequency = ViewBag.Pitch.Hertz, type = 3 })' type='audio/mpeg'>
-                                </audio>
+                                <figure>
+                                    <figcaption><img class="piano" /></figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 3 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
                             </div>
                             <div class="col-md-4">
                                 <p>LA LA FA FA MI</p>
-                                <audio controls preload='none'>
-                                    <source src='@Url.Action("GetDrill", "L1C2", new { frequency = ViewBag.Pitch.Hertz, type = 4 })' type='audio/mpeg'>
-                                </audio>
+                                <figure>
+                                    <figcaption><img class="piano" /></figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 4 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
                             </div>
                             <div class="col-md-4">
                                 <p>MI MI DO DO DO</p>
-                                <audio controls preload='none'>
-                                    <source src='@Url.Action("GetDrill", "L1C2", new { frequency = ViewBag.Pitch.Hertz, type = 5 })' type='audio/mpeg'>
-                                </audio>
+                                <figure>
+                                    <figcaption><img class="piano" /></figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 5 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
                             </div>
                         </div>
                     </div>
@@ -87,39 +109,57 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <p>MI MI DO DO DO</p>
-                                <audio controls preload='none'>
-                                    <source src='@Url.Action("GetDrill", "L1C2", new { frequency = ViewBag.Pitch.Hertz, type = 6 })' type='audio/mpeg'>
-                                </audio>
+                                <figure>
+                                    <figcaption><img class="piano" /></figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 6 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
                             </div>
                             <div class="col-md-4">
                                 <p>LA LA FA FA MI</p>
-                                <audio controls preload='none'>
-                                    <source src='@Url.Action("GetDrill", "L1C2", new { frequency = ViewBag.Pitch.Hertz, type = 7 })' type='audio/mpeg'>
-                                </audio>
+                                <figure>
+                                    <figcaption><img class="piano" /></figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 7 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
                             </div>
                             <div class="col-md-4">
                                 <p>TI TI SO SO SO</p>
-                                <audio controls preload='none'>
-                                    <source src='@Url.Action("GetDrill", "L1C2", new { frequency = ViewBag.Pitch.Hertz, type = 8 })' type='audio/mpeg'>
-                                </audio>
+                                <figure>
+                                    <figcaption><img class="piano" /></figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 8 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
                             </div>
                             <div class="col-md-4">
                                 <p>SO SO TI TI DO</p>
-                                <audio controls preload='none'>
-                                    <source src='@Url.Action("GetDrill", "L1C2", new { frequency = ViewBag.Pitch.Hertz, type = 9 })' type='audio/mpeg'>
-                                </audio>
+                                <figure>
+                                    <figcaption><img class="piano" /></figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 9 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
                             </div>
                             <div class="col-md-4">
                                 <p>FA FA LA LA SO</p>
-                                <audio controls preload='none'>
-                                    <source src='@Url.Action("GetDrill", "L1C2", new { frequency = ViewBag.Pitch.Hertz, type = 10 })' type='audio/mpeg'>
-                                </audio>
+                                <figure>
+                                    <figcaption><img class="piano" /></figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 10 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
                             </div>
                             <div class="col-md-4">
                                 <p>DO DO MI MI MI</p>
-                                <audio controls preload='none'>
-                                    <source src='@Url.Action("GetDrill", "L1C2", new { frequency = ViewBag.Pitch.Hertz, type = 11 })' type='audio/mpeg'>
-                                </audio>
+                                <figure>
+                                    <figcaption><img class="piano" /></figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 11 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
                             </div>
                         </div>
                     </div>
@@ -160,7 +200,7 @@
         });
 
         function setAudDrill1Src() {
-            var baseSrc = '@Url.Action("GetDrill", "L1C2", new { frequency = ViewBag.Pitch.Hertz })';
+            var baseSrc = '@Url.Action("GetDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName })';
 
             // Find the active tab.
             var activeTab = $('div.tab-pane.active');
