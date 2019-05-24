@@ -12,17 +12,6 @@
         <input type="button" value="Get a New DO" onclick="location.href='@Url.Action("Index", "L1C3")'" />
     </div>
 </div>
-@*<div class="row">
-        <div class="col-md-12">
-            <audio controls preload='none'>
-                <source src='@Url.Action("GetDO", "DO", new { frequency = ViewBag.Pitch.Hertz })' type='audio/mpeg'>
-            </audio>
-            <div class="col-md-12">
-                <p>Hover over the below to reveal the DO</p>
-                <p class="spoiler">Your DO is @ViewBag.Pitch.PitchName - @ViewBag.Pitch.Hertz Hz</p>
-            </div>
-        </div>
-    </div>*@
 
 <div class="row">
     <div class="col-md-12">
@@ -49,14 +38,6 @@
         <input type="button" value="Get a New Triad" onclick="setAudioSrc()" />
     </div>
 </div>
-
-@*<div class="row">
-        <div class="col-md-12">
-            <audio id="audio" controls preload='none'>
-                <source src='' type='audio/mpeg'>
-            </audio>
-        </div>
-    </div>*@
 
 <div class="row">
     <div class="col-md-12">
@@ -181,14 +162,11 @@
         });
 
         function setAudioSrc() {
-            //var audioSrc = '@Url.Action("GetTriad", "L1C3", new { frequency = ViewBag.Pitch.Hertz })';
             var audioExSrc = '@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName })';
             var triadtype = getRandomInt(0, 2);
             var inversion = getRandomInt(0, 2);
-            //audioSrc = audioSrc + '&triadtype=' + triadtype + '&inversion=' + inversion;;
             audioExSrc = audioExSrc + '&triadtype=' + triadtype + '&inversion=' + inversion;;
 
-            //$('#audio').attr('src', audioSrc);
             $('#audioEx').attr('src', audioExSrc);
 
             var msg = 'Your triad is @ViewBag.Triad - ';
