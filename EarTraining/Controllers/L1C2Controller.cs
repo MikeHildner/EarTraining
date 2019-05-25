@@ -52,12 +52,7 @@ namespace EarTraining.Controllers
             double gain = 0.2;
             SignalGeneratorType sgType = SignalGeneratorType.SawTooth;
 
-            ISampleProvider shortRest = new SignalGenerator()
-            {
-                Gain = 0
-            }.Take(TimeSpan.FromMilliseconds(200));
-
-            ISampleProvider note1, note2, note3, note4, note5;
+             ISampleProvider note1, note2, note3, note4, note5;
 
             Solfeg solfeg = new Solfeg(frequency);
 
@@ -166,13 +161,9 @@ namespace EarTraining.Controllers
             }
 
             var phrase = note1
-                .FollowedBy(shortRest)
                 .FollowedBy(note2)
-                .FollowedBy(shortRest)
                 .FollowedBy(note3)
-                .FollowedBy(shortRest)
                 .FollowedBy(note4)
-                .FollowedBy(shortRest)
                 .FollowedBy(note5);
 
             var stwp = new SampleToWaveProvider(phrase);
@@ -193,11 +184,6 @@ namespace EarTraining.Controllers
             string doFileName = NAudioHelper.GetFileNameFromNoteName(doNoteName);
             doFileName = Path.GetFileName(doFileName);
             int doNoteNumber = int.Parse(doFileName.Split('.')[0]);
-
-            ISampleProvider shortRest = new SignalGenerator()
-            {
-                Gain = 0
-            }.Take(TimeSpan.FromMilliseconds(200));
 
             ISampleProvider note1, note2, note3, note4, note5;
 
@@ -306,13 +292,9 @@ namespace EarTraining.Controllers
             }
 
             var phrase = note1
-                .FollowedBy(shortRest)
                 .FollowedBy(note2)
-                .FollowedBy(shortRest)
                 .FollowedBy(note3)
-                .FollowedBy(shortRest)
                 .FollowedBy(note4)
-                .FollowedBy(shortRest)
                 .FollowedBy(note5);
 
             var stwp = new SampleToWaveProvider(phrase);

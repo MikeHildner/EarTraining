@@ -43,9 +43,22 @@
     @RenderSection("scripts", required: false)
 
     <script>
-        $.ajax({
-            url: '@Url.Content("~/")' + 'base/DeleteOldFiles'
+        $(document).ready(function () {
+            deleteOldFiles();
+            //setupImagesToPlayDO();
         });
+
+        function deleteOldFiles() {
+            $.ajax({
+                url: '@Url.Content("~/")' + 'base/DeleteOldFiles'
+            });
+        }
+
+        @*function setupImagesToPlayDO() {
+            $('.play-do').click(function () {
+                alert('@ViewBag.Pitch.PitchName');
+            });
+        }*@
     </script>
 </body>
 </html>

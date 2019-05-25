@@ -53,11 +53,6 @@ namespace EarTraining.Controllers
             double gain = 0.2;
             SignalGeneratorType sgType = SignalGeneratorType.SawTooth;
 
-            ISampleProvider shortRest = new SignalGenerator()
-            {
-                Gain = 0
-            }.Take(TimeSpan.FromMilliseconds(200));
-
             ISampleProvider note1;
             ISampleProvider note2;
             ISampleProvider note3;
@@ -108,11 +103,8 @@ namespace EarTraining.Controllers
             }
 
             ISampleProvider phrase = note1
-                .FollowedBy(shortRest)
                 .FollowedBy(note2)
-                .FollowedBy(shortRest)
                 .FollowedBy(note3)
-                .FollowedBy(shortRest)
                 .FollowedBy(note4);
 
             SampleToWaveProvider stwp = new SampleToWaveProvider(phrase);
@@ -134,11 +126,6 @@ namespace EarTraining.Controllers
             string doFileName = NAudioHelper.GetFileNameFromNoteName(doNoteName);
             doFileName = Path.GetFileName(doFileName);
             int doNoteNumber = int.Parse(doFileName.Split('.')[0]);
-
-            ISampleProvider shortRest = new SignalGenerator()
-            {
-                Gain = 0
-            }.Take(TimeSpan.FromMilliseconds(200));
 
             ISampleProvider note1;
             ISampleProvider note2;
@@ -188,11 +175,8 @@ namespace EarTraining.Controllers
             }
 
             ISampleProvider phrase = note1
-                .FollowedBy(shortRest)
                 .FollowedBy(note2)
-                .FollowedBy(shortRest)
                 .FollowedBy(note3)
-                .FollowedBy(shortRest)
                 .FollowedBy(note4);
 
             SampleToWaveProvider stwp = new SampleToWaveProvider(phrase);

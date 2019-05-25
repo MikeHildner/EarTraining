@@ -63,7 +63,7 @@ namespace EarTraining.Controllers
             WaveFileWriter.WriteWavFileToStream(wavStream, wp);
             wavStream.Position = 0;
 
-            MemoryStream mp3Stream = wavStream.WavToMp3File(out string fileName);
+            wavStream.WavToMp3File(out string fileName);
             return Redirect($"~/Temp/{fileName}");
         }
 
@@ -110,7 +110,7 @@ namespace EarTraining.Controllers
             WaveFileWriter.WriteWavFileToStream(wavStream, wp);
             wavStream.Position = 0;
 
-            MemoryStream mp3Stream = wavStream.WavToMp3File(out string fileName);
+            wavStream.WavToMp3File(out string fileName);
             return Redirect($"~/Temp/{fileName}");
         }
     }

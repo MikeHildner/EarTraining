@@ -3,7 +3,6 @@ using NAudio.Wave;
 using NLog;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -13,7 +12,7 @@ namespace EarTrainingLibrary.Utility
 {
     public static class ExtensionMethods
     {
-        private static Logger _log = LogManager.GetCurrentClassLogger();
+        private static readonly Logger _log = LogManager.GetCurrentClassLogger();
 
         public static void Shuffle<T>(this IList<T> list)
         {
@@ -37,10 +36,10 @@ namespace EarTrainingLibrary.Utility
 
         public static MemoryStream WavToMp3Stream(this Stream wavStream)
         {
-            var mp3Stream = new MemoryStream();
-            var rdr = new WaveFileReader(wavStream);
+            MemoryStream mp3Stream = new MemoryStream();
+            WaveFileReader rdr = new WaveFileReader(wavStream);
             CheckAddBinPath();
-            var wtr = new LameMP3FileWriter(mp3Stream, rdr.WaveFormat, 128);
+            LameMP3FileWriter wtr = new LameMP3FileWriter(mp3Stream, rdr.WaveFormat, 128);
             rdr.CopyTo(wtr);
 
             mp3Stream.Position = 0;
@@ -49,12 +48,12 @@ namespace EarTrainingLibrary.Utility
             return mp3Stream;
         }
 
-        public static MemoryStream WavToMp3File(this Stream wavStream, out string fileName)
+        public static MemoryStream WavToMp3FileOld(this Stream wavStream, out string fileName)
         {
-            var mp3Stream = new MemoryStream();
-            var rdr = new WaveFileReader(wavStream);
+            MemoryStream mp3Stream = new MemoryStream();
+            WaveFileReader rdr = new WaveFileReader(wavStream);
             CheckAddBinPath();
-            var wtr = new LameMP3FileWriter(mp3Stream, rdr.WaveFormat, 128);
+            LameMP3FileWriter wtr = new LameMP3FileWriter(mp3Stream, rdr.WaveFormat, 128);
             rdr.CopyTo(wtr);
             mp3Stream.Position = 0;
 
@@ -62,7 +61,7 @@ namespace EarTrainingLibrary.Utility
             string tempFolder = HostingEnvironment.MapPath("~/Temp");
             //CleanFolder(tempFolder);
             string guid = Guid.NewGuid().ToString();
-            var fileNameOnly = guid + ".mp3";
+            string fileNameOnly = guid + ".mp3";
             string mp3FileName = Path.Combine(tempFolder, fileNameOnly);
 
             using (FileStream file = new FileStream(mp3FileName, FileMode.Create))
@@ -73,8 +72,34 @@ namespace EarTrainingLibrary.Utility
             mp3Stream.Position = 0;
             wavStream.Position = 0;
 
-            fileName =  fileNameOnly;
+            fileName = fileNameOnly;
             return mp3Stream;
+        }
+
+        public static void WavToMp3File(this Stream wavStream, out string fileName)
+        {
+            CheckAddBinPath();
+
+            using (MemoryStream mp3Stream = new MemoryStream())
+            using (WaveFileReader rdr = new WaveFileReader(wavStream))
+            using (LameMP3FileWriter wtr = new LameMP3FileWriter(mp3Stream, rdr.WaveFormat, 128))
+            {
+                rdr.CopyTo(wtr);
+                mp3Stream.Position = 0;
+
+                // Write the mp3 stream to disk.
+                string tempFolder = HostingEnvironment.MapPath("~/Temp");
+                string guid = Guid.NewGuid().ToString();
+                string fileNameOnly = guid + ".mp3";
+                string mp3FileName = Path.Combine(tempFolder, fileNameOnly);
+
+                using (FileStream file = new FileStream(mp3FileName, FileMode.Create))
+                {
+                    mp3Stream.CopyTo(file);
+                }
+
+                fileName = fileNameOnly;
+            }
         }
 
         //public static MemoryStream WavToMp4(this Stream wavStream)
@@ -118,9 +143,9 @@ namespace EarTrainingLibrary.Utility
         public static void CheckAddBinPath()
         {
             // find path to 'bin' folder
-            var binPath = Path.Combine(new string[] { AppDomain.CurrentDomain.BaseDirectory, "bin" });
+            string binPath = Path.Combine(new string[] { AppDomain.CurrentDomain.BaseDirectory, "bin" });
             // get current search path from environment
-            var path = Environment.GetEnvironmentVariable("PATH") ?? "";
+            string path = Environment.GetEnvironmentVariable("PATH") ?? "";
 
             // add 'bin' folder to search path if not already present
             if (!path.Split(Path.PathSeparator).Contains(binPath, StringComparer.CurrentCultureIgnoreCase))

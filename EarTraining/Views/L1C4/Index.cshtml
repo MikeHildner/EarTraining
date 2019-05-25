@@ -31,7 +31,7 @@
                             <div class="col-md-4">
                                 <p>IV(2nd) - I(root)</p>
                                 <figure>
-                                    <figcaption><img class="piano" /></figcaption>
+                                    <figcaption><img class="piano play-do" /></figcaption>
                                     <audio controls preload='none'>
                                         <source src='@Url.Action("GetProgressionEx", "L1C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 0 })' type='audio/mpeg'>
                                     </audio>
@@ -40,7 +40,7 @@
                             <div class="col-md-4">
                                 <p>V(1st) - I(root)</p>
                                 <figure>
-                                    <figcaption><img class="piano" /></figcaption>
+                                    <figcaption><img class="piano play-do" /></figcaption>
                                     <audio controls preload='none'>
                                         <source src='@Url.Action("GetProgressionEx", "L1C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 1 })' type='audio/mpeg'>
                                     </audio>
@@ -49,7 +49,7 @@
                             <div class="col-md-4">
                                 <p>V(root) - IV(root)</p>
                                 <figure>
-                                    <figcaption><img class="piano" /></figcaption>
+                                    <figcaption><img class="piano play-do" /></figcaption>
                                     <audio controls preload='none'>
                                         <source src='@Url.Action("GetProgressionEx", "L1C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 2 })' type='audio/mpeg'>
                                     </audio>
@@ -58,7 +58,7 @@
                             <div class="col-md-4">
                                 <p>I(root) - IV(2nd)</p>
                                 <figure>
-                                    <figcaption><img class="piano" /></figcaption>
+                                    <figcaption><img class="piano play-do" /></figcaption>
                                     <audio controls preload='none'>
                                         <source src='@Url.Action("GetProgressionEx", "L1C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 3 })' type='audio/mpeg'>
                                     </audio>
@@ -83,7 +83,7 @@
     <div class="col-md-12">
         <input type="button" value="Get a New Progression" onclick="setAudProgressionSrc()" />
         <figure>
-            <figcaption><img class="piano" /></figcaption>
+            <figcaption><img class="piano play-do" /></figcaption>
             <audio id="audProgression" controls preload='none'>
                 <source src='' type='audio/mpeg'>
             </audio>

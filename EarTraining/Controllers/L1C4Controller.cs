@@ -69,18 +69,12 @@ namespace EarTraining.Controllers
             msp1.AddMixerInput(samples1[1]);
             msp1.AddMixerInput(samples1[2]);
 
-            ISampleProvider shortRest = new SignalGenerator()
-            {
-                Gain = 0
-            }.Take(TimeSpan.FromMilliseconds(200));
-
             MixingSampleProvider msp2 = new MixingSampleProvider(samples2[0].WaveFormat);
             msp2.AddMixerInput(samples2[0]);
             msp2.AddMixerInput(samples2[1]);
             msp2.AddMixerInput(samples2[2]);
 
             var phrase = msp1
-                //.FollowedBy(shortRest)
                 .FollowedBy(msp2);
 
             var stwp = new SampleToWaveProvider(phrase);
@@ -89,7 +83,7 @@ namespace EarTraining.Controllers
             WaveFileWriter.WriteWavFileToStream(wavStream, stwp);
             wavStream.Position = 0;
 
-            MemoryStream mp3Stream = wavStream.WavToMp3File(out string fileName);
+            wavStream.WavToMp3File(out string fileName);
             return Redirect($"~/Temp/{fileName}");
         }
     }
