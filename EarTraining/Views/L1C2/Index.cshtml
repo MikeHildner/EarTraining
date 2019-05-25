@@ -8,27 +8,9 @@
 
 <div class="row">
     <div class="col-md-12">
-        <p>Each time this page is refreshed, a new DO is assigned.</p>
-        <input type="button" value="Get a New DO" onclick="location.href='@Url.Action("Index", "L1C2")'" />
-    </div>
-</div>
-<hr />
-
-<div class="row">
-    <div class="col-md-12">
-        <figure>
-            <figcaption><img class="piano" /></figcaption>
-            <audio controls preload='none'>
-                <source src='@Url.Action("GetDOEx", "DO", new { doNoteName = ViewBag.Pitch.PitchName })' type='audio/mpeg'>
-            </audio>
-        </figure>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-12">
-        <p>Hover over the below to reveal your DO.</p>
-        <p class="spoiler">Your DO is @ViewBag.Pitch.PitchName - @ViewBag.Pitch.Hertz Hz</p>
+        @{
+            Html.RenderPartial("NewDO");
+        }
     </div>
 </div>
 
