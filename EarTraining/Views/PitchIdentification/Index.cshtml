@@ -17,18 +17,25 @@
     <div class="col-md-6">
         <p>Each time this page is refreshed, a new DO is assigned.</p>
         <input type="button" value="Get a New DO" onclick="location.href='@Url.Action("Index", "PitchIdentification")'" />
-        <audio controls preload='none'>
-            <source src='@Url.Action("GetDO", "DO", new { frequency = ViewBag.Pitch.Hertz })' type='audio/mpeg'>
-        </audio>
+        <figure>
+            <figcaption><img class="piano" /></figcaption>
+            <audio controls preload='none'>
+                <source src='@Url.Action("GetDOEx", "DO", new { doNoteName = ViewBag.Pitch.PitchName })' type='audio/mpeg'>
+            </audio>
+        </figure>
         <p>Hover over the below to reveal the DO</p>
         <p class="spoiler">Your DO is @ViewBag.Pitch.PitchName< - @ViewBag.Pitch.Hertz Hz</p>
     </div>
+
     <div class="col-md-6">
         <p>Major scale pitch identification.</p>
         <input type="button" value="Get a New Pitch" onclick="setMajorAudPitchSrc()" />
-        <audio id="majorAudPitch" controls preload='none'>
-            <source src='@Url.Action("GetPitch", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz })' type='audio/mpeg'>
-        </audio>
+        <figure>
+            <figcaption><img class="piano" /></figcaption>
+            <audio id="majorAudPitch" controls preload='none'>
+                <source src='' type='audio/mpeg'>
+            </audio>
+        </figure>
         <p>Hover over the below to reveal the pitch</p>
         <p class="spoiler" id="majorPitch">Your pitch here @ViewBag.Pitch></p>
     </div>
@@ -46,9 +53,12 @@
     <div class="col-md-6">
         <p>Minor scale pitch identification.</p>
         <input type="button" value="Get a New Pitch" onclick="setMinorAudPitchSrc()" />
-        <audio id="minorAudPitch" controls preload='none'>
-            <source src='@Url.Action("GetPitch", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz })' type='audio/mpeg'>
-        </audio>
+        <figure>
+            <figcaption><img class="piano" /></figcaption>
+            <audio id="minorAudPitch" controls preload='none'>
+                <source src='' type='audio/mpeg'>
+            </audio>
+        </figure>
         <p>Hover over the below to reveal the pitch</p>
         <p class="spoiler" id="minorPitch">Your pitch here @ViewBag.Pitch</p>
     </div>
@@ -60,9 +70,12 @@
     <div class="col-md-6">
         <p>Blues scale pitch identification.</p>
         <input type="button" value="Get a New Pitch" onclick="setBluesAudPitchSrc()" />
-        <audio id="bluesAudPitch" controls preload='none'>
-            <source src='@Url.Action("GetPitch", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz })' type='audio/mpeg'>
-        </audio>
+        <figure>
+            <figcaption><img class="piano" /></figcaption>
+            <audio id="bluesAudPitch" controls preload='none'>
+                <source src='' type='audio/mpeg'>
+            </audio>
+        </figure>
         <p>Hover over the below to reveal the pitch</p>
         <p class="spoiler" id="bluesPitch">Your pitch here @ViewBag.Pitch</p>
     </div>
@@ -87,7 +100,7 @@
         });
 
         function setMajorAudPitchSrc() {
-            var baseSrc = '@Url.Action("GetPitch", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz })';
+            var baseSrc = '@Url.Action("GetPitchEx", "PitchIdentification", new { doNoteName = ViewBag.Pitch.PitchName })';
             var randomInt = getRandomInt(0, 12, [1,3,6,8,10]);
             var src = baseSrc + '&type=' + randomInt;
             $('#majorAudPitch').attr('src', src);
@@ -128,7 +141,7 @@
         }
 
         function setMinorAudPitchSrc() {
-            var baseSrc = '@Url.Action("GetPitch", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz })';
+            var baseSrc = '@Url.Action("GetPitchEx", "PitchIdentification", new { doNoteName = ViewBag.Pitch.PitchName })';
             var randomInt = getRandomInt(0, 12, [1,4,6,9,11]);
             var src = baseSrc + '&type=' + randomInt;
             $('#minorAudPitch').attr('src', src);
@@ -168,7 +181,7 @@
         }
 
         function setBluesAudPitchSrc() {
-            var baseSrc = '@Url.Action("GetPitch", "PitchIdentification", new { frequency = ViewBag.Pitch.Hertz })';
+            var baseSrc = '@Url.Action("GetPitchEx", "PitchIdentification", new { doNoteName = ViewBag.Pitch.PitchName })';
             var randomInt = getRandomInt(0, 12, [1,2,4,8,9,11]);
             var src = baseSrc + '&type=' + randomInt;
             $('#bluesAudPitch').attr('src', src);
