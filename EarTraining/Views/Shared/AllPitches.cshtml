@@ -114,4 +114,13 @@
             </audio>
         </figure>
     </div>
+    <div class="col-md-4">
+        <p><b>Do</b> - Octave</p>
+        <figure>
+            <figcaption><img class="piano" /></figcaption>
+            <audio controls preload='none'>
+                <source src='@Url.Action("GetPitchEx", "PitchIdentification", new { doNoteName = ViewBag.Pitch.PitchName, type = 12 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
 </div>
