@@ -26,6 +26,21 @@
                 </nav>
                 <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-2" role="tabpanel" aria-labelledby="nav-2-tab">
+                        <h3>Drill</h3>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="button" value="Get a New Progression" onclick="setAudProgression2Src()" />
+                                <figure>
+                                    <figcaption><img class="piano play-do" /></figcaption>
+                                    <audio id="audProgression2" controls preload='none'>
+                                        <source src='' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                                <p><span class="spoiler" id="progression2">Putting some text in here just to make it long enough</span></p>
+                            </div>
+                        </div>
+
                         <h4>2 Chord Progression Prompts</h4>
                         <div class="row">
                             <div class="col-md-4">
@@ -33,7 +48,7 @@
                                 <figure>
                                     <figcaption><img class="piano play-do" /></figcaption>
                                     <audio controls preload='none'>
-                                        <source src='@Url.Action("GetProgressionEx", "L1C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 0 })' type='audio/mpeg'>
+                                        <source src='@Url.Action("Get2ChordProgressionEx", "L1C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 0 })' type='audio/mpeg'>
                                     </audio>
                                 </figure>
                             </div>
@@ -42,7 +57,7 @@
                                 <figure>
                                     <figcaption><img class="piano play-do" /></figcaption>
                                     <audio controls preload='none'>
-                                        <source src='@Url.Action("GetProgressionEx", "L1C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 1 })' type='audio/mpeg'>
+                                        <source src='@Url.Action("Get2ChordProgressionEx", "L1C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 1 })' type='audio/mpeg'>
                                     </audio>
                                 </figure>
                             </div>
@@ -51,7 +66,7 @@
                                 <figure>
                                     <figcaption><img class="piano play-do" /></figcaption>
                                     <audio controls preload='none'>
-                                        <source src='@Url.Action("GetProgressionEx", "L1C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 2 })' type='audio/mpeg'>
+                                        <source src='@Url.Action("Get2ChordProgressionEx", "L1C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 2 })' type='audio/mpeg'>
                                     </audio>
                                 </figure>
                             </div>
@@ -60,15 +75,40 @@
                                 <figure>
                                     <figcaption><img class="piano play-do" /></figcaption>
                                     <audio controls preload='none'>
-                                        <source src='@Url.Action("GetProgressionEx", "L1C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 3 })' type='audio/mpeg'>
+                                        <source src='@Url.Action("Get2ChordProgressionEx", "L1C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 3 })' type='audio/mpeg'>
                                     </audio>
                                 </figure>
                             </div>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="nav-3" role="tabpanel" aria-labelledby="nav-3-tab">
+                        <h3>Drill</h3>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="button" value="Get a New Progression" onclick="setAudProgression3Src()" />
+                                <figure>
+                                    <figcaption><img class="piano play-do" /></figcaption>
+                                    <audio id="audProgression3" controls preload='none'>
+                                        <source src='' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                                <p><span class="spoiler" id="progression3">Putting some text in here just to make it long enough</span></p>
+                            </div>
+                        </div>
+
                         <h4>3 Chord Progression Prompts</h4>
-                        Note Yet Implemented
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p>IV(2nd) - V(1st) - I(root)</p>
+                                <figure>
+                                    <figcaption><img class="piano play-do" /></figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("Get3ChordProgressionEx", "L1C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 4 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+                        </div>
                     </div>
                     <hr />
                 </div>
@@ -77,32 +117,18 @@
     </div>
 </section>
 
-<h4>Drill</h4>
-
-<div class="row">
-    <div class="col-md-12">
-        <input type="button" value="Get a New Progression" onclick="setAudProgressionSrc()" />
-        <figure>
-            <figcaption><img class="piano play-do" /></figcaption>
-            <audio id="audProgression" controls preload='none'>
-                <source src='' type='audio/mpeg'>
-            </audio>
-        </figure>
-        <p><span class="spoiler" id="progression">Putting some text in here just to make it long enough</span></p>
-    </div>
-</div>
-
 @section  scripts {
     <script>
         $(document).ready(function () {
-            setAudProgressionSrc();
+            setAudProgression2Src();
+            setAudProgression3Src();
         });
 
-        function setAudProgressionSrc() {
-            var baseSrc = '@Url.Action("GetProgressionEx", "L1C4", new { doNoteName = ViewBag.Pitch.PitchName })';
+        function setAudProgression2Src() {
+            var baseSrc = '@Url.Action("Get2ChordProgressionEx", "L1C4", new { doNoteName = ViewBag.Pitch.PitchName })';
             var progressiontype = getRandomInt(0, 3);
             var src = baseSrc + '&progressiontype=' + progressiontype;
-            $('#audProgression').attr('src', src);
+            $('#audProgression2').attr('src', src);
 
             var msg = 'Your progression is ';
             switch (progressiontype) {
@@ -120,8 +146,23 @@
                     break;
             }
 
-            $('#progression').text(msg);
+            $('#progression2').text(msg);
         }
 
+        function setAudProgression3Src() {
+            var baseSrc = '@Url.Action("Get3ChordProgressionEx", "L1C4", new { doNoteName = ViewBag.Pitch.PitchName })';
+            var progressiontype = getRandomInt(4, 4);
+            var src = baseSrc + '&progressiontype=' + progressiontype;
+            $('#audProgression3').attr('src', src);
+
+            var msg = 'Your progression is ';
+            switch (progressiontype) {
+                case 4:
+                    msg = msg + 'IV(2nd) - V(1st) - I(root)';
+                    break;
+            }
+
+            $('#progression3').text(msg);
+        }
     </script>
 }
