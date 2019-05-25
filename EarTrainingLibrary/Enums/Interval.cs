@@ -12,6 +12,7 @@ namespace EarTrainingLibrary.Enums
         public static int DownMinor3rd { get { return -3; } }
         public static int DownHalfStep { get { return -1; } }
         public static int Up2nd { get { return 2; } }
+        public static int UpMinor3rd { get { return 3; } }
         public static int UpMajor3rd{get{ return 4; }}
         public static int UpPerfect4th { get { return 5; } }
         public static int UpPerfect5th { get { return 7; } }

@@ -21,9 +21,12 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <audio controls preload='none'>
-            <source src='@Url.Action("GetDO", "DO", new { frequency = ViewBag.Pitch.Hertz })' type='audio/mpeg'>
-        </audio>
+        <figure>
+            <figcaption><img class="piano" /></figcaption>
+            <audio controls preload='none'>
+                <source src='@Url.Action("GetDOEx", "DO", new { doNoteName = ViewBag.Pitch.PitchName })' type='audio/mpeg'>
+            </audio>
+        </figure>
         <div class="col-md-12">
             <p>Hover over the below to reveal the DO</p>
             <p class="spoiler">Your DO is @ViewBag.Pitch.PitchName - @ViewBag.Pitch.Hertz Hz</p>
@@ -43,9 +46,12 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <audio id="audResolution" controls preload='none'>
-            <source src='@Url.Action("GetChord", "MajorOrMinorTriad", new { frequency = ViewBag.Pitch.Hertz })' type='audio/mpeg'>
-        </audio>
+        <figure>
+            <figcaption><img class="piano" /></figcaption>
+            <audio id="audResolution" controls preload='none'>
+                <source src='@Url.Action("GetChordEx", "MajorOrMinorTriad", new { doNoteName = ViewBag.Pitch.PitchName })' type='audio/mpeg'>
+            </audio>
+        </figure>
     </div>
 </div>
 <div class="row">
@@ -65,7 +71,7 @@
         });
 
         function setAudResolutionSrc() {
-            var baseSrc = '@Url.Action("GetChord", "MajorOrMinorTriad", new { frequency = ViewBag.Pitch.Hertz })';
+            var baseSrc = '@Url.Action("GetChordEx", "MajorOrMinorTriad", new { doNoteName = ViewBag.Pitch.PitchName })';
             var randomInt = getRandomInt(0, 1);
             var src = baseSrc + '&type=' + randomInt;
             $('#audResolution').attr('src', src);
