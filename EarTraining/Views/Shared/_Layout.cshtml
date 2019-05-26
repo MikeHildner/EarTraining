@@ -18,7 +18,7 @@
 
                 <ul class="nav navbar-nav mr-auto">
                     <li class="nav-item">@Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })</li>
-                    <li><a href="https://github.com/MikeHildner/EarTraining" class="nav-link">Fork Me on GitHub</a></li>
+                    @*<li><a href="https://github.com/MikeHildner/EarTraining" class="nav-link">Fork Me on GitHub</a></li>*@
                 </ul>
             </div>
         </div>
@@ -33,10 +33,17 @@
                 <li>This site does not use cookies</li>
                 <li>This site does not collect, record or share any personal information</li>
             </ul>
-            <a href="https://github.com/MikeHildner/EarTraining/issues" target="_blank">Report an Issue</a>
+            <div class="row">
+                <div class="col-md-6">
+                    <a href="https://github.com/MikeHildner/EarTraining/issues" target="_blank">Report an Issue</a>
+                </div>
+                <div class="col-md-6 text-align-right">
+                    <a href="https://github.com/MikeHildner/EarTraining" target="blank">Fork Me on GitHub</a>
+                </div>
+            </div>
         </footer>
     </div>
-    
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/site")
