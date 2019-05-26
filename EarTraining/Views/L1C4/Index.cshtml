@@ -130,6 +130,37 @@
                                     </audio>
                                 </figure>
                             </div>
+
+                            <div class="col-md-4">
+                                <p>V(1st) - I(root) - IV(2nd)</p>
+                                <figure>
+                                    <figcaption><img class="piano play-do" /></figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("Get3ChordProgressionEx", "L1C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 7 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+
+                            <div class="col-md-4">
+                                <p>I(root) - V(1st) - IV(2nd)</p>
+                                <figure>
+                                    <figcaption><img class="piano play-do" /></figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("Get3ChordProgressionEx", "L1C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 8 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+
+                            <div class="col-md-4">
+                                <p>IV(2nd) - I(root) - V(1st)</p>
+                                <figure>
+                                    <figcaption><img class="piano play-do" /></figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("Get3ChordProgressionEx", "L1C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 9 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+
                         </div>
 
                     </div>
@@ -174,7 +205,7 @@
 
         function setAudProgression3Src() {
             var baseSrc = '@Url.Action("Get3ChordProgressionEx", "L1C4", new { doNoteName = ViewBag.Pitch.PitchName })';
-            var progressiontype = getRandomInt(4, 6);
+            var progressiontype = getRandomInt(4, 9);
             var src = baseSrc + '&progressiontype=' + progressiontype;
             $('#audProgression3').attr('src', src);
 
@@ -190,6 +221,18 @@
 
                 case 6:
                     msg = msg + 'I(root) - IV(2nd) - V(1st)';
+                    break;
+
+                case 7:
+                    msg = msg + 'V(1st) - I(root) - IV(2nd)';
+                    break;
+
+                case 8:
+                    msg = msg + 'I(root) - V(1st) - IV(2nd)';
+                    break;
+
+                case 9:
+                    msg = msg + 'IV(2nd) - I(root) - V(1st)';
                     break;
             }
 
