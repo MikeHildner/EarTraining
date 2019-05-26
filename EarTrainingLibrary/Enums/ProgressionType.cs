@@ -9,6 +9,8 @@
         OneRootToFour2nd = 3,
 
         // Three chord progressions.
-        Four2ndFive1stOneRoot = 4
+        Four2ndFive1stOneRoot = 4,
+        Five1stFour2ndOneRoot = 5,
+        OneRootFour2ndFive1st = 6
     }
 }
