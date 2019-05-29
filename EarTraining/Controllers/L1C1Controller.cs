@@ -186,5 +186,20 @@ namespace EarTraining.Controllers
             wavStream.Position = 0;
             return wavStream;
         }
+
+        public ActionResult GetNoteEx(string doNoteName, int type)
+        {
+            int doNoteNumber = NoteHelper.NoteNumberFromNoteName(doNoteName);
+            int thisNoteNumber = doNoteNumber + type;
+            ISampleProvider note = NAudioHelper.GetSampleProvider(thisNoteNumber, TimeSpan.FromSeconds(3));
+
+            var stwp = new SampleToWaveProvider(note);
+            MemoryStream wavStream = new MemoryStream();
+            WaveFileWriter.WriteWavFileToStream(wavStream, stwp);
+            wavStream.Position = 0;
+
+            wavStream.WavToMp3File(out string fileName);
+            return Redirect($"~/Temp/{fileName}");
+        }
     }
 }

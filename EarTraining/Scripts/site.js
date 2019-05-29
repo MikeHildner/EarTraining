@@ -7,3 +7,8 @@
     }
     return ri;
 }
+
+function consoleAndAlert(msg) {
+    console.log(msg);
+    alert(msg);
+}

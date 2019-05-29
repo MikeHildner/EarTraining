@@ -74,6 +74,7 @@
     <Compile Include="Utility\ExtensionMethods.cs" />
     <Compile Include="Utility\FileSystem.cs" />
     <Compile Include="Utility\Inversion.cs" />
+    <Compile Include="Utility\NoteHelper.cs" />
     <Compile Include="Utility\Solfeg.cs" />
     <Compile Include="Enums\SolfegPitch.cs" />
   </ItemGroup>
