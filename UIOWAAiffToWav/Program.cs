@@ -22,7 +22,9 @@ namespace UIOWAAiffToWav
             // I want an immediate attack and smaller files, so chop off the dead space at the beginning
             // and shorten the duration of the sample.
 
-            string[] aiffFiles = Directory.GetFiles(@"C:\Users\Mike\source\repos\EarTraining\EarTraining\UIOWA_AIFFs");
+            var aiffFiles = Directory.GetFiles(@"C:\Users\Mike\source\repos\EarTraining\EarTraining\UIOWA_AIFFs")
+                .Where(w => w.EndsWith(".aiff"));
+
             var skipDuration = TimeSpan.FromMilliseconds(1000);
             var takeDuration = TimeSpan.FromSeconds(4);
 
@@ -38,6 +40,10 @@ namespace UIOWAAiffToWav
                 // Turn into a wav.
                 var stwp = new SampleToWaveProvider(outSample);
 
+                // Crank up the gain / volume.
+                SampleChannel sc = new SampleChannel(stwp);
+                sc.Volume = sc.Volume * 10;
+
                 // New file name.
                 string newFileName = Path.GetFileNameWithoutExtension(aiffFile);
                 newFileName = newFileName.Replace("Piano.ff.", string.Empty);
@@ -47,7 +53,8 @@ namespace UIOWAAiffToWav
                 // Write to disk.
                 using (var file = new FileStream(newFileName, FileMode.Create))
                 {
-                    WaveFileWriter.WriteWavFileToStream(file, stwp);
+                    //WaveFileWriter.WriteWavFileToStream(file, stwp);
+                    WaveFileWriter.WriteWavFileToStream(file, sc.ToWaveProvider());
                 }
             }
         }
