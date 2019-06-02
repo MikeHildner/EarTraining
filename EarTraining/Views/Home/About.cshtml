@@ -4,7 +4,7 @@
 <h2>@ViewBag.Title</h2>
 <h3>@ViewBag.Message</h3>
 
-<p>This site was created to provide additional eartraining drills for my own personal use after I began to study <a href="https://www.harrisonmusic.com"> Mark Harrison</a>'s <a href="https://www.harrisonmusic.com/store/c7/Ear_Training_Books_Audio.html">Contemporary Eartraining series</a> (Published by Hal Leonard).</p>
+<p>This site was created to provide additional eartraining drills for my own personal use after I began to study <a href="https://www.harrisonmusic.com"> Mark Harrison</a>'s <a href="https://www.harrisonmusic.com/store/c7/Ear_Training_Books_Audio.html">Contemporary Eartraining</a> series (Published by Hal Leonard).</p>
 
 <p>I thought it would be useful, and a fun programming exercise, to create additional drills that are random and available in any key.</p>
 <p> - Mike Hildner (mike dot hildner at gmail dot com)</p>
@@ -12,7 +12,14 @@
 <hr />
 <h3>About the Piano Samples</h3>
 <p>The original piano samples were downloaded from a University of Iowa <a href="http://theremin.music.uiowa.edu/mispiano.html">site</a>. Many thanks to those who made the samples freely available. On this site, those samples are found <a href="@Url.Content("~/UIOWA_AIFFs")">here</a>.</p>
-<p>Since those samples have a short duration before the note is struck, they were modified, with the results <a href="@Url.Content("~/Samples")">here</a>. It's these latter samples that are used to generate the audio on this site.</p>
+<p>Those original samples were modified to suit the needs of this site. Specifically:</p>
+<ul>
+    <li>There's a short (and inconsistent) duration before the note is struck.</li>
+    <li>The samples are quite long (apx. 30 seconds). While nice, I didn't need anything that long.</li>
+    <li>The gain is quite low.</li>
+</ul>
+
+<p>The project that modifies the original samples is named "UIOWAAiffToWav", and is part of the <a href="https://github.com/MikeHildner/EarTraining">source code</a>. It's these latter samples that are used to generate the audio on this site.</p>
 
 <hr />
 <h3>How the Audio is Generated</h3>
