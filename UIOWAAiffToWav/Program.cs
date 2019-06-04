@@ -42,7 +42,7 @@ namespace UIOWAAiffToWav
 
                 // Crank up the gain / volume.
                 SampleChannel sc = new SampleChannel(stwp);
-                sc.Volume = sc.Volume * 10;
+                sc.Volume = sc.Volume * 9;
 
                 // New file name.
                 string newFileName = Path.GetFileNameWithoutExtension(aiffFile);
