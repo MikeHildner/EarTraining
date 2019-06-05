@@ -13,7 +13,9 @@ namespace UIOWAAiffToWav
     {
         static void Main(string[] args)
         {
-            ConvertFiles();
+            //ConvertFiles();
+            ConvertFilesWithNormilization();
+            Console.ReadLine();
         }
 
         private static void ConvertFiles()
@@ -22,7 +24,8 @@ namespace UIOWAAiffToWav
             // I want an immediate attack and smaller files, so chop off the dead space at the beginning
             // and shorten the duration of the sample.
 
-            var aiffFiles = Directory.GetFiles(@"C:\Users\Mike\source\repos\EarTraining\EarTraining\UIOWA_AIFFs")
+            //var aiffFiles = Directory.GetFiles(@"C:\Users\Mike\source\repos\EarTraining\EarTraining\UIOWA_AIFFs")
+            var aiffFiles = Directory.GetFiles(@"E:\Source\Repos\EarTraining\EarTraining\UIOWA_AIFFs")
                 .Where(w => w.EndsWith(".aiff"));
 
             var skipDuration = TimeSpan.FromMilliseconds(1000);
@@ -59,6 +62,60 @@ namespace UIOWAAiffToWav
             }
         }
 
+        private static void ConvertFilesWithNormilization()
+        {
+            // These UIOW files have some dead space at the beginning, and are very long (apx. 30 seconds).
+            // I want an immediate attack and smaller files, so chop off the dead space at the beginning
+            // and shorten the duration of the sample.
+
+            //var aiffFiles = Directory.GetFiles(@"C:\Users\Mike\source\repos\EarTraining\EarTraining\UIOWA_AIFFs")
+            var aiffFiles = Directory.GetFiles(@"E:\Source\Repos\EarTraining\EarTraining\UIOWA_AIFFs")
+                .Where(w => w.EndsWith(".aiff"));
+
+            var skipDuration = TimeSpan.FromMilliseconds(1000);
+            var takeDuration = TimeSpan.FromSeconds(4);
+            float max = 0;
+
+            foreach (var aiffFile in aiffFiles)
+            {
+
+                using (var reader = new AudioFileReader(aiffFile))
+                {
+                    // find the max peak
+                    float[] buffer = new float[reader.WaveFormat.SampleRate];
+                    int read;
+                    do
+                    {
+                        read = reader.Read(buffer, 0, buffer.Length);
+                        for (int n = 0; n < read; n++)
+                        {
+                            var abs = Math.Abs(buffer[n]);
+                            if (abs > max) max = abs;
+                        }
+                    } while (read > 0);
+                    Console.WriteLine($"{aiffFile} max sample value: {max}");
+
+                    if (max == 0 || max > 1.0f)
+                        throw new InvalidOperationException("File cannot be normalized");
+
+                    // rewind and amplify
+                    reader.Position = 0;
+                    reader.Volume = 1.0f / max;
+
+                    // Rewind and chop.
+                    reader.Position = 0;
+                    ISampleProvider sample = reader.Skip(skipDuration).Take(takeDuration);
+
+                    // write out to a new WAV file
+                    // New file name.
+                    string newFileName = Path.GetFileNameWithoutExtension(aiffFile);
+                    newFileName = newFileName.Replace("Piano.ff.", string.Empty);
+                    newFileName = NumberFromNoteName(newFileName);
+                    newFileName = Path.Combine(@"e:\temp", newFileName + ".wav");
+                    WaveFileWriter.CreateWaveFile16(newFileName, sample);
+                }
+            }
+        }
         private static string NumberFromNoteName(string noteName)
         {
             int n;
