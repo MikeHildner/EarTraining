@@ -58,81 +58,72 @@
 </div>
 <div class="row">
     <div class="col-md-4">
-        <p>I(root)</p>
         <figure>
-            <figcaption><img class="piano" /></figcaption>
+            <figcaption><img class="piano" /> I (root)</figcaption>
             <audio id="audio" controls preload='none'>
                 <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 0, inversion = 0 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
     <div class="col-md-4">
-        <p>IV(root)</p>
         <figure>
-            <figcaption><img class="piano" /></figcaption>
+            <figcaption><img class="piano" /> IV (root)</figcaption>
             <audio id="audio" controls preload='none'>
                 <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 1, inversion = 0 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
     <div class="col-md-4">
-        <p>V(root)</p>
         <figure>
-            <figcaption><img class="piano" /></figcaption>
+            <figcaption><img class="piano" /> V (root)</figcaption>
             <audio id="audio" controls preload='none'>
                 <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 2, inversion = 0 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
     <div class="col-md-4">
-        <p>I(1st)</p>
         <figure>
-            <figcaption><img class="piano" /></figcaption>
+            <figcaption><img class="piano" /> I (1st)</figcaption>
             <audio id="audio" controls preload='none'>
                 <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 0, inversion = 1 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
     <div class="col-md-4">
-        <p>IV(1st)</p>
         <figure>
-            <figcaption><img class="piano" /></figcaption>
+            <figcaption><img class="piano" /> IV (1st)</figcaption>
             <audio id="audio" controls preload='none'>
                 <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 1, inversion = 1 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
     <div class="col-md-4">
-        <p>V(1st)</p>
         <figure>
-            <figcaption><img class="piano" /></figcaption>
+            <figcaption><img class="piano" /> V (1st)</figcaption>
             <audio id="audio" controls preload='none'>
                 <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 2, inversion = 1 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
     <div class="col-md-4">
-        <p>I(2nd)</p>
         <figure>
-            <figcaption><img class="piano" /></figcaption>
+            <figcaption><img class="piano" /> I (2nd)</figcaption>
             <audio id="audio" controls preload='none'>
                 <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 0, inversion = 2 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
     <div class="col-md-4">
-        <p>IV(2nd)</p>
         <figure>
-            <figcaption><img class="piano" /></figcaption>
+            <figcaption><img class="piano" /> IV (2nd)</figcaption>
             <audio id="audio" controls preload='none'>
                 <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 1, inversion = 2 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
     <div class="col-md-4">
-        <p>V(2nd)</p>
         <figure>
-            <figcaption><img class="piano" /></figcaption>
+            <figcaption><img class="piano" /> V (2nd)</figcaption>
             <audio id="audio" controls preload='none'>
                 <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 2, inversion = 2 })' type='audio/mpeg'>
             </audio>
@@ -155,28 +146,28 @@
 
             $('#audioEx').attr('src', audioExSrc);
 
-            var msg = 'Your triad is @ViewBag.Triad - ';
+            var msg = '@ViewBag.Triad';
             switch (triadtype) {
                 case 0:
-                    msg = msg + 'I - ';
+                    msg = msg + 'I ';
                     break;
                 case 1:
-                    msg = msg + 'IV - ';
+                    msg = msg + 'IV ';
                     break;
                 case 2:
-                    msg = msg + 'V - ';
+                    msg = msg + 'V ';
                     break;
             }
 
             switch (inversion) {
                 case 0:
-                    msg = msg + 'Root position';
+                    msg = msg + '(root)';
                     break;
                 case 1:
-                    msg = msg + 'First inversion';
+                    msg = msg + '(1st)';
                     break;
                 case 2:
-                    msg = msg + 'Second inversion';
+                    msg = msg + '(2nd)';
                     break;
             }
 
