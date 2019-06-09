@@ -13,7 +13,7 @@ using WaveLibrary;
 
 namespace EarTraining.Controllers
 {
-    public class L1C2Controller : Controller
+    public class L1C2Controller : BaseController
     {
         // GET: L1C2
         public ActionResult Index()
