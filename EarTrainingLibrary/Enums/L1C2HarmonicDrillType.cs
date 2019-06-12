@@ -10,6 +10,9 @@ namespace EarTrainingLibrary.Enums
     {
         DoMi3 = 0,
         FaLa3 = 1,
-        SoTi = 2
+        SoTi3 = 2,
+        MiDo6 = 3,
+        LaFa6 = 4,
+        TiSo6 = 5
     }
 }

@@ -105,6 +105,11 @@ namespace EarTrainingLibrary.Utility
                     // Do nothing - just make what we were given.
                     break;
 
+                case InversionType.HighFirstInversion:
+                    // Take the bottom note up an octave.
+                    firstNoteNumber = firstNoteNumber + Interval.Up1Octave;
+                    break;
+
                 default:
                     throw new NotSupportedException($"InversionType {inversionType} is not supported.");
             }

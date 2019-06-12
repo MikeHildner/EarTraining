@@ -333,29 +333,58 @@ namespace EarTraining.Controllers
 
         private MemoryStream GetHarmonicDrillEx(string doNoteName, L1C2HarmonicDrillType drillType)
         {
-            var duration = TimeSpan.FromSeconds(2);
+            var duration = TimeSpan.FromSeconds(4);
 
             string doFileName = NAudioHelper.GetFileNameFromNoteName(doNoteName);
             doFileName = Path.GetFileName(doFileName);
             int doNoteNumber = int.Parse(doFileName.Split('.')[0]);
 
-            ISampleProvider note1, note2;
+            int newDo;
+            InversionType inversionType;
 
             switch (drillType)
             {
                 // Major 3rd intervals.
                 case L1C2HarmonicDrillType.DoMi3:
-                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber, duration);
-                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + 4, duration);
+                    newDo = doNoteNumber;
+                    inversionType = InversionType.RootPosition;
+                    break;
+
+                case L1C2HarmonicDrillType.FaLa3:
+                    newDo = doNoteNumber + Interval.UpPerfect4th;
+                    inversionType = InversionType.RootPosition;
+                    break;
+
+                case L1C2HarmonicDrillType.SoTi3:
+                    newDo = doNoteNumber + Interval.UpPerfect5th;
+                    inversionType = InversionType.RootPosition;
+                    break;
+
+                // Minor 6th intervals.
+                case L1C2HarmonicDrillType.MiDo6:
+                    newDo = doNoteNumber;
+                    inversionType = InversionType.HighFirstInversion;
+                    break;
+
+                case L1C2HarmonicDrillType.LaFa6:
+                    newDo = doNoteNumber + Interval.UpPerfect4th;
+                    inversionType = InversionType.HighFirstInversion;
+                    break;
+
+                case L1C2HarmonicDrillType.TiSo6:
+                    newDo = doNoteNumber + Interval.UpPerfect5th;
+                    inversionType = InversionType.HighFirstInversion;
                     break;
 
                 default:
                     throw new NotSupportedException($"L1C2HarmonicDrillType '{drillType}' is not supported.");
             }
 
-            MixingSampleProvider msp = new MixingSampleProvider(note1.WaveFormat);
-            msp.AddMixerInput(note1);
-            msp.AddMixerInput(note2);
+            ISampleProvider[] samples = Inversion.Create2NoteInversionEx(inversionType, duration, newDo, newDo + Interval.UpMajor3rd);
+
+            MixingSampleProvider msp = new MixingSampleProvider(samples[0].WaveFormat);
+            msp.AddMixerInput(samples[0]);
+            msp.AddMixerInput(samples[1]);
 
             IWaveProvider wp = msp.ToWaveProvider();
             MemoryStream wavStream = new MemoryStream();
