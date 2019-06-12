@@ -22,6 +22,22 @@ namespace EarTraining.Controllers
             return View();
         }
 
+        public ActionResult SolfegResolutions()
+        {
+            Pitch pitch = new Pitches().Random();
+            ViewBag.Pitch = pitch;
+
+            return View();
+        }
+
+        public ActionResult PitchIdentification()
+        {
+            Pitch pitch = new Pitches().Random();
+            ViewBag.Pitch = pitch;
+
+            return View();
+        }
+
         public ActionResult GetResolution(double frequency, int type)
         {
             ResolutionType rt = (ResolutionType)type;

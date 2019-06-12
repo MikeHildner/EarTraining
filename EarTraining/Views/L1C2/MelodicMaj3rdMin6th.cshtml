@@ -1,0 +1,258 @@
+﻿@{
+    ViewBag.Title = "Level 1, Chapter 2";
+}
+<h2>@ViewBag.Title</h2>
+
+<h5>Major 3rd / Minor 6th Intervals</h5>
+<hr />
+
+<div class="row">
+    <div class="col-md-12">
+        @{
+            Html.RenderPartial("NewDO");
+        }
+    </div>
+</div>
+
+<hr />
+
+
+<h4>Drill</h4>
+<div class="row">
+    <div class="col-md-4">
+        <input type="button" value="Get a New Interval" onclick="setAudDrill1Src()" />
+        <figure>
+            <figcaption><img class="piano" /></figcaption>
+            <audio id="audDrill1" controls preload='none'>
+                <source src='' type='audio/mpeg'>
+            </audio>
+        </figure>
+        <p><span class="spoiler" id="drill1">Putting some text in here just to make it long enough</span></p>
+    </div>
+</div>
+
+<section id="tabs">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 ">
+                <nav>
+                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-maj3rd-tab" data-toggle="tab" href="#nav-maj3rd" role="tab" aria-controls="nav-maj3rd" aria-selected="true">Major 3rd Intervals</a>
+                        <a class="nav-item nav-link" id="nav-min6th-tab" data-toggle="tab" href="#nav-min6th" role="tab" aria-controls="nav-min6th" aria-selected="false">Minor 6th Intervals</a>
+                    </div>
+                </nav>
+                <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-maj3rd" role="tabpanel" aria-labelledby="nav-maj3rd-tab">
+                        <h4>Prompts</h4>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p>DO DO MI MI MI</p>
+                                <figure>
+                                    <figcaption><img class="piano" /></figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 0 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+                            <div class="col-md-4">
+                                <p>FA FA LA LA SO</p>
+                                <figure>
+                                    <figcaption><img class="piano" /></figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 1 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+                            <div class="col-md-4">
+                                <p>SO SO TI TI DO</p>
+                                <figure>
+                                    <figcaption><img class="piano" /></figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 2 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+                            <div class="col-md-4">
+                                <p>TI TI SO SO SO</p>
+                                <figure>
+                                    <figcaption><img class="piano" /></figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 3 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+                            <div class="col-md-4">
+                                <p>LA LA FA FA MI</p>
+                                <figure>
+                                    <figcaption><img class="piano" /></figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 4 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+                            <div class="col-md-4">
+                                <p>MI MI DO DO DO</p>
+                                <figure>
+                                    <figcaption><img class="piano" /></figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 5 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-min6th" role="tabpanel" aria-labelledby="nav-min6th-tab">
+                        <h4>Prompts</h4>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p>MI MI DO DO DO</p>
+                                <figure>
+                                    <figcaption><img class="piano" /></figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 6 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+                            <div class="col-md-4">
+                                <p>LA LA FA FA MI</p>
+                                <figure>
+                                    <figcaption><img class="piano" /></figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 7 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+                            <div class="col-md-4">
+                                <p>TI TI SO SO SO</p>
+                                <figure>
+                                    <figcaption><img class="piano" /></figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 8 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+                            <div class="col-md-4">
+                                <p>SO SO TI TI DO</p>
+                                <figure>
+                                    <figcaption><img class="piano" /></figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 9 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+                            <div class="col-md-4">
+                                <p>FA FA LA LA SO</p>
+                                <figure>
+                                    <figcaption><img class="piano" /></figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 10 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+                            <div class="col-md-4">
+                                <p>DO DO MI MI MI</p>
+                                <figure>
+                                    <figcaption><img class="piano" /></figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 11 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section  scripts {
+    <script>
+        $(document).ready(function () {
+            setAudDrill1Src();
+
+            $('#nav-maj3rd-tab').click(function () {
+                $('#nav-maj3rd').addClass('active');
+                $('#nav-min6th').removeClass('active');
+                setAudDrill1Src();
+            });
+
+            $('#nav-min6th-tab').click(function () {
+                $('#nav-min6th').addClass('active');
+                $('#nav-maj3rd').removeClass('active');
+                setAudDrill1Src();
+            });
+        });
+
+        function setAudDrill1Src() {
+            var baseSrc = '@Url.Action("GetDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName })';
+
+            // Find the active tab.
+            var activeTab = $('div.tab-pane.active');
+            var activeTabId = activeTab.attr('id');
+
+            // Get the drills based on what tab we're on.
+            var randomInt;
+
+            switch (activeTabId) {
+                case 'nav-maj3rd':
+                    randomInt = getRandomInt(0, 5);
+                    break;
+                case 'nav-min6th':
+                    randomInt = getRandomInt(6, 11);
+                    break;
+
+                default:
+                    var msg = 'activeTabId ' + activeTabId + ' is not supported';
+                    console.log(msg);
+                    alert(msg);
+            }
+
+            var src = baseSrc + '&type=' + randomInt;
+            $('#audDrill1').attr('src', src);
+
+            var msg = '';
+            switch (randomInt) {
+                case 0:
+                    msg = msg + 'DO DO MI MI MI (Maj 3rd)';
+                    break;
+                case 1:
+                    msg = msg + 'FA FA LA LA SO (Maj 3rd)';
+                    break;
+                case 2:
+                    msg = msg + 'SO SO TI TI DO (Maj3 rd)';
+                    break;
+                case 3:
+                    msg = msg + 'TI TI SO SO SO (Maj 3rd)';
+                    break;
+                case 4:
+                    msg = msg + 'LA LA FA FA MI (Maj 3rd)';
+                    break;
+                case 5:
+                    msg = msg + 'MI MI DO DO DO (Maj 3rd)';
+                    break;
+                case 6:
+                    msg = msg + 'MI MI DO DO DO (Min 6th)';
+                    break;
+                case 7:
+                    msg = msg + 'LA LA LA FA MI (Min 6th)';
+                    break;
+                case 8:
+                    msg = msg + 'TI TI SO SO SO (Min 6th)';
+                    break;
+                case 9:
+                    msg = msg + 'SO SO TI TI DO (Min 6th)';
+                    break;
+                case 10:
+                    msg = msg + 'FA FA LA LA SO (Min 6th)';
+                    break;
+                case 11:
+                    msg = msg + 'DO DO MI MI MI (Min 6th)';
+                    break;
+            }
+
+            $('#drill1').text(msg);
+    }
+    </script>
+}

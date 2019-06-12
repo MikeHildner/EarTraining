@@ -17,8 +17,24 @@
             <div class="navbar-collapse collapse" id="navbarSupportedContent">
 
                 <ul class="nav navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownL1C1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Level 1 Chapter 1
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownL1C1">
+                            @Html.ActionLink("Solfeg Resolutions", "SolfegResolutions", "L1C1", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Pitch Identification", "PitchIdentification", "L1C1", null, new { @class = "dropdown-item" })
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink("Original Page", "Index", "L1C1", null, new { @class = "dropdown-item" })
+                        </div>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownL1C2">
+                            @Html.ActionLink("Melodic Maj 3rd and Min 6th", "MelodicMaj3rdMin6th", "L1C2", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Harmonics Maj 3rd and Min 6th", "HarmonicMaj3rdMin6th", "L1C2", null, new { @class = "dropdown-item" })
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink("Original Page", "Index", "L1C2", null, new { @class = "dropdown-item" })
+                        </div>
+                    </li>
                     <li class="nav-item">@Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })</li>
-                    @*<li><a href="https://github.com/MikeHildner/EarTraining" class="nav-link">Fork Me on GitHub</a></li>*@
                 </ul>
             </div>
         </div>

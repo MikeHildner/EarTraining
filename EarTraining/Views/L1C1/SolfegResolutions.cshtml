@@ -1,0 +1,318 @@
+﻿@{
+    ViewBag.Title = "Level 1, Chapter 1";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h5>Solfeg Resolutions</h5>
+<hr />
+
+<div class="row">
+    <div class="col-md-12">
+        @{
+            Html.RenderPartial("NewDO");
+        }
+    </div>
+</div>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>Drill</h4>
+        <input type="button" value="Get a New Resolution" onclick="setAudResolutionSrc()" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <figure>
+            <figcaption><img class="piano" /></figcaption>
+            <audio id="audResolution" controls preload='none'>
+                <source src='@Url.Action("GetResolutionEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <hr />
+    </div>
+    <div class="col-md-12">
+        <p>Hover over the below to reveal the resolution</p>
+        <p class="spoiler" id="resolution">Your resolution goes here @ViewBag.ResolutionName</p>
+    </div>
+</div>
+
+<h4>Practice Resolutions</h4>
+
+<div class="row">
+    <div class="col-md-4">
+        <figure>
+            <figcaption><img class="piano" /> DO DO RE DO</figcaption>
+            <audio controls preload='none'>
+                <source src='@Url.Action("GetResolutionEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 0 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+    <div class="col-md-4">
+        <figure>
+            <figcaption><img class="piano" /> DO DO FA MI</figcaption>
+            <audio controls preload='none'>
+                <source src='@Url.Action("GetResolutionEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 1 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+    <div class="col-md-4">
+        <figure>
+            <figcaption><img class="piano" /> DO DO LA SO</figcaption>
+            <audio controls preload='none'>
+                <source src='@Url.Action("GetResolutionEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 2 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <figure>
+            <figcaption><img class="piano" /> DO DO TI (high)DO</figcaption>
+            <audio controls preload='none'>
+                <source src='@Url.Action("GetResolutionEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 3 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+    <div class="col-md-4">
+        <figure>
+            <figcaption><img class="piano" /> DO DO (low)TI DO</figcaption>
+            <audio controls preload='none'>
+                <source src='@Url.Action("GetResolutionEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 4 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+</div>
+
+@*<section id="tabs">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 ">
+                <nav>
+                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-1-tab" data-toggle="tab" href="#nav-1" role="tab" aria-controls="nav-1" aria-selected="true">Solfeg Resolutions</a>
+                        <a class="nav-item nav-link" id="nav-2-tab" data-toggle="tab" href="#nav-2" role="tab" aria-controls="nav-2" aria-selected="false">Pitch Identification</a>
+                    </div>
+                </nav>
+                <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-1" role="tabpanel" aria-labelledby="nav-1-tab">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>Drill</h4>
+                                <input type="button" value="Get a New Resolution" onclick="setAudResolutionSrc()" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <figure>
+                                    <figcaption><img class="piano" /></figcaption>
+                                    <audio id="audResolution" controls preload='none'>
+                                        <source src='@Url.Action("GetResolutionEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <hr />
+                            </div>
+                            <div class="col-md-12">
+                                <p>Hover over the below to reveal the resolution</p>
+                                <p class="spoiler" id="resolution">Your resolution goes here @ViewBag.ResolutionName</p>
+                            </div>
+                        </div>
+
+                        <h4>Practice Resolutions</h4>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <figure>
+                                    <figcaption><img class="piano" /> DO DO RE DO</figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetResolutionEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 0 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+                            <div class="col-md-4">
+                                <figure>
+                                    <figcaption><img class="piano" /> DO DO FA MI</figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetResolutionEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 1 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+                            <div class="col-md-4">
+                                <figure>
+                                    <figcaption><img class="piano" /> DO DO LA SO</figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetResolutionEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 2 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <figure>
+                                    <figcaption><img class="piano" /> DO DO TI (high)DO</figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetResolutionEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 3 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+                            <div class="col-md-4">
+                                <figure>
+                                    <figcaption><img class="piano" /> DO DO (low)TI DO</figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetResolutionEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 4 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-2" role="tabpanel" aria-labelledby="nav-2-tab">
+                        <h3>Drill</h3>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="button" value="Get a New Note" onclick="setAudNoteSrc()" />
+                                <figure>
+                                    <figcaption><img class="piano" /></figcaption>
+                                    <audio id="audNote" controls preload='none'>
+                                        <source src='' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                                <p><span class="spoiler" id="note">Putting some text in here just to make it long enough</span></p>
+                            </div>
+                        </div>
+                        <hr />
+                        <h3>Practice Notes</h3>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <figure>
+                                    <figcaption><img class="piano" /> TI</figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetNoteEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = -1 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+                            <div class="col-md-4">
+                                <figure>
+                                    <figcaption><img class="piano" /> DO</figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetNoteEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 0 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+                            <div class="col-md-4">
+                                <figure>
+                                    <figcaption><img class="piano" /> RE</figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetNoteEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 2 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+                            <div class="col-md-4">
+                                <figure>
+                                    <figcaption><img class="piano" /> MI</figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetNoteEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 4 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+                            <div class="col-md-4">
+                                <figure>
+                                    <figcaption><img class="piano" /> FA</figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetNoteEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 5 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+                            <div class="col-md-4">
+                                <figure>
+                                    <figcaption><img class="piano" /> SO</figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetNoteEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 7 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+                            <div class="col-md-4">
+                                <figure>
+                                    <figcaption><img class="piano" /> LA</figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetNoteEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 9 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+                            <div class="col-md-4">
+                                <figure>
+                                    <figcaption><img class="piano" /> TI</figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetNoteEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 11 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+                            <div class="col-md-4">
+                                <figure>
+                                    <figcaption><img class="piano" /> DO</figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("GetNoteEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 12 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>*@
+
+
+@section  scripts {
+    <script>
+        $(document).ready(function () {
+            setAudResolutionSrc();
+        });
+
+        function setAudResolutionSrc() {
+            var baseSrc = '@Url.Action("GetResolutionEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName })';
+            var randomInt = getRandomInt(0, 4);
+            var src = baseSrc + '&type=' + randomInt;
+            $('#audResolution').attr('src', src);
+
+            var msg = 'Your resolution is ';
+            switch (randomInt) {
+                case 0:
+                    msg = msg + 'DO DO RE DO';
+                    break;
+                case 1:
+                    msg = msg + 'DO DO FA MI';
+                    break;
+                case 2:
+                    msg = msg + 'DO DO LA SO';
+                    break;
+                case 3:
+                    msg = msg + 'DO DO TI DO';
+                    break;
+                case 4:
+                    msg = msg + 'DO DO TI DO';
+                    break;
+                default:
+                    consoleAndAlert('Resolution type \'' + randomInt + '\' is not supported.');
+            }
+
+            $('#resolution').text(msg);
+    }
+
+    </script>
+}
