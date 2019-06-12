@@ -96,5 +96,24 @@ namespace EarTrainingLibrary.Utility
 
             return samples;
         }
+
+        public static ISampleProvider[] Create2NoteInversionEx(InversionType inversionType, TimeSpan duration, int firstNoteNumber, int secondNoteNumber)
+        {
+            switch (inversionType)
+            {
+                case InversionType.RootPosition:
+                    // Do nothing - just make what we were given.
+                    break;
+
+                default:
+                    throw new NotSupportedException($"InversionType {inversionType} is not supported.");
+            }
+
+            var samples = new ISampleProvider[2];
+            samples[0] = NAudioHelper.GetSampleProvider(firstNoteNumber, duration);
+            samples[1] = NAudioHelper.GetSampleProvider(secondNoteNumber, duration);
+
+            return samples;
+        }
     }
 }

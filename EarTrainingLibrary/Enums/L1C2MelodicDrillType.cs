@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EarTrainingLibrary.Enums
 {
-    public enum L1C2DrillType
+    public enum L1C2MelodicDrillType
     {
         DoDoMiMiMi3 = 0,
         FaFaLaLaSo3 = 1,

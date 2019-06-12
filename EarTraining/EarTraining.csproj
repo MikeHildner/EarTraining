@@ -185,6 +185,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css-toggle-switch.css" />
     <Content Include="Content\Images\Piano.svg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -281,6 +282,7 @@
     <Content Include="Views\L1C1\SolfegResolutions.cshtml" />
     <Content Include="Views\L1C1\PitchIdentification.cshtml" />
     <Content Include="Views\L1C2\MelodicMaj3rdMin6th.cshtml" />
+    <Content Include="Views\L1C2\HarmonicMaj3rdMin6th.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

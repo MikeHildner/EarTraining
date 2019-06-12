@@ -3,7 +3,7 @@
 }
 <h2>@ViewBag.Title</h2>
 
-<h5>Melodic Major 3rd / Minor 6th Intervals</h5>
+<h5>Harmonic Major 3rd / Minor 6th Intervals</h5>
 <hr />
 
 <div class="row">
@@ -52,50 +52,55 @@
     <h4>Maj 3rd Prompts</h4>
     <div class="row">
         <div class="col-md-4">
+            <p>DO DO MI MI MI</p>
             <figure>
-                <figcaption><img class="piano" /> DO DO MI MI MI</figcaption>
+                <figcaption><img class="piano" /></figcaption>
                 <audio controls preload='none'>
-                    <source src='@Url.Action("GetMelodicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 0 })' type='audio/mpeg'>
+                    <source src='@Url.Action("GetHarmonicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 0 })' type='audio/mpeg'>
                 </audio>
             </figure>
         </div>
         <div class="col-md-4">
             <figure>
-                <figcaption><img class="piano" /> FA FA LA LA SO</figcaption>
+                <figcaption><img class="piano" /> DO MI</figcaption>
                 <audio controls preload='none'>
-                    <source src='@Url.Action("GetMelodicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 1 })' type='audio/mpeg'>
+                    <source src='@Url.Action("GetHarmonicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 1 })' type='audio/mpeg'>
                 </audio>
             </figure>
         </div>
         <div class="col-md-4">
+            <p>SO SO TI TI DO</p>
             <figure>
-                <figcaption><img class="piano" /> SO SO TI TI DO</figcaption>
+                <figcaption><img class="piano" /></figcaption>
                 <audio controls preload='none'>
-                    <source src='@Url.Action("GetMelodicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 2 })' type='audio/mpeg'>
+                    <source src='@Url.Action("GetHarmonicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 2 })' type='audio/mpeg'>
                 </audio>
             </figure>
         </div>
         <div class="col-md-4">
+            <p>TI TI SO SO SO</p>
             <figure>
-                <figcaption><img class="piano" /> TI TI SO SO SO</figcaption>
+                <figcaption><img class="piano" /></figcaption>
                 <audio controls preload='none'>
-                    <source src='@Url.Action("GetMelodicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 3 })' type='audio/mpeg'>
+                    <source src='@Url.Action("GetHarmonicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 3 })' type='audio/mpeg'>
                 </audio>
             </figure>
         </div>
         <div class="col-md-4">
+            <p>LA LA FA FA MI</p>
             <figure>
-                <figcaption><img class="piano" /> LA LA FA FA MI</figcaption>
+                <figcaption><img class="piano" /></figcaption>
                 <audio controls preload='none'>
-                    <source src='@Url.Action("GetMelodicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 4 })' type='audio/mpeg'>
+                    <source src='@Url.Action("GetHarmonicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 4 })' type='audio/mpeg'>
                 </audio>
             </figure>
         </div>
         <div class="col-md-4">
+            <p>MI MI DO DO DO</p>
             <figure>
-                <figcaption><img class="piano" /> MI MI DO DO DO</figcaption>
+                <figcaption><img class="piano" /></figcaption>
                 <audio controls preload='none'>
-                    <source src='@Url.Action("GetMelodicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 5 })' type='audio/mpeg'>
+                    <source src='@Url.Action("GetHarmonicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 5 })' type='audio/mpeg'>
                 </audio>
             </figure>
         </div>
@@ -107,50 +112,56 @@
     <h4>Min 6th Prompts</h4>
     <div class="row">
         <div class="col-md-4">
+            <p>MI MI DO DO DO</p>
             <figure>
-                <figcaption><img class="piano" /> MI MI DO DO DO</figcaption>
+                <figcaption><img class="piano" /></figcaption>
                 <audio controls preload='none'>
-                    <source src='@Url.Action("GetMelodicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 6 })' type='audio/mpeg'>
+                    <source src='@Url.Action("GetHarmonicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 6 })' type='audio/mpeg'>
                 </audio>
             </figure>
         </div>
         <div class="col-md-4">
+            <p>LA LA FA FA MI</p>
             <figure>
-                <figcaption><img class="piano" /> LA LA FA FA MI</figcaption>
+                <figcaption><img class="piano" /></figcaption>
                 <audio controls preload='none'>
-                    <source src='@Url.Action("GetMelodicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 7 })' type='audio/mpeg'>
+                    <source src='@Url.Action("GetHarmonicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 7 })' type='audio/mpeg'>
                 </audio>
             </figure>
         </div>
         <div class="col-md-4">
+            <p>TI TI SO SO SO</p>
             <figure>
-                <figcaption><img class="piano" /> TI TI SO SO SO</figcaption>
+                <figcaption><img class="piano" /></figcaption>
                 <audio controls preload='none'>
-                    <source src='@Url.Action("GetMelodicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 8 })' type='audio/mpeg'>
+                    <source src='@Url.Action("GetHarmonicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 8 })' type='audio/mpeg'>
                 </audio>
             </figure>
         </div>
         <div class="col-md-4">
+            <p>SO SO TI TI DO</p>
             <figure>
-                <figcaption><img class="piano" /> SO SO TI TI DO</figcaption>
+                <figcaption><img class="piano" /></figcaption>
                 <audio controls preload='none'>
-                    <source src='@Url.Action("GetMelodicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 9 })' type='audio/mpeg'>
+                    <source src='@Url.Action("GetHarmonicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 9 })' type='audio/mpeg'>
                 </audio>
             </figure>
         </div>
         <div class="col-md-4">
+            <p>FA FA LA LA SO</p>
             <figure>
-                <figcaption><img class="piano" /> FA FA LA LA SO</figcaption>
+                <figcaption><img class="piano" /></figcaption>
                 <audio controls preload='none'>
-                    <source src='@Url.Action("GetMelodicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 10 })' type='audio/mpeg'>
+                    <source src='@Url.Action("GetHarmonicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 10 })' type='audio/mpeg'>
                 </audio>
             </figure>
         </div>
         <div class="col-md-4">
+            <p>DO DO MI MI MI</p>
             <figure>
-                <figcaption><img class="piano" /> DO DO MI MI MI</figcaption>
+                <figcaption><img class="piano" /></figcaption>
                 <audio controls preload='none'>
-                    <source src='@Url.Action("GetMelodicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 11 })' type='audio/mpeg'>
+                    <source src='@Url.Action("GetHarmonicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 11 })' type='audio/mpeg'>
                 </audio>
             </figure>
         </div>
@@ -169,7 +180,7 @@
         });
 
         function setAudDrill1Src() {
-            var baseSrc = '@Url.Action("GetMelodicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName })';
+            var baseSrc = '@Url.Action("GetHarmonicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName })';
 
             // Get the drills based on what the user has choosen.
             var intervalType = $("input[type=radio][name=intervaltype]:checked").attr('id');
@@ -206,6 +217,7 @@
             }
 
             var randomInt = randomInt = getRandomInt(minDrill, maxDrill);
+            randomInt = 0;
 
             var src = baseSrc + '&type=' + randomInt;
             $('#audDrill1').attr('src', src);
@@ -213,7 +225,7 @@
             var msg = '';
             switch (randomInt) {
                 case 0:
-                    msg = msg + 'DO DO MI MI MI (Maj 3rd)';
+                    msg = msg + 'DO MI (Maj 3rd)';
                     break;
                 case 1:
                     msg = msg + 'FA FA LA LA SO (Maj 3rd)';
@@ -252,6 +264,6 @@
 
             $('#drill1').text(msg);
         }
-    
+
     </script>
 }
