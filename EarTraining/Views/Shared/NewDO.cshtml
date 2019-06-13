@@ -1,5 +1,4 @@
-﻿<p>Each time this page is refreshed, a new DO is assigned.</p>
-<input type="button" value="Get a New DO" onclick="location.href='@Request.Url.AbsoluteUri'" />
+﻿<input type="button" value="Get a New DO" onclick="location.href='@Request.Url.AbsoluteUri'" />
 <figure>
     <figcaption><img class="piano" /></figcaption>
     <audio controls preload='none'>
@@ -7,4 +6,5 @@
     </audio>
 </figure>
 <p>Hover over the below to reveal the DO</p>
-<p class="spoiler">@ViewBag.Pitch.PitchName - @ViewBag.Pitch.Hertz Hz</p>
+<div class="spoiler">@ViewBag.Pitch.PitchName - @ViewBag.Pitch.Hertz Hz</div>
+<hr />

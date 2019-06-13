@@ -8,7 +8,7 @@
 <hr />
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-4">
         @{
             Html.RenderPartial("NewDO");
         }
@@ -51,7 +51,7 @@
                             </div>
                             <div class="col-md-12">
                                 <p>Hover over the below to reveal the resolution</p>
-                                <p class="spoiler" id="resolution">Your resolution goes here @ViewBag.ResolutionName</p>
+                                <div class="spoiler" id="resolution"></div>
                             </div>
                         </div>
 
@@ -116,7 +116,7 @@
                                         <source src='' type='audio/mpeg'>
                                     </audio>
                                 </figure>
-                                <p><span class="spoiler" id="note">Putting some text in here just to make it long enough</span></p>
+                                <div class="spoiler" id="note"></div>
                             </div>
                         </div>
                         <hr />

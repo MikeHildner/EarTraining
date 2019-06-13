@@ -23,7 +23,10 @@ namespace EarTrainingLibrary.Enums
         DoDoMiMiMi6 = 11,
 
         // Minor 3rds / major 6ths.
-        ReReFaFaMi3 = 12
-
+        ReReFaFaMi3 = 12,
+        MiMiSoSoSo3 = 13,
+        LaLaDoDoDo3 = 14,
+        TiTiReReDo3High = 15,
+        TiTiReReDo3Low = 16
     }
 }

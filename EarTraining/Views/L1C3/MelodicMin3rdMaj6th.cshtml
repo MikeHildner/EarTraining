@@ -7,7 +7,7 @@
 <hr />
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-4">
         @{
             Html.RenderPartial("NewDO");
         }
@@ -44,7 +44,7 @@
                 <source src='' type='audio/mpeg'>
             </audio>
         </figure>
-        <p><span class="spoiler" id="drill1">Putting some text in here just to make it long enough</span></p>
+        <div class="spoiler" id="drill1"></div>
     </div>
 </div>
 
@@ -58,6 +58,38 @@
                 <figcaption><img class="piano" /> RE RE FA FA MI</figcaption>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetMelodicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 12 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> MI MI SO SO SO</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 13 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> LA LA DO DO DO</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 14 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> TI TI RE RE DO (high)</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 15 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> TI TI RE RE DO (low)</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 16 })' type='audio/mpeg'>
                 </audio>
             </figure>
         </div>
@@ -93,21 +125,23 @@
             switch (intervalType) {
                 case 'min3rds':
                     minDrill = 12;
-                    maxDrill = 12;
+                    maxDrill = 16;
                     $('#min-3rd-prompts').fadeIn();
                     $('#maj-6th-prompts').fadeOut();
                     break;
 
                 case 'maj6ths':
-                    minDrill = 12;
-                    maxDrill = 12;
+                    consoleAndAlert('Not yet implemented');
+                    minDrill = 42;
+                    maxDrill = 42;
                     $('#min-3rd-prompts').fadeOut();
                     $('#maj-6th-prompts').fadeIn();
                     break;
 
                 case 'both':
-                    minDrill = 6;
-                    maxDrill = 11;
+                    consoleAndAlert('Not yet implemented');
+                    minDrill = 42;
+                    maxDrill = 42;
                     $('#min-3rd-prompts').fadeIn();
                     $('#maj-6th-prompts').fadeIn();
                     break;
@@ -127,17 +161,17 @@
                 case 12:
                     msg = msg + 'RE RE FA FA MI (Maj 3rd)';
                     break;
-                case 1:
-                    msg = msg + '';
+                case 13:
+                    msg = msg + 'MI MI SO SO SO (Maj 3rd)';
                     break;
-                case 2:
-                    msg = msg + '';
+                case 14:
+                    msg = msg + 'LA LA DO DO DO (Maj 3rd)';
                     break;
-                case 3:
-                    msg = msg + '';
+                case 15:
+                    msg = msg + 'TI TI RE RE DO (high) (Maj 3rd)';
                     break;
-                case 4:
-                    msg = msg + '';
+                case 16:
+                    msg = msg + 'TI TI RE RE DO (low) (Maj 3rd)';
                     break;
                 case 5:
                     msg = msg + '';
