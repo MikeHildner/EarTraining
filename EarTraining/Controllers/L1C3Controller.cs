@@ -24,6 +24,14 @@ namespace EarTraining.Controllers
             return View();
         }
 
+        public ActionResult HarmonicMin3rdMaj6th()
+        {
+            Pitch pitch = new Pitches().Random();
+            ViewBag.Pitch = pitch;
+
+            return View();
+        }
+
         public ActionResult GetTriad(double frequency, int triadtype, int inversion)
         {
             var triadType = (TriadType)triadtype;

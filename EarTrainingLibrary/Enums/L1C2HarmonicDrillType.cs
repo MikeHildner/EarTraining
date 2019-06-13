@@ -13,6 +13,14 @@ namespace EarTrainingLibrary.Enums
         SoTi3 = 2,
         MiDo6 = 3,
         LaFa6 = 4,
-        TiSo6 = 5
+        TiSo6 = 5,
+        ReFa3 = 6,
+        MiSo3 = 7,
+        LaDo3 = 8,
+        TiRe3 = 9,
+        FaRe6 = 10,
+        SoMi6 = 11,
+        DoLa6 = 12,
+        ReTi6 = 13
     }
 }

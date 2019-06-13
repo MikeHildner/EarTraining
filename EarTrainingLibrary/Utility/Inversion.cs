@@ -110,6 +110,11 @@ namespace EarTrainingLibrary.Utility
                     firstNoteNumber = firstNoteNumber + Interval.Up1Octave;
                     break;
 
+                case InversionType.LowFirstInversion:
+                    // Take top note down an octave.
+                    secondNoteNumber = secondNoteNumber + Interval.Down1Octave;
+                    break;
+
                 default:
                     throw new NotSupportedException($"InversionType {inversionType} is not supported.");
             }

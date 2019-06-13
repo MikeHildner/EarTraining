@@ -41,6 +41,40 @@
                         </div>
                     </li>
 
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownL1C3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Level 1 Chapter 3
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownL1C2">
+                            @Html.ActionLink("I IV V Diatonic Triad Recognition", "Index", "L1C3", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Melodic Min 3rd and Maj 6th", "MelodicMin3rdMaj6th", "L1C3", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Harmonic Maj 3rd and Min 6th", "HarmonicMin3rdMaj6th", "L1C3", null, new { @class = "dropdown-item" })
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink("Original Page", "Index", "L1C3", null, new { @class = "dropdown-item" })
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownL1C4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Level 1 Chapter 4
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownL1C2">
+                            @Html.ActionLink("2 and 3 Chord Progressions", "Index", "L1C4", null, new { @class = "dropdown-item" })
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownOther" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Other Drills
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownL1C2">
+                            @Html.ActionLink("Find the DO", "Index", "DO", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Major or Minor Triad", "Index", "MajorOrMinorTriad", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Solfeg Pitch Identification", "Index", "PitchIdentification", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("All Solfeg Syllables", "Index", "Solfeg", null, new { @class = "dropdown-item" })
+                        </div>
+                    </li>
+
                     <li class="nav-item">@Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })</li>
                 </ul>
             </div>
@@ -52,7 +86,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>Please see the @Html.ActionLink("about page", "About", "Home") for an explanation of this site and eartraining information.</p>
+            <p>Please use the menu to explore the pages of this site, or see the @Html.ActionLink("about page", "About", "Home") for information.</p>
             <p class="underline">Privacy information:</p>
             <ul>
                 <li>This site does not use cookies</li>

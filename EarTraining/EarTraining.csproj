@@ -283,6 +283,8 @@
     <Content Include="Views\L1C1\PitchIdentification.cshtml" />
     <Content Include="Views\L1C2\MelodicMaj3rdMin6th.cshtml" />
     <Content Include="Views\L1C2\HarmonicMaj3rdMin6th.cshtml" />
+    <Content Include="Views\L1C3\MelodicMin3rdMaj6th.cshtml" />
+    <Content Include="Views\L1C3\HarmonicMin3rdMaj6th.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

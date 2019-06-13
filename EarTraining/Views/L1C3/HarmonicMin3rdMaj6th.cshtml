@@ -1,0 +1,212 @@
+﻿@{
+    ViewBag.Title = "Level 1, Chapter 3";
+}
+<h2>@ViewBag.Title</h2>
+
+<h5>Harmonic Minor 3rd / Major 6th Intervals</h5>
+<hr />
+
+<div class="row">
+    <div class="col-md-12">
+        @{
+            Html.RenderPartial("NewDO");
+        }
+    </div>
+</div>
+
+<hr />
+
+<div class="row toggle-demo" role="group">
+    <div class="col-md-6">
+        Include drills for
+        <div class="switch-toggle alert alert-dark">
+            <input id="min3rds" name="intervaltype" type="radio" checked>
+            <label for="min3rds" onclick="">Minor 3rds</label>
+
+            <input id="maj6ths" name="intervaltype" type="radio">
+            <label for="maj6ths" onclick="">Major 6ths</label>
+
+            <input id="both" name="intervaltype" type="radio">
+            <label for="both" onclick="">Both</label>
+
+            <a class="btn btn-primary"></a>
+        </div>
+    </div>
+</div>
+
+<h4>Drill</h4>
+<div class="row">
+    <div class="col-md-4">
+        <input type="button" value="Get a New Interval" onclick="setAudDrill1Src()" />
+        <figure>
+            <figcaption><img class="piano" /></figcaption>
+            <audio id="audDrill1" controls preload='none'>
+                <source src='' type='audio/mpeg'>
+            </audio>
+        </figure>
+        <p><span class="spoiler" id="drill1">Putting some text in here just to make it long enough</span></p>
+    </div>
+</div>
+
+<!-- Note that even though this is chapter 3, we're calling methods in chapter 2's controller because the code was already set up there. -->
+
+<div id="min-3rd-prompts">
+    <h4>Min 3rd Prompts</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> RE FA</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetHarmonicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 6 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> MI SO</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetHarmonicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 7 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> LA DO</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetHarmonicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 8 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> TI RE</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetHarmonicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 9 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+    </div>
+</div>
+
+<div id="maj-6th-prompts">
+    <h4>Maj 6th Prompts</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> FA RE</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetHarmonicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 10 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> SO MI</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetHarmonicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 11 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> DO LA</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetHarmonicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 12 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> RE TI</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetHarmonicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 13 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+    </div>
+</div>
+
+@section  scripts {
+    <script>
+        $(document).ready(function () {
+            setAudDrill1Src();
+
+            $('input[type=radio][name=intervaltype]').change(function () {
+                setAudDrill1Src();
+            });
+        });
+
+        function setAudDrill1Src() {
+            var baseSrc = '@Url.Action("GetHarmonicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName })';
+
+            // Get the drills based on what the user has choosen.
+            var intervalType = $("input[type=radio][name=intervaltype]:checked").attr('id');
+
+            var minDrill;
+            var maxDrill;
+
+            switch (intervalType) {
+                case 'min3rds':
+                    minDrill = 6;
+                    maxDrill = 9;
+                    $('#min-3rd-prompts').fadeIn();
+                    $('#maj-6th-prompts').fadeOut();
+                    break;
+
+                case 'maj6ths':
+                    minDrill = 10;
+                    maxDrill = 13;
+                    $('#min-3rd-prompts').fadeOut();
+                    $('#maj-6th-prompts').fadeIn();
+                    break;
+
+                case 'both':
+                    minDrill = 6;
+                    maxDrill = 13;
+                    $('#min-3rd-prompts').fadeIn();
+                    $('#maj-6th-prompts').fadeIn();
+                    break;
+
+                default:
+                    var msg = 'intervalType ' + intervalType + ' is not supported';
+                    consoleAndAlert(msg);
+            }
+
+            var randomInt = randomInt = getRandomInt(minDrill, maxDrill);
+
+            var src = baseSrc + '&type=' + randomInt;
+            $('#audDrill1').attr('src', src);
+
+            var msg = '';
+            switch (randomInt) {
+                case 6:
+                    msg = msg + 'RE FA (3rd)';
+                    break;
+                case 7:
+                    msg = msg + 'MI SO (3rd)';
+                    break;
+                case 8:
+                    msg = msg + 'LA DO (3rd)';
+                    break;
+                case 9:
+                    msg = msg + 'TI RE (3rd)';
+                    break;
+                case 10:
+                    msg = msg + 'FA RE (6th)';
+                    break;
+                case 11:
+                    msg = msg + 'SO MI (6th)';
+                    break;
+                case 12:
+                    msg = msg + 'DO LA (6th)';
+                    break;
+                case 13:
+                    msg = msg + 'RE TI (6th)';
+                    break;
+            }
+
+            $('#drill1').text(msg);
+        }
+
+    </script>
+}
