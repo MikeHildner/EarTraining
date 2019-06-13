@@ -8,6 +8,7 @@ namespace EarTrainingLibrary.Enums
 {
     public enum L1C2MelodicDrillType
     {
+        // Major 3rds / minor 6ths.
         DoDoMiMiMi3 = 0,
         FaFaLaLaSo3 = 1,
         SoSoTiTiDo3 = 2,
@@ -19,6 +20,10 @@ namespace EarTrainingLibrary.Enums
         TiTiSoSoSo6 = 8,
         SoSoTiTiDo6 = 9,
         FaFaLaLaSo6 = 10,
-        DoDoMiMiMi6 = 11
+        DoDoMiMiMi6 = 11,
+
+        // Minor 3rds / major 6ths.
+        ReReFaFaMi3 = 12
+
     }
 }

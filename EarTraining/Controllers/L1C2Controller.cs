@@ -313,6 +313,15 @@ namespace EarTraining.Controllers
                     note5 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor3rd, wholeNoteDuration);
                     break;
 
+                // Minor 3rd intervals.
+                case L1C2MelodicDrillType.ReReFaFaMi3:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.Up2nd, quarterNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.Up2nd, quarterNoteDuration);
+                    note3 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect4th, quarterNoteDuration);
+                    note4 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect4th, quarterNoteDuration);
+                    note5 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor3rd, wholeNoteDuration);
+                    break;
+
                 default:
                     throw new NotSupportedException($"L1C2MelodicDrillType '{drillType}' is not supported.");
             }
