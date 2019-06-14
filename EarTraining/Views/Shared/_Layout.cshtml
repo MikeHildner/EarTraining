@@ -79,6 +79,28 @@
 
     <div class="container body-content">
         @RenderBody()
+
+        @if (ViewBag.Pitch != null)
+        {
+        <div class="float-button bg-primary">
+            <audio id="doPlayer" preload='none'>
+                <source src='@Url.Action("GetDOEx", "DO", new { doNoteName = ViewBag.Pitch.PitchName })' type='audio/mpeg'>
+            </audio>
+            <div>
+                <i class="fa fa-play my-float" onclick="document.getElementById('doPlayer').play()" title="Play the DO"></i>
+            </div>
+        </div>
+
+            
+            @*<a href='@Url.Action("GetDOEx", "DO", new { doNoteName = ViewBag.Pitch.PitchName })' class="float">
+                <i class="fa fa-plus my-float"></i>
+            </a>*@
+        }
+
+        @*<a href='#' class="float">
+            <i class="fa fa-plus my-float"></i>
+        </a>*@
+
         <hr />
         <footer>
             <p>Please use the menu to explore the pages of this site, or see the @Html.ActionLink("about page", "About", "Home") for information.</p>
