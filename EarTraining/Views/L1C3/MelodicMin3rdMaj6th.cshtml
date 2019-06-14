@@ -99,6 +99,71 @@
 <div id="maj-6th-prompts">
     <h4>Maj 6th Prompts</h4>
     <div class="row">
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> DO DO LA LA SO</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 17 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> RE RE TI TI DO</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 18 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> FA FA RE RE DO</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 19 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> SO SO MI MI MI</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 20 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> LA LA DO DO DO</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 21 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> TI TI RE RE DO</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 22 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> RE RE FA FA MI</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 23 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> MI MI SO SO SO</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 24 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+
     </div>
 
 </div>
@@ -124,6 +189,7 @@
 
             switch (intervalType) {
                 case 'min3rds':
+                    consoleAndAlert('Not fully implemented');
                     minDrill = 12;
                     maxDrill = 16;
                     $('#min-3rd-prompts').fadeIn();
@@ -132,16 +198,16 @@
 
                 case 'maj6ths':
                     consoleAndAlert('Not yet implemented');
-                    minDrill = 42;
-                    maxDrill = 42;
+                    minDrill = 17;
+                    maxDrill = 24;
                     $('#min-3rd-prompts').fadeOut();
                     $('#maj-6th-prompts').fadeIn();
                     break;
 
                 case 'both':
                     consoleAndAlert('Not yet implemented');
-                    minDrill = 42;
-                    maxDrill = 42;
+                    minDrill = 12;
+                    maxDrill = 24;
                     $('#min-3rd-prompts').fadeIn();
                     $('#maj-6th-prompts').fadeIn();
                     break;
@@ -159,40 +225,43 @@
             var msg = '';
             switch (randomInt) {
                 case 12:
-                    msg = msg + 'RE RE FA FA MI (Maj 3rd)';
+                    msg = msg + 'RE RE FA FA MI (Min 3rd)';
                     break;
                 case 13:
-                    msg = msg + 'MI MI SO SO SO (Maj 3rd)';
+                    msg = msg + 'MI MI SO SO SO (Min 3rd)';
                     break;
                 case 14:
-                    msg = msg + 'LA LA DO DO DO (Maj 3rd)';
+                    msg = msg + 'LA LA DO DO DO (Min 3rd)';
                     break;
                 case 15:
-                    msg = msg + 'TI TI RE RE DO (high) (Maj 3rd)';
+                    msg = msg + 'TI TI RE RE DO (high) (Min 3rd)';
                     break;
                 case 16:
-                    msg = msg + 'TI TI RE RE DO (low) (Maj 3rd)';
+                    msg = msg + 'TI TI RE RE DO (low) (Min 3rd)';
                     break;
-                case 5:
-                    msg = msg + '';
+                case 17:
+                    msg = msg + 'DO DO LA LA SO (Maj 6th)';
                     break;
-                case 6:
-                    msg = msg + '';
+                case 18:
+                    msg = msg + 'RE RE TI TI DO (Maj 6th)';
                     break;
-                case 7:
-                    msg = msg + '';
+                case 19:
+                    msg = msg + 'FA FA RE RE DO (Maj 6th)';
                     break;
-                case 8:
-                    msg = msg + '';
+                case 20:
+                    msg = msg + 'SO SO MI MI MI (Maj 6th)';
                     break;
-                case 9:
-                    msg = msg + '';
+                case 21:
+                    msg = msg + 'LA LA DO DO DO (Maj 6th)';
                     break;
-                case 10:
-                    msg = msg + '';
+                case 22:
+                    msg = msg + 'TI TI RE RE DO (Maj 6th)';
                     break;
-                case 11:
-                    msg = msg + '';
+                case 23:
+                    msg = msg + 'RE RE FA FA MI (Maj 6th)';
+                    break;
+                case 24:
+                    msg = msg + 'MI MI SO SO SO (Maj 6th)';
                     break;
             }
 
