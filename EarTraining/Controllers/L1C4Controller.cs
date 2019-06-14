@@ -15,11 +15,16 @@ namespace EarTraining.Controllers
 {
     public class L1C4Controller : BaseController
     {
-        // GET: L1C4
-        public ActionResult Index()
+        public L1C4Controller()
         {
             Pitch pitch = new Pitches().Random();
             ViewBag.Pitch = pitch;
+        }
+
+        // GET: L1C4
+        public ActionResult Index()
+        {
+            ViewBag.ShowPlayDoTriad = true;
 
             return View();
         }

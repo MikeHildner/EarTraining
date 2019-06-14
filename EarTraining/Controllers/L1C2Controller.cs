@@ -15,28 +15,25 @@ namespace EarTraining.Controllers
 {
     public class L1C2Controller : BaseController
     {
-        // GET: L1C2
-        public ActionResult Index()
+        public L1C2Controller()
         {
             Pitch pitch = new Pitches().Random();
             ViewBag.Pitch = pitch;
+        }
 
+        // GET: L1C2
+        public ActionResult Index()
+        {
             return View();
         }
 
         public ActionResult MelodicMaj3rdMin6th()
         {
-            Pitch pitch = new Pitches().Random();
-            ViewBag.Pitch = pitch;
-
             return View();
         }
 
         public ActionResult HarmonicMaj3rdMin6th()
         {
-            Pitch pitch = new Pitches().Random();
-            ViewBag.Pitch = pitch;
-
             return View();
         }
 
