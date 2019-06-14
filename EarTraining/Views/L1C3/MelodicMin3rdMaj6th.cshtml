@@ -189,7 +189,6 @@
 
             switch (intervalType) {
                 case 'min3rds':
-                    consoleAndAlert('Not fully implemented');
                     minDrill = 12;
                     maxDrill = 16;
                     $('#min-3rd-prompts').fadeIn();
@@ -197,7 +196,6 @@
                     break;
 
                 case 'maj6ths':
-                    consoleAndAlert('Not yet implemented');
                     minDrill = 17;
                     maxDrill = 24;
                     $('#min-3rd-prompts').fadeOut();
@@ -205,7 +203,6 @@
                     break;
 
                 case 'both':
-                    consoleAndAlert('Not yet implemented');
                     minDrill = 12;
                     maxDrill = 24;
                     $('#min-3rd-prompts').fadeIn();
@@ -217,7 +214,7 @@
                     consoleAndAlert(msg);
             }
 
-            var randomInt = randomInt = getRandomInt(minDrill, maxDrill);
+            var randomInt = getRandomInt(minDrill, maxDrill);
 
             var src = baseSrc + '&type=' + randomInt;
             $('#audDrill1').attr('src', src);
@@ -263,6 +260,11 @@
                 case 24:
                     msg = msg + 'MI MI SO SO SO (Maj 6th)';
                     break;
+
+                default:
+                    var msg2 = 'drillType ' + randomInt + ' is not supported';
+                    consoleAndAlert(msg2);
+
             }
 
             $('#drill1').text(msg);

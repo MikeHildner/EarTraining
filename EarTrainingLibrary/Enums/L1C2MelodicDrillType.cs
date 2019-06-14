@@ -27,6 +27,14 @@ namespace EarTrainingLibrary.Enums
         MiMiSoSoSo3 = 13,
         LaLaDoDoDo3 = 14,
         TiTiReReDo3High = 15,
-        TiTiReReDo3Low = 16
+        TiTiReReDo3Low = 16,
+        DoDoLaLaSo6 = 17,
+        ReReTiTiDo6 = 18,
+        FaFaReReDo6 = 19,
+        SoSoMiMiMi6 = 20,
+        LaLaDoDoDo6 = 21,
+        TiTiReReDo6 = 22,
+        ReReFaFaMi6 = 23,
+        MiMiSoSoSo6 = 24
     }
 }
