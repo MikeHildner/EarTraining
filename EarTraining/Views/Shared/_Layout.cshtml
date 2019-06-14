@@ -71,6 +71,10 @@
                     </li>
 
                     <li class="nav-item">@Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })</li>
+
+                    <li class="nav-item"><a href="https://github.com/MikeHildner/EarTraining/issues" target="_blank" class="nav-link">Report an Issue</a></li>
+
+                    <li class="nav-item"><a href="https://github.com/MikeHildner/EarTraining" target="_blank" class="nav-link">Fork Me on GitHub</a></li>
                 </ul>
             </div>
         </div>
@@ -90,18 +94,10 @@
                 <i class="fa fa-play my-float" onclick="document.getElementById('doPlayer').play()" title="Play the DO"></i>
             </div>
         </div>
-
-            
-            @*<a href='@Url.Action("GetDOEx", "DO", new { doNoteName = ViewBag.Pitch.PitchName })' class="float">
-                <i class="fa fa-plus my-float"></i>
-            </a>*@
         }
 
-        @*<a href='#' class="float">
-            <i class="fa fa-plus my-float"></i>
-        </a>*@
-
         <hr />
+
         <footer>
             <p>Please use the menu to explore the pages of this site, or see the @Html.ActionLink("about page", "About", "Home") for information.</p>
             <p class="underline">Privacy information:</p>
@@ -109,14 +105,6 @@
                 <li>This site does not use cookies</li>
                 <li>This site does not collect, record or share any personal information</li>
             </ul>
-            <div class="row">
-                <div class="col-md-6">
-                    <a href="https://github.com/MikeHildner/EarTraining/issues" target="_blank">Report an Issue</a>
-                </div>
-                <div class="col-md-6 text-align-right">
-                    <a href="https://github.com/MikeHildner/EarTraining" target="blank">Fork Me on GitHub</a>
-                </div>
-            </div>
         </footer>
     </div>
 
@@ -128,7 +116,12 @@
     <script>
         $(document).ready(function () {
             deleteOldFiles();
-            //setupImagesToPlayDO();
+
+            $(window).resize(function () {
+                setBodyMargin();
+            });
+
+            setBodyMargin();
         });
 
         function deleteOldFiles() {
@@ -136,6 +129,12 @@
                 url: '@Url.Content("~/")' + 'base/DeleteOldFiles'
             });
         }
+
+        function setBodyMargin() {
+            var heightSlider = $('.navbar').height();
+            $('.body-content').css({ marginTop: heightSlider + 0 + 'px' });
+        }
+
     </script>
 </body>
 </html>
