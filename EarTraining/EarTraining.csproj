@@ -188,7 +188,11 @@
     <Content Include="Content\css-toggle-switch.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\Images\chord-purple.png" />
+    <Content Include="Content\Images\chord-white.png" />
     <Content Include="Content\Images\Piano.svg" />
+    <Content Include="Content\Images\quarter-note-white.png" />
+    <Content Include="Content\Images\quarter-note.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />

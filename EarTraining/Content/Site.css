@@ -73,6 +73,11 @@ textarea {
     cursor: pointer;
 }
 
-.my-float {
-    margin-top: 22px;
+.my-float-1 {
+    margin-top: 7px;
+}
+
+.my-float-2 {
+    margin-top: -5px;
+    margin-left: -5px;
 }

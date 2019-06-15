@@ -91,7 +91,8 @@
                     <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 0, inversion = 0 })' type='audio/mpeg'>
                 </audio>
                 <div>
-                    <i class="fa fa-music my-float" onclick="document.getElementById('triadPlayer').play()" title="Play the DO triad (root)"></i>
+                    @*<i class="fa fa-music my-float" onclick="document.getElementById('triadPlayer').play()" title="Play the DO triad (root)"></i>*@
+                    <img class="my-float-2" src='@Url.Content("~/Content/Images/chord-white.png")' onclick="document.getElementById('triadPlayer').play()" title="Play the DO triad (root)" />
                 </div>
             </div>
         }
@@ -103,7 +104,8 @@
                     <source src='@Url.Action("GetDOEx", "DO", new { doNoteName = ViewBag.Pitch.PitchName })' type='audio/mpeg'>
                 </audio>
                 <div>
-                    <i class="fa fa-play my-float" onclick="document.getElementById('doPlayer').play()" title="Play the DO"></i>
+                    @*<i class="fa fa-play my-float" onclick="document.getElementById('doPlayer').play()" title="Play the DO"></i>*@
+                    <img class="my-float-1" src='@Url.Content("~/Content/Images/quarter-note-white.png")' onclick="document.getElementById('doPlayer').play()" title="Play the DO" />
                 </div>
             </div>
         }
