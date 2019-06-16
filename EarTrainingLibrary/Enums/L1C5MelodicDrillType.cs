@@ -8,6 +8,7 @@ namespace EarTrainingLibrary.Enums
 {
     public enum L1C5MelodicDrillType
     {
-        DoDoDoFaFaMi4 = 0
+        DoDoDoFaFaMi4 = 0,
+        ReReSoSoSoSo4 = 1
     }
 }

@@ -62,6 +62,14 @@
                 </audio>
             </figure>
         </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> RE RE SO SO SO SO (Perf 4th)</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C5", new { doNoteName = ViewBag.Pitch.PitchName, type = 1 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
     </div>
 </div>
 
@@ -72,6 +80,9 @@
 @section  scripts {
     <script>
         $(document).ready(function () {
+
+            alert('Not yet fully implemented.');
+
             setAudDrill1Src();
 
             $('input[type=radio][name=intervaltype]').change(function () {
@@ -114,6 +125,12 @@
                     var msg = 'intervalType ' + intervalType + ' is not supported';
                     consoleAndAlert(msg);
             }
+
+            @{ 
+                // TODO: Change when implementing more drills.
+            }
+            minDrill = 0;
+            maxDrill = 1;
 
             var randomInt = randomInt = getRandomInt(minDrill, maxDrill);
 
