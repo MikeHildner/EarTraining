@@ -1,0 +1,166 @@
+﻿
+@{
+    ViewBag.Title = "Melodic Intervals";
+}
+
+<h2>Melodic Intervals</h2>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        @{
+            Html.RenderPartial("NewDO");
+        }
+    </div>
+</div>
+
+<hr />
+
+<div class="row toggle-demo" role="group">
+    <div class="col-md-6">
+        Include drills for
+        <div class="switch-toggle alert alert-dark">
+            <input id="4ths" name="intervaltype" type="radio" checked>
+            <label for="4ths" onclick="">4ths</label>
+
+            <input id="5ths" name="intervaltype" type="radio">
+            <label for="5ths" onclick="">5ths</label>
+
+            <input id="both" name="intervaltype" type="radio">
+            <label for="both" onclick="">Both</label>
+
+            <a class="btn btn-primary"></a>
+        </div>
+    </div>
+</div>
+
+<h4>Drill</h4>
+<div class="row">
+    <div class="col-md-4">
+        <input type="button" value="Get a New Interval" onclick="setAudDrill1Src()" />
+        <figure>
+            <figcaption><img class="piano" /></figcaption>
+            <audio id="audDrill1" controls preload='none'>
+                <source src='' type='audio/mpeg'>
+            </audio>
+        </figure>
+        <div class="spoiler" id="drill1"></div>
+    </div>
+</div>
+
+<hr />
+
+<div id="4th-prompts">
+    <h4>Perfect 4th and Augmented 4th Intervals</h4>
+</div>
+
+<div id="5th-prompts">
+    <h4>Perfect 5th and Diminished 5th Intervals</h4>
+</div>
+
+@section  scripts {
+    <script>
+        $(document).ready(function () {
+            setAudDrill1Src();
+
+            $('input[type=radio][name=intervaltype]').change(function () {
+                setAudDrill1Src();
+            });
+        });
+
+        function setAudDrill1Src() {
+            var baseSrc = '@Url.Action("GetMelodicDrillEx", "L1C5", new { doNoteName = ViewBag.Pitch.PitchName })';
+
+            // Get the drills based on what the user has choosen.
+            var intervalType = $("input[type=radio][name=intervaltype]:checked").attr('id');
+
+            var minDrill;
+            var maxDrill;
+
+            switch (intervalType) {
+                case '4ths':
+                    minDrill = 0;
+                    maxDrill = 6;
+                    $('#4th-prompts').fadeIn();
+                    $('#5th-prompts').fadeOut();
+                    break;
+
+                case '5ths':
+                    minDrill = 7;
+                    maxDrill = 13;
+                    $('#4th-prompts').fadeOut();
+                    $('#5th-prompts').fadeIn();
+                    break;
+
+                case 'both':
+                    minDrill = 6;
+                    maxDrill = 11;
+                    $('#4th-prompts').fadeIn();
+                    $('#5thth-prompts').fadeIn();
+                    break;
+
+                default:
+                    var msg = 'intervalType ' + intervalType + ' is not supported';
+                    consoleAndAlert(msg);
+            }
+
+            var randomInt = randomInt = getRandomInt(minDrill, maxDrill);
+
+            var src = baseSrc + '&type=' + randomInt;
+            $('#audDrill1').attr('src', src);
+
+            var msg = '';
+            switch (randomInt) {
+                case 0:
+                    msg = msg + 'DO DO DO FA FA MI (Perf 4th)';
+                    break;
+                case 1:
+                    msg = msg + 'RE RE SO SO SO SO (Perf 4th)';
+                    break;
+                case 2:
+                    msg = msg + 'MI MI MI LA LA SO (Perf 4th)';
+                    break;
+                case 3:
+                    msg = msg + 'FA FA TI TI TI DO (Aug 4th)';
+                    break;
+                case 4:
+                    msg = msg + 'SO SO SO DO DO DO (Perf 4th)';
+                    break;
+                case 5:
+                    msg = msg + 'LA LA RE RE RE DO (Perf 4th)';
+                    break;
+                case 6:
+                    msg = msg + 'TI TI TI MI MI MI (Perf 4th)';
+                    break;
+                case 7:
+                    msg = msg + 'DO DO DO SO SO SO (Perf 5th)';
+                    break;
+                case 8:
+                    msg = msg + 'RE RE LA LA LA SO (Perf 5th)';
+                    break;
+                case 9:
+                    msg = msg + 'MI MI MI TI TI DO (Perf 5th)';
+                    break;
+                case 10:
+                    msg = msg + 'FA FA DO DO DO DO (Perf 5th)';
+                    break;
+                case 11:
+                    msg = msg + 'SO SO SO RE RE DO (Perf 5th)';
+                    break;
+                case 12:
+                    msg = msg + 'LA LA MI MI MI MI (Perf 5th)';
+                    break;
+                case 13:
+                    msg = msg + 'FA FA FA TI TI DO (Dim 5th)';
+                    break;
+                default:
+                    msg = 'drillType ' + randomInt + ' is not supported';
+                    consoleAndAlert(msg);
+            }
+
+            $('#drill1').text(msg);
+        }
+
+    </script>
+}

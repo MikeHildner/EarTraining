@@ -169,6 +169,7 @@
     <Compile Include="Controllers\L1C2Controller.cs" />
     <Compile Include="Controllers\L1C3Controller.cs" />
     <Compile Include="Controllers\L1C4Controller.cs" />
+    <Compile Include="Controllers\L1C5Controller.cs" />
     <Compile Include="Controllers\MajorOrMinorTriadController.cs" />
     <Compile Include="Controllers\PitchIdentificationController.cs" />
     <Compile Include="Controllers\SolfegController.cs" />
@@ -297,6 +298,7 @@
     <Content Include="Views\L1C2\HarmonicMaj3rdMin6th.cshtml" />
     <Content Include="Views\L1C3\MelodicMin3rdMaj6th.cshtml" />
     <Content Include="Views\L1C3\HarmonicMin3rdMaj6th.cshtml" />
+    <Content Include="Views\L1C5\MelodicIntervals.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
