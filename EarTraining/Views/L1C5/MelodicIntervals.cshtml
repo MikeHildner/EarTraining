@@ -70,19 +70,114 @@
                 </audio>
             </figure>
         </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> MI MI MI LA LA SO (Perf 4th)</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C5", new { doNoteName = ViewBag.Pitch.PitchName, type = 2 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> FA FA TI TI TI DO (Aug 4th)</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C5", new { doNoteName = ViewBag.Pitch.PitchName, type = 3 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> SO SO SO DO DO DO (Perf 4th)</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C5", new { doNoteName = ViewBag.Pitch.PitchName, type = 4 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> LA LA RE RE RE DO (Perf 4th)</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C5", new { doNoteName = ViewBag.Pitch.PitchName, type = 5 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> TI TI TI MI MI MI (Perf 4th)</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C5", new { doNoteName = ViewBag.Pitch.PitchName, type = 6 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
     </div>
 </div>
 
 <div id="5th-prompts">
     <h4>Perfect 5th and Diminished 5th Intervals</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> DO DO DO SO SO SO (Perf 5th)</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C5", new { doNoteName = ViewBag.Pitch.PitchName, type = 7 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> RE RE LA LA LA SO (Perf 5th)</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C5", new { doNoteName = ViewBag.Pitch.PitchName, type = 8 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> MI MI MI TI TI DO (Perf 5th)</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C5", new { doNoteName = ViewBag.Pitch.PitchName, type = 9 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> FA FA DO DO DO DO (Perf 5th)</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C5", new { doNoteName = ViewBag.Pitch.PitchName, type = 10 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> SO SO SO RE RE DO (Perf 5th)</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C5", new { doNoteName = ViewBag.Pitch.PitchName, type = 11 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> LA LA MI MI MI MI (Perf 5th)</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C5", new { doNoteName = ViewBag.Pitch.PitchName, type = 12 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> FA FA FA TI TI DO (Dim 5th)</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C5", new { doNoteName = ViewBag.Pitch.PitchName, type = 13 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+    </div>
 </div>
 
 @section  scripts {
     <script>
         $(document).ready(function () {
-
-            alert('Not yet fully implemented.');
-
             setAudDrill1Src();
 
             $('input[type=radio][name=intervaltype]').change(function () {
@@ -125,12 +220,6 @@
                     var msg = 'intervalType ' + intervalType + ' is not supported';
                     consoleAndAlert(msg);
             }
-
-            @{ 
-                // TODO: Change when implementing more drills.
-            }
-            minDrill = 0;
-            maxDrill = 1;
 
             var randomInt = randomInt = getRandomInt(minDrill, maxDrill);
 
