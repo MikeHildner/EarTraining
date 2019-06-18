@@ -63,18 +63,22 @@
                             Level 1 Chapter 5
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownL1C5">
-                            @Html.ActionLink("Melodic Intervals", "MelodicIntervals", "L1C5", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("4th and 5th Melodic Intervals", "MelodicIntervals", "L1C5", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("4th and 5th Harmonic Intervals", "HarmonicIntervals", "L1C5", null, new { @class = "dropdown-item" })
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink("I IV V vi Diatonic Triad Recognition", "DiatonicTriadRecognition", "L1C5", null, new { @class = "dropdown-item" })
+                            @*@Html.ActionLink("I IV V vi Diatonic Triad Progressions", "DiatonicTriadProgressions", "L1C5", null, new { @class = "dropdown-item" })*@
+
                         </div>
                     </li>
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownOther" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Other Drills
+                            Other
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownOther">
                             @Html.ActionLink("Find the DO", "Index", "DO", null, new { @class = "dropdown-item" })
-                            @Html.ActionLink("Major or Minor Triad", "Index", "MajorOrMinorTriad", null, new { @class = "dropdown-item" })
-                            @Html.ActionLink("Solfeg Pitch Identification", "Index", "PitchIdentification", null, new { @class = "dropdown-item" })
+                            @*@Html.ActionLink("Solfeg Pitch Identification", "Index", "PitchIdentification", null, new { @class = "dropdown-item" })*@
                             @Html.ActionLink("All Solfeg Syllables", "Index", "Solfeg", null, new { @class = "dropdown-item" })
                         </div>
                     </li>
@@ -96,7 +100,6 @@
                     <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 0, inversion = 0 })' type='audio/mpeg'>
                 </audio>
                 <div>
-                    @*<i class="fa fa-music my-float" onclick="document.getElementById('triadPlayer').play()" title="Play the DO triad (root)"></i>*@
                     <img class="my-float-2" src='@Url.Content("~/Content/Images/chord-white.png")' onclick="document.getElementById('triadPlayer').play()" title="Play the DO triad (root)" />
                 </div>
             </div>
@@ -109,7 +112,6 @@
                     <source src='@Url.Action("GetDOEx", "DO", new { doNoteName = ViewBag.Pitch.PitchName })' type='audio/mpeg'>
                 </audio>
                 <div>
-                    @*<i class="fa fa-play my-float" onclick="document.getElementById('doPlayer').play()" title="Play the DO"></i>*@
                     <img class="my-float-1" src='@Url.Content("~/Content/Images/quarter-note-white.png")' onclick="document.getElementById('doPlayer').play()" title="Play the DO" />
                 </div>
             </div>

@@ -170,10 +170,8 @@
     <Compile Include="Controllers\L1C3Controller.cs" />
     <Compile Include="Controllers\L1C4Controller.cs" />
     <Compile Include="Controllers\L1C5Controller.cs" />
-    <Compile Include="Controllers\MajorOrMinorTriadController.cs" />
     <Compile Include="Controllers\PitchIdentificationController.cs" />
     <Compile Include="Controllers\SolfegController.cs" />
-    <Compile Include="Controllers\TriadIdentificationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -273,8 +271,6 @@
     <Content Include="Views\DO\Index.cshtml" />
     <Content Include="Views\Donate\Index.cshtml" />
     <Content Include="Views\L1C1\Index.cshtml" />
-    <Content Include="Views\MajorOrMinorTriad\Index.cshtml" />
-    <Content Include="Views\TriadIdentification\Index.cshtml" />
     <Content Include="Views\PitchIdentification\Index.cshtml" />
     <Content Include="Views\Shared\AllPitches.cshtml" />
     <Content Include="Views\Auth\Unauthorized.cshtml" />
@@ -299,6 +295,8 @@
     <Content Include="Views\L1C3\MelodicMin3rdMaj6th.cshtml" />
     <Content Include="Views\L1C3\HarmonicMin3rdMaj6th.cshtml" />
     <Content Include="Views\L1C5\MelodicIntervals.cshtml" />
+    <Content Include="Views\L1C5\HarmonicIntervals.cshtml" />
+    <Content Include="Views\L1C5\DiatonicTriadRecognition.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

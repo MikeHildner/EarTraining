@@ -1,4 +1,19 @@
-﻿function getRandomInt(min, max, exclude) {
+﻿//$(document).ready(function () {
+//    $('.spoiler').hover(
+//        function () {
+//            var t = $(this)[0];
+//            $(this)[0].animate({
+//                "color": "#FFFFFF"//,
+//                //backgroundColor: "blue"
+//            });
+//        },
+//        function () {
+//            //alert('mouse leave');
+//        }
+//    );
+//});
+
+function getRandomInt(min, max, exclude) {
     min = Math.ceil(min);
     max = Math.floor(max);
     var ri = Math.floor(Math.random() * (max - min + 1)) + min;

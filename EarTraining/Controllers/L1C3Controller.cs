@@ -103,12 +103,17 @@ namespace EarTraining.Controllers
 
                 case TriadType.FourMajorTriad:
                     newDoNoteNumber = doNoteNumber + Interval.UpPerfect4th;
-                    samples = Inversion.CreateTriadInversionEx(inversionType, noteDuration, newDoNoteNumber, newDoNoteNumber + 4, newDoNoteNumber + 7);
+                    samples = Inversion.CreateTriadInversionEx(inversionType, noteDuration, newDoNoteNumber, newDoNoteNumber + Interval.UpMajor3rd, newDoNoteNumber + Interval.UpPerfect5th);
                     break;
 
                 case TriadType.FiveMajorTriad:
                     newDoNoteNumber = doNoteNumber + Interval.UpPerfect5th;
-                    samples = Inversion.CreateTriadInversionEx(inversionType, noteDuration, newDoNoteNumber, newDoNoteNumber + 4, newDoNoteNumber + 7);
+                    samples = Inversion.CreateTriadInversionEx(inversionType, noteDuration, newDoNoteNumber, newDoNoteNumber + Interval.UpMajor3rd, newDoNoteNumber + Interval.UpPerfect5th);
+                    break;
+
+                case TriadType.SixMinorTriad:
+                    newDoNoteNumber = doNoteNumber + Interval.UpMajor6th;
+                    samples = Inversion.CreateTriadInversionEx(inversionType, noteDuration, newDoNoteNumber, newDoNoteNumber + Interval.UpMinor3rd, newDoNoteNumber + Interval.UpPerfect5th);
                     break;
 
                 default:

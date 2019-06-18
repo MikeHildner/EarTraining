@@ -25,12 +25,14 @@ textarea {
 }
 
 .spoiler {
-    color: black;
-    background-color: black;
+    color: #D9EDF7;
+    background-color: #D9EDF7;
+    padding-left: 5px;
 }
 
 .spoiler:hover {
-    background-color: white;
+    color: #428BCA;
+    background-color: #D9EDF7;
 }
 
 .underline {
@@ -38,12 +40,12 @@ textarea {
 }
 
 .piano {
-    content:url(Images/Piano.svg); 
+    content: url(Images/Piano.svg);
     width: 16px;
     height: 16px;
 }
 
-.text-align-right{
+.text-align-right {
     text-align: right;
 }
 
@@ -80,4 +82,10 @@ textarea {
 .my-float-2 {
     margin-top: -5px;
     margin-left: -5px;
+}
+
+audio {
+    /*filter: sepia(20%) saturate(70%) grayscale(1) contrast(99%) invert(12%);*/
+    /*width: 200px;
+    height: 25px;*/
 }

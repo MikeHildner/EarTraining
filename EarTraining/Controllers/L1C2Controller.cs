@@ -318,8 +318,8 @@ namespace EarTraining.Controllers
 
                 // Minor 3rd intervals.
                 case L1C2MelodicDrillType.ReReFaFaMi3:
-                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.Up2nd, quarterNoteDuration);
-                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.Up2nd, quarterNoteDuration);
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor2nd, quarterNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor2nd, quarterNoteDuration);
                     note3 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect4th, quarterNoteDuration);
                     note4 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect4th, quarterNoteDuration);
                     note5 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor3rd, wholeNoteDuration);
@@ -352,8 +352,8 @@ namespace EarTraining.Controllers
                 case L1C2MelodicDrillType.TiTiReReDo3Low:
                     note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.DownHalfStep, quarterNoteDuration);
                     note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.DownHalfStep, quarterNoteDuration);
-                    note3 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.Up2nd, quarterNoteDuration);
-                    note4 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.Up2nd, quarterNoteDuration);
+                    note3 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor2nd, quarterNoteDuration);
+                    note4 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor2nd, quarterNoteDuration);
                     note5 = NAudioHelper.GetSampleProvider(doNoteNumber, wholeNoteDuration);
                     break;
 
@@ -367,8 +367,8 @@ namespace EarTraining.Controllers
                     break;
 
                 case L1C2MelodicDrillType.ReReTiTiDo6:
-                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.Up2nd, quarterNoteDuration);
-                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.Up2nd, quarterNoteDuration);
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor2nd, quarterNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor2nd, quarterNoteDuration);
                     note3 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor7th, quarterNoteDuration);
                     note4 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor7th, quarterNoteDuration);
                     note5 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.Up1Octave, wholeNoteDuration);
@@ -401,8 +401,8 @@ namespace EarTraining.Controllers
                 case L1C2MelodicDrillType.TiTiReReDo6:
                     note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor7th, quarterNoteDuration);
                     note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor7th, quarterNoteDuration);
-                    note3 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.Up2nd, quarterNoteDuration);
-                    note4 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.Up2nd, quarterNoteDuration);
+                    note3 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor2nd, quarterNoteDuration);
+                    note4 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor2nd, quarterNoteDuration);
                     note5 = NAudioHelper.GetSampleProvider(doNoteNumber, wholeNoteDuration);
                     break;
 
@@ -496,7 +496,7 @@ namespace EarTraining.Controllers
 
                 // Minor 3rd intervals.
                 case L1C2HarmonicDrillType.ReFa3:
-                    newDo = doNoteNumber + Interval.Up2nd;
+                    newDo = doNoteNumber + Interval.UpMajor2nd;
                     secondNoteNumber = newDo + Interval.UpMinor3rd;
                     inversionType = InversionType.RootPosition;
                     break;
@@ -521,7 +521,7 @@ namespace EarTraining.Controllers
 
                 // Major 6th intervals.
                 case L1C2HarmonicDrillType.FaRe6:
-                    newDo = doNoteNumber + Interval.Up2nd;
+                    newDo = doNoteNumber + Interval.UpMajor2nd;
                     secondNoteNumber = newDo + Interval.UpMinor3rd;
                     inversionType = InversionType.HighFirstInversion;
                     break;

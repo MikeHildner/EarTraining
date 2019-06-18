@@ -151,7 +151,7 @@ namespace EarTraining.Controllers
                 case ResolutionType.DoDoReDo:
                     note1 = NAudioHelper.GetSampleProvider(doNoteNumber, quarterNoteDuration);
                     note2 = NAudioHelper.GetSampleProvider(doNoteNumber, quarterNoteDuration);
-                    note3 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.Up2nd, halfNoteDuration);
+                    note3 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor2nd, halfNoteDuration);
                     note4 = NAudioHelper.GetSampleProvider(doNoteNumber, wholeNoteDuration);
                     break;
 
