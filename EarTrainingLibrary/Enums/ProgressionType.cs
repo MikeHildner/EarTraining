@@ -2,18 +2,26 @@
 {
     public enum ProgressionType
     {
-        // Two chord progressions.
+        // I IV V two chord progressions.
         Four2ndToOneRoot = 0,
         Five1stToOneRoot = 1,
         FiveRootToFourRoot = 2,
         OneRootToFour2nd = 3,
 
-        // Three chord progressions.
+        // I IV V three chord progressions.
         Four2ndFive1stOneRoot = 4,
         Five1stFour2ndOneRoot = 5,
         OneRootFour2ndFive1st = 6,
         Five1stOneRootFour2nd = 7,
         OneRootFive1stFour2nd = 8,
-        Four2ndOneRootFive1st = 9
+        Four2ndOneRootFive1st = 9,
+
+        // I IV V iv.
+        SixMin2ndToFourRoot = 10,
+        FiveRootToSixMinRoot = 11,
+        SixMin1stToOneRoot = 12,
+        FourRootToFiveRoot = 13, // OK, not a minor, but it came in at chapter 5, so putting here.
+        SixMinRootToFiveRoot = 14,
+        FourRootToSixMin2nd = 15
     }
 }
