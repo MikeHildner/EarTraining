@@ -16,12 +16,21 @@
         OneRootFive1stFour2nd = 8,
         Four2ndOneRootFive1st = 9,
 
-        // I IV V iv.
+        // I IV V iv two chord progressions.
         SixMin2ndToFourRoot = 10,
         FiveRootToSixMinRoot = 11,
         SixMin1stToOneRoot = 12,
         FourRootToFiveRoot = 13, // OK, not a minor, but it came in at chapter 5, so putting here.
         SixMinRootToFiveRoot = 14,
-        FourRootToSixMin2nd = 15
+        FourRootToSixMin2nd = 15,
+
+        // I IV V iv three chord progressions.
+        OneRootFive1stSixMin2nd = 16,
+        SixMin2ndFourRootOne1st = 17,
+        OneRootSixMin1stFive1st = 18,
+        FiveRootFourRootSixMin2nd = 19,
+        FourRootFiveRootSixMinRoot = 20,
+        SixMin1stOne2ndFour1st = 21,
+        Five2ndSixMin2ndOneRppt = 22
     }
 }
