@@ -4,6 +4,7 @@ using EarTrainingLibrary.Utility;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
 using System;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Web.Mvc;
@@ -38,7 +39,6 @@ namespace EarTraining.Controllers
         public ActionResult GetResolution(double frequency, int type)
         {
             ResolutionType rt = (ResolutionType)type;
-            MemoryStream retMs = new MemoryStream();
             MemoryStream wavStream = GetResolution(frequency, rt);
 
             wavStream.WavToMp3File(out string fileName);
@@ -49,7 +49,6 @@ namespace EarTraining.Controllers
         public ActionResult GetResolutionEx(string doNoteName, int type)
         {
             ResolutionType rt = (ResolutionType)type;
-            MemoryStream retMs = new MemoryStream();
             MemoryStream wavStream = GetResolution(doNoteName, rt);
 
             wavStream.WavToMp3File(out string fileName);
@@ -60,7 +59,7 @@ namespace EarTraining.Controllers
 
         private MemoryStream GetResolution(double frequency, ResolutionType resolutionType)
         {
-            double bpm = 100;
+            double bpm = double.Parse(ConfigurationManager.AppSettings["MelodicDrillBPM"]);
             double quarterNotemillis = (60 / bpm) * 1000;
             TimeSpan noteDuration = TimeSpan.FromMilliseconds(quarterNotemillis);
             double gain = 0.2;
@@ -130,7 +129,7 @@ namespace EarTraining.Controllers
 
         private MemoryStream GetResolution(string doNoteName, ResolutionType resolutionType)
         {
-            double bpm = 60;
+            double bpm = double.Parse(ConfigurationManager.AppSettings["MelodicDrillBPM"]);
             double quarterNotemillis = (60 / bpm) * 1000;
             TimeSpan quarterNoteDuration = TimeSpan.FromMilliseconds(quarterNotemillis);
             TimeSpan halfNoteDuration = quarterNoteDuration.Add(quarterNoteDuration);

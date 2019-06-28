@@ -25,12 +25,12 @@
         FourRootToSixMin2nd = 15,
 
         // I IV V iv three chord progressions.
-        OneRootFive1stSixMin2nd = 16,
+        OneRootFive1stSixMin1st = 16,
         SixMin2ndFourRootOne1st = 17,
         OneRootSixMin1stFive1st = 18,
         FiveRootFourRootSixMin2nd = 19,
         FourRootFiveRootSixMinRoot = 20,
         SixMin1stOne2ndFour1st = 21,
-        Five2ndSixMin2ndOneRppt = 22
+        Five2ndSixMin2ndOneRoot = 22
     }
 }

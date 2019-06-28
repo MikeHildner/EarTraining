@@ -1,0 +1,238 @@
+﻿
+@{
+    ViewBag.Title = "Level 1 Chapter 6";
+}
+
+<h2>@ViewBag.Title</h2>
+<h5>Melodic Major 2nd Intervals</h5>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        @{
+            Html.RenderPartial("NewDO");
+        }
+    </div>
+</div>
+
+<hr />
+
+<div class="row toggle-demo" role="group">
+    <div class="col-md-6">
+        Include drills for
+        <div class="switch-toggle alert alert-dark">
+            <input id="maj2nds" name="intervaltype" type="radio" checked>
+            <label for="maj2nds" onclick="">Major 2nds</label>
+
+            <input id="min7ths" name="intervaltype" type="radio">
+            <label for="min7thths" onclick="">Minor 7ths</label>
+
+            <input id="both" name="intervaltype" type="radio">
+            <label for="both" onclick="">Both</label>
+
+            <a class="btn btn-primary"></a>
+        </div>
+    </div>
+</div>
+
+<h4>Drill</h4>
+<div class="row">
+    <div class="col-md-4">
+        <input type="button" class="btn btn-primary" value="Get a New Interval" onclick="setAudDrill1Src()" />
+        <figure>
+            <figcaption><img class="piano" /></figcaption>
+            <audio id="audDrill1" controls preload='none'>
+                <source src='' type='audio/mpeg'>
+            </audio>
+        </figure>
+        <div class="spoiler" id="drill1"></div>
+    </div>
+</div>
+
+<div id="maj-2nd-prompts">
+    <h4>Maj 2nd Prompts</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> </figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, type = 0 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> </figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, type = 1 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> </figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, type = 2 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> </figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, type = 3 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> </figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, type = 4 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> </figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, type = 5 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> </figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, type = 6 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> </figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, type = 7 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> </figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, type = 8 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> </figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, type = 9 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+    </div>
+</div>
+
+<div id="min-7th-prompts">
+    <h4>Min 7th Prompts</h4>
+    <div class="row">
+        <h3 class="text-warning">Not Yet Implemented</h3>
+    </div>
+</div>
+
+@section  scripts {
+    <script>
+        $(document).ready(function () {
+            setAudDrill1Src();
+
+            $('input[type=radio][name=intervaltype]').change(function () {
+                setAudDrill1Src();
+            });
+        });
+
+        function setAudDrill1Src() {
+            var baseSrc = '@Url.Action("GetMelodicDrillEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName })';
+
+            // Get the drills based on what the user has choosen.
+            var intervalType = $("input[type=radio][name=intervaltype]:checked").attr('id');
+
+            var minDrill;
+            var maxDrill;
+
+            switch (intervalType) {
+                case 'maj2nds':
+                    minDrill = 0;
+                    maxDrill = 4;
+                    $('#maj-2nd-prompts').fadeIn();
+                    $('#min-7th-prompts').fadeOut();
+                    break;
+
+                case 'min7ths':
+                    minDrill = 5;
+                    maxDrill = 9;
+                    $('#maj-2nd-prompts').fadeOut();
+                    $('#min-7th-prompts').fadeIn();
+                    break;
+
+                case 'both':
+                    minDrill = 0;
+                    maxDrill = 9;
+                    $('#maj-2nd-prompts').fadeIn();
+                    $('#min-7th-prompts').fadeIn();
+                    break;
+
+                default:
+                    var msg = 'intervalType ' + intervalType + ' is not supported';
+                    consoleAndAlert(msg);
+            }
+
+            var randomInt = randomInt = getRandomInt(minDrill, maxDrill);
+
+            var src = baseSrc + '&type=' + randomInt;
+            $('#audDrill1').attr('src', src);
+
+            var msg = '';
+            switch (randomInt) {
+                case 0:
+                    msg = msg + '';
+                    break;
+                case 1:
+                    msg = msg + '';
+                    break;
+                case 2:
+                    msg = msg + '';
+                    break;
+                case 3:
+                    msg = msg + '';
+                    break;
+                case 4:
+                    msg = msg + '';
+                    break;
+                case 5:
+                    msg = msg + '';
+                    break;
+                case 6:
+                    msg = msg + '';
+                    break;
+                case 7:
+                    msg = msg + '';
+                    break;
+                case 8:
+                    msg = msg + '';
+                    break;
+                case 9:
+                    msg = msg + '';
+                    break;
+                default:
+                    consoleAndAlert('randomInt ' + randomInt + ' is not supported.');
+                    break;
+            }
+
+            $('#drill1').text(msg);
+        }
+
+    </script>
+}

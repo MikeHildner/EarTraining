@@ -170,6 +170,7 @@
     <Compile Include="Controllers\L1C3Controller.cs" />
     <Compile Include="Controllers\L1C4Controller.cs" />
     <Compile Include="Controllers\L1C5Controller.cs" />
+    <Compile Include="Controllers\L1C6Controller.cs" />
     <Compile Include="Controllers\PitchIdentificationController.cs" />
     <Compile Include="Controllers\SolfegController.cs" />
     <Compile Include="Global.asax.cs">
@@ -298,6 +299,7 @@
     <Content Include="Views\L1C5\HarmonicIntervals.cshtml" />
     <Content Include="Views\L1C5\DiatonicTriadRecognition.cshtml" />
     <Content Include="Views\L1C5\DiatonicTriadProgressions.cshtml" />
+    <Content Include="Views\L1C6\MelodicMajor2ndIntervals.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

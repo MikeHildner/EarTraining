@@ -5,6 +5,7 @@ using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -40,7 +41,6 @@ namespace EarTraining.Controllers
         public ActionResult GetDrill(double frequency, int type)
         {
             L1C2MelodicDrillType drillType = (L1C2MelodicDrillType)type;
-            var retMs = new MemoryStream();
             MemoryStream wavStream = GetDrill(frequency, drillType);
 
             wavStream.WavToMp3File(out string fileName);
@@ -50,7 +50,6 @@ namespace EarTraining.Controllers
         public ActionResult GetMelodicDrillEx(string doNoteName, int type)
         {
             L1C2MelodicDrillType drillType = (L1C2MelodicDrillType)type;
-            var retMs = new MemoryStream();
             MemoryStream wavStream = GetMelodicDrillEx(doNoteName, drillType);
 
             wavStream.WavToMp3File(out string fileName);
@@ -60,7 +59,6 @@ namespace EarTraining.Controllers
         public ActionResult GetHarmonicDrillEx(string doNoteName, int type)
         {
             L1C2HarmonicDrillType drillType = (L1C2HarmonicDrillType)type;
-            var retMs = new MemoryStream();
             MemoryStream wavStream = GetHarmonicDrillEx(doNoteName, drillType);
 
             wavStream.WavToMp3File(out string fileName);
@@ -69,7 +67,7 @@ namespace EarTraining.Controllers
 
         private MemoryStream GetDrill(double frequency, L1C2MelodicDrillType drillType)
         {
-            double bpm = 100;
+            double bpm = double.Parse(ConfigurationManager.AppSettings["MelodicDrillBPM"]);
             double quarterNotemillis = (60 / bpm) * 1000;
             TimeSpan noteDuration = TimeSpan.FromMilliseconds(quarterNotemillis);
             double gain = 0.2;
@@ -199,7 +197,7 @@ namespace EarTraining.Controllers
 
         private MemoryStream GetMelodicDrillEx(string doNoteName, L1C2MelodicDrillType drillType)
         {
-            double bpm = 90;
+            double bpm = double.Parse(ConfigurationManager.AppSettings["MelodicDrillBPM"]);
             double quarterNotemillis = (60 / bpm) * 1000;
             TimeSpan quarterNoteDuration = TimeSpan.FromMilliseconds(quarterNotemillis);
             TimeSpan wholeNoteDuration = quarterNoteDuration.Add(quarterNoteDuration).Add(quarterNoteDuration).Add(quarterNoteDuration);
