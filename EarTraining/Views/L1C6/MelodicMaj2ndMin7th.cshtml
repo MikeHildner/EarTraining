@@ -4,7 +4,7 @@
 }
 
 <h2>@ViewBag.Title</h2>
-<h5>Melodic Major 2nd Intervals</h5>
+<h5>Melodic Major 2nd and Minor 7th Intervals</h5>
 
 <hr />
 
@@ -26,7 +26,7 @@
             <label for="maj2nds" onclick="">Major 2nds</label>
 
             <input id="min7ths" name="intervaltype" type="radio">
-            <label for="min7thths" onclick="">Minor 7ths</label>
+            <label for="min7ths" onclick="">Minor 7ths</label>
 
             <input id="both" name="intervaltype" type="radio">
             <label for="both" onclick="">Both</label>
@@ -52,10 +52,11 @@
 
 <div id="maj-2nd-prompts">
     <h4>Maj 2nd Prompts</h4>
+    <h4 class="text-warning">Not fully implemented</h4>
     <div class="row">
         <div class="col-md-4">
             <figure>
-                <figcaption><img class="piano" /> </figcaption>
+                <figcaption><img class="piano" /> DO DO RE RE DO</figcaption>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetMelodicDrillEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, type = 0 })' type='audio/mpeg'>
                 </audio>
@@ -63,7 +64,7 @@
         </div>
         <div class="col-md-4">
             <figure>
-                <figcaption><img class="piano" /> </figcaption>
+                <figcaption><img class="piano" /> RE RE MI MI MI</figcaption>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetMelodicDrillEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, type = 1 })' type='audio/mpeg'>
                 </audio>
@@ -71,7 +72,7 @@
         </div>
         <div class="col-md-4">
             <figure>
-                <figcaption><img class="piano" /> </figcaption>
+                <figcaption><img class="piano" /> FA FA SO SO SO</figcaption>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetMelodicDrillEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, type = 2 })' type='audio/mpeg'>
                 </audio>
@@ -79,7 +80,7 @@
         </div>
         <div class="col-md-4">
             <figure>
-                <figcaption><img class="piano" /> </figcaption>
+                <figcaption><img class="piano" /> SO SO LA LA SO</figcaption>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetMelodicDrillEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, type = 3 })' type='audio/mpeg'>
                 </audio>
@@ -87,7 +88,7 @@
         </div>
         <div class="col-md-4">
             <figure>
-                <figcaption><img class="piano" /> </figcaption>
+                <figcaption><img class="piano" /> LA LA TI TI DO</figcaption>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetMelodicDrillEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, type = 4 })' type='audio/mpeg'>
                 </audio>
@@ -95,7 +96,7 @@
         </div>
         <div class="col-md-4">
             <figure>
-                <figcaption><img class="piano" /> </figcaption>
+                <figcaption><img class="piano" /> RE RE DO DO DO</figcaption>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetMelodicDrillEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, type = 5 })' type='audio/mpeg'>
                 </audio>
@@ -103,7 +104,7 @@
         </div>
         <div class="col-md-4">
             <figure>
-                <figcaption><img class="piano" /> </figcaption>
+                <figcaption><img class="piano" /> MI MI RE RE DO</figcaption>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetMelodicDrillEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, type = 6 })' type='audio/mpeg'>
                 </audio>
@@ -111,7 +112,7 @@
         </div>
         <div class="col-md-4">
             <figure>
-                <figcaption><img class="piano" /> </figcaption>
+                <figcaption><img class="piano" /> SO SO FA FA MI</figcaption>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetMelodicDrillEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, type = 7 })' type='audio/mpeg'>
                 </audio>
@@ -119,7 +120,7 @@
         </div>
         <div class="col-md-4">
             <figure>
-                <figcaption><img class="piano" /> </figcaption>
+                <figcaption><img class="piano" /> LA LA SO SO SO</figcaption>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetMelodicDrillEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, type = 8 })' type='audio/mpeg'>
                 </audio>
@@ -127,7 +128,7 @@
         </div>
         <div class="col-md-4">
             <figure>
-                <figcaption><img class="piano" /> </figcaption>
+                <figcaption><img class="piano" /> TI TI LA LA SO</figcaption>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetMelodicDrillEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, type = 9 })' type='audio/mpeg'>
                 </audio>
@@ -138,8 +139,9 @@
 
 <div id="min-7th-prompts">
     <h4>Min 7th Prompts</h4>
+    <h4 class="text-warning">Not yet implemented</h4>
     <div class="row">
-        <h3 class="text-warning">Not Yet Implemented</h3>
+        
     </div>
 </div>
 
@@ -165,21 +167,21 @@
             switch (intervalType) {
                 case 'maj2nds':
                     minDrill = 0;
-                    maxDrill = 4;
+                    maxDrill = 9;
                     $('#maj-2nd-prompts').fadeIn();
                     $('#min-7th-prompts').fadeOut();
                     break;
 
                 case 'min7ths':
-                    minDrill = 5;
-                    maxDrill = 9;
+                    minDrill = 10;
+                    maxDrill = 19;
                     $('#maj-2nd-prompts').fadeOut();
                     $('#min-7th-prompts').fadeIn();
                     break;
 
                 case 'both':
                     minDrill = 0;
-                    maxDrill = 9;
+                    maxDrill = 19;
                     $('#maj-2nd-prompts').fadeIn();
                     $('#min-7th-prompts').fadeIn();
                     break;
@@ -197,34 +199,34 @@
             var msg = '';
             switch (randomInt) {
                 case 0:
-                    msg = msg + '';
+                    msg = msg + 'DO DO RE RE DO';
                     break;
                 case 1:
-                    msg = msg + '';
+                    msg = msg + 'RE RE MI MI MI';
                     break;
                 case 2:
-                    msg = msg + '';
+                    msg = msg + 'FA FA SO SO SO';
                     break;
                 case 3:
-                    msg = msg + '';
+                    msg = msg + 'SO SO LA LA SO';
                     break;
                 case 4:
-                    msg = msg + '';
+                    msg = msg + 'LA LA TI TI DO';
                     break;
                 case 5:
-                    msg = msg + '';
+                    msg = msg + 'RE RE DO DO DO';
                     break;
                 case 6:
-                    msg = msg + '';
+                    msg = msg + 'MI MI RE RE DO';
                     break;
                 case 7:
-                    msg = msg + '';
+                    msg = msg + 'SO SO FA FA MI';
                     break;
                 case 8:
-                    msg = msg + '';
+                    msg = msg + 'LA LA SO SO SO';
                     break;
                 case 9:
-                    msg = msg + '';
+                    msg = msg + 'TI TI LA LA SO';
                     break;
                 default:
                     consoleAndAlert('randomInt ' + randomInt + ' is not supported.');

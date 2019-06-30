@@ -299,7 +299,7 @@
     <Content Include="Views\L1C5\HarmonicIntervals.cshtml" />
     <Content Include="Views\L1C5\DiatonicTriadRecognition.cshtml" />
     <Content Include="Views\L1C5\DiatonicTriadProgressions.cshtml" />
-    <Content Include="Views\L1C6\MelodicMajor2ndIntervals.cshtml" />
+    <Content Include="Views\L1C6\MelodicMaj2ndMin7th.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
