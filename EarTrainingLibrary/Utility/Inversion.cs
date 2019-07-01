@@ -107,12 +107,12 @@ namespace EarTrainingLibrary.Utility
 
                 case InversionType.HighFirstInversion:
                     // Take the bottom note up an octave.
-                    firstNoteNumber = firstNoteNumber + Interval.Up1Octave;
+                    firstNoteNumber += Interval.UpPerfectOctave;
                     break;
 
                 case InversionType.LowFirstInversion:
                     // Take top note down an octave.
-                    secondNoteNumber = secondNoteNumber + Interval.Down1Octave;
+                    secondNoteNumber += Interval.DownPerfectOctave;
                     break;
 
                 default:

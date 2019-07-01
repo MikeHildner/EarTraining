@@ -52,7 +52,6 @@
 
 <div id="maj-2nd-prompts">
     <h4>Maj 2nd Prompts</h4>
-    <h4 class="text-warning">Not fully implemented</h4>
     <div class="row">
         <div class="col-md-4">
             <figure>
@@ -139,9 +138,88 @@
 
 <div id="min-7th-prompts">
     <h4>Min 7th Prompts</h4>
-    <h4 class="text-warning">Not yet implemented</h4>
     <div class="row">
-        
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> RE RE DO DO DO</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, type = 10 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> MI MI RE RE DO</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, type = 11 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> SO SO FA FA MI</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, type = 12 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> LA LA SO SO SO</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, type = 13 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> TI TI LA LA SO</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, type = 14 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> DO DO RE RE DO</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, type = 15 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> RE RE MI MI MI</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, type = 16 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> FA FA SO SO SO</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, type = 17 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> SO SO LA LA SO</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, type = 18 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> LA LA TI TI DO</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, type = 19 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+
     </div>
 </div>
 
@@ -227,6 +305,36 @@
                     break;
                 case 9:
                     msg = msg + 'TI TI LA LA SO';
+                    break;
+                case 10:
+                    msg = msg + 'RE RE DO DO DO';
+                    break;
+                case 11:
+                    msg = msg + 'MI MI RE RE DO';
+                    break;
+                case 12:
+                    msg = msg + 'SO SO FA FA MI';
+                    break;
+                case 13:
+                    msg = msg + 'LA LA SO SO SO';
+                    break;
+                case 14:
+                    msg = msg + 'TI TI LA LA SO';
+                    break;
+                case 15:
+                    msg = msg + 'DO DO RE RE DO';
+                    break;
+                case 16:
+                    msg = msg + 'RE RE MI MI MI';
+                    break;
+                case 17:
+                    msg = msg + 'FA FA SO SO SO';
+                    break;
+                case 18:
+                    msg = msg + 'SO SO LA LA SO';
+                    break;
+                case 19:
+                    msg = msg + 'LA LA TI TI DO';
                     break;
                 default:
                     consoleAndAlert('randomInt ' + randomInt + ' is not supported.');

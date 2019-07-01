@@ -8,7 +8,7 @@ namespace EarTrainingLibrary.Enums
 {
     public static class Interval
     {
-        public static int Down1Octave { get { return -12; } }
+        public static int DownPerfectOctave { get { return -12; } }
         public static int DownPerfect4th { get { return -5; } }
         public static int DownMinor3rd { get { return -3; } }
         public static int DownHalfStep { get { return -1; } }
@@ -19,9 +19,11 @@ namespace EarTrainingLibrary.Enums
         public static int UpPerfect5th { get { return 7; } }
         public static int UpMajor6th { get { return 9; } }
         public static int UpMajor7th { get { return 11; } }
-        public static int Up1Octave { get { return 12; } }
+        public static int UpPerfectOctave { get { return 12; } }
         public static int UpMajor9th { get { return 14; } }
         public static int UpMajor10th { get { return 16; } }
-        public static int UpMajor11th { get { return 17; } }
+        public static int UpPerfect11th { get { return 17; } }
+        public static int UpPerfect12th { get { return 19; } }
+        public static int UpMajor13th { get { return 21; } }
     }
 }

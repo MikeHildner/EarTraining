@@ -25,7 +25,7 @@ namespace EarTrainingLibrary.Enums
         MiMiReReDo7th = 11,
         SoSoFaFaMi7th = 12,
         LaLaSoSoSo7th = 13,
-        TiTiLaLaDo7th = 14,
+        TiTiLaLaSo7th = 14,
         DoDoReReDo7th = 15,
         ReReMiMiMi7th = 16,
         FaFaSoSoSo7th = 17,
