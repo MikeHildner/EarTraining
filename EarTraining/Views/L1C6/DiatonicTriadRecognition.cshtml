@@ -1,0 +1,221 @@
+﻿@{
+    ViewBag.Title = "I IV V vi iii Diatonic Triad Recognition";
+}
+
+<h2>Level 1 Chapter 6</h2>
+<h5>@ViewBag.Title</h5>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        @{
+            Html.RenderPartial("NewDO");
+        }
+    </div>
+</div>
+
+<hr />
+
+<h4>Drill</h4>
+<div class="row">
+    <div class="col-md-4">
+        <input type="button" class="btn btn-primary" value="Get a New Triad" onclick="setAudioSrc()" />
+        <figure>
+            <figcaption><img class="piano" /></figcaption>
+            <audio id="audioEx" controls preload='none'>
+                <source src='' type='audio/mpeg'>
+            </audio>
+        </figure>
+        <div class="spoiler" id="triad"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>Prompts</h4>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <figure>
+            <figcaption><img class="piano" /> I (root)</figcaption>
+            <audio id="audio" controls preload='none'>
+                <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 0, inversion = 0 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+    <div class="col-md-4">
+        <figure>
+            <figcaption><img class="piano" /> IV (root)</figcaption>
+            <audio id="audio" controls preload='none'>
+                <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 1, inversion = 0 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+    <div class="col-md-4">
+        <figure>
+            <figcaption><img class="piano" /> V (root)</figcaption>
+            <audio id="audio" controls preload='none'>
+                <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 2, inversion = 0 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+    <div class="col-md-4">
+        <figure>
+            <figcaption><img class="piano" /> vi (root)</figcaption>
+            <audio id="audio" controls preload='none'>
+                <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 3, inversion = 0 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+    <div class="col-md-4">
+        <figure>
+            <figcaption><img class="piano" /> iii (root)</figcaption>
+            <audio id="audio" controls preload='none'>
+                <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 4, inversion = 0 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+
+    <div class="col-md-4">
+        <figure>
+            <figcaption><img class="piano" /> I (1st)</figcaption>
+            <audio id="audio" controls preload='none'>
+                <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 0, inversion = 1 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+    <div class="col-md-4">
+        <figure>
+            <figcaption><img class="piano" /> IV (1st)</figcaption>
+            <audio id="audio" controls preload='none'>
+                <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 1, inversion = 1 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+    <div class="col-md-4">
+        <figure>
+            <figcaption><img class="piano" /> V (1st)</figcaption>
+            <audio id="audio" controls preload='none'>
+                <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 2, inversion = 1 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+    <div class="col-md-4">
+        <figure>
+            <figcaption><img class="piano" /> vi (1st)</figcaption>
+            <audio id="audio" controls preload='none'>
+                <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 3, inversion = 1 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+    <div class="col-md-4">
+        <figure>
+            <figcaption><img class="piano" /> iii (1st)</figcaption>
+            <audio id="audio" controls preload='none'>
+                <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 4, inversion = 1 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+    <div class="col-md-4">
+        <figure>
+            <figcaption><img class="piano" /> I (2nd)</figcaption>
+            <audio id="audio" controls preload='none'>
+                <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 0, inversion = 2 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+    <div class="col-md-4">
+        <figure>
+            <figcaption><img class="piano" /> IV (2nd)</figcaption>
+            <audio id="audio" controls preload='none'>
+                <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 1, inversion = 2 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+    <div class="col-md-4">
+        <figure>
+            <figcaption><img class="piano" /> V (2nd)</figcaption>
+            <audio id="audio" controls preload='none'>
+                <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 2, inversion = 2 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+    <div class="col-md-4">
+        <figure>
+            <figcaption><img class="piano" /> vi (2nd)</figcaption>
+            <audio id="audio" controls preload='none'>
+                <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 3, inversion = 2 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+    <div class="col-md-4">
+        <figure>
+            <figcaption><img class="piano" /> iii (2nd)</figcaption>
+            <audio id="audio" controls preload='none'>
+                <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 4, inversion = 2 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+</div>
+
+@section  scripts {
+    <script>
+        $(document).ready(function () {
+            setAudioSrc();
+        });
+
+        // Note we're using the controller method from L1C3 because most of the code was already written.
+        function setAudioSrc() {
+            var audioExSrc = '@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName })';
+            var triadtype = getRandomInt(0, 4);
+            var inversion = getRandomInt(0, 2);
+            audioExSrc = audioExSrc + '&triadtype=' + triadtype + '&inversion=' + inversion;;
+
+            $('#audioEx').attr('src', audioExSrc);
+
+            var msg = '';
+            switch (triadtype) {
+                case 0:
+                    msg = msg + 'I ';
+                    break;
+                case 1:
+                    msg = msg + 'IV ';
+                    break;
+                case 2:
+                    msg = msg + 'V ';
+                    break;
+                case 3:
+                    msg = msg + 'vi ';
+                    break;
+                case 4:
+                    msg = msg + 'iii ';
+                    break;
+                default:
+                    msg = 'triadType ' + triadtype + ' is not supported.';
+                    consoleAndAlert(msg);
+            }
+
+            switch (inversion) {
+                case 0:
+                    msg = msg + '(root)';
+                    break;
+                case 1:
+                    msg = msg + '(1st)';
+                    break;
+                case 2:
+                    msg = msg + '(2nd)';
+                    break;
+                default:
+                    msg = 'inversion ' + inversion + ' is not supported.';
+                    consoleAndAlert(msg);
+
+            }
+
+            $('#triad').text(msg);
+    }
+
+    </script>
+}
+

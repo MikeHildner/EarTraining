@@ -27,6 +27,12 @@ namespace EarTraining.Controllers
             return View();
         }
 
+        public ActionResult DiatonicTriadRecognition()
+        {
+            ViewBag.ShowPlayDoTriad = true;
+            return View();
+        }
+
         public ActionResult GetMelodicDrillEx(string doNoteName, int type)
         {
             L1C6MelodicDrillType drillType = (L1C6MelodicDrillType)type;

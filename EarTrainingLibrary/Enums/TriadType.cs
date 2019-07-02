@@ -11,6 +11,7 @@ namespace EarTrainingLibrary.Enums
         OneMajorTriad = 0,
         FourMajorTriad = 1,
         FiveMajorTriad = 2,
-        SixMinorTriad = 3
+        SixMinorTriad = 3,
+        ThreeMinorTriad = 4
     }
 }

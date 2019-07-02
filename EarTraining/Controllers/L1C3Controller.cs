@@ -116,6 +116,11 @@ namespace EarTraining.Controllers
                     samples = Inversion.CreateTriadInversionEx(inversionType, noteDuration, newDoNoteNumber, newDoNoteNumber + Interval.UpMinor3rd, newDoNoteNumber + Interval.UpPerfect5th);
                     break;
 
+                case TriadType.ThreeMinorTriad:
+                    newDoNoteNumber = doNoteNumber + Interval.UpMajor3rd;
+                    samples = Inversion.CreateTriadInversionEx(inversionType, noteDuration, newDoNoteNumber, newDoNoteNumber + Interval.UpMinor3rd, newDoNoteNumber + Interval.UpPerfect5th);
+                    break;
+
                 default:
                     throw new NotSupportedException($"TriadType {triadType} is not supported.");
             }
