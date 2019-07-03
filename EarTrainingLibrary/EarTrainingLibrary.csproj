@@ -69,6 +69,7 @@
     <Compile Include="Enums\L1C2HarmonicDrillType.cs" />
     <Compile Include="Enums\L1C5HarmonicDrillType.cs" />
     <Compile Include="Enums\L1C5MelodicDrillType.cs" />
+    <Compile Include="Enums\L1C6HarmonicDrillType.cs" />
     <Compile Include="Enums\L1C6MelodicDrillType.cs" />
     <Compile Include="Enums\ProgressionType.cs" />
     <Compile Include="Enums\TriadType.cs" />

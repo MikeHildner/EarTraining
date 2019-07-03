@@ -22,7 +22,12 @@ namespace EarTraining.Controllers
             ViewBag.Pitch = pitch;
         }
 
-        public ActionResult MelodicMaj2ndMin7th()
+        public ActionResult MelodicIntervals()
+        {
+            return View();
+        }
+
+        public ActionResult HarmonicIntervals()
         {
             return View();
         }
@@ -237,6 +242,97 @@ namespace EarTraining.Controllers
                 .FollowedBy(note5);
 
             var stwp = new SampleToWaveProvider(phrase);
+
+            MemoryStream wavStream = new MemoryStream();
+            WaveFileWriter.WriteWavFileToStream(wavStream, stwp);
+            wavStream.Position = 0;
+            return wavStream;
+        }
+
+        public ActionResult GetHarmonicDrillEx(string doNoteName, int type)
+        {
+            L1C6HarmonicDrillType drillType = (L1C6HarmonicDrillType)type;
+            MemoryStream wavStream = GetHarmonicDrillEx(doNoteName, drillType);
+
+            wavStream.WavToMp3File(out string fileName);
+            return Redirect($"~/Temp/{fileName}");
+        }
+
+        private MemoryStream GetHarmonicDrillEx(string doNoteName, L1C6HarmonicDrillType drillType)
+        {
+            TimeSpan duration = TimeSpan.FromSeconds(3);
+
+            string doFileName = NAudioHelper.GetFileNameFromNoteName(doNoteName);
+            doFileName = Path.GetFileName(doFileName);
+            int doNoteNumber = int.Parse(doFileName.Split('.')[0]);
+
+            ISampleProvider note1, note2;
+
+            switch (drillType)
+            {
+                // Major 2nds.
+
+                case L1C6HarmonicDrillType.DoRe2nd:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber, duration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor2nd, duration);
+                    break;
+
+                case L1C6HarmonicDrillType.ReMi2nd:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor2nd, duration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor3rd, duration);
+                    break;
+
+                case L1C6HarmonicDrillType.FaSo2nd:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect4th, duration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect5th, duration);
+                    break;
+
+                case L1C6HarmonicDrillType.SoLa2nd:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect5th, duration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor6th, duration);
+                    break;
+
+                case L1C6HarmonicDrillType.LaTi2nd:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor6th, duration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor7th, duration);
+                    break;
+
+                // Minor 7ths.
+                
+                case L1C6HarmonicDrillType.ReDo7th:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor2nd, duration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfectOctave, duration);
+                    break;
+
+                case L1C6HarmonicDrillType.MiRe7th:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor3rd, duration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor9th, duration);
+                    break;
+
+                case L1C6HarmonicDrillType.SoFa7th:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect5th, duration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect11th, duration);
+                    break;
+
+                case L1C6HarmonicDrillType.LaSo7th:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor6th, duration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect12th, duration);
+                    break;
+
+                case L1C6HarmonicDrillType.TiLa7th:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor7th, duration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor13th, duration);
+                    break;
+
+                default:
+                    throw new NotSupportedException($"L1C6HarmonicDrillType '{drillType}' is not supported.");
+            }
+
+            MixingSampleProvider msp = new MixingSampleProvider(note1.WaveFormat);
+            msp.AddMixerInput(note1);
+            msp.AddMixerInput(note2);
+
+            var stwp = new SampleToWaveProvider(msp);
 
             MemoryStream wavStream = new MemoryStream();
             WaveFileWriter.WriteWavFileToStream(wavStream, stwp);
