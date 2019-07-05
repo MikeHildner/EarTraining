@@ -75,7 +75,7 @@
 <div class="row">
     <div class="col-md-4">
         <figure>
-            <figcaption><img class="piano" /> DO DO TI (high)DO</figcaption>
+            <figcaption><img class="piano" /> DO DO (high)TI DO</figcaption>
             <audio controls preload='none'>
                 <source src='@Url.Action("GetResolutionEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 3 })' type='audio/mpeg'>
             </audio>
@@ -103,7 +103,7 @@
             var src = baseSrc + '&type=' + randomInt;
             $('#audResolution').attr('src', src);
 
-            var msg = 'Your resolution is ';
+            var msg = '';
             switch (randomInt) {
                 case 0:
                     msg = msg + 'DO DO RE DO';
@@ -115,10 +115,10 @@
                     msg = msg + 'DO DO LA SO';
                     break;
                 case 3:
-                    msg = msg + 'DO DO TI DO';
+                    msg = msg + 'DO DO (high)TI DO';
                     break;
                 case 4:
-                    msg = msg + 'DO DO TI DO';
+                    msg = msg + 'DO DO (low)TI DO';
                     break;
                 default:
                     consoleAndAlert('Resolution type \'' + randomInt + '\' is not supported.');

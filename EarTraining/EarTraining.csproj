@@ -271,7 +271,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\DO\Index.cshtml" />
     <Content Include="Views\Donate\Index.cshtml" />
-    <Content Include="Views\L1C1\Index.cshtml" />
     <Content Include="Views\PitchIdentification\Index.cshtml" />
     <Content Include="Views\Shared\AllPitches.cshtml" />
     <Content Include="Views\Auth\Unauthorized.cshtml" />

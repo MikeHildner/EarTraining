@@ -20,12 +20,6 @@ namespace EarTraining.Controllers
             ViewBag.Pitch = pitch;
         }
 
-        // GET: L1C1
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         public ActionResult SolfegResolutions()
         {
             return View();
