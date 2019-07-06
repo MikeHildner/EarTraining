@@ -38,6 +38,12 @@ namespace EarTraining.Controllers
             return View();
         }
 
+        public ActionResult DiatonicTriadProgressions()
+        {
+            ViewBag.ShowPlayDoTriad = true;
+            return View();
+        }
+
         public ActionResult GetMelodicDrillEx(string doNoteName, int type)
         {
             L1C6MelodicDrillType drillType = (L1C6MelodicDrillType)type;
@@ -338,6 +344,55 @@ namespace EarTraining.Controllers
             WaveFileWriter.WriteWavFileToStream(wavStream, stwp);
             wavStream.Position = 0;
             return wavStream;
+        }
+
+        public ActionResult Get2ChordProgressionEx(string doNoteName, int progressiontype)
+        {
+            var progressionType = (ProgressionType2)progressiontype;
+
+            TimeSpan noteDuration1 = TimeSpan.FromSeconds(1);
+            TimeSpan noteDuration2 = noteDuration1.Add(noteDuration1);
+
+            string doFileName = NAudioHelper.GetFileNameFromNoteName(doNoteName);
+            doFileName = Path.GetFileName(doFileName);
+            int doNoteNumber = int.Parse(doFileName.Split('.')[0]);
+
+            ISampleProvider[] samples1;
+            ISampleProvider[] samples2;
+
+            switch (progressionType)
+            {
+                case ProgressionType2.OneRootToSixMinFirst:
+                    samples1 = Inversion.CreateTriadInversionEx(InversionType.RootPosition, noteDuration1, doNoteNumber, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpPerfect5th);
+                    samples2 = Inversion.CreateTriadInversionEx(InversionType.HighFirstInversion, noteDuration2, doNoteNumber, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpMajor6th);
+                    break;
+
+
+                default:
+                    throw new NotSupportedException($"ProgressionType {progressionType} is not supported.");
+            }
+
+            MixingSampleProvider msp1 = new MixingSampleProvider(samples1[0].WaveFormat);
+            msp1.AddMixerInput(samples1[0]);
+            msp1.AddMixerInput(samples1[1]);
+            msp1.AddMixerInput(samples1[2]);
+
+            MixingSampleProvider msp2 = new MixingSampleProvider(samples2[0].WaveFormat);
+            msp2.AddMixerInput(samples2[0]);
+            msp2.AddMixerInput(samples2[1]);
+            msp2.AddMixerInput(samples2[2]);
+
+            var phrase = msp1
+                .FollowedBy(msp2);
+
+            var stwp = new SampleToWaveProvider(phrase);
+
+            MemoryStream wavStream = new MemoryStream();
+            WaveFileWriter.WriteWavFileToStream(wavStream, stwp);
+            wavStream.Position = 0;
+
+            wavStream.WavToMp3File(out string fileName);
+            return Redirect($"~/Temp/{fileName}");
         }
     }
 }
