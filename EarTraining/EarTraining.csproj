@@ -288,7 +288,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\L1C2\Index.cshtml" />
     <Content Include="Views\Shared\NewDO.cshtml" />
-    <Content Include="Views\L1C1\SolfegResolutions.cshtml" />
+    <Content Include="Views\L1C1\SolfegResolutionsDO.cshtml" />
     <Content Include="Views\L1C1\PitchIdentification.cshtml" />
     <Content Include="Views\L1C2\MelodicMaj3rdMin6th.cshtml" />
     <Content Include="Views\L1C2\HarmonicMaj3rdMin6th.cshtml" />
@@ -302,6 +302,7 @@
     <Content Include="Views\L1C6\DiatonicTriadRecognition.cshtml" />
     <Content Include="Views\L1C6\HarmonicIntervals.cshtml" />
     <Content Include="Views\L1C6\DiatonicTriadProgressions.cshtml" />
+    <Content Include="Views\L1C1\SolfegResolutionsNoDO.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

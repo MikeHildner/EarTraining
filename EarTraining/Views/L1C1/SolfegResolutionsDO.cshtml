@@ -1,0 +1,131 @@
+﻿@{
+    ViewBag.Title = "Solfeg Resolutions with DO";
+}
+
+<h2>Level 1 Chapter 1</h2>
+
+<h5>@ViewBag.Title</h5>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        @{
+            Html.RenderPartial("NewDO");
+        }
+    </div>
+</div>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>Drill</h4>
+        <input type="button" class="btn btn-primary" value="Get a New Resolution" onclick="setAudResolutionSrc()" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <figure>
+            <figcaption><img class="piano" /></figcaption>
+            <audio id="audResolution" controls preload='none'>
+                <source src='@Url.Action("GetResolutionDO", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <hr />
+    </div>
+    <div class="col-md-12">
+        <p>Hover over the below to reveal the resolution</p>
+        <div class="spoiler" id="resolution"></div>
+    </div>
+</div>
+
+<h4>Practice Resolutions</h4>
+
+<div class="row">
+    <div class="col-md-4">
+        <figure>
+            <figcaption><img class="piano" /> DO DO RE DO</figcaption>
+            <audio controls preload='none'>
+                <source src='@Url.Action("GetResolutionDO", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 0 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+    <div class="col-md-4">
+        <figure>
+            <figcaption><img class="piano" /> DO DO FA MI</figcaption>
+            <audio controls preload='none'>
+                <source src='@Url.Action("GetResolutionDO", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 1 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+    <div class="col-md-4">
+        <figure>
+            <figcaption><img class="piano" /> DO DO LA SO</figcaption>
+            <audio controls preload='none'>
+                <source src='@Url.Action("GetResolutionDO", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 2 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <figure>
+            <figcaption><img class="piano" /> DO DO (high)TI DO</figcaption>
+            <audio controls preload='none'>
+                <source src='@Url.Action("GetResolutionDO", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 3 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+    <div class="col-md-4">
+        <figure>
+            <figcaption><img class="piano" /> DO DO (low)TI DO</figcaption>
+            <audio controls preload='none'>
+                <source src='@Url.Action("GetResolutionDO", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 4 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+</div>
+
+@section  scripts {
+    <script>
+        $(document).ready(function () {
+            setAudResolutionSrc();
+        });
+
+        function setAudResolutionSrc() {
+            var baseSrc = '@Url.Action("GetResolutionDO", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName })';
+            var randomInt = getRandomInt(0, 4);
+            var src = baseSrc + '&type=' + randomInt;
+            $('#audResolution').attr('src', src);
+
+            var msg = '';
+            switch (randomInt) {
+                case 0:
+                    msg = msg + 'DO DO RE DO';
+                    break;
+                case 1:
+                    msg = msg + 'DO DO FA MI';
+                    break;
+                case 2:
+                    msg = msg + 'DO DO LA SO';
+                    break;
+                case 3:
+                    msg = msg + 'DO DO (high)TI DO';
+                    break;
+                case 4:
+                    msg = msg + 'DO DO (low)TI DO';
+                    break;
+                default:
+                    consoleAndAlert('Resolution type \'' + randomInt + '\' is not supported.');
+            }
+
+            $('#resolution').text(msg);
+    }
+
+    </script>
+}

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Solfeg Resolutions";
+    ViewBag.Title = "Solfeg Resolutions without DO";
 }
 
 <h2>Level 1 Chapter 1</h2>
@@ -28,7 +28,7 @@
         <figure>
             <figcaption><img class="piano" /></figcaption>
             <audio id="audResolution" controls preload='none'>
-                <source src='@Url.Action("GetResolutionEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName })' type='audio/mpeg'>
+                <source src='@Url.Action("GetResolutionNoDO", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
@@ -48,25 +48,25 @@
 <div class="row">
     <div class="col-md-4">
         <figure>
-            <figcaption><img class="piano" /> DO DO RE DO</figcaption>
+            <figcaption><img class="piano" /> RE DO</figcaption>
             <audio controls preload='none'>
-                <source src='@Url.Action("GetResolutionEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 0 })' type='audio/mpeg'>
+                <source src='@Url.Action("GetResolutionNoDO", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 0 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
     <div class="col-md-4">
         <figure>
-            <figcaption><img class="piano" /> DO DO FA MI</figcaption>
+            <figcaption><img class="piano" /> FA MI</figcaption>
             <audio controls preload='none'>
-                <source src='@Url.Action("GetResolutionEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 1 })' type='audio/mpeg'>
+                <source src='@Url.Action("GetResolutionNoDO", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 1 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
     <div class="col-md-4">
         <figure>
-            <figcaption><img class="piano" /> DO DO LA SO</figcaption>
+            <figcaption><img class="piano" /> LA SO</figcaption>
             <audio controls preload='none'>
-                <source src='@Url.Action("GetResolutionEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 2 })' type='audio/mpeg'>
+                <source src='@Url.Action("GetResolutionNoDO", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 2 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
@@ -75,17 +75,17 @@
 <div class="row">
     <div class="col-md-4">
         <figure>
-            <figcaption><img class="piano" /> DO DO (high)TI DO</figcaption>
+            <figcaption><img class="piano" /> (high)TI DO</figcaption>
             <audio controls preload='none'>
-                <source src='@Url.Action("GetResolutionEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 3 })' type='audio/mpeg'>
+                <source src='@Url.Action("GetResolutionNoDO", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 3 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
     <div class="col-md-4">
         <figure>
-            <figcaption><img class="piano" /> DO DO (low)TI DO</figcaption>
+            <figcaption><img class="piano" /> (low)TI DO</figcaption>
             <audio controls preload='none'>
-                <source src='@Url.Action("GetResolutionEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 4 })' type='audio/mpeg'>
+                <source src='@Url.Action("GetResolutionNoDO", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 4 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
@@ -98,7 +98,7 @@
         });
 
         function setAudResolutionSrc() {
-            var baseSrc = '@Url.Action("GetResolutionEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName })';
+            var baseSrc = '@Url.Action("GetResolutionNoDO", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName })';
             var randomInt = getRandomInt(0, 4);
             var src = baseSrc + '&type=' + randomInt;
             $('#audResolution').attr('src', src);
@@ -106,19 +106,19 @@
             var msg = '';
             switch (randomInt) {
                 case 0:
-                    msg = msg + 'DO DO RE DO';
+                    msg = msg + 'RE DO';
                     break;
                 case 1:
-                    msg = msg + 'DO DO FA MI';
+                    msg = msg + 'FA MI';
                     break;
                 case 2:
-                    msg = msg + 'DO DO LA SO';
+                    msg = msg + 'LA SO';
                     break;
                 case 3:
-                    msg = msg + 'DO DO (high)TI DO';
+                    msg = msg + '(high)TI DO';
                     break;
                 case 4:
-                    msg = msg + 'DO DO (low)TI DO';
+                    msg = msg + '(low)TI DO';
                     break;
                 default:
                     consoleAndAlert('Resolution type \'' + randomInt + '\' is not supported.');
