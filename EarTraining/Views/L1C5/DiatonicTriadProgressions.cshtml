@@ -7,7 +7,7 @@
 <hr />
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         @{
             Html.RenderPartial("NewDO");
         }
@@ -42,14 +42,17 @@
 
                         <div class="row">
                             <div class="col-md-4">
-                                <input type="button" class="btn btn-primary" value="Get a New Progression" onclick="setAudProgression2Src()" />
                                 <figure>
-                                    <figcaption><img class="piano" /></figcaption>
+                                    <figcaption><img class="piano" />Press the play button to hear the progression</figcaption>
                                     <audio id="audProgression2" controls preload='none'>
                                         <source src='' type='audio/mpeg'>
                                     </audio>
                                 </figure>
+                                <p>Hover over the below to see the progression</p>
                                 <div class="spoiler" id="progression2"></div>
+                                <div class="pad-top-10">
+                                    <input type="button" class="btn btn-primary" value="Get a New Progression" onclick="setAudProgression2Src()" />
+                                </div>
                             </div>
                         </div>
 
@@ -135,14 +138,17 @@
 
                         <div class="row">
                             <div class="col-md-4">
-                                <input type="button" class="btn btn-primary" value="Get a New Progression" onclick="setAudProgression3Src()" />
                                 <figure>
-                                    <figcaption><img class="piano" /></figcaption>
+                                    <figcaption><img class="piano" />Press the play button to hear the progression</figcaption>
                                     <audio id="audProgression3" controls preload='none'>
                                         <source src='' type='audio/mpeg'>
                                     </audio>
                                 </figure>
+                                <p>Hover over the below to see the progression</p>
                                 <div class="spoiler" id="progression3"></div>
+                                <div class="pad-top-10">
+                                    <input type="button" class="btn btn-primary" value="Get a New Progression" onclick="setAudProgression3Src()" />
+                                </div>
                             </div>
                         </div>
 

@@ -40,9 +40,11 @@ textarea {
 }
 
 .piano {
+    /*
     content: url(Images/Piano.svg);
     width: 16px;
     height: 16px;
+    */
 }
 
 .text-align-right {
@@ -88,4 +90,8 @@ audio {
     /*filter: sepia(20%) saturate(70%) grayscale(1) contrast(99%) invert(12%);*/
     /*width: 200px;
     height: 25px;*/
+}
+
+.pad-top-10{
+    padding-top: 10px;
 }

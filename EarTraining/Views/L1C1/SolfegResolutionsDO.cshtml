@@ -8,7 +8,7 @@
 <hr />
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         @{
             Html.RenderPartial("NewDO");
         }
@@ -18,31 +18,22 @@
 <hr />
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
         <h4>Drill</h4>
-        <input type="button" class="btn btn-primary" value="Get a New Resolution" onclick="setAudResolutionSrc()" />
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
         <figure>
-            <figcaption><img class="piano" /></figcaption>
+            <figcaption><img class="piano" />Press the play button to hear the resolution</figcaption>
             <audio id="audResolution" controls preload='none'>
                 <source src='@Url.Action("GetResolutionDO", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName })' type='audio/mpeg'>
             </audio>
         </figure>
+            <p>Hover over the below to reveal the resolution</p>
+            <div class="spoiler" id="resolution"></div>
+        <div class="pad-top-10">
+            <input type="button" class="btn btn-primary" value="Get a New Resolution" onclick="setAudResolutionSrc()" />
+        </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-12">
-        <hr />
-    </div>
-    <div class="col-md-12">
-        <p>Hover over the below to reveal the resolution</p>
-        <div class="spoiler" id="resolution"></div>
-    </div>
-</div>
-
+<hr />
 <h4>Practice Resolutions</h4>
 
 <div class="row">

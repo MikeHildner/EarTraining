@@ -8,7 +8,7 @@
 <hr />
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         @{
             Html.RenderPartial("NewDO");
         }
@@ -17,19 +17,20 @@
 
 <hr />
 
-
-
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
         <h4>Drill</h4>
-        <input type="button" class="btn btn-primary" value="Get a New Note" onclick="setAudNoteSrc()" />
         <figure>
-            <figcaption><img class="piano" /></figcaption>
+            <figcaption><img class="piano" />Press the play button to hear the note</figcaption>
             <audio id="audNote" controls preload='none'>
                 <source src='' type='audio/mpeg'>
             </audio>
         </figure>
+        <p>Hover over the below to reveal the note</p>
         <div class="spoiler" id="note"></div>
+        <div class="pad-top-10">
+            <input type="button" class="btn btn-primary" value="Get a New Note" onclick="setAudNoteSrc()" />
+        </div>
     </div>
 </div>
 <hr />
@@ -121,7 +122,7 @@
             var src = baseSrc + '&type=' + randomInt;
             $('#audNote').attr('src', src);
 
-            var msg = 'Your note is ';
+            var msg = '';
             switch (randomInt) {
                 case -1:
                     msg = msg + 'TI';

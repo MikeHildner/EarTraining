@@ -9,7 +9,7 @@
 <hr />
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         @{
             Html.RenderPartial("NewDO");
         }
@@ -38,15 +38,18 @@
 
 <h4>Drill</h4>
 <div class="row">
-    <div class="col-md-4">
-        <input type="button" class="btn btn-primary" value="Get a New Interval" onclick="setAudDrill1Src()" />
+    <div class="col-md-6">
         <figure>
-            <figcaption><img class="piano" /></figcaption>
+            <figcaption><img class="piano" />Press the play button to hear the interval</figcaption>
             <audio id="audDrill1" controls preload='none'>
                 <source src='' type='audio/mpeg'>
             </audio>
         </figure>
+        <p>Hover over the below to see the triad</p>
         <div class="spoiler" id="drill1"></div>
+        <div class="pad-top-10">
+            <input type="button" class="btn btn-primary" value="Get a New Interval" onclick="setAudDrill1Src()" />
+        </div>
     </div>
 </div>
 

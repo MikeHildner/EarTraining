@@ -7,53 +7,36 @@
 <hr />
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         @{
             Html.RenderPartial("NewDO");
         }
     </div>
- </div>
-
-<div class="row">
-    <div class="col-md-12">
-        <hr />
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        <input type="button" class="btn btn-primary" value="Get a New Triad" onclick="setAudioSrc()" />
-    </div>
 </div>
 
+<hr />
+
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
         <figure>
-            <figcaption><img class="piano" /></figcaption>
+            <figcaption><img class="piano" />Press the play button to hear the triad</figcaption>
             <audio id="audioEx" controls preload='none'>
                 <source src='' type='audio/mpeg'>
             </audio>
         </figure>
+        <p>Hover over the below to reveal the triad</p>
+        <div class="spoiler" id="triad"></div>
+        <div class="pad-top-10">
+            <input type="button" class="btn btn-primary" value="Get a New Triad" onclick="setAudioSrc()" />
+        </div>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-12">
-        <hr />
-    </div>
-    <div class="col-md-12">
-        <p>Hover over the below to reveal the triad</p>
-        <div class="spoiler" id="triad"></div>
-    </div>
-</div>
+<hr />
 
 <div class="row">
     <div class="col-md-12">
         <h4>Prompts</h4>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        <hr />
     </div>
 </div>
 <div class="row">

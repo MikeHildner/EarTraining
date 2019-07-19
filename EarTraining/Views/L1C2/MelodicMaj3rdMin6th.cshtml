@@ -7,7 +7,7 @@
 <hr />
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         @{
             Html.RenderPartial("NewDO");
         }
@@ -36,18 +36,21 @@
 
 <h4>Drill</h4>
 <div class="row">
-    <div class="col-md-4">
-        <input type="button" class="btn btn-primary" value="Get a New Interval" onclick="setAudDrill1Src()" />
+    <div class="col-md-6">
         <figure>
-            <figcaption><img class="piano" /></figcaption>
+            <figcaption><img class="piano" />Press the play button to hear the interval</figcaption>
             <audio id="audDrill1" controls preload='none'>
                 <source src='' type='audio/mpeg'>
             </audio>
         </figure>
+        <p>Hover over the below to reveal the interval</p>
         <div class="spoiler" id="drill1"></div>
+        <div class="pad-top-10">
+            <input type="button" class="btn btn-primary" value="Get a New Interval" onclick="setAudDrill1Src()" />
+        </div>
     </div>
 </div>
-
+<hr />
 <div id="maj-3rd-prompts">
     <h4>Maj 3rd Prompts</h4>
     <div class="row">
@@ -218,7 +221,7 @@
                     msg = msg + 'FA FA LA LA SO (Maj 3rd)';
                     break;
                 case 2:
-                    msg = msg + 'SO SO TI TI DO (Maj3 rd)';
+                    msg = msg + 'SO SO TI TI DO (Maj 3rd)';
                     break;
                 case 3:
                     msg = msg + 'TI TI SO SO SO (Maj 3rd)';
