@@ -149,6 +149,8 @@
     @RenderSection("scripts", required: false)
 
     <script>
+        var rootPath = '@Url.Content("~/")';
+
         $(document).ready(function () {
             deleteOldFiles();
 

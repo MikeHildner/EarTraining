@@ -29,7 +29,8 @@ namespace EarTraining
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/css-toggle-switch.css",
-                      "~/Content/font-awesome.css"));
+                      "~/Content/font-awesome.css",
+                      "~/Content/hover.css"));
         }
     }
 }

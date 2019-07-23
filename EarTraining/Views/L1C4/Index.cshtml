@@ -12,8 +12,17 @@
             Html.RenderPartial("NewDO");
         }
     </div>
-</div>
+    <div class="col-md-6">
+        <figure>
+            <figcaption><img class="piano" />Helper - I triad (root)</figcaption>
+            <audio id="audio" controls preload='none'>
+                <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 0, inversion = 0 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
 
+</div>
+<div class="pad-top-10"></div>
 <section id="tabs">
     <div class="container">
         <div class="row">
@@ -30,28 +39,20 @@
 
                         <div class="row">
                             <div class="col-md-4">
-                                <input type="button" class="btn btn-primary" value="Get a New Progression" onclick="setAudProgression2Src()" />
                                 <figure>
-                                    <figcaption><img class="piano" /></figcaption>
+                                    <figcaption><img class="piano" />Press the play button to hear the progression</figcaption>
                                     <audio id="audProgression2" controls preload='none'>
                                         <source src='' type='audio/mpeg'>
                                     </audio>
                                 </figure>
+                                <p>Hover over the below to see the progression</p>
                                 <div class="spoiler" id="progression2"></div>
+                                <div class="pad-top-10">
+                                    <input type="button" class="btn btn-primary" value="Get a New Progression" onclick="setAudProgression2Src()" />
+                                </div>
                             </div>
-                            <div class="col-md-4">
-                                <h6>Helper - I chord</h6>
-                                <figure>
-                                    <figcaption><img class="piano" /> I (root)</figcaption>
-                                    <audio id="audio" controls preload='none'>
-                                        <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 0, inversion = 0 })' type='audio/mpeg'>
-                                    </audio>
-                                </figure>
-                            </div>
-
                         </div>
-
-
+                        <hr />
                         <h4>2 Chord Progression Prompts</h4>
                         <div class="row">
                             <div class="col-md-4">
@@ -94,27 +95,20 @@
 
                         <div class="row">
                             <div class="col-md-4">
-                                <input type="button" class="btn btn-primary" value="Get a New Progression" onclick="setAudProgression3Src()" />
                                 <figure>
-                                    <figcaption><img class="piano" /></figcaption>
+                                    <figcaption><img class="piano" />Press the play button to hear the progression</figcaption>
                                     <audio id="audProgression3" controls preload='none'>
                                         <source src='' type='audio/mpeg'>
                                     </audio>
                                 </figure>
+                                <p>Hover over the below to see the progression</p>
                                 <div class="spoiler" id="progression3"></div>
+                                <div class="pad-top-10">
+                                    <input type="button" class="btn btn-primary" value="Get a New Progression" onclick="setAudProgression3Src()" />
+                                </div>
                             </div>
-                            <div class="col-md-4">
-                                <h6>Helper - I chord</h6>
-                                <figure>
-                                    <figcaption><img class="piano" /> I (root)</figcaption>
-                                    <audio id="audio" controls preload='none'>
-                                        <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 0, inversion = 0 })' type='audio/mpeg'>
-                                    </audio>
-                                </figure>
-                            </div>
-
                         </div>
-
+                        <hr />
                         <h4>3 Chord Progression Prompts</h4>
 
                         <div class="row">

@@ -44,5 +44,12 @@ namespace EarTraining.Controllers
             wavStream.WavToMp3File(out string fileName);
             return Redirect($"~/Temp/{fileName}");
         }
+
+        public ActionResult GetNewDO()
+        {
+            Pitch pitch = new Pitches().Random();
+            JsonResult jsonResult = Json(pitch, JsonRequestBehavior.AllowGet);
+            return jsonResult;
+        }
     }
 }

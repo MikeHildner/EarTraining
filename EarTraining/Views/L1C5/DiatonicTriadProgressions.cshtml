@@ -12,20 +12,16 @@
             Html.RenderPartial("NewDO");
         }
     </div>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h6>Helper - I chord</h6>
+    <div class="col-md-6">
         <figure>
-            <figcaption><img class="piano" /> I (root)</figcaption>
+            <figcaption><img class="piano" />Helper - I (root)</figcaption>
             <audio id="audio" controls preload='none'>
                 <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 0, inversion = 0 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
 </div>
-
+<hr />
 <section id="tabs">
     <div class="container">
         <div class="row">
@@ -55,7 +51,7 @@
                                 </div>
                             </div>
                         </div>
-
+                        <hr />
                         <h4>2 Chord Progression Prompts</h4>
                         <div class="row">
                             <div class="col-md-4">
@@ -151,7 +147,7 @@
                                 </div>
                             </div>
                         </div>
-
+                        <hr />
                         <h4>3 Chord Progression Prompts</h4>
 
                         <div class="row">

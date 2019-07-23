@@ -27,3 +27,23 @@ function consoleAndAlert(msg) {
     console.log(msg);
     alert(msg);
 }
+
+function getNewDo() {
+    var request = $.ajax({
+        url: rootPath + "DO/getNewDO",
+        method: "GET"
+    });
+
+    request.done(function (data) {
+        var pitchName = data.PitchName;
+        var frequency = data.Hertz;
+
+        $('#divSpoiler').text(pitchName + ' - ' + frequency + ' Hz');
+        //$('.doAccepter')
+    });
+
+    request.fail(function (jqXHR, textStatus) {
+        alert('There was an error processing the request.\n\n' + textStatus + ': ' + jqXHR.status + ' - ' + jqXHR.statusText + '.');
+    });
+
+}

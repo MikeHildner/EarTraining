@@ -188,6 +188,7 @@
     <Content Include="Content\css-toggle-switch.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\hover.css" />
     <Content Include="Content\Images\chord-purple.png" />
     <Content Include="Content\Images\chord-white.png" />
     <Content Include="Content\Images\Piano.svg" />
