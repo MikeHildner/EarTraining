@@ -191,6 +191,8 @@
     <Content Include="Content\hover.css" />
     <Content Include="Content\Images\chord-purple.png" />
     <Content Include="Content\Images\chord-white.png" />
+    <Content Include="Content\Images\ear.png" />
+    <Content Include="Content\Images\ear32.png" />
     <Content Include="Content\Images\Piano.svg" />
     <Content Include="Content\Images\quarter-note-white.png" />
     <Content Include="Content\Images\quarter-note.png" />
@@ -291,9 +293,9 @@
     <Content Include="Views\Shared\NewDO.cshtml" />
     <Content Include="Views\L1C1\SolfegResolutionsDO.cshtml" />
     <Content Include="Views\L1C1\PitchIdentification.cshtml" />
-    <Content Include="Views\L1C2\MelodicMaj3rdMin6th.cshtml" />
+    <Content Include="Views\L1C2\MelodicMaj3rdMin6thDO.cshtml" />
     <Content Include="Views\L1C2\HarmonicMaj3rdMin6th.cshtml" />
-    <Content Include="Views\L1C3\MelodicMin3rdMaj6th.cshtml" />
+    <Content Include="Views\L1C3\MelodicMin3rdMaj6thDO.cshtml" />
     <Content Include="Views\L1C3\HarmonicMin3rdMaj6th.cshtml" />
     <Content Include="Views\L1C5\MelodicIntervals.cshtml" />
     <Content Include="Views\L1C5\HarmonicIntervals.cshtml" />
@@ -304,6 +306,8 @@
     <Content Include="Views\L1C6\HarmonicIntervals.cshtml" />
     <Content Include="Views\L1C6\DiatonicTriadProgressions.cshtml" />
     <Content Include="Views\L1C1\SolfegResolutionsNoDO.cshtml" />
+    <Content Include="Views\L1C2\MelodicMaj3rdMin6thNoDO.cshtml" />
+    <Content Include="Views\L1C3\MelodicMin3rdMaj6thNoDO.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

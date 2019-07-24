@@ -28,7 +28,12 @@ namespace EarTraining.Controllers
             return View();
         }
 
-        public ActionResult MelodicMaj3rdMin6th()
+        public ActionResult MelodicMaj3rdMin6thDO()
+        {
+            return View();
+        }
+
+        public ActionResult MelodicMaj3rdMin6thNoDO()
         {
             return View();
         }
@@ -38,19 +43,19 @@ namespace EarTraining.Controllers
             return View();
         }
 
-        public ActionResult GetDrill(double frequency, int type)
+        public ActionResult GetMelodicDrillDO(string doNoteName, int type)
         {
             L1C2MelodicDrillType drillType = (L1C2MelodicDrillType)type;
-            MemoryStream wavStream = GetDrill(frequency, drillType);
+            MemoryStream wavStream = GetMelodicDrillDO(doNoteName, drillType);
 
             wavStream.WavToMp3File(out string fileName);
             return Redirect($"~/Temp/{fileName}");
         }
 
-        public ActionResult GetMelodicDrillEx(string doNoteName, int type)
+        public ActionResult GetMelodicDrillNoDO(string doNoteName, int type)
         {
             L1C2MelodicDrillType drillType = (L1C2MelodicDrillType)type;
-            MemoryStream wavStream = GetMelodicDrillEx(doNoteName, drillType);
+            MemoryStream wavStream = GetMelodicDrillNoDO(doNoteName, drillType);
 
             wavStream.WavToMp3File(out string fileName);
             return Redirect($"~/Temp/{fileName}");
@@ -65,137 +70,7 @@ namespace EarTraining.Controllers
             return Redirect($"~/Temp/{fileName}");
         }
 
-        private MemoryStream GetDrill(double frequency, L1C2MelodicDrillType drillType)
-        {
-            double bpm = double.Parse(ConfigurationManager.AppSettings["MelodicDrillBPM"]);
-            double quarterNotemillis = (60 / bpm) * 1000;
-            TimeSpan noteDuration = TimeSpan.FromMilliseconds(quarterNotemillis);
-            double gain = 0.2;
-            SignalGeneratorType sgType = SignalGeneratorType.SawTooth;
-
-             ISampleProvider note1, note2, note3, note4, note5;
-
-            Solfeg solfeg = new Solfeg(frequency);
-
-            switch (drillType)
-            {
-                // Major 3rd intervals.
-                case L1C2MelodicDrillType.DoDoMiMiMi3:
-                    note1 = NAudioHelper.GetSampleProvider(gain, solfeg.DoFrequency, sgType, noteDuration);
-                    note2 = NAudioHelper.GetSampleProvider(gain, solfeg.DoFrequency, sgType, noteDuration);
-                    note3 = NAudioHelper.GetSampleProvider(gain, solfeg.MiFrequency, sgType, noteDuration);
-                    note4 = NAudioHelper.GetSampleProvider(gain, solfeg.MiFrequency, sgType, noteDuration);
-                    note5 = NAudioHelper.GetSampleProvider(gain, solfeg.MiFrequency, sgType, noteDuration);
-                    break;
-
-                case L1C2MelodicDrillType.FaFaLaLaSo3:
-                    note1 = NAudioHelper.GetSampleProvider(gain, solfeg.FaFrequency, sgType, noteDuration);
-                    note2 = NAudioHelper.GetSampleProvider(gain, solfeg.FaFrequency, sgType, noteDuration);
-                    note3 = NAudioHelper.GetSampleProvider(gain, solfeg.LaFrequency, sgType, noteDuration);
-                    note4 = NAudioHelper.GetSampleProvider(gain, solfeg.LaFrequency, sgType, noteDuration);
-                    note5 = NAudioHelper.GetSampleProvider(gain, solfeg.SoFrequency, sgType, noteDuration);
-                    break;
-
-                case L1C2MelodicDrillType.SoSoTiTiDo3:
-                    note1 = NAudioHelper.GetSampleProvider(gain, solfeg.SoFrequency, sgType, noteDuration);
-                    note2 = NAudioHelper.GetSampleProvider(gain, solfeg.SoFrequency, sgType, noteDuration);
-                    note3 = NAudioHelper.GetSampleProvider(gain, solfeg.TiFrequency, sgType, noteDuration);
-                    note4 = NAudioHelper.GetSampleProvider(gain, solfeg.TiFrequency, sgType, noteDuration);
-                    note5 = NAudioHelper.GetSampleProvider(gain, solfeg.HighDoFrequency, sgType, noteDuration);
-                    break;
-
-                case L1C2MelodicDrillType.TiTiSoSoSo3:
-                    note1 = NAudioHelper.GetSampleProvider(gain, solfeg.TiFrequency, sgType, noteDuration);
-                    note2 = NAudioHelper.GetSampleProvider(gain, solfeg.TiFrequency, sgType, noteDuration);
-                    note3 = NAudioHelper.GetSampleProvider(gain, solfeg.SoFrequency, sgType, noteDuration);
-                    note4 = NAudioHelper.GetSampleProvider(gain, solfeg.SoFrequency, sgType, noteDuration);
-                    note5 = NAudioHelper.GetSampleProvider(gain, solfeg.SoFrequency, sgType, noteDuration);
-                    break;
-
-                case L1C2MelodicDrillType.LaLaFaFaMi3:
-                    note1 = NAudioHelper.GetSampleProvider(gain, solfeg.LaFrequency, sgType, noteDuration);
-                    note2 = NAudioHelper.GetSampleProvider(gain, solfeg.LaFrequency, sgType, noteDuration);
-                    note3 = NAudioHelper.GetSampleProvider(gain, solfeg.FaFrequency, sgType, noteDuration);
-                    note4 = NAudioHelper.GetSampleProvider(gain, solfeg.FaFrequency, sgType, noteDuration);
-                    note5 = NAudioHelper.GetSampleProvider(gain, solfeg.MiFrequency, sgType, noteDuration);
-                    break;
-
-                case L1C2MelodicDrillType.MiMiDoDoDo3:
-                    note1 = NAudioHelper.GetSampleProvider(gain, solfeg.MiFrequency, sgType, noteDuration);
-                    note2 = NAudioHelper.GetSampleProvider(gain, solfeg.MiFrequency, sgType, noteDuration);
-                    note3 = NAudioHelper.GetSampleProvider(gain, solfeg.DoFrequency, sgType, noteDuration);
-                    note4 = NAudioHelper.GetSampleProvider(gain, solfeg.DoFrequency, sgType, noteDuration);
-                    note5 = NAudioHelper.GetSampleProvider(gain, solfeg.DoFrequency, sgType, noteDuration);
-                    break;
-
-                // Minor 6th intervals.
-                case L1C2MelodicDrillType.MiMiDoDoDo6:
-                    note1 = NAudioHelper.GetSampleProvider(gain, solfeg.MiFrequency, sgType, noteDuration);
-                    note2 = NAudioHelper.GetSampleProvider(gain, solfeg.MiFrequency, sgType, noteDuration);
-                    note3 = NAudioHelper.GetSampleProvider(gain, solfeg.HighDoFrequency, sgType, noteDuration);
-                    note4 = NAudioHelper.GetSampleProvider(gain, solfeg.HighDoFrequency, sgType, noteDuration);
-                    note5 = NAudioHelper.GetSampleProvider(gain, solfeg.HighDoFrequency, sgType, noteDuration);
-                    break;
-
-                case L1C2MelodicDrillType.LaLaFaFaMi6:
-                    note1 = NAudioHelper.GetSampleProvider(gain, solfeg.LowLaFrequency, sgType, noteDuration);
-                    note2 = NAudioHelper.GetSampleProvider(gain, solfeg.LowLaFrequency, sgType, noteDuration);
-                    note3 = NAudioHelper.GetSampleProvider(gain, solfeg.FaFrequency, sgType, noteDuration);
-                    note4 = NAudioHelper.GetSampleProvider(gain, solfeg.FaFrequency, sgType, noteDuration);
-                    note5 = NAudioHelper.GetSampleProvider(gain, solfeg.MiFrequency, sgType, noteDuration);
-                    break;
-
-                case L1C2MelodicDrillType.TiTiSoSoSo6:
-                    note1 = NAudioHelper.GetSampleProvider(gain, solfeg.LowTiFrequency, sgType, noteDuration);
-                    note2 = NAudioHelper.GetSampleProvider(gain, solfeg.LowTiFrequency, sgType, noteDuration);
-                    note3 = NAudioHelper.GetSampleProvider(gain, solfeg.SoFrequency, sgType, noteDuration);
-                    note4 = NAudioHelper.GetSampleProvider(gain, solfeg.SoFrequency, sgType, noteDuration);
-                    note5 = NAudioHelper.GetSampleProvider(gain, solfeg.SoFrequency, sgType, noteDuration);
-                    break;
-
-                case L1C2MelodicDrillType.SoSoTiTiDo6:
-                    note1 = NAudioHelper.GetSampleProvider(gain, solfeg.SoFrequency, sgType, noteDuration);
-                    note2 = NAudioHelper.GetSampleProvider(gain, solfeg.SoFrequency, sgType, noteDuration);
-                    note3 = NAudioHelper.GetSampleProvider(gain, solfeg.LowTiFrequency, sgType, noteDuration);
-                    note4 = NAudioHelper.GetSampleProvider(gain, solfeg.LowTiFrequency, sgType, noteDuration);
-                    note5 = NAudioHelper.GetSampleProvider(gain, solfeg.DoFrequency, sgType, noteDuration);
-                    break;
-
-                case L1C2MelodicDrillType.FaFaLaLaSo6:
-                    note1 = NAudioHelper.GetSampleProvider(gain, solfeg.FaFrequency, sgType, noteDuration);
-                    note2 = NAudioHelper.GetSampleProvider(gain, solfeg.FaFrequency, sgType, noteDuration);
-                    note3 = NAudioHelper.GetSampleProvider(gain, solfeg.LowLaFrequency, sgType, noteDuration);
-                    note4 = NAudioHelper.GetSampleProvider(gain, solfeg.LowLaFrequency, sgType, noteDuration);
-                    note5 = NAudioHelper.GetSampleProvider(gain, solfeg.LowSoFrequency, sgType, noteDuration);
-                    break;
-
-                case L1C2MelodicDrillType.DoDoMiMiMi6:
-                    note1 = NAudioHelper.GetSampleProvider(gain, solfeg.HighDoFrequency, sgType, noteDuration);
-                    note2 = NAudioHelper.GetSampleProvider(gain, solfeg.HighDoFrequency, sgType, noteDuration);
-                    note3 = NAudioHelper.GetSampleProvider(gain, solfeg.MiFrequency, sgType, noteDuration);
-                    note4 = NAudioHelper.GetSampleProvider(gain, solfeg.MiFrequency, sgType, noteDuration);
-                    note5 = NAudioHelper.GetSampleProvider(gain, solfeg.MiFrequency, sgType, noteDuration);
-                    break;
-
-                default:
-                    throw new NotSupportedException($"L1C2DrillType '{drillType}' is not supported.");
-            }
-
-            var phrase = note1
-                .FollowedBy(note2)
-                .FollowedBy(note3)
-                .FollowedBy(note4)
-                .FollowedBy(note5);
-
-            var stwp = new SampleToWaveProvider(phrase);
-
-            MemoryStream wavStream = new MemoryStream();
-            WaveFileWriter.WriteWavFileToStream(wavStream, stwp);
-            wavStream.Position = 0;
-            return wavStream;
-        }
-
-        private MemoryStream GetMelodicDrillEx(string doNoteName, L1C2MelodicDrillType drillType)
+        private MemoryStream GetMelodicDrillDO(string doNoteName, L1C2MelodicDrillType drillType)
         {
             double bpm = double.Parse(ConfigurationManager.AppSettings["MelodicDrillBPM"]);
             double quarterNotemillis = (60 / bpm) * 1000;
@@ -431,6 +306,172 @@ namespace EarTraining.Controllers
                 .FollowedBy(note3)
                 .FollowedBy(note4)
                 .FollowedBy(note5);
+
+            var stwp = new SampleToWaveProvider(phrase);
+
+            MemoryStream wavStream = new MemoryStream();
+            WaveFileWriter.WriteWavFileToStream(wavStream, stwp);
+            wavStream.Position = 0;
+            return wavStream;
+        }
+
+        private MemoryStream GetMelodicDrillNoDO(string doNoteName, L1C2MelodicDrillType drillType)
+        {
+            double bpm = double.Parse(ConfigurationManager.AppSettings["MelodicDrillBPM"]);
+            double quarterNotemillis = (60 / bpm) * 1000;
+            TimeSpan halfNoteDuration = TimeSpan.FromMilliseconds(quarterNotemillis * 2);
+
+            string doFileName = NAudioHelper.GetFileNameFromNoteName(doNoteName);
+            doFileName = Path.GetFileName(doFileName);
+            int doNoteNumber = int.Parse(doFileName.Split('.')[0]);
+
+            ISampleProvider note1, note2;
+
+            switch (drillType)
+            {
+                #region Major 3rds / min 6ths
+
+                // Major 3rd intervals.
+                case L1C2MelodicDrillType.DoMi3:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor3rd, halfNoteDuration);
+                    break;
+                    
+                case L1C2MelodicDrillType.FaLa3:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect4th, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor6th, halfNoteDuration);
+                    break;
+
+                case L1C2MelodicDrillType.SoTi3:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect5th, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor7th, halfNoteDuration);
+                    break;
+
+                case L1C2MelodicDrillType.TiSo3:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor7th, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect5th, halfNoteDuration);
+                    break;
+
+                case L1C2MelodicDrillType.LaFa3:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor6th, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect4th, halfNoteDuration);
+                    break;
+
+                case L1C2MelodicDrillType.MiDo3:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor3rd, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber, halfNoteDuration);
+                    break;
+
+                // Minor 6th intervals.
+                case L1C2MelodicDrillType.MiDo6:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor3rd, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfectOctave, halfNoteDuration);
+                    break;
+
+                case L1C2MelodicDrillType.LaFa6:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.DownMinor3rd, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect4th, halfNoteDuration);
+                    break;
+
+                case L1C2MelodicDrillType.TiSo6:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.DownHalfStep, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect5th, halfNoteDuration);
+                    break;
+
+                case L1C2MelodicDrillType.SoTi6:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect5th, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.DownHalfStep, halfNoteDuration);
+                    break;
+
+                case L1C2MelodicDrillType.FaLa6:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect4th, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.DownMinor3rd, halfNoteDuration);
+                    break;
+
+                case L1C2MelodicDrillType.DoMi6:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfectOctave, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor3rd, halfNoteDuration);
+                    break;
+
+                #endregion Major 3rds / min 6ths
+
+                #region Minor 3rds / maj 6ths.
+
+                // Minor 3rd intervals.
+                case L1C2MelodicDrillType.ReFa3:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor2nd, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect4th, halfNoteDuration);
+                    break;
+
+                case L1C2MelodicDrillType.MiSo3:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor3rd, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect5th, halfNoteDuration);
+                    break;
+
+                case L1C2MelodicDrillType.LaDo3:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor6th, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfectOctave, halfNoteDuration);
+                    break;
+
+                case L1C2MelodicDrillType.TiRe3High:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor7th, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor9th, halfNoteDuration);
+                    break;
+
+                case L1C2MelodicDrillType.TiRe3Low:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.DownHalfStep, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor2nd, halfNoteDuration);
+                    break;
+
+                // Major 6th intervals.
+                case L1C2MelodicDrillType.DoLa6:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor6th, halfNoteDuration);
+                    break;
+
+                case L1C2MelodicDrillType.ReTi6:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor2nd, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor7th, halfNoteDuration);
+                    break;
+
+                case L1C2MelodicDrillType.FaRe6:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect4th, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor9th, halfNoteDuration);
+                    break;
+
+                case L1C2MelodicDrillType.SoMi6:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect5th, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor10th, halfNoteDuration);
+                    break;
+
+                case L1C2MelodicDrillType.LaDo6:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor6th, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber, halfNoteDuration);
+                    break;
+
+                case L1C2MelodicDrillType.TiRe6:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor7th, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor2nd, halfNoteDuration);
+                    break;
+
+                case L1C2MelodicDrillType.ReFa6:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor9th, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect4th, halfNoteDuration);
+                    break;
+
+                case L1C2MelodicDrillType.MiSo6:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor3rd, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.DownPerfect4th, halfNoteDuration);
+                    break;
+
+                #endregion Minor 3rds / maj 6ths.
+
+                default:
+                    throw new NotSupportedException($"L1C2MelodicDrillType '{drillType}' is not supported.");
+            }
+
+            var phrase = note1
+                .FollowedBy(note2);
 
             var stwp = new SampleToWaveProvider(phrase);
 

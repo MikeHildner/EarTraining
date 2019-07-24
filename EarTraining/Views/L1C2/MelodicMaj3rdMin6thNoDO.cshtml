@@ -1,0 +1,259 @@
+﻿@{
+    ViewBag.Title = "Melodic Major 3rd / Minor 6th Intervals without DO";
+}
+<h2>Level 1 Chapter 2</h2>
+
+<h5>@ViewBag.Title</h5>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        @{
+            Html.RenderPartial("NewDO");
+        }
+    </div>
+</div>
+
+<hr />
+
+<div class="row toggle-demo" role="group">
+    <div class="col-md-6">
+        Include drills for
+        <div class="switch-toggle alert alert-dark">
+            <input id="maj3rds" name="intervaltype" type="radio" checked>
+            <label for="maj3rds" onclick="">Major 3rds</label>
+
+            <input id="min6ths" name="intervaltype" type="radio">
+            <label for="min6ths" onclick="">Minor 6ths</label>
+
+            <input id="both" name="intervaltype" type="radio">
+            <label for="both" onclick="">Both</label>
+
+            <a class="btn btn-primary"></a>
+        </div>
+    </div>
+</div>
+
+<h4>Drill</h4>
+<div class="row">
+    <div class="col-md-6">
+        <figure>
+            <figcaption><img class="piano" />Press the play button to hear the interval</figcaption>
+            <audio id="audDrill1" controls preload='none'>
+                <source src='' type='audio/mpeg'>
+            </audio>
+        </figure>
+        <p>Hover over the below to reveal the interval</p>
+        <div class="spoiler" id="drill1"></div>
+        <div class="pad-top-10">
+            <input type="button" class="btn btn-primary" value="Get a New Interval" onclick="setAudDrill1Src()" />
+        </div>
+    </div>
+</div>
+<hr />
+<div id="maj-3rd-prompts">
+    <h4>Maj 3rd Prompts</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> DO MI</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillNoDO", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 0 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> FA LA</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillNoDO", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 1 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> SO TI</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillNoDO", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 2 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> TI SO</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillNoDO", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 3 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> LA FA</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillNoDO", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 4 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> MI DO</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillNoDO", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 5 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+    </div>
+
+</div>
+
+<div id="min-6th-prompts">
+    <h4>Min 6th Prompts</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> MI DO</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillNoDO", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 6 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> LA FA</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillNoDO", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 7 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> TI SO</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillNoDO", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 8 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> SO TI</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillNoDO", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 9 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> FA LA</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillNoDO", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 10 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> DO MI</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrillNoDO", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 11 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+    </div>
+
+</div>
+
+@section  scripts {
+    <script>
+        $(document).ready(function () {
+            setAudDrill1Src();
+
+            $('input[type=radio][name=intervaltype]').change(function () {
+                setAudDrill1Src();
+            });
+        });
+
+        function setAudDrill1Src() {
+            var baseSrc = '@Url.Action("GetMelodicDrillNoDO", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName })';
+
+            // Get the drills based on what the user has choosen.
+            var intervalType = $("input[type=radio][name=intervaltype]:checked").attr('id');
+
+            var minDrill;
+            var maxDrill;
+
+            switch (intervalType) {
+                case 'maj3rds':
+                    minDrill = 0;
+                    maxDrill = 5;
+                    $('#maj-3rd-prompts').fadeIn();
+                    $('#min-6th-prompts').fadeOut();
+                    break;
+
+                case 'min6ths':
+                    minDrill = 6;
+                    maxDrill = 11;
+                    $('#maj-3rd-prompts').fadeOut();
+                    $('#min-6th-prompts').fadeIn();
+                    break;
+
+                case 'both':
+                    minDrill = 6;
+                    maxDrill = 11;
+                    $('#maj-3rd-prompts').fadeIn();
+                    $('#min-6th-prompts').fadeIn();
+                    break;
+
+                default:
+                    var msg = 'intervalType ' + intervalType + ' is not supported';
+                    consoleAndAlert(msg);
+            }
+
+            var randomInt = randomInt = getRandomInt(minDrill, maxDrill);
+
+            var src = baseSrc + '&type=' + randomInt;
+            $('#audDrill1').attr('src', src);
+
+            var msg = '';
+            switch (randomInt) {
+                case 0:
+                    msg = msg + 'DO MI (Maj 3rd)';
+                    break;
+                case 1:
+                    msg = msg + 'FA LA (Maj 3rd)';
+                    break;
+                case 2:
+                    msg = msg + 'SO TI (Maj 3rd)';
+                    break;
+                case 3:
+                    msg = msg + 'TI SO (Maj 3rd)';
+                    break;
+                case 4:
+                    msg = msg + 'LA FA (Maj 3rd)';
+                    break;
+                case 5:
+                    msg = msg + 'MI DO (Maj 3rd)';
+                    break;
+                case 6:
+                    msg = msg + 'MI DO (Min 6th)';
+                    break;
+                case 7:
+                    msg = msg + 'LA FA (Min 6th)';
+                    break;
+                case 8:
+                    msg = msg + 'TI SO (Min 6th)';
+                    break;
+                case 9:
+                    msg = msg + 'SO TI (Min 6th)';
+                    break;
+                case 10:
+                    msg = msg + 'FA LA (Min 6th)';
+                    break;
+                case 11:
+                    msg = msg + 'DO MI (Min 6th)';
+                    break;
+            }
+
+            $('#drill1').text(msg);
+        }
+    
+    </script>
+}

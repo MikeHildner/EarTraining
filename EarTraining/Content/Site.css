@@ -47,6 +47,10 @@ textarea {
     */
 }
 
+.image-ear {
+    /*content: url(Images/ear32.png);*/
+}
+
 .text-align-right {
     text-align: right;
 }
