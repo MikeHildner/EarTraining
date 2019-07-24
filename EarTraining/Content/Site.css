@@ -99,3 +99,7 @@ audio {
 .pad-top-10{
     padding-top: 10px;
 }
+
+.dropdown-header{
+    font-weight: bold;
+}
