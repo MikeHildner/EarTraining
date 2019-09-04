@@ -204,7 +204,10 @@
                     break;
             }
 
-            $('#progression2').text(msg);
+            var doInfo = $('#doSpoiler').text();
+            var progression = buildProgressionText(doInfo, msg);
+
+            $('#progression2').html(msg + '&nbsp;&nbsp;&nbsp;&nbsp; <span class="font-weight-bold">' + progression + '</span>');
         }
 
         function setAudProgression3Src() {
@@ -240,7 +243,10 @@
                     break;
             }
 
-            $('#progression3').text(msg);
+            var doInfo = $('#doSpoiler').text();
+            var progression = buildProgressionText(doInfo, msg);
+
+            $('#progression3').html(msg + '&nbsp;&nbsp;&nbsp;&nbsp; <span class="font-weight-bold">' + progression + '</span>');
         }
     </script>
 }

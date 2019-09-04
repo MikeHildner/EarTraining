@@ -154,7 +154,10 @@
                     break;
             }
 
-            $('#triad').text(msg);
+            var doInfo = $('#doSpoiler').text();
+            var progression = buildProgressionText(doInfo, msg);
+            $('#triad').html(msg + '&nbsp;&nbsp;&nbsp;&nbsp; <span class="font-weight-bold">' + progression + '</span>');
+            //$('#triad').text(msg);
     }
 
     </script>
