@@ -350,7 +350,7 @@ namespace EarTraining.Controllers
         {
             var progressionType = (ProgressionType2)progressiontype;
 
-            TimeSpan noteDuration1 = TimeSpan.FromSeconds(1);
+            TimeSpan noteDuration1 = TimeSpan.FromSeconds(2);
             TimeSpan noteDuration2 = noteDuration1.Add(noteDuration1);
 
             string doFileName = NAudioHelper.GetFileNameFromNoteName(doNoteName);
