@@ -84,6 +84,8 @@ function getChord(theDo, numeral) {
     var charCode = doNoSharp.charCodeAt(0);
     //console.log(doNoSharp + ': ' + charCode);
 
+    var isMinor = false;
+
     switch (numeral) {
         case 'I':
             charCode += 0;
@@ -93,6 +95,10 @@ function getChord(theDo, numeral) {
             break;
         case 'V':
             charCode += 4;
+            break;
+        case 'vi':
+            charCode += 5;
+            isMinor = true;
             break;
         default:
             consoleAndAlert("Numeral '" + numeral + "' is not supported.");
@@ -106,12 +112,25 @@ function getChord(theDo, numeral) {
     }
 
     var chord = String.fromCharCode(charCode);
+
     if (hasSharp) {
         chord += '#';
     }
 
-    if (theDo === 'F' && chord === 'B') {
-        chord = 'Bb';
+    chord = adjustChord(theDo, chord);
+
+    if (isMinor) {
+        chord += 'min';
     }
+
     return chord;
+}
+
+function adjustChord(theDo, chord) {
+    if (theDo === 'F' && chord === 'B') {
+        return 'Bb';
+    }
+
+    return chord;
+
 }
