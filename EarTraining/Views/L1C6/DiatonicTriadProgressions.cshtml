@@ -319,7 +319,9 @@
                     break;
             }
 
-            $('#progression2').text(msg);
+            var doInfo = $('#doSpoiler').text();
+            var progression = buildProgressionText(doInfo, msg);
+            $('#progression2').html(msg + '<span class="font-weight-bold pad-left-20">' + progression + '</span>');
         }
 
         function setAudProgression3Src() {
@@ -375,7 +377,9 @@
                     break;
             }
 
-            $('#progression3').text(msg);
+            var doInfo = $('#doSpoiler').text();
+            var progression = buildProgressionText(doInfo, msg);
+            $('#progression3').html(msg + '<span class="font-weight-bold pad-left-20">' + progression + '</span>');
         }
     </script>
 }

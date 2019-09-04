@@ -78,46 +78,31 @@ function buildProgressionText(doInfo, progInfo) {
 }
 
 function getChord(theDo, numeral) {
-    var hasSharp = theDo.includes('#');
-    var doNoSharp = theDo.replace('#', '');
-
-    var charCode = doNoSharp.charCodeAt(0);
-    //console.log(doNoSharp + ': ' + charCode);
-
+    var scale = getMajorScale(theDo);
     var isMinor = false;
+    var chord;
 
     switch (numeral) {
         case 'I':
-            charCode += 0;
+            chord = scale[0];
+            break;
+        case 'iii':
+            chord = scale[2];
+            isMinor = true;
             break;
         case 'IV':
-            charCode += 3;
+            chord = scale[3];
             break;
         case 'V':
-            charCode += 4;
+            chord = scale[4];
             break;
         case 'vi':
-            charCode += 5;
+            chord = scale[5];
             isMinor = true;
             break;
         default:
             consoleAndAlert("Numeral '" + numeral + "' is not supported.");
     }
-
-    // Handle 'overflow'.
-    //console.log('charCode: ' + charCode);
-    if (charCode > 71) {
-        charCode -= 7;
-        //console.log('New charCode: ' + charCode);
-    }
-
-    var chord = String.fromCharCode(charCode);
-
-    if (hasSharp) {
-        chord += '#';
-    }
-
-    chord = adjustChord(theDo, chord);
 
     if (isMinor) {
         chord += 'min';
@@ -126,11 +111,48 @@ function getChord(theDo, numeral) {
     return chord;
 }
 
-function adjustChord(theDo, chord) {
-    if (theDo === 'F' && chord === 'B') {
-        return 'Bb';
+function getMajorScale(theDo) {
+    var scale;
+    switch (theDo) {
+        case 'C':
+            scale = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+            break;
+        case 'G':
+            scale = ['G', 'A', 'B', 'C', 'D', 'E', 'F#'];
+            break;
+        case 'D':
+            scale = ['D', 'E', 'F#', 'G', 'A', 'B', 'C#'];
+            break;
+        case 'A':
+            scale = ['A', 'B', 'C#', 'D', 'E', 'F#', 'G#'];
+            break;
+        case 'E':
+            scale = ['E', 'F#', 'G#', 'A', 'B', 'C#', 'D#'];
+            break;
+        case 'B':
+            scale = ['B', 'C#', 'D#', 'E', 'F#', 'G#', 'A#'];
+            break;
+        case 'F#':
+            scale = ['F#', 'G#', 'A#', 'B', 'C#', 'D#', 'E#'];
+            break;
+        case 'C#':
+            scale = ['Db', 'Eb', 'F', 'Gb', 'Ab', 'Bb', 'C'];
+            break;
+        case 'G#':
+            scale = ['Ab', 'Bb', 'C', 'Db', 'Eb', 'F', 'G'];
+            break;
+        case 'D#':
+            scale = ['Eb', 'F', 'G', 'Ab', 'Bb', 'C', 'D'];
+            break;
+        case 'A#':
+            scale = ['Bb', 'C', 'D', 'Eb', 'F', 'G', 'A'];
+            break;
+        case 'F':
+            scale = ['F', 'G', 'A', 'Bb', 'C', 'D', 'E'];
+            break;	
+        default:
+            consoleAndAlert("getScale for '" + theDo + "' is not supported.");
     }
 
-    return chord;
-
+    return scale;
 }
