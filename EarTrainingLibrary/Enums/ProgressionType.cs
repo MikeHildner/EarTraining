@@ -7,6 +7,7 @@
         Five1stToOneRoot = 1,
         FiveRootToFourRoot = 2,
         OneRootToFour2nd = 3,
+        OneRootToFive1st = 23,
 
         // I IV V three chord progressions.
         Four2ndFive1stOneRoot = 4,
