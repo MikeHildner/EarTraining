@@ -362,11 +362,15 @@ namespace EarTraining.Controllers
 
             switch (progressionType)
             {
-                case ProgressionType2.OneRootToSixMinFirst:
+                case ProgressionType2.OneRootToSixMin1st:
                     samples1 = Inversion.CreateTriadInversionEx(InversionType.RootPosition, noteDuration1, doNoteNumber, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpPerfect5th);
                     samples2 = Inversion.CreateTriadInversionEx(InversionType.HighFirstInversion, noteDuration2, doNoteNumber, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpMajor6th);
                     break;
 
+                case ProgressionType2.OneRootToFourMaj2nd:
+                    samples1 = Inversion.CreateTriadInversionEx(InversionType.RootPosition, noteDuration1, doNoteNumber, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpPerfect5th);
+                    samples2 = Inversion.CreateTriadInversionEx(InversionType.HighSecondInversion, noteDuration2, doNoteNumber + Interval.UpPerfect4th, doNoteNumber + Interval.UpMajor6th, doNoteNumber + Interval.UpPerfectOctave);
+                    break;
 
                 default:
                     throw new NotSupportedException($"ProgressionType {progressionType} is not supported.");
