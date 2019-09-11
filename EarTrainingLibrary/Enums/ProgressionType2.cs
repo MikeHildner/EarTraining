@@ -11,7 +11,7 @@ namespace EarTrainingLibrary.Enums
     {
         // I IV V vi ii 2 chord progressions.
         OneRootToSixMin1st = 0,
-        OneRootToFourMaj2nd = 1,
+        OneRootToFour2nd = 1,
         FourRootToFiveRoot = 2,
         One2ndToThreeMin1st = 3,
         ThreeMin1stToSixMinRoot = 4,

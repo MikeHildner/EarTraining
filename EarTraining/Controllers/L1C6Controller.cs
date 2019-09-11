@@ -351,7 +351,7 @@ namespace EarTraining.Controllers
             var progressionType = (ProgressionType2)progressiontype;
 
             TimeSpan noteDuration1 = TimeSpan.FromSeconds(2);
-            TimeSpan noteDuration2 = noteDuration1.Add(noteDuration1);
+            TimeSpan noteDuration2 = noteDuration1;
 
             string doFileName = NAudioHelper.GetFileNameFromNoteName(doNoteName);
             doFileName = Path.GetFileName(doFileName);
@@ -364,12 +364,57 @@ namespace EarTraining.Controllers
             {
                 case ProgressionType2.OneRootToSixMin1st:
                     samples1 = Inversion.CreateTriadInversionEx(InversionType.RootPosition, noteDuration1, doNoteNumber, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpPerfect5th);
-                    samples2 = Inversion.CreateTriadInversionEx(InversionType.HighFirstInversion, noteDuration2, doNoteNumber, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpMajor6th);
+                    samples2 = Inversion.CreateTriadInversionEx(InversionType.LowFirstInversion, noteDuration2, doNoteNumber + Interval.UpMajor6th, doNoteNumber + Interval.UpPerfectOctave, doNoteNumber + Interval.UpMajor10th);
                     break;
 
-                case ProgressionType2.OneRootToFourMaj2nd:
+                case ProgressionType2.OneRootToFour2nd:
                     samples1 = Inversion.CreateTriadInversionEx(InversionType.RootPosition, noteDuration1, doNoteNumber, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpPerfect5th);
                     samples2 = Inversion.CreateTriadInversionEx(InversionType.HighSecondInversion, noteDuration2, doNoteNumber + Interval.UpPerfect4th, doNoteNumber + Interval.UpMajor6th, doNoteNumber + Interval.UpPerfectOctave);
+                    break;
+
+                case ProgressionType2.FourRootToFiveRoot:
+                    samples1 = Inversion.CreateTriadInversionEx(InversionType.RootPosition, noteDuration1, doNoteNumber + Interval.UpPerfect4th, doNoteNumber + Interval.UpMajor6th, doNoteNumber + Interval.UpPerfectOctave);
+                    samples2 = Inversion.CreateTriadInversionEx(InversionType.RootPosition, noteDuration2, doNoteNumber + Interval.UpPerfect5th, doNoteNumber + Interval.UpMajor7th, doNoteNumber + Interval.UpMajor9th);
+                    break;
+
+                case ProgressionType2.One2ndToThreeMin1st:
+                    samples1 = Inversion.CreateTriadInversionEx(InversionType.LowSecondInversion, noteDuration1, doNoteNumber, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpPerfect5th);
+                    samples2 = Inversion.CreateTriadInversionEx(InversionType.LowFirstInversion, noteDuration2, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpPerfect5th, doNoteNumber + Interval.UpMajor7th);
+                    break;
+
+                case ProgressionType2.ThreeMin1stToSixMinRoot:
+                    samples1 = Inversion.CreateTriadInversionEx(InversionType.HighFirstInversion, noteDuration1, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpPerfect5th, doNoteNumber + Interval.UpMajor7th);
+                    samples2 = Inversion.CreateTriadInversionEx(InversionType.RootPosition, noteDuration2, doNoteNumber + Interval.UpMajor6th, doNoteNumber + Interval.UpPerfectOctave, doNoteNumber + Interval.UpMajor10th);
+                    break;
+
+                case ProgressionType2.Five2ndToOne1st:
+                    samples1 = Inversion.CreateTriadInversionEx(InversionType.HighSecondInversion, noteDuration1, doNoteNumber + Interval.UpPerfect5th, doNoteNumber + Interval.UpMajor7th, doNoteNumber + Interval.UpMajor9th);
+                    samples2 = Inversion.CreateTriadInversionEx(InversionType.HighFirstInversion, noteDuration2, doNoteNumber, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpPerfect5th);
+                    break;
+
+                case ProgressionType2.One1stToFour1st:
+                    samples1 = Inversion.CreateTriadInversionEx(InversionType.LowFirstInversion, noteDuration1, doNoteNumber, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpPerfect5th);
+                    samples2 = Inversion.CreateTriadInversionEx(InversionType.LowFirstInversion, noteDuration2, doNoteNumber + Interval.UpPerfect4th, doNoteNumber + Interval.UpMajor6th, doNoteNumber + Interval.UpPerfectOctave);
+                    break;
+
+                case ProgressionType2.One2ndToSixMinRoot:
+                    samples1 = Inversion.CreateTriadInversionEx(InversionType.HighSecondInversion, noteDuration1, doNoteNumber, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpPerfect5th);
+                    samples2 = Inversion.CreateTriadInversionEx(InversionType.RootPosition, noteDuration2, doNoteNumber + Interval.UpMajor6th, doNoteNumber + Interval.UpPerfectOctave, doNoteNumber + Interval.UpMajor10th);
+                    break;
+
+                case ProgressionType2.ThreeMinRootToFive2nd:
+                    samples1 = Inversion.CreateTriadInversionEx(InversionType.RootPosition, noteDuration1, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpPerfect5th, doNoteNumber + Interval.UpMajor7th);
+                    samples2 = Inversion.CreateTriadInversionEx(InversionType.LowSecondInversion, noteDuration2, doNoteNumber + Interval.UpPerfect5th, doNoteNumber + Interval.UpMajor7th, doNoteNumber + Interval.UpMajor9th);
+                    break;
+
+                case ProgressionType2.Five2ndToSixMin2nd:
+                    samples1 = Inversion.CreateTriadInversionEx(InversionType.LowSecondInversion, noteDuration1, doNoteNumber + Interval.UpPerfect5th, doNoteNumber + Interval.UpMajor7th, doNoteNumber + Interval.UpMajor9th);
+                    samples2 = Inversion.CreateTriadInversionEx(InversionType.LowSecondInversion, noteDuration2, doNoteNumber + Interval.UpMajor6th, doNoteNumber + Interval.UpPerfectOctave, doNoteNumber + Interval.UpMajor10th);
+                    break;
+
+                case ProgressionType2.Four2ndToThreeMin2nd:
+                    samples1 = Inversion.CreateTriadInversionEx(InversionType.LowSecondInversion, noteDuration1, doNoteNumber + Interval.UpPerfect4th, doNoteNumber + Interval.UpMajor6th, doNoteNumber + Interval.UpPerfectOctave);
+                    samples2 = Inversion.CreateTriadInversionEx(InversionType.LowSecondInversion, noteDuration2, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpPerfect5th, doNoteNumber + Interval.UpMajor7th);
                     break;
 
                 default:
