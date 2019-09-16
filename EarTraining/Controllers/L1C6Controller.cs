@@ -369,7 +369,7 @@ namespace EarTraining.Controllers
 
                 case ProgressionType2.OneRootToFour2nd:
                     samples1 = Inversion.CreateTriadInversionEx(InversionType.RootPosition, noteDuration1, doNoteNumber, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpPerfect5th);
-                    samples2 = Inversion.CreateTriadInversionEx(InversionType.HighSecondInversion, noteDuration2, doNoteNumber + Interval.UpPerfect4th, doNoteNumber + Interval.UpMajor6th, doNoteNumber + Interval.UpPerfectOctave);
+                    samples2 = Inversion.CreateTriadInversionEx(InversionType.LowSecondInversion, noteDuration2, doNoteNumber + Interval.UpPerfect4th, doNoteNumber + Interval.UpMajor6th, doNoteNumber + Interval.UpPerfectOctave);
                     break;
 
                 case ProgressionType2.FourRootToFiveRoot:
