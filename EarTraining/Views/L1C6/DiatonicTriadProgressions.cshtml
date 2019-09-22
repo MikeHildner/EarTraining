@@ -169,13 +169,13 @@
                         </div>
                         <hr />
                         <h4>3 Chord Progression Prompts</h4>
-                        <h5 class="text-warning">Not Yet Implemented</h5>
+                        <h5 class="text-warning">Not Fully Implemented</h5>
                         <div class="row">
                             <div class="col-md-4">
                                 <figure>
-                                    <figcaption><img class="piano" /> </figcaption>
+                                    <figcaption><img class="piano" /> I (root) - V (1st) - vi (1st)</figcaption>
                                     <audio controls preload='none'>
-                                        <source src='@Url.Action("Get3ChordProgressionEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 4 })' type='audio/mpeg'>
+                                        <source src='@Url.Action("Get3ChordProgressionEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 11 })' type='audio/mpeg'>
                                     </audio>
                                 </figure>
                             </div>
@@ -326,50 +326,14 @@
 
         function setAudProgression3Src() {
             var baseSrc = '@Url.Action("Get3ChordProgressionEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName })';
-            var progressiontype = getRandomInt(4, 22, [5, 7, 8, 10, 11, 12, 13, 14, 15]);
+            var progressiontype = getRandomInt(11, 22);
             var src = baseSrc + '&progressiontype=' + progressiontype;
             $('#audProgression3').attr('src', src);
 
             var msg = '';
             switch (progressiontype) {
-                case 4:
-                    msg = msg + 'IV (2nd) - V (1st) - I (root)';
-                    break;
-
-                case 6:
-                    msg = msg + 'I (root) - IV (2nd) - V (1st)';
-                    break;
-
-                case 9:
-                    msg = msg + 'IV (2nd) - I (root) - V (1st)';
-                    break;
-
-                case 16:
+                case 11:
                     msg = msg + 'I (root) - V (1st) - vi (1st)';
-                    break;
-
-                case 17:
-                    msg = msg + 'vi (2nd) - IV (root) - I (1st)';
-                    break;
-
-                case 18:
-                    msg = msg + 'I (root) - vi (1st) - V (1st)';
-                    break;
-
-                case 19:
-                    msg = msg + 'V (root) - IV (root) - vi (2nd)';
-                    break;
-
-                case 20:
-                    msg = msg + 'IV (root) - V (root) - vi (root)';
-                    break;
-
-                case 21:
-                    msg = msg + 'vi (1st) - I (2nd) - IV (1st)';
-                    break;
-
-                case 22:
-                    msg = msg + 'V (2nd) - vi (2nd) - I (root)';
                     break;
 
                 default:
