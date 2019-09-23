@@ -484,6 +484,18 @@ namespace EarTraining.Controllers
                     samples3 = Inversion.CreateTriadInversionEx(InversionType.LowFirstInversion, noteDuration, doNoteNumber + Interval.UpMajor6th, doNoteNumber + Interval.UpPerfectOctave, doNoteNumber + Interval.UpMajor10th);
                     break;
 
+                case ProgressionType2.FourRootOne1stThreeMinRoot:
+                    samples1 = Inversion.CreateTriadInversionEx(InversionType.RootPosition, noteDuration, doNoteNumber + Interval.UpPerfect4th, doNoteNumber + Interval.UpMajor6th, doNoteNumber + Interval.UpPerfectOctave);
+                    samples2 = Inversion.CreateTriadInversionEx(InversionType.HighFirstInversion, noteDuration, doNoteNumber, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpPerfect5th);
+                    samples3 = Inversion.CreateTriadInversionEx(InversionType.RootPosition, noteDuration, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpPerfect5th, doNoteNumber + Interval.UpMajor7th);
+                    break;
+
+                case ProgressionType2.SixMin2ndThreeMinRootOne1st:
+                    samples1 = Inversion.CreateTriadInversionEx(InversionType.LowSecondInversion, noteDuration, doNoteNumber + Interval.UpMajor6th, doNoteNumber + Interval.UpPerfectOctave, doNoteNumber + Interval.UpMajor10th);
+                    samples2 = Inversion.CreateTriadInversionEx(InversionType.RootPosition, noteDuration, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpPerfect5th, doNoteNumber + Interval.UpMajor7th);
+                    samples3 = Inversion.CreateTriadInversionEx(InversionType.HighFirstInversion, noteDuration, doNoteNumber, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpPerfect5th);
+                    break;
+
                 default:
                     throw new NotSupportedException($"ProgressionType {progressionType} is not supported.");
             }

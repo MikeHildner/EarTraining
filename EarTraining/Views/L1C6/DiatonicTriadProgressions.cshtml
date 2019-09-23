@@ -207,6 +207,24 @@
                                 </figure>
                             </div>
 
+                            <div class="col-md-4">
+                                <figure>
+                                    <figcaption><img class="piano" /> IV (root) - I (1st) - iii (root)</figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("Get3ChordProgressionEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 15 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+
+                            <div class="col-md-4">
+                                <figure>
+                                    <figcaption><img class="piano" /> vi (2nd) - iii (root) - I (1st)</figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("Get3ChordProgressionEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 16 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+
                         </div>
 
                     </div>
@@ -277,7 +295,7 @@
 
         function setAudProgression3Src() {
             var baseSrc = '@Url.Action("Get3ChordProgressionEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName })';
-            var progressiontype = getRandomInt(11, 14);
+            var progressiontype = getRandomInt(11, 16);
             var src = baseSrc + '&progressiontype=' + progressiontype;
             $('#audProgression3').attr('src', src);
 
@@ -297,6 +315,14 @@
 
                 case 14:
                     msg = msg + 'iii (2nd) - I (root) - vi (1st)';
+                    break;
+
+                case 15:
+                    msg = msg + 'IV (root) - I (1st) - iii (root)';
+                    break;
+
+                case 16:
+                    msg = msg + 'vi (2nd) - iii (root) - I (1st)';
                     break;
 
                 
