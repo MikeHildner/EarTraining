@@ -12,14 +12,15 @@ namespace EarTraining.Controllers
     {
         public BaseController()
         {
-            //var stageNames = new List<string>
-            //{
-            //    "Fats Treetop",
-            //    "Keys Clamfinger"
-            //};
+            var stageNames = new List<string>
+            {
+                "Fats Treetop",
+                "Keys Clamfinger",
+                "Sol Dofamado"
+            };
 
-            //stageNames.Shuffle();
-            //ViewBag.StageName = stageNames.First();
+            stageNames.Shuffle();
+            ViewBag.StageName = stageNames.First();
         }
 
         //[HttpDelete]
