@@ -169,7 +169,6 @@
                         </div>
                         <hr />
                         <h4>3 Chord Progression Prompts</h4>
-                        <h5 class="text-warning">Not Fully Implemented</h5>
                         <div class="row">
                             <div class="col-md-4">
                                 <figure>
@@ -221,6 +220,60 @@
                                     <figcaption><img class="piano" /> vi (2nd) - iii (root) - I (1st)</figcaption>
                                     <audio controls preload='none'>
                                         <source src='@Url.Action("Get3ChordProgressionEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 16 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+
+                            <div class="col-md-4">
+                                <figure>
+                                    <figcaption><img class="piano" /> I (2nd) - IV (1st) - V (root)</figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("Get3ChordProgressionEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 17 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+
+                            <div class="col-md-4">
+                                <figure>
+                                    <figcaption><img class="piano" /> vi (root) - I (2nd) - IV (1st)</figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("Get3ChordProgressionEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 18 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+
+                            <div class="col-md-4">
+                                <figure>
+                                    <figcaption><img class="piano" /> iii (1st) - vi (root) - IV (1st)</figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("Get3ChordProgressionEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 19 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+
+                            <div class="col-md-4">
+                                <figure>
+                                    <figcaption><img class="piano" /> I (root) - vi (1st) - V (1st)</figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("Get3ChordProgressionEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 20 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+
+                            <div class="col-md-4">
+                                <figure>
+                                    <figcaption><img class="piano" /> V (2nd) - I (1st) - vi (2nd)</figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("Get3ChordProgressionEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 21 })' type='audio/mpeg'>
+                                    </audio>
+                                </figure>
+                            </div>
+
+                            <div class="col-md-4">
+                                <figure>
+                                    <figcaption><img class="piano" /> V (root) - V (2nd) - vi (2nd)</figcaption>
+                                    <audio controls preload='none'>
+                                        <source src='@Url.Action("Get3ChordProgressionEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 22 })' type='audio/mpeg'>
                                     </audio>
                                 </figure>
                             </div>
@@ -295,7 +348,7 @@
 
         function setAudProgression3Src() {
             var baseSrc = '@Url.Action("Get3ChordProgressionEx", "L1C6", new { doNoteName = ViewBag.Pitch.PitchName })';
-            var progressiontype = getRandomInt(11, 16);
+            var progressiontype = getRandomInt(11, 22);
             var src = baseSrc + '&progressiontype=' + progressiontype;
             $('#audProgression3').attr('src', src);
 
@@ -325,6 +378,29 @@
                     msg = msg + 'vi (2nd) - iii (root) - I (1st)';
                     break;
 
+                case 17:
+                    msg = msg + 'I (2nd) - IV (1st) - V (root)';
+                    break;
+
+                case 18:
+                    msg = msg + 'vi (root) - I (2nd) - IV (1st)';
+                    break;
+
+                case 19:
+                    msg = msg + 'iii (1st) - vi (root) - IV (1st)';
+                    break;
+
+                case 20:
+                    msg = msg + 'I (root) - vi (1st) - V (1st)';
+                    break;
+
+                case 21:
+                    msg = msg + 'V (2nd) - I (1st) - vi (2nd)';
+                    break;
+
+                case 22:
+                    msg = msg + 'IV (root) - V (2nd) - vi (2nd)';
+                    break;
                 
                 default:
                     consoleAndAlert('progression type ' + progressiontype + ' is not supported.');
