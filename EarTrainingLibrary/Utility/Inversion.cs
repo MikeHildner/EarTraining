@@ -97,6 +97,92 @@ namespace EarTrainingLibrary.Utility
             return samples;
         }
 
+        public static ISampleProvider[] CreateTriadInversionEx(int doNoteNumber, TriadType triadType, InversionType inversionType, TimeSpan duration)
+        {
+            int firstNoteNumber, secondNoteNumber, thirdNoteNumber;
+
+            switch(triadType)
+            {
+                case TriadType.OneMajor:
+                    firstNoteNumber = doNoteNumber;
+                    secondNoteNumber = doNoteNumber + Interval.UpMajor3rd;
+                    thirdNoteNumber = doNoteNumber + Interval.UpPerfect5th;
+                    break;
+
+                case TriadType.FourMajor:
+                    firstNoteNumber = doNoteNumber + Interval.UpPerfect4th;
+                    secondNoteNumber = doNoteNumber + Interval.UpMajor6th;
+                    thirdNoteNumber = doNoteNumber + Interval.UpPerfectOctave;
+                    break;
+
+                case TriadType.FiveMajor:
+                    firstNoteNumber = doNoteNumber + Interval.UpPerfect5th;
+                    secondNoteNumber = doNoteNumber + Interval.UpMajor7th;
+                    thirdNoteNumber = doNoteNumber + Interval.UpMajor9th;
+                    break;
+
+                case TriadType.SixMinor:
+                    firstNoteNumber = doNoteNumber + Interval.UpMajor6th;
+                    secondNoteNumber = doNoteNumber + Interval.UpPerfectOctave;
+                    thirdNoteNumber = doNoteNumber + Interval.UpMajor10th;
+                    break;
+
+                case TriadType.ThreeMinor:
+                    firstNoteNumber = doNoteNumber + Interval.UpMajor3rd;
+                    secondNoteNumber = doNoteNumber + Interval.UpPerfect5th;
+                    thirdNoteNumber = doNoteNumber + Interval.UpMajor7th;
+                    break;
+
+                case TriadType.TwoMinor:
+                    firstNoteNumber = doNoteNumber + Interval.UpMajor2nd;
+                    secondNoteNumber = doNoteNumber + Interval.UpPerfect4th;
+                    thirdNoteNumber = doNoteNumber + Interval.UpMajor6th;
+                    break;
+
+                default:
+                    throw new NotSupportedException($"TriadType {triadType} is not supported.");
+            }
+
+            switch (inversionType)
+            {
+                case InversionType.RootPosition:
+                    // Do nothing - just make what we were given.
+                    break;
+
+                case InversionType.HighFirstInversion:
+                    // Take the bottom note up an octave.
+                    firstNoteNumber += 12;
+                    break;
+
+                case InversionType.HighSecondInversion:
+                    // Take the bottom two notes up an octave.
+                    firstNoteNumber += 12;
+                    secondNoteNumber += 12;
+                    break;
+
+                case InversionType.LowSecondInversion:
+                    // Take the top note down an octave.
+                    thirdNoteNumber -= 12;
+                    break;
+
+                case InversionType.LowFirstInversion:
+                    // Take the top two notes down an octave.
+                    secondNoteNumber -= 12;
+                    thirdNoteNumber -= 12;
+                    break;
+
+                default:
+                    throw new NotSupportedException($"InversionType {inversionType} is not supported.");
+            }
+
+            var samples = new ISampleProvider[3];
+            samples[0] = NAudioHelper.GetSampleProvider(firstNoteNumber, duration);
+            samples[1] = NAudioHelper.GetSampleProvider(secondNoteNumber, duration);
+            samples[2] = NAudioHelper.GetSampleProvider(thirdNoteNumber, duration);
+
+            return samples;
+        }
+
         public static ISampleProvider[] Create2NoteInversionEx(InversionType inversionType, TimeSpan duration, int firstNoteNumber, int secondNoteNumber)
         {
             switch (inversionType)

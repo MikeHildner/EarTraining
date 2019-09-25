@@ -59,26 +59,26 @@ namespace EarTraining.Controllers
             int newDoNoteNumber;  // Used for other chords besides the I.
             switch (triadType)
             {
-                case TriadType.OneMajorTriad:
+                case TriadType.OneMajor:
                     samples = Inversion.CreateTriadInversionEx(inversionType, noteDuration, doNoteNumber, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpPerfect5th);
                     break;
 
-                case TriadType.FourMajorTriad:
+                case TriadType.FourMajor:
                     newDoNoteNumber = doNoteNumber + Interval.UpPerfect4th;
                     samples = Inversion.CreateTriadInversionEx(inversionType, noteDuration, newDoNoteNumber, newDoNoteNumber + Interval.UpMajor3rd, newDoNoteNumber + Interval.UpPerfect5th);
                     break;
 
-                case TriadType.FiveMajorTriad:
+                case TriadType.FiveMajor:
                     newDoNoteNumber = doNoteNumber + Interval.UpPerfect5th;
                     samples = Inversion.CreateTriadInversionEx(inversionType, noteDuration, newDoNoteNumber, newDoNoteNumber + Interval.UpMajor3rd, newDoNoteNumber + Interval.UpPerfect5th);
                     break;
 
-                case TriadType.SixMinorTriad:
+                case TriadType.SixMinor:
                     newDoNoteNumber = doNoteNumber + Interval.UpMajor6th;
                     samples = Inversion.CreateTriadInversionEx(inversionType, noteDuration, newDoNoteNumber, newDoNoteNumber + Interval.UpMinor3rd, newDoNoteNumber + Interval.UpPerfect5th);
                     break;
 
-                case TriadType.ThreeMinorTriad:
+                case TriadType.ThreeMinor:
                     newDoNoteNumber = doNoteNumber + Interval.UpMajor3rd;
                     samples = Inversion.CreateTriadInversionEx(inversionType, noteDuration, newDoNoteNumber, newDoNoteNumber + Interval.UpMinor3rd, newDoNoteNumber + Interval.UpPerfect5th);
                     break;

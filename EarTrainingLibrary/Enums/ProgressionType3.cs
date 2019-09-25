@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 
 namespace EarTrainingLibrary.Enums
 {
-    public enum TriadType
+    public enum ProgressionType3
     {
-        OneMajor = 0,
-        FourMajor = 1,
-        FiveMajor = 2,
-        SixMinor = 3,
-        ThreeMinor = 4,
-        TwoMinor = 5,
+        OneRootTwoMinRoot = 0,
     }
 }
