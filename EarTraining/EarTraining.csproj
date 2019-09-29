@@ -323,6 +323,7 @@
     <Content Include="Views\L1C2\MelodicMaj3rdMin6thNoDO.cshtml" />
     <Content Include="Views\L1C3\MelodicMin3rdMaj6thNoDO.cshtml" />
     <Content Include="Views\L1C7\DiatonicTriadProgressions.cshtml" />
+    <Content Include="Views\L1C7\VocalDrills.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

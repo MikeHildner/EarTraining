@@ -1,0 +1,174 @@
+﻿@{
+    ViewBag.Title = "Vocal Drills - Minor 2nd and Major 7th Intervals";
+}
+<h2>Level 1 Chapter 7</h2>
+
+<h5>@ViewBag.Title</h5>
+<hr />
+
+<h3 class="text-warning">Not Fully Implemented</h3>
+
+<div class="row">
+    <div class="col-md-6">
+        @{
+            Html.RenderPartial("NewDO");
+        }
+    </div>
+</div>
+
+<hr />
+
+<div class="row toggle-demo" role="group">
+    <div class="col-md-6">
+        Include drills for
+        <div class="switch-toggle alert alert-dark">
+            <input id="min2nds" name="intervaltype" type="radio" checked>
+            <label for="min2nds" onclick="">Minor 2nds</label>
+
+            <input id="maj7ths" name="intervaltype" type="radio">
+            <label for="maj7ths" onclick="">Major 7ths</label>
+
+            <input id="both" name="intervaltype" type="radio">
+            <label for="both" onclick="">Both</label>
+
+            <a class="btn btn-primary"></a>
+        </div>
+    </div>
+</div>
+
+<h4>Drill</h4>
+<div class="row">
+    <div class="col-md-6">
+        <figure>
+            <figcaption><img class="piano" />Press the play button to hear the interval</figcaption>
+            <audio id="audDrill1" controls preload='none'>
+                <source src='' type='audio/mpeg'>
+            </audio>
+        </figure>
+        <p>Hover over the below to reveal the interval</p>
+        <div class="spoiler" id="drill1"></div>
+        <div class="pad-top-10">
+            <input type="button" class="btn btn-primary" value="Get a New Interval" onclick="setAudDrill1Src()" />
+        </div>
+    </div>
+</div>
+<hr />
+
+<div id="min-2nd-prompts">
+    <h4>Min 2nd Vocal Drills</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> MI MI FA MI</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrill", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, type = 0 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+    </div>
+
+</div>
+
+<div id="maj-7th-prompts">
+    <h4>Maj 7th Vocal Drills</h4>
+    <div class="row">
+    </div>
+
+</div>
+
+@section  scripts {
+    <script>
+        $(document).ready(function () {
+            setAudDrill1Src();
+
+            $('input[type=radio][name=intervaltype]').change(function () {
+                setAudDrill1Src();
+            });
+        });
+
+        function setAudDrill1Src() {
+            var baseSrc = '@Url.Action("GetMelodicDrill", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName })';
+
+            // Get the drills based on what the user has choosen.
+            var intervalType = $("input[type=radio][name=intervaltype]:checked").attr('id');
+
+            var minDrill;
+            var maxDrill;
+
+            switch (intervalType) {
+                case 'min2nds':
+                    minDrill = 0;
+                    maxDrill = 0;
+                    $('#min-2nd-prompts').fadeIn();
+                    $('#maj-7th-prompts').fadeOut();
+                    break;
+
+                case 'maj7ths':
+                    minDrill = 6;
+                    maxDrill = 11;
+                    $('#min-2nd-prompts').fadeOut();
+                    $('#maj-7th-prompts').fadeIn();
+                    break;
+
+                case 'both':
+                    minDrill = 6;
+                    maxDrill = 11;
+                    $('#min-2nd-prompts').fadeIn();
+                    $('#maj-7th-prompts').fadeIn();
+                    break;
+
+                default:
+                    var msg = 'intervalType ' + intervalType + ' is not supported';
+                    consoleAndAlert(msg);
+            }
+
+            var randomInt = randomInt = getRandomInt(minDrill, maxDrill);
+
+            var src = baseSrc + '&type=' + randomInt;
+            $('#audDrill1').attr('src', src);
+
+            var msg = '';
+            switch (randomInt) {
+                case 0:
+                    msg = msg + 'MI MI FA MI (Min 2nd)';
+                    break;
+                case 1:
+                    msg = msg + 'FA FA LA LA SO (Maj 3rd)';
+                    break;
+                case 2:
+                    msg = msg + 'SO SO TI TI DO (Maj 3rd)';
+                    break;
+                case 3:
+                    msg = msg + 'TI TI SO SO SO (Maj 3rd)';
+                    break;
+                case 4:
+                    msg = msg + 'LA LA FA FA MI (Maj 3rd)';
+                    break;
+                case 5:
+                    msg = msg + 'MI MI DO DO DO (Maj 3rd)';
+                    break;
+                case 6:
+                    msg = msg + 'MI MI DO DO DO (Min 6th)';
+                    break;
+                case 7:
+                    msg = msg + 'LA LA FA FA MI (Min 6th)';
+                    break;
+                case 8:
+                    msg = msg + 'TI TI SO SO SO (Min 6th)';
+                    break;
+                case 9:
+                    msg = msg + 'SO SO TI TI DO (Min 6th)';
+                    break;
+                case 10:
+                    msg = msg + 'FA FA LA LA SO (Min 6th)';
+                    break;
+                case 11:
+                    msg = msg + 'DO DO MI MI MI (Min 6th)';
+                    break;
+            }
+
+            $('#drill1').text(msg);
+        }
+
+    </script>
+}
