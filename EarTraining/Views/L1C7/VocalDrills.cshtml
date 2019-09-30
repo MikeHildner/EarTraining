@@ -6,8 +6,6 @@
 <h5>@ViewBag.Title</h5>
 <hr />
 
-<h3 class="text-warning">Not Fully Implemented</h3>
-
 <div class="row">
     <div class="col-md-6">
         @{
@@ -73,6 +71,22 @@
                 </audio>
             </figure>
         </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> FA FA MI MI</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrill", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, type = 2 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> DO TI DO</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrill", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, type = 3 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
     </div>
 
 </div>
@@ -80,6 +94,38 @@
 <div id="maj-7th-prompts">
     <h4>Maj 7th Vocal Drills</h4>
     <div class="row">
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> DO DO TI DO</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrill", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, type = 4 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> FA MI MI</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrill", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, type = 5 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> TI TI DO DO</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrill", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, type = 6 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <figcaption><img class="piano" /> MI FA MI</figcaption>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrill", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, type = 7 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
     </div>
 
 </div>
@@ -106,21 +152,21 @@
             switch (intervalType) {
                 case 'min2nds':
                     minDrill = 0;
-                    maxDrill = 1;
+                    maxDrill = 3;
                     $('#min-2nd-prompts').fadeIn();
                     $('#maj-7th-prompts').fadeOut();
                     break;
 
                 case 'maj7ths':
-                    minDrill = 6;
-                    maxDrill = 11;
+                    minDrill = 4;
+                    maxDrill = 7;
                     $('#min-2nd-prompts').fadeOut();
                     $('#maj-7th-prompts').fadeIn();
                     break;
 
                 case 'both':
-                    minDrill = 6;
-                    maxDrill = 11;
+                    minDrill = 0;
+                    maxDrill = 7;
                     $('#min-2nd-prompts').fadeIn();
                     $('#maj-7th-prompts').fadeIn();
                     break;
@@ -144,34 +190,22 @@
                     msg = msg + 'TI DO DO (Min 2nd)';
                     break;
                 case 2:
-                    msg = msg + 'SO SO TI TI DO (Maj 3rd)';
+                    msg = msg + 'FA FA MI MI (Min 2nd)';
                     break;
                 case 3:
-                    msg = msg + 'TI TI SO SO SO (Maj 3rd)';
+                    msg = msg + 'DO TI DO (Min 2nd)';
                     break;
                 case 4:
-                    msg = msg + 'LA LA FA FA MI (Maj 3rd)';
+                    msg = msg + 'DO DO TI DO (Maj 7th)';
                     break;
                 case 5:
-                    msg = msg + 'MI MI DO DO DO (Maj 3rd)';
+                    msg = msg + 'FA MI MI (Maj 7th)';
                     break;
                 case 6:
-                    msg = msg + 'MI MI DO DO DO (Min 6th)';
+                    msg = msg + 'TI TI DO DO (Maj 7th)';
                     break;
                 case 7:
-                    msg = msg + 'LA LA FA FA MI (Min 6th)';
-                    break;
-                case 8:
-                    msg = msg + 'TI TI SO SO SO (Min 6th)';
-                    break;
-                case 9:
-                    msg = msg + 'SO SO TI TI DO (Min 6th)';
-                    break;
-                case 10:
-                    msg = msg + 'FA FA LA LA SO (Min 6th)';
-                    break;
-                case 11:
-                    msg = msg + 'DO DO MI MI MI (Min 6th)';
+                    msg = msg + 'MI FA MI (Maj 7th)';
                     break;
             }
 

@@ -62,17 +62,58 @@ namespace EarTraining.Controllers
 
             switch (drillType)
             {
-                case L1C7MelodicDrillType.MiMiFaMi:
+                // Minor 2nd intervals.
+                case L1C7MelodicDrillType.MiMiFaMiMin2nd:
                     note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor3rd, quarterNoteDuration);
                     note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor3rd, eigthNoteDuration);
                     note3 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect4th, halfNoteAndEigthNoteDuration);
                     note4 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor3rd, wholeNoteDuration);
                     break;
 
-                case L1C7MelodicDrillType.TiDoDo:
+                case L1C7MelodicDrillType.TiDoDoMin2nd:
                     note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.DownMinor2nd, dottedQuarterNoteDuration);
                     note2 = NAudioHelper.GetSampleProvider(doNoteNumber, halfNoteAndEigthNoteDuration);
                     note3 = NAudioHelper.GetSampleProvider(doNoteNumber, wholeNoteDuration);
+                    break;
+
+                case L1C7MelodicDrillType.FaFaMiMiMin2nd:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect4th, quarterNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect4th, eigthNoteDuration);
+                    note3 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor3rd, halfNoteAndEigthNoteDuration);
+                    note4 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor3rd, wholeNoteDuration);
+                    break;
+
+                case L1C7MelodicDrillType.DoTiDoMin2nd:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber, dottedQuarterNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.DownMinor2nd, halfNoteAndEigthNoteDuration);
+                    note3 = NAudioHelper.GetSampleProvider(doNoteNumber, wholeNoteDuration);
+                    break;
+
+                // Major 7th intervals.
+                case L1C7MelodicDrillType.DoDoTiDoMaj7th:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber, quarterNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber, eigthNoteDuration);
+                    note3 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor7th, halfNoteAndEigthNoteDuration);
+                    note4 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfectOctave, wholeNoteDuration);
+                    break;
+
+                case L1C7MelodicDrillType.FaMiMiMaj7th:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect4th, dottedQuarterNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor10th, halfNoteAndEigthNoteDuration);
+                    note3 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor10th, wholeNoteDuration);
+                    break;
+
+                case L1C7MelodicDrillType.TiTiDoDoMaj7th:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor7th, quarterNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor7th, eigthNoteDuration);
+                    note3 = NAudioHelper.GetSampleProvider(doNoteNumber, halfNoteAndEigthNoteDuration);
+                    note4 = NAudioHelper.GetSampleProvider(doNoteNumber, wholeNoteDuration);
+                    break;
+
+                case L1C7MelodicDrillType.MiFaMiMaj7th:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor10th, dottedQuarterNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect4th, halfNoteAndEigthNoteDuration);
+                    note3 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor3rd, wholeNoteDuration);
                     break;
 
                 default:
