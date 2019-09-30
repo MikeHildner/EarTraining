@@ -154,8 +154,8 @@ namespace EarTraining.Controllers
                     break;
 
                 case L1C2MelodicDrillType.TiTiSoSoSo6:
-                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.DownHalfStep, quarterNoteDuration);
-                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.DownHalfStep, quarterNoteDuration);
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.DownMinor2nd, quarterNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.DownMinor2nd, quarterNoteDuration);
                     note3 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect5th, quarterNoteDuration);
                     note4 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect5th, quarterNoteDuration);
                     note5 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect5th, wholeNoteDuration);
@@ -164,8 +164,8 @@ namespace EarTraining.Controllers
                 case L1C2MelodicDrillType.SoSoTiTiDo6:
                     note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect5th, quarterNoteDuration);
                     note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect5th, quarterNoteDuration);
-                    note3 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.DownHalfStep, quarterNoteDuration);
-                    note4 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.DownHalfStep, quarterNoteDuration);
+                    note3 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.DownMinor2nd, quarterNoteDuration);
+                    note4 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.DownMinor2nd, quarterNoteDuration);
                     note5 = NAudioHelper.GetSampleProvider(doNoteNumber, wholeNoteDuration);
                     break;
 
@@ -223,8 +223,8 @@ namespace EarTraining.Controllers
                     break;
 
                 case L1C2MelodicDrillType.TiTiReReDo3Low:
-                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.DownHalfStep, quarterNoteDuration);
-                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.DownHalfStep, quarterNoteDuration);
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.DownMinor2nd, quarterNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.DownMinor2nd, quarterNoteDuration);
                     note3 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor2nd, quarterNoteDuration);
                     note4 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor2nd, quarterNoteDuration);
                     note5 = NAudioHelper.GetSampleProvider(doNoteNumber, wholeNoteDuration);
@@ -374,13 +374,13 @@ namespace EarTraining.Controllers
                     break;
 
                 case L1C2MelodicDrillType.TiSo6:
-                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.DownHalfStep, halfNoteDuration);
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.DownMinor2nd, halfNoteDuration);
                     note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect5th, halfNoteDuration);
                     break;
 
                 case L1C2MelodicDrillType.SoTi6:
                     note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect5th, halfNoteDuration);
-                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.DownHalfStep, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.DownMinor2nd, halfNoteDuration);
                     break;
 
                 case L1C2MelodicDrillType.FaLa6:
@@ -419,7 +419,7 @@ namespace EarTraining.Controllers
                     break;
 
                 case L1C2MelodicDrillType.TiRe3Low:
-                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.DownHalfStep, halfNoteDuration);
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.DownMinor2nd, halfNoteDuration);
                     note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor2nd, halfNoteDuration);
                     break;
 

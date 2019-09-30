@@ -9,5 +9,6 @@ namespace EarTrainingLibrary.Enums
     public enum L1C7MelodicDrillType
     {
         MiMiFaMi = 0,
+        TiDoDo = 1
     }
 }

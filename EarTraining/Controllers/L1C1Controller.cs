@@ -96,7 +96,7 @@ namespace EarTraining.Controllers
                 case ResolutionType.DoDoLowTiDo:
                     note1 = NAudioHelper.GetSampleProvider(doNoteNumber, quarterNoteDuration);
                     note2 = NAudioHelper.GetSampleProvider(doNoteNumber, quarterNoteDuration);
-                    note3 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.DownHalfStep, halfNoteDuration);
+                    note3 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.DownMinor2nd, halfNoteDuration);
                     note4 = NAudioHelper.GetSampleProvider(doNoteNumber, wholeNoteDuration);
                     break;
 
@@ -166,7 +166,7 @@ namespace EarTraining.Controllers
                     break;
 
                 case ResolutionType.DoDoLowTiDo:
-                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.DownHalfStep, halfNoteDuration);
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.DownMinor2nd, halfNoteDuration);
                     note2 = NAudioHelper.GetSampleProvider(doNoteNumber, wholeNoteDuration);
                     break;
 

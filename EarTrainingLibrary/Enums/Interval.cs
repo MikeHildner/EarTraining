@@ -11,7 +11,7 @@ namespace EarTrainingLibrary.Enums
         public static int DownPerfectOctave { get { return -12; } }
         public static int DownPerfect4th { get { return -5; } }
         public static int DownMinor3rd { get { return -3; } }
-        public static int DownHalfStep { get { return -1; } }
+        public static int DownMinor2nd { get { return -1; } }
         public static int UpMajor2nd { get { return 2; } }
         public static int UpMinor3rd { get { return 3; } }
         public static int UpMajor3rd{get{ return 4; }}

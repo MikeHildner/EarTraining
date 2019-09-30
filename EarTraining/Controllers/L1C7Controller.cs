@@ -49,23 +49,30 @@ namespace EarTraining.Controllers
 
             TimeSpan eigthNoteDuration = TimeSpan.FromMilliseconds(quarterNoteMillis / 2);
             TimeSpan quarterNoteDuration = TimeSpan.FromMilliseconds(quarterNoteMillis);
+            TimeSpan dottedQuarterNoteDuration = TimeSpan.FromMilliseconds(quarterNoteMillis).Add(eigthNoteDuration);
             TimeSpan halfNoteDuration = TimeSpan.FromMilliseconds(quarterNoteMillis * 2);
-            TimeSpan doubleDottedHalfNoteDuration = halfNoteDuration.Add(eigthNoteDuration);
+            TimeSpan halfNoteAndEigthNoteDuration = halfNoteDuration.Add(eigthNoteDuration);
             TimeSpan wholeNoteDuration = TimeSpan.FromMilliseconds(quarterNoteMillis * 4);
 
             string doFileName = NAudioHelper.GetFileNameFromNoteName(doNoteName);
             doFileName = Path.GetFileName(doFileName);
             int doNoteNumber = int.Parse(doFileName.Split('.')[0]);
 
-            ISampleProvider note1, note2, note3, note4;
+            ISampleProvider note1, note2, note3, note4 = null;
 
             switch (drillType)
             {
                 case L1C7MelodicDrillType.MiMiFaMi:
                     note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor3rd, quarterNoteDuration);
                     note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor3rd, eigthNoteDuration);
-                    note3 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect4th, doubleDottedHalfNoteDuration);
+                    note3 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect4th, halfNoteAndEigthNoteDuration);
                     note4 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor3rd, wholeNoteDuration);
+                    break;
+
+                case L1C7MelodicDrillType.TiDoDo:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.DownMinor2nd, dottedQuarterNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber, halfNoteAndEigthNoteDuration);
+                    note3 = NAudioHelper.GetSampleProvider(doNoteNumber, wholeNoteDuration);
                     break;
 
                 default:
@@ -74,8 +81,11 @@ namespace EarTraining.Controllers
 
             var phrase = note1
                 .FollowedBy(note2)
-                .FollowedBy(note3)
-                .FollowedBy(note4);
+                .FollowedBy(note3);
+            if(note4 != null)
+            {
+                phrase = phrase.FollowedBy(note4);
+            }
 
             var stwp = new SampleToWaveProvider(phrase);
 
