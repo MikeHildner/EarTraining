@@ -294,8 +294,11 @@
             }
 
             var doInfo = $('#doSpoiler').text();
-            var progression = buildProgressionText(doInfo, msg);
-            $('#progression2').html(msg + '<span class="font-weight-bold pad-left-20">' + progression + '</span>');
+            //var progression = buildProgressionText(doInfo, msg);
+            //$('#progression2').html(msg + '<span class="font-weight-bold pad-left-20">' + progression + '</span>');
+
+            var progressionTable = buildProgressionTable(doInfo, msg);
+            $('#progression2').html(progressionTable);
         }
 
         function setAudProgression3Src() {
@@ -352,9 +355,11 @@
             }
 
             var doInfo = $('#doSpoiler').text();
-            var progression = buildProgressionText(doInfo, msg);
-            $('#progression3').html(msg + '<span class="font-weight-bold pad-left-20">' + progression + '</span>');
+            //var progression = buildProgressionText(doInfo, msg);
+            //$('#progression3').html(msg + '<span class="font-weight-bold pad-left-20">' + progression + '</span>');
 
+            var progressionTable = buildProgressionTable(doInfo, msg);
+            $('#progression3').html(progressionTable);
         }
     </script>
 }

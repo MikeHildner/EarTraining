@@ -107,3 +107,16 @@ audio {
 .pad-left-20{
     padding-left: 20px;
 }
+
+.tdcenter{
+    width: 100%;
+    table-layout: fixed;
+}
+
+.tdcenter td{
+    text-align:center;
+}
+
+.bottom-border{
+    border-bottom: 1pt solid;
+}

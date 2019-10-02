@@ -155,8 +155,11 @@
             }
 
             var doInfo = $('#doSpoiler').text();
-            var progression = buildProgressionText(doInfo, msg);
-            $('#triad').html(msg + '<span class="font-weight-bold pad-left-20">' + progression + '</span>');
+            //var progression = buildProgressionText(doInfo, msg);
+            //$('#triad').html(msg + '<span class="font-weight-bold pad-left-20">' + progression + '</span>');
+
+            var progressionTable = buildProgressionTable(doInfo, msg);
+            $('#triad').html(progressionTable);
     }
 
     </script>

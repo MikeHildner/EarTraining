@@ -51,7 +51,7 @@ function buildProgressionText(doInfo, progInfo) {
     // Get just the note name from doInfo.
     var theDo = doInfo.split('-')[0].split('/')[0].trim();
     theDo = theDo.replace(/[0-9]/g, '');
-    console.log('theDo: ' + theDo);
+    //console.log('theDo: ' + theDo);
 
     // Get progression.
     // Remove parenthesis and text inside them.
@@ -60,7 +60,7 @@ function buildProgressionText(doInfo, progInfo) {
 
     // Remove whitespace.
     progInfo = progInfo.replace(/\s+/g, "");
-    console.log('progInfo: ' + progInfo);
+    //console.log('progInfo: ' + progInfo);
 
     // Get the roman numerals as an array.
     var progs = progInfo.split('-');
@@ -73,8 +73,43 @@ function buildProgressionText(doInfo, progInfo) {
         }
     }
 
-    console.log('progText: ' + progText);
+    //console.log('progText: ' + progText);
     return '<br/>' + progText;
+}
+
+function buildProgressionTable(doInfo, progInfo) {
+    // Get just the note name from doInfo.
+    var theDo = doInfo.split('-')[0].split('/')[0].trim();
+    theDo = theDo.replace(/[0-9]/g, '');
+
+    // Get progression.
+    // Remove parenthesis and text inside them.
+    progInfo = progInfo.replace(/ *\([^)]*\) */g, '');
+
+    // Remove whitespace.
+    progInfo = progInfo.replace(/\s+/g, "");
+
+    // Get the roman numerals as an array.
+    var progs = progInfo.split('-');
+
+    var progTable = '<table class="tdcenter">';
+
+    // Numerals.
+    progTable += '<tr>';
+    for (var i = 0; i < progs.length; i++) {
+        progTable += '<td class="bottom-border">' + progs[i] + '</td>';
+    }
+    progTable += '<tr>';
+
+    // Chords.
+    progTable += '<tr>';
+    for (var j = 0; j < progs.length; j++) {
+        progTable += '<td class="font-weight-bold">' + getChord(theDo, progs[j]) + '</td>';
+    }
+    progTable += '<tr>';
+
+    progTable += '</table>';
+    return progTable;
 }
 
 function getChord(theDo, numeral) {
