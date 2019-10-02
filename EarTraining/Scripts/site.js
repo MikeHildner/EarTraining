@@ -74,7 +74,7 @@ function buildProgressionText(doInfo, progInfo) {
     }
 
     console.log('progText: ' + progText);
-    return progText;
+    return '<br/>' + progText;
 }
 
 function getChord(theDo, numeral) {

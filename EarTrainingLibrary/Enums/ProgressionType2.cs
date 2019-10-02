@@ -29,7 +29,7 @@ namespace EarTrainingLibrary.Enums
         ThreeMin2ndOneRootSixMin1st = 14,
         FourRootOne1stThreeMinRoot = 15,
         SixMin2ndThreeMinRootOne1st = 16,
-        One2ndFour1stFiveRoot = 17,
+        One2ndFour1stFive1st = 17,
         SixMinRootOne2ndFour1st = 18,
         ThreeMin1stSixMinRootFour1st = 19,
         OneRootSixMin1stFive1st = 20,
