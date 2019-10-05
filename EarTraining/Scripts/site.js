@@ -82,6 +82,9 @@ function buildProgressionTable(doInfo, progInfo) {
     var theDo = doInfo.split('-')[0].split('/')[0].trim();
     theDo = theDo.replace(/[0-9]/g, '');
 
+    // Split the progInfo, keeping inversion info.
+    var progsWithInversionInfo = progInfo.split('-');
+
     // Get progression.
     // Remove parenthesis and text inside them.
     progInfo = progInfo.replace(/ *\([^)]*\) */g, '');
@@ -94,10 +97,10 @@ function buildProgressionTable(doInfo, progInfo) {
 
     var progTable = '<table class="tdcenter">';
 
-    // Numerals.
+    // Numerals with inversion info.
     progTable += '<tr>';
-    for (var i = 0; i < progs.length; i++) {
-        progTable += '<td class="bottom-border">' + progs[i] + '</td>';
+    for (var i = 0; i < progsWithInversionInfo.length; i++) {
+        progTable += '<td class="bottom-border">' + progsWithInversionInfo[i] + '</td>';
     }
     progTable += '<tr>';
 
