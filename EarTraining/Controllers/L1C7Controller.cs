@@ -277,5 +277,90 @@ namespace EarTraining.Controllers
             wavStream.WavToMp3File(out string fileName);
             return Redirect($"~/Temp/{fileName}");
         }
+
+        public ActionResult Get3ChordProgressionEx(string doNoteName, int progressiontype)
+        {
+            var progressionType = (ProgressionType3)progressiontype;
+
+            TimeSpan duration = TimeSpan.FromSeconds(2);
+
+            string doFileName = NAudioHelper.GetFileNameFromNoteName(doNoteName);
+            doFileName = Path.GetFileName(doFileName);
+            int doNoteNumber = int.Parse(doFileName.Split('.')[0]);
+
+            ISampleProvider[] samples1;
+            ISampleProvider[] samples2;
+            ISampleProvider[] samples3;
+
+            switch (progressionType)
+            {
+                case ProgressionType3.One2ndTwoMin1stThreeMin1st:
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.HighSecondInversion, duration);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.TwoMinor, InversionType.HighFirstInversion, duration);
+                    samples3 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.ThreeMinor, InversionType.HighFirstInversion, duration);
+                    break;
+
+                case ProgressionType3.One1stFive2ndSixMin2nd:
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.HighFirstInversion, duration);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FiveMajor, InversionType.LowSecondInversion, duration);
+                    samples3 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.SixMinor, InversionType.LowSecondInversion, duration);
+                    break;
+
+                case ProgressionType3.Four2ndFive1stSixMin1st:
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FourMajor, InversionType.LowSecondInversion, duration);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FiveMajor, InversionType.LowFirstInversion, duration);
+                    samples3 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.SixMinor, InversionType.LowFirstInversion, duration);
+                    break;
+
+                case ProgressionType3.ThreeMin1stOne2ndTwoMin1st:
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.ThreeMinor, InversionType.HighFirstInversion, duration);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.HighSecondInversion, duration);
+                    samples3 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.TwoMinor, InversionType.HighFirstInversion, duration);
+                    break;
+
+                case ProgressionType3.FourRootFive2ndThreeMinRoot:
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FourMajor, InversionType.RootPosition, duration);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FiveMajor, InversionType.LowSecondInversion, duration);
+                    samples3 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.ThreeMinor, InversionType.RootPosition, duration);
+                    break;
+
+                case ProgressionType3.OneRootTwoMin2ndFour1st:
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.RootPosition, duration);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.TwoMinor, InversionType.LowSecondInversion, duration);
+                    samples3 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FourMajor, InversionType.LowFirstInversion, duration);
+                    break;
+
+                default:
+                    throw new NotSupportedException($"ProgressionType {progressionType} is not supported.");
+            }
+
+            MixingSampleProvider msp1 = new MixingSampleProvider(samples1[0].WaveFormat);
+            msp1.AddMixerInput(samples1[0]);
+            msp1.AddMixerInput(samples1[1]);
+            msp1.AddMixerInput(samples1[2]);
+
+            MixingSampleProvider msp2 = new MixingSampleProvider(samples2[0].WaveFormat);
+            msp2.AddMixerInput(samples2[0]);
+            msp2.AddMixerInput(samples2[1]);
+            msp2.AddMixerInput(samples2[2]);
+
+            MixingSampleProvider msp3 = new MixingSampleProvider(samples3[0].WaveFormat);
+            msp3.AddMixerInput(samples3[0]);
+            msp3.AddMixerInput(samples3[1]);
+            msp3.AddMixerInput(samples3[2]);
+
+            var phrase = msp1
+                .FollowedBy(msp2)
+                .FollowedBy(msp3);
+
+            var stwp = new SampleToWaveProvider(phrase);
+
+            MemoryStream wavStream = new MemoryStream();
+            WaveFileWriter.WriteWavFileToStream(wavStream, stwp);
+            wavStream.Position = 0;
+
+            wavStream.WavToMp3File(out string fileName);
+            return Redirect($"~/Temp/{fileName}");
+        }
     }
 }
