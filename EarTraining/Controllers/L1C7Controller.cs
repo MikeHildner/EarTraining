@@ -22,12 +22,6 @@ namespace EarTraining.Controllers
             ViewBag.Pitch = pitch;
         }
 
-        public ActionResult DiatonicTriadProgressions()
-        {
-            ViewBag.ShowPlayDoTriad = true;
-            return View();
-        }
-
         public ActionResult VocalDrills()
         {
             return View();
@@ -35,6 +29,18 @@ namespace EarTraining.Controllers
 
         public ActionResult HarmonicIntervals()
         {
+            return View();
+        }
+
+        public ActionResult DiatonicTriadRecognition()
+        {
+            ViewBag.ShowPlayDoTriad = true;
+            return View();
+        }
+
+        public ActionResult DiatonicTriadProgressions()
+        {
+            ViewBag.ShowPlayDoTriad = true;
             return View();
         }
 
