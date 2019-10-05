@@ -33,6 +33,11 @@ namespace EarTraining.Controllers
             return View();
         }
 
+        public ActionResult HarmonicIntervals()
+        {
+            return View();
+        }
+
         public ActionResult GetMelodicDrill(string doNoteName, int type)
         {
             L1C7MelodicDrillType drillType = (L1C7MelodicDrillType)type;
@@ -135,6 +140,66 @@ namespace EarTraining.Controllers
             wavStream.Position = 0;
             return wavStream;
         }
+
+        public ActionResult GetHarmonicDrill(string doNoteName, int type)
+        {
+            L1C7HarmonicDrillType drillType = (L1C7HarmonicDrillType)type;
+            MemoryStream wavStream = GetHarmonicDrill(doNoteName, drillType);
+
+            wavStream.WavToMp3File(out string fileName);
+            return Redirect($"~/Temp/{fileName}");
+        }
+
+        private MemoryStream GetHarmonicDrill(string doNoteName, L1C7HarmonicDrillType drillType)
+        {
+            TimeSpan duration = TimeSpan.FromSeconds(3);
+
+            string doFileName = NAudioHelper.GetFileNameFromNoteName(doNoteName);
+            doFileName = Path.GetFileName(doFileName);
+            int doNoteNumber = int.Parse(doFileName.Split('.')[0]);
+
+            ISampleProvider note1, note2;
+
+            switch (drillType)
+            {
+                // Minor 2nds.
+                case L1C7HarmonicDrillType.MiFa2nd:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor3rd, duration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect4th, duration);
+                    break;
+
+                case L1C7HarmonicDrillType.TiDo2nd:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor7th, duration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfectOctave, duration);
+                    break;
+
+                // Major 7ths.
+                case L1C7HarmonicDrillType.DoTi7th:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber, duration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor7th, duration);
+                    break;
+
+                case L1C7HarmonicDrillType.FaMi7th:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect4th, duration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor10th, duration);
+                    break;
+
+                default:
+                    throw new NotSupportedException($"L1C7HarmonicDrillType '{drillType}' is not supported.");
+            }
+
+            MixingSampleProvider msp = new MixingSampleProvider(note1.WaveFormat);
+            msp.AddMixerInput(note1);
+            msp.AddMixerInput(note2);
+
+            var stwp = new SampleToWaveProvider(msp);
+
+            MemoryStream wavStream = new MemoryStream();
+            WaveFileWriter.WriteWavFileToStream(wavStream, stwp);
+            wavStream.Position = 0;
+            return wavStream;
+        }
+
         public ActionResult Get2ChordProgressionEx(string doNoteName, int progressiontype)
         {
             var progressionType = (ProgressionType3)progressiontype;
