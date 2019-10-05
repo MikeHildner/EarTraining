@@ -47,36 +47,6 @@ function getNewDo() {
 
 }
 
-function buildProgressionText(doInfo, progInfo) {
-    // Get just the note name from doInfo.
-    var theDo = doInfo.split('-')[0].split('/')[0].trim();
-    theDo = theDo.replace(/[0-9]/g, '');
-    //console.log('theDo: ' + theDo);
-
-    // Get progression.
-    // Remove parenthesis and text inside them.
-    progInfo = progInfo.replace(/ *\([^)]*\) */g, '');
-    //console.log('progInfo: ' + progInfo);
-
-    // Remove whitespace.
-    progInfo = progInfo.replace(/\s+/g, "");
-    //console.log('progInfo: ' + progInfo);
-
-    // Get the roman numerals as an array.
-    var progs = progInfo.split('-');
-
-    var progText = '';
-    for (var i = 0; i < progs.length; i++) {
-        progText += getChord(theDo, progs[i]);
-        if (i + 1 < progs.length) {
-            progText += ' - ';
-        }
-    }
-
-    //console.log('progText: ' + progText);
-    return '<br/>' + progText;
-}
-
 function buildProgressionTable(doInfo, progInfo) {
     // Get just the note name from doInfo.
     var theDo = doInfo.split('-')[0].split('/')[0].trim();
@@ -123,6 +93,10 @@ function getChord(theDo, numeral) {
     switch (numeral) {
         case 'I':
             chord = scale[0];
+            break;
+        case 'ii':
+            chord = scale[1];
+            isMinor = true;
             break;
         case 'iii':
             chord = scale[2];

@@ -221,9 +221,14 @@ namespace EarTraining.Controllers
 
             switch (progressionType)
             {
-                case ProgressionType3.OneRootTwoMinRoot:
-                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.RootPosition, noteDuration);
-                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.TwoMinor, InversionType.RootPosition, noteDuration);
+                case ProgressionType3.Four2ndOneRoot:
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FourMajor, InversionType.LowSecondInversion, noteDuration);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.RootPosition, noteDuration);
+                    break;
+
+                case ProgressionType3.TwoMinRootFive1st:
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.TwoMinor, InversionType.RootPosition, noteDuration);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FiveMajor, InversionType.LowFirstInversion, noteDuration);
                     break;
 
                 default:

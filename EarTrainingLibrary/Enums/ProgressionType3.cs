@@ -8,6 +8,7 @@ namespace EarTrainingLibrary.Enums
 {
     public enum ProgressionType3
     {
-        OneRootTwoMinRoot = 0,
+        Four2ndOneRoot = 0,
+        TwoMinRootFive1st = 1,
     }
 }
