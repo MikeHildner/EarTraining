@@ -499,88 +499,88 @@ namespace EarTraining.Controllers
                 case L1C2HarmonicDrillType.DoMi3:
                     newDo = doNoteNumber;
                     secondNoteNumber = newDo + Interval.UpMajor3rd;
-                    inversionType = InversionType.RootPosition;
+                    inversionType = InversionType.Root;
                     break;
 
                 case L1C2HarmonicDrillType.FaLa3:
                     newDo = doNoteNumber + Interval.UpPerfect4th;
                     secondNoteNumber = newDo + Interval.UpMajor3rd;
-                    inversionType = InversionType.RootPosition;
+                    inversionType = InversionType.Root;
                     break;
 
                 case L1C2HarmonicDrillType.SoTi3:
                     newDo = doNoteNumber + Interval.UpPerfect5th;
                     secondNoteNumber = newDo + Interval.UpMajor3rd;
-                    inversionType = InversionType.RootPosition;
+                    inversionType = InversionType.Root;
                     break;
 
                 // Minor 6th intervals.
                 case L1C2HarmonicDrillType.MiDo6:
                     newDo = doNoteNumber;
                     secondNoteNumber = newDo + Interval.UpMajor3rd;
-                    inversionType = InversionType.HighFirstInversion;
+                    inversionType = InversionType.HighFirst;
                     break;
 
                 case L1C2HarmonicDrillType.LaFa6:
                     newDo = doNoteNumber + Interval.UpPerfect4th;
                     secondNoteNumber = newDo + Interval.UpMajor3rd;
-                    inversionType = InversionType.HighFirstInversion;
+                    inversionType = InversionType.HighFirst;
                     break;
 
                 case L1C2HarmonicDrillType.TiSo6:
                     newDo = doNoteNumber + Interval.UpPerfect5th;
                     secondNoteNumber = newDo + Interval.UpMajor3rd;
-                    inversionType = InversionType.HighFirstInversion;
+                    inversionType = InversionType.HighFirst;
                     break;
 
                 // Minor 3rd intervals.
                 case L1C2HarmonicDrillType.ReFa3:
                     newDo = doNoteNumber + Interval.UpMajor2nd;
                     secondNoteNumber = newDo + Interval.UpMinor3rd;
-                    inversionType = InversionType.RootPosition;
+                    inversionType = InversionType.Root;
                     break;
 
                 case L1C2HarmonicDrillType.MiSo3:
                     newDo = doNoteNumber + Interval.UpMajor3rd;
                     secondNoteNumber = newDo + Interval.UpMinor3rd;
-                    inversionType = InversionType.RootPosition;
+                    inversionType = InversionType.Root;
                     break;
 
                 case L1C2HarmonicDrillType.LaDo3:
                     newDo = doNoteNumber + Interval.UpMajor6th;
                     secondNoteNumber = newDo + Interval.UpMinor3rd;
-                    inversionType = InversionType.RootPosition;
+                    inversionType = InversionType.Root;
                     break;
 
                 case L1C2HarmonicDrillType.TiRe3:
                     newDo = doNoteNumber + Interval.UpMajor7th;
                     secondNoteNumber = newDo + Interval.UpMinor3rd;
-                    inversionType = InversionType.RootPosition;
+                    inversionType = InversionType.Root;
                     break;
 
                 // Major 6th intervals.
                 case L1C2HarmonicDrillType.FaRe6:
                     newDo = doNoteNumber + Interval.UpMajor2nd;
                     secondNoteNumber = newDo + Interval.UpMinor3rd;
-                    inversionType = InversionType.HighFirstInversion;
+                    inversionType = InversionType.HighFirst;
                     break;
 
                 case L1C2HarmonicDrillType.SoMi6:
                     newDo = doNoteNumber + Interval.UpMajor3rd;
                     secondNoteNumber = newDo + Interval.UpMinor3rd;
-                    inversionType = InversionType.HighFirstInversion;
+                    inversionType = InversionType.HighFirst;
                     break;
 
                 case L1C2HarmonicDrillType.DoLa6:
                     newDo = doNoteNumber + Interval.UpMajor6th;
                     secondNoteNumber = newDo + Interval.UpMinor3rd;
-                    inversionType = InversionType.LowFirstInversion;
+                    inversionType = InversionType.LowFirst;
                     break;
 
                 case L1C2HarmonicDrillType.ReTi6:
                     newDo = doNoteNumber + Interval.UpMajor7th;
                     secondNoteNumber = newDo + Interval.UpMinor3rd;
-                    inversionType = InversionType.LowFirstInversion;
+                    inversionType = InversionType.LowFirst;
                     break;
 
                 default:

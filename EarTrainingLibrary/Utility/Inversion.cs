@@ -16,27 +16,27 @@ namespace EarTrainingLibrary.Utility
         {
             switch(inversionType)
             {
-                case InversionType.RootPosition:
+                case InversionType.Root:
                     // Do nothing - just make what we were given.
                     break;
 
-                case InversionType.HighFirstInversion:
+                case InversionType.HighFirst:
                     // Take the bottom note up an octave.
                     frequencies[0] *= 2;
                     break;
 
-                case InversionType.HighSecondInversion:
+                case InversionType.HighSecond:
                     // Take the bottom two notes up an octave.
                     frequencies[0] *= 2;
                     frequencies[1] *= 2;
                     break;
 
-                case InversionType.LowSecondInversion:
+                case InversionType.LowSecond:
                     // Take the top note down an octave.
                     frequencies[2] /= 2;
                     break;
 
-                case InversionType.LowFirstInversion:
+                case InversionType.LowFirst:
                     // Take the top two notes down an octave.
                     frequencies[1] /= 2;
                     frequencies[2] /= 2;
@@ -59,27 +59,27 @@ namespace EarTrainingLibrary.Utility
         {
             switch (inversionType)
             {
-                case InversionType.RootPosition:
+                case InversionType.Root:
                     // Do nothing - just make what we were given.
                     break;
 
-                case InversionType.HighFirstInversion:
+                case InversionType.HighFirst:
                     // Take the bottom note up an octave.
                     firstNoteNumber += 12;
                     break;
 
-                case InversionType.HighSecondInversion:
+                case InversionType.HighSecond:
                     // Take the bottom two notes up an octave.
                     firstNoteNumber += 12;
                     secondNoteNumber += 12;
                     break;
 
-                case InversionType.LowSecondInversion:
+                case InversionType.LowSecond:
                     // Take the top note down an octave.
                     thirdNoteNumber -= 12;
                     break;
 
-                case InversionType.LowFirstInversion:
+                case InversionType.LowFirst:
                     // Take the top two notes down an octave.
                     secondNoteNumber -= 12;
                     thirdNoteNumber -= 12;
@@ -145,27 +145,27 @@ namespace EarTrainingLibrary.Utility
 
             switch (inversionType)
             {
-                case InversionType.RootPosition:
+                case InversionType.Root:
                     // Do nothing - just make what we were given.
                     break;
 
-                case InversionType.HighFirstInversion:
+                case InversionType.HighFirst:
                     // Take the bottom note up an octave.
                     firstNoteNumber += 12;
                     break;
 
-                case InversionType.HighSecondInversion:
+                case InversionType.HighSecond:
                     // Take the bottom two notes up an octave.
                     firstNoteNumber += 12;
                     secondNoteNumber += 12;
                     break;
 
-                case InversionType.LowSecondInversion:
+                case InversionType.LowSecond:
                     // Take the top note down an octave.
                     thirdNoteNumber -= 12;
                     break;
 
-                case InversionType.LowFirstInversion:
+                case InversionType.LowFirst:
                     // Take the top two notes down an octave.
                     secondNoteNumber -= 12;
                     thirdNoteNumber -= 12;
@@ -187,16 +187,16 @@ namespace EarTrainingLibrary.Utility
         {
             switch (inversionType)
             {
-                case InversionType.RootPosition:
+                case InversionType.Root:
                     // Do nothing - just make what we were given.
                     break;
 
-                case InversionType.HighFirstInversion:
+                case InversionType.HighFirst:
                     // Take the bottom note up an octave.
                     firstNoteNumber += Interval.UpPerfectOctave;
                     break;
 
-                case InversionType.LowFirstInversion:
+                case InversionType.LowFirst:
                     // Take top note down an octave.
                     secondNoteNumber += Interval.DownPerfectOctave;
                     break;

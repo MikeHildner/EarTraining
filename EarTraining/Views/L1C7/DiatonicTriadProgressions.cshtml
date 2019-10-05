@@ -195,7 +195,7 @@
 
                             <div class="col-md-4">
                                 <figure>
-                                    <figcaption><img class="piano" /> </figcaption>
+                                    <figcaption><img class="piano" /> I (1st) - iii (root) - ii (1st)</figcaption>
                                     <audio controls preload='none'>
                                         <source src='@Url.Action("Get3ChordProgressionEx", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 12 })' type='audio/mpeg'>
                                     </audio>
@@ -204,7 +204,7 @@
 
                             <div class="col-md-4">
                                 <figure>
-                                    <figcaption><img class="piano" /> </figcaption>
+                                    <figcaption><img class="piano" /> IV (2nd) - I (root) - V (1st)</figcaption>
                                     <audio controls preload='none'>
                                         <source src='@Url.Action("Get3ChordProgressionEx", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 13 })' type='audio/mpeg'>
                                     </audio>
@@ -213,7 +213,7 @@
 
                             <div class="col-md-4">
                                 <figure>
-                                    <figcaption><img class="piano" /> </figcaption>
+                                    <figcaption><img class="piano" /> vi (root) - IV (1st) - I (2nd)</figcaption>
                                     <audio controls preload='none'>
                                         <source src='@Url.Action("Get3ChordProgressionEx", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 14 })' type='audio/mpeg'>
                                     </audio>
@@ -222,7 +222,7 @@
 
                             <div class="col-md-4">
                                 <figure>
-                                    <figcaption><img class="piano" /> </figcaption>
+                                    <figcaption><img class="piano" /> V (2nd) - I (root) - ii (root)</figcaption>
                                     <audio controls preload='none'>
                                         <source src='@Url.Action("Get3ChordProgressionEx", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 15 })' type='audio/mpeg'>
                                     </audio>
@@ -231,18 +231,9 @@
 
                             <div class="col-md-4">
                                 <figure>
-                                    <figcaption><img class="piano" /> </figcaption>
+                                    <figcaption><img class="piano" /> I (1st) - V (2nd) - IV (root)</figcaption>
                                     <audio controls preload='none'>
                                         <source src='@Url.Action("Get3ChordProgressionEx", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 16 })' type='audio/mpeg'>
-                                    </audio>
-                                </figure>
-                            </div>
-
-                            <div class="col-md-4">
-                                <figure>
-                                    <figcaption><img class="piano" /> </figcaption>
-                                    <audio controls preload='none'>
-                                        <source src='@Url.Action("Get3ChordProgressionEx", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 17 })' type='audio/mpeg'>
                                     </audio>
                                 </figure>
                             </div>
@@ -308,7 +299,7 @@
 
         function setAudProgression3Src() {
             var baseSrc = '@Url.Action("Get3ChordProgressionEx", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName })';
-            var progressiontype = getRandomInt(6, 17);
+            var progressiontype = getRandomInt(6, 16);
             var src = baseSrc + '&progressiontype=' + progressiontype;
             $('#audProgression3').attr('src', src);
 
@@ -339,27 +330,23 @@
                 break;
 
                 case 12:
-                msg = msg + ' ';
+                msg = msg + ' I (1st) - iii (root) - ii (1st)';
                 break;
 
                 case 13:
-                msg = msg + ' ';
+                msg = msg + ' IV (2nd) - I (root) - V (1st)';
                 break;
 
                 case 14:
-                msg = msg + ' ';
+                msg = msg + ' vi (root) - IV (1st) - I (2nd)';
                 break;
 
                 case 15:
-                msg = msg + ' ';
+                msg = msg + ' V (2nd) - I (root) - ii (root)';
                 break;
 
                 case 16:
-                msg = msg + ' ';
-                break;
-
-                case 17:
-                msg = msg + ' ';
+                msg = msg + ' I (1st) - V (2nd) - IV (root)';
                 break;
 
                 default:

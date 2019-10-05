@@ -8,10 +8,10 @@ namespace EarTrainingLibrary.Enums
 {
     public enum InversionType
     {
-        RootPosition = 0,
-        HighFirstInversion = 1,
-        HighSecondInversion = 2,
-        LowSecondInversion = 3,
-        LowFirstInversion = 4
+        Root = 0,
+        HighFirst = 1,
+        HighSecond = 2,
+        LowSecond = 3,
+        LowFirst = 4
     }
 }
