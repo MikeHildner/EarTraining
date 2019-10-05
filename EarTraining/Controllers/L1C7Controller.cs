@@ -231,6 +231,26 @@ namespace EarTraining.Controllers
                     samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FiveMajor, InversionType.LowFirstInversion, noteDuration);
                     break;
 
+                case ProgressionType3.One2ndTwoMin1st:
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.HighSecondInversion, noteDuration);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.TwoMinor, InversionType.HighFirstInversion, noteDuration);
+                    break;
+
+                case ProgressionType3.SixMinRootFour1st:
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.SixMinor, InversionType.RootPosition, noteDuration);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FourMajor, InversionType.LowFirstInversion, noteDuration);
+                    break;
+
+                case ProgressionType3.OneFirstFive2nd:
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.HighFirstInversion, noteDuration);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FiveMajor, InversionType.LowSecondInversion, noteDuration);
+                    break;
+
+                case ProgressionType3.OneRootSixMin1st:
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.RootPosition, noteDuration);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.SixMinor, InversionType.LowFirstInversion, noteDuration);
+                    break;
+
                 default:
                     throw new NotSupportedException($"ProgressionType {progressionType} is not supported.");
             }

@@ -10,5 +10,9 @@ namespace EarTrainingLibrary.Enums
     {
         Four2ndOneRoot = 0,
         TwoMinRootFive1st = 1,
+        One2ndTwoMin1st = 2,
+        SixMinRootFour1st = 3,
+        OneFirstFive2nd = 4,
+        OneRootSixMin1st = 5
     }
 }
