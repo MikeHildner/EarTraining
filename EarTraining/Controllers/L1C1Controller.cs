@@ -35,6 +35,11 @@ namespace EarTraining.Controllers
             return View();
         }
 
+        public ActionResult Experimental()
+        {
+            return View();
+        }
+
         public ActionResult GetResolutionDO(string doNoteName, int type)
         {
             ResolutionType rt = (ResolutionType)type;
