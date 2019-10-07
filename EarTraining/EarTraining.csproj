@@ -339,6 +339,7 @@
     <Content Include="Views\L1C7\VocalDrills.cshtml" />
     <Content Include="Views\L1C7\HarmonicIntervals.cshtml" />
     <Content Include="Views\L1C7\DiatonicTriadRecognition.cshtml" />
+    <Content Include="Views\L1C1\Experimental.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
