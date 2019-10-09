@@ -99,7 +99,7 @@
         function setAudResolutionSrc() {
             var baseSrc = '@Url.Action("GetResolutionNoDO", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName })';
             var excluded = getExcluded();
-            alert(excluded);
+            //alert(excluded);
             var randomInt = getRandomInt(0, 4, excluded);
             var src = baseSrc + '&type=' + randomInt;
             $('#audResolution').attr('src', src);
