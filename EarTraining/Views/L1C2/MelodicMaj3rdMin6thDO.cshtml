@@ -7,7 +7,7 @@
 <hr />
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 card">
         @{
             Html.RenderPartial("NewDO");
         }
@@ -17,7 +17,7 @@
 <hr />
 
 <div class="row toggle-demo" role="group">
-    <div class="col-md-6">
+    <div class="col-md-6 card">
         Include drills for
         <div class="switch-toggle alert alert-dark">
             <input id="maj3rds" name="intervaltype" type="radio" checked>
@@ -36,7 +36,7 @@
 
 <h4>Drill</h4>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 card">
         <figure>
             <figcaption>Press the play button to hear the interval</figcaption>
             <audio id="audDrill1" controls preload='none'>
@@ -54,49 +54,85 @@
 <div id="maj-3rd-prompts">
     <h4>Maj 3rd Prompts</h4>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 card">
             <figure>
-                <figcaption> DO DO MI MI MI</figcaption>
+                <figcaption>
+                    <div class="float-left">DO DO MI MI MI</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-0" checked />
+                        <label class="custom-control-label small" for="cb-include-0">Include in Drills</label>
+                    </div>
+                </figcaption>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetMelodicDrillDO", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 0 })' type='audio/mpeg'>
                 </audio>
             </figure>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 card">
             <figure>
-                <figcaption> FA FA LA LA SO</figcaption>
+                <figcaption>
+                    <div class="float-left">FA FA LA LA SO</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-1" checked />
+                        <label class="custom-control-label small" for="cb-include-1">Include in Drills</label>
+                    </div>
+                </figcaption>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetMelodicDrillDO", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 1 })' type='audio/mpeg'>
                 </audio>
             </figure>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 card">
             <figure>
-                <figcaption> SO SO TI TI DO</figcaption>
+                <figcaption>
+                    <div class="float-left">SO SO TI TI DO</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-2" checked />
+                        <label class="custom-control-label small" for="cb-include-2">Include in Drills</label>
+                    </div>
+                </figcaption>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetMelodicDrillDO", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 2 })' type='audio/mpeg'>
                 </audio>
             </figure>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 card">
             <figure>
-                <figcaption> TI TI SO SO SO</figcaption>
+                <figcaption>
+                    <div class="float-left">TI TI SO SO SO</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-3" checked />
+                        <label class="custom-control-label small" for="cb-include-3">Include in Drills</label>
+                    </div>
+                </figcaption>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetMelodicDrillDO", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 3 })' type='audio/mpeg'>
                 </audio>
             </figure>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 card">
             <figure>
-                <figcaption> LA LA FA FA MI</figcaption>
+                <figcaption>
+                    <div class="float-left">LA LA FA FA MI</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-4" checked />
+                        <label class="custom-control-label small" for="cb-include-4">Include in Drills</label>
+                    </div>
+                </figcaption>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetMelodicDrillDO", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 4 })' type='audio/mpeg'>
                 </audio>
             </figure>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 card">
             <figure>
-                <figcaption> MI MI DO DO DO</figcaption>
+                <figcaption>
+                    <div class="float-left">MI MI DO DO DO</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-5" checked />
+                        <label class="custom-control-label small" for="cb-include-5">Include in Drills</label>
+                    </div>
+                </figcaption>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetMelodicDrillDO", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 5 })' type='audio/mpeg'>
                 </audio>
@@ -109,49 +145,85 @@
 <div id="min-6th-prompts">
     <h4>Min 6th Prompts</h4>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 card">
             <figure>
-                <figcaption> MI MI DO DO DO</figcaption>
+                <figcaption>
+                    <div class="float-left">MI MI DO DO DO</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-6" checked />
+                        <label class="custom-control-label small" for="cb-include-6">Include in Drills</label>
+                    </div>
+                </figcaption>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetMelodicDrillDO", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 6 })' type='audio/mpeg'>
                 </audio>
             </figure>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 card">
             <figure>
-                <figcaption> LA LA FA FA MI</figcaption>
+                <figcaption>
+                    <div class="float-left">LA LA FA FA MI</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-7" checked />
+                        <label class="custom-control-label small" for="cb-include-7">Include in Drills</label>
+                    </div>
+                </figcaption>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetMelodicDrillDO", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 7 })' type='audio/mpeg'>
                 </audio>
             </figure>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 card">
             <figure>
-                <figcaption> TI TI SO SO SO</figcaption>
+                <figcaption>
+                    <div class="float-left">TI TI SO SO SO</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-8" checked />
+                        <label class="custom-control-label small" for="cb-include-8">Include in Drills</label>
+                    </div>
+                </figcaption>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetMelodicDrillDO", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 8 })' type='audio/mpeg'>
                 </audio>
             </figure>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 card">
             <figure>
-                <figcaption> SO SO TI TI DO</figcaption>
+                <figcaption>
+                    <div class="float-left">SO SO TI TI DO</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-9" checked />
+                        <label class="custom-control-label small" for="cb-include-9">Include in Drills</label>
+                    </div>
+                </figcaption>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetMelodicDrillDO", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 9 })' type='audio/mpeg'>
                 </audio>
             </figure>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 card">
             <figure>
-                <figcaption> FA FA LA LA SO</figcaption>
+                <figcaption>
+                    <div class="float-left">FA FA LA LA SO</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-10" checked />
+                        <label class="custom-control-label small" for="cb-include-10">Include in Drills</label>
+                    </div>
+                </figcaption>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetMelodicDrillDO", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 10 })' type='audio/mpeg'>
                 </audio>
             </figure>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 card">
             <figure>
-                <figcaption> DO DO MI MI MI</figcaption>
+                <figcaption>
+                    <div class="float-left">DO DO MI MI MI</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-11" checked />
+                        <label class="custom-control-label small" for="cb-include-11">Include in Drills</label>
+                    </div>
+                </figcaption>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetMelodicDrillDO", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 11 })' type='audio/mpeg'>
                 </audio>
@@ -165,6 +237,9 @@
     <script>
         $(document).ready(function () {
             setAudDrill1Src();
+            $('.cb-include').change(function () {
+                setAudDrill1Src();
+            });
 
             $('input[type=radio][name=intervaltype]').change(function () {
                 setAudDrill1Src();
@@ -179,6 +254,7 @@
 
             var minDrill;
             var maxDrill;
+            var excluded = getExcluded();
 
             switch (intervalType) {
                 case 'maj3rds':
@@ -207,7 +283,7 @@
                     consoleAndAlert(msg);
             }
 
-            var randomInt = randomInt = getRandomInt(minDrill, maxDrill);
+            var randomInt = getRandomInt(minDrill, maxDrill, excluded);
 
             var src = baseSrc + '&type=' + randomInt;
             $('#audDrill1').attr('src', src);
@@ -254,6 +330,6 @@
 
             $('#drill1').text(msg);
         }
-    
+
     </script>
 }
