@@ -34,55 +34,57 @@
     </div>
 </div>
 <hr />
+
+
 <h4>Practice Resolutions</h4>
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 card">
         <audio id="audDrill0" preload='none'>
             <source src='@Url.Action("GetResolutionNoDO", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 0 })' type='audio/mpeg'>
         </audio>
         <div style="float:left;">RE DO</div>
-        <div style="float:right;"><label><input type="checkbox" class="cb-include" id="cb-include-0" checked>Include Drill</label></div>
+        <div style="float:right;"><label><input type="checkbox" class="cb-include" id="cb-include-0" checked>Include in Drills</label></div>
         <div style="clear:both;">
             <i class="fa fa-youtube-play fa-4x text-primary" onclick="playAudio('audDrill0');"></i>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 card">
         <audio id="audDrill1" preload='none'>
             <source src='@Url.Action("GetResolutionNoDO", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 1 })' type='audio/mpeg'>
         </audio>
         <div style="float:left;">FA MI</div>
-        <div style="float:right;"><label><input type="checkbox" class="cb-include" id="cb-include-1" checked>Include Drill</label></div>
+        <div style="float:right;"><label><input type="checkbox" class="cb-include" id="cb-include-1" checked>Include in Drills</label></div>
         <div style="clear:both;">
             <i class="fa fa-youtube-play fa-4x text-primary" onclick="playAudio('audDrill1');"></i>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 card">
         <audio id="audDrill2" preload='none'>
             <source src='@Url.Action("GetResolutionNoDO", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 2 })' type='audio/mpeg'>
         </audio>
         <div style="float:left;">LA SO</div>
-        <div style="float:right;"><label><input type="checkbox" class="cb-include" id="cb-include-2" checked>Include Drill</label></div>
+        <div style="float:right;"><label><input type="checkbox" class="cb-include" id="cb-include-2" checked>Include in Drills</label></div>
         <div style="clear:both;">
             <i class="fa fa-youtube-play fa-4x text-primary" onclick="playAudio('audDrill2');"></i>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 card">
         <audio id="audDrill3" preload='none'>
             <source src='@Url.Action("GetResolutionNoDO", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 3 })' type='audio/mpeg'>
         </audio>
         <div style="float:left;">(high)TI DO</div>
-        <div style="float:right;"><label><input type="checkbox" class="cb-include" id="cb-include-3" checked>Include Drill</label></div>
+        <div style="float:right;"><label><input type="checkbox" class="cb-include" id="cb-include-3" checked>Include in Drills</label></div>
         <div style="clear:both;">
             <i class="fa fa-youtube-play fa-4x text-primary" onclick="playAudio('audDrill3');"></i>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 card">
         <audio id="audDrill4" preload='none'>
             <source src='@Url.Action("GetResolutionNoDO", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 4 })' type='audio/mpeg'>
         </audio>
         <div style="float:left;">(low)TI DO</div>
-        <div style="float:right;"><label><input type="checkbox" class="cb-include" id="cb-include-4" checked>Include Drill</label></div>
+        <div style="float:right;"><label><input type="checkbox" class="cb-include" id="cb-include-4" checked>Include in Drills</label></div>
         <div style="clear:both;">
             <i class="fa fa-youtube-play fa-4x text-primary" onclick="playAudio('audDrill4');"></i>
         </div>
