@@ -120,3 +120,7 @@ audio {
 .bottom-border{
     border-bottom: 1pt solid;
 }
+
+.card{
+    margin:2px;
+}

@@ -1,27 +1,24 @@
 ﻿@{
-    ViewBag.Title = "Solfeg Resolutions without DO";
+    ViewBag.Title = "Solfeg Resolutions Without DO";
 }
 
 <h2>Level 1 Chapter 1</h2>
 
 <h5>@ViewBag.Title</h5>
-<hr />
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 card">
         @{
             Html.RenderPartial("NewDO");
         }
     </div>
 </div>
 
-<hr />
-
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 card">
         <h4>Drill</h4>
         <figure>
-            <figcaption><img class="piano" />Press the play button to hear the resolution</figcaption>
+            <figcaption>Press the play button to hear the resolution</figcaption>
             <audio id="audResolution" controls preload='none'>
                 <source src='@Url.Action("GetResolutionNoDO", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName })' type='audio/mpeg'>
             </audio>
@@ -33,48 +30,80 @@
         </div>
     </div>
 </div>
-<hr />
+
 <h4>Practice Resolutions</h4>
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 card">
         <figure>
-            <figcaption><img class="piano" /> RE DO</figcaption>
+            <figcaption>
+                <div class="float-left">RE DO</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-0" checked />
+                    <label class="custom-control-label small" for="cb-include-0">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
             <audio controls preload='none'>
                 <source src='@Url.Action("GetResolutionNoDO", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 0 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 card">
         <figure>
-            <figcaption><img class="piano" /> FA MI</figcaption>
+            <figcaption>
+                <div class="float-left">FA MI</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-1" checked />
+                    <label class="custom-control-label small" for="cb-include-1">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
             <audio controls preload='none'>
                 <source src='@Url.Action("GetResolutionNoDO", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 1 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 card">
         <figure>
-            <figcaption><img class="piano" /> LA SO</figcaption>
+            <figcaption>
+                <div class="float-left">LA SO</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-2" checked />
+                    <label class="custom-control-label small" for="cb-include-2">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
             <audio controls preload='none'>
                 <source src='@Url.Action("GetResolutionNoDO", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 2 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 card">
         <figure>
-            <figcaption><img class="piano" /> (high)TI DO</figcaption>
+            <figcaption>
+                <div class="float-left">(high)TI DO</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-3" checked />
+                    <label class="custom-control-label small" for="cb-include-3">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
             <audio controls preload='none'>
                 <source src='@Url.Action("GetResolutionNoDO", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 3 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 card">
         <figure>
-            <figcaption><img class="piano" /> (low)TI DO</figcaption>
+            <figcaption>
+                <div class="float-left">(low)TI DO</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-4" checked />
+                    <label class="custom-control-label small" for="cb-include-4">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
             <audio controls preload='none'>
                 <source src='@Url.Action("GetResolutionNoDO", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 4 })' type='audio/mpeg'>
             </audio>
@@ -86,11 +115,15 @@
     <script>
         $(document).ready(function () {
             setAudResolutionSrc();
+            $('.cb-include').change(function () {
+                setAudResolutionSrc();
+            });
         });
 
         function setAudResolutionSrc() {
             var baseSrc = '@Url.Action("GetResolutionNoDO", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName })';
-            var randomInt = getRandomInt(0, 4);
+            var excluded = getExcluded();
+            var randomInt = getRandomInt(0, 4, excluded);
             var src = baseSrc + '&type=' + randomInt;
             $('#audResolution').attr('src', src);
 

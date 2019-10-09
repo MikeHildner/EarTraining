@@ -8,7 +8,7 @@
 <hr />
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 card">
         @{
             Html.RenderPartial("NewDO");
         }
@@ -18,10 +18,10 @@
 <hr />
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 card">
         <h4>Drill</h4>
         <figure>
-            <figcaption><img class="piano" />Press the play button to hear the note</figcaption>
+            <figcaption>Press the play button to hear the note</figcaption>
             <audio id="audNote" controls preload='none'>
                 <source src='' type='audio/mpeg'>
             </audio>
@@ -36,73 +36,127 @@
 <hr />
 <h3>Practice Notes</h3>
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 card">
         <figure>
-            <figcaption><img class="piano" /> TI</figcaption>
+            <figcaption>
+                <div class="float-left">TI</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include--1" checked />
+                    <label class="custom-control-label small" for="cb-include--1">Include in Drills</label>
+                </div>
+            </figcaption>
             <audio controls preload='none'>
                 <source src='@Url.Action("GetNoteEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = -1 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 card">
         <figure>
-            <figcaption><img class="piano" /> DO</figcaption>
+            <figcaption>
+                <div class="float-left">DO</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-0" checked />
+                    <label class="custom-control-label small" for="cb-include-0">Include in Drills</label>
+                </div>
+            </figcaption>
             <audio controls preload='none'>
                 <source src='@Url.Action("GetNoteEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 0 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 card">
         <figure>
-            <figcaption><img class="piano" /> RE</figcaption>
+            <figcaption>
+                <div class="float-left">RE</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-2" checked />
+                    <label class="custom-control-label small" for="cb-include-2">Include in Drills</label>
+                </div>
+            </figcaption>
             <audio controls preload='none'>
                 <source src='@Url.Action("GetNoteEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 2 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 card">
         <figure>
-            <figcaption><img class="piano" /> MI</figcaption>
+            <figcaption>
+                <div class="float-left">MI</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-4" checked />
+                    <label class="custom-control-label small" for="cb-include-4">Include in Drills</label>
+                </div>
+            </figcaption>
             <audio controls preload='none'>
                 <source src='@Url.Action("GetNoteEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 4 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 card">
         <figure>
-            <figcaption><img class="piano" /> FA</figcaption>
+            <figcaption>
+                <div class="float-left">FA</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-5" checked />
+                    <label class="custom-control-label small" for="cb-include-5">Include in Drills</label>
+                </div>
+            </figcaption>
             <audio controls preload='none'>
                 <source src='@Url.Action("GetNoteEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 5 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 card">
         <figure>
-            <figcaption><img class="piano" /> SO</figcaption>
+            <figcaption>
+                <div class="float-left">SO</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-7" checked />
+                    <label class="custom-control-label small" for="cb-include-7">Include in Drills</label>
+                </div>
+            </figcaption>
             <audio controls preload='none'>
                 <source src='@Url.Action("GetNoteEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 7 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 card">
         <figure>
-            <figcaption><img class="piano" /> LA</figcaption>
+            <figcaption>
+                <div class="float-left">LA</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-9" checked />
+                    <label class="custom-control-label small" for="cb-include-9">Include in Drills</label>
+                </div>
+            </figcaption>
             <audio controls preload='none'>
                 <source src='@Url.Action("GetNoteEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 9 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 card">
         <figure>
-            <figcaption><img class="piano" /> TI</figcaption>
+            <figcaption>
+                <div class="float-left">TI</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-11" checked />
+                    <label class="custom-control-label small" for="cb-include-11">Include in Drills</label>
+                </div>
+            </figcaption>
             <audio controls preload='none'>
                 <source src='@Url.Action("GetNoteEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 11 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 card">
         <figure>
-            <figcaption><img class="piano" /> DO</figcaption>
+            <figcaption>
+                <div class="float-left">DO</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-12" checked />
+                    <label class="custom-control-label small" for="cb-include-12">Include in Drills</label>
+                </div>
+            </figcaption>
             <audio controls preload='none'>
                 <source src='@Url.Action("GetNoteEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName, type = 12 })' type='audio/mpeg'>
             </audio>
@@ -114,11 +168,16 @@
     <script>
         $(document).ready(function () {
             setAudNoteSrc();
+            $('.cb-include').change(function () {
+                setAudNoteSrc();
+            });
         });
 
         function setAudNoteSrc() {
             var baseSrc = '@Url.Action("GetNoteEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName })';
-            var randomInt = getRandomInt(-1, 12, [1, 3, 6, 8, 10]);
+            var excluded = [1, 3, 6, 8, 10];
+            excluded = getExcluded(excluded);
+            var randomInt = getRandomInt(-1, 12, excluded);
             var src = baseSrc + '&type=' + randomInt;
             $('#audNote').attr('src', src);
 

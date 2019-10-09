@@ -21,7 +21,7 @@
     <div class="col-md-6">
         <h4>Drill</h4>
         <figure>
-            <figcaption><img class="piano" />Press the play button to hear the resolution</figcaption>
+            <figcaption>Press the play button to hear the resolution</figcaption>
             <audio id="audResolution" controls preload='none'>
                 <source src='@Url.Action("GetResolutionNoDO", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName })' type='audio/mpeg'>
             </audio>
@@ -101,7 +101,6 @@
         function setAudResolutionSrc() {
             var baseSrc = '@Url.Action("GetResolutionNoDO", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName })';
             var excluded = getExcluded();
-            //alert(excluded);
             var randomInt = getRandomInt(0, 4, excluded);
             var src = baseSrc + '&type=' + randomInt;
             $('#audResolution').attr('src', src);

@@ -168,3 +168,18 @@ function getMajorScale(theDo) {
 
     return scale;
 }
+
+function getExcluded(excluded) {
+    excluded = excluded || [];
+    $('.cb-include').each(function () {
+        var cb = $(this);
+        var checked = cb.is(':checked');
+        if (!checked) {
+            var num = cb.attr('id').replace('cb-include-', '');
+            num = parseInt(num);
+            excluded.push(num);
+        }
+    });
+    console.log(excluded);
+    return excluded;
+}
