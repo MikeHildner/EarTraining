@@ -4,20 +4,17 @@
 <h2>Level 1 Chapter 3</h2>
 
 <h5>@ViewBag.Title</h5>
-<hr />
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 card">
         @{
             Html.RenderPartial("NewDO");
         }
     </div>
 </div>
 
-<hr />
-
 <div class="row toggle-demo" role="group">
-    <div class="col-md-6">
+    <div class="col-md-6 card">
         Include drills for
         <div class="switch-toggle alert alert-dark">
             <input id="min3rds" name="intervaltype" type="radio" checked>
@@ -36,7 +33,7 @@
 
 <h4>Drill</h4>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 card">
         <figure>
             <figcaption>Press the play button to hear the interval</figcaption>
             <audio id="audDrill1" controls preload='none'>
@@ -50,39 +47,67 @@
         </div>
     </div>
 </div>
-<hr />
+
 <!-- Note that even though this is chapter 3, we're calling methods in chapter 2's controller because the code was already set up there. -->
 
 <div id="min-3rd-prompts">
     <h4>Min 3rd Prompts</h4>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 card">
             <figure>
-                <figcaption> RE FA</figcaption>
+                <figcaption>
+                    <div class="float-left">RE FA</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-6" checked />
+                        <label class="custom-control-label small" for="cb-include-6">Include in Drills</label>
+                    </div>
+                </figcaption>
+                <div class="clearfix"></div>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetHarmonicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 6 })' type='audio/mpeg'>
                 </audio>
             </figure>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 card">
             <figure>
-                <figcaption> MI SO</figcaption>
+                <figcaption>
+                    <div class="float-left">MI SO</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-7" checked />
+                        <label class="custom-control-label small" for="cb-include-7">Include in Drills</label>
+                    </div>
+                </figcaption>
+                <div class="clearfix"></div>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetHarmonicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 7 })' type='audio/mpeg'>
                 </audio>
             </figure>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 card">
             <figure>
-                <figcaption> LA DO</figcaption>
+                <figcaption>
+                    <div class="float-left">LA DO</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-8" checked />
+                        <label class="custom-control-label small" for="cb-include-8">Include in Drills</label>
+                    </div>
+                </figcaption>
+                <div class="clearfix"></div>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetHarmonicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 8 })' type='audio/mpeg'>
                 </audio>
             </figure>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 card">
             <figure>
-                <figcaption> TI RE</figcaption>
+                <figcaption>
+                    <div class="float-left">TI RE</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-9" checked />
+                        <label class="custom-control-label small" for="cb-include-9">Include in Drills</label>
+                    </div>
+                </figcaption>
+                <div class="clearfix"></div>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetHarmonicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 9 })' type='audio/mpeg'>
                 </audio>
@@ -94,33 +119,61 @@
 <div id="maj-6th-prompts">
     <h4>Maj 6th Prompts</h4>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 card">
             <figure>
-                <figcaption> FA RE</figcaption>
+                <figcaption>
+                    <div class="float-left">FA RE</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-10" checked />
+                        <label class="custom-control-label small" for="cb-include-10">Include in Drills</label>
+                    </div>
+                </figcaption>
+                <div class="clearfix"></div>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetHarmonicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 10 })' type='audio/mpeg'>
                 </audio>
             </figure>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 card">
             <figure>
-                <figcaption> SO MI</figcaption>
+                <figcaption>
+                    <div class="float-left">SO MI</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-11" checked />
+                        <label class="custom-control-label small" for="cb-include-11">Include in Drills</label>
+                    </div>
+                </figcaption>
+                <div class="clearfix"></div>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetHarmonicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 11 })' type='audio/mpeg'>
                 </audio>
             </figure>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 card">
             <figure>
-                <figcaption> DO LA</figcaption>
+                <figcaption>
+                    <div class="float-left">DO LA</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-12" checked />
+                        <label class="custom-control-label small" for="cb-include-12">Include in Drills</label>
+                    </div>
+                </figcaption>
+                <div class="clearfix"></div>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetHarmonicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 12 })' type='audio/mpeg'>
                 </audio>
             </figure>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 card">
             <figure>
-                <figcaption> RE TI</figcaption>
+                <figcaption>
+                    <div class="float-left">RE TI</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-13" checked />
+                        <label class="custom-control-label small" for="cb-include-13">Include in Drills</label>
+                    </div>
+                </figcaption>
+                <div class="clearfix"></div>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetHarmonicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName, type = 13 })' type='audio/mpeg'>
                 </audio>
@@ -137,6 +190,9 @@
             $('input[type=radio][name=intervaltype]').change(function () {
                 setAudDrill1Src();
             });
+            $('.cb-include').change(function () {
+                setAudDrill1Src();
+            });
         });
 
         function setAudDrill1Src() {
@@ -147,6 +203,7 @@
 
             var minDrill;
             var maxDrill;
+            var excluded = getExcluded();
 
             switch (intervalType) {
                 case 'min3rds':
@@ -175,7 +232,7 @@
                     consoleAndAlert(msg);
             }
 
-            var randomInt = randomInt = getRandomInt(minDrill, maxDrill);
+            var randomInt = getRandomInt(minDrill, maxDrill, excluded);
 
             var src = baseSrc + '&type=' + randomInt;
             $('#audDrill1').attr('src', src);
