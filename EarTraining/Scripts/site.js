@@ -161,7 +161,7 @@ function getMajorScale(theDo) {
             break;
         case 'F':
             scale = ['F', 'G', 'A', 'Bb', 'C', 'D', 'E'];
-            break;	
+            break;
         default:
             consoleAndAlert("getScale for '" + theDo + "' is not supported.");
     }
@@ -169,14 +169,15 @@ function getMajorScale(theDo) {
     return scale;
 }
 
-function getExcluded(excluded) {
+
+function getExcluded(excluded, index) {
     excluded = excluded || [];
     $('.cb-include').each(function () {
         var cb = $(this);
         var checked = cb.is(':checked');
         if (!checked) {
             var num = cb.attr('id').replace('cb-include-', '');
-            num = parseInt(num);
+            num = parseInt(num.split('-')[index]);
             excluded.push(num);
         }
     });

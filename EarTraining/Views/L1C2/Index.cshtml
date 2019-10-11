@@ -259,7 +259,7 @@
 
             // Get the drills based on what tab we're on.
             var randomInt;
-            var excluded = getExcluded();
+            var excluded = getExcluded(null, 0);
             switch (activeTabId) {
                 case 'nav-maj3rd':
                     randomInt = getRandomInt(0, 5, excluded);

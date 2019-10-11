@@ -24,7 +24,7 @@
         <p>Hover over the below to reveal the triad</p>
         <div class="spoiler" id="triad"></div>
         <div class="pad-top-10">
-            <input type="button" class="btn btn-primary" value="Get a New Triad" onclick="setAudioSrc()" />
+            <input type="button" class="btn btn-primary" value="Get a New Triad" onclick="setAudioSrc2()" />
         </div>
     </div>
 </div>
@@ -37,7 +37,14 @@
 <div class="row">
     <div class="col-md-4 card">
         <figure>
-            <figcaption> I (root)</figcaption>
+            <figcaption>
+                <div class="float-left">I (root)</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-0-0" checked />
+                    <label class="custom-control-label small" for="cb-include-0-0">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
             <audio id="audio" controls preload='none'>
                 <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 0, inversion = 0 })' type='audio/mpeg'>
             </audio>
@@ -45,7 +52,15 @@
     </div>
     <div class="col-md-4 card">
         <figure>
-            <figcaption> IV (root)</figcaption>
+            <figcaption>
+                IV (root)
+                <div class="float-left"></div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-1-0" checked />
+                    <label class="custom-control-label small" for="cb-include-1-0">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
             <audio id="audio" controls preload='none'>
                 <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 1, inversion = 0 })' type='audio/mpeg'>
             </audio>
@@ -53,7 +68,15 @@
     </div>
     <div class="col-md-4 card">
         <figure>
-            <figcaption> V (root)</figcaption>
+            <figcaption>
+                V (root)
+                <div class="float-left"></div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-2-0" checked />
+                    <label class="custom-control-label small" for="cb-include-2-0">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
             <audio id="audio" controls preload='none'>
                 <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 2, inversion = 0 })' type='audio/mpeg'>
             </audio>
@@ -61,7 +84,15 @@
     </div>
     <div class="col-md-4 card">
         <figure>
-            <figcaption> I (1st)</figcaption>
+            <figcaption>
+                I (1st)
+                <div class="float-left"></div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-0-1" checked />
+                    <label class="custom-control-label small" for="cb-include-0-1">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
             <audio id="audio" controls preload='none'>
                 <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 0, inversion = 1 })' type='audio/mpeg'>
             </audio>
@@ -69,7 +100,15 @@
     </div>
     <div class="col-md-4 card">
         <figure>
-            <figcaption> IV (1st)</figcaption>
+            <figcaption>
+                IV (1st)
+                <div class="float-left"></div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-1-1" checked />
+                    <label class="custom-control-label small" for="cb-include-1-1">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
             <audio id="audio" controls preload='none'>
                 <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 1, inversion = 1 })' type='audio/mpeg'>
             </audio>
@@ -77,7 +116,15 @@
     </div>
     <div class="col-md-4 card">
         <figure>
-            <figcaption> V (1st)</figcaption>
+            <figcaption>
+                V (1st)
+                <div class="float-left"></div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-2-1" checked />
+                    <label class="custom-control-label small" for="cb-include-2-1">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
             <audio id="audio" controls preload='none'>
                 <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 2, inversion = 1 })' type='audio/mpeg'>
             </audio>
@@ -85,7 +132,15 @@
     </div>
     <div class="col-md-4 card">
         <figure>
-            <figcaption> I (2nd)</figcaption>
+            <figcaption>
+                I (2nd)
+                <div class="float-left"></div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-0-2" checked />
+                    <label class="custom-control-label small" for="cb-include-0-2">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
             <audio id="audio" controls preload='none'>
                 <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 0, inversion = 2 })' type='audio/mpeg'>
             </audio>
@@ -93,7 +148,15 @@
     </div>
     <div class="col-md-4 card">
         <figure>
-            <figcaption> IV (2nd)</figcaption>
+            <figcaption>
+                IV (2nd)
+                <div class="float-left"></div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-1-2" checked />
+                    <label class="custom-control-label small" for="cb-include-1-2">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
             <audio id="audio" controls preload='none'>
                 <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 1, inversion = 2 })' type='audio/mpeg'>
             </audio>
@@ -101,7 +164,15 @@
     </div>
     <div class="col-md-4 card">
         <figure>
-            <figcaption> V (2nd)</figcaption>
+            <figcaption>
+                V (2nd)
+                <div class="float-left"></div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-2-2" checked />
+                    <label class="custom-control-label small" for="cb-include-2-2">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
             <audio id="audio" controls preload='none'>
                 <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 2, inversion = 2 })' type='audio/mpeg'>
             </audio>
@@ -113,8 +184,61 @@
 @section  scripts {
     <script>
         $(document).ready(function () {
-            setAudioSrc();
+            setAudioSrc2();
+            $('.cb-include').change(function () {
+            setAudioSrc2();
+            });
         });
+
+        function setAudioSrc2() {
+            var audioExSrc = '@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName })';
+
+            // Get the selected chords.
+            var selected = $('.cb-include:checkbox:checked');
+            // Pick a random one.
+            var randElement = selected[Math.floor(Math.random() * selected.length)];
+            var randId = $(randElement).attr('id');
+            console.log('randId: ' + randId);
+
+            // Parse out the triad type and inversion.
+            var tag = randId.replace('cb-include-', '');
+            var parts = tag.split('-');
+            var triadtype = parseInt(parts[0]);
+            var inversion = parseInt(parts[1]);
+
+            audioExSrc = audioExSrc + '&triadtype=' + triadtype + '&inversion=' + inversion;;
+
+            $('#audioEx').attr('src', audioExSrc);
+
+            var msg = '@ViewBag.Triad';
+            switch (triadtype) {
+                case 0:
+                    msg = msg + 'I ';
+                    break;
+                case 1:
+                    msg = msg + 'IV ';
+                    break;
+                case 2:
+                    msg = msg + 'V ';
+                    break;
+            }
+
+            switch (inversion) {
+                case 0:
+                    msg = msg + '(root)';
+                    break;
+                case 1:
+                    msg = msg + '(1st)';
+                    break;
+                case 2:
+                    msg = msg + '(2nd)';
+                    break;
+            }
+
+            var doInfo = $('#doSpoiler').text();
+            var progressionTable = buildProgressionTable(doInfo, msg);
+            $('#triad').html(progressionTable);
+    }
 
         function setAudioSrc() {
             var audioExSrc = '@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName })';
