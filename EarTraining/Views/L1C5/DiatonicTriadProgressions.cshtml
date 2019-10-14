@@ -56,8 +56,7 @@
                             <div class="col-md-4 card">
                                 <figure>
                                     <figcaption>
-                                        IV (2nd) - I (root)
-                                        <div class="float-left"></div>
+                                        <div class="float-left">IV (2nd) - I (root)</div>
                                         <div class="float-right custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input cb-include" id="cb-include-0" checked />
                                             <label class="custom-control-label small" for="cb-include-0">Include in Drills</label>
@@ -385,11 +384,10 @@
             setAudProgression2Src();
             setAudProgression3Src();
 
-        $('.cb-include').change(function () {
-            setAudProgression2Src();
-            setAudProgression3Src();
-        });
-
+            $('.cb-include').change(function () {
+                setAudProgression2Src();
+                setAudProgression3Src();
+            });
         });
 
         function setAudProgression2Src() {
