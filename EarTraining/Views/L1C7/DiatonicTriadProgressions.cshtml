@@ -5,19 +5,17 @@
 <h2>@ViewBag.Title</h2>
 
 <h5>2 and 3 Chord Progressions</h5>
-<hr />
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 card">
         @{
             Html.RenderPartial("NewDO");
         }
     </div>
 </div>
 
-
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 card">
         <h6>Helper - I chord</h6>
         <figure>
             <figcaption> I (root)</figcaption>
@@ -43,7 +41,7 @@
                         <h3>Drill</h3>
 
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-6 card">
                                 <figure>
                                     <figcaption>Press the play button to hear the progression</figcaption>
                                     <audio id="audProgression2" controls preload='none'>
@@ -57,57 +55,99 @@
                                 </div>
                             </div>
                         </div>
-                        <hr />
+                        
                         <h4>2 Chord Progression Prompts</h4>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-4 card">
                                 <figure>
-                                    <figcaption> IV (2nd) - I (root)</figcaption>
+                                    <figcaption>
+                                        <div class="float-left">IV (2nd) - I (root)</div>
+                                        <div class="float-right custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input cb-include" id="cb-include-0" checked />
+                                            <label class="custom-control-label small" for="cb-include-0">Include in Drills</label>
+                                        </div>
+                                    </figcaption>
+                                    <div class="clearfix"></div>
                                     <audio controls preload='none'>
                                         <source src='@Url.Action("Get2ChordProgressionEx", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 0 })' type='audio/mpeg'>
                                     </audio>
                                 </figure>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-4 card">
                                 <figure>
-                                    <figcaption> ii (root) - V (1st)</figcaption>
+                                    <figcaption>
+                                        <div class="float-left">ii (root) - V (1st)</div>
+                                        <div class="float-right custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input cb-include" id="cb-include-1" checked />
+                                            <label class="custom-control-label small" for="cb-include-1">Include in Drills</label>
+                                        </div>
+                                    </figcaption>
+                                    <div class="clearfix"></div>
                                     <audio controls preload='none'>
                                         <source src='@Url.Action("Get2ChordProgressionEx", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 1 })' type='audio/mpeg'>
                                     </audio>
                                 </figure>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-4 card">
                                 <figure>
-                                    <figcaption> I (2nd) - ii (1st)</figcaption>
+                                    <figcaption>
+                                        <div class="float-left">I (2nd) - ii (1st)</div>
+                                        <div class="float-right custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input cb-include" id="cb-include-2" checked />
+                                            <label class="custom-control-label small" for="cb-include-2">Include in Drills</label>
+                                        </div>
+                                    </figcaption>
+                                    <div class="clearfix"></div>
                                     <audio controls preload='none'>
                                         <source src='@Url.Action("Get2ChordProgressionEx", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 2 })' type='audio/mpeg'>
                                     </audio>
                                 </figure>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-4 card">
                                 <figure>
-                                    <figcaption> vi (root) - IV (1st)</figcaption>
+                                    <figcaption>
+                                        <div class="float-left">vi (root) - IV (1st)</div>
+                                        <div class="float-right custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input cb-include" id="cb-include-3" checked />
+                                            <label class="custom-control-label small" for="cb-include-3">Include in Drills</label>
+                                        </div>
+                                    </figcaption>
+                                    <div class="clearfix"></div>
                                     <audio controls preload='none'>
                                         <source src='@Url.Action("Get2ChordProgressionEx", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 3 })' type='audio/mpeg'>
                                     </audio>
                                 </figure>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-4 card">
                                 <figure>
-                                    <figcaption> I (1st) - V (2nd)</figcaption>
+                                    <figcaption>
+                                        <div class="float-left">I (1st) - V (2nd)</div>
+                                        <div class="float-right custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input cb-include" id="cb-include-4" checked />
+                                            <label class="custom-control-label small" for="cb-include-4">Include in Drills</label>
+                                        </div>
+                                    </figcaption>
+                                    <div class="clearfix"></div>
                                     <audio controls preload='none'>
                                         <source src='@Url.Action("Get2ChordProgressionEx", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 4 })' type='audio/mpeg'>
                                     </audio>
                                 </figure>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-4 card">
                                 <figure>
-                                    <figcaption> I (root) - vi (1st)</figcaption>
+                                    <figcaption>
+                                        <div class="float-left">I (root) - vi (1st)</div>
+                                        <div class="float-right custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input cb-include" id="cb-include-5" checked />
+                                            <label class="custom-control-label small" for="cb-include-5">Include in Drills</label>
+                                        </div>
+                                    </figcaption>
+                                    <div class="clearfix"></div>
                                     <audio controls preload='none'>
                                         <source src='@Url.Action("Get2ChordProgressionEx", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 5 })' type='audio/mpeg'>
                                     </audio>
@@ -121,7 +161,7 @@
                         <h3>Drill</h3>
 
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-6 card">
                                 <figure>
                                     <figcaption>Press the play button to hear the progression</figcaption>
                                     <audio id="audProgression3" controls preload='none'>
@@ -135,114 +175,187 @@
                                 </div>
                             </div>
                         </div>
-                        <hr />
-
+                        
                         <h4>3 Chord Progression Prompts</h4>
                         <div class="row">
 
-                            <div class="col-md-4">
+                            <div class="col-md-4 card">
                                 <figure>
-                                    <figcaption> I (2nd) - ii (1st) - iii (1st)</figcaption>
+                                    <figcaption>
+                                        <div class="float-left">I (2nd) - ii (1st) - iii (1st)</div>
+                                        <div class="float-right custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input cb-include" id="cb-include-6" checked />
+                                            <label class="custom-control-label small" for="cb-include-6">Include in Drills</label>
+                                        </div>
+                                    </figcaption>
+                                    <div class="clearfix"></div>
                                     <audio controls preload='none'>
                                         <source src='@Url.Action("Get3ChordProgressionEx", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 6 })' type='audio/mpeg'>
                                     </audio>
                                 </figure>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-4 card">
                                 <figure>
-                                    <figcaption> I (1st) - V (2nd) - vi (2nd)</figcaption>
+                                    <figcaption>
+                                        <div class="float-left">I (1st) - V (2nd) - vi (2nd)</div>
+                                        <div class="float-right custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input cb-include" id="cb-include-7" checked />
+                                            <label class="custom-control-label small" for="cb-include-7">Include in Drills</label>
+                                        </div>
+                                    </figcaption>
+                                    <div class="clearfix"></div>
                                     <audio controls preload='none'>
                                         <source src='@Url.Action("Get3ChordProgressionEx", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 7 })' type='audio/mpeg'>
                                     </audio>
                                 </figure>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-4 card">
                                 <figure>
-                                    <figcaption> IV (2nd) - V (1st) - vi (1st)</figcaption>
+                                    <figcaption>
+                                        <div class="float-left">IV (2nd) - V (1st) - vi (1st)</div>
+                                        <div class="float-right custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input cb-include" id="cb-include-8" checked />
+                                            <label class="custom-control-label small" for="cb-include-8">Include in Drills</label>
+                                        </div>
+                                    </figcaption>
+                                    <div class="clearfix"></div>
                                     <audio controls preload='none'>
                                         <source src='@Url.Action("Get3ChordProgressionEx", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 8 })' type='audio/mpeg'>
                                     </audio>
                                 </figure>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-4 card">
                                 <figure>
-                                    <figcaption> iii (1st) - I (2nd) - ii (1st)</figcaption>
+                                    <figcaption>
+                                        <div class="float-left">iii (1st) - I (2nd) - ii (1st)</div>
+                                        <div class="float-right custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input cb-include" id="cb-include-9" checked />
+                                            <label class="custom-control-label small" for="cb-include-9">Include in Drills</label>
+                                        </div>
+                                    </figcaption>
+                                    <div class="clearfix"></div>
                                     <audio controls preload='none'>
                                         <source src='@Url.Action("Get3ChordProgressionEx", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 9 })' type='audio/mpeg'>
                                     </audio>
                                 </figure>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-4 card">
                                 <figure>
-                                    <figcaption> IV (root) - V (2nd) - iii (root)</figcaption>
+                                    <figcaption>
+                                        <div class="float-left">IV (root) - V (2nd) - iii (root)</div>
+                                        <div class="float-right custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input cb-include" id="cb-include-10" checked />
+                                            <label class="custom-control-label small" for="cb-include-10">Include in Drills</label>
+                                        </div>
+                                    </figcaption>
+                                    <div class="clearfix"></div>
                                     <audio controls preload='none'>
                                         <source src='@Url.Action("Get3ChordProgressionEx", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 10 })' type='audio/mpeg'>
                                     </audio>
                                 </figure>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-4 card">
                                 <figure>
-                                    <figcaption> I (root) - ii (2nd) - IV (1st)</figcaption>
+                                    <figcaption>
+                                        <div class="float-left">I (root) - ii (2nd) - IV (1st)</div>
+                                        <div class="float-right custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input cb-include" id="cb-include-11" checked />
+                                            <label class="custom-control-label small" for="cb-include-11">Include in Drills</label>
+                                        </div>
+                                    </figcaption>
+                                    <div class="clearfix"></div>
                                     <audio controls preload='none'>
                                         <source src='@Url.Action("Get3ChordProgressionEx", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 11 })' type='audio/mpeg'>
                                     </audio>
                                 </figure>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-4 card">
                                 <figure>
-                                    <figcaption> I (1st) - iii (root) - ii (1st)</figcaption>
+                                    <figcaption>
+                                        <div class="float-left">I (1st) - iii (root) - ii (1st)</div>
+                                        <div class="float-right custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input cb-include" id="cb-include-12" checked />
+                                            <label class="custom-control-label small" for="cb-include-12">Include in Drills</label>
+                                        </div>
+                                    </figcaption>
+                                    <div class="clearfix"></div>
                                     <audio controls preload='none'>
                                         <source src='@Url.Action("Get3ChordProgressionEx", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 12 })' type='audio/mpeg'>
                                     </audio>
                                 </figure>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-4 card">
                                 <figure>
-                                    <figcaption> IV (2nd) - I (root) - V (1st)</figcaption>
+                                    <figcaption>
+                                        <div class="float-left">IV (2nd) - I (root) - V (1st)</div>
+                                        <div class="float-right custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input cb-include" id="cb-include-13" checked />
+                                            <label class="custom-control-label small" for="cb-include-13">Include in Drills</label>
+                                        </div>
+                                    </figcaption>
+                                    <div class="clearfix"></div>
                                     <audio controls preload='none'>
                                         <source src='@Url.Action("Get3ChordProgressionEx", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 13 })' type='audio/mpeg'>
                                     </audio>
                                 </figure>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-4 card">
                                 <figure>
-                                    <figcaption> vi (root) - IV (1st) - I (2nd)</figcaption>
+                                    <figcaption>
+                                        <div class="float-left">vi (root) - IV (1st) - I (2nd)</div>
+                                        <div class="float-right custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input cb-include" id="cb-include-14" checked />
+                                            <label class="custom-control-label small" for="cb-include-14">Include in Drills</label>
+                                        </div>
+                                    </figcaption>
+                                    <div class="clearfix"></div>
                                     <audio controls preload='none'>
                                         <source src='@Url.Action("Get3ChordProgressionEx", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 14 })' type='audio/mpeg'>
                                     </audio>
                                 </figure>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-4 card">
                                 <figure>
-                                    <figcaption> V (2nd) - I (root) - ii (root)</figcaption>
+                                    <figcaption>
+                                        <div class="float-left">V (2nd) - I (root) - ii (root)</div>
+                                        <div class="float-right custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input cb-include" id="cb-include-15" checked />
+                                            <label class="custom-control-label small" for="cb-include-15">Include in Drills</label>
+                                        </div>
+                                    </figcaption>
+                                    <div class="clearfix"></div>
                                     <audio controls preload='none'>
                                         <source src='@Url.Action("Get3ChordProgressionEx", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 15 })' type='audio/mpeg'>
                                     </audio>
                                 </figure>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-4 card">
                                 <figure>
-                                    <figcaption> I (1st) - V (2nd) - IV (root)</figcaption>
+                                    <figcaption>
+                                        <div class="float-left">I (1st) - V (2nd) - IV (root)</div>
+                                        <div class="float-right custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input cb-include" id="cb-include-16" checked />
+                                            <label class="custom-control-label small" for="cb-include-16">Include in Drills</label>
+                                        </div>
+                                    </figcaption>
+                                    <div class="clearfix"></div>
                                     <audio controls preload='none'>
                                         <source src='@Url.Action("Get3ChordProgressionEx", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 16 })' type='audio/mpeg'>
                                     </audio>
                                 </figure>
                             </div>
-
                         </div>
-
                     </div>
-                    <hr />
                 </div>
             </div>
         </div>
@@ -254,11 +367,17 @@
         $(document).ready(function () {
             setAudProgression2Src();
             setAudProgression3Src();
+
+            $('.cb-include').change(function () {
+                setAudProgression2Src();
+                setAudProgression3Src();
+            });
         });
 
         function setAudProgression2Src() {
             var baseSrc = '@Url.Action("Get2ChordProgressionEx", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName })';
-            var progressiontype = getRandomInt(0, 5);
+            var excluded = getExcluded(null, 0);
+            var progressiontype = getRandomInt(0, 5, excluded);
             var src = baseSrc + '&progressiontype=' + progressiontype;
             $('#audProgression2').attr('src', src);
 
@@ -300,7 +419,8 @@
 
         function setAudProgression3Src() {
             var baseSrc = '@Url.Action("Get3ChordProgressionEx", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName })';
-            var progressiontype = getRandomInt(6, 16);
+            var excluded = getExcluded(null, 0);
+            var progressiontype = getRandomInt(6, 16, excluded);
             var src = baseSrc + '&progressiontype=' + progressiontype;
             $('#audProgression3').attr('src', src);
 

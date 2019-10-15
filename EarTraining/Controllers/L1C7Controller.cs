@@ -22,7 +22,7 @@ namespace EarTraining.Controllers
             ViewBag.Pitch = pitch;
         }
 
-        public ActionResult VocalDrills()
+        public ActionResult MelodicIntervals()
         {
             return View();
         }
