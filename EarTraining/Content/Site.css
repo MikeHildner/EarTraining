@@ -104,8 +104,12 @@ audio {
     font-weight: bold;
 }
 
-.pad-left-20{
+.pad-left-20 {
     padding-left: 20px;
+}
+
+.pad-left-10 {
+    padding-left: 10px;
 }
 
 .tdcenter{

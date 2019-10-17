@@ -1,10 +1,17 @@
 ﻿@{
-    ViewBag.Title = "Solfeg Resolutions With DO";
+    ViewBag.Title = "Solfeg Resolutions Vocal Drills";
 }
 
 <h2>Level 1 Chapter 1</h2>
 
 <h5>@ViewBag.Title</h5>
+
+<div class="card bg-info text-white">
+    <div class="card-body">
+        <i class="fa fa-info-circle"></i>
+        <span class="pad-left-10">These are selected from the vocal drills on pages 9-10</span>
+    </div>
+</div>
 
 <div class="row">
     <div class="col-md-6 card">
@@ -18,20 +25,20 @@
     <div class="col-md-6 card">
         <h4>Drill</h4>
         <figure>
-            <figcaption>Press the play button to hear the resolution</figcaption>
+            <figcaption>Press the play button to hear the drill</figcaption>
             <audio id="audResolution" controls preload='none'>
                 <source src='@Url.Action("GetResolutionDO", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName })' type='audio/mpeg'>
             </audio>
         </figure>
-        <p>Hover over the below to reveal the resolution</p>
+        <p>Hover over the below to reveal the drill</p>
         <div class="spoiler" id="resolution"></div>
         <div class="pad-top-10">
-            <input type="button" class="btn btn-primary" value="Get a New Resolution" onclick="setAudResolutionSrc()" />
+            <input type="button" class="btn btn-primary" value="Get a New Drill" onclick="setAudResolutionSrc()" />
         </div>
     </div>
 </div>
 
-<h4>Practice Resolutions</h4>
+<h4>Practice Drills</h4>
 
 <div class="row">
     <div class="col-md-4 card">

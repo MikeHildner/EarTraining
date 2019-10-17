@@ -23,12 +23,11 @@
                             Level 1 Chapter 1
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownL1C1">
-                            <div class="dropdown-header">Solfeg Resolutions</div>
+                            <div class="dropdown-header">Solfeg</div>
                             <div class="dropdown-divider"></div>
-                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;With DO"), "SolfegResolutionsDO", "L1C1", null, new { @class = "dropdown-item" })
-                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Without DO"), "SolfegResolutionsNoDO", "L1C1", null, new { @class = "dropdown-item" })
-                            <div class="dropdown-divider"></div>
-                            @Html.ActionLink("Pitch Identification", "PitchIdentification", "L1C1", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Vocal Drills"), "SolfegResolutionsDO", "L1C1", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Resolution Identification"), "SolfegResolutionsNoDO", "L1C1", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Pitch Identification"), "PitchIdentification", "L1C1", null, new { @class = "dropdown-item" })
                         </div>
                     </li>
 
@@ -37,7 +36,7 @@
                             Level 1 Chapter 2
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownL1C2">
-                            <div class="dropdown-header">Melodic Maj 3rd and Min 6th Intervals</div>
+                            <div class="dropdown-header">Maj 3rd and Min 6th Intervals</div>
                             <div class="dropdown-divider"></div>
                             @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;With Resolutions"), "MelodicMaj3rdMin6thDO", "L1C2", null, new { @class = "dropdown-item" })
                             @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Without Resolutions"), "MelodicMaj3rdMin6thNoDO", "L1C2", null, new { @class = "dropdown-item" })
@@ -53,8 +52,8 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownL1C3">
                             <div class="dropdown-header">Melodic Min 3rd and Maj 6th Intervals</div>
                             <div class="dropdown-divider"></div>
-                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;With Resolutions"), "MelodicMin3rdMaj6thDO", "L1C3", null, new { @class = "dropdown-item" })
-                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Without Resolutions"), "MelodicMin3rdMaj6thNoDO", "L1C3", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Vocal Drills"), "MelodicMin3rdMaj6thDO", "L1C3", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Interval Identification"), "MelodicMin3rdMaj6thNoDO", "L1C3", null, new { @class = "dropdown-item" })
                             <div class="dropdown-divider"></div>
                             @Html.ActionLink("Harmonic Min 3rd and Maj 6th Intervals", "HarmonicMin3rdMaj6th", "L1C3", null, new { @class = "dropdown-item" })
                             <div class="dropdown-divider"></div>
