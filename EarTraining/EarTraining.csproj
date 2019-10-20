@@ -322,7 +322,7 @@
     <Content Include="Views\L1C1\PitchIdentification.cshtml" />
     <Content Include="Views\L1C2\VocalDrills.cshtml" />
     <Content Include="Views\L1C2\HarmonicMaj3rdMin6th.cshtml" />
-    <Content Include="Views\L1C3\MelodicMin3rdMaj6thDO.cshtml" />
+    <Content Include="Views\L1C3\VocalDrills.cshtml" />
     <Content Include="Views\L1C3\HarmonicMin3rdMaj6th.cshtml" />
     <Content Include="Views\L1C5\VocalDrills.cshtml" />
     <Content Include="Views\L1C5\HarmonicIntervals.cshtml" />
