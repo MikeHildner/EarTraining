@@ -4,6 +4,7 @@
 <h2>Level 1 Chapter 5</h2>
 
 <h5>@ViewBag.Title</h5>
+<h5 class="alert-warning">Not Yet Fully Implemented</h5>
 
 <div class="card bg-info text-white">
     <div class="card-body">
@@ -72,6 +73,96 @@
                 <div class="clearfix"></div>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetMelodicInterval", "L1C5", new { doNoteName = ViewBag.Pitch.PitchName, type = 14 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4 card">
+            <figure>
+                <figcaption>
+                    <div class="float-left">RE SO</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-15" checked />
+                        <label class="custom-control-label small" for="cb-include-15">Include in Drills</label>
+                    </div>
+                </figcaption>
+                <div class="clearfix"></div>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicInterval", "L1C5", new { doNoteName = ViewBag.Pitch.PitchName, type = 15 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4 card">
+            <figure>
+                <figcaption>
+                    <div class="float-left">MI LA</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-16" checked />
+                        <label class="custom-control-label small" for="cb-include-16">Include in Drills</label>
+                    </div>
+                </figcaption>
+                <div class="clearfix"></div>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicInterval", "L1C5", new { doNoteName = ViewBag.Pitch.PitchName, type = 16 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4 card">
+            <figure>
+                <figcaption>
+                    <div class="float-left">FA TI</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-17" checked />
+                        <label class="custom-control-label small" for="cb-include-17">Include in Drills</label>
+                    </div>
+                </figcaption>
+                <div class="clearfix"></div>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicInterval", "L1C5", new { doNoteName = ViewBag.Pitch.PitchName, type = 17 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4 card">
+            <figure>
+                <figcaption>
+                    <div class="float-left">SO DO</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-18" checked />
+                        <label class="custom-control-label small" for="cb-include-18">Include in Drills</label>
+                    </div>
+                </figcaption>
+                <div class="clearfix"></div>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicInterval", "L1C5", new { doNoteName = ViewBag.Pitch.PitchName, type = 18 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4 card">
+            <figure>
+                <figcaption>
+                    <div class="float-left">LA RE</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-19" checked />
+                        <label class="custom-control-label small" for="cb-include-19">Include in Drills</label>
+                    </div>
+                </figcaption>
+                <div class="clearfix"></div>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicInterval", "L1C5", new { doNoteName = ViewBag.Pitch.PitchName, type = 19 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4 card">
+            <figure>
+                <figcaption>
+                    <div class="float-left">TI FA</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-20" checked />
+                        <label class="custom-control-label small" for="cb-include-20">Include in Drills</label>
+                    </div>
+                </figcaption>
+                <div class="clearfix"></div>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicInterval", "L1C5", new { doNoteName = ViewBag.Pitch.PitchName, type = 20 })' type='audio/mpeg'>
                 </audio>
             </figure>
         </div>
@@ -163,22 +254,22 @@
                     msg = msg + 'DO FA (Per 4th Asc)';
                     break;
                 case 15:
-                    msg = msg + '';
+                    msg = msg + 'RE SO (Per 4th Asc)';
                     break;
                 case 16:
-                    msg = msg + '';
+                    msg = msg + 'MI LA (Per 4th Asc)';
                     break;
                 case 17:
-                    msg = msg + '';
+                    msg = msg + 'FA TI (Aug 4th Asc)';
                     break;
                 case 18:
-                    msg = msg + '';
+                    msg = msg + 'SO DO (Per 4th Asc)';
                     break;
                 case 19:
-                    msg = msg + '';
+                    msg = msg + 'LA RE (Per 4th Asc)';
                     break;
                 case 20:
-                    msg = msg + '';
+                    msg = msg + 'TI MI (Per 4th Asc)';
                     break;
                 case 21:
                     msg = msg + '';
