@@ -328,7 +328,7 @@
     <Content Include="Views\L1C5\HarmonicIntervals.cshtml" />
     <Content Include="Views\L1C5\DiatonicTriadRecognition.cshtml" />
     <Content Include="Views\L1C5\DiatonicTriadProgressions.cshtml" />
-    <Content Include="Views\L1C6\MelodicIntervals.cshtml" />
+    <Content Include="Views\L1C6\VocalDrills.cshtml" />
     <Content Include="Views\L1C6\DiatonicTriadRecognition.cshtml" />
     <Content Include="Views\L1C6\HarmonicIntervals.cshtml" />
     <Content Include="Views\L1C6\DiatonicTriadProgressions.cshtml" />
@@ -340,6 +340,7 @@
     <Content Include="Views\L1C7\HarmonicIntervals.cshtml" />
     <Content Include="Views\L1C7\DiatonicTriadRecognition.cshtml" />
     <Content Include="Views\L1C5\MelodicIntervals.cshtml" />
+    <Content Include="Views\L1C6\MelodicIntervals.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
