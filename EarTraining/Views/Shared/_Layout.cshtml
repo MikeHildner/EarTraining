@@ -75,8 +75,13 @@
                             Level 1 Chapter 5
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownL1C5">
-                            @Html.ActionLink("Melodic 4th and 5th Intervals", "MelodicIntervals", "L1C5", null, new { @class = "dropdown-item" })
-                            @Html.ActionLink("Harmonic 4th and 5th Intervals", "HarmonicIntervals", "L1C5", null, new { @class = "dropdown-item" })
+                            <div class="dropdown-header">Diatonic 4th and 5th Intervals</div>
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Vocal Drills"), "VocalDrills", "L1C5", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Melodic Interval Identification"), "MelodicIntervals", "L1C5", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Harmonic Interval Identification"), "HarmonicIntervals", "L1C5", null, new { @class = "dropdown-item" })
+                            <div class="dropdown-divider"></div>
+                            <div class="dropdown-header">Diatonic Triads and Progressions</div>
                             <div class="dropdown-divider"></div>
                             @Html.ActionLink("I IV V vi Diatonic Triad Recognition", "DiatonicTriadRecognition", "L1C5", null, new { @class = "dropdown-item" })
                             @Html.ActionLink("2 and 3 Chord Progressions", "DiatonicTriadProgressions", "L1C5", null, new { @class = "dropdown-item" })
