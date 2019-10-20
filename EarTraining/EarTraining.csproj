@@ -26,7 +26,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <TypeScriptToolsVersion>3.5</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>3.6</TypeScriptToolsVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -336,11 +336,12 @@
     <Content Include="Views\L1C2\MelodicMaj3rdMin6thNoDO.cshtml" />
     <Content Include="Views\L1C3\MelodicMin3rdMaj6thNoDO.cshtml" />
     <Content Include="Views\L1C7\DiatonicTriadProgressions.cshtml" />
-    <Content Include="Views\L1C7\MelodicIntervals.cshtml" />
+    <Content Include="Views\L1C7\VocalDrills.cshtml" />
     <Content Include="Views\L1C7\HarmonicIntervals.cshtml" />
     <Content Include="Views\L1C7\DiatonicTriadRecognition.cshtml" />
     <Content Include="Views\L1C5\MelodicIntervals.cshtml" />
     <Content Include="Views\L1C6\MelodicIntervals.cshtml" />
+    <Content Include="Views\L1C7\MelodicIntervals.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

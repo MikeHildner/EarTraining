@@ -1,0 +1,281 @@
+﻿@{
+    ViewBag.Title = "2.1 - Melodic Min 2nd/Maj 7th Vocal Drills";
+}
+
+<h2>Level 1 Chapter 7</h2>
+<h5>@ViewBag.Title</h5>
+
+<div class="card bg-info text-white">
+    <div class="card-body">
+        <i class="fa fa-info-circle"></i>
+        <span class="pad-left-10">These are selected from the vocal drills on pages 153-154</span>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 card">
+        @{
+            Html.RenderPartial("NewDO");
+        }
+    </div>
+</div>
+
+<div class="row toggle-demo" role="group">
+    <div class="col-md-6 card">
+        Include drills for
+        <div class="switch-toggle alert alert-dark">
+            <input id="min2nds" name="intervaltype" type="radio" checked>
+            <label for="min2nds" onclick="">Minor 2nds</label>
+
+            <input id="maj7ths" name="intervaltype" type="radio">
+            <label for="maj7ths" onclick="">Major 7ths</label>
+
+            <input id="both" name="intervaltype" type="radio">
+            <label for="both" onclick="">Both</label>
+
+            <a class="btn btn-primary"></a>
+        </div>
+    </div>
+</div>
+
+<h4>Drill</h4>
+<div class="row">
+    <div class="col-md-6 card">
+        <figure>
+            <figcaption>Press the play button to hear the drill</figcaption>
+            <audio id="audDrill1" controls preload='none'>
+                <source src='' type='audio/mpeg'>
+            </audio>
+        </figure>
+        <p>Hover over the below to reveal the drill</p>
+        <div class="spoiler" id="drill1"></div>
+        <div class="pad-top-10">
+            <input type="button" class="btn btn-primary" value="Get a New Interval" onclick="setAudDrill1Src()" />
+        </div>
+    </div>
+</div>
+
+<div id="min-2nd-prompts">
+    <h4>Min 2nd Prompts</h4>
+    <div class="row">
+        <div class="col-md-4 card">
+            <figure>
+                <figcaption>
+                    <div class="float-left">MI MI FA MI</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-0" checked />
+                        <label class="custom-control-label small" for="cb-include-0">Include in Drills</label>
+                    </div>
+                </figcaption>
+                <div class="clearfix"></div>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrill", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, type = 0 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4 card">
+            <figure>
+                <figcaption>
+                    <div class="float-left">TI DO DO</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-1" checked />
+                        <label class="custom-control-label small" for="cb-include-1">Include in Drills</label>
+                    </div>
+                </figcaption>
+                <div class="clearfix"></div>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrill", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, type = 1 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4 card">
+            <figure>
+                <figcaption>
+                    <div class="float-left">FA FA MI MI</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-2" checked />
+                        <label class="custom-control-label small" for="cb-include-2">Include in Drills</label>
+                    </div>
+                </figcaption>
+                <div class="clearfix"></div>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrill", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, type = 2 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4 card">
+            <figure>
+                <figcaption>
+                    <div class="float-left">DO TI DO</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-3" checked />
+                        <label class="custom-control-label small" for="cb-include-3">Include in Drills</label>
+                    </div>
+                </figcaption>
+                <div class="clearfix"></div>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrill", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, type = 3 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+    </div>
+
+</div>
+
+<div id="maj-7th-prompts">
+    <h4>Maj 7th Prompts</h4>
+    <div class="row">
+        <div class="col-md-4 card">
+            <figure>
+                <figcaption>
+                    <div class="float-left">DO DO TI DO</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-4" checked />
+                        <label class="custom-control-label small" for="cb-include-4">Include in Drills</label>
+                    </div>
+                </figcaption>
+                <div class="clearfix"></div>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrill", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, type = 4 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4 card">
+            <figure>
+                <figcaption>
+                    <div class="float-left">FA MI MI</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-5" checked />
+                        <label class="custom-control-label small" for="cb-include-5">Include in Drills</label>
+                    </div>
+                </figcaption>
+                <div class="clearfix"></div>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrill", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, type = 5 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4 card">
+            <figure>
+                <figcaption>
+                    <div class="float-left">TI TI DO DO</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-6" checked />
+                        <label class="custom-control-label small" for="cb-include-6">Include in Drills</label>
+                    </div>
+                </figcaption>
+                <div class="clearfix"></div>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrill", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, type = 6 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4 card">
+            <figure>
+                <figcaption>
+                    <div class="float-left">MI FA MI</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-7" checked />
+                        <label class="custom-control-label small" for="cb-include-7">Include in Drills</label>
+                    </div>
+                </figcaption>
+                <div class="clearfix"></div>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicDrill", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, type = 7 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+    </div>
+
+</div>
+
+@section  scripts {
+    <script>
+        $(document).ready(function () {
+            setAudDrill1Src();
+
+            $('input[type=radio][name=intervaltype]').change(function () {
+                setAudDrill1Src();
+            });
+
+            $('.cb-include').change(function () {
+                setAudDrill1Src();
+            });
+
+        });
+
+        function setAudDrill1Src() {
+            var baseSrc = '@Url.Action("GetMelodicDrill", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName })';
+
+            // Get the drills based on what the user has choosen.
+            var intervalType = $("input[type=radio][name=intervaltype]:checked").attr('id');
+
+            var minDrill;
+            var maxDrill;
+            var excluded = getExcluded(null, 0);
+
+            switch (intervalType) {
+                case 'min2nds':
+                    minDrill = 0;
+                    maxDrill = 3;
+                    $('#min-2nd-prompts').fadeIn();
+                    $('#maj-7th-prompts').fadeOut();
+                    break;
+
+                case 'maj7ths':
+                    minDrill = 4;
+                    maxDrill = 7;
+                    $('#min-2nd-prompts').fadeOut();
+                    $('#maj-7th-prompts').fadeIn();
+                    break;
+
+                case 'both':
+                    minDrill = 0;
+                    maxDrill = 7;
+                    $('#min-2nd-prompts').fadeIn();
+                    $('#maj-7th-prompts').fadeIn();
+                    break;
+
+                default:
+                    var msg = 'intervalType ' + intervalType + ' is not supported';
+                    consoleAndAlert(msg);
+            }
+
+            var randomInt = getRandomInt(minDrill, maxDrill, excluded);
+
+            var src = baseSrc + '&type=' + randomInt;
+            $('#audDrill1').attr('src', src);
+
+            var msg = '';
+            switch (randomInt) {
+                case 0:
+                    msg = msg + 'MI MI FA MI (Min 2nd)';
+                    break;
+                case 1:
+                    msg = msg + 'TI DO DO (Min 2nd)';
+                    break;
+                case 2:
+                    msg = msg + 'FA FA MI MI (Min 2nd)';
+                    break;
+                case 3:
+                    msg = msg + 'DO TI DO (Min 2nd)';
+                    break;
+                case 4:
+                    msg = msg + 'DO DO TI DO (Maj 7th)';
+                    break;
+                case 5:
+                    msg = msg + 'FA MI MI (Maj 7th)';
+                    break;
+                case 6:
+                    msg = msg + 'TI TI DO DO (Maj 7th)';
+                    break;
+                case 7:
+                    msg = msg + 'MI FA MI (Maj 7th)';
+                    break;
+            }
+
+            $('#drill1').text(msg);
+        }
+
+    </script>
+}

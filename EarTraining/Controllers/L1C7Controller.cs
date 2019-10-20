@@ -22,6 +22,11 @@ namespace EarTraining.Controllers
             ViewBag.Pitch = pitch;
         }
 
+        public ActionResult VocalDrills()
+        {
+            return View();
+        }
+
         public ActionResult MelodicIntervals()
         {
             return View();
@@ -391,6 +396,60 @@ namespace EarTraining.Controllers
 
             wavStream.WavToMp3File(out string fileName);
             return Redirect($"~/Temp/{fileName}");
+        }
+
+        public ActionResult GetMelodicInterval(string doNoteName, int type)
+        {
+            L1C7MelodicDrillType drillType = (L1C7MelodicDrillType)type;
+            MemoryStream wavStream = GetMelodicInterval(doNoteName, drillType);
+
+            wavStream.WavToMp3File(out string fileName);
+            return Redirect($"~/Temp/{fileName}");
+        }
+
+        private MemoryStream GetMelodicInterval(string doNoteName, L1C7MelodicDrillType drillType)
+        {
+            double bpm = double.Parse(ConfigurationManager.AppSettings["MelodicDrillBPM"]);
+            double quarterNoteMillis = (60 / bpm) * 1000;
+            TimeSpan halfNoteDuration = TimeSpan.FromMilliseconds(quarterNoteMillis * 2);
+
+            string doFileName = NAudioHelper.GetFileNameFromNoteName(doNoteName);
+            doFileName = Path.GetFileName(doFileName);
+            int doNoteNumber = int.Parse(doFileName.Split('.')[0]);
+
+            ISampleProvider note1, note2;
+
+            switch (drillType)
+            {
+                #region Major 2nds / min 7ths
+
+                // Minor 2nd intervals.
+                case L1C7MelodicDrillType.MiFa2Asc:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor3rd, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect4th, halfNoteDuration);
+                    break;
+
+                // Major 7th intervals.
+                case L1C7MelodicDrillType.DoTi7Asc:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor7th, halfNoteDuration);
+                    break;
+
+                #endregion Major 2nds / min 7ths
+
+                default:
+                    throw new NotSupportedException($"L1C6MelodicDrillType '{drillType}' is not supported.");
+            }
+
+            var phrase = note1
+                .FollowedBy(note2);
+
+            var stwp = new SampleToWaveProvider(phrase);
+
+            MemoryStream wavStream = new MemoryStream();
+            WaveFileWriter.WriteWavFileToStream(wavStream, stwp);
+            wavStream.Position = 0;
+            return wavStream;
         }
     }
 }
