@@ -1,9 +1,16 @@
 ﻿@{
-    ViewBag.Title = "Melodic Major 3rd / Minor 6th Intervals With Resolutions";
+    ViewBag.Title = "L1C2 2.2 - Melodic Major 3rd / Minor 6th Vocal Drills";
 }
-<h2>Level 1 Chapter 2</h2>
 
+<h2>Level 1 Chapter 2</h2>
 <h5>@ViewBag.Title</h5>
+
+<div class="card bg-info text-white">
+    <div class="card-body">
+        <i class="fa fa-info-circle"></i>
+        <span class="pad-left-10">These are selected from the vocal drills on pages 23-25</span>
+    </div>
+</div>
 
 <div class="row">
     <div class="col-md-6 card">
@@ -35,12 +42,12 @@
 <div class="row">
     <div class="col-md-6 card">
         <figure>
-            <figcaption>Press the play button to hear the interval</figcaption>
+            <figcaption>Press the play button to hear the drill</figcaption>
             <audio id="audDrill1" controls preload='none'>
                 <source src='' type='audio/mpeg'>
             </audio>
         </figure>
-        <p>Hover over the below to reveal the interval</p>
+        <p>Hover over the below to reveal the drill</p>
         <div class="spoiler" id="drill1"></div>
         <div class="pad-top-10">
             <input type="button" class="btn btn-primary" value="Get a New Interval" onclick="setAudDrill1Src()" />
@@ -49,7 +56,7 @@
 </div>
 
 <div id="maj-3rd-prompts">
-    <h4>Maj 3rd Prompts</h4>
+    <h4>Maj 3rd Drills</h4>
     <div class="row">
         <div class="col-md-4 card">
             <figure>
@@ -146,7 +153,7 @@
 </div>
 
 <div id="min-6th-prompts">
-    <h4>Min 6th Prompts</h4>
+    <h4>Min 6th Drills</h4>
     <div class="row">
         <div class="col-md-4 card">
             <figure>

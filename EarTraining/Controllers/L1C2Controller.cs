@@ -28,7 +28,7 @@ namespace EarTraining.Controllers
             return View();
         }
 
-        public ActionResult MelodicMaj3rdMin6thDO()
+        public ActionResult VocalDrills()
         {
             return View();
         }
