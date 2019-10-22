@@ -60,6 +60,6 @@ namespace EarTrainingLibrary.Enums
         DoFa5Desc = 38,
         ReSo5Desc = 39,
         MiLa5Desc = 40,
-        FaTo5Desc = 41
+        FaTi5Desc = 41
     }
 }
