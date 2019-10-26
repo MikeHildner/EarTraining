@@ -4,7 +4,6 @@
 <h2>Level 1 Chapter 7</h2>
 
 <h5>@ViewBag.Title</h5>
-<h5 class="alert-warning">Not Yet Fully Implemented</h5>
 
 <div class="card bg-info text-white">
     <div class="card-body">
@@ -62,7 +61,7 @@
         <div class="col-md-4 card">
             <figure>
                 <figcaption>
-                    <div class="float-left">MI FA</div>
+                    <div class="float-left">MI FA (Min 2nd Asc)</div>
                     <div class="float-right custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input cb-include" id="cb-include-8" checked />
                         <label class="custom-control-label small" for="cb-include-8">Include in Drills</label>
@@ -71,6 +70,51 @@
                 <div class="clearfix"></div>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetMelodicInterval", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, type = 8 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4 card">
+            <figure>
+                <figcaption>
+                    <div class="float-left">TI DO (Min 2nd Asc)</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-9" checked />
+                        <label class="custom-control-label small" for="cb-include-9">Include in Drills</label>
+                    </div>
+                </figcaption>
+                <div class="clearfix"></div>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicInterval", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, type = 9 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4 card">
+            <figure>
+                <figcaption>
+                    <div class="float-left">FA MI (Min 2nd Desc)</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-10" checked />
+                        <label class="custom-control-label small" for="cb-include-10">Include in Drills</label>
+                    </div>
+                </figcaption>
+                <div class="clearfix"></div>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicInterval", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, type = 10 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4 card">
+            <figure>
+                <figcaption>
+                    <div class="float-left">DO TI (Min 2nd Desc)</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-11" checked />
+                        <label class="custom-control-label small" for="cb-include-11">Include in Drills</label>
+                    </div>
+                </figcaption>
+                <div class="clearfix"></div>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicInterval", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, type = 11 })' type='audio/mpeg'>
                 </audio>
             </figure>
         </div>
@@ -83,7 +127,7 @@
         <div class="col-md-4 card">
             <figure>
                 <figcaption>
-                    <div class="float-left">DO TI</div>
+                    <div class="float-left">DO TI (Maj 7th Asc)</div>
                     <div class="float-right custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input cb-include" id="cb-include-12" checked />
                         <label class="custom-control-label small" for="cb-include-12">Include in Drills</label>
@@ -92,6 +136,51 @@
                 <div class="clearfix"></div>
                 <audio controls preload='none'>
                     <source src='@Url.Action("GetMelodicInterval", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, type = 12 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4 card">
+            <figure>
+                <figcaption>
+                    <div class="float-left">FA MI (Maj 7th Asc)</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-13" checked />
+                        <label class="custom-control-label small" for="cb-include-13">Include in Drills</label>
+                    </div>
+                </figcaption>
+                <div class="clearfix"></div>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicInterval", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, type = 13 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4 card">
+            <figure>
+                <figcaption>
+                    <div class="float-left">TI DO (Maj 7th Desc)</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-14" checked />
+                        <label class="custom-control-label small" for="cb-include-14">Include in Drills</label>
+                    </div>
+                </figcaption>
+                <div class="clearfix"></div>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicInterval", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, type = 14 })' type='audio/mpeg'>
+                </audio>
+            </figure>
+        </div>
+        <div class="col-md-4 card">
+            <figure>
+                <figcaption>
+                    <div class="float-left">MI FA (Maj 7th Desc)</div>
+                    <div class="float-right custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input cb-include" id="cb-include-15" checked />
+                        <label class="custom-control-label small" for="cb-include-15">Include in Drills</label>
+                    </div>
+                </figcaption>
+                <div class="clearfix"></div>
+                <audio controls preload='none'>
+                    <source src='@Url.Action("GetMelodicInterval", "L1C7", new { doNoteName = ViewBag.Pitch.PitchName, type = 15 })' type='audio/mpeg'>
                 </audio>
             </figure>
         </div>
@@ -162,25 +251,25 @@
                     msg = msg + 'MI FA (Min 2nd Asc)';
                     break;
                 case 9:
-                    msg = msg + '';
+                    msg = msg + 'TI DO (Min 2nd Asc)';
                     break;
                 case 10:
-                    msg = msg + '';
+                    msg = msg + 'FA MI (Min 2nd Desc)';
                     break;
                 case 11:
-                    msg = msg + '';
+                    msg = msg + 'DO TI (Min 2nd Desc)';
                     break;
                 case 12:
                     msg = msg + 'DO TI (Maj 7th Asc)';
                     break;
                 case 13:
-                    msg = msg + '';
+                    msg = msg + 'FA MI (Maj 7th Asc)';
                     break;
                 case 14:
-                    msg = msg + '';
+                    msg = msg + 'TI DO (Maj 7th Desc)';
                     break;
                 case 15:
-                    msg = msg + '';
+                    msg = msg + 'MI FA (Maj 7th Desc)';
                     break;
 
                 default:

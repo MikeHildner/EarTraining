@@ -22,8 +22,6 @@ namespace EarTrainingLibrary.Enums
         TiTiDoDoMaj7th = 6,
         MiFaMiMaj7th = 7,
 
-        // Harmonic intervals.
-
         // Minor 2nds.
         MiFa2Asc = 8,
         TiDo2Asc = 9,
