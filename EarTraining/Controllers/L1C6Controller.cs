@@ -601,10 +601,100 @@ namespace EarTraining.Controllers
                     note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor2nd, halfNoteDuration);
                     break;
 
+                case L1C6MelodicDrillType.ReMi2Asc:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor2nd, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor3rd, halfNoteDuration);
+                    break;
+
+                case L1C6MelodicDrillType.FaSo2Asc:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect4th, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect5th, halfNoteDuration);
+                    break;
+
+                case L1C6MelodicDrillType.SoLa2Asc:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect5th, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor6th, halfNoteDuration);
+                    break;
+
+                case L1C6MelodicDrillType.LaTi2Asc:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor6th, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor7th, halfNoteDuration);
+                    break;
+
+                case L1C6MelodicDrillType.ReDo2Desc:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor2nd, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber, halfNoteDuration);
+                    break;
+
+                case L1C6MelodicDrillType.MiRe2Desc:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor3rd, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor2nd, halfNoteDuration);
+                    break;
+
+                case L1C6MelodicDrillType.SoFa2Desc:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect5th, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect4th, halfNoteDuration);
+                    break;
+
+                case L1C6MelodicDrillType.LaSo2Desc:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor6th, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect5th, halfNoteDuration);
+                    break;
+
+                case L1C6MelodicDrillType.TiLa2Desc:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor7th, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor6th, halfNoteDuration);
+                    break;
+
                 // Minor 7th intervals.
                 case L1C6MelodicDrillType.ReDo7Asc:
                     note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor2nd, halfNoteDuration);
                     note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfectOctave, halfNoteDuration);
+                    break;
+
+                case L1C6MelodicDrillType.MiRe7Asc:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor3rd, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor9th, halfNoteDuration);
+                    break;
+
+                case L1C6MelodicDrillType.SoFa7Asc:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect5th, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect11th, halfNoteDuration);
+                    break;
+
+                case L1C6MelodicDrillType.LaSo7Asc:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor6th, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect12th, halfNoteDuration);
+                    break;
+
+                case L1C6MelodicDrillType.TiLa7Asc:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor7th, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor13th, halfNoteDuration);
+                    break;
+
+                case L1C6MelodicDrillType.DoRe7Desc:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfectOctave, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor2nd, halfNoteDuration);
+                    break;
+
+                case L1C6MelodicDrillType.ReMi7Desc:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor9th, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor3rd, halfNoteDuration);
+                    break;
+
+                case L1C6MelodicDrillType.FaSo7Desc:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect11th, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect5th, halfNoteDuration);
+                    break;
+
+                case L1C6MelodicDrillType.SoLa7Desc:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect12th, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor6th, halfNoteDuration);
+                    break;
+
+                case L1C6MelodicDrillType.LaTi7Desc:
+                    note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor13th, halfNoteDuration);
+                    note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor7th, halfNoteDuration);
                     break;
 
                 #endregion Major 2nds / min 7ths
