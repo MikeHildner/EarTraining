@@ -37,9 +37,17 @@
     </div>
 </div>
 
-<h4>Drill</h4>
 <div class="row">
     <div class="col-md-4 card">
+        <div>
+            <div class="float-left">
+                <h4>Drill</h4>
+            </div>
+            <div class="float-right">
+                <input type="button" class="btn btn-primary margin-top-5" value="Get a New Drill" onclick="setAudDrill1Src()" />
+            </div>
+        </div>
+
         <figure>
             <figcaption>Press the play button to hear the drill</figcaption>
             <audio id="audDrill1" controls preload='none'>
@@ -48,9 +56,6 @@
         </figure>
         <p>Hover over the below to reveal the drill</p>
         <div class="spoiler" id="drill1"></div>
-        <div class="pad-top-10">
-            <input type="button" class="btn btn-primary" value="Get a New Drill" onclick="setAudDrill1Src()" />
-        </div>
     </div>
 </div>
 

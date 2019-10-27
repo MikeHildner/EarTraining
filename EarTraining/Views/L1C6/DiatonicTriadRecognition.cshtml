@@ -20,9 +20,17 @@
     </div>
 </div>
 
-<h4>Drill</h4>
 <div class="row">
     <div class="col-md-6 card">
+        <div>
+            <div class="float-left">
+                <h4>Drill</h4>
+            </div>
+            <div class="float-right">
+                <input type="button" class="btn btn-primary margin-top-5" value="Get a New Triad" onclick="setAudioSrc()" />
+            </div>
+        </div>
+
         <figure>
             <figcaption>Press the play button to hear the triad</figcaption>
             <audio id="audioEx" controls preload='none'>
@@ -31,9 +39,6 @@
         </figure>
         <p>Hover over the below to see the triad</p>
         <div class="spoiler" id="triad"></div>
-        <div class="pad-top-10">
-            <input type="button" class="btn btn-primary" value="Get a New Triad" onclick="setAudioSrc()" />
-        </div>
     </div>
 </div>
 

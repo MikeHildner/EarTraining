@@ -1,4 +1,13 @@
-﻿<figure>
+﻿<div>
+    <div class="float-left">
+        <h4>DO</h4>
+    </div>
+    <div class="float-right">
+        <input type="button" class="btn btn-primary margin-top-5" value="Get a New DO" onclick="location.href='@Request.Url.AbsoluteUri'" />
+    </div>
+</div>
+
+<figure>
     <figcaption>Press the play button to hear the DO</figcaption>
     <audio class="doAccepter" controls preload='none'>
         <source src='@Url.Action("GetDOEx", "DO", new { doNoteName = ViewBag.Pitch.PitchName })' type='audio/mpeg'>
@@ -6,6 +15,3 @@
 </figure>
 <p>Hover over the below to reveal the DO</p>
 <div class="spoiler" id="doSpoiler">@ViewBag.Pitch.PitchName - @ViewBag.Pitch.Hertz Hz</div>
-<div class="pad-top-10">
-    <input type="button" class="btn btn-primary" value="Get a New DO" onclick="location.href='@Request.Url.AbsoluteUri'" />
-</div>
