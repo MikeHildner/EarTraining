@@ -61,7 +61,7 @@ textarea {
     width: 60px;
     height: 60px;
     bottom: 40px;
-    right: 40px;
+    /*right: 40px;*/
     color: #FFF;
     border-radius: 50px;
     text-align: center;
@@ -74,7 +74,7 @@ textarea {
     width: 60px;
     height: 60px;
     bottom: 120px;
-    right: 40px;
+    /*right: 40px;*/
     color: #FFF;
     border-radius: 50px;
     text-align: center;
