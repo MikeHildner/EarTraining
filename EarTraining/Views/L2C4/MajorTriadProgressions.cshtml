@@ -1,0 +1,201 @@
+﻿
+@{
+    ViewBag.Title = "L2C4 ?.? - Major Triad Progressions";
+}
+
+<h2>Level 2 Chapter 4</h2>
+<h5>@ViewBag.Title</h5>
+
+<div class="card bg-info text-white">
+    <div class="card-body">
+        <i class="fa fa-info-circle"></i>
+        <span class="pad-left-10">These are selected from the major triad progression questions on page ?</span>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 card">
+        @{
+            Html.RenderPartial("NewDO");
+        }
+    </div>
+    <div class="col-md-6 card">
+        <figure>
+            <figcaption>Helper - I triad (root)</figcaption>
+            <audio id="audio" controls preload='none'>
+                <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 0, inversion = 0 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 card">
+        <div>
+            <div class="float-left">
+                <h4>Drill</h4>
+            </div>
+            <div class="float-right">
+                <input type="button" class="btn btn-primary margin-top-5" value="Get a New Progression" onclick="setAudProgressionSrc()" />
+            </div>
+        </div>
+
+        <figure>
+            <figcaption>Press the play button to hear the progression</figcaption>
+            <audio id="audProgression" controls preload='none'>
+                <source src='' type='audio/mpeg'>
+            </audio>
+        </figure>
+        <p>Hover over the below to see the progression</p>
+        <div class="spoiler" id="progression"></div>
+    </div>
+</div>
+
+<!-- Circle of 5ths -->
+<div class="row">
+    <div class="col-md-4 card">
+        <figure>
+            <figcaption>
+                <div class="float-left">V (2nd) - I (1st)</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-0" checked />
+                    <label class="custom-control-label small" for="cb-include-0">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
+            <audio controls preload='none'>
+                <source src='@Url.Action("Get2ChordProgression", "L2C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 0 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+    <div class="col-md-4 card">
+        <figure>
+            <figcaption>
+                <div class="float-left">V (1st) - I (root)</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-1" checked />
+                    <label class="custom-control-label small" for="cb-include-1">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
+            <audio controls preload='none'>
+                <source src='@Url.Action("Get2ChordProgression", "L2C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 1 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+    <div class="col-md-4 card">
+        <figure>
+            <figcaption>
+                <div class="float-left">V (root) - I (2nd)</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-2" checked />
+                    <label class="custom-control-label small" for="cb-include-2">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
+            <audio controls preload='none'>
+                <source src='@Url.Action("Get2ChordProgression", "L2C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 2 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+</div>
+
+<!-- Circle of 4ths -->
+<div class="row">
+    <div class="col-md-4 card">
+        <figure>
+            <figcaption>
+                <div class="float-left">IV (1st) - I (2nd)</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-3" checked />
+                    <label class="custom-control-label small" for="cb-include-3">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
+            <audio controls preload='none'>
+                <source src='@Url.Action("Get2ChordProgression", "L2C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 3 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+    <div class="col-md-4 card">
+        <figure>
+            <figcaption>
+                <div class="float-left">IV (root) - I (1st)</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-4" checked />
+                    <label class="custom-control-label small" for="cb-include-4">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
+            <audio controls preload='none'>
+                <source src='@Url.Action("Get2ChordProgression", "L2C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 4 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+    <div class="col-md-4 card">
+        <figure>
+            <figcaption>
+                <div class="float-left">IV (2nd) - I (root)</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-5" checked />
+                    <label class="custom-control-label small" for="cb-include-5">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
+            <audio controls preload='none'>
+                <source src='@Url.Action("Get2ChordProgression", "L2C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 5 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+</div>
+
+@section  scripts {
+    <script>
+        $(document).ready(function () {
+            setAudProgressionSrc();
+
+            $('.cb-include').change(function () {
+                setAudProgressionSrc();
+            });
+        });
+
+        function setAudProgressionSrc() {
+            var baseSrc = '@Url.Action("Get2ChordProgression", "L2C4", new { doNoteName = ViewBag.Pitch.PitchName })';
+            var excluded = getExcluded(null, 0);
+            var progressiontype = getRandomInt(0, 5, excluded);
+            var src = baseSrc + '&progressiontype=' + progressiontype;
+            $('#audProgression').attr('src', src);
+
+            var msg = '';
+            switch (progressiontype) {
+                case 0:
+                    msg = msg + 'V (2nd) - I (1st)';
+                    break;
+                case 1:
+                    msg = msg + 'V (1st) - I (root)';
+                    break;
+                case 2:
+                    msg = msg + 'V (root) - I (2nd)';
+                    break;
+                case 3:
+                    msg = msg + 'IV (1st) - I (2nd)';
+                    break;
+                case 4:
+                    msg = msg + 'IV (root) - I (1st)';
+                    break;
+                case 5:
+                    msg = msg + 'IV (2nd) - I (root)';
+                    break;
+                default:
+                    consoleAndAlert("progressiontype '" + progressiontype + "' is not supported.");
+                    break;
+            }
+
+            var doInfo = $('#doSpoiler').text();
+            var progressionTable = buildProgressionTable(doInfo, msg);
+            $('#progression').html(progressionTable);
+        }
+
+    </script>
+}
+
