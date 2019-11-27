@@ -99,6 +99,20 @@ function getChord(theDo, numeral) {
         case 'I':
             chord = scale[0];
             break;
+        case 'bII':
+            if (theDo === 'B') {
+                chord = 'C';
+            }
+            else if (theDo === 'E') {
+                chord = 'F';
+            }
+            else if (theDo.endsWith('#')) {
+                chord = scale[0].charAt(0);
+            }
+            else {
+                chord = scale[1] + 'b';
+            }
+            break;
         case 'ii':
             chord = scale[1];
             isMinor = true;
@@ -116,6 +130,9 @@ function getChord(theDo, numeral) {
         case 'vi':
             chord = scale[5];
             isMinor = true;
+            break;
+        case 'VII':
+            chord = scale[6];
             break;
         default:
             consoleAndAlert("Numeral '" + numeral + "' is not supported.");

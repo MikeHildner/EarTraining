@@ -139,6 +139,70 @@
     </div>
 </div>
 
+<!-- Half-step up -->
+<div class="row">
+    <div class="col-md-4 card">
+        <figure>
+            <figcaption>
+                <div class="float-left">I (root) - bII (root)</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-6" checked />
+                    <label class="custom-control-label small" for="cb-include-6">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
+            <audio controls preload='none'>
+                <source src='@Url.Action("Get2ChordProgression", "L2C10", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 6 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+    <div class="col-md-4 card">
+        <figure>
+            <figcaption>
+                <div class="float-left">I (root) - bII (2nd)</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-7" checked />
+                    <label class="custom-control-label small" for="cb-include-7">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
+            <audio controls preload='none'>
+                <source src='@Url.Action("Get2ChordProgression", "L2C10", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 7 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+    <div class="col-md-4 card">
+        <figure>
+            <figcaption>
+                <div class="float-left">I (root) - VII (root)</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-8" checked />
+                    <label class="custom-control-label small" for="cb-include-8">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
+            <audio controls preload='none'>
+                <source src='@Url.Action("Get2ChordProgression", "L2C10", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 8 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+    <div class="col-md-4 card">
+        <figure>
+            <figcaption>
+                <div class="float-left">I (root) - VII (1st)</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-9" checked />
+                    <label class="custom-control-label small" for="cb-include-9">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
+            <audio controls preload='none'>
+                <source src='@Url.Action("Get2ChordProgression", "L2C10", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 9 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+</div>
+
 @section  scripts {
     <script>
         $(document).ready(function () {
@@ -152,7 +216,7 @@
         function setAudProgressionSrc() {
             var baseSrc = '@Url.Action("Get2ChordProgression", "L2C10", new { doNoteName = ViewBag.Pitch.PitchName })';
             var excluded = getExcluded(null, 0);
-            var progressiontype = getRandomInt(0, 5, excluded);
+            var progressiontype = getRandomInt(0, 9, excluded);
             var src = baseSrc + '&progressiontype=' + progressiontype;
             //$('#audProgression').attr('src', src);
             $('#audProgression source').attr('src', src);
@@ -176,6 +240,18 @@
                     break;
                 case 5:
                     msg = msg + 'IV (2nd) - I (root)';
+                    break;
+                case 6:
+                    msg = msg + 'I (root) - bII (root)';
+                    break;
+                case 7:
+                    msg = msg + 'I (root) - bII (2nd)';
+                    break;
+                case 8:
+                    msg = msg + 'I (root) - VII (root)';
+                    break;
+                case 9:
+                    msg = msg + 'I (root) - VII (1st)';
                     break;
                 default:
                     consoleAndAlert("progressiontype '" + progressiontype + "' is not supported.");

@@ -14,5 +14,9 @@ namespace EarTrainingLibrary.Enums
         Four1stToOne2nd = 3,
         FourRootToOne1st = 4,
         Four2ndToOneRoot = 5,
+        OneRootToFlatTwoRoot = 6,
+        OneRootToFlatTwo2nd = 7,
+        OneRootToSevenRoot = 8,
+        OneRootToSeven1st = 9
     }
 }
