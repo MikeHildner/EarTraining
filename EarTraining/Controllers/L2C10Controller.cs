@@ -21,10 +21,13 @@ namespace EarTraining.Controllers
             ViewBag.Pitch = pitch;
         }
 
-        // GET: L2C4
         public ActionResult MajorTriadProgressions2()
         {
-            //ViewBag.ShowPlayDoTriad = true;
+            return View();
+        }
+
+        public ActionResult MajorTriadProgressions3()
+        {
             return View();
         }
 
@@ -109,6 +112,59 @@ namespace EarTraining.Controllers
 
             var phrase = msp1
                 .FollowedBy(msp2);
+
+            var stwp = new SampleToWaveProvider(phrase);
+
+            MemoryStream wavStream = new MemoryStream();
+            WaveFileWriter.WriteWavFileToStream(wavStream, stwp);
+            wavStream.Position = 0;
+
+            wavStream.WavToMp3File(out string fileName);
+            return Redirect($"~/Temp/{fileName}");
+        }
+
+        public ActionResult Get3ChordProgression(string doNoteName, int progressiontype)
+        {
+            var progressionType = (L2C4ProgressionType)progressiontype;
+
+            TimeSpan noteDuration = TimeSpan.FromSeconds(2);
+
+            string doFileName = NAudioHelper.GetFileNameFromNoteName(doNoteName);
+            doFileName = Path.GetFileName(doFileName);
+            int doNoteNumber = int.Parse(doFileName.Split('.')[0]);
+
+            ISampleProvider[] samples1, samples2, samples3;
+
+            switch (progressionType)
+            {
+                case L2C4ProgressionType.OneThen5ThenHalfUp:
+                    samples1 = Inversion.CreateTriadInversionEx(InversionType.LowSecond, noteDuration, doNoteNumber, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpPerfect5th);
+                    samples2 = Inversion.CreateTriadInversionEx(InversionType.LowFirst, noteDuration, doNoteNumber + Interval.UpPerfect4th, doNoteNumber + Interval.UpMajor6th, doNoteNumber + Interval.UpPerfectOctave);
+                    samples3 = Inversion.CreateTriadInversionEx(InversionType.LowFirst, noteDuration.Add(noteDuration), doNoteNumber + Interval.UpDiminished5th, doNoteNumber + Interval.UpMinor7th, doNoteNumber + Interval.UpMinor9th);
+                    break;
+
+                default:
+                    throw new NotSupportedException($"ProgressionType {progressionType} is not supported.");
+            }
+
+            MixingSampleProvider msp1 = new MixingSampleProvider(samples1[0].WaveFormat);
+            msp1.AddMixerInput(samples1[0]);
+            msp1.AddMixerInput(samples1[1]);
+            msp1.AddMixerInput(samples1[2]);
+
+            MixingSampleProvider msp2 = new MixingSampleProvider(samples2[0].WaveFormat);
+            msp2.AddMixerInput(samples2[0]);
+            msp2.AddMixerInput(samples2[1]);
+            msp2.AddMixerInput(samples2[2]);
+
+            MixingSampleProvider msp3 = new MixingSampleProvider(samples3[0].WaveFormat);
+            msp3.AddMixerInput(samples3[0]);
+            msp3.AddMixerInput(samples3[1]);
+            msp3.AddMixerInput(samples3[2]);
+
+            var phrase = msp1
+                .FollowedBy(msp2)
+                .FollowedBy(msp3);
 
             var stwp = new SampleToWaveProvider(phrase);
 

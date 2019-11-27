@@ -344,6 +344,7 @@
     <Content Include="Views\L1C6\MelodicIntervals.cshtml" />
     <Content Include="Views\L1C7\MelodicIntervals.cshtml" />
     <Content Include="Views\L2C10\MajorTriadProgressions2.cshtml" />
+    <Content Include="Views\L2C10\MajorTriadProgressions3.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

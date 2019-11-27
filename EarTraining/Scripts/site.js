@@ -28,7 +28,7 @@ function consoleAndAlert(msg) {
     alert(msg);
 }
 
-function getNewDo(callback, msg) {
+function getNewDo(callback, msg, friendlyMessage) {
     var request = $.ajax({
         url: rootPath + "DO/getNewDO",
         method: "GET"
@@ -42,7 +42,7 @@ function getNewDo(callback, msg) {
 
         //$('#doSpoiler').text(pitchName + ' - ' + frequency + ' Hz');
         //var doInfo = pitchName + ' - ' + frequency + ' Hz';
-        callback(pitchName, msg);
+        callback(pitchName, msg, friendlyMessage);
     });
 
     request.fail(function (jqXHR, textStatus) {
@@ -51,7 +51,7 @@ function getNewDo(callback, msg) {
 
 }
 
-function buildProgressionTable(doInfo, progInfo) {
+function buildProgressionTable(doInfo, progInfo, friendlyMessage) {
     doInfo = decodeURIComponent(doInfo);
     // Get just the note name from doInfo.
     var theDo = doInfo.split('-')[0].split('/')[0].trim();
@@ -71,6 +71,14 @@ function buildProgressionTable(doInfo, progInfo) {
     var progs = progInfo.split('-');
 
     var progTable = '<table class="tdcenter">';
+
+    // Friendly message, if we have one.
+    if (friendlyMessage) {
+        var colspan = progsWithInversionInfo.length;
+        progTable += '<tr>';
+        progTable += '<td colspan="' + colspan + '" class="font-weight-bold">' + friendlyMessage + '</td>';
+        progTable += '<tr>';
+    }
 
     // Numerals with inversion info.
     progTable += '<tr>';
@@ -124,12 +132,37 @@ function getChord(theDo, numeral) {
         case 'IV':
             chord = scale[3];
             break;
+        case 'bV':
+            console.log('=== bV');
+            console.log('theDo:' + theDo);
+            chord = scale[4] + 'b';
+            break;
         case 'V':
             chord = scale[4];
             break;
         case 'vi':
             chord = scale[5];
             isMinor = true;
+            break;
+        case 'bVI':
+            console.log('=== bVI');
+            console.log('theDo:' + theDo);
+            console.log('scale[4]:' + scale[4]);
+            if (scale[4] === 'B') {
+                chord = 'C';
+            }
+            else if (scale[4] === 'E') {
+                chord = 'F';
+            }
+            else if (scale[4].endsWith('#')) {
+                chord = scale[5].charAt(0);
+            }
+            else if (scale[4].endsWith('b')) {
+                chord = scale[4].charAt(0);
+            }
+            else {
+                chord = scale[5] + 'b';
+            }
             break;
         case 'VII':
             chord = scale[6];
@@ -218,34 +251,34 @@ function getDoFromLocalStorage() {
 }
 
 function changeAllDoNoteNames(theDo) {
-    console.log('***Entered changeAllDoNoteNames. theDo: ' + theDo);
+    //console.log('***Entered changeAllDoNoteNames. theDo: ' + theDo);
     if (!theDo) {
         theDo = getDoFromLocalStorage();
     }
     var allSources = $('audio source');
     allSources.each(function (index, element) {
-        console.log('===allSources[' + index + ']: ' + element);
+        //console.log('===allSources[' + index + ']: ' + element);
         var src = $(element).attr('src');
-        console.log('src: ' + src);
+        //console.log('src: ' + src);
         var regex = /doNoteName=.*?(&|$)/;
         var doNoteNameParams = src.match(regex);
-        console.log('doNoteNameParams: ' + doNoteNameParams);
+        //console.log('doNoteNameParams: ' + doNoteNameParams);
 
         $(doNoteNameParams).each(function (i, el) {
-            console.log('doNoteNameParam[' + i + ']: ' + el);
+            //console.log('doNoteNameParam[' + i + ']: ' + el);
             if (el.endsWith('&')) {
                 el = el.slice(0, -1); // Trim last character.
-                console.log('doNoteNameParam[' + i + '] trim last char: ' + el);
+                //console.log('doNoteNameParam[' + i + '] trim last char: ' + el);
             }
 
             if (el.includes('doNoteName')) {
                 src = src.replace(el, 'doNoteName=' + theDo);
-                console.log('new src: ' + src);
+                //console.log('new src: ' + src);
                 $(element).attr('src', src);
                 var parent = $(element).parent();
                 parent.attr('src', src);
             }
         });
     });
-    console.log('***Exiting changeAllDoNoteNames');
+    //console.log('***Exiting changeAllDoNoteNames');
 }

@@ -8,6 +8,7 @@ namespace EarTrainingLibrary.Enums
 {
     public enum L2C4ProgressionType
     {
+        // 2 chords.
         Five2ndToOne1st = 0,
         Five1stToOneRoot = 1,
         FiveRootToOne2nd = 2,
@@ -17,6 +18,9 @@ namespace EarTrainingLibrary.Enums
         OneRootToFlatTwoRoot = 6,
         OneRootToFlatTwo2nd = 7,
         OneRootToSevenRoot = 8,
-        OneRootToSeven1st = 9
+        OneRootToSeven1st = 9,
+
+        // 3 chords.
+        OneThen5ThenHalfUp = 100,
     }
 }

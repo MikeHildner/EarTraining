@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewBag.Title = "L2C10 1 - Major Triad Progressions - 3 Chords";
+}
+<h4 class="text-warning">Not yet fully implemented</h4>
+<h2>Level 2 Chapter 10</h2>
+<h5>@ViewBag.Title</h5>
+
+<div class="card bg-info text-white">
+    <div class="card-body">
+        <i class="fa fa-info-circle"></i>
+        <span class="pad-left-10">These are selected from the major triad progression questions on page 65</span>
+    </div>
+</div>
+<div class="card bg-info text-white margin-top-5">
+    <div class="card-body">
+        <i class="fa fa-pencil"></i>
+        <span class="pad-left-10">Note: When you get a new progression, or change which drills to include, you will also get a new randomly assigned key</span>
+    </div>
+</div>
+
+<div class="row margin-top-5">
+    <div class="col-md-6 card">
+        <div>
+            <div class="float-left">
+                <h4>Drill</h4>
+            </div>
+            <div class="float-right">
+                <input type="button" class="btn btn-primary margin-top-5" value="Get a New Progression" onclick="setAudProgressionSrc()" />
+            </div>
+        </div>
+
+        <figure>
+            <figcaption>Press the play button to hear the progression</figcaption>
+            <audio id="audProgression" controls preload='none'>
+                <source src='' type='audio/mpeg'>
+            </audio>
+        </figure>
+        <p>Hover over the below to see the progression</p>
+        <div class="spoiler" id="progression"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 card">
+        <figure>
+            <figcaption>
+                <div class="float-left">5 followed by 1/2U</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-0" checked />
+                    <label class="custom-control-label small" for="cb-include-0">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
+            <audio controls preload='none'>
+                <source src='@Url.Action("Get3ChordProgression", "L2C10", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 100 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+</div>
+
+@section  scripts {
+    <script>
+        $(document).ready(function () {
+            setAudProgressionSrc();
+
+            $('.cb-include').change(function () {
+                setAudProgressionSrc();
+            });
+        });
+
+        function setAudProgressionSrc() {
+            var baseSrc = '@Url.Action("Get3ChordProgression", "L2C10", new { doNoteName = ViewBag.Pitch.PitchName })';
+            var excluded = getExcluded(null, 0);
+            var progressiontype = getRandomInt(100, 100, excluded);
+            var src = baseSrc + '&progressiontype=' + progressiontype;
+            $('#audProgression source').attr('src', src);
+
+            var msg = '';
+            var friendlyMessage = '';
+            switch (progressiontype) {
+                case 100:
+                    msg = msg + 'I (2nd) - IV (1st) - bV (1st)';
+                    friendlyMessage = '5 followed by 1/2U';
+                    break;
+                default:
+                    consoleAndAlert("progressiontype '" + progressiontype + "' is not supported.");
+                    break;
+            }
+
+            getNewDo(doTheChange, msg, friendlyMessage);
+        }
+
+        function doTheChange(pitchName, msg, friendlyMessage) {
+            changeAllDoNoteNames(pitchName);
+            var progressionTable = buildProgressionTable(pitchName, msg, friendlyMessage);
+            $('#progression').html(progressionTable);
+        }
+    </script>
+}
+
