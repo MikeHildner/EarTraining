@@ -12,24 +12,14 @@
         <span class="pad-left-10">These are selected from the major triad progression questions on page 63</span>
     </div>
 </div>
-
-@*<div class="row">
-    <div class="col-md-6 card">
-        @{
-            Html.RenderPartial("NewDO");
-        }
+<div class="card bg-info text-white margin-top-5">
+    <div class="card-body">
+        <i class="fa fa-pencil"></i>
+        <span class="pad-left-10">Note: When you get a new progression, you will also get a new randomly assigned key</span>
     </div>
-    <div class="col-md-6 card">
-        <figure>
-            <figcaption>Helper - I triad (root)</figcaption>
-            <audio id="audio" controls preload='none'>
-                <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 0, inversion = 0 })' type='audio/mpeg'>
-            </audio>
-        </figure>
-    </div>
-</div>*@
+</div>
 
-<div class="row">
+<div class="row margin-top-5">
     <div class="col-md-6 card">
         <div>
             <div class="float-left">
@@ -191,7 +181,6 @@
                     break;
             }
 
-            //var doInfo = $('#doSpoiler').text();
             var doInfo = '@ViewBag.Pitch.PitchName - @ViewBag.Pitch.Hertz Hz';
             var progressionTable = buildProgressionTable(doInfo, msg);
             $('#progression').html(progressionTable);
