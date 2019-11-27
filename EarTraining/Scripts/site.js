@@ -28,7 +28,7 @@ function consoleAndAlert(msg) {
     alert(msg);
 }
 
-function getNewDo() {
+function getNewDo(callback, msg) {
     var request = $.ajax({
         url: rootPath + "DO/getNewDO",
         method: "GET"
@@ -36,9 +36,13 @@ function getNewDo() {
 
     request.done(function (data) {
         var pitchName = data.PitchName;
+        //pitchName = pitchName.split('/')[0];
+        pitchName = encodeURIComponent(pitchName);
         var frequency = data.Hertz;
 
-        $('#doSpoiler').text(pitchName + ' - ' + frequency + ' Hz');
+        //$('#doSpoiler').text(pitchName + ' - ' + frequency + ' Hz');
+        //var doInfo = pitchName + ' - ' + frequency + ' Hz';
+        callback(pitchName, msg);
     });
 
     request.fail(function (jqXHR, textStatus) {
@@ -48,6 +52,7 @@ function getNewDo() {
 }
 
 function buildProgressionTable(doInfo, progInfo) {
+    doInfo = decodeURIComponent(doInfo);
     // Get just the note name from doInfo.
     var theDo = doInfo.split('-')[0].split('/')[0].trim();
     theDo = theDo.replace(/[0-9]/g, '');
@@ -183,4 +188,47 @@ function getExcluded(excluded, index) {
     });
     console.log(excluded);
     return excluded;
+}
+
+function getDoFromLocalStorage() {
+    var doNoteName = window.localStorage.getItem('doNoteName');
+    if (!doNoteName) {
+        doNoteName = 'C4';
+        window.localStorage.setItem('doNoteName', doNoteName);
+    }
+
+    return doNoteName;
+}
+
+function changeAllDoNoteNames(theDo) {
+    console.log('***Entered changeAllDoNoteNames. theDo: ' + theDo);
+    if (!theDo) {
+        theDo = getDoFromLocalStorage();
+    }
+    var allSources = $('audio source');
+    allSources.each(function (index, element) {
+        console.log('===allSources[' + index + ']: ' + element);
+        var src = $(element).attr('src');
+        console.log('src: ' + src);
+        var regex = /doNoteName=.*?(&|$)/;
+        var doNoteNameParams = src.match(regex);
+        console.log('doNoteNameParams: ' + doNoteNameParams);
+
+        $(doNoteNameParams).each(function (i, el) {
+            console.log('doNoteNameParam[' + i + ']: ' + el);
+            if (el.endsWith('&')) {
+                el = el.slice(0, -1); // Trim last character.
+                console.log('doNoteNameParam[' + i + '] trim last char: ' + el);
+            }
+
+            if (el.includes('doNoteName')) {
+                src = src.replace(el, 'doNoteName=' + theDo);
+                console.log('new src: ' + src);
+                $(element).attr('src', src);
+                var parent = $(element).parent();
+                parent.attr('src', src);
+            }
+        });
+    });
+    console.log('***Exiting changeAllDoNoteNames');
 }

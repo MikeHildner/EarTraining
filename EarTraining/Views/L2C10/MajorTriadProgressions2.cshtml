@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "L2C10 1 - Major Triad Progressions Pairs";
 }
-
+<h4 class="text-warning">Not yet fully implemented</h4>
 <h2>Level 2 Chapter 10</h2>
 <h5>@ViewBag.Title</h5>
 
@@ -15,7 +15,7 @@
 <div class="card bg-info text-white margin-top-5">
     <div class="card-body">
         <i class="fa fa-pencil"></i>
-        <span class="pad-left-10">Note: When you get a new progression, you will also get a new randomly assigned key</span>
+        <span class="pad-left-10">Note: When you get a new progression, or change which drills to include, you will also get a new randomly assigned key</span>
     </div>
 </div>
 
@@ -154,7 +154,8 @@
             var excluded = getExcluded(null, 0);
             var progressiontype = getRandomInt(0, 5, excluded);
             var src = baseSrc + '&progressiontype=' + progressiontype;
-            $('#audProgression').attr('src', src);
+            //$('#audProgression').attr('src', src);
+            $('#audProgression source').attr('src', src);
 
             var msg = '';
             switch (progressiontype) {
@@ -181,11 +182,20 @@
                     break;
             }
 
-            var doInfo = '@ViewBag.Pitch.PitchName - @ViewBag.Pitch.Hertz Hz';
-            var progressionTable = buildProgressionTable(doInfo, msg);
-            $('#progression').html(progressionTable);
+            //var doInfo = '@ViewBag.Pitch.PitchName - @ViewBag.Pitch.Hertz Hz';
+            //var doInfo = '@ViewBag.Pitch.PitchName';
+            //changeAllDoNoteNames(doInfo);
+            //var progressionTable = buildProgressionTable(doInfo, msg);
+            //$('#progression').html(progressionTable);
+
+            getNewDo(doTheChange, msg);
         }
 
+        function doTheChange(pitchName, msg) {
+            changeAllDoNoteNames(pitchName);
+            var progressionTable = buildProgressionTable(pitchName, msg);
+            $('#progression').html(progressionTable);
+        }
     </script>
 }
 
