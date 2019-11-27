@@ -13,18 +13,18 @@ using WaveLibrary;
 
 namespace EarTraining.Controllers
 {
-    public class L2C4Controller : BaseController
+    public class L2C10Controller : BaseController
     {
-        public L2C4Controller()
+        public L2C10Controller()
         {
             Pitch pitch = new Pitches().Random();
             ViewBag.Pitch = pitch;
         }
 
         // GET: L2C4
-        public ActionResult MajorTriadProgressions()
+        public ActionResult MajorTriadProgressions2()
         {
-            ViewBag.ShowPlayDoTriad = true;
+            //ViewBag.ShowPlayDoTriad = true;
             return View();
         }
 

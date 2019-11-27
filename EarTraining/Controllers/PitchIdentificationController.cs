@@ -20,6 +20,7 @@ namespace EarTraining.Controllers
         {
             Pitch pitch = new Pitches().Random();
             ViewBag.Pitch = pitch;
+            ViewBag.ShowDo = true;
 
             return View();
         }

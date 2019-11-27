@@ -1,19 +1,19 @@
 ﻿
 @{
-    ViewBag.Title = "L2C4 ?.? - Major Triad Progressions";
+    ViewBag.Title = "L2C10 1 - Major Triad Progressions Pairs";
 }
 
-<h2>Level 2 Chapter 4</h2>
+<h2>Level 2 Chapter 10</h2>
 <h5>@ViewBag.Title</h5>
 
 <div class="card bg-info text-white">
     <div class="card-body">
         <i class="fa fa-info-circle"></i>
-        <span class="pad-left-10">These are selected from the major triad progression questions on page ?</span>
+        <span class="pad-left-10">These are selected from the major triad progression questions on page 63</span>
     </div>
 </div>
 
-<div class="row">
+@*<div class="row">
     <div class="col-md-6 card">
         @{
             Html.RenderPartial("NewDO");
@@ -27,7 +27,7 @@
             </audio>
         </figure>
     </div>
-</div>
+</div>*@
 
 <div class="row">
     <div class="col-md-6 card">
@@ -64,7 +64,7 @@
             </figcaption>
             <div class="clearfix"></div>
             <audio controls preload='none'>
-                <source src='@Url.Action("Get2ChordProgression", "L2C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 0 })' type='audio/mpeg'>
+                <source src='@Url.Action("Get2ChordProgression", "L2C10", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 0 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
@@ -79,7 +79,7 @@
             </figcaption>
             <div class="clearfix"></div>
             <audio controls preload='none'>
-                <source src='@Url.Action("Get2ChordProgression", "L2C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 1 })' type='audio/mpeg'>
+                <source src='@Url.Action("Get2ChordProgression", "L2C10", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 1 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
@@ -94,7 +94,7 @@
             </figcaption>
             <div class="clearfix"></div>
             <audio controls preload='none'>
-                <source src='@Url.Action("Get2ChordProgression", "L2C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 2 })' type='audio/mpeg'>
+                <source src='@Url.Action("Get2ChordProgression", "L2C10", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 2 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
@@ -113,7 +113,7 @@
             </figcaption>
             <div class="clearfix"></div>
             <audio controls preload='none'>
-                <source src='@Url.Action("Get2ChordProgression", "L2C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 3 })' type='audio/mpeg'>
+                <source src='@Url.Action("Get2ChordProgression", "L2C10", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 3 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
@@ -128,7 +128,7 @@
             </figcaption>
             <div class="clearfix"></div>
             <audio controls preload='none'>
-                <source src='@Url.Action("Get2ChordProgression", "L2C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 4 })' type='audio/mpeg'>
+                <source src='@Url.Action("Get2ChordProgression", "L2C10", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 4 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
@@ -143,7 +143,7 @@
             </figcaption>
             <div class="clearfix"></div>
             <audio controls preload='none'>
-                <source src='@Url.Action("Get2ChordProgression", "L2C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 5 })' type='audio/mpeg'>
+                <source src='@Url.Action("Get2ChordProgression", "L2C10", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 5 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
@@ -160,7 +160,7 @@
         });
 
         function setAudProgressionSrc() {
-            var baseSrc = '@Url.Action("Get2ChordProgression", "L2C4", new { doNoteName = ViewBag.Pitch.PitchName })';
+            var baseSrc = '@Url.Action("Get2ChordProgression", "L2C10", new { doNoteName = ViewBag.Pitch.PitchName })';
             var excluded = getExcluded(null, 0);
             var progressiontype = getRandomInt(0, 5, excluded);
             var src = baseSrc + '&progressiontype=' + progressiontype;
@@ -191,7 +191,8 @@
                     break;
             }
 
-            var doInfo = $('#doSpoiler').text();
+            //var doInfo = $('#doSpoiler').text();
+            var doInfo = '@ViewBag.Pitch.PitchName - @ViewBag.Pitch.Hertz Hz';
             var progressionTable = buildProgressionTable(doInfo, msg);
             $('#progression').html(progressionTable);
         }

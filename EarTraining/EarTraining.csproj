@@ -198,7 +198,7 @@
     <Compile Include="Controllers\L1C5Controller.cs" />
     <Compile Include="Controllers\L1C6Controller.cs" />
     <Compile Include="Controllers\L1C7Controller.cs" />
-    <Compile Include="Controllers\L2C4Controller.cs" />
+    <Compile Include="Controllers\L2C10Controller.cs" />
     <Compile Include="Controllers\PitchIdentificationController.cs" />
     <Compile Include="Controllers\SolfegController.cs" />
     <Compile Include="Global.asax.cs">
@@ -343,7 +343,7 @@
     <Content Include="Views\L1C5\MelodicIntervals.cshtml" />
     <Content Include="Views\L1C6\MelodicIntervals.cshtml" />
     <Content Include="Views\L1C7\MelodicIntervals.cshtml" />
-    <Content Include="Views\L2C4\MajorTriadProgressions.cshtml" />
+    <Content Include="Views\L2C10\MajorTriadProgressions2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

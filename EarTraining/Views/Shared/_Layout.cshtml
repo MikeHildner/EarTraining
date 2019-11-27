@@ -135,13 +135,13 @@
                         </li>*@
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownL2C4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Level 2 Chapter 4
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownL2C10" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Level 2 Chapter 10
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownL2C4">
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownL2C10">
                             <div class="dropdown-header">Major Diatonic Triad Progressions</div>
                             <div class="dropdown-divider"></div>
-                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Circle of 5ths/4ths and Half-Step Movements"), "MajorTriadProgressions", "L2C4", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Circle of 5ths/4ths and 1/2 Step Movements (pairs)"), "MajorTriadProgressions2", "L2C10", null, new { @class = "dropdown-item" })
                         </div>
                     </li>
 
@@ -178,7 +178,7 @@
             </div>
         }
 
-        @if (ViewBag.Pitch != null)
+        @if (ViewBag.ShowDo == true)
         {
             <div class="float-button-1 bg-primary">
                 <audio id="doPlayer" preload='none'>
