@@ -222,36 +222,47 @@
             $('#audProgression source').attr('src', src);
 
             var msg = '';
+            var friendlyMessage = 'I\'m a message!';;
             switch (progressiontype) {
                 case 0:
                     msg = msg + 'V (2nd) - I (1st)';
+                    friendlyMessage = '5';
                     break;
                 case 1:
                     msg = msg + 'V (1st) - I (root)';
+                    friendlyMessage = '5';
                     break;
                 case 2:
                     msg = msg + 'V (root) - I (2nd)';
+                    friendlyMessage = '5';
                     break;
                 case 3:
                     msg = msg + 'IV (1st) - I (2nd)';
+                    friendlyMessage = '4';
                     break;
                 case 4:
                     msg = msg + 'IV (root) - I (1st)';
+                    friendlyMessage = '4';
                     break;
                 case 5:
                     msg = msg + 'IV (2nd) - I (root)';
+                    friendlyMessage = '4';
                     break;
                 case 6:
                     msg = msg + 'I (root) - bII (root)';
+                    friendlyMessage = '1/2U';
                     break;
                 case 7:
                     msg = msg + 'I (root) - bII (2nd)';
+                    friendlyMessage = '1/2U';
                     break;
                 case 8:
                     msg = msg + 'I (root) - VII (root)';
+                    friendlyMessage = '1/2D';
                     break;
                 case 9:
                     msg = msg + 'I (root) - VII (1st)';
+                    friendlyMessage = '1/2D';
                     break;
                 default:
                     consoleAndAlert("progressiontype '" + progressiontype + "' is not supported.");
@@ -264,12 +275,12 @@
             //var progressionTable = buildProgressionTable(doInfo, msg);
             //$('#progression').html(progressionTable);
 
-            getNewDo(doTheChange, msg);
+            getNewDo(doTheChange, msg, friendlyMessage);
         }
 
-        function doTheChange(pitchName, msg) {
+        function doTheChange(pitchName, msg, friendlyMessage) {
             changeAllDoNoteNames(pitchName);
-            var progressionTable = buildProgressionTable(pitchName, msg);
+            var progressionTable = buildProgressionTable(pitchName, msg, friendlyMessage);
             $('#progression').html(progressionTable);
         }
     </script>
