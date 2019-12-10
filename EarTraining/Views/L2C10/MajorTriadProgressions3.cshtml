@@ -47,13 +47,28 @@
             <figcaption>
                 <div class="float-left">5 followed by 1/2U</div>
                 <div class="float-right custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-0" checked />
-                    <label class="custom-control-label small" for="cb-include-0">Include in Drills</label>
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-100" checked />
+                    <label class="custom-control-label small" for="cb-include-100">Include in Drills</label>
                 </div>
             </figcaption>
             <div class="clearfix"></div>
             <audio controls preload='none'>
                 <source src='@Url.Action("Get3ChordProgression", "L2C10", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 100 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+    <div class="col-md-4 card">
+        <figure>
+            <figcaption>
+                <div class="float-left">4 followed by 1/2D</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-101" checked />
+                    <label class="custom-control-label small" for="cb-include-101">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
+            <audio controls preload='none'>
+                <source src='@Url.Action("Get3ChordProgression", "L2C10", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 101 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
@@ -72,7 +87,7 @@
         function setAudProgressionSrc() {
             var baseSrc = '@Url.Action("Get3ChordProgression", "L2C10", new { doNoteName = ViewBag.Pitch.PitchName })';
             var excluded = getExcluded(null, 0);
-            var progressiontype = getRandomInt(100, 100, excluded);
+            var progressiontype = getRandomInt(100, 101, excluded);
             var src = baseSrc + '&progressiontype=' + progressiontype;
             $('#audProgression source').attr('src', src);
 
@@ -82,6 +97,10 @@
                 case 100:
                     msg = msg + 'I (2nd) - IV (1st) - bV (1st)';
                     friendlyMessage = '5 followed by 1/2U';
+                    break;
+                case 101:
+                    msg = msg + 'I (root) - V (1st) - bV (1st)';
+                    friendlyMessage = '4 followed by 1/2D';
                     break;
                 default:
                     consoleAndAlert("progressiontype '" + progressiontype + "' is not supported.");

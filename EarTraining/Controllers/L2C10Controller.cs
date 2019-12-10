@@ -143,6 +143,12 @@ namespace EarTraining.Controllers
                     samples3 = Inversion.CreateTriadInversionEx(InversionType.LowFirst, noteDuration.Add(noteDuration), doNoteNumber + Interval.UpDiminished5th, doNoteNumber + Interval.UpMinor7th, doNoteNumber + Interval.UpMinor9th);
                     break;
 
+                case L2C4ProgressionType.OneThen4ThenHalfDown:
+                    samples1 = Inversion.CreateTriadInversionEx(InversionType.Root, noteDuration, doNoteNumber, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpPerfect5th);
+                    samples2 = Inversion.CreateTriadInversionEx(InversionType.LowFirst, noteDuration, doNoteNumber + Interval.UpPerfect5th, doNoteNumber + Interval.UpMajor7th, doNoteNumber + Interval.UpMajor9th);
+                    samples3 = Inversion.CreateTriadInversionEx(InversionType.LowFirst, noteDuration.Add(noteDuration), doNoteNumber + Interval.UpDiminished5th, doNoteNumber + Interval.UpMinor7th, doNoteNumber + Interval.UpMinor9th);
+                    break;
+
                 default:
                     throw new NotSupportedException($"ProgressionType {progressionType} is not supported.");
             }

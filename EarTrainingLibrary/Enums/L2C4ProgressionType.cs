@@ -22,5 +22,6 @@ namespace EarTrainingLibrary.Enums
 
         // 3 chords.
         OneThen5ThenHalfUp = 100,
+        OneThen4ThenHalfDown = 101,
     }
 }
