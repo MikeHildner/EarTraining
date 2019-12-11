@@ -96,11 +96,11 @@
             switch (progressiontype) {
                 case 100:
                     msg = msg + 'I (2nd) - IV (1st) - bV (1st)';
-                    friendlyMessage = '5 followed by 1/2U';
+                    friendlyMessage = '<span class="font-weight-bold">5</span> followed by <span class="font-weight-bold">1/2U</span>';
                     break;
                 case 101:
                     msg = msg + 'I (root) - V (1st) - bV (1st)';
-                    friendlyMessage = '4 followed by 1/2D';
+                    friendlyMessage = '<span class="font-weight-bold">4</span> followed by <span class="font-weight-bold">1/2D</span>';
                     break;
                 default:
                     consoleAndAlert("progressiontype '" + progressiontype + "' is not supported.");
@@ -112,7 +112,7 @@
 
         function doTheChange(pitchName, msg, friendlyMessage) {
             changeAllDoNoteNames(pitchName);
-            var progressionTable = buildProgressionTable(pitchName, msg, friendlyMessage);
+            var progressionTable = buildProgressionTable(pitchName, msg, friendlyMessage, true);
             $('#progression').html(progressionTable);
         }
     </script>

@@ -51,7 +51,7 @@ function getNewDo(callback, msg, friendlyMessage) {
 
 }
 
-function buildProgressionTable(doInfo, progInfo, friendlyMessage) {
+function buildProgressionTable(doInfo, progInfo, friendlyMessage, inversionsOnly) {
     doInfo = decodeURIComponent(doInfo);
     // Get just the note name from doInfo.
     var theDo = doInfo.split('-')[0].split('/')[0].trim();
@@ -76,14 +76,23 @@ function buildProgressionTable(doInfo, progInfo, friendlyMessage) {
     if (friendlyMessage) {
         var colspan = progsWithInversionInfo.length;
         progTable += '<tr>';
-        progTable += '<td colspan="' + colspan + '" class="font-weight-bold">' + friendlyMessage + '</td>';
+        progTable += '<td colspan="' + colspan + '">' + friendlyMessage + '</td>';
         progTable += '<tr>';
     }
 
     // Numerals with inversion info.
     progTable += '<tr>';
     for (var i = 0; i < progsWithInversionInfo.length; i++) {
-        progTable += '<td class="bottom-border">' + progsWithInversionInfo[i] + '</td>';
+        var tdInfo;
+        if (inversionsOnly) {
+            // Grab just the text in parenthesis.
+            tdInfo = progsWithInversionInfo[i].match(/\((.*?)\)/);
+            tdInfo = tdInfo[0];
+        }
+        else {
+            tdInfo = progsWithInversionInfo[i];
+        }
+        progTable += '<td class="bottom-border">' + tdInfo + '</td>';
     }
     progTable += '<tr>';
 
@@ -136,6 +145,10 @@ function getChord(theDo, numeral) {
             console.log('=== bV');
             console.log('theDo:' + theDo);
             chord = scale[4] + 'b';
+            if (chord.endsWith('bb')){
+                chord = chord.replace('bb', '');
+                chord = previousLetterName(chord);
+            }
             break;
         case 'V':
             chord = scale[4];
@@ -224,7 +237,6 @@ function getMajorScale(theDo) {
     return scale;
 }
 
-
 function getExcluded(excluded, index) {
     excluded = excluded || [];
     $('.cb-include').each(function () {
@@ -281,4 +293,15 @@ function changeAllDoNoteNames(theDo) {
         });
     });
     //console.log('***Exiting changeAllDoNoteNames');
+}
+
+function previousLetterName(letter) {
+    var i = letter.charCodeAt(0);
+    i = i - 1;
+    if (i === 64) {
+        i = 71;
+    }
+
+    var previousLetter = String.fromCharCode(i);
+    return previousLetter;
 }
