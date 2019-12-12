@@ -1,0 +1,187 @@
+﻿
+@{
+    ViewBag.Title = "L2 - Major Triad Progressions";
+}
+<h4 class="text-warning">Not yet fully implemented</h4>
+<h2>Level 2</h2>
+<h5>@ViewBag.Title</h5>
+
+<div class="card bg-info text-white margin-top-5">
+    <div class="card-body">
+        <i class="fa fa-pencil"></i>
+        <span class="pad-left-10">Note: When you get a new progression, you will also get a new randomly assigned key</span>
+    </div>
+</div>
+
+<div class="row margin-top-5">
+    <div class="col-md-6 card">
+        <h4>Settings</h4>
+        <fieldset>
+            Number of Chords <select id="numberOfChords" name="numberOfChords" class="">
+                <option selected="selected" value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <div>Movement Types</div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" id="circleOf4ths" value="4" class="custom-control-input">
+                <label class="custom-control-label" for="circleOf4ths">Circle of 4ths</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" id="circleOf5ths" value="5" class="custom-control-input">
+                <label class="custom-control-label" for="circleOf5ths">Circle of 5ths</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" id="1-2U" value="1/2U" class="custom-control-input">
+                <label class="custom-control-label" for="1-2U">Half-Step Up</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" id="1-2D" value="1/2D" class="custom-control-input">
+                <label class="custom-control-label" for="1-2D">Half-Step Down</label>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+<div class="row margin-top-5">
+    <div class="col-md-6 card">
+        <div>
+            <div class="float-left">
+                <h4>Drill</h4>
+            </div>
+            <div class="float-right">
+                <input type="button" class="btn btn-primary margin-top-5" value="Get a New Progression" onclick="setAudProgressionSrc()" />
+            </div>
+        </div>
+
+        <figure>
+            <figcaption>Press the play button to hear the progression</figcaption>
+            <audio id="audProgression" controls preload='none'>
+                <source src='' type='audio/mpeg'>
+            </audio>
+        </figure>
+        <p>Hover over the below to see the progression</p>
+        <div class="spoiler" id="progression"></div>
+    </div>
+</div>
+
+@section  scripts {
+    <script>
+        $(document).ready(function () {
+            //setAudProgressionSrc();
+        });
+
+        function setAudProgressionSrc() {
+            //var baseSrc = '@Url.Action("GetMajorTriadProgression", "L2", new { doNoteName = ViewBag.Pitch.PitchName })';
+            getNewDo(setupProgression)
+        }
+
+        function setupProgression(pitchNames) {
+            pitchNames = decodeURIComponent(pitchNames);
+            var pitchNames = pitchNames.split('/');
+            var pitchName = pitchNames[pitchNames.length - 1];  // Get last element of the array (the flat key if given enharmonic key),
+
+            var numberOfChords = $('#numberOfChords').val();
+
+            var movementTypes = [];
+            if ($('#circleOf4ths').prop('checked') === true) { movementTypes.push($('#circleOf4ths').val()); }
+            if ($('#circleOf5ths').prop('checked') === true) { movementTypes.push($('#circleOf5ths').val()); }
+            if ($('#1-2U').prop('checked') === true) { movementTypes.push($('#1-2U').val()); }
+            if ($('#1-2D').prop('checked') === true) { movementTypes.push($('#1-2D').val()); }
+
+            var movementProgression = [];
+            for (var i = 0; i < numberOfChords; i++) {
+                movementProgression.push(movementTypes[Math.floor(Math.random() * movementTypes.length)]);
+            }
+
+            var progression = buildProgression(pitchName, movementProgression);
+        }
+
+        function buildProgression(pitchName, movementProgression) {
+            //console.log(pitchName);
+            //console.log(movementProgression);
+
+            var pitch = pitchName.replace(/\d+/g, '');  // Remove numbers.
+            var inversions = ['(root)', '(1st)', '(2nd)'];
+            var inversion = inversions[Math.floor(Math.random() * inversions.length)];
+            var chordProgression = pitch + ' ' + inversion;
+            for (var i = 0; i < movementProgression.length; i++) {
+                inversion = inversions[Math.floor(Math.random() * inversions.length)];
+                var scale = getMajorScale(pitch);
+                var movement = movementProgression[i];
+                //console.log('pitch: ' + pitch + ', movement: ' + movement);
+                switch (movement) {
+                    case '4':
+                        pitch = scale[4];
+                        chordProgression += ' - ' + pitch + ' ' + inversion;
+                        break;
+                    case '5':
+                        pitch = scale[3];
+                        chordProgression += ' - ' + pitch + ' ' + inversion;
+                        break;
+                    case '1/2U':
+                        pitch = scale[1];
+                        if (pitch.endsWith('#')) {
+                            pitch = pitch.replace('#', '');
+                        }
+                        else if (pitch.endsWith('b')) {
+                            pitch = scale[0].replace('b', '');
+                            if (pitch === 'Cb') { pitch = 'B'; }
+                            //if (pitch === 'Cb') { pitch = 'B'; }
+                        }
+                        else if (pitch === 'C') {
+                            pitch = 'B';
+                        }
+                        else if (pitch === 'F') {
+                            pitch = 'E';
+                        }
+                        else {
+                            pitch += 'b';
+                        }
+                        chordProgression += ' - ' + pitch + ' ' + inversion;
+                        break;
+                    case '1/2D':
+                        pitch = scale[6];
+                        chordProgression += ' - ' + pitch + ' ' + inversion;
+                        break;
+                    default:
+                        consoleAndAlert('movement type "' + movement + '" is not supported.');
+                }
+                //console.log('chordProgression: ' + chordProgression);
+            }
+
+            //alert(chordProgression + '\n' + movementProgression);
+            var html = '<table><tr><td>' + movementProgression + '</td></tr><tr><td>' + chordProgression + '</td></tr></table>';
+            $('#progression').html(html);
+            setupSrc(pitchName, chordProgression);
+        }
+
+    function setupSrc(pitchName, chordProgression) {
+        var request = $.ajax({
+            url: rootPath + 'L2/CreateProgression?pitchName=' + pitchName + '&chordProgression=' + chordProgression,
+            method: "GET"
+        });
+
+        request.done(function (data) {
+            $('#audProgression').attr('src', rootPath + data);
+        });
+
+        request.fail(function (jqXHR, textStatus) {
+            alert('There was an error processing the request.\n\n' + textStatus + ': ' + jqXHR.status + ' - ' + jqXHR.statusText + '.');
+        });
+    }
+
+        //function doTheChange(pitchName, msg, friendlyMessage) {
+        //    changeAllDoNoteNames(pitchName);
+        //    var progressionTable = buildProgressionTable(pitchName, msg, friendlyMessage, true);
+        //    $('#progression').html(progressionTable);
+        //}
+    </script>
+}
+

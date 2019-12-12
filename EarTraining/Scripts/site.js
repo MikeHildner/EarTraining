@@ -1,19 +1,4 @@
-﻿//$(document).ready(function () {
-//    $('.spoiler').hover(
-//        function () {
-//            var t = $(this)[0];
-//            $(this)[0].animate({
-//                "color": "#FFFFFF"//,
-//                //backgroundColor: "blue"
-//            });
-//        },
-//        function () {
-//            //alert('mouse leave');
-//        }
-//    );
-//});
-
-function getRandomInt(min, max, exclude) {
+﻿function getRandomInt(min, max, exclude) {
     min = Math.ceil(min);
     max = Math.floor(max);
     var ri = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -48,7 +33,6 @@ function getNewDo(callback, msg, friendlyMessage) {
     request.fail(function (jqXHR, textStatus) {
         alert('There was an error processing the request.\n\n' + textStatus + ': ' + jqXHR.status + ' - ' + jqXHR.statusText + '.');
     });
-
 }
 
 function buildProgressionTable(doInfo, progInfo, friendlyMessage, inversionsOnly) {
@@ -213,18 +197,23 @@ function getMajorScale(theDo) {
             scale = ['B', 'C#', 'D#', 'E', 'F#', 'G#', 'A#'];
             break;
         case 'F#':
+        case 'Gb':
             scale = ['Gb', 'Ab', 'Bb', 'Cb', 'Db', 'Eb', 'F'];
             break;
         case 'C#':
+        case 'Db':
             scale = ['Db', 'Eb', 'F', 'Gb', 'Ab', 'Bb', 'C'];
             break;
         case 'G#':
+        case 'Ab':
             scale = ['Ab', 'Bb', 'C', 'Db', 'Eb', 'F', 'G'];
             break;
         case 'D#':
+        case 'Eb':
             scale = ['Eb', 'F', 'G', 'Ab', 'Bb', 'C', 'D'];
             break;
         case 'A#':
+        case 'Bb':
             scale = ['Bb', 'C', 'D', 'Eb', 'F', 'G', 'A'];
             break;
         case 'F':
