@@ -53,7 +53,7 @@
             </figcaption>
             <div class="clearfix"></div>
             <audio controls preload='none'>
-                <source src='@Url.Action("Get3ChordProgression", "L2C10", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 100 })' type='audio/mpeg'>
+                <source src='@Url.Action("Get3ChordProgression", "L2C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 100 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
@@ -68,7 +68,7 @@
             </figcaption>
             <div class="clearfix"></div>
             <audio controls preload='none'>
-                <source src='@Url.Action("Get3ChordProgression", "L2C10", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 101 })' type='audio/mpeg'>
+                <source src='@Url.Action("Get3ChordProgression", "L2C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 101 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
@@ -85,7 +85,7 @@
         });
 
         function setAudProgressionSrc() {
-            var baseSrc = '@Url.Action("Get3ChordProgression", "L2C10", new { doNoteName = ViewBag.Pitch.PitchName })';
+            var baseSrc = '@Url.Action("Get3ChordProgression", "L2C4", new { doNoteName = ViewBag.Pitch.PitchName })';
             var excluded = getExcluded(null, 0);
             var progressiontype = getRandomInt(100, 101, excluded);
             var src = baseSrc + '&progressiontype=' + progressiontype;

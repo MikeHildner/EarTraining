@@ -13,9 +13,9 @@ using WaveLibrary;
 
 namespace EarTraining.Controllers
 {
-    public class L2C10Controller : BaseController
+    public class L2C4Controller : BaseController
     {
-        public L2C10Controller()
+        public L2C4Controller()
         {
             Pitch pitch = new Pitches().Random();
             ViewBag.Pitch = pitch;

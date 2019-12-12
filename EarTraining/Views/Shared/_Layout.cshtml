@@ -125,24 +125,15 @@
                         </div>
                     </li>
 
-                    @*<li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownExperimental" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Experimental
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownExperimental">
-                                @Html.ActionLink("L1C1 Resolutions Without DO", "Experimental", "L1C1", null, new { @class = "dropdown-item" })
-                            </div>
-                        </li>*@
-
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownL2C10" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownL2C4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Level 2 Chapter 4
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownL2C10">
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownL2C4">
                             <div class="dropdown-header">Major Triad Progressions</div>
                             <div class="dropdown-divider"></div>
-                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Circle of 5ths/4ths and 1/2 Step Movements (pairs)"), "MajorTriadProgressions2", "L2C10", null, new { @class = "dropdown-item" })
-                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Circle of 5ths/4ths and 1/2 Step Movements (3 chords)"), "MajorTriadProgressions3", "L2C10", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Circle of 5ths/4ths and 1/2 Step Movements (pairs)"), "MajorTriadProgressions2", "L2C4", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Circle of 5ths/4ths and 1/2 Step Movements (3 chords)"), "MajorTriadProgressions3", "L2C4", null, new { @class = "dropdown-item" })
                         </div>
                     </li>
 
@@ -154,6 +145,15 @@
                             @Html.ActionLink("Find the DO", "Index", "DO", null, new { @class = "dropdown-item" })
                             @*@Html.ActionLink("Solfeg Pitch Identification", "Index", "PitchIdentification", null, new { @class = "dropdown-item" })*@
                             @Html.ActionLink("All Solfeg Syllables", "Index", "Solfeg", null, new { @class = "dropdown-item" })
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownExperimental" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Experimental
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownExperimental">
+                            @Html.ActionLink("L2 Triad Progressions", "Experimental", "L1C1", null, new { @class = "dropdown-item" })
                         </div>
                     </li>
 

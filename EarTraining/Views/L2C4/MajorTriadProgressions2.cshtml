@@ -54,7 +54,7 @@
             </figcaption>
             <div class="clearfix"></div>
             <audio controls preload='none'>
-                <source src='@Url.Action("Get2ChordProgression", "L2C10", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 0 })' type='audio/mpeg'>
+                <source src='@Url.Action("Get2ChordProgression", "L2C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 0 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
@@ -69,7 +69,7 @@
             </figcaption>
             <div class="clearfix"></div>
             <audio controls preload='none'>
-                <source src='@Url.Action("Get2ChordProgression", "L2C10", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 1 })' type='audio/mpeg'>
+                <source src='@Url.Action("Get2ChordProgression", "L2C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 1 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
@@ -84,7 +84,7 @@
             </figcaption>
             <div class="clearfix"></div>
             <audio controls preload='none'>
-                <source src='@Url.Action("Get2ChordProgression", "L2C10", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 2 })' type='audio/mpeg'>
+                <source src='@Url.Action("Get2ChordProgression", "L2C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 2 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
@@ -103,7 +103,7 @@
             </figcaption>
             <div class="clearfix"></div>
             <audio controls preload='none'>
-                <source src='@Url.Action("Get2ChordProgression", "L2C10", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 3 })' type='audio/mpeg'>
+                <source src='@Url.Action("Get2ChordProgression", "L2C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 3 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
@@ -118,7 +118,7 @@
             </figcaption>
             <div class="clearfix"></div>
             <audio controls preload='none'>
-                <source src='@Url.Action("Get2ChordProgression", "L2C10", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 4 })' type='audio/mpeg'>
+                <source src='@Url.Action("Get2ChordProgression", "L2C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 4 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
@@ -133,7 +133,7 @@
             </figcaption>
             <div class="clearfix"></div>
             <audio controls preload='none'>
-                <source src='@Url.Action("Get2ChordProgression", "L2C10", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 5 })' type='audio/mpeg'>
+                <source src='@Url.Action("Get2ChordProgression", "L2C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 5 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
@@ -152,7 +152,7 @@
             </figcaption>
             <div class="clearfix"></div>
             <audio controls preload='none'>
-                <source src='@Url.Action("Get2ChordProgression", "L2C10", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 6 })' type='audio/mpeg'>
+                <source src='@Url.Action("Get2ChordProgression", "L2C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 6 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
@@ -167,7 +167,7 @@
             </figcaption>
             <div class="clearfix"></div>
             <audio controls preload='none'>
-                <source src='@Url.Action("Get2ChordProgression", "L2C10", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 7 })' type='audio/mpeg'>
+                <source src='@Url.Action("Get2ChordProgression", "L2C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 7 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
@@ -182,7 +182,7 @@
             </figcaption>
             <div class="clearfix"></div>
             <audio controls preload='none'>
-                <source src='@Url.Action("Get2ChordProgression", "L2C10", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 8 })' type='audio/mpeg'>
+                <source src='@Url.Action("Get2ChordProgression", "L2C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 8 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
@@ -197,7 +197,7 @@
             </figcaption>
             <div class="clearfix"></div>
             <audio controls preload='none'>
-                <source src='@Url.Action("Get2ChordProgression", "L2C10", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 9 })' type='audio/mpeg'>
+                <source src='@Url.Action("Get2ChordProgression", "L2C4", new { doNoteName = ViewBag.Pitch.PitchName, progressionType = 9 })' type='audio/mpeg'>
             </audio>
         </figure>
     </div>
@@ -214,7 +214,7 @@
         });
 
         function setAudProgressionSrc() {
-            var baseSrc = '@Url.Action("Get2ChordProgression", "L2C10", new { doNoteName = ViewBag.Pitch.PitchName })';
+            var baseSrc = '@Url.Action("Get2ChordProgression", "L2C4", new { doNoteName = ViewBag.Pitch.PitchName })';
             var excluded = getExcluded(null, 0);
             var progressiontype = getRandomInt(0, 9, excluded);
             var src = baseSrc + '&progressiontype=' + progressiontype;
