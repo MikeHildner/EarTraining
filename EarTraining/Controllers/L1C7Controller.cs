@@ -61,7 +61,7 @@ namespace EarTraining.Controllers
 
         private MemoryStream GetMelodicDrill(string doNoteName, L1C7MelodicDrillType drillType)
         {
-            double bpm = double.Parse(ConfigurationManager.AppSettings["MelodicDrillBPM"]);
+            double bpm = double.Parse(ConfigurationManager.AppSettings["BPM"]);
             double quarterNoteMillis = (60 / bpm) * 1000;
 
             TimeSpan eigthNoteDuration = TimeSpan.FromMilliseconds(quarterNoteMillis / 2);
@@ -410,7 +410,7 @@ namespace EarTraining.Controllers
 
         private MemoryStream GetMelodicInterval(string doNoteName, L1C7MelodicDrillType drillType)
         {
-            double bpm = double.Parse(ConfigurationManager.AppSettings["MelodicDrillBPM"]);
+            double bpm = double.Parse(ConfigurationManager.AppSettings["BPM"]);
             double quarterNoteMillis = (60 / bpm) * 1000;
             TimeSpan halfNoteDuration = TimeSpan.FromMilliseconds(quarterNoteMillis * 2);
 

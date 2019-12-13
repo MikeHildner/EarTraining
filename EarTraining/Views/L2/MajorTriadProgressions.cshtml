@@ -96,11 +96,11 @@
             if ($('#1-2D').prop('checked') === true) { movementTypes.push($('#1-2D').val()); }
 
             var movementProgression = [];
-            for (var i = 0; i < numberOfChords; i++) {
+            for (var i = 0; i < numberOfChords - 1; i++) {
                 movementProgression.push(movementTypes[Math.floor(Math.random() * movementTypes.length)]);
             }
 
-            var progression = buildProgression(pitchName, movementProgression);
+            buildProgression(pitchName, movementProgression);
         }
 
         function buildProgression(pitchName, movementProgression) {
@@ -115,7 +115,7 @@
                 inversion = inversions[Math.floor(Math.random() * inversions.length)];
                 var scale = getMajorScale(pitch);
                 var movement = movementProgression[i];
-                //console.log('pitch: ' + pitch + ', movement: ' + movement);
+                console.log('pitch: ' + pitch + ', movement: ' + movement);
                 switch (movement) {
                     case '4':
                         pitch = scale[4];
@@ -133,7 +133,6 @@
                         else if (pitch.endsWith('b')) {
                             pitch = scale[0].replace('b', '');
                             if (pitch === 'Cb') { pitch = 'B'; }
-                            //if (pitch === 'Cb') { pitch = 'B'; }
                         }
                         else if (pitch === 'C') {
                             pitch = 'B';
@@ -153,35 +152,34 @@
                     default:
                         consoleAndAlert('movement type "' + movement + '" is not supported.');
                 }
-                //console.log('chordProgression: ' + chordProgression);
+                console.log('chordProgression: ' + chordProgression);
             }
 
+            movementProgression = movementProgression.join(', ');
             //alert(chordProgression + '\n' + movementProgression);
             var html = '<table><tr><td>' + movementProgression + '</td></tr><tr><td>' + chordProgression + '</td></tr></table>';
             $('#progression').html(html);
-            setupSrc(pitchName, chordProgression);
+            setupSrc(pitchName, chordProgression, movementProgression);
         }
 
-    function setupSrc(pitchName, chordProgression) {
-        var request = $.ajax({
-            url: rootPath + 'L2/CreateProgression?pitchName=' + pitchName + '&chordProgression=' + chordProgression,
-            method: "GET"
-        });
+        function setupSrc(pitchName, chordProgression, movementProgression) {
+            console.log('movementProgression:' + movementProgression);
+            chordProgression = encodeURIComponent(chordProgression);
+            var uri = rootPath + 'L2/CreateProgression?pitchName=' + pitchName + '&chordProgression=' + chordProgression + '&movementProgression=' + movementProgression;
+            console.log('uri: ' + uri);
+            var request = $.ajax({
+                url: uri,
+                method: "GET"
+            });
 
-        request.done(function (data) {
-            $('#audProgression').attr('src', rootPath + data);
-        });
+            request.done(function (data) {
+                $('#audProgression').attr('src', rootPath + data);
+            });
 
-        request.fail(function (jqXHR, textStatus) {
-            alert('There was an error processing the request.\n\n' + textStatus + ': ' + jqXHR.status + ' - ' + jqXHR.statusText + '.');
-        });
-    }
-
-        //function doTheChange(pitchName, msg, friendlyMessage) {
-        //    changeAllDoNoteNames(pitchName);
-        //    var progressionTable = buildProgressionTable(pitchName, msg, friendlyMessage, true);
-        //    $('#progression').html(progressionTable);
-        //}
+            request.fail(function (jqXHR, textStatus) {
+                alert('There was an error processing the request.\n\n' + textStatus + ': ' + jqXHR.status + ' - ' + jqXHR.statusText + '.');
+            });
+        }
     </script>
 }
 

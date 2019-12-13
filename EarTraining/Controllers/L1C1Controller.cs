@@ -53,7 +53,7 @@ namespace EarTraining.Controllers
 
         private MemoryStream GetResolutionDO(string doNoteName, ResolutionType resolutionType)
         {
-            double bpm = double.Parse(ConfigurationManager.AppSettings["MelodicDrillBPM"]);
+            double bpm = double.Parse(ConfigurationManager.AppSettings["BPM"]);
             double quarterNotemillis = (60 / bpm) * 1000;
             TimeSpan quarterNoteDuration = TimeSpan.FromMilliseconds(quarterNotemillis);
             TimeSpan halfNoteDuration = quarterNoteDuration.Add(quarterNoteDuration);
@@ -135,7 +135,7 @@ namespace EarTraining.Controllers
 
         private MemoryStream GetResolutionNoDO(string doNoteName, ResolutionType resolutionType)
         {
-            double bpm = double.Parse(ConfigurationManager.AppSettings["MelodicDrillBPM"]);
+            double bpm = double.Parse(ConfigurationManager.AppSettings["BPM"]);
             double quarterNotemillis = (60 / bpm) * 1000;
             TimeSpan quarterNoteDuration = TimeSpan.FromMilliseconds(quarterNotemillis);
             TimeSpan halfNoteDuration = quarterNoteDuration.Add(quarterNoteDuration);
