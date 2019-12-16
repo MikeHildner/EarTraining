@@ -17,7 +17,8 @@
     <div class="col-md-6 card">
         <h4>Settings</h4>
         <fieldset>
-            Number of Chords <select id="numberOfChords" name="numberOfChords" class="">
+            <label for="numberOfChords" class="font-weight-bold">Number of Chords</label>
+            <select id="numberOfChords" name="numberOfChords" class="form-control">
                 <option selected="selected" value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
@@ -28,7 +29,7 @@
             </select>
         </fieldset>
         <fieldset>
-            <div>Movement Types</div>
+            <div class="font-weight-bold">Movement Types</div>
             <div class="custom-control custom-checkbox">
                 <input type="checkbox" id="circleOf4ths" value="4" class="custom-control-input">
                 <label class="custom-control-label" for="circleOf4ths">Circle of 4ths</label>
@@ -98,6 +99,11 @@
             var movementProgression = [];
             for (var i = 0; i < numberOfChords - 1; i++) {
                 movementProgression.push(movementTypes[Math.floor(Math.random() * movementTypes.length)]);
+            }
+
+            if (!movementProgression[0]) {  // If no movement types choosen, there will be one array element, which is undefined.
+                alert('Please choose at least one Movement Type.');
+                return;
             }
 
             buildProgression(pitchName, movementProgression);
