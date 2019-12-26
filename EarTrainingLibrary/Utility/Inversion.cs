@@ -2,6 +2,7 @@
 using EarTrainingLibrary.NAudio;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace EarTrainingLibrary.Utility
 {
     public class Inversion
     {
+        private static readonly Logger _log = LogManager.GetCurrentClassLogger();
+
         public static ISampleProvider[] CreateInversion(InversionType inversionType, double gain, TimeSpan duration, SignalGeneratorType sgType, params double[] frequencies)
         {
             switch(inversionType)
@@ -57,6 +60,8 @@ namespace EarTrainingLibrary.Utility
 
         public static ISampleProvider[] CreateTriadInversionEx(InversionType inversionType, TimeSpan duration, int firstNoteNumber, int secondNoteNumber, int thirdNoteNumber)
         {
+            _log.Debug($"inversionType: {inversionType}, duration: {duration}, firstNoteNumber: {firstNoteNumber}, secondNoteNumber: {secondNoteNumber}, thirdNoteNumber: {thirdNoteNumber}");
+
             switch (inversionType)
             {
                 case InversionType.Root:

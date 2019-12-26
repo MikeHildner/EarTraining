@@ -6,6 +6,7 @@ using NAudio.Wave.SampleProviders;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -30,6 +31,9 @@ namespace EarTraining.Controllers
 
         public ActionResult CreateProgression(string pitchName, string chordProgression, string movementProgression)
         {
+            Debug.WriteLine("CreateProgression()");
+            Debug.WriteLine($"pitchName: {pitchName}, chordProgression: {chordProgression}, movementProgression: {movementProgression}");
+
             string[] chordsAndInversions = chordProgression.Split('-');
             string[] movements = movementProgression.Split(',');
             MixingSampleProvider[] msps = new MixingSampleProvider[chordsAndInversions.Length];
@@ -71,6 +75,8 @@ namespace EarTraining.Controllers
 
         private MixingSampleProvider CreateMajorTriad(string doNoteName, string chordAndInversion, string movement)
         {
+            Debug.WriteLine("CreateMajorTriad()");
+            Debug.WriteLine($"doNoteName: {doNoteName}, chordAndInversion: {chordAndInversion}, movement: {movement ?? "null"}");
             double bpm = double.Parse(ConfigurationManager.AppSettings["BPM"]);
             double quarterNoteMillis = (60 / bpm) * 1000;
             double halfNoteMillis = quarterNoteMillis * 2;
@@ -80,30 +86,46 @@ namespace EarTraining.Controllers
             int doNoteRegister = int.Parse(doNoteRegisterString);
             string[] parts = chordAndInversion.Trim().Split(' ');
             string chord = parts[0].Trim();
-            
 
-             
             string inversion = parts[1].Trim();
-
-
-            bool secondNoteInHigherRegister = IsSecondInHigherRegisterNoteHigher(doNoteName, chord);
-
-            string thisChordRootNote;
-            if (secondNoteInHigherRegister)
+            InversionType inversionType;
+            switch(inversion)
             {
-                thisChordRootNote = chord + (doNoteRegister + 1).ToString();
-            }
-            else
-            {
-                thisChordRootNote = chord + doNoteRegister.ToString();
+                case "(root)":
+                    inversionType = InversionType.Root;
+                    break;
+
+                case "(1st)":
+                    inversionType = InversionType.LowFirst;
+                    break;
+
+                case "(2nd)":
+                    inversionType = InversionType.LowSecond;
+                    break;
+
+                default:
+                    inversionType = InversionType.Root;
+                    break;
             }
 
+            //bool secondNoteIsHigher = IsSecondNoteHigher(doNoteName, chord);
+
+            //string thisChordRootNote;
+            //if (secondNoteIsHigher)
+            //{
+            //    thisChordRootNote = chord + (doNoteRegister + 1).ToString();
+            //}
+            //else
+            //{
+            //    thisChordRootNote = chord + doNoteRegister.ToString();
+            //}
+            string thisChordRootNote = chord + doNoteRegister.ToString();
             string doFileName = NAudioHelper.GetFileNameFromNoteName(thisChordRootNote);
             doFileName = Path.GetFileName(doFileName);
             int doNoteNumber = int.Parse(doFileName.Split('.')[0]);
 
             ISampleProvider[] samples;
-            samples = Inversion.CreateTriadInversionEx(InversionType.Root, noteDuration, doNoteNumber + Interval.UpPerfect4th, doNoteNumber + Interval.UpMajor6th, doNoteNumber + Interval.UpPerfectOctave);
+            samples = Inversion.CreateTriadInversionEx(inversionType, noteDuration, doNoteNumber + Interval.UpPerfect4th, doNoteNumber + Interval.UpMajor6th, doNoteNumber + Interval.UpPerfectOctave);
 
             MixingSampleProvider msp = new MixingSampleProvider(samples[0].WaveFormat);
             msp.AddMixerInput(samples[0]);
@@ -113,7 +135,7 @@ namespace EarTraining.Controllers
             return msp;
         }
 
-        private bool IsSecondInHigherRegisterNoteHigher(string doNoteName, string chord)
+        private bool IsSecondNoteHigher(string doNoteName, string chord)
         {
             bool isHigher = false;
             return isHigher;

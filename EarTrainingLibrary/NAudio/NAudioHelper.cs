@@ -55,11 +55,22 @@ namespace EarTrainingLibrary.NAudio
                 noteName = noteName.Split('/')[1];
             }
 
+            noteName = SharpToFlat(noteName);
+
             string samplesFolder = HostingEnvironment.MapPath("~/Samples");
             string[] files = Directory.GetFiles(samplesFolder);
             string fileName = files.Single(s => s.Contains(noteName));
 
             return fileName;
+        }
+
+        private static string SharpToFlat(string noteName)
+        {
+            if (!noteName.Contains("#")) { return noteName; }
+
+            if (noteName.Contains("F#")) { return noteName.Replace("F#", "Gb"); }
+
+            return noteName;
         }
 
         public static ISampleProvider GetSampleProviderFromFile(string fileName, TimeSpan duration)
