@@ -89,7 +89,7 @@ namespace EarTraining.Controllers
 
             string inversion = parts[1].Trim();
             InversionType inversionType;
-            switch(inversion)
+            switch (inversion)
             {
                 case "(root)":
                     inversionType = InversionType.Root;
@@ -109,7 +109,7 @@ namespace EarTraining.Controllers
             }
 
             string thisChordRootNote = GetClosestNote(doNoteName, chord);
-            //string thisChordRootNote = chord + doNoteRegister.ToString();
+            //thisChordRootNote = chord + doNoteRegister.ToString();
             _log.Debug($"doNoteName: {doNoteName}, thisChordRootNote: {thisChordRootNote}");
             string doFileName = NAudioHelper.GetFileNameFromNoteName(thisChordRootNote);
             doFileName = Path.GetFileName(doFileName);
@@ -126,15 +126,62 @@ namespace EarTraining.Controllers
             return msp;
         }
 
-        private string GetClosestNote(string doNoteName, string note)
+        private string GetClosestNote(string doNoteName, string secondNote)
         {
             string doNoteRegisterString = doNoteName[doNoteName.Length - 1].ToString();
             int doNoteRegister = int.Parse(doNoteRegisterString);
 
             PitchNumber doNotePitchNumber = (PitchNumber)Enum.Parse(typeof(PitchNumber), doNoteName);
-            int doNoteNumber = (int)doNotePitchNumber;
+            //int doNoteNumber = (int)doNotePitchNumber;
 
-            throw new NotImplementedException();
+            string lowerRegisterSecondNoteName = secondNote + (doNoteRegister - 1).ToString();
+            string sameRegisterSecondNoteName = secondNote + (doNoteRegister).ToString();
+            string higherRegisterSecondNoteName = secondNote + (doNoteRegister + 1).ToString();
+
+            PitchNumber lowerRegisterPitchNumber, sameRegisterPitchNumber, higherRegisterPitchNumber;
+            int lowerRegisterSecondNoteNumber, sameRegisterSecondNoteNumber, higherRegisterSecondNoteNumber;
+
+            // Note: Because we're limiting the initial notes two be the middle two octaves (C3 through B4 in Pitches.cs),
+            // we don't have to worry about (for now) lower or higher registers being out of the range (e.g. A-1 or C10).
+
+            // See https://docs.microsoft.com/en-us/dotnet/api/system.enum.tryparse?view=netframework-4.8 to do this robustly.
+
+            Enum.TryParse(lowerRegisterSecondNoteName, out lowerRegisterPitchNumber);
+            lowerRegisterSecondNoteNumber = (int)lowerRegisterPitchNumber;
+
+            Enum.TryParse(sameRegisterSecondNoteName, out sameRegisterPitchNumber);
+            sameRegisterSecondNoteNumber = (int)sameRegisterPitchNumber;
+
+            Enum.TryParse(higherRegisterSecondNoteName, out higherRegisterPitchNumber);
+            higherRegisterSecondNoteNumber = (int)higherRegisterPitchNumber;
+
+
+            int lowerRegisterDiff = Math.Abs(sameRegisterSecondNoteNumber - lowerRegisterSecondNoteNumber);
+            int sameRegisterDiff = Math.Abs(sameRegisterSecondNoteNumber - sameRegisterSecondNoteNumber);
+            int higherRegisterDiff = Math.Abs(sameRegisterSecondNoteNumber - higherRegisterSecondNoteNumber);
+
+            string returnedSecondNoteName;
+
+            if(lowerRegisterDiff <= 6)
+            {
+                returnedSecondNoteName = lowerRegisterSecondNoteName;
+            }
+            else if(sameRegisterDiff <= 6)
+            {
+                returnedSecondNoteName = sameRegisterSecondNoteName;
+            }
+            else if(higherRegisterDiff <= 6)
+            {
+                returnedSecondNoteName = higherRegisterSecondNoteName;
+            }
+            else
+            {
+                throw new Exception("Could not find a closest note name.");
+            }
+
+            _log.Debug($"doNoteName: {doNoteName}, secondNote: {secondNote}, returnedSecondNoteName: {returnedSecondNoteName}");
+
+            return returnedSecondNoteName;
         }
     }
 }
