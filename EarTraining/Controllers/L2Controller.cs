@@ -3,10 +3,10 @@ using EarTrainingLibrary.NAudio;
 using EarTrainingLibrary.Utility;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -18,6 +18,8 @@ namespace EarTraining.Controllers
 {
     public class L2Controller : BaseController
     {
+        private static readonly Logger _log = LogManager.GetCurrentClassLogger();
+
         public L2Controller()
         {
             Pitch pitch = new Pitches().Random();
@@ -31,8 +33,8 @@ namespace EarTraining.Controllers
 
         public ActionResult CreateProgression(string pitchName, string chordProgression, string movementProgression)
         {
-            Debug.WriteLine("CreateProgression()");
-            Debug.WriteLine($"pitchName: {pitchName}, chordProgression: {chordProgression}, movementProgression: {movementProgression}");
+            _log.Debug("CreateProgression()");
+            _log.Debug($"pitchName: {pitchName}, chordProgression: {chordProgression}, movementProgression: {movementProgression}");
 
             string[] chordsAndInversions = chordProgression.Split('-');
             string[] movements = movementProgression.Split(',');
@@ -75,8 +77,8 @@ namespace EarTraining.Controllers
 
         private MixingSampleProvider CreateMajorTriad(string doNoteName, string chordAndInversion, string movement)
         {
-            Debug.WriteLine("CreateMajorTriad()");
-            Debug.WriteLine($"doNoteName: {doNoteName}, chordAndInversion: {chordAndInversion}, movement: {movement ?? "null"}");
+            _log.Debug("CreateMajorTriad()");
+            _log.Debug($"doNoteName: {doNoteName}, chordAndInversion: {chordAndInversion}, movement: {movement ?? "null"}");
             double bpm = double.Parse(ConfigurationManager.AppSettings["BPM"]);
             double quarterNoteMillis = (60 / bpm) * 1000;
             double halfNoteMillis = quarterNoteMillis * 2;
