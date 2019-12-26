@@ -74,6 +74,7 @@
     <Compile Include="Enums\L1C7HarmonicDrillType.cs" />
     <Compile Include="Enums\L1C7MelodicDrillType.cs" />
     <Compile Include="Enums\L2C4ProgressionType.cs" />
+    <Compile Include="Enums\PitchNumber.cs" />
     <Compile Include="Enums\ProgressionType.cs" />
     <Compile Include="Enums\ProgressionType2.cs" />
     <Compile Include="Enums\ProgressionType3.cs" />

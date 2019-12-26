@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace EarTraining.Controllers
 {
-    public class ErrorHandlerController : Controller
+    public class ErrorHandlerController : BaseController
     {
         // GET: ErrorHandler
         public ActionResult Index()

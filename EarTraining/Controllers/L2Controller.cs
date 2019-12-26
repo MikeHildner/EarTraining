@@ -33,7 +33,6 @@ namespace EarTraining.Controllers
 
         public ActionResult CreateProgression(string pitchName, string chordProgression, string movementProgression)
         {
-            _log.Debug("CreateProgression()");
             _log.Debug($"pitchName: {pitchName}, chordProgression: {chordProgression}, movementProgression: {movementProgression}");
 
             string[] chordsAndInversions = chordProgression.Split('-');
@@ -77,7 +76,6 @@ namespace EarTraining.Controllers
 
         private MixingSampleProvider CreateMajorTriad(string doNoteName, string chordAndInversion, string movement)
         {
-            _log.Debug("CreateMajorTriad()");
             _log.Debug($"doNoteName: {doNoteName}, chordAndInversion: {chordAndInversion}, movement: {movement ?? "null"}");
             double bpm = double.Parse(ConfigurationManager.AppSettings["BPM"]);
             double quarterNoteMillis = (60 / bpm) * 1000;
@@ -110,18 +108,9 @@ namespace EarTraining.Controllers
                     break;
             }
 
-            //bool secondNoteIsHigher = IsSecondNoteHigher(doNoteName, chord);
-
-            //string thisChordRootNote;
-            //if (secondNoteIsHigher)
-            //{
-            //    thisChordRootNote = chord + (doNoteRegister + 1).ToString();
-            //}
-            //else
-            //{
-            //    thisChordRootNote = chord + doNoteRegister.ToString();
-            //}
-            string thisChordRootNote = chord + doNoteRegister.ToString();
+            string thisChordRootNote = GetClosestNote(doNoteName, chord);
+            //string thisChordRootNote = chord + doNoteRegister.ToString();
+            _log.Debug($"doNoteName: {doNoteName}, thisChordRootNote: {thisChordRootNote}");
             string doFileName = NAudioHelper.GetFileNameFromNoteName(thisChordRootNote);
             doFileName = Path.GetFileName(doFileName);
             int doNoteNumber = int.Parse(doFileName.Split('.')[0]);
@@ -137,10 +126,15 @@ namespace EarTraining.Controllers
             return msp;
         }
 
-        private bool IsSecondNoteHigher(string doNoteName, string chord)
+        private string GetClosestNote(string doNoteName, string note)
         {
-            bool isHigher = false;
-            return isHigher;
+            string doNoteRegisterString = doNoteName[doNoteName.Length - 1].ToString();
+            int doNoteRegister = int.Parse(doNoteRegisterString);
+
+            PitchNumber doNotePitchNumber = (PitchNumber)Enum.Parse(typeof(PitchNumber), doNoteName);
+            int doNoteNumber = (int)doNotePitchNumber;
+
+            throw new NotImplementedException();
         }
     }
 }

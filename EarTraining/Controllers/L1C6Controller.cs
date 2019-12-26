@@ -14,7 +14,7 @@ using WaveLibrary;
 
 namespace EarTraining.Controllers
 {
-    public class L1C6Controller : Controller
+    public class L1C6Controller : BaseController
     {
         public L1C6Controller()
         {

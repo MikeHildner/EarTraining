@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace EarTraining.Controllers
 {
-    public class AuthController : Controller
+    public class AuthController : BaseController
     {
         public ActionResult Unauthorized()
         {

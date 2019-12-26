@@ -1,5 +1,6 @@
 ﻿using EarTraining.Authorization;
 using EarTrainingLibrary.Utility;
+using NLog;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Hosting;
@@ -10,6 +11,8 @@ namespace EarTraining.Controllers
     //[EarTrainingAuthorize]
     public class BaseController : Controller
     {
+        private static readonly Logger _log = LogManager.GetCurrentClassLogger();
+
         public BaseController()
         {
             var stageNames = new List<string>
@@ -28,6 +31,13 @@ namespace EarTraining.Controllers
         {
             string tempFolder = HostingEnvironment.MapPath("~/Temp");
             EarTrainingLibrary.Utility.FileSystem.CleanFolder(tempFolder);
+        }
+
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            filterContext.ExceptionHandled = true;
+            _log.Error(filterContext.Exception, filterContext.Exception.Message);
+            filterContext.Result = RedirectToAction("Index", "ErrorHandler");
         }
     }
 }

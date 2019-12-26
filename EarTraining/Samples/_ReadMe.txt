@@ -7,7 +7,7 @@ e.g.
 ...
 39.C4.wav
 ...
-45.Gb.wav
+45.Gb4.wav
 
 So, 39.C4.wav is middle C.
 
