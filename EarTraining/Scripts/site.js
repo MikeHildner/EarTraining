@@ -193,6 +193,7 @@ function getMajorScale(theDo) {
         case 'E':
             scale = ['E', 'F#', 'G#', 'A', 'B', 'C#', 'D#'];
             break;
+        case 'Cb':
         case 'B':
             scale = ['B', 'C#', 'D#', 'E', 'F#', 'G#', 'A#'];
             break;

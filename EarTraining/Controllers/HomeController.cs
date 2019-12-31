@@ -1,4 +1,5 @@
 ﻿using NLog;
+using System;
 using System.Web.Mvc;
 
 namespace EarTraining.Controllers
@@ -21,6 +22,11 @@ namespace EarTraining.Controllers
             ViewBag.Message = "Supplemental Eartraining Drills";
 
             return View();
+        }
+
+        public ActionResult ForceError()
+        {
+            throw new NotImplementedException("Method is not implemented.");
         }
     }
 }

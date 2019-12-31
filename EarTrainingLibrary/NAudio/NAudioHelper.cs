@@ -68,7 +68,11 @@ namespace EarTrainingLibrary.NAudio
         {
             if (!noteName.Contains("#")) { return noteName; }
 
+            if (noteName.Contains("C#")) { return noteName.Replace("C#", "Db"); }
+            if (noteName.Contains("D#")) { return noteName.Replace("D#", "Eb"); }
             if (noteName.Contains("F#")) { return noteName.Replace("F#", "Gb"); }
+            if (noteName.Contains("G#")) { return noteName.Replace("G#", "Ab"); }
+            if (noteName.Contains("A#")) { return noteName.Replace("A#", "Bb"); }
 
             return noteName;
         }
