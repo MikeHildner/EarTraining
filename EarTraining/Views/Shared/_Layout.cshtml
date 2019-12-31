@@ -138,6 +138,17 @@
                     </li>
 
                     <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownL2C5" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Level 2 Chapter 5
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownL2C5">
+                            <div class="dropdown-header">Diatonic Triad Progressions</div>
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Diatonic Triad Progressions (4 chords)"), "DiatonicTriadProgressions4", "L2C5", null, new { @class = "dropdown-item" })
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownOther" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Other
                         </a>
@@ -155,7 +166,7 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownExperimental">
                             @Html.ActionLink("L2 Major Triad Progressions", "MajorTriadProgressions", "L2", null, new { @class = "dropdown-item" })
                             @*<div class="dropdown-divider"></div>
-                            @Html.ActionLink("Force Error", "ForceError", "Home", null, new { @class = "dropdown-item" })*@
+                @Html.ActionLink("Force Error", "ForceError", "Home", null, new { @class = "dropdown-item" })*@
                         </div>
                     </li>
 

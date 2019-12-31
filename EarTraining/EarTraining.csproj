@@ -203,6 +203,7 @@
     <Compile Include="Controllers\L1C6Controller.cs" />
     <Compile Include="Controllers\L1C7Controller.cs" />
     <Compile Include="Controllers\L2C4Controller.cs" />
+    <Compile Include="Controllers\L2C5Controller.cs" />
     <Compile Include="Controllers\L2Controller.cs" />
     <Compile Include="Controllers\PitchIdentificationController.cs" />
     <Compile Include="Controllers\SolfegController.cs" />
@@ -418,6 +419,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\ErrorHandler\Index.cshtml" />
     <Content Include="Views\ErrorHandler\NotFound.cshtml" />
+    <Content Include="Views\L2C5\DiatonicTriadProgressions4.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

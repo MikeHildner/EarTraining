@@ -1,0 +1,213 @@
+﻿
+@{
+    ViewBag.Title = "L2C5 - Diatonic Triad Progressions - 4 Chords";
+}
+
+<h4 class="text-warning">Not yet fully implemented</h4>
+<h2>Level 2 Chapter 5</h2>
+<h5>@ViewBag.Title</h5>
+
+<div class="card bg-info text-white">
+    <div class="card-body">
+        <i class="fa fa-info-circle"></i>
+        <span class="pad-left-10">These are designed from the diatonic triad progression questions on page 69-71</span>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 card">
+        @{
+            Html.RenderPartial("NewDO");
+        }
+    </div>
+</div>
+
+@*<div class="card bg-info text-white margin-top-5">
+        <div class="card-body">
+            <i class="fa fa-pencil"></i>
+            <span class="pad-left-10">Note: When you get a new progression, or change which drills to include, you will also get a new randomly assigned key</span>
+        </div>
+    </div>*@
+
+<div class="row margin-top-5">
+    <div class="col-md-6 card">
+        <div>
+            <div class="float-left">
+                <h4>Drill</h4>
+            </div>
+            <div class="float-right">
+                <input type="button" class="btn btn-primary margin-top-5" value="Get a New Progression" onclick="setAudProgressionSrc()" />
+            </div>
+        </div>
+
+        <figure>
+            <figcaption>Press the play button to hear the progression</figcaption>
+            <audio id="audProgression" controls preload='none'>
+                <source src='' type='audio/mpeg'>
+            </audio>
+        </figure>
+        <p>Hover over the below to see the progression</p>
+        <div class="spoiler" id="progression"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 card">
+        <figure>
+            <figcaption>
+                <div class="float-left">I</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-1" checked />
+                    <label class="custom-control-label small" for="cb-include-1">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
+            <audio controls preload='none' onended="setSrc(this);">
+                <source src='@Url.Action("GetTriad", "L2C5", new { doNoteName = ViewBag.Pitch.PitchName, triadType = 1 })' type='audio/mpeg' />
+            </audio>
+        </figure>
+    </div>
+    <div class="col-md-4 card">
+        <figure>
+            <figcaption>
+                <div class="float-left">ii</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-2" checked />
+                    <label class="custom-control-label small" for="cb-include-2">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
+            <audio controls preload='none' onended="setSrc(this);">
+                <source src='@Url.Action("GetTriad", "L2C5", new { doNoteName = ViewBag.Pitch.PitchName, triadType = 2 })' type='audio/mpeg' />
+            </audio>
+        </figure>
+    </div>
+    <div class="col-md-4 card">
+        <figure>
+            <figcaption>
+                <div class="float-left">iii</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-3" checked />
+                    <label class="custom-control-label small" for="cb-include-3">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
+            <audio controls preload='none' onended="setSrc(this);">
+                <source src='@Url.Action("GetTriad", "L2C5", new { doNoteName = ViewBag.Pitch.PitchName, triadType = 3 })' type='audio/mpeg' />
+            </audio>
+        </figure>
+    </div>
+    <div class="col-md-4 card">
+        <figure>
+            <figcaption>
+                <div class="float-left">IV</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-4" checked />
+                    <label class="custom-control-label small" for="cb-include-4">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
+            <audio controls preload='none' onended="setSrc(this);">
+                <source src='@Url.Action("GetTriad", "L2C5", new { doNoteName = ViewBag.Pitch.PitchName, triadType = 4 })' type='audio/mpeg' />
+            </audio>
+        </figure>
+    </div>
+    <div class="col-md-4 card">
+        <figure>
+            <figcaption>
+                <div class="float-left">V</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-5" checked />
+                    <label class="custom-control-label small" for="cb-include-5">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
+            <audio controls preload='none' onended="setSrc(this);">
+                <source src='@Url.Action("GetTriad", "L2C5", new { doNoteName = ViewBag.Pitch.PitchName, triadType = 5 })' type='audio/mpeg' />
+            </audio>
+        </figure>
+    </div>
+    <div class="col-md-4 card">
+        <figure>
+            <figcaption>
+                <div class="float-left">vi</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-6" checked />
+                    <label class="custom-control-label small" for="cb-include-6">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
+            <audio controls preload='none' onended="setSrc(this);">
+                <source src='@Url.Action("GetTriad", "L2C5", new { doNoteName = ViewBag.Pitch.PitchName, triadType = 6 })' type='audio/mpeg' />
+            </audio>
+        </figure>
+    </div>
+    <div class="col-md-4 card">
+        <figure>
+            <figcaption>
+                <div class="float-left">vii&deg;</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-7" checked />
+                    <label class="custom-control-label small" for="cb-include-7">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
+            <audio controls preload='none' onended="setSrc(this);">
+                <source src='@Url.Action("GetTriad", "L2C5", new { doNoteName = ViewBag.Pitch.PitchName, triadType = 7 })' type='audio/mpeg' />
+            </audio>
+        </figure>
+    </div>
+
+</div>
+
+@section  scripts {
+    <script>
+        $(document).ready(function () {
+            setAudProgressionSrc();
+
+            $('.cb-include').change(function () {
+                setAudProgressionSrc();
+            });
+        });
+
+        function setAudProgressionSrc() {
+            var baseSrc = '@Url.Action("Get4ChordProgression", "L2C5", new { doNoteName = ViewBag.Pitch.PitchName })';
+            var excluded = getExcluded(null, 0);
+            var progressiontype = getRandomInt(100, 101, excluded);
+            var src = baseSrc + '&progressiontype=' + progressiontype;
+            $('#audProgression source').attr('src', src);
+
+            var msg = '';
+            var friendlyMessage = '';
+            switch (progressiontype) {
+                case 100:
+                    msg = msg + 'I (2nd) - IV (1st) - bV (1st)';
+                    friendlyMessage = '<span class="font-weight-bold">5</span> followed by <span class="font-weight-bold">1/2U</span>';
+                    break;
+                case 101:
+                    msg = msg + 'I (root) - V (1st) - bV (1st)';
+                    friendlyMessage = '<span class="font-weight-bold">4</span> followed by <span class="font-weight-bold">1/2D</span>';
+                    break;
+                default:
+                    consoleAndAlert("progressiontype '" + progressiontype + "' is not supported.");
+                    break;
+            }
+
+            getNewDo(doTheChange, msg, friendlyMessage);
+        }
+
+        function doTheChange(pitchName, msg, friendlyMessage) {
+            changeAllDoNoteNames(pitchName);
+            var progressionTable = buildProgressionTable(pitchName, msg, friendlyMessage, true);
+            $('#progression').html(progressionTable);
+        }
+
+        function setSrc(audio) {
+            // Clear and reset the src to prevent caching.
+            var src = audio.src;
+            audio.src = '';
+            audio.src = src;
+        }
+    </script>
+}
+
