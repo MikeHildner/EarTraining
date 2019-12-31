@@ -36,6 +36,10 @@
                 <h4>Drill</h4>
             </div>
             <div class="float-right">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="tonicIsFirst" checked />
+                    <label class="custom-control-label small" for="tonicIsFirst">First chord is I</label>
+                </div>
                 <input type="button" class="btn btn-primary margin-top-5" value="Get a New Progression" onclick="setAudProgressionSrc()" />
             </div>
         </div>
@@ -63,7 +67,7 @@
             </figcaption>
             <div class="clearfix"></div>
             <audio controls preload='none' onended="setSrc(this);">
-                <source src='@Url.Action("GetTriad", "L2C5", new { doNoteName = ViewBag.Pitch.PitchName, triadType = 1 })' type='audio/mpeg' />
+                <source src='@Url.Action("GetTriad", "L2C5", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 1 })' type='audio/mpeg' />
             </audio>
         </figure>
     </div>
@@ -78,7 +82,7 @@
             </figcaption>
             <div class="clearfix"></div>
             <audio controls preload='none' onended="setSrc(this);">
-                <source src='@Url.Action("GetTriad", "L2C5", new { doNoteName = ViewBag.Pitch.PitchName, triadType = 2 })' type='audio/mpeg' />
+                <source src='@Url.Action("GetTriad", "L2C5", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 2 })' type='audio/mpeg' />
             </audio>
         </figure>
     </div>
@@ -93,7 +97,7 @@
             </figcaption>
             <div class="clearfix"></div>
             <audio controls preload='none' onended="setSrc(this);">
-                <source src='@Url.Action("GetTriad", "L2C5", new { doNoteName = ViewBag.Pitch.PitchName, triadType = 3 })' type='audio/mpeg' />
+                <source src='@Url.Action("GetTriad", "L2C5", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 3 })' type='audio/mpeg' />
             </audio>
         </figure>
     </div>
@@ -108,7 +112,7 @@
             </figcaption>
             <div class="clearfix"></div>
             <audio controls preload='none' onended="setSrc(this);">
-                <source src='@Url.Action("GetTriad", "L2C5", new { doNoteName = ViewBag.Pitch.PitchName, triadType = 4 })' type='audio/mpeg' />
+                <source src='@Url.Action("GetTriad", "L2C5", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 4 })' type='audio/mpeg' />
             </audio>
         </figure>
     </div>
@@ -123,7 +127,7 @@
             </figcaption>
             <div class="clearfix"></div>
             <audio controls preload='none' onended="setSrc(this);">
-                <source src='@Url.Action("GetTriad", "L2C5", new { doNoteName = ViewBag.Pitch.PitchName, triadType = 5 })' type='audio/mpeg' />
+                <source src='@Url.Action("GetTriad", "L2C5", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 5 })' type='audio/mpeg' />
             </audio>
         </figure>
     </div>
@@ -138,7 +142,7 @@
             </figcaption>
             <div class="clearfix"></div>
             <audio controls preload='none' onended="setSrc(this);">
-                <source src='@Url.Action("GetTriad", "L2C5", new { doNoteName = ViewBag.Pitch.PitchName, triadType = 6 })' type='audio/mpeg' />
+                <source src='@Url.Action("GetTriad", "L2C5", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 6 })' type='audio/mpeg' />
             </audio>
         </figure>
     </div>
@@ -153,7 +157,7 @@
             </figcaption>
             <div class="clearfix"></div>
             <audio controls preload='none' onended="setSrc(this);">
-                <source src='@Url.Action("GetTriad", "L2C5", new { doNoteName = ViewBag.Pitch.PitchName, triadType = 7 })' type='audio/mpeg' />
+                <source src='@Url.Action("GetTriad", "L2C5", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 7 })' type='audio/mpeg' />
             </audio>
         </figure>
     </div>
@@ -173,27 +177,54 @@
         function setAudProgressionSrc() {
             var baseSrc = '@Url.Action("Get4ChordProgression", "L2C5", new { doNoteName = ViewBag.Pitch.PitchName })';
             var excluded = getExcluded(null, 0);
-            var progressiontype = getRandomInt(100, 101, excluded);
-            var src = baseSrc + '&progressiontype=' + progressiontype;
-            $('#audProgression source').attr('src', src);
+            var progression = [];
 
-            var msg = '';
-            var friendlyMessage = '';
-            switch (progressiontype) {
-                case 100:
-                    msg = msg + 'I (2nd) - IV (1st) - bV (1st)';
-                    friendlyMessage = '<span class="font-weight-bold">5</span> followed by <span class="font-weight-bold">1/2U</span>';
-                    break;
-                case 101:
-                    msg = msg + 'I (root) - V (1st) - bV (1st)';
-                    friendlyMessage = '<span class="font-weight-bold">4</span> followed by <span class="font-weight-bold">1/2D</span>';
-                    break;
-                default:
-                    consoleAndAlert("progressiontype '" + progressiontype + "' is not supported.");
-                    break;
+            var startChord = 0;
+
+            var cb = $('#tonicIsFirst');
+            var checked = cb.is(':checked');
+            if (checked) {
+                progression.push(1);
+                excluded.push(1);
+                startChord = 1;
             }
 
-            getNewDo(doTheChange, msg, friendlyMessage);
+            for (var i = startChord; i < 4; i++) {
+                var chord = getRandomInt(1, 7, excluded);
+                progression.push(chord);
+                excluded.push(chord);
+            }
+
+            var inversions = ['Root', 'HighFirst', 'HighSecond', 'LowSecond', 'LowFirst'];
+
+            for (var i = 0; i < 4; i++) {
+                var thisInversion = inversions[Math.floor(Math.random() * inversions.length)];
+                progression[i] = progression[i] + ' ' + thisInversion;
+            }
+
+            progression = progression.join('-');
+            var src = baseSrc + '&progression=' + progression;
+            $('#progression').html(progression);
+            $('#audProgression source').attr('src', src);
+            $('#audProgression').attr('src', src);
+
+            //var msg = '';
+            //var friendlyMessage = '';
+            //switch (progressiontype) {
+            //    case 100:
+            //        msg = msg + 'I (2nd) - IV (1st) - bV (1st)';
+            //        friendlyMessage = '<span class="font-weight-bold">5</span> followed by <span class="font-weight-bold">1/2U</span>';
+            //        break;
+            //    case 101:
+            //        msg = msg + 'I (root) - V (1st) - bV (1st)';
+            //        friendlyMessage = '<span class="font-weight-bold">4</span> followed by <span class="font-weight-bold">1/2D</span>';
+            //        break;
+            //    default:
+            //        consoleAndAlert("progressiontype '" + progressiontype + "' is not supported.");
+            //        break;
+            //}
+
+            //getNewDo(doTheChange, msg, friendlyMessage);
         }
 
         function doTheChange(pitchName, msg, friendlyMessage) {
@@ -204,7 +235,7 @@
 
         function setSrc(audio) {
             // Clear and reset the src to prevent caching.
-            var src = audio.src;
+            var src = audio.currentSrc;
             audio.src = '';
             audio.src = src;
         }
