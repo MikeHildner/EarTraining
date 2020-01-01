@@ -19,7 +19,7 @@ namespace EarTraining.Controllers
             {
                 "Fats Treetop",
                 "Keys Clamfinger",
-                "Sol Dofamado"
+                "Sol Dofamedo"
             };
 
             stageNames.Shuffle();
