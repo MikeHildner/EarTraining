@@ -116,7 +116,7 @@ namespace EarTraining.Controllers
             int doNoteNumber = int.Parse(doFileName.Split('.')[0]);
 
             ISampleProvider[] samples;
-            samples = Inversion.CreateTriadInversionEx(inversionType, noteDuration, doNoteNumber + Interval.UpPerfect4th, doNoteNumber + Interval.UpMajor6th, doNoteNumber + Interval.UpPerfectOctave);
+            samples = Inversion.CreateTriadInversionEx(inversionType, noteDuration, doNoteNumber, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpPerfect5th);
 
             MixingSampleProvider msp = new MixingSampleProvider(samples[0].WaveFormat);
             msp.AddMixerInput(samples[0]);

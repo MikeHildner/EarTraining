@@ -94,6 +94,7 @@ namespace EarTrainingLibrary.Utility
                     throw new NotSupportedException($"InversionType {inversionType} is not supported.");
             }
 
+            _log.Debug($"Creating inversion using firstNoteNumber: {firstNoteNumber}, secondNoteNumber: {secondNoteNumber}, thirdNoteNumber: {thirdNoteNumber}");
             var samples = new ISampleProvider[3];
             samples[0] = NAudioHelper.GetSampleProvider(firstNoteNumber, duration);
             samples[1] = NAudioHelper.GetSampleProvider(secondNoteNumber, duration);
