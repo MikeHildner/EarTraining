@@ -7,6 +7,7 @@ using System.IO;
 using System.Media;
 using System.Web.Mvc;
 using WaveLibrary;
+using System.Linq;
 
 namespace EarTraining.Controllers
 {
@@ -37,6 +38,7 @@ namespace EarTraining.Controllers
         public ActionResult GetNewDO()
         {
             Pitch pitch = new Pitches().Random();
+            //Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName == "F#3/Gb3");
             JsonResult jsonResult = Json(pitch, JsonRequestBehavior.AllowGet);
             return jsonResult;
         }
