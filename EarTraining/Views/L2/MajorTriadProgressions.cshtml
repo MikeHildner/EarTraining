@@ -57,7 +57,7 @@
                 <h4>Drill</h4>
             </div>
             <div class="float-right">
-                @*<span id="spinner" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>*@
+                <span id="spinner" class="spinner-border spinner-border-sm text-primary" role="status" aria-hidden="true"></span>
                     <input type="button" class="btn btn-primary margin-top-5" value="Get a New Progression" onclick="setAudProgressionSrc()" />
             </div>
         </div>
@@ -76,15 +76,15 @@
 @section  scripts {
     <script>
         $(document).ready(function () {
-            //setAudProgressionSrc();
+            $('#spinner').hide();
         });
 
         function setAudProgressionSrc() {
-            //var baseSrc = '@Url.Action("GetMajorTriadProgression", "L2", new { doNoteName = ViewBag.Pitch.PitchName })';
             getNewDo(setupProgression)
         }
 
         function setupProgression(pitchNames) {
+            $('#spinner').show();
             console.log('setupProgression - pitchNames: ' + pitchNames);
             pitchNames = decodeURIComponent(pitchNames);
             var pitchNames = pitchNames.split('/');
@@ -105,6 +105,7 @@
 
             if (!movementProgression[0]) {  // If no movement types choosen, there will be one array element, which is undefined.
                 alert('Please choose at least one Movement Type.');
+                $('#spinner').hide();
                 return;
             }
 
@@ -187,6 +188,7 @@
                 }
 
                 $('#audProgression').attr('src', rootPath + data);
+                $('#spinner').hide();
             });
 
             request.fail(function (jqXHR, textStatus) {
