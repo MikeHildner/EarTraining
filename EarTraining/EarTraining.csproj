@@ -227,6 +227,7 @@
     <Content Include="Content\Images\chord-white.png" />
     <Content Include="Content\Images\ear.png" />
     <Content Include="Content\Images\ear32.png" />
+    <Content Include="Content\Images\MuseScoreSampleExplanation.png" />
     <Content Include="Content\Images\Piano.svg" />
     <Content Include="Content\Images\quarter-note-white.png" />
     <Content Include="Content\Images\quarter-note.png" />

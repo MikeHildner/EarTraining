@@ -60,7 +60,7 @@ namespace EarTrainingLibrary.NAudio
             noteName = SharpToFlat(noteName);
 
             string samplesFolder = HostingEnvironment.MapPath($"~/Samples/{_timbre}");
-            var files = Directory.GetFiles(samplesFolder).Where(w => w.EndsWith(".mp3"));
+            var files = Directory.GetFiles(samplesFolder);//.Where(w => w.EndsWith(".mp3"));
             string fileName = files.Single(s => s.Contains(noteName));
 
             return fileName;
