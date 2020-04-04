@@ -17,6 +17,7 @@ namespace EarTraining.Controllers
         public L1C1Controller()
         {
             Pitch pitch = new Pitches().Random();
+            //pitch = new Pitches().PitchesList.Single(s => s.PitchName == "E4");
             ViewBag.Pitch = pitch;
             ViewBag.ShowDo = true;
         }

@@ -12,6 +12,8 @@ namespace EarTrainingLibrary.NAudio
 {
     public class NAudioHelper
     {
+        private static string _timbre = "Piano";
+
         public static ISampleProvider GetSampleProvider(double gain, double frequency, SignalGeneratorType signalGeneratorType, TimeSpan duration)
         {
             var note = new SignalGenerator()
@@ -57,8 +59,8 @@ namespace EarTrainingLibrary.NAudio
 
             noteName = SharpToFlat(noteName);
 
-            string samplesFolder = HostingEnvironment.MapPath("~/Samples");
-            string[] files = Directory.GetFiles(samplesFolder);
+            string samplesFolder = HostingEnvironment.MapPath($"~/Samples/{_timbre}");
+            var files = Directory.GetFiles(samplesFolder).Where(w => w.EndsWith(".mp3"));
             string fileName = files.Single(s => s.Contains(noteName));
 
             return fileName;
@@ -91,10 +93,11 @@ namespace EarTrainingLibrary.NAudio
 
         public static string GetFileNameFromNoteNumber(int noteNumber)
         {
-            string samplesFolder = HostingEnvironment.MapPath("~/Samples");
+            string samplesFolder = HostingEnvironment.MapPath($"~/Samples/{_timbre}");
             string[] files = Directory.GetFiles(samplesFolder);
             string searchString = noteNumber.ToString() + ".";
             string fileName = files.Single(s => Path.GetFileName(s).StartsWith(searchString));
+            //string fileName = files.Single(s => Path.GetFileName(s).StartsWith(searchString) && Path.GetFileName(s).EndsWith(".mp3"));
 
             return fileName;
         }
