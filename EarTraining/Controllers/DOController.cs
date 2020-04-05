@@ -8,11 +8,14 @@ using System.Media;
 using System.Web.Mvc;
 using WaveLibrary;
 using System.Linq;
+using NLog;
 
 namespace EarTraining.Controllers
 {
     public class DOController : BaseController
     {
+        private static readonly Logger _log = LogManager.GetCurrentClassLogger();
+
         // GET: DO
         public ActionResult Index()
         {
@@ -25,7 +28,9 @@ namespace EarTraining.Controllers
 
         public ActionResult GetDOEx(string doNoteName)
         {
+            _log.Info("Entered. Getting the note...");
             ISampleProvider note = NAudioHelper.GetSampleProvider(doNoteName, TimeSpan.FromSeconds(2));
+            _log.Info("Got the note");
             var stwp = new SampleToWaveProvider(note);
             MemoryStream wavStream = new MemoryStream();
             WaveFileWriter.WriteWavFileToStream(wavStream, stwp);

@@ -83,6 +83,8 @@ namespace EarTrainingLibrary.NAudio
         {
             // Read the sample from disk.
             var reader = new AudioFileReader(fileName);
+            //var reader = new Mp3FileReader(fileName);
+            //var reader = new MediaFoundationReader(fileName);
             ISampleProvider inSample = reader.ToSampleProvider();
 
             // Shorten to specified duration.
