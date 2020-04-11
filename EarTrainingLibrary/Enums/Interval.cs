@@ -8,6 +8,7 @@ namespace EarTrainingLibrary.Enums
 {
     public static class Interval
     {
+        public static int Down2PerfectOctaves { get { return -24; } }
         public static int DownPerfectOctave { get { return -12; } }
         public static int DownPerfect4th { get { return -5; } }
         public static int DownMinor3rd { get { return -3; } }

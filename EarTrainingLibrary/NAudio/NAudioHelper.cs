@@ -45,7 +45,7 @@ namespace EarTrainingLibrary.NAudio
         {
             string fileName = GetFileNameFromNoteNumber(noteNumber);
 
-            var sample = GetSampleProviderFromFile(fileName, duration);
+            ISampleProvider sample = GetSampleProviderFromFile(fileName, duration);
 
             return sample;
         }
@@ -85,11 +85,13 @@ namespace EarTrainingLibrary.NAudio
             var reader = new AudioFileReader(fileName);
             //var reader = new Mp3FileReader(fileName);
             //var reader = new MediaFoundationReader(fileName);
+            string sVolume = System.Configuration.ConfigurationManager.AppSettings["PlaybackVolume"];
+            float volume = float.Parse(sVolume);
+            reader.Volume = volume;
             ISampleProvider inSample = reader.ToSampleProvider();
-
+            
             // Shorten to specified duration.
             ISampleProvider outSample = inSample.Take(duration);
-
             return outSample;
         }
 

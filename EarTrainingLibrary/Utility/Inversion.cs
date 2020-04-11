@@ -58,7 +58,7 @@ namespace EarTrainingLibrary.Utility
             return outSamples;
         }
 
-        public static ISampleProvider[] CreateTriadInversionEx(InversionType inversionType, TimeSpan duration, int firstNoteNumber, int secondNoteNumber, int thirdNoteNumber)
+        public static ISampleProvider[] CreateTriadInversionEx(InversionType inversionType, TimeSpan duration, int firstNoteNumber, int secondNoteNumber, int thirdNoteNumber, int? bassNoteNumber = null)
         {
             _log.Debug($"inversionType: {inversionType}, duration: {duration}, firstNoteNumber: {firstNoteNumber}, secondNoteNumber: {secondNoteNumber}, thirdNoteNumber: {thirdNoteNumber}");
 
@@ -95,10 +95,18 @@ namespace EarTrainingLibrary.Utility
             }
 
             _log.Debug($"Creating inversion using firstNoteNumber: {firstNoteNumber}, secondNoteNumber: {secondNoteNumber}, thirdNoteNumber: {thirdNoteNumber}");
-            var samples = new ISampleProvider[3];
+            var samples = new ISampleProvider[4];
             samples[0] = NAudioHelper.GetSampleProvider(firstNoteNumber, duration);
             samples[1] = NAudioHelper.GetSampleProvider(secondNoteNumber, duration);
             samples[2] = NAudioHelper.GetSampleProvider(thirdNoteNumber, duration);
+            if(bassNoteNumber.HasValue)
+            {
+                samples[3] = NAudioHelper.GetSampleProvider(bassNoteNumber.Value, duration);
+            }
+            else
+            {
+                samples[3] = null;
+            }
 
             return samples;
         }
