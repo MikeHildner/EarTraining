@@ -24,10 +24,10 @@ namespace EarTraining.Controllers
         }
 
         // GET: L1C2
-        public ActionResult Index()
-        {
-            return View();
-        }
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
 
         public ActionResult VocalDrills()
         {

@@ -58,24 +58,20 @@ namespace EarTraining.Controllers
 
             ISampleProvider[] samples;
             int newDoNoteNumber;  // Used for other chords besides the I.
-            int bassNoteNumber;
             switch (triadType)
             {
                 case TriadType.OneMajor:
-                    bassNoteNumber = doNoteNumber + Interval.DownPerfectOctave;
-                    samples = Inversion.CreateTriadInversionEx(inversionType, noteDuration, doNoteNumber, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpPerfect5th, bassNoteNumber);
+                    samples = Inversion.CreateTriadInversionEx(inversionType, noteDuration, doNoteNumber, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpPerfect5th);
                     break;
 
                 case TriadType.FourMajor:
                     newDoNoteNumber = doNoteNumber + Interval.UpPerfect4th;
-                    bassNoteNumber = newDoNoteNumber + Interval.DownPerfectOctave;
-                    samples = Inversion.CreateTriadInversionEx(inversionType, noteDuration, newDoNoteNumber, newDoNoteNumber + Interval.UpMajor3rd, newDoNoteNumber + Interval.UpPerfect5th, bassNoteNumber);
+                    samples = Inversion.CreateTriadInversionEx(inversionType, noteDuration, newDoNoteNumber, newDoNoteNumber + Interval.UpMajor3rd, newDoNoteNumber + Interval.UpPerfect5th);
                     break;
 
                 case TriadType.FiveMajor:
                     newDoNoteNumber = doNoteNumber + Interval.UpPerfect5th;
-                    bassNoteNumber = newDoNoteNumber + Interval.DownPerfectOctave;
-                    samples = Inversion.CreateTriadInversionEx(inversionType, noteDuration, newDoNoteNumber, newDoNoteNumber + Interval.UpMajor3rd, newDoNoteNumber + Interval.UpPerfect5th, bassNoteNumber);
+                    samples = Inversion.CreateTriadInversionEx(inversionType, noteDuration, newDoNoteNumber, newDoNoteNumber + Interval.UpMajor3rd, newDoNoteNumber + Interval.UpPerfect5th);
                     break;
 
                 case TriadType.SixMinor:

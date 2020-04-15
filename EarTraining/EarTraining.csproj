@@ -377,7 +377,7 @@
     <Content Include="Views\L1C3\Index.cshtml" />
     <Content Include="Views\L1C4\Index.cshtml" />
     <Content Include="Views\Solfeg\Index.cshtml" />
-    <Content Include="Views\L1C2\Index.cshtml" />
+    <Content Include="Views\L1C2\Index.DeleteMe.cshtml" />
     <Content Include="Views\Shared\NewDO.cshtml" />
     <Content Include="Views\L1C1\SolfegResolutionsDO.cshtml" />
     <Content Include="Views\L1C1\PitchIdentification.cshtml" />

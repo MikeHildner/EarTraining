@@ -47,6 +47,7 @@
                                         <h4>Drill</h4>
                                     </div>
                                     <div class="float-right">
+                                        <span id="spinner2" class="spinner-border spinner-border-sm text-primary" role="status" aria-hidden="true"></span>
                                         <input type="button" class="btn btn-primary margin-top-5" value="Get a New Progression" onclick="setAudProgression2Src()" />
                                     </div>
                                 </div>
@@ -210,6 +211,7 @@
                                         <h4>Drill</h4>
                                     </div>
                                     <div class="float-right">
+                                        <span id="spinner3" class="spinner-border spinner-border-sm text-primary" role="status" aria-hidden="true"></span>
                                         <input type="button" class="btn btn-primary margin-top-5" value="Get a New Progression" onclick="setAudProgression3Src()" />
                                     </div>
                                 </div>
@@ -404,6 +406,7 @@
         });
 
         function setAudProgression2Src() {
+            $('#spinner2').show();
             var baseSrc = '@Url.Action("Get2ChordProgressionEx", "L1C5", new { doNoteName = ViewBag.Pitch.PitchName })';
 
             var excluded = getExcluded([2, 4, 5, 6, 7, 8, 9], 0);
@@ -449,9 +452,11 @@
             var doInfo = $('#doSpoiler').text();
             var progressionTable = buildProgressionTable(doInfo, msg);
             $('#progression2').html(progressionTable);
+            $('#spinner2').fadeOut("slow");
         }
 
         function setAudProgression3Src() {
+            $('#spinner3').show();
             var baseSrc = '@Url.Action("Get3ChordProgressionEx", "L1C5", new { doNoteName = ViewBag.Pitch.PitchName })';
 
             var excluded = getExcluded([5, 7, 8, 10, 11, 12, 13, 14, 15], 0);
@@ -510,6 +515,7 @@
             var doInfo = $('#doSpoiler').text();
             var progressionTable = buildProgressionTable(doInfo, msg);
             $('#progression3').html(progressionTable);
+            $('#spinner3').fadeOut("slow");
         }
     </script>
 }

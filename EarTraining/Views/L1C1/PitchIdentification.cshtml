@@ -27,6 +27,7 @@
                 <h4>Drill</h4>
             </div>
             <div class="float-right">
+                <span id="spinner" class="spinner-border spinner-border-sm text-primary" role="status" aria-hidden="true"></span>
                 <input type="button" class="btn btn-primary margin-top-5" value="Get a New Note" onclick="setAudNoteSrc()" />
             </div>
         </div>
@@ -190,6 +191,7 @@
         });
 
         function setAudNoteSrc() {
+            $('#spinner').show();
             var baseSrc = '@Url.Action("GetNoteEx", "L1C1", new { doNoteName = ViewBag.Pitch.PitchName })';
             var excluded = [1, 3, 6, 8, 10];
             excluded = getExcluded(excluded, 0);
@@ -231,6 +233,7 @@
             }
 
             $('#note').text(msg);
+            $('#spinner').fadeOut("slow");
         }
 
     </script>

@@ -45,6 +45,7 @@
                 <h4>Drill</h4>
             </div>
             <div class="float-right">
+                <span id="spinner" class="spinner-border spinner-border-sm text-primary" role="status" aria-hidden="true"></span>
                 <input type="button" class="btn btn-primary margin-top-5" value="Get a New Interval" onclick="setAudDrill1Src()" />
             </div>
         </div>
@@ -297,6 +298,7 @@
         });
 
         function setAudDrill1Src() {
+            $('#spinner').show();
             var baseSrc = '@Url.Action("GetMelodicDrillEx", "L1C5", new { doNoteName = ViewBag.Pitch.PitchName })';
 
             // Get the drills based on what the user has choosen.
@@ -388,6 +390,7 @@
             }
 
             $('#drill1').text(msg);
+            $('#spinner').fadeOut("slow");
         }
 
     </script>
