@@ -26,6 +26,7 @@
                 <h4>Drill</h4>
             </div>
             <div class="float-right">
+                <span id="spinner" class="spinner-border spinner-border-sm text-primary" role="status" aria-hidden="true"></span>
                 <input type="button" class="btn btn-primary margin-top-5" value="Get a New Progression" onclick="setAudProgressionSrc()" />
             </div>
         </div>
@@ -85,6 +86,7 @@
         });
 
         function setAudProgressionSrc() {
+            $('#spinner').show();
             var baseSrc = '@Url.Action("Get3ChordProgression", "L2C4", new { doNoteName = ViewBag.Pitch.PitchName })';
             var excluded = getExcluded(null, 0);
             var progressiontype = getRandomInt(100, 101, excluded);
@@ -114,6 +116,7 @@
             changeAllDoNoteNames(pitchName);
             var progressionTable = buildProgressionTable(pitchName, msg, friendlyMessage, true);
             $('#progression').html(progressionTable);
+            $('#spinner').fadeOut("slow");
         }
     </script>
 }

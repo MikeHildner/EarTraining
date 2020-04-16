@@ -40,6 +40,7 @@
                     <input type="checkbox" class="custom-control-input" id="tonicIsFirst" checked />
                     <label class="custom-control-label small" for="tonicIsFirst">First chord is I</label>
                 </div>
+                <span id="spinner" class="spinner-border spinner-border-sm text-primary" role="status" aria-hidden="true"></span>
                 <input type="button" class="btn btn-primary margin-top-5" value="Get a New Progression" onclick="setAudProgressionSrc()" />
             </div>
         </div>
@@ -175,6 +176,7 @@
         });
 
         function setAudProgressionSrc() {
+            $('#spinner').show();
             var baseSrc = '@Url.Action("Get4ChordProgression", "L2C5", new { doNoteName = ViewBag.Pitch.PitchName })';
             var excluded = getExcluded(null, 0);
             var progression = [];
@@ -207,6 +209,8 @@
             $('#progression').html(progression);
             $('#audProgression source').attr('src', src);
             $('#audProgression').attr('src', src);
+
+            $('#spinner').fadeOut("slow");
 
             //var msg = '';
             //var friendlyMessage = '';
