@@ -155,5 +155,33 @@ namespace EarTrainingLibrary.Utility
             }
         }
 
+        /// <summary>
+        /// Gets the bass note number from the given note number.
+        /// Bass notes should be between C2 and C3 inclusive.
+        /// </summary>
+        /// <param name="noteNumber"></param>
+        /// <returns></returns>
+        public static int BassNoteNumber(this int noteNumber)
+        {
+            int lowest = 15;   // C2.
+            int highest = 27;  // C3.
+
+            int bassNoteNumber = noteNumber;
+
+            while(bassNoteNumber > highest || bassNoteNumber < lowest)
+            {
+                if(bassNoteNumber > highest)
+                {
+                    bassNoteNumber -= 12;
+                }
+
+                if(bassNoteNumber < lowest)
+                {
+                    bassNoteNumber += 12;
+                }
+            }
+
+            return bassNoteNumber;
+        }
     }
 }

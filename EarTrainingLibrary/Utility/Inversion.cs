@@ -111,7 +111,7 @@ namespace EarTrainingLibrary.Utility
             return samples;
         }
 
-        public static ISampleProvider[] CreateTriadInversionEx(int doNoteNumber, TriadType triadType, InversionType inversionType, TimeSpan duration)
+        public static ISampleProvider[] CreateTriadInversionEx(int doNoteNumber, TriadType triadType, InversionType inversionType, TimeSpan duration, bool includeBassNote = false)
         {
             int firstNoteNumber, secondNoteNumber, thirdNoteNumber;
 
@@ -189,10 +189,18 @@ namespace EarTrainingLibrary.Utility
                     throw new NotSupportedException($"InversionType {inversionType} is not supported.");
             }
 
-            var samples = new ISampleProvider[3];
+            var samples = new ISampleProvider[4];
             samples[0] = NAudioHelper.GetSampleProvider(firstNoteNumber, duration);
             samples[1] = NAudioHelper.GetSampleProvider(secondNoteNumber, duration);
             samples[2] = NAudioHelper.GetSampleProvider(thirdNoteNumber, duration);
+            if (includeBassNote)
+            {
+                samples[3] = NAudioHelper.GetSampleProvider(firstNoteNumber.BassNoteNumber(), duration);
+            }
+            else
+            {
+                samples[3] = null;
+            }
 
             return samples;
         }

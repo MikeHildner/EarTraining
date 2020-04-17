@@ -228,33 +228,33 @@ namespace EarTraining.Controllers
             switch (progressionType)
             {
                 case ProgressionType3.Four2ndOneRoot:
-                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FourMajor, InversionType.LowSecond, noteDuration);
-                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.Root, noteDuration);
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FourMajor, InversionType.LowSecond, noteDuration, true);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.Root, noteDuration, true);
                     break;
 
                 case ProgressionType3.TwoMinRootFive1st:
-                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.TwoMinor, InversionType.Root, noteDuration);
-                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FiveMajor, InversionType.LowFirst, noteDuration);
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.TwoMinor, InversionType.Root, noteDuration, true);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FiveMajor, InversionType.LowFirst, noteDuration, true);
                     break;
 
                 case ProgressionType3.One2ndTwoMin1st:
-                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.HighSecond, noteDuration);
-                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.TwoMinor, InversionType.HighFirst, noteDuration);
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.HighSecond, noteDuration, true);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.TwoMinor, InversionType.HighFirst, noteDuration, true);
                     break;
 
                 case ProgressionType3.SixMinRootFour1st:
-                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.SixMinor, InversionType.Root, noteDuration);
-                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FourMajor, InversionType.LowFirst, noteDuration);
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.SixMinor, InversionType.Root, noteDuration, true);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FourMajor, InversionType.LowFirst, noteDuration, true);
                     break;
 
                 case ProgressionType3.OneFirstFive2nd:
-                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.HighFirst, noteDuration);
-                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FiveMajor, InversionType.LowSecond, noteDuration);
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.HighFirst, noteDuration, true);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FiveMajor, InversionType.LowSecond, noteDuration, true);
                     break;
 
                 case ProgressionType3.OneRootSixMin1st:
-                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.Root, noteDuration);
-                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.SixMinor, InversionType.LowFirst, noteDuration);
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.Root, noteDuration, true);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.SixMinor, InversionType.LowFirst, noteDuration, true);
                     break;
 
                 default:
@@ -265,11 +265,19 @@ namespace EarTraining.Controllers
             msp1.AddMixerInput(samples1[0]);
             msp1.AddMixerInput(samples1[1]);
             msp1.AddMixerInput(samples1[2]);
+            if (samples1[3] != null)  // Bass note.
+            {
+                msp1.AddMixerInput(samples1[3]);
+            }
 
             MixingSampleProvider msp2 = new MixingSampleProvider(samples2[0].WaveFormat);
             msp2.AddMixerInput(samples2[0]);
             msp2.AddMixerInput(samples2[1]);
             msp2.AddMixerInput(samples2[2]);
+            if (samples2[3] != null)  // Bass note.
+            {
+                msp2.AddMixerInput(samples2[3]);
+            }
 
             var phrase = msp1
                 .FollowedBy(msp2);
@@ -301,69 +309,69 @@ namespace EarTraining.Controllers
             switch (progressionType)
             {
                 case ProgressionType3.One2ndTwoMin1stThreeMin1st:
-                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.HighSecond, duration);
-                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.TwoMinor, InversionType.HighFirst, duration);
-                    samples3 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.ThreeMinor, InversionType.HighFirst, duration);
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.HighSecond, duration, true);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.TwoMinor, InversionType.HighFirst, duration, true);
+                    samples3 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.ThreeMinor, InversionType.HighFirst, duration, true);
                     break;
 
                 case ProgressionType3.One1stFive2ndSixMin2nd:
-                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.HighFirst, duration);
-                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FiveMajor, InversionType.LowSecond, duration);
-                    samples3 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.SixMinor, InversionType.LowSecond, duration);
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.HighFirst, duration, true);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FiveMajor, InversionType.LowSecond, duration, true);
+                    samples3 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.SixMinor, InversionType.LowSecond, duration, true);
                     break;
 
                 case ProgressionType3.Four2ndFive1stSixMin1st:
-                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FourMajor, InversionType.LowSecond, duration);
-                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FiveMajor, InversionType.LowFirst, duration);
-                    samples3 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.SixMinor, InversionType.LowFirst, duration);
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FourMajor, InversionType.LowSecond, duration, true);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FiveMajor, InversionType.LowFirst, duration, true);
+                    samples3 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.SixMinor, InversionType.LowFirst, duration, true);
                     break;
 
                 case ProgressionType3.ThreeMin1stOne2ndTwoMin1st:
-                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.ThreeMinor, InversionType.HighFirst, duration);
-                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.HighSecond, duration);
-                    samples3 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.TwoMinor, InversionType.HighFirst, duration);
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.ThreeMinor, InversionType.HighFirst, duration, true);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.HighSecond, duration, true);
+                    samples3 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.TwoMinor, InversionType.HighFirst, duration, true);
                     break;
 
                 case ProgressionType3.FourRootFive2ndThreeMinRoot:
-                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FourMajor, InversionType.Root, duration);
-                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FiveMajor, InversionType.LowSecond, duration);
-                    samples3 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.ThreeMinor, InversionType.Root, duration);
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FourMajor, InversionType.Root, duration, true);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FiveMajor, InversionType.LowSecond, duration, true);
+                    samples3 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.ThreeMinor, InversionType.Root, duration, true);
                     break;
 
                 case ProgressionType3.OneRootTwoMin2ndFour1st:
-                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.Root, duration);
-                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.TwoMinor, InversionType.LowSecond, duration);
-                    samples3 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FourMajor, InversionType.LowFirst, duration);
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.Root, duration, true);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.TwoMinor, InversionType.LowSecond, duration, true);
+                    samples3 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FourMajor, InversionType.LowFirst, duration, true);
                     break;
 
                 case ProgressionType3.One1stThreeMinRootTwoMinFirst:
-                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.HighFirst, duration);
-                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.ThreeMinor, InversionType.Root, duration);
-                    samples3 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.TwoMinor, InversionType.HighFirst, duration);
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.HighFirst, duration, true);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.ThreeMinor, InversionType.Root, duration, true);
+                    samples3 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.TwoMinor, InversionType.HighFirst, duration, true);
                     break;
 
                 case ProgressionType3.Four2ndOneRootFive1st:
-                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FourMajor, InversionType.LowSecond, duration);
-                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.Root, duration);
-                    samples3 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FiveMajor, InversionType.LowFirst, duration);
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FourMajor, InversionType.LowSecond, duration, true);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.Root, duration, true);
+                    samples3 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FiveMajor, InversionType.LowFirst, duration, true);
                     break;
 
                 case ProgressionType3.SixMinRootFour1stOne2nd:
-                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.SixMinor, InversionType.Root, duration);
-                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FourMajor, InversionType.HighFirst, duration);
-                    samples3 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.HighSecond, duration);
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.SixMinor, InversionType.Root, duration, true);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FourMajor, InversionType.HighFirst, duration, true);
+                    samples3 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.HighSecond, duration, true);
                     break;
 
                 case ProgressionType3.Five2ndOneRootTwoRoot:
-                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FiveMajor, InversionType.LowSecond, duration);
-                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.Root, duration);
-                    samples3 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.TwoMinor, InversionType.Root, duration);
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FiveMajor, InversionType.LowSecond, duration, true);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.Root, duration, true);
+                    samples3 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.TwoMinor, InversionType.Root, duration, true);
                     break;
 
                 case ProgressionType3.One1stFive2ndFourRoot:
-                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.HighFirst, duration);
-                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FiveMajor, InversionType.LowSecond, duration);
-                    samples3 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FourMajor, InversionType.Root, duration);
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.HighFirst, duration, true);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FiveMajor, InversionType.LowSecond, duration, true);
+                    samples3 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FourMajor, InversionType.Root, duration, true);
                     break;
 
                 default:
@@ -374,16 +382,28 @@ namespace EarTraining.Controllers
             msp1.AddMixerInput(samples1[0]);
             msp1.AddMixerInput(samples1[1]);
             msp1.AddMixerInput(samples1[2]);
+            if (samples1[3] != null)  // Bass note.
+            {
+                msp1.AddMixerInput(samples1[3]);
+            }
 
             MixingSampleProvider msp2 = new MixingSampleProvider(samples2[0].WaveFormat);
             msp2.AddMixerInput(samples2[0]);
             msp2.AddMixerInput(samples2[1]);
             msp2.AddMixerInput(samples2[2]);
+            if (samples2[3] != null)  // Bass note.
+            {
+                msp2.AddMixerInput(samples2[3]);
+            }
 
             MixingSampleProvider msp3 = new MixingSampleProvider(samples3[0].WaveFormat);
             msp3.AddMixerInput(samples3[0]);
             msp3.AddMixerInput(samples3[1]);
             msp3.AddMixerInput(samples3[2]);
+            if (samples3[3] != null)  // Bass note.
+            {
+                msp3.AddMixerInput(samples3[3]);
+            }
 
             var phrase = msp1
                 .FollowedBy(msp2)
