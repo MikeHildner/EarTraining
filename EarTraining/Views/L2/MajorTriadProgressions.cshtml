@@ -100,7 +100,8 @@
             }
 
             if (!movementProgression[0]) {  // If no movement types choosen, there will be one array element, which is undefined.
-                alert('Please choose at least one Movement Type.');
+                //alert('Please choose at least one Movement Type.');
+                toastr.warning('Please choose at least one Movement Type.');
                 $('#spinner').fadeOut("slow");
                 return;
             }

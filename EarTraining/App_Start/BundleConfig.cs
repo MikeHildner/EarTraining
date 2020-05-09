@@ -23,14 +23,16 @@ namespace EarTraining
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/site").Include(
-                      "~/Scripts/site.js"));
+                      "~/Scripts/site.js",
+                      "~/Scripts/toastr.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/css-toggle-switch.css",
                       "~/Content/font-awesome.css",
-                      "~/Content/hover.css"));
+                      "~/Content/hover.css",
+                      "~/Content/toastr.css"));
         }
     }
 }
