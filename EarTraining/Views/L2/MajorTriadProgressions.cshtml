@@ -19,8 +19,8 @@
         <fieldset>
             <label for="numberOfChords" class="font-weight-bold">Number of Chords</label>
             <select id="numberOfChords" name="numberOfChords" class="form-control">
-                <option selected="selected" value="2">2</option>
-                <option value="3">3</option>
+                <option value="2">2</option>
+                <option selected="selected" value="3">3</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
                 <option value="6">6</option>
@@ -31,19 +31,19 @@
         <fieldset>
             <div class="font-weight-bold">Movement Types</div>
             <div class="custom-control custom-checkbox">
-                <input type="checkbox" id="circleOf4ths" value="4" class="custom-control-input">
+                <input type="checkbox" id="circleOf4ths" value="4" class="custom-control-input" checked>
                 <label class="custom-control-label" for="circleOf4ths">Circle of 4ths</label>
             </div>
             <div class="custom-control custom-checkbox">
-                <input type="checkbox" id="circleOf5ths" value="5" class="custom-control-input">
+                <input type="checkbox" id="circleOf5ths" value="5" class="custom-control-input" checked>
                 <label class="custom-control-label" for="circleOf5ths">Circle of 5ths</label>
             </div>
             <div class="custom-control custom-checkbox">
-                <input type="checkbox" id="1-2U" value="1/2U" class="custom-control-input">
+                <input type="checkbox" id="1-2U" value="1/2U" class="custom-control-input" checked>
                 <label class="custom-control-label" for="1-2U">Half-Step Up</label>
             </div>
             <div class="custom-control custom-checkbox">
-                <input type="checkbox" id="1-2D" value="1/2D" class="custom-control-input">
+                <input type="checkbox" id="1-2D" value="1/2D" class="custom-control-input" checked>
                 <label class="custom-control-label" for="1-2D">Half-Step Down</label>
             </div>
         </fieldset>
@@ -75,8 +75,13 @@
 
 @section  scripts {
     <script>
+
+        $(document).ready(function () {
+            setAudProgressionSrc();
+        });
+
         function setAudProgressionSrc() {
-            getNewDo(setupProgression)
+            getNewDo(setupProgression);
         }
 
         function setupProgression(pitchNames) {
@@ -109,9 +114,6 @@
         }
 
         function buildProgression(pitchName, movementProgression) {
-            //console.log(pitchName);
-            //console.log(movementProgression);
-
             var pitch = pitchName.replace(/\d+/g, '');  // Remove numbers.
             var inversions = ['(root)', '(1st)', '(2nd)'];
             var inversion = inversions[Math.floor(Math.random() * inversions.length)];
