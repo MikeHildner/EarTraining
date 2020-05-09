@@ -275,9 +275,8 @@
                     break;
 
                 default:
-                    var msg = 'activeTabId ' + activeTabId + ' is not supported';
-                    console.log(msg);
-                    alert(msg);
+                    var msg = 'activeTabId ' + activeTabId + ' is not supported.';
+                    consoleAndToastr(msg, null, 'error');
             }
 
             var src = baseSrc + '&type=' + randomInt;

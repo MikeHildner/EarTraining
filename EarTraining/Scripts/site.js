@@ -12,9 +12,29 @@ function getRandomInt(min, max, exclude) {
     return ri;
 }
 
-function consoleAndAlert(msg) {
+function consoleAndToastr(msg, title, severity) {
     console.log(msg);
-    alert(msg);
+    switch (severity) {
+        case "error":
+            toastr.error(msg, title);
+            break;
+
+        case "info":
+            toastr.info(msg, title);
+            break;
+
+        case "success":
+            toastr.success(msg, title);
+            break;
+
+        case "warning":
+            toastr.warning(msg, title);
+            break;
+
+        default:
+            toastr.warning(msg, title);
+    }
+    
 }
 
 function getNewDo(callback, msg, friendlyMessage) {
@@ -35,7 +55,7 @@ function getNewDo(callback, msg, friendlyMessage) {
     });
 
     request.fail(function (jqXHR, textStatus) {
-        alert('There was an error processing the request.\n\n' + textStatus + ': ' + jqXHR.status + ' - ' + jqXHR.statusText + '.');
+        consoleAndToastr('There was an error processing the request.\n\n' + textStatus + ': ' + jqXHR.status + ' - ' + jqXHR.statusText + '.', null, 'error');
     });
 }
 
@@ -169,7 +189,7 @@ function getChord(theDo, numeral) {
             chord = scale[6];
             break;
         default:
-            consoleAndAlert("Numeral '" + numeral + "' is not supported.");
+            consoleAndToastr("Numeral '" + numeral + "' is not supported.");
     }
 
     if (isMinor) {
@@ -225,7 +245,7 @@ function getMajorScale(theDo) {
             scale = ['F', 'G', 'A', 'Bb', 'C', 'D', 'E'];
             break;
         default:
-            consoleAndAlert("getScale for '" + theDo + "' is not supported.");
+            consoleAndToastr("getScale for '" + theDo + "' is not supported.");
     }
 
     return scale;

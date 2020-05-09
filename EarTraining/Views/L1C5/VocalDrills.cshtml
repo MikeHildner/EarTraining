@@ -332,7 +332,7 @@
 
                 default:
                     var msg = 'intervalType ' + intervalType + ' is not supported';
-                    consoleAndAlert(msg);
+                    consoleAndToastr(msg);
             }
 
             var randomInt = getRandomInt(minDrill, maxDrill, excluded);
@@ -386,7 +386,7 @@
                     break;
                 default:
                     msg = 'drillType ' + randomInt + ' is not supported';
-                    consoleAndAlert(msg);
+                    consoleAndToastr(msg);
             }
 
             $('#drill1').text(msg);

@@ -100,8 +100,7 @@
             }
 
             if (!movementProgression[0]) {  // If no movement types choosen, there will be one array element, which is undefined.
-                //alert('Please choose at least one Movement Type.');
-                toastr.warning('Please choose at least one Movement Type.');
+                consoleAndToastr('Please choose at least one Movement Type.');
                 $('#spinner').fadeOut("slow");
                 return;
             }
@@ -157,13 +156,12 @@
                         chordProgression += ' - ' + pitch + ' ' + inversion;
                         break;
                     default:
-                        consoleAndAlert('movement type "' + movement + '" is not supported.');
+                        consoleAndToastr('movement type "' + movement + '" is not supported.');
                 }
                 console.log('chordProgression: ' + chordProgression);
             }
 
             movementProgression = movementProgression.join(', ');
-            //alert(chordProgression + '\n' + movementProgression);
             var html = '<table><tr><td>' + movementProgression + '</td></tr><tr><td>' + chordProgression + '</td></tr></table>';
             $('#progression').html(html);
             setupSrc(pitchName, chordProgression, movementProgression);
@@ -181,7 +179,7 @@
 
             request.done(function (data) {
                 if (!data.endsWith('.mp3')) {
-                    alert("The progression '" + decodeURIComponent(chordProgression) + "' did not generate a valid .mp3. Please let us know about this issue.");
+                    consoleAndToastr("The progression '" + decodeURIComponent(chordProgression) + "' did not generate a valid .mp3. Please let us know about this issue.", null, 'error');
                 }
 
                 $('#audProgression').attr('src', rootPath + data);
@@ -189,7 +187,7 @@
             });
 
             request.fail(function (jqXHR, textStatus) {
-                alert('There was an error processing the request.\n\n' + textStatus + ': ' + jqXHR.status + ' - ' + jqXHR.statusText + '.');
+                consoleAndToastr('There was an error processing the request.\n\n' + textStatus + ': ' + jqXHR.status + ' - ' + jqXHR.statusText + '.', null, 'error');
             });
         }
     </script>

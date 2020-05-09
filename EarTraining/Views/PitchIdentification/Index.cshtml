@@ -125,7 +125,7 @@
                     msg = msg + 'DO';
                     break;
                 default:
-                    alert('Pitch ' + randomInt + ' is not valid for a major scale.');
+                    consoleAndToastr('Pitch ' + randomInt + ' is not valid for a major scale.', null, 'error');
                     break;
 
             }
@@ -166,7 +166,7 @@
                     msg = msg + 'DO';
                     break;
                 default:
-                    alert('Pitch ' + randomInt + ' is not valid for a minor scale.');
+                    consoleAndToastr('Pitch ' + randomInt + ' is not valid for a minor scale.', null, 'error');
                     break;
             }
 
@@ -203,7 +203,7 @@
                     msg = msg + 'DO';
                     break;
                 default:
-                    alert('Pitch ' + randomInt + ' is not valid for a blues scale.');
+                    consoleAndToastr('Pitch ' + randomInt + ' is not valid for a blues scale.', null, 'error');
                     break;
             }
 

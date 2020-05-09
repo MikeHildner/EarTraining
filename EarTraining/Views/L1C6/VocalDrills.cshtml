@@ -423,7 +423,7 @@
 
                 default:
                     var msg = 'intervalType ' + intervalType + ' is not supported';
-                    consoleAndAlert(msg);
+                    consoleAndToastr(msg);
             }
 
             var randomInt = getRandomInt(minDrill, maxDrill, excluded);
@@ -494,7 +494,7 @@
                     msg = msg + 'LA LA TI TI DO';
                     break;
                 default:
-                    consoleAndAlert('randomInt ' + randomInt + ' is not supported.');
+                    consoleAndToastr('randomInt ' + randomInt + ' is not supported.');
                     break;
             }
 
