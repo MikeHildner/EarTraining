@@ -90,7 +90,7 @@
             pitchNames = decodeURIComponent(pitchNames);
             var pitchNames = pitchNames.split('/');
             var pitchName = pitchNames[pitchNames.length - 1];  // Get last element of the array (the flat key if given enharmonic key),
-
+            console.log("pitchName: " + pitchName);
             var numberOfChords = $('#numberOfChords').val();
 
             var movementTypes = [];
@@ -117,12 +117,16 @@
             var pitch = pitchName.replace(/\d+/g, '');  // Remove numbers.
             var inversions = ['(root)', '(1st)', '(2nd)'];
             var inversion = inversions[Math.floor(Math.random() * inversions.length)];
+            console.log("Initial random inversion: " + inversion);
             var chordProgression = pitch + ' ' + inversion;
+
             for (var i = 0; i < movementProgression.length; i++) {
                 inversion = inversions[Math.floor(Math.random() * inversions.length)];
+                console.log("This movementProgression:: " + movementProgression[i]);
+                console.log("This random inversion: " + inversion);
                 var scale = getMajorScale(pitch);
                 var movement = movementProgression[i];
-                console.log('pitch: ' + pitch + ', movement: ' + movement);
+                console.log('(previous) pitch: ' + pitch + ', (this) movement: ' + movement);
                 switch (movement) {
                     case '4':
                         pitch = scale[4];
@@ -160,7 +164,7 @@
                     default:
                         consoleAndToastr('movement type "' + movement + '" is not supported.');
                 }
-                console.log('chordProgression: ' + chordProgression);
+                console.log('(current) chordProgression: ' + chordProgression);
             }
 
             movementProgression = movementProgression.join(', ');
@@ -170,10 +174,13 @@
         }
 
         function setupSrc(pitchName, chordProgression, movementProgression) {
-            console.log('movementProgression:' + movementProgression);
+            console.log("=== setupSrc() ===");
+            console.log("pitchName: " + pitchName);
+            console.log("chordProgression: " + chordProgression);
+            console.log('movementProgression: ' + movementProgression);
             chordProgression = encodeURIComponent(chordProgression);
             var uri = rootPath + 'L2/CreateProgression?pitchName=' + pitchName + '&chordProgression=' + chordProgression + '&movementProgression=' + movementProgression;
-            console.log('uri: ' + uri);
+
             var request = $.ajax({
                 url: uri,
                 method: "GET"

@@ -56,8 +56,6 @@ namespace EarTraining.Controllers
                 msps[i] = CreateMajorTriad(pitchName, chordAndInversion, movement);
             }
 
-            //ISampleProvider note = NAudioHelper.GetSampleProvider(pitchName, TimeSpan.FromSeconds(2));
-            //var stwp = new SampleToWaveProvider(note);
             ISampleProvider phrase = msps[0];
             for (int i = 1; i < msps.Length; i++)
             {
@@ -116,7 +114,7 @@ namespace EarTraining.Controllers
             int doNoteNumber = int.Parse(doFileName.Split('.')[0]);
 
             ISampleProvider[] samples;
-            samples = Inversion.CreateTriadInversionEx(inversionType, noteDuration, doNoteNumber, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpPerfect5th, doNoteNumber);
+            samples = Inversion.CreateTriadInversionEx(inversionType, noteDuration, doNoteNumber, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpPerfect5th, doNoteNumber.BassNoteNumber());
 
             MixingSampleProvider msp = new MixingSampleProvider(samples[0].WaveFormat);
             msp.AddMixerInput(samples[0]);
