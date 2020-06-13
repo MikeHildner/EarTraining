@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Transcription Test";
+}
+<h4 class="text-warning">Not yet fully implemented</h4>
+<h2>@ViewBag.Title</h2>
+
+<div id="boo"></div>
+
+@section scripts
+{
+    <script src="~/Scripts/vexflow-min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            //vexFlowTest();
+            var request = $.ajax({
+                url: rootPath + "Transcription/AudioAndDictation",
+                method: "GET"
+            });
+
+            request.done(function (data) {
+                eval(data.theScript);
+            });
+
+            request.fail(function (jqXHR, textStatus) {
+                consoleAndToastr('There was an error processing the request.\n\n' + textStatus + ': ' + jqXHR.status + ' - ' + jqXHR.statusText + '.', null, 'error');
+            });
+        });
+
+        function vexFlowTest() {
+            //import Vex from 'vexflow';
+
+            const vf = new Vex.Flow.Factory({
+                renderer: { elementId: 'boo', width: 500, height: 200 }
+            });
+
+            const score = vf.EasyScore();
+            const system = vf.System();
+
+            system.addStave({
+                voices: [
+                    score.voice(score.notes('C#5/q, B4, A4, G#4', { stem: 'up' })),
+                    score.voice(score.notes('C#4/h, C#4', { stem: 'down' }))
+                ]
+            }).addClef('treble').addTimeSignature('4/4');
+
+            vf.draw();
+        }
+    </script>
+
+}
+
