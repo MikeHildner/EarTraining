@@ -66,6 +66,20 @@ namespace EarTrainingLibrary.NAudio
             return fileName;
         }
 
+        public static string GetNoteNameFromNoteNumber(int noteNumber)
+        {
+            string startsWith = noteNumber.ToString() + ".";
+            string samplesFolder = HostingEnvironment.MapPath($"~/Samples/{_timbre}");
+            var files = Directory.GetFiles(samplesFolder);
+            for (int i = 0; i < files.Length; i++)
+            {
+                files[i] = Path.GetFileName(files[i]);
+            }
+            string fileName = files.Single(s => s.StartsWith(startsWith));
+            string noteName = fileName.Split('.')[1];
+            return noteName;
+        }
+
         private static string SharpToFlat(string noteName)
         {
             if (!noteName.Contains("#")) { return noteName; }
