@@ -25,12 +25,15 @@ namespace EarTraining.Controllers
         {
             var dict = new Dictionary<string, string>();
 
-            // Do the audio part.
+            #region Audio
 
             double bpm = double.Parse(ConfigurationManager.AppSettings["BPM"]);
-            double quarterNotemillis = (60 / bpm) * 1000;
-            TimeSpan quarterNoteDuration = TimeSpan.FromMilliseconds(quarterNotemillis);
+            double quarterNoteMillis = (60 / bpm) * 1000;
+            double wholeNoteMillis = quarterNoteMillis * 4;
+            TimeSpan quarterNoteDuration = TimeSpan.FromMilliseconds(quarterNoteMillis);
+            TimeSpan wholeNoteDuration = TimeSpan.FromMilliseconds(wholeNoteMillis);
 
+            ISampleProvider doNote;
             ISampleProvider note1;
             ISampleProvider note2;
             ISampleProvider note3;
@@ -42,12 +45,15 @@ namespace EarTraining.Controllers
             int thirdNoteNumber = GetRandomNoteNumber(noteNumbers);
             int fourthNoteNumber = GetRandomNoteNumber(noteNumbers);
 
+            doNote = NAudioHelper.GetSampleProvider(noteNumbers[0], wholeNoteDuration);
             note1 = NAudioHelper.GetSampleProvider(firstNoteNumber, quarterNoteDuration);
             note2 = NAudioHelper.GetSampleProvider(secondNoteNumber, quarterNoteDuration);
             note3 = NAudioHelper.GetSampleProvider(thirdNoteNumber, quarterNoteDuration);
             note4 = NAudioHelper.GetSampleProvider(fourthNoteNumber, quarterNoteDuration);
 
-            ISampleProvider phrase = note1
+            ISampleProvider phrase =
+                doNote
+                .FollowedBy(note1)
                 .FollowedBy(note2)
                 .FollowedBy(note3)
                 .FollowedBy(note4);
@@ -60,7 +66,9 @@ namespace EarTraining.Controllers
             wavStream.WavToMp3File(out string fileName);
             dict.Add("src", fileName);
 
-            // Do the notation part.
+            #endregion Audio
+
+            #region Notation
 
             string firstNoteName = NAudioHelper.GetNoteNameFromNoteNumber(firstNoteNumber);
             string secondNoteName = NAudioHelper.GetNoteNameFromNoteNumber(secondNoteNumber);
@@ -69,7 +77,8 @@ namespace EarTraining.Controllers
 
             var script = $@"
             const vf = new Vex.Flow.Factory({{
-                renderer: {{ elementId: 'transcription', width: 500, height: 200 }}
+                //renderer: {{ elementId: 'transcription', width: 500, height: 200 }}
+                renderer: {{ elementId: 'transcription' }}
             }});
 
             const score = vf.EasyScore();
@@ -86,6 +95,8 @@ namespace EarTraining.Controllers
             ";
 
             dict.Add("theScript", script);
+
+            #endregion Notation
 
             var json = Json(dict, JsonRequestBehavior.AllowGet);
             return json;
