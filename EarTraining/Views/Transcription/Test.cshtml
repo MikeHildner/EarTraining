@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Transcription Test";
+    ViewBag.Title = "Transcription / Dictation Test";
 }
 <h4 class="text-warning">Not yet fully implemented</h4>
 <h2>@ViewBag.Title</h2>
@@ -13,16 +13,16 @@
             </div>
             <div class="float-right">
                 <span id="spinner" class="spinner-border spinner-border-sm text-primary" role="status" aria-hidden="true"></span>
-                <input type="button" class="btn btn-primary margin-top-5" value="Get a New Transcription" onclick="newTranscription();" />
+                <input type="button" class="btn btn-primary margin-top-5" value="Get a New Dictation" onclick="newDictation();" />
             </div>
         </div>
         <figure>
-            <figcaption>Press the play button to hear the melody</figcaption>
+            <figcaption>Press the play button to hear the dictation</figcaption>
             <audio id="audMelody" controls preload='none'>
                 <source src='' type='audio/mpeg'>
             </audio>
         </figure>
-        <p>Hover over the below to reveal the melody</p>
+        <p>Hover over the below to reveal the transcription</p>
         <div class="spoiler" id="transcription"></div>
     </div>
 </div>
@@ -33,10 +33,10 @@
 
     <script>
         $(document).ready(function () {
-            newTranscription();
+            newDictation();
         });
 
-        function newTranscription() {
+        function newDictation() {
             var request = $.ajax({
                 url: rootPath + "Transcription/AudioAndDictation",
                 method: "GET"

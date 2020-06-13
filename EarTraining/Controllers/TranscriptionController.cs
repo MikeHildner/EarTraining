@@ -33,7 +33,8 @@ namespace EarTraining.Controllers
             TimeSpan quarterNoteDuration = TimeSpan.FromMilliseconds(quarterNoteMillis);
             TimeSpan wholeNoteDuration = TimeSpan.FromMilliseconds(wholeNoteMillis);
 
-            ISampleProvider doNote;
+            ISampleProvider wholeDoNote;
+            ISampleProvider[] ticks = new ISampleProvider[4];
             ISampleProvider note1;
             ISampleProvider note2;
             ISampleProvider note3;
@@ -45,18 +46,32 @@ namespace EarTraining.Controllers
             int thirdNoteNumber = GetRandomNoteNumber(noteNumbers);
             int fourthNoteNumber = GetRandomNoteNumber(noteNumbers);
 
-            doNote = NAudioHelper.GetSampleProvider(noteNumbers[0], wholeNoteDuration);
+            wholeDoNote = NAudioHelper.GetSampleProvider(noteNumbers[0], wholeNoteDuration);
+            for (int i = 0; i < ticks.Length; i++)
+            {
+                ticks[i] = NAudioHelper.GetSampleProvider(noteNumbers[0], quarterNoteDuration);
+            }
+
+
             note1 = NAudioHelper.GetSampleProvider(firstNoteNumber, quarterNoteDuration);
             note2 = NAudioHelper.GetSampleProvider(secondNoteNumber, quarterNoteDuration);
             note3 = NAudioHelper.GetSampleProvider(thirdNoteNumber, quarterNoteDuration);
             note4 = NAudioHelper.GetSampleProvider(fourthNoteNumber, quarterNoteDuration);
 
             ISampleProvider phrase =
-                doNote
+                wholeDoNote;
+
+            foreach (var tick in ticks)
+            {
+                phrase = phrase.FollowedBy(tick);
+            }
+
+            phrase = phrase
                 .FollowedBy(note1)
                 .FollowedBy(note2)
                 .FollowedBy(note3)
                 .FollowedBy(note4);
+
 
             SampleToWaveProvider stwp = new SampleToWaveProvider(phrase);
 
