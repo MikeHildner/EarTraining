@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
 
 namespace EarTraining.Controllers
@@ -47,9 +48,13 @@ namespace EarTraining.Controllers
             int fourthNoteNumber = GetRandomNoteNumber(noteNumbers);
 
             wholeDoNote = NAudioHelper.GetSampleProvider(noteNumbers[0], wholeNoteDuration);
+
+
+            string tickFile = HostingEnvironment.MapPath($"~/Samples/Woodblock.wav");
             for (int i = 0; i < ticks.Length; i++)
             {
-                ticks[i] = NAudioHelper.GetSampleProvider(noteNumbers[0], quarterNoteDuration);
+                //ticks[i] = NAudioHelper.GetSampleProvider(noteNumbers[0], quarterNoteDuration);
+                ticks[i] = NAudioHelper.GetSampleProviderFromFile(tickFile, quarterNoteDuration);
             }
 
 
