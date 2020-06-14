@@ -102,44 +102,6 @@ namespace EarTrainingLibrary.Utility
             }
         }
 
-        //public static MemoryStream WavToMp4(this Stream wavStream)
-        //{
-        //    try
-        //    {
-        //        string tempFolder = HostingEnvironment.MapPath("~/Temp");
-        //        CleanFolder(tempFolder);
-        //        string guid = Guid.NewGuid().ToString();
-        //        string wavFileName = Path.Combine(tempFolder, guid + ".wav");
-
-        //        // Write the wav stream to disk.
-        //        wavStream.CopyTo(new FileStream(wavFileName, FileMode.Create));
-        //        string mp4FileName = Path.Combine(tempFolder, guid + ".mp4");
-
-        //        CheckAddBinPath();
-
-        //        var cmdLine = $"ffmpeg.exe -i {wavFileName} {mp4FileName}";
-        //        var process = Process.Start("ffmpeg.exe", $"-i {wavFileName} {mp4FileName}");
-        //        process.WaitForExit();
-
-        //        var mp4Stream = new MemoryStream();
-
-        //        using (FileStream file = new FileStream(mp4FileName, FileMode.Open, FileAccess.Read))
-        //        {
-        //            byte[] bytes = new byte[file.Length];
-        //            file.Read(bytes, 0, (int)file.Length);
-        //            mp4Stream.Write(bytes, 0, (int)file.Length);
-        //            mp4Stream.Position = 0;
-        //        }
-
-        //        return mp4Stream;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _log.Error(ex, ex.Message);
-        //        throw;
-        //    }
-        //}
-
         public static void CheckAddBinPath()
         {
             // find path to 'bin' folder
@@ -182,6 +144,22 @@ namespace EarTrainingLibrary.Utility
             }
 
             return bassNoteNumber;
+        }
+
+        /// <summary>
+        /// VexFlow wants note names like C/4 instead of C4.
+        /// </summary>
+        /// <param name="noteName">The note name in the format such as C4.</param>
+        /// <returns>string in the format such as C/4.</returns>
+        public static string ToSlashNoteName(this string noteName)
+        {
+            int noteNameLength = noteName.Length;
+            string nName = noteName.Substring(0, noteName.Length - 1);  // Hopefully we won't have to deal with super-high registers.
+            string octave = noteName.Last().ToString();
+
+            string slashNoteName = $"{nName}/{octave}";
+
+            return slashNoteName;
         }
     }
 }

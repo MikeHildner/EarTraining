@@ -23,7 +23,9 @@
             </audio>
         </figure>
         <p>Hover over the below to reveal the transcription</p>
-        <div class="spoiler" id="transcription"></div>
+        <div class="spoiler">
+            <div id="transcription"></div>
+        </div>
     </div>
 </div>
 
@@ -38,7 +40,7 @@
 
         function newDictation() {
             var request = $.ajax({
-                url: rootPath + "Transcription/AudioAndDictation",
+                url: rootPath + "Transcription/AudioAndDictation2",
                 method: "GET"
             });
 
