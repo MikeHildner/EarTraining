@@ -350,7 +350,7 @@ namespace EarTraining.Controllers
             return json;
         }
 
-        public ActionResult AudioAndDictation4()
+        public ActionResult AudioAndDictation4(int resolutionType)
         {
             var dict = new Dictionary<string, string>();
 
@@ -403,16 +403,37 @@ namespace EarTraining.Controllers
             ISampleProvider[] notes1 = new ISampleProvider[numberOfNotes1];
             ISampleProvider[] notes2 = new ISampleProvider[numberOfNotes2];
 
+            Queue<int> noteNumberQueue;
+            switch (resolutionType)
+            {
+                case 1:
+                    noteNumberQueue = GetResolutionIntQueue(scaleNoteNumbers, 8, false);  // 8 notes max.
+                    break;
+
+                case 2:
+                    noteNumberQueue = GetResolutionIntQueue(scaleNoteNumbers, 8, true);  // 8 notes max.
+                    break;
+
+                case 3:
+                    noteNumberQueue = GetRandomIntQueue(scaleNoteNumbers, 8);  // 8 notes max.
+                    break;
+
+                default:
+                    throw new NotSupportedException($"ResolutionType '{resolutionType}' is not supported.");
+            }
+             
             int[] measureNoteNumbers1 = new int[numberOfNotes1];
             for (int i = 0; i < measureNoteNumbers1.Length; i++)
             {
-                measureNoteNumbers1[i] = GetRandomNoteNumber(scaleNoteNumbers);
+                //measureNoteNumbers1[i] = GetRandomNoteNumber(scaleNoteNumbers);
+                measureNoteNumbers1[i] = noteNumberQueue.Dequeue();
             }
 
             int[] measureNoteNumbers2 = new int[numberOfNotes2];
             for (int i = 0; i < measureNoteNumbers2.Length; i++)
             {
-                measureNoteNumbers2[i] = GetRandomNoteNumber(scaleNoteNumbers);
+                //measureNoteNumbers2[i] = GetRandomNoteNumber(scaleNoteNumbers);
+                measureNoteNumbers2[i] = noteNumberQueue.Dequeue();
             }
 
             TimeSpan duration;
@@ -629,5 +650,56 @@ namespace EarTraining.Controllers
 
             return script;
         }
+
+        private Queue<int> GetRandomIntQueue(int[] scaleNoteNumbers, int numberOfNotes)
+        {
+            var q = new Queue<int>();
+            int noteNumber;
+            for (int i = 0; i < numberOfNotes; i++)
+            {
+                noteNumber = GetRandomNoteNumber(scaleNoteNumbers);
+                q.Enqueue(noteNumber);
+            }
+            return q;
+        }
+
+        private Queue<int> GetResolutionIntQueue(int[] scaleNoteNumbers, int numberOfNotes, bool includeInverse)
+        {
+            List<Tuple<int, int>> resolutions = new List<Tuple<int, int>>();
+            resolutions.Add(new Tuple<int, int>(1, 0));
+            resolutions.Add(new Tuple<int, int>(3, 2));
+            resolutions.Add(new Tuple<int, int>(5, 4));
+            resolutions.Add(new Tuple<int, int>(6, 7));
+
+            var q = new Queue<int>();
+            while (q.Count < numberOfNotes)
+            {
+                int randomInt = GetRandomInt(0, resolutions.Count);
+                Tuple<int, int> t = resolutions[randomInt];
+
+                if (includeInverse)
+                {
+                    int ri = GetRandomInt(0, 2);
+                    if(ri % 2 == 0)
+                    {
+                        q.Enqueue(scaleNoteNumbers[t.Item1]);
+                        q.Enqueue(scaleNoteNumbers[t.Item2]);
+                    }
+                    else
+                    {
+                        q.Enqueue(scaleNoteNumbers[t.Item2]);
+                        q.Enqueue(scaleNoteNumbers[t.Item1]);
+                    }
+                }
+                else
+                {
+                    q.Enqueue(scaleNoteNumbers[t.Item1]);
+                    q.Enqueue(scaleNoteNumbers[t.Item2]);
+                }
+            }
+
+            return q;
+        }
+
     }
 }

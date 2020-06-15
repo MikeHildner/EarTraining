@@ -7,6 +7,19 @@
 
 <div class="row">
     <div class="col-md-6 card">
+        <h4>Settings</h4>
+        <fieldset>
+            <label for="numberOfChords" class="font-weight-bold">Resolution Types</label>
+            <select id="resolutionTypes" name="resolutionTypes" class="form-control">
+                <option value="1">Resolutions</option>
+                <option selected="selected" value="2">Resolutions and Reverse</option>
+                <option value="3">Random Notes</option>
+            </select>
+        </fieldset>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 card">
         <div>
             <div class="float-left">
                 <h4>Drill</h4>
@@ -41,9 +54,11 @@
 
         function newDictation() {
             $('#spinner').show();
+            var resolutionType = $('#resolutionTypes').val();
             var request = $.ajax({
                 url: rootPath + "Transcription/AudioAndDictation4",
-                method: "GET"
+                method: "GET",
+                data: { resolutionType: resolutionType }
             });
 
             request.done(function (data) {
