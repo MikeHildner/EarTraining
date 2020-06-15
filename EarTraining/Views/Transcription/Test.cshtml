@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Transcription / Dictation Test";
+    ViewBag.Title = "Transcription / Dictation";
 }
 <h4 class="text-warning">Not yet fully implemented</h4>
 <h2>@ViewBag.Title</h2>
@@ -24,7 +24,8 @@
         </figure>
         <p>Hover over the below to reveal the transcription</p>
         <div class="spoiler">
-            <div id="transcription"></div>
+            <div id="transcription1"></div>
+            <div id="transcription2"></div>
         </div>
     </div>
 </div>
@@ -39,15 +40,25 @@
         });
 
         function newDictation() {
+            $('#spinner').show();
             var request = $.ajax({
-                url: rootPath + "Transcription/AudioAndDictation2",
+                url: rootPath + "Transcription/AudioAndDictation4",
                 method: "GET"
             });
 
             request.done(function (data) {
                 $('#audMelody').attr('src', rootPath + 'Temp/' + data.src);
-                $("#transcription").html("");
-                eval(data.theScript);
+                $("#transcription1").html("");
+                $("#transcription2").html("");
+                console.log("========== theScript1==========");
+                console.log(data.theScript1);
+                eval(data.theScript1);
+
+                console.log("========== theScript2==========");
+                console.log(data.theScript2);
+                eval(data.theScript2);
+
+                $('#spinner').fadeOut("slow");
             });
 
             request.fail(function (jqXHR, textStatus) {

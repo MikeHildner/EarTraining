@@ -24,7 +24,7 @@ textarea {
     max-width: 280px;
 }
 
-.spoiler {
+/*.spoiler {
     color: #D9EDF7;
     background-color: #D9EDF7;
     padding-left: 5px;
@@ -34,7 +34,30 @@ textarea {
 .spoiler:hover {
     color: #428BCA;
     background-color: #D9EDF7;
+}*/
+
+/*.spoiler > div {
+    opacity: 0;
+    transition: opacity 0.5s
 }
+
+.spoiler:hover > div {
+    opacity: 1
+}*/
+
+.spoiler, .spoiler > * {
+    transition: color 0.5s, opacity 0.5s;
+}
+
+    .spoiler:not(:hover) {
+        /*color: transparent;*/
+        color: #4b0085;
+        background-color: #4b0085;
+    }
+
+.spoiler:not(:hover) > * {
+    opacity: 0;
+ }
 
 .underline {
     text-decoration: underline;
@@ -97,11 +120,11 @@ audio {
     height: 25px;*/
 }
 
-.pad-top-10{
+.pad-top-10 {
     padding-top: 10px;
 }
 
-.dropdown-header{
+.dropdown-header {
     font-weight: bold;
 }
 
@@ -113,27 +136,27 @@ audio {
     padding-left: 10px;
 }
 
-.tdcenter{
+.tdcenter {
     width: 100%;
     table-layout: fixed;
 }
 
-.tdcenter td{
-    text-align:center;
-}
+    .tdcenter td {
+        text-align: center;
+    }
 
-.bottom-border{
+.bottom-border {
     border-bottom: 1pt solid;
 }
 
-.card{
-    margin:0px;
+.card {
+    margin: 0px;
 }
 
-.z-index-back{
-    z-index:-1;
+.z-index-back {
+    z-index: -1;
 }
 
-.margin-top-5{
+.margin-top-5 {
     margin-top: 5px;
 }
