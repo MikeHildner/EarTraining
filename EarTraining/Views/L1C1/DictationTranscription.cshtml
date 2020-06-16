@@ -1,24 +1,56 @@
-﻿
-@{
-    ViewBag.Title = "Transcription / Dictation";
+﻿@{
+    ViewBag.Title = "L1C1 6.3 - Melodic Dictation / Transcription";
 }
-<h4 class="text-warning">Not yet fully implemented</h4>
-<h2>@ViewBag.Title</h2>
+
+<h2>Level 1 Chapter 1</h2>
+<h5>@ViewBag.Title</h5>
+
+<div class="card bg-info text-white">
+    <div class="card-body">
+        <i class="fa fa-info-circle"></i>
+        <span class="pad-left-10">These are based on the melodic dictation / transcription questions on pages 13-14.</span>
+    </div>
+</div>
 
 <div class="row">
-    <div class="col-md-6 card">
+    <div class="col-md-6 card pad-bottom-3">
         <h4>Settings</h4>
         <fieldset>
-            <label for="numberOfChords" class="font-weight-bold">Resolution Types</label>
+            <label for="resolutionTypes" class="font-weight-bold">Resolution Types</label>
             <select id="resolutionTypes" name="resolutionTypes" class="form-control">
                 <option value="1">Resolutions</option>
                 <option selected="selected" value="2">Resolutions and Reverse</option>
                 <option value="3">Random Notes</option>
             </select>
         </fieldset>
+        <fieldset>
+            <label for="keySignature" class="font-weight-bold">Key</label>
+            <select id="keySignature" name="keySignature" class="form-control">
+                <option value="E">E</option>
+                <option value="D">D</option>
+                <option value="C" selected="selected">C</option>
+                <option value="A">A</option>
+                <option value="G">G</option>
+            </select>
+        </fieldset>
+
+        @*<fieldset>
+            <label for="bpm" class="font-weight-bold">BPM</label>
+            <select id="bpm" name="bpm" class="form-control">
+                <option value="60" selected="selected">60</option>
+                <option value="65">65</option>
+                <option value="70">70</option>
+                <option value="75">75</option>
+                <option value="80">80</option>
+                <option value="85">85</option>
+                    <option value="90">90</option>
+                    <option value="95">95</option>
+                    <option value="100">100</option>
+            </select>
+        </fieldset>*@
     </div>
 </div>
-<div class="row">
+<div class="row margin-top-5">
     <div class="col-md-6 card">
         <div>
             <div class="float-left">
@@ -54,11 +86,19 @@
 
         function newDictation() {
             $('#spinner').show();
+
             var resolutionType = $('#resolutionTypes').val();
+            var keySignature = $('#keySignature').val();
+            var bpm = $('#bpm').val();
+
             var request = $.ajax({
-                url: rootPath + "Transcription/AudioAndDictation4",
+                url: rootPath + "L1C1/AudioAndDictation",
                 method: "GET",
-                data: { resolutionType: resolutionType }
+                data: {
+                    resolutionType: resolutionType,
+                    keySignature: keySignature,
+                    //bpm: bpm
+                }
             });
 
             request.done(function (data) {

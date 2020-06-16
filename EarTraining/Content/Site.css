@@ -124,6 +124,10 @@ audio {
     padding-top: 10px;
 }
 
+.pad-bottom-3 {
+    padding-bottom: 3px;
+}
+
 .dropdown-header {
     font-weight: bold;
 }

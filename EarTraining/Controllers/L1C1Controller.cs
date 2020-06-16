@@ -4,9 +4,13 @@ using EarTrainingLibrary.Utility;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using WaveLibrary;
 
@@ -34,6 +38,12 @@ namespace EarTraining.Controllers
 
         public ActionResult PitchIdentification()
         {
+            return View();
+        }
+
+        public ActionResult DictationTranscription()
+        {
+            ViewBag.ShowDo = false;
             return View();
         }
 
@@ -205,6 +215,371 @@ namespace EarTraining.Controllers
 
             wavStream.WavToMp3File(out string fileName);
             return Redirect($"~/Temp/{fileName}");
+        }
+
+        public ActionResult AudioAndDictation(int resolutionType, string keySignature, double bpm = 60)
+        {
+            var dict = new Dictionary<string, string>();
+
+            #region Audio
+
+            //double bpm = double.Parse(ConfigurationManager.AppSettings["BPM"]);
+            double quarterNoteMillis = (60 / bpm) * 1000;
+            double halfNoteMillis = quarterNoteMillis * 2;
+            double dottedHalfNoteMillis = quarterNoteMillis * 3;
+            double wholeNoteMillis = quarterNoteMillis * 4;
+            TimeSpan quarterNoteDuration = TimeSpan.FromMilliseconds(quarterNoteMillis);
+            TimeSpan halfNoteDuration = TimeSpan.FromMilliseconds(halfNoteMillis);
+            TimeSpan dottedHalfNoteDuration = TimeSpan.FromMilliseconds(dottedHalfNoteMillis);
+            TimeSpan wholeNoteDuration = TimeSpan.FromMilliseconds(wholeNoteMillis);
+
+            // Setup the scale note numbers.
+            int[] scaleNoteNumbers = new int[] { 39, 41, 43, 44, 46, 48, 50, 51 };  // C Major.
+            scaleNoteNumbers = TransposeScaleNoteNumbers(scaleNoteNumbers, keySignature);
+
+            ISampleProvider wholeDoNote = NAudioHelper.GetSampleProvider(scaleNoteNumbers[0], wholeNoteDuration);
+
+            ISampleProvider[] ticks = new ISampleProvider[4];
+            string tickFile = HostingEnvironment.MapPath($"~/Samples/Woodblock.wav");
+            for (int i = 0; i < ticks.Length; i++)
+            {
+                ticks[i] = NAudioHelper.GetSampleProviderFromFile(tickFile, quarterNoteDuration);
+            }
+
+
+            List<string> measureRhythms = new List<string>();
+            measureRhythms.Add("1");
+            measureRhythms.Add("2,2");
+            measureRhythms.Add("4,2.");
+            measureRhythms.Add("2.,4");
+            measureRhythms.Add("4,4,4,4");
+            measureRhythms.Add("4,4,2");
+            measureRhythms.Add("2,4,4");
+            measureRhythms.Add("4,2,4");
+
+            int randomInt = GetRandomInt(0, measureRhythms.Count);
+            string measureRhythm1 = measureRhythms[randomInt];
+            randomInt = GetRandomInt(0, measureRhythms.Count);
+            string measureRhythm2 = measureRhythms[randomInt];
+
+
+            string[] measureRhythmSplit1 = measureRhythm1.Split(',');
+            int numberOfNotes1 = measureRhythmSplit1.Length;
+
+            string[] measureRhythmSplit2 = measureRhythm2.Split(',');
+            int numberOfNotes2 = measureRhythmSplit2.Length;
+
+            ISampleProvider[] notes1 = new ISampleProvider[numberOfNotes1];
+            ISampleProvider[] notes2 = new ISampleProvider[numberOfNotes2];
+
+            Queue<int> noteNumberQueue;
+            switch (resolutionType)
+            {
+                case 1:
+                    noteNumberQueue = GetResolutionIntQueue(scaleNoteNumbers, 8, false);  // 8 notes max.
+                    break;
+
+                case 2:
+                    noteNumberQueue = GetResolutionIntQueue(scaleNoteNumbers, 8, true);  // 8 notes max.
+                    break;
+
+                case 3:
+                    noteNumberQueue = GetRandomIntQueue(scaleNoteNumbers, 8);  // 8 notes max.
+                    break;
+
+                default:
+                    throw new NotSupportedException($"ResolutionType '{resolutionType}' is not supported.");
+            }
+
+            int[] measureNoteNumbers1 = new int[numberOfNotes1];
+            for (int i = 0; i < measureNoteNumbers1.Length; i++)
+            {
+                //measureNoteNumbers1[i] = GetRandomNoteNumber(scaleNoteNumbers);
+                measureNoteNumbers1[i] = noteNumberQueue.Dequeue();
+            }
+
+            int[] measureNoteNumbers2 = new int[numberOfNotes2];
+            for (int i = 0; i < measureNoteNumbers2.Length; i++)
+            {
+                //measureNoteNumbers2[i] = GetRandomNoteNumber(scaleNoteNumbers);
+                measureNoteNumbers2[i] = noteNumberQueue.Dequeue();
+            }
+
+            TimeSpan duration;
+            for (int i = 0; i < notes1.Length; i++)
+            {
+                switch (measureRhythmSplit1[i])
+                {
+                    case "1":
+                        duration = wholeNoteDuration;
+                        break;
+
+                    case "2":
+                        duration = halfNoteDuration;
+                        break;
+
+                    case "2.":
+                        duration = dottedHalfNoteDuration;
+                        break;
+
+                    case "4":
+                        duration = quarterNoteDuration;
+                        break;
+
+                    default:
+                        throw new NotSupportedException($"Duration '{measureRhythmSplit1[i]}' is not supported.");
+                }
+
+                notes1[i] = NAudioHelper.GetSampleProvider(measureNoteNumbers1[i], duration);
+            }
+            for (int i = 0; i < notes2.Length; i++)
+            {
+                switch (measureRhythmSplit2[i])
+                {
+                    case "1":
+                        duration = wholeNoteDuration;
+                        break;
+
+                    case "2":
+                        duration = halfNoteDuration;
+                        break;
+
+                    case "2.":
+                        duration = dottedHalfNoteDuration;
+                        break;
+
+                    case "4":
+                        duration = quarterNoteDuration;
+                        break;
+
+                    default:
+                        throw new NotSupportedException($"Duration '{measureRhythmSplit2[i]}' is not supported.");
+                }
+
+                notes2[i] = NAudioHelper.GetSampleProvider(measureNoteNumbers2[i], duration);
+            }
+
+            ISampleProvider phrase =
+                wholeDoNote;
+
+            foreach (var tick in ticks)
+            {
+                phrase = phrase.FollowedBy(tick);
+            }
+
+            foreach (var note1 in notes1)
+            {
+                phrase = phrase.FollowedBy(note1);
+            }
+            foreach (var note2 in notes2)
+            {
+                phrase = phrase.FollowedBy(note2);
+            }
+
+            SampleToWaveProvider stwp = new SampleToWaveProvider(phrase);
+
+            MemoryStream wavStream = new MemoryStream();
+            WaveFileWriter.WriteWavFileToStream(wavStream, stwp);
+            wavStream.Position = 0;
+            wavStream.WavToMp3File(out string fileName);
+            dict.Add("src", fileName);
+
+            #endregion Audio
+
+            #region Notation
+
+            string[] noteNames1 = new string[numberOfNotes1];
+            for (int i = 0; i < noteNames1.Length; i++)
+            {
+                noteNames1[i] = NAudioHelper.GetNoteNameFromNoteNumber(measureNoteNumbers1[i]);
+                if ((keySignature == "G" || keySignature == "A" || keySignature == "D" || keySignature == "E") && noteNames1[i].Contains("b"))
+                {
+                    noteNames1[i] = noteNames1[i].FlatToSharpForEasyScore();
+                }
+            }
+            string[] noteNames2 = new string[numberOfNotes2];
+            for (int i = 0; i < noteNames2.Length; i++)
+            {
+                noteNames2[i] = NAudioHelper.GetNoteNameFromNoteNumber(measureNoteNumbers2[i]);
+                if ((keySignature == "G" || keySignature == "A" || keySignature == "D" || keySignature == "E") && noteNames2[i].Contains("b"))
+                {
+                    noteNames2[i] = noteNames2[i].FlatToSharpForEasyScore();
+                }
+            }
+
+            var jsNotes1 = new StringBuilder();
+            jsNotes1.AppendLine("var notes = [");
+            for (int i = 0; i < noteNames1.Length; i++)
+            {
+                string staffNote = $"new VF.StaveNote({{clef: 'treble', keys: ['{noteNames1[i].ToSlashNoteName()}'], duration: '{measureRhythmSplit1[i]}' }}),";
+                jsNotes1.AppendLine(staffNote);
+            }
+            jsNotes1.AppendLine("];");
+            var jsNotes2 = new StringBuilder();
+            jsNotes2.AppendLine("var notes = [");
+            for (int i = 0; i < noteNames2.Length; i++)
+            {
+                string staffNote = $"new VF.StaveNote({{clef: 'treble', keys: ['{noteNames2[i].ToSlashNoteName()}'], duration: '{measureRhythmSplit2[i]}' }}),";
+                jsNotes2.AppendLine(staffNote);
+            }
+            jsNotes2.AppendLine("];");
+
+            //string script = GetVexFlowScript("transcription1", jsNotes.ToString());
+            string script1 = GetEasyScoreScript("transcription1", noteNames1, measureRhythmSplit1, keySignature);
+            dict.Add("theScript1", script1);
+            string script2 = GetEasyScoreScript("transcription2", noteNames2, measureRhythmSplit2, keySignature);
+            dict.Add("theScript2", script2);
+
+            #endregion Notation
+
+            var json = Json(dict, JsonRequestBehavior.AllowGet);
+            return json;
+        }
+
+        private int[] TransposeScaleNoteNumbers(int[] scaleNoteNumbers, string keySignature)
+        {
+            switch (keySignature)
+            {
+                case "E":
+                    for (int i = 0; i < scaleNoteNumbers.Length; i++)
+                    {
+                        scaleNoteNumbers[i] += 4;
+                    }
+                    break;
+
+                case "D":
+                    for (int i = 0; i < scaleNoteNumbers.Length; i++)
+                    {
+                        scaleNoteNumbers[i] += 2;
+                    }
+                    break;
+
+                case "C":
+                    break;  // Do nothing as (hopefully!) we're passed in the C major scale notes number.
+
+                case "A":
+                    for (int i = 0; i < scaleNoteNumbers.Length; i++)
+                    {
+                        scaleNoteNumbers[i] += -3;
+                    }
+                    break;
+
+                case "G":
+                    for (int i = 0; i < scaleNoteNumbers.Length; i++)
+                    {
+                        scaleNoteNumbers[i] += -5;
+                    }
+                    break;
+
+                default:
+                    throw new NotSupportedException($"Key signature '{keySignature}' is not supported.");
+            }
+
+            return scaleNoteNumbers;
+        }
+
+        private string GetEasyScoreScript(string elementId, string[] noteNames, string[] measureRhythmSplit, string keySignature)
+        {
+            var easyScoreNotes = new StringBuilder();
+            for (int i = 0; i < noteNames.Length; i++)
+            {
+                easyScoreNotes.Append($"{noteNames[i]}/{measureRhythmSplit[i]},");
+            }
+
+            string script = $@"
+            const vf = new Vex.Flow.Factory({{
+                renderer: {{ elementId: '{elementId}' }}
+            }});
+
+            const score = vf.EasyScore();
+            const system = vf.System();
+
+            system.addStave({{
+                voices: [
+                    score.voice(score.notes('{easyScoreNotes.ToString()}', {{ stem: 'up' }})),
+                ]
+            }}).addClef('treble').addTimeSignature('4/4').addKeySignature('{keySignature}');
+
+            vf.draw();
+            ";
+
+            return script;
+        }
+
+        private int GetRandomInt(int min, int max)
+        {
+            using (var rng = new RNGCryptoServiceProvider())
+            {
+                byte[] buffer = new byte[4];
+
+                rng.GetBytes(buffer);
+                int result = BitConverter.ToInt32(buffer, 0);
+                int index = new Random(result).Next(min, max);
+                return index;
+            }
+        }
+
+        private Queue<int> GetRandomIntQueue(int[] scaleNoteNumbers, int numberOfNotes)
+        {
+            var q = new Queue<int>();
+            int noteNumber;
+            for (int i = 0; i < numberOfNotes; i++)
+            {
+                noteNumber = GetRandomNoteNumber(scaleNoteNumbers);
+                q.Enqueue(noteNumber);
+            }
+            return q;
+        }
+
+        private Queue<int> GetResolutionIntQueue(int[] scaleNoteNumbers, int numberOfNotes, bool includeInverse)
+        {
+            List<Tuple<int, int>> resolutions = new List<Tuple<int, int>>();
+            resolutions.Add(new Tuple<int, int>(1, 0));
+            resolutions.Add(new Tuple<int, int>(3, 2));
+            resolutions.Add(new Tuple<int, int>(5, 4));
+            resolutions.Add(new Tuple<int, int>(6, 7));
+
+            var q = new Queue<int>();
+            while (q.Count < numberOfNotes)
+            {
+                int randomInt = GetRandomInt(0, resolutions.Count);
+                Tuple<int, int> t = resolutions[randomInt];
+
+                if (includeInverse)
+                {
+                    int ri = GetRandomInt(0, 2);
+                    if (ri % 2 == 0)
+                    {
+                        q.Enqueue(scaleNoteNumbers[t.Item1]);
+                        q.Enqueue(scaleNoteNumbers[t.Item2]);
+                    }
+                    else
+                    {
+                        q.Enqueue(scaleNoteNumbers[t.Item2]);
+                        q.Enqueue(scaleNoteNumbers[t.Item1]);
+                    }
+                }
+                else
+                {
+                    q.Enqueue(scaleNoteNumbers[t.Item1]);
+                    q.Enqueue(scaleNoteNumbers[t.Item2]);
+                }
+            }
+
+            return q;
+        }
+
+        private int GetRandomNoteNumber(int[] noteNumbers)
+        {
+            using (var rng = new RNGCryptoServiceProvider())
+            {
+                byte[] buffer = new byte[4];
+
+                rng.GetBytes(buffer);
+                int result = BitConverter.ToInt32(buffer, 0);
+                int index = new Random(result).Next(0, noteNumbers.Length);
+                return noteNumbers[index];
+            }
         }
     }
 }

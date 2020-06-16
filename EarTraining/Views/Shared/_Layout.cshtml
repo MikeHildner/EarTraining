@@ -28,6 +28,8 @@
                             @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Vocal Drills"), "SolfegResolutionsDO", "L1C1", null, new { @class = "dropdown-item" })
                             @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Resolution Identification"), "SolfegResolutionsNoDO", "L1C1", null, new { @class = "dropdown-item" })
                             @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Pitch Identification"), "PitchIdentification", "L1C1", null, new { @class = "dropdown-item" })
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Dictation / Transcription"), "DictationTranscription", "L1C1", null, new { @class = "dropdown-item" })
                         </div>
                     </li>
 
@@ -165,7 +167,6 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownExperimental">
                             @Html.ActionLink("L2 Major Triad Progressions", "MajorTriadProgressions", "L2", null, new { @class = "dropdown-item" })
-                            @Html.ActionLink("Transcription / Dictation", "Test", "Transcription", null, new { @class = "dropdown-item" })
                             @*<div class="dropdown-divider"></div>
         @Html.ActionLink("Force Error", "ForceError", "Home", null, new { @class = "dropdown-item" })*@
                         </div>

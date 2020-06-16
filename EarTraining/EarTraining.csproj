@@ -430,7 +430,7 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Theme\Index.cshtml" />
-    <Content Include="Views\Transcription\Test.cshtml" />
+    <Content Include="Views\L1C1\DictationTranscription.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -438,6 +438,7 @@
     <Folder Include="Models\" />
     <Folder Include="Samples\" />
     <Folder Include="Temp\" />
+    <Folder Include="Views\Transcription\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

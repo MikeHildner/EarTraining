@@ -130,14 +130,14 @@ namespace EarTrainingLibrary.Utility
 
             int bassNoteNumber = noteNumber;
 
-            while(bassNoteNumber > highest || bassNoteNumber < lowest)
+            while (bassNoteNumber > highest || bassNoteNumber < lowest)
             {
-                if(bassNoteNumber > highest)
+                if (bassNoteNumber > highest)
                 {
                     bassNoteNumber -= 12;
                 }
 
-                if(bassNoteNumber < lowest)
+                if (bassNoteNumber < lowest)
                 {
                     bassNoteNumber += 12;
                 }
@@ -160,6 +160,31 @@ namespace EarTrainingLibrary.Utility
             string slashNoteName = $"{nName}/{octave}";
 
             return slashNoteName;
+        }
+
+        public static string FlatToSharpForEasyScore(this string noteNameWithOctave)
+        {
+            if (noteNameWithOctave.StartsWith("Gb"))
+            {
+                return noteNameWithOctave.Replace("Gb", "F");
+            }
+
+            if (noteNameWithOctave.StartsWith("Db"))
+            {
+                return noteNameWithOctave.Replace("Db", "C");
+            }
+
+            if (noteNameWithOctave.StartsWith("Ab"))
+            {
+                return noteNameWithOctave.Replace("Ab", "G");
+            }
+
+            if (noteNameWithOctave.StartsWith("Eb"))
+            {
+                return noteNameWithOctave.Replace("Eb", "D");
+            }
+
+            throw new NotSupportedException($"Converting '{noteNameWithOctave}' FlatToSharp is not supported.");
         }
     }
 }
