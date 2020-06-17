@@ -12,6 +12,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web.Hosting;
 using System.Web.Mvc;
+using System.Windows.Forms;
 using WaveLibrary;
 
 namespace EarTraining.Controllers
@@ -276,15 +277,15 @@ namespace EarTraining.Controllers
             switch (resolutionType)
             {
                 case 1:
-                    noteNumberQueue = GetResolutionIntQueue(scaleNoteNumbers, 8, false);  // 8 notes max.
+                    noteNumberQueue = GetResolutionIntQueue(scaleNoteNumbers, 8, 1);  // 8 notes max.
                     break;
 
                 case 2:
-                    noteNumberQueue = GetResolutionIntQueue(scaleNoteNumbers, 8, true);  // 8 notes max.
+                    noteNumberQueue = GetResolutionIntQueue(scaleNoteNumbers, 8, 2);  // 8 notes max.
                     break;
 
                 case 3:
-                    noteNumberQueue = GetRandomIntQueue(scaleNoteNumbers, 8);  // 8 notes max.
+                    noteNumberQueue = GetResolutionIntQueue(scaleNoteNumbers, 8, 3);  // 8 notes max.
                     break;
 
                 default:
@@ -294,14 +295,12 @@ namespace EarTraining.Controllers
             int[] measureNoteNumbers1 = new int[numberOfNotes1];
             for (int i = 0; i < measureNoteNumbers1.Length; i++)
             {
-                //measureNoteNumbers1[i] = GetRandomNoteNumber(scaleNoteNumbers);
                 measureNoteNumbers1[i] = noteNumberQueue.Dequeue();
             }
 
             int[] measureNoteNumbers2 = new int[numberOfNotes2];
             for (int i = 0; i < measureNoteNumbers2.Length; i++)
             {
-                //measureNoteNumbers2[i] = GetRandomNoteNumber(scaleNoteNumbers);
                 measureNoteNumbers2[i] = noteNumberQueue.Dequeue();
             }
 
@@ -376,10 +375,38 @@ namespace EarTraining.Controllers
                 phrase = phrase.FollowedBy(note2);
             }
 
+            // HACK: Use an empty note because without it, the audio gets cut short.
+            ISampleProvider emptyNote = NAudioHelper.GetSampleProvider(0, 0, SignalGeneratorType.White, halfNoteDuration);
+            phrase = phrase.FollowedBy(emptyNote);
+
             SampleToWaveProvider stwp = new SampleToWaveProvider(phrase);
+            MixingSampleProvider msp = new MixingSampleProvider(stwp.WaveFormat);
+            msp.AddMixerInput(stwp);
+
+            ISampleProvider[] metronomeTicks = new ISampleProvider[16];
+
+            for (int i = 0; i < 8; i++)
+            {
+                metronomeTicks[i] = NAudioHelper.GetSampleProvider(0, 0, SignalGeneratorType.White, quarterNoteDuration);
+            }
+            for (int i = 8; i < 16; i++)
+            {
+                metronomeTicks[i] = NAudioHelper.GetSampleProviderFromFile(tickFile, quarterNoteDuration);
+            }
+
+            ISampleProvider metronomePhrase = metronomeTicks[0];
+            for (int i = 0; i < metronomeTicks.Length; i++)
+            {
+                metronomePhrase = metronomePhrase.FollowedBy(metronomeTicks[i]);
+            }
+
+            msp.AddMixerInput(metronomePhrase);
+
+            IWaveProvider wp = msp.ToWaveProvider();
 
             MemoryStream wavStream = new MemoryStream();
-            WaveFileWriter.WriteWavFileToStream(wavStream, stwp);
+            //WaveFileWriter.WriteWavFileToStream(wavStream, stwp);
+            WaveFileWriter.WriteWavFileToStream(wavStream, wp);
             wavStream.Position = 0;
             wavStream.WavToMp3File(out string fileName);
             dict.Add("src", fileName);
@@ -394,7 +421,11 @@ namespace EarTraining.Controllers
                 noteNames1[i] = NAudioHelper.GetNoteNameFromNoteNumber(measureNoteNumbers1[i]);
                 if ((keySignature == "G" || keySignature == "A" || keySignature == "D" || keySignature == "E") && noteNames1[i].Contains("b"))
                 {
-                    noteNames1[i] = noteNames1[i].FlatToSharpForEasyScore();
+                    noteNames1[i] = noteNames1[i].FlatToNaturalForSharpKeys();
+                }
+                if ((keySignature == "F" || keySignature == "Bb") && noteNames1[i].Contains("b"))
+                {
+                    noteNames1[i] = noteNames1[i].FlatToNaturalForFlatKeys();
                 }
             }
             string[] noteNames2 = new string[numberOfNotes2];
@@ -403,28 +434,14 @@ namespace EarTraining.Controllers
                 noteNames2[i] = NAudioHelper.GetNoteNameFromNoteNumber(measureNoteNumbers2[i]);
                 if ((keySignature == "G" || keySignature == "A" || keySignature == "D" || keySignature == "E") && noteNames2[i].Contains("b"))
                 {
-                    noteNames2[i] = noteNames2[i].FlatToSharpForEasyScore();
+                    noteNames2[i] = noteNames2[i].FlatToNaturalForSharpKeys();
+                }
+                if ((keySignature == "F" || keySignature == "Bb") && noteNames2[i].Contains("b"))
+                {
+                    noteNames2[i] = noteNames2[i].FlatToNaturalForFlatKeys();
                 }
             }
 
-            var jsNotes1 = new StringBuilder();
-            jsNotes1.AppendLine("var notes = [");
-            for (int i = 0; i < noteNames1.Length; i++)
-            {
-                string staffNote = $"new VF.StaveNote({{clef: 'treble', keys: ['{noteNames1[i].ToSlashNoteName()}'], duration: '{measureRhythmSplit1[i]}' }}),";
-                jsNotes1.AppendLine(staffNote);
-            }
-            jsNotes1.AppendLine("];");
-            var jsNotes2 = new StringBuilder();
-            jsNotes2.AppendLine("var notes = [");
-            for (int i = 0; i < noteNames2.Length; i++)
-            {
-                string staffNote = $"new VF.StaveNote({{clef: 'treble', keys: ['{noteNames2[i].ToSlashNoteName()}'], duration: '{measureRhythmSplit2[i]}' }}),";
-                jsNotes2.AppendLine(staffNote);
-            }
-            jsNotes2.AppendLine("];");
-
-            //string script = GetVexFlowScript("transcription1", jsNotes.ToString());
             string script1 = GetEasyScoreScript("transcription1", noteNames1, measureRhythmSplit1, keySignature);
             dict.Add("theScript1", script1);
             string script2 = GetEasyScoreScript("transcription2", noteNames2, measureRhythmSplit2, keySignature);
@@ -440,6 +457,13 @@ namespace EarTraining.Controllers
         {
             switch (keySignature)
             {
+                case "F":
+                    for (int i = 0; i < scaleNoteNumbers.Length; i++)
+                    {
+                        scaleNoteNumbers[i] += 5;
+                    }
+                    break;
+
                 case "E":
                     for (int i = 0; i < scaleNoteNumbers.Length; i++)
                     {
@@ -456,6 +480,13 @@ namespace EarTraining.Controllers
 
                 case "C":
                     break;  // Do nothing as (hopefully!) we're passed in the C major scale notes number.
+
+                case "Bb":
+                    for (int i = 0; i < scaleNoteNumbers.Length; i++)
+                    {
+                        scaleNoteNumbers[i] += -2;
+                    }
+                    break;
 
                 case "A":
                     for (int i = 0; i < scaleNoteNumbers.Length; i++)
@@ -480,11 +511,15 @@ namespace EarTraining.Controllers
 
         private string GetEasyScoreScript(string elementId, string[] noteNames, string[] measureRhythmSplit, string keySignature)
         {
-            var easyScoreNotes = new StringBuilder();
+            var sb = new StringBuilder();
             for (int i = 0; i < noteNames.Length; i++)
             {
-                easyScoreNotes.Append($"{noteNames[i]}/{measureRhythmSplit[i]},");
+                sb.Append($"{noteNames[i]}/{measureRhythmSplit[i]},");
             }
+
+            var easyScoreNotes = sb.ToString();
+            easyScoreNotes = easyScoreNotes.TrimEnd(',');
+            //easyScoreNotes += " |";
 
             string script = $@"
             const vf = new Vex.Flow.Factory({{
@@ -492,13 +527,16 @@ namespace EarTraining.Controllers
             }});
 
             const score = vf.EasyScore();
-            const system = vf.System();
+            //const system = vf.System();
+            var system = vf.System({{width: 320}});
 
             system.addStave({{
                 voices: [
-                    score.voice(score.notes('{easyScoreNotes.ToString()}', {{ stem: 'up' }})),
+                    score.voice(score.notes('{easyScoreNotes}', {{ stem: 'up' }})),
                 ]
             }}).addClef('treble').addTimeSignature('4/4').addKeySignature('{keySignature}');
+            system.addConnector('singleLeft');
+            system.addConnector('singleRight');
 
             vf.draw();
             ";
@@ -531,7 +569,7 @@ namespace EarTraining.Controllers
             return q;
         }
 
-        private Queue<int> GetResolutionIntQueue(int[] scaleNoteNumbers, int numberOfNotes, bool includeInverse)
+        private Queue<int> GetResolutionIntQueue(int[] scaleNoteNumbers, int numberOfNotes, int resolutionType)
         {
             List<Tuple<int, int>> resolutions = new List<Tuple<int, int>>();
             resolutions.Add(new Tuple<int, int>(1, 0));
@@ -545,24 +583,33 @@ namespace EarTraining.Controllers
                 int randomInt = GetRandomInt(0, resolutions.Count);
                 Tuple<int, int> t = resolutions[randomInt];
 
-                if (includeInverse)
+                switch(resolutionType)
                 {
-                    int ri = GetRandomInt(0, 2);
-                    if (ri % 2 == 0)
-                    {
+                    case 1:
                         q.Enqueue(scaleNoteNumbers[t.Item1]);
                         q.Enqueue(scaleNoteNumbers[t.Item2]);
-                    }
-                    else
-                    {
+                        break;
+
+                    case 2:
                         q.Enqueue(scaleNoteNumbers[t.Item2]);
                         q.Enqueue(scaleNoteNumbers[t.Item1]);
-                    }
-                }
-                else
-                {
-                    q.Enqueue(scaleNoteNumbers[t.Item1]);
-                    q.Enqueue(scaleNoteNumbers[t.Item2]);
+                        break;
+
+                    case 3:
+                        int ri = GetRandomInt(0, 2);
+                        if (ri % 2 == 0)
+                        {
+                            q.Enqueue(scaleNoteNumbers[t.Item1]);
+                            q.Enqueue(scaleNoteNumbers[t.Item2]);
+                        }
+                        else
+                        {
+                            q.Enqueue(scaleNoteNumbers[t.Item2]);
+                            q.Enqueue(scaleNoteNumbers[t.Item1]);
+                        }
+                        break;
+                    default:
+                        throw new NotSupportedException($"Resolution type '{resolutionType}' is not supported.");
                 }
             }
 

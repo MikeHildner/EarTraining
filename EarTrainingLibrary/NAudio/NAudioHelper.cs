@@ -93,15 +93,18 @@ namespace EarTrainingLibrary.NAudio
             return noteName;
         }
 
-        public static ISampleProvider GetSampleProviderFromFile(string fileName, TimeSpan duration)
+        public static ISampleProvider GetSampleProviderFromFile(string fileName, TimeSpan duration, float? volume = null)
         {
             // Read the sample from disk.
             var reader = new AudioFileReader(fileName);
             //var reader = new Mp3FileReader(fileName);
             //var reader = new MediaFoundationReader(fileName);
-            string sVolume = System.Configuration.ConfigurationManager.AppSettings["PlaybackVolume"];
-            float volume = float.Parse(sVolume);
-            reader.Volume = volume;
+            if(volume == null)
+            {
+                string sVolume = System.Configuration.ConfigurationManager.AppSettings["PlaybackVolume"];
+                volume = float.Parse(sVolume);
+            }
+            reader.Volume = volume.Value;
             ISampleProvider inSample = reader.ToSampleProvider();
             
             // Shorten to specified duration.

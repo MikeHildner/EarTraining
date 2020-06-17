@@ -162,7 +162,7 @@ namespace EarTrainingLibrary.Utility
             return slashNoteName;
         }
 
-        public static string FlatToSharpForEasyScore(this string noteNameWithOctave)
+        public static string FlatToNaturalForSharpKeys(this string noteNameWithOctave)
         {
             if (noteNameWithOctave.StartsWith("Gb"))
             {
@@ -184,7 +184,22 @@ namespace EarTrainingLibrary.Utility
                 return noteNameWithOctave.Replace("Eb", "D");
             }
 
-            throw new NotSupportedException($"Converting '{noteNameWithOctave}' FlatToSharp is not supported.");
+            throw new NotSupportedException($"Converting '{noteNameWithOctave}' FlatToNatural is not supported.");
+        }
+
+        public static string FlatToNaturalForFlatKeys(this string noteNameWithOctave)
+        {
+            if (noteNameWithOctave.StartsWith("Eb"))
+            {
+                return noteNameWithOctave.Replace("Eb", "E");
+            }
+
+            if (noteNameWithOctave.StartsWith("Bb"))
+            {
+                return noteNameWithOctave.Replace("Bb", "B");
+            }
+
+            throw new NotSupportedException($"Converting '{noteNameWithOctave}' FlatToNatural is not supported.");
         }
     }
 }
