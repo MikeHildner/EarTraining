@@ -220,26 +220,26 @@ namespace EarTraining.Controllers
 
         public ActionResult AudioAndDictation(int resolutionType, string keySignature, double bpm = 60)
         {
+            // We'll add stuff to the Dictionary and return as JSON.
             var dict = new Dictionary<string, string>();
 
             #region Audio
 
             //double bpm = double.Parse(ConfigurationManager.AppSettings["BPM"]);
             double quarterNoteMillis = (60 / bpm) * 1000;
-            double halfNoteMillis = quarterNoteMillis * 2;
-            double dottedHalfNoteMillis = quarterNoteMillis * 3;
-            double wholeNoteMillis = quarterNoteMillis * 4;
             TimeSpan quarterNoteDuration = TimeSpan.FromMilliseconds(quarterNoteMillis);
-            TimeSpan halfNoteDuration = TimeSpan.FromMilliseconds(halfNoteMillis);
-            TimeSpan dottedHalfNoteDuration = TimeSpan.FromMilliseconds(dottedHalfNoteMillis);
-            TimeSpan wholeNoteDuration = TimeSpan.FromMilliseconds(wholeNoteMillis);
+            TimeSpan halfNoteDuration = TimeSpan.FromMilliseconds(quarterNoteMillis * 2);
+            TimeSpan dottedHalfNoteDuration = TimeSpan.FromMilliseconds(quarterNoteMillis * 3);
+            TimeSpan wholeNoteDuration = TimeSpan.FromMilliseconds(quarterNoteMillis * 4);
 
             // Setup the scale note numbers.
             int[] scaleNoteNumbers = new int[] { 39, 41, 43, 44, 46, 48, 50, 51 };  // C Major.
             scaleNoteNumbers = TransposeScaleNoteNumbers(scaleNoteNumbers, keySignature);
 
+            // The initial DO.
             ISampleProvider wholeDoNote = NAudioHelper.GetSampleProvider(scaleNoteNumbers[0], wholeNoteDuration);
 
+            // Four metronome ticks before the transcription part plays.
             ISampleProvider[] ticks = new ISampleProvider[4];
             string tickFile = HostingEnvironment.MapPath($"~/Samples/Woodblock.wav");
             for (int i = 0; i < ticks.Length; i++)
@@ -247,7 +247,7 @@ namespace EarTraining.Controllers
                 ticks[i] = NAudioHelper.GetSampleProviderFromFile(tickFile, quarterNoteDuration);
             }
 
-
+            // Various rhythm possibilities for each measure.
             List<string> measureRhythms = new List<string>();
             measureRhythms.Add("1");
             measureRhythms.Add("2,2");
@@ -292,71 +292,11 @@ namespace EarTraining.Controllers
                     throw new NotSupportedException($"ResolutionType '{resolutionType}' is not supported.");
             }
 
-            int[] measureNoteNumbers1 = new int[numberOfNotes1];
-            for (int i = 0; i < measureNoteNumbers1.Length; i++)
-            {
-                measureNoteNumbers1[i] = noteNumberQueue.Dequeue();
-            }
+            int[] measureNoteNumbers1 = PopulateNoteNumbersFromQueue(numberOfNotes1, noteNumberQueue);
+            int[] measureNoteNumbers2 = PopulateNoteNumbersFromQueue(numberOfNotes2, noteNumberQueue);
 
-            int[] measureNoteNumbers2 = new int[numberOfNotes2];
-            for (int i = 0; i < measureNoteNumbers2.Length; i++)
-            {
-                measureNoteNumbers2[i] = noteNumberQueue.Dequeue();
-            }
-
-            TimeSpan duration;
-            for (int i = 0; i < notes1.Length; i++)
-            {
-                switch (measureRhythmSplit1[i])
-                {
-                    case "1":
-                        duration = wholeNoteDuration;
-                        break;
-
-                    case "2":
-                        duration = halfNoteDuration;
-                        break;
-
-                    case "2.":
-                        duration = dottedHalfNoteDuration;
-                        break;
-
-                    case "4":
-                        duration = quarterNoteDuration;
-                        break;
-
-                    default:
-                        throw new NotSupportedException($"Duration '{measureRhythmSplit1[i]}' is not supported.");
-                }
-
-                notes1[i] = NAudioHelper.GetSampleProvider(measureNoteNumbers1[i], duration);
-            }
-            for (int i = 0; i < notes2.Length; i++)
-            {
-                switch (measureRhythmSplit2[i])
-                {
-                    case "1":
-                        duration = wholeNoteDuration;
-                        break;
-
-                    case "2":
-                        duration = halfNoteDuration;
-                        break;
-
-                    case "2.":
-                        duration = dottedHalfNoteDuration;
-                        break;
-
-                    case "4":
-                        duration = quarterNoteDuration;
-                        break;
-
-                    default:
-                        throw new NotSupportedException($"Duration '{measureRhythmSplit2[i]}' is not supported.");
-                }
-
-                notes2[i] = NAudioHelper.GetSampleProvider(measureNoteNumbers2[i], duration);
-            }
+            CreateSamplesFromRhythmsAndNoteNames(quarterNoteDuration, halfNoteDuration, dottedHalfNoteDuration, wholeNoteDuration, measureRhythmSplit1, notes1, measureNoteNumbers1);
+            CreateSamplesFromRhythmsAndNoteNames(quarterNoteDuration, halfNoteDuration, dottedHalfNoteDuration, wholeNoteDuration, measureRhythmSplit2, notes2, measureNoteNumbers2);
 
             ISampleProvider phrase =
                 wholeDoNote;
@@ -419,26 +359,34 @@ namespace EarTraining.Controllers
             for (int i = 0; i < noteNames1.Length; i++)
             {
                 noteNames1[i] = NAudioHelper.GetNoteNameFromNoteNumber(measureNoteNumbers1[i]);
-                if ((keySignature == "G" || keySignature == "A" || keySignature == "D" || keySignature == "E") && noteNames1[i].Contains("b"))
+                if ((keySignature == "G" || keySignature == "A" || keySignature == "D" || keySignature == "E" || keySignature == "B") && noteNames1[i].Contains("b"))
                 {
                     noteNames1[i] = noteNames1[i].FlatToNaturalForSharpKeys();
                 }
-                if ((keySignature == "F" || keySignature == "Bb") && noteNames1[i].Contains("b"))
+                if ((keySignature == "F" || keySignature == "Bb" || keySignature == "Eb" || keySignature == "Ab" || keySignature == "Db") && noteNames1[i].Contains("b"))
                 {
                     noteNames1[i] = noteNames1[i].FlatToNaturalForFlatKeys();
+                }
+                if (keySignature == "F#")
+                {
+                    noteNames1[i] = noteNames1[i].AdjustForFSharp();
                 }
             }
             string[] noteNames2 = new string[numberOfNotes2];
             for (int i = 0; i < noteNames2.Length; i++)
             {
                 noteNames2[i] = NAudioHelper.GetNoteNameFromNoteNumber(measureNoteNumbers2[i]);
-                if ((keySignature == "G" || keySignature == "A" || keySignature == "D" || keySignature == "E") && noteNames2[i].Contains("b"))
+                if ((keySignature == "G" || keySignature == "A" || keySignature == "D" || keySignature == "E" || keySignature == "B") && noteNames2[i].Contains("b"))
                 {
                     noteNames2[i] = noteNames2[i].FlatToNaturalForSharpKeys();
                 }
-                if ((keySignature == "F" || keySignature == "Bb") && noteNames2[i].Contains("b"))
+                if ((keySignature == "F" || keySignature == "Bb" || keySignature == "Eb" || keySignature == "Ab" || keySignature == "Db") && noteNames2[i].Contains("b"))
                 {
                     noteNames2[i] = noteNames2[i].FlatToNaturalForFlatKeys();
+                }
+                if (keySignature == "F#")
+                {
+                    noteNames2[i] = noteNames2[i].AdjustForFSharp();
                 }
             }
 
@@ -453,10 +401,59 @@ namespace EarTraining.Controllers
             return json;
         }
 
+        private static void CreateSamplesFromRhythmsAndNoteNames(TimeSpan quarterNoteDuration, TimeSpan halfNoteDuration, TimeSpan dottedHalfNoteDuration, TimeSpan wholeNoteDuration, string[] measureRhythmSplit1, ISampleProvider[] notes1, int[] measureNoteNumbers1)
+        {
+            for (int i = 0; i < notes1.Length; i++)
+            {
+                TimeSpan duration;
+                switch (measureRhythmSplit1[i])
+                {
+                    case "1":
+                        duration = wholeNoteDuration;
+                        break;
+
+                    case "2":
+                        duration = halfNoteDuration;
+                        break;
+
+                    case "2.":
+                        duration = dottedHalfNoteDuration;
+                        break;
+
+                    case "4":
+                        duration = quarterNoteDuration;
+                        break;
+
+                    default:
+                        throw new NotSupportedException($"Duration '{measureRhythmSplit1[i]}' is not supported.");
+                }
+
+                notes1[i] = NAudioHelper.GetSampleProvider(measureNoteNumbers1[i], duration);
+            }
+        }
+
+        private static int[] PopulateNoteNumbersFromQueue(int numberOfNotes, Queue<int> noteNumberQueue)
+        {
+            int[] measureNoteNumbers = new int[numberOfNotes];
+            for (int i = 0; i < measureNoteNumbers.Length; i++)
+            {
+                measureNoteNumbers[i] = noteNumberQueue.Dequeue();
+            }
+
+            return measureNoteNumbers;
+        }
+
         private int[] TransposeScaleNoteNumbers(int[] scaleNoteNumbers, string keySignature)
         {
             switch (keySignature)
             {
+                case "F#":
+                    for (int i = 0; i < scaleNoteNumbers.Length; i++)
+                    {
+                        scaleNoteNumbers[i] += 6;
+                    }
+                    break;
+
                 case "F":
                     for (int i = 0; i < scaleNoteNumbers.Length; i++)
                     {
@@ -471,6 +468,13 @@ namespace EarTraining.Controllers
                     }
                     break;
 
+                case "Eb":
+                    for (int i = 0; i < scaleNoteNumbers.Length; i++)
+                    {
+                        scaleNoteNumbers[i] += 3;
+                    }
+                    break;
+
                 case "D":
                     for (int i = 0; i < scaleNoteNumbers.Length; i++)
                     {
@@ -478,8 +482,22 @@ namespace EarTraining.Controllers
                     }
                     break;
 
+                case "Db":
+                    for (int i = 0; i < scaleNoteNumbers.Length; i++)
+                    {
+                        scaleNoteNumbers[i] += 1;
+                    }
+                    break;
+
                 case "C":
                     break;  // Do nothing as (hopefully!) we're passed in the C major scale notes number.
+
+                case "B":
+                    for (int i = 0; i < scaleNoteNumbers.Length; i++)
+                    {
+                        scaleNoteNumbers[i] += -1;
+                    }
+                    break;
 
                 case "Bb":
                     for (int i = 0; i < scaleNoteNumbers.Length; i++)
@@ -492,6 +510,13 @@ namespace EarTraining.Controllers
                     for (int i = 0; i < scaleNoteNumbers.Length; i++)
                     {
                         scaleNoteNumbers[i] += -3;
+                    }
+                    break;
+
+                case "Ab":
+                    for (int i = 0; i < scaleNoteNumbers.Length; i++)
+                    {
+                        scaleNoteNumbers[i] += -4;
                     }
                     break;
 

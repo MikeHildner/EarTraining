@@ -184,22 +184,82 @@ namespace EarTrainingLibrary.Utility
                 return noteNameWithOctave.Replace("Eb", "D");
             }
 
+            if (noteNameWithOctave.StartsWith("Bb"))
+            {
+                return noteNameWithOctave.Replace("Bb", "A");
+            }
+
             throw new NotSupportedException($"Converting '{noteNameWithOctave}' FlatToNatural is not supported.");
         }
 
         public static string FlatToNaturalForFlatKeys(this string noteNameWithOctave)
         {
-            if (noteNameWithOctave.StartsWith("Eb"))
-            {
-                return noteNameWithOctave.Replace("Eb", "E");
-            }
-
             if (noteNameWithOctave.StartsWith("Bb"))
             {
                 return noteNameWithOctave.Replace("Bb", "B");
             }
 
+            if (noteNameWithOctave.StartsWith("Eb"))
+            {
+                return noteNameWithOctave.Replace("Eb", "E");
+            }
+
+            if (noteNameWithOctave.StartsWith("Ab"))
+            {
+                return noteNameWithOctave.Replace("Ab", "A");
+            }
+
+            if (noteNameWithOctave.StartsWith("Db"))
+            {
+                return noteNameWithOctave.Replace("Db", "D");
+            }
+
+            if (noteNameWithOctave.StartsWith("Gb"))
+            {
+                return noteNameWithOctave.Replace("Gb", "G");
+            }
+
             throw new NotSupportedException($"Converting '{noteNameWithOctave}' FlatToNatural is not supported.");
+        }
+
+        public static string AdjustForFSharp(this string noteNameWithOctave)
+        {
+            if (noteNameWithOctave.StartsWith("Bb"))
+            {
+                return noteNameWithOctave.Replace("Bb", "A");
+            }
+            
+            if (noteNameWithOctave.StartsWith("Eb"))
+            {
+                return noteNameWithOctave.Replace("Eb", "D");
+            }
+
+            if (noteNameWithOctave.StartsWith("Ab"))
+            {
+                return noteNameWithOctave.Replace("Ab", "G");
+            }
+
+            if (noteNameWithOctave.StartsWith("Db"))
+            {
+                return noteNameWithOctave.Replace("Db", "C");
+            }
+
+            if (noteNameWithOctave.StartsWith("Gb"))
+            {
+                return noteNameWithOctave.Replace("Gb", "F");
+            }
+
+            if (noteNameWithOctave.StartsWith("F"))
+            {
+                return noteNameWithOctave.Replace("F", "E");
+            }
+
+            if (noteNameWithOctave.StartsWith("B"))
+            {
+                return noteNameWithOctave;
+            }
+
+            throw new NotSupportedException($"Converting '{noteNameWithOctave}' AdjustForFSharp is not supported.");
         }
     }
 }
