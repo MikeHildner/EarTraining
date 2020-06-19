@@ -218,7 +218,7 @@ namespace EarTraining.Controllers
             return Redirect($"~/Temp/{fileName}");
         }
 
-        public ActionResult AudioAndDictation(int resolutionType, string keySignature, double bpm = 60)
+        public ActionResult AudioAndDictation(int resolutionType, string keySignature, double bpm, int numberOfMeasures)
         {
             // We'll add stuff to the Dictionary and return as JSON.
             var dict = new Dictionary<string, string>();
@@ -253,30 +253,39 @@ namespace EarTraining.Controllers
             string measureRhythm1 = measureRhythms[randomInt];
             randomInt = GetRandomInt(0, measureRhythms.Count);
             string measureRhythm2 = measureRhythms[randomInt];
+            randomInt = GetRandomInt(0, measureRhythms.Count);
+            string measureRhythm3 = measureRhythms[randomInt];
+            randomInt = GetRandomInt(0, measureRhythms.Count);
+            string measureRhythm4 = measureRhythms[randomInt];
 
 
             string[] measureRhythmSplit1 = measureRhythm1.Split(',');
             int numberOfNotes1 = measureRhythmSplit1.Length;
-
             string[] measureRhythmSplit2 = measureRhythm2.Split(',');
             int numberOfNotes2 = measureRhythmSplit2.Length;
+            string[] measureRhythmSplit3 = measureRhythm3.Split(',');
+            int numberOfNotes3 = measureRhythmSplit3.Length;
+            string[] measureRhythmSplit4 = measureRhythm4.Split(',');
+            int numberOfNotes4 = measureRhythmSplit4.Length;
 
             ISampleProvider[] notes1 = new ISampleProvider[numberOfNotes1];
             ISampleProvider[] notes2 = new ISampleProvider[numberOfNotes2];
+            ISampleProvider[] notes3 = new ISampleProvider[numberOfNotes3];
+            ISampleProvider[] notes4 = new ISampleProvider[numberOfNotes4];
 
             Queue<int> noteNumberQueue;
             switch (resolutionType)
             {
                 case 1:
-                    noteNumberQueue = GetResolutionIntQueue(scaleNoteNumbers, 8, 1);  // 8 notes max.
+                    noteNumberQueue = GetResolutionIntQueue(scaleNoteNumbers, 16, 1);  // 16 notes max.
                     break;
 
                 case 2:
-                    noteNumberQueue = GetResolutionIntQueue(scaleNoteNumbers, 8, 2);  // 8 notes max.
+                    noteNumberQueue = GetResolutionIntQueue(scaleNoteNumbers, 16, 2);
                     break;
 
                 case 3:
-                    noteNumberQueue = GetResolutionIntQueue(scaleNoteNumbers, 8, 3);  // 8 notes max.
+                    noteNumberQueue = GetResolutionIntQueue(scaleNoteNumbers, 16, 3);
                     break;
 
                 default:
@@ -285,9 +294,13 @@ namespace EarTraining.Controllers
 
             int[] measureNoteNumbers1 = PopulateNoteNumbersFromQueue(numberOfNotes1, noteNumberQueue);
             int[] measureNoteNumbers2 = PopulateNoteNumbersFromQueue(numberOfNotes2, noteNumberQueue);
+            int[] measureNoteNumbers3 = PopulateNoteNumbersFromQueue(numberOfNotes3, noteNumberQueue);
+            int[] measureNoteNumbers4 = PopulateNoteNumbersFromQueue(numberOfNotes4, noteNumberQueue);
 
             CreateSamplesFromRhythmsAndNoteNames(quarterNoteDuration, halfNoteDuration, dottedHalfNoteDuration, wholeNoteDuration, measureRhythmSplit1, notes1, measureNoteNumbers1);
             CreateSamplesFromRhythmsAndNoteNames(quarterNoteDuration, halfNoteDuration, dottedHalfNoteDuration, wholeNoteDuration, measureRhythmSplit2, notes2, measureNoteNumbers2);
+            CreateSamplesFromRhythmsAndNoteNames(quarterNoteDuration, halfNoteDuration, dottedHalfNoteDuration, wholeNoteDuration, measureRhythmSplit3, notes3, measureNoteNumbers3);
+            CreateSamplesFromRhythmsAndNoteNames(quarterNoteDuration, halfNoteDuration, dottedHalfNoteDuration, wholeNoteDuration, measureRhythmSplit4, notes4, measureNoteNumbers4);
 
             ISampleProvider phrase =
                 wholeDoNote;
@@ -305,6 +318,17 @@ namespace EarTraining.Controllers
             {
                 phrase = phrase.FollowedBy(note2);
             }
+            if(numberOfMeasures == 4)
+            {
+                foreach (var note3 in notes3)
+                {
+                    phrase = phrase.FollowedBy(note3);
+                }
+                foreach (var note4 in notes4)
+                {
+                    phrase = phrase.FollowedBy(note4);
+                }
+            }
 
             // HACK: Use an empty note because without it, the audio gets cut short.
             ISampleProvider emptyNote = NAudioHelper.GetSampleProvider(0, 0, SignalGeneratorType.White, halfNoteDuration);
@@ -314,13 +338,15 @@ namespace EarTraining.Controllers
             MixingSampleProvider msp = new MixingSampleProvider(stwp.WaveFormat);
             msp.AddMixerInput(stwp);
 
-            ISampleProvider[] metronomeTicks = new ISampleProvider[16];
+            int totalTicks = 8 + (4 * numberOfMeasures);
+            ISampleProvider[] metronomeTicks = new ISampleProvider[totalTicks];
 
+            // The first two measures have zero gain, as this is the initial DO whole note and metronome ticks.
             for (int i = 0; i < 8; i++)
             {
                 metronomeTicks[i] = NAudioHelper.GetSampleProvider(0, 0, SignalGeneratorType.White, quarterNoteDuration);
             }
-            for (int i = 8; i < 16; i++)
+            for (int i = 8; i < totalTicks; i++)
             {
                 metronomeTicks[i] = NAudioHelper.GetSampleProviderFromFile(tickFile, quarterNoteDuration);
             }
@@ -352,10 +378,24 @@ namespace EarTraining.Controllers
             string[] noteNames2 = new string[numberOfNotes2];
             AdjustNoteNamesForKey(keySignature, measureNoteNumbers2, noteNames2);
 
+            string[] noteNames3 = new string[numberOfNotes3];
+            AdjustNoteNamesForKey(keySignature, measureNoteNumbers3, noteNames3);
+
+            string[] noteNames4 = new string[numberOfNotes4];
+            AdjustNoteNamesForKey(keySignature, measureNoteNumbers4, noteNames4);
+
             string script1 = GetEasyScoreScript("transcription1", noteNames1, measureRhythmSplit1, keySignature);
             dict.Add("theScript1", script1);
             string script2 = GetEasyScoreScript("transcription2", noteNames2, measureRhythmSplit2, keySignature);
             dict.Add("theScript2", script2);
+            if(numberOfMeasures == 4)
+            {
+                string script3 = GetEasyScoreScript("transcription3", noteNames3, measureRhythmSplit3, keySignature);
+                dict.Add("theScript3", script3);
+                string script4 = GetEasyScoreScript("transcription4", noteNames4, measureRhythmSplit4, keySignature);
+                dict.Add("theScript4", script4);
+
+            }
 
             #endregion Notation
 

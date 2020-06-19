@@ -57,6 +57,14 @@
                 <option value="100">100</option>
             </select>
         </fieldset>
+
+        <fieldset>
+            <label for="numberOfMeasures" class="font-weight-bold">Measures</label>
+            <select id="numberOfMeasures" name="numberOfMeasures" class="form-control changer">
+                <option value="2" selected="selected">2</option>
+                <option value="4">4</option>
+            </select>
+        </fieldset>
     </div>
 </div>
 <div class="row margin-top-5">
@@ -79,7 +87,9 @@
         <p>Hover over the below to reveal the transcription</p>
         <div class="spoiler rounded">
             <div id="transcription1"></div>
-            <div id="transcription2"></div>
+            <div id="transcription2" class="one-staff-system-margin"></div>
+            <div id="transcription3" class="one-staff-system-margin"></div>
+            <div id="transcription4" class="one-staff-system-margin"></div>
         </div>
     </div>
 </div>
@@ -104,6 +114,7 @@
             var resolutionType = $('#resolutionTypes').val();
             var keySignature = $('#keySignature').val();
             var bpm = $('#bpm').val();
+            var numberOfMeasures = $('#numberOfMeasures').val();
 
             var request = $.ajax({
                 url: rootPath + "L1C1/AudioAndDictation",
@@ -111,7 +122,8 @@
                 data: {
                     resolutionType: resolutionType,
                     keySignature: keySignature,
-                    bpm: bpm
+                    bpm: bpm,
+                    numberOfMeasures: numberOfMeasures
                 }
             });
 
@@ -119,6 +131,9 @@
                 $('#audMelody').attr('src', rootPath + 'Temp/' + data.src);
                 $("#transcription1").html("");
                 $("#transcription2").html("");
+                $("#transcription3").html("");
+                $("#transcription4").html("");
+
                 console.log("========== theScript1==========");
                 console.log(data.theScript1);
                 eval(data.theScript1);
@@ -127,6 +142,18 @@
                 console.log(data.theScript2);
                 eval(data.theScript2);
 
+                if (data.theScript3) {
+                    console.log("========== theScript3==========");
+                    console.log(data.theScript3);
+                    eval(data.theScript3);
+
+                    console.log("========== theScript4==========");
+                    console.log(data.theScript4);
+                    eval(data.theScript4);
+                }
+                else {
+                    $("#transcription4").html("<br>");
+                }
                 $('#spinner').fadeOut("slow");
             });
 
