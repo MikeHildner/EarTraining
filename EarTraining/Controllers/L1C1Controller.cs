@@ -247,16 +247,7 @@ namespace EarTraining.Controllers
                 ticks[i] = NAudioHelper.GetSampleProviderFromFile(tickFile, quarterNoteDuration);
             }
 
-            // Various rhythm possibilities for each measure.
-            List<string> measureRhythms = new List<string>();
-            measureRhythms.Add("1");
-            measureRhythms.Add("2,2");
-            measureRhythms.Add("4,2.");
-            measureRhythms.Add("2.,4");
-            measureRhythms.Add("4,4,4,4");
-            measureRhythms.Add("4,4,2");
-            measureRhythms.Add("2,4,4");
-            measureRhythms.Add("4,2,4");
+            List<string> measureRhythms = GetQuarterNoteRhythms();
 
             int randomInt = GetRandomInt(0, measureRhythms.Count);
             string measureRhythm1 = measureRhythms[randomInt];
@@ -356,39 +347,10 @@ namespace EarTraining.Controllers
             #region Notation
 
             string[] noteNames1 = new string[numberOfNotes1];
-            for (int i = 0; i < noteNames1.Length; i++)
-            {
-                noteNames1[i] = NAudioHelper.GetNoteNameFromNoteNumber(measureNoteNumbers1[i]);
-                if ((keySignature == "G" || keySignature == "A" || keySignature == "D" || keySignature == "E" || keySignature == "B") && noteNames1[i].Contains("b"))
-                {
-                    noteNames1[i] = noteNames1[i].FlatToNaturalForSharpKeys();
-                }
-                if ((keySignature == "F" || keySignature == "Bb" || keySignature == "Eb" || keySignature == "Ab" || keySignature == "Db") && noteNames1[i].Contains("b"))
-                {
-                    noteNames1[i] = noteNames1[i].FlatToNaturalForFlatKeys();
-                }
-                if (keySignature == "F#")
-                {
-                    noteNames1[i] = noteNames1[i].AdjustForFSharp();
-                }
-            }
+            AdjustNoteNamesForKey(keySignature, measureNoteNumbers1, noteNames1);
+
             string[] noteNames2 = new string[numberOfNotes2];
-            for (int i = 0; i < noteNames2.Length; i++)
-            {
-                noteNames2[i] = NAudioHelper.GetNoteNameFromNoteNumber(measureNoteNumbers2[i]);
-                if ((keySignature == "G" || keySignature == "A" || keySignature == "D" || keySignature == "E" || keySignature == "B") && noteNames2[i].Contains("b"))
-                {
-                    noteNames2[i] = noteNames2[i].FlatToNaturalForSharpKeys();
-                }
-                if ((keySignature == "F" || keySignature == "Bb" || keySignature == "Eb" || keySignature == "Ab" || keySignature == "Db") && noteNames2[i].Contains("b"))
-                {
-                    noteNames2[i] = noteNames2[i].FlatToNaturalForFlatKeys();
-                }
-                if (keySignature == "F#")
-                {
-                    noteNames2[i] = noteNames2[i].AdjustForFSharp();
-                }
-            }
+            AdjustNoteNamesForKey(keySignature, measureNoteNumbers2, noteNames2);
 
             string script1 = GetEasyScoreScript("transcription1", noteNames1, measureRhythmSplit1, keySignature);
             dict.Add("theScript1", script1);
@@ -399,6 +361,42 @@ namespace EarTraining.Controllers
 
             var json = Json(dict, JsonRequestBehavior.AllowGet);
             return json;
+        }
+
+        private static List<string> GetQuarterNoteRhythms()
+        {
+
+            // Various rhythm possibilities for each measure.
+            List<string> measureRhythms = new List<string>();
+            measureRhythms.Add("1");
+            measureRhythms.Add("2,2");
+            measureRhythms.Add("4,2.");
+            measureRhythms.Add("2.,4");
+            measureRhythms.Add("4,4,4,4");
+            measureRhythms.Add("4,4,2");
+            measureRhythms.Add("2,4,4");
+            measureRhythms.Add("4,2,4");
+            return measureRhythms;
+        }
+
+        private static void AdjustNoteNamesForKey(string keySignature, int[] measureNoteNumbers, string[] noteNames)
+        {
+            for (int i = 0; i < noteNames.Length; i++)
+            {
+                noteNames[i] = NAudioHelper.GetNoteNameFromNoteNumber(measureNoteNumbers[i]);
+                if ((keySignature == "G" || keySignature == "A" || keySignature == "D" || keySignature == "E" || keySignature == "B") && noteNames[i].Contains("b"))
+                {
+                    noteNames[i] = noteNames[i].FlatToNaturalForSharpKeys();
+                }
+                if ((keySignature == "F" || keySignature == "Bb" || keySignature == "Eb" || keySignature == "Ab" || keySignature == "Db") && noteNames[i].Contains("b"))
+                {
+                    noteNames[i] = noteNames[i].FlatToNaturalForFlatKeys();
+                }
+                if (keySignature == "F#")
+                {
+                    noteNames[i] = noteNames[i].AdjustForFSharp();
+                }
+            }
         }
 
         private static void CreateSamplesFromRhythmsAndNoteNames(TimeSpan quarterNoteDuration, TimeSpan halfNoteDuration, TimeSpan dottedHalfNoteDuration, TimeSpan wholeNoteDuration, string[] measureRhythmSplit1, ISampleProvider[] notes1, int[] measureNoteNumbers1)
