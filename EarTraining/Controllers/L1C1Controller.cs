@@ -233,11 +233,11 @@ namespace EarTraining.Controllers
             TimeSpan wholeNoteDuration = TimeSpan.FromMilliseconds(quarterNoteMillis * 4);
 
             // Setup the scale note numbers.
-            int[] scaleNoteNumbers = new int[] { 39, 41, 43, 44, 46, 48, 50, 51 };  // C Major.
+            int[] scaleNoteNumbers = new int[] { 38, 39, 41, 43, 44, 46, 48, 50, 51 };  // C Major, with a low TI.
             scaleNoteNumbers = TransposeScaleNoteNumbers(scaleNoteNumbers, keySignature);
 
             // The initial DO.
-            ISampleProvider wholeDoNote = NAudioHelper.GetSampleProvider(scaleNoteNumbers[0], wholeNoteDuration);
+            ISampleProvider wholeDoNote = NAudioHelper.GetSampleProvider(scaleNoteNumbers[1], wholeNoteDuration);
 
             // Four metronome ticks before the transcription part plays.
             ISampleProvider[] ticks = new ISampleProvider[4];
@@ -635,10 +635,11 @@ namespace EarTraining.Controllers
         private Queue<int> GetResolutionIntQueue(int[] scaleNoteNumbers, int numberOfNotes, int resolutionType)
         {
             List<Tuple<int, int>> resolutions = new List<Tuple<int, int>>();
-            resolutions.Add(new Tuple<int, int>(1, 0));
-            resolutions.Add(new Tuple<int, int>(3, 2));
-            resolutions.Add(new Tuple<int, int>(5, 4));
-            resolutions.Add(new Tuple<int, int>(6, 7));
+            resolutions.Add(new Tuple<int, int>(2, 1));  // RE DO.
+            resolutions.Add(new Tuple<int, int>(4, 3));  // FA MI.
+            resolutions.Add(new Tuple<int, int>(6, 5));  // LA SO.
+            resolutions.Add(new Tuple<int, int>(7, 8));  // High TI DO.
+            resolutions.Add(new Tuple<int, int>(0, 1));  // Low TI DO.
 
             var q = new Queue<int>();
             while (q.Count < numberOfNotes)
