@@ -384,17 +384,16 @@ namespace EarTraining.Controllers
             string[] noteNames4 = new string[numberOfNotes4];
             AdjustNoteNamesForKey(keySignature, measureNoteNumbers4, noteNames4);
 
-            string script1 = GetEasyScoreScript("transcription1", noteNames1, measureRhythmSplit1, keySignature);
+            string script1 = GetEasyScoreScript("transcription1", noteNames1, measureRhythmSplit1, keySignature, true);
             dict.Add("theScript1", script1);
-            string script2 = GetEasyScoreScript("transcription2", noteNames2, measureRhythmSplit2, keySignature);
+            string script2 = GetEasyScoreScript("transcription2", noteNames2, measureRhythmSplit2, keySignature, false);
             dict.Add("theScript2", script2);
             if(numberOfMeasures == 4)
             {
-                string script3 = GetEasyScoreScript("transcription3", noteNames3, measureRhythmSplit3, keySignature);
+                string script3 = GetEasyScoreScript("transcription3", noteNames3, measureRhythmSplit3, keySignature, false);
                 dict.Add("theScript3", script3);
-                string script4 = GetEasyScoreScript("transcription4", noteNames4, measureRhythmSplit4, keySignature);
+                string script4 = GetEasyScoreScript("transcription4", noteNames4, measureRhythmSplit4, keySignature, false);
                 dict.Add("theScript4", script4);
-
             }
 
             #endregion Notation
@@ -572,8 +571,14 @@ namespace EarTraining.Controllers
             return scaleNoteNumbers;
         }
 
-        private string GetEasyScoreScript(string elementId, string[] noteNames, string[] measureRhythmSplit, string keySignature)
+        private string GetEasyScoreScript(string elementId, string[] noteNames, string[] measureRhythmSplit, string keySignature, bool showTimeSignature)
         {
+            string timeSignature = string.Empty;
+            if (showTimeSignature)
+            {
+                timeSignature = ".addTimeSignature('4/4')";
+            }
+
             var sb = new StringBuilder();
             for (int i = 0; i < noteNames.Length; i++)
             {
@@ -597,7 +602,7 @@ namespace EarTraining.Controllers
                 voices: [
                     score.voice(score.notes('{easyScoreNotes}', {{ stem: 'up' }})),
                 ]
-            }}).addClef('treble').addTimeSignature('4/4').addKeySignature('{keySignature}');
+            }}).addClef('treble'){timeSignature}.addKeySignature('{keySignature}');
             system.addConnector('singleLeft');
             system.addConnector('singleRight');
 
