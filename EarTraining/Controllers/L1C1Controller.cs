@@ -253,10 +253,26 @@ namespace EarTraining.Controllers
             string measureRhythm1 = measureRhythms[randomInt];
             randomInt = GetRandomInt(0, measureRhythms.Count);
             string measureRhythm2 = measureRhythms[randomInt];
+            if(numberOfMeasures == 2)
+            {
+                while ((measureRhythm1.Split(',').Count() + measureRhythm2.Split(',').Count()) % 2 == 1)  // Ensure an even number of notes, so there's always a (reverse) resolution.
+                {
+                    randomInt = GetRandomInt(0, measureRhythms.Count);
+                    measureRhythm2 = measureRhythms[randomInt];
+                }
+            }
             randomInt = GetRandomInt(0, measureRhythms.Count);
             string measureRhythm3 = measureRhythms[randomInt];
             randomInt = GetRandomInt(0, measureRhythms.Count);
             string measureRhythm4 = measureRhythms[randomInt];
+            if (numberOfMeasures == 4)
+            {
+                while ((measureRhythm1.Split(',').Count() + measureRhythm2.Split(',').Count() + measureRhythm3.Split(',').Count() + measureRhythm4.Split(',').Count()) % 2 == 1)
+                {
+                    randomInt = GetRandomInt(0, measureRhythms.Count);
+                    measureRhythm4 = measureRhythms[randomInt];
+                }
+            }
 
 
             string[] measureRhythmSplit1 = measureRhythm1.Split(',');
