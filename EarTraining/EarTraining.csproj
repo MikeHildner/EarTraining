@@ -208,7 +208,6 @@
     <Compile Include="Controllers\PitchIdentificationController.cs" />
     <Compile Include="Controllers\SolfegController.cs" />
     <Compile Include="Controllers\ThemeController.cs" />
-    <Compile Include="Controllers\TranscriptionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -431,14 +430,13 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Theme\Index.cshtml" />
     <Content Include="Views\L1C1\DictationTranscription.cshtml" />
+    <Content Include="Views\L1C2\DictationTranscription.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="FFmpeg\" />
     <Folder Include="Models\" />
     <Folder Include="Samples\" />
-    <Folder Include="Temp\" />
-    <Folder Include="Views\Transcription\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
