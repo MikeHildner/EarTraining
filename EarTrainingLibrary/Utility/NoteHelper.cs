@@ -7,6 +7,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace EarTrainingLibrary.Utility
 {
@@ -230,6 +231,141 @@ namespace EarTrainingLibrary.Utility
             ";
 
             return script;
+        }
+
+        public static string GetEasyScoreScript2(string elementId, string[] noteNames, string[] measureRhythmSplit, string keySignature, bool showTimeSignature)
+        {
+            string timeSignature = string.Empty;
+            if (showTimeSignature)
+            {
+                timeSignature = "stave.addTimeSignature('4/4')";
+            }
+
+            var noteSb = new StringBuilder();
+            for (int i = 0; i < noteNames.Length; i++)
+            {
+                string noteName = noteNames[i];
+                string note = noteName.Substring(0, noteName.Length - 1);  // Pull the note out - e.g. Ab from Ab4.
+                string octave = noteName.Substring(noteName.Length -1, 1);  // Pull the octave out - e.g. 4 from Ab4.
+                string duration = measureRhythmSplit[i];
+                noteSb.Append($"{{ keys:['{note}/{octave}'], duration: '{duration}'}},");
+            }
+
+            string setupBeam1 = string.Empty;
+            string drawBeam1 = string.Empty;
+            if(false)
+            {
+                setupBeam1 = "var group1 = notes.slice(0, 2);var beam1 = new Vex.Flow.Beam(group1);";
+                drawBeam1 = "beam1.setContext(context).draw();";
+            }
+
+            var scriptSb = new StringBuilder();
+            scriptSb.Append(
+                $@"
+                VF = Vex.Flow;
+                var div = document.getElementById('{elementId}');
+                var renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
+                renderer.resize(300, 300);
+                var context = renderer.getContext();
+                var stave = new VF.Stave(0, 0, 300);
+                stave.setContext(context);
+                stave.addClef('treble');
+                stave.addKeySignature('{keySignature}');
+                {timeSignature};
+                stave.draw();
+                var note_data = [{noteSb}];
+                ");
+            scriptSb.Append(
+                $@"
+                function createNote(note_data) {{
+                  return new Vex.Flow.StaveNote(note_data);
+                }}
+
+                var formatter = new VF.Formatter();
+                var notes = note_data.map(createNote);
+                var voice = new Vex.Flow.Voice(Vex.Flow.TIME4_4);
+
+                voice.addTickables(notes);
+                formatter.joinVoices([voice]).formatToStave([voice], stave);
+                //{setupBeam1}
+                voice.draw(context, stave);
+                //{drawBeam1}
+                "
+                );
+
+            return scriptSb.ToString().Replace(Environment.NewLine, string.Empty);
+        }
+
+        public static string GetMusicXmlScript(string elementId, string[] noteNames, string[] measureRhythmSplit, string keySignature, bool showTimeSignature)
+        {
+            int fifths = GetFifthsFromKey(keySignature);
+            string timeSignature = showTimeSignature ? "<time><beats>4</beats><beat-type>4</beat-type></time>" : string.Empty;
+
+            string xml = $@"
+                <?xml version=""1.0"" encoding=""UTF-8"" standalone=""no""?>
+                <!DOCTYPE score-partwise PUBLIC
+                    ""-//Recordare//DTD MusicXML 3.1 Partwise//EN""
+                    ""http://www.musicxml.org/dtds/partwise.dtd"">
+                <score-partwise version=""3.1"">
+                  <work>
+                    <work-title> </work-title>
+                  </work>
+                  <part-list>
+                    <score-part id=""P1"">
+                      <part-name>Music</part-name>
+                    </score-part>
+                  </part-list>
+                  <part id=""P1"">
+                    <measure number=""1"">
+                      <attributes>
+                        <divisions>1</divisions>
+                        <key>
+                          <fifths>{fifths}</fifths>
+                        </key>
+                        {timeSignature}
+                        <clef>
+                          <sign>G</sign>
+                          <line>2</line>
+                        </clef>
+                      </attributes>
+                      <note>
+                        <pitch>
+                          <step>D</step>
+                          <octave>4</octave>
+                        </pitch>
+                        <duration>4</duration>
+                        <type>whole</type>
+                      </note>
+                    </measure>
+                  </part>
+                </score-partwise>
+";
+
+            xml = xml.Replace(Environment.NewLine, string.Empty);
+            var script = $@"
+            var osmd = new opensheetmusicdisplay.OpenSheetMusicDisplay({elementId});
+            var loadPromise = osmd.load('{xml}');
+            loadPromise.then(function() {{
+                osmd.render();
+            }});
+            ";
+
+            return script;
+        }
+
+        private static int GetFifthsFromKey(string keySignature)
+        {
+            switch (keySignature)
+            {
+                case "C":
+                    return 0;
+
+                case "G":
+                    return 1;
+
+                default:
+                    throw new NotSupportedException($"keySignature '{keySignature}' is not supported.");
+            }
         }
     }
 }
