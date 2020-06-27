@@ -194,6 +194,7 @@
     <Compile Include="Controllers\DOController.cs" />
     <Compile Include="Controllers\DonateController.cs" />
     <Compile Include="Controllers\ErrorHandlerController.cs" />
+    <Compile Include="Controllers\ExperimentalController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\L1C1Controller.cs" />
     <Compile Include="Controllers\L1C2Controller.cs" />
@@ -258,6 +259,7 @@
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
     <Content Include="libman.json" />
+    <Content Include="package.json" />
     <None Include="Properties\PublishProfiles\Ear Training Beta.pubxml" />
     <None Include="Properties\PublishProfiles\Ear Training Prod.pubxml" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -290,6 +292,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\opensheetmusicdisplay.min.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
@@ -431,6 +434,8 @@
     <Content Include="Views\Theme\Index.cshtml" />
     <Content Include="Views\L1C1\DictationTranscription.cshtml" />
     <Content Include="Views\L1C2\DictationTranscription.cshtml" />
+    <Content Include="Scripts\opensheetmusicdisplay.min.js.map" />
+    <Content Include="Views\Experimental\Osmd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

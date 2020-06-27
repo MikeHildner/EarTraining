@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "Osmd";
+}
+
+<h2>Osmd</h2>
+
+<div id="div-container">
+
+</div>
+
+@section scripts
+{
+    <script src="~/Scripts/vexflow-min.js"></script>
+    <script src="~/Scripts/opensheetmusicdisplay.min.js"></script>
+
+    <script>
+        $(function () {
+            osmdTest();
+        });
+
+        function osmdTest() {
+            $('#spinner').show();
+            
+            var request = $.ajax({
+                url: rootPath + "Experimental/OsmdTest",
+                method: "GET",
+                //data: {
+                //    resolutionType: resolutionType,
+                //    keySignature: keySignature,
+                //    bpm: bpm,
+                //    numberOfMeasures: numberOfMeasures
+                //}
+            });
+
+            request.done(function (data) {
+                console.log("========== theScript1==========");
+                console.log(data.theScript1);
+                eval(data.theScript1);
+
+                $('#spinner').fadeOut("slow");
+            });
+
+            request.fail(function (jqXHR, textStatus) {
+                consoleAndToastr('There was an error processing the request.\n\n' + textStatus + ': ' + jqXHR.status + ' - ' + jqXHR.statusText + '.', null, 'error');
+            });
+        }
+    </script>
+    
+}
