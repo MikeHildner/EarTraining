@@ -233,7 +233,7 @@ namespace EarTrainingLibrary.Utility
             return script;
         }
 
-        public static string GetEasyScoreScript2(string elementId, string[] noteNames, string[] measureRhythmSplit, string keySignature, bool showTimeSignature)
+        public static string GetEasyScoreScript2XXX(string elementId, string[] noteNames, string[] measureRhythms, string keySignature, bool showTimeSignature)
         {
             string timeSignature = string.Empty;
             if (showTimeSignature)
@@ -246,16 +246,23 @@ namespace EarTrainingLibrary.Utility
             {
                 string noteName = noteNames[i];
                 string note = noteName.Substring(0, noteName.Length - 1);  // Pull the note out - e.g. Ab from Ab4.
-                string octave = noteName.Substring(noteName.Length -1, 1);  // Pull the octave out - e.g. 4 from Ab4.
-                string duration = measureRhythmSplit[i];
+                string octave = noteName.Substring(noteName.Length - 1, 1);  // Pull the octave out - e.g. 4 from Ab4.
+                string duration = measureRhythms[i];
+                duration = duration.Replace("2", "h");  // EasyScore uses 2, VexFlow uses 'h' for half note (actually VexFlow seems to use both 2 and h, but 2. doesn't work, hd does for dotted half notes.
+                duration = duration.Replace(".", "d");  // EasyScore uses a dot, VexFlow uses 'd' for dotted.
                 noteSb.Append($"{{ keys:['{note}/{octave}'], duration: '{duration}'}},");
             }
 
             string setupBeam1 = string.Empty;
             string drawBeam1 = string.Empty;
-            if(false)
+            if (measureRhythms[0] == "8")
             {
                 setupBeam1 = "var group1 = notes.slice(0, 2);var beam1 = new Vex.Flow.Beam(group1);";
+                drawBeam1 = "beam1.setContext(context).draw();";
+            }
+            if (measureRhythms.Length > 3 && measureRhythms[2] == "8")
+            {
+                setupBeam1 = "var group1 = notes.slice(2, 2);var beam1 = new Vex.Flow.Beam(group1);";
                 drawBeam1 = "beam1.setContext(context).draw();";
             }
 
@@ -287,15 +294,65 @@ namespace EarTrainingLibrary.Utility
 
                 voice.addTickables(notes);
                 formatter.joinVoices([voice]).formatToStave([voice], stave);
-                //{setupBeam1}
+                {setupBeam1}
                 voice.draw(context, stave);
-                //{drawBeam1}
+                {drawBeam1}
                 "
                 );
 
             return scriptSb.ToString().Replace(Environment.NewLine, string.Empty);
         }
 
+        public static string GetEasyScoreScript3(string elementId, string[] noteNames, string[] measureRhythms, string keySignature, bool showTimeSignature)
+        {
+            string timeSignature = string.Empty;
+            if (showTimeSignature)
+            {
+                timeSignature = ".addTimeSignature('4/4')";
+            }
+
+            var sb = new StringBuilder();
+            for (int i = 0; i < noteNames.Length; i++)
+            {
+                // Beam if a pair of eigth notes.
+                if (measureRhythms[i] == "8" && measureRhythms[i + 1] == "8")
+                {
+                    sb.Append($".concat(score.beam(score.notes('{noteNames[i]}/{measureRhythms[i]},{noteNames[i + 1]}/{measureRhythms[i + 1]}')))");
+                    i++;
+                }
+                else
+                {
+                    sb.Append($".concat(score.notes('{noteNames[i]}/{measureRhythms[i]},'))");
+                }
+            }
+
+            var easyScoreNotes = sb.ToString();
+            easyScoreNotes = easyScoreNotes.TrimEnd(',');
+
+            string script = $@"
+            const vf = new Vex.Flow.Factory({{
+                renderer: {{ elementId: '{elementId}' }}
+            }});
+
+            const score = vf.EasyScore();
+            var system = vf.System({{width: 320}});
+
+            system.addStave({{
+                voices: [
+                    score.voice(
+                      score.notes('')
+                      {easyScoreNotes}
+                      ),
+                ]
+            }}).addClef('treble'){timeSignature}.addKeySignature('{keySignature}');
+            system.addConnector('singleLeft');
+            system.addConnector('singleRight');
+
+            vf.draw();
+            ";
+
+            return script;
+        }
         public static string GetMusicXmlScript(string elementId, string[] noteNames, string[] measureRhythmSplit, string keySignature, bool showTimeSignature)
         {
             int fifths = GetFifthsFromKey(keySignature);

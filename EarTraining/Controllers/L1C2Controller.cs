@@ -792,17 +792,17 @@ namespace EarTraining.Controllers
             string[] noteNames4 = new string[numberOfNotes4];
             NoteHelper.AdjustNoteNamesForKey(keySignature, measureNoteNumbers4, noteNames4);
 
-            string script1 = NoteHelper.GetEasyScoreScript2("transcription1", noteNames1, measureRhythmSplit1, keySignature, true);
+            string script1 = NoteHelper.GetEasyScoreScript3("transcription1", noteNames1, measureRhythmSplit1, keySignature, true);
             //string script1 = NoteHelper.GetMusicXmlScript("transcription1", noteNames1, measureRhythmSplit1, keySignature, false);
 
             dict.Add("theScript1", script1);
-            string script2 = NoteHelper.GetEasyScoreScript2("transcription2", noteNames2, measureRhythmSplit2, keySignature, false);
+            string script2 = NoteHelper.GetEasyScoreScript3("transcription2", noteNames2, measureRhythmSplit2, keySignature, false);
             dict.Add("theScript2", script2);
             if (numberOfMeasures == 4)
             {
-                string script3 = NoteHelper.GetEasyScoreScript2("transcription3", noteNames3, measureRhythmSplit3, keySignature, false);
+                string script3 = NoteHelper.GetEasyScoreScript3("transcription3", noteNames3, measureRhythmSplit3, keySignature, false);
                 dict.Add("theScript3", script3);
-                string script4 = NoteHelper.GetEasyScoreScript2("transcription4", noteNames4, measureRhythmSplit4, keySignature, false);
+                string script4 = NoteHelper.GetEasyScoreScript3("transcription4", noteNames4, measureRhythmSplit4, keySignature, false);
                 dict.Add("theScript4", script4);
             }
 
