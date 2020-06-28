@@ -233,76 +233,6 @@ namespace EarTrainingLibrary.Utility
             return script;
         }
 
-        public static string GetEasyScoreScript2XXX(string elementId, string[] noteNames, string[] measureRhythms, string keySignature, bool showTimeSignature)
-        {
-            string timeSignature = string.Empty;
-            if (showTimeSignature)
-            {
-                timeSignature = "stave.addTimeSignature('4/4')";
-            }
-
-            var noteSb = new StringBuilder();
-            for (int i = 0; i < noteNames.Length; i++)
-            {
-                string noteName = noteNames[i];
-                string note = noteName.Substring(0, noteName.Length - 1);  // Pull the note out - e.g. Ab from Ab4.
-                string octave = noteName.Substring(noteName.Length - 1, 1);  // Pull the octave out - e.g. 4 from Ab4.
-                string duration = measureRhythms[i];
-                duration = duration.Replace("2", "h");  // EasyScore uses 2, VexFlow uses 'h' for half note (actually VexFlow seems to use both 2 and h, but 2. doesn't work, hd does for dotted half notes.
-                duration = duration.Replace(".", "d");  // EasyScore uses a dot, VexFlow uses 'd' for dotted.
-                noteSb.Append($"{{ keys:['{note}/{octave}'], duration: '{duration}'}},");
-            }
-
-            string setupBeam1 = string.Empty;
-            string drawBeam1 = string.Empty;
-            if (measureRhythms[0] == "8")
-            {
-                setupBeam1 = "var group1 = notes.slice(0, 2);var beam1 = new Vex.Flow.Beam(group1);";
-                drawBeam1 = "beam1.setContext(context).draw();";
-            }
-            if (measureRhythms.Length > 3 && measureRhythms[2] == "8")
-            {
-                setupBeam1 = "var group1 = notes.slice(2, 2);var beam1 = new Vex.Flow.Beam(group1);";
-                drawBeam1 = "beam1.setContext(context).draw();";
-            }
-
-            var scriptSb = new StringBuilder();
-            scriptSb.Append(
-                $@"
-                VF = Vex.Flow;
-                var div = document.getElementById('{elementId}');
-                var renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
-                renderer.resize(300, 300);
-                var context = renderer.getContext();
-                var stave = new VF.Stave(0, 0, 300);
-                stave.setContext(context);
-                stave.addClef('treble');
-                stave.addKeySignature('{keySignature}');
-                {timeSignature};
-                stave.draw();
-                var note_data = [{noteSb}];
-                ");
-            scriptSb.Append(
-                $@"
-                function createNote(note_data) {{
-                  return new Vex.Flow.StaveNote(note_data);
-                }}
-
-                var formatter = new VF.Formatter();
-                var notes = note_data.map(createNote);
-                var voice = new Vex.Flow.Voice(Vex.Flow.TIME4_4);
-
-                voice.addTickables(notes);
-                formatter.joinVoices([voice]).formatToStave([voice], stave);
-                {setupBeam1}
-                voice.draw(context, stave);
-                {drawBeam1}
-                "
-                );
-
-            return scriptSb.ToString().Replace(Environment.NewLine, string.Empty);
-        }
-
         public static string GetEasyScoreScript3(string elementId, string[] noteNames, string[] measureRhythms, string keySignature, bool showTimeSignature)
         {
             string timeSignature = string.Empty;
@@ -317,7 +247,7 @@ namespace EarTrainingLibrary.Utility
                 // Beam if a pair of eigth notes.
                 if (measureRhythms[i] == "8" && measureRhythms[i + 1] == "8")
                 {
-                    sb.Append($".concat(score.beam(score.notes('{noteNames[i]}/{measureRhythms[i]},{noteNames[i + 1]}/{measureRhythms[i + 1]}')))");
+                    sb.Append($".concat(score.beam(score.notes('{noteNames[i]}/{measureRhythms[i]},{noteNames[i + 1]}/{measureRhythms[i + 1]}'), {{ autoStem: true }}))");
                     i++;
                 }
                 else

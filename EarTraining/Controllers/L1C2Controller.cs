@@ -344,7 +344,7 @@ namespace EarTraining.Controllers
                     note1 = NAudioHelper.GetSampleProvider(doNoteNumber, halfNoteDuration);
                     note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor3rd, halfNoteDuration);
                     break;
-                    
+
                 case L1C2MelodicDrillType.FaLa3:
                     note1 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpPerfect4th, halfNoteDuration);
                     note2 = NAudioHelper.GetSampleProvider(doNoteNumber + Interval.UpMajor6th, halfNoteDuration);
@@ -645,9 +645,12 @@ namespace EarTraining.Controllers
             string measureRhythm1 = measureRhythms[randomInt];
             randomInt = NoteHelper.GetRandomInt(0, measureRhythms.Count);
             string measureRhythm2 = measureRhythms[randomInt];
+
+            // TODO: If needed, check for even number of notes after adjusting measures 3 and 4 for at least one pair of 8th notes.
+            // Ensure an even number of notes, so there's always a (reverse) resolution.
             if (numberOfMeasures == 2)
             {
-                while ((measureRhythm1.Split(',').Count() + measureRhythm2.Split(',').Count()) % 2 == 1)  // Ensure an even number of notes, so there's always a (reverse) resolution.
+                while ((measureRhythm1.Split(',').Count() + measureRhythm2.Split(',').Count()) % 2 == 1)
                 {
                     randomInt = NoteHelper.GetRandomInt(0, measureRhythms.Count);
                     measureRhythm2 = measureRhythms[randomInt];
@@ -666,6 +669,25 @@ namespace EarTraining.Controllers
                 }
             }
 
+            // Ensure that every two measures has exactly one pair of eigth notes.
+            // Always take care of the first two measures, regardless of the number of measures.
+            while (measureRhythm1.Split(',').Where(w => w == "8").Count() + measureRhythm2.Split(',').Where(w => w == "8").Count() != 2)
+            {
+                randomInt = NoteHelper.GetRandomInt(0, measureRhythms.Count);
+                measureRhythm1 = measureRhythms[randomInt];
+                randomInt = NoteHelper.GetRandomInt(0, measureRhythms.Count);
+                measureRhythm2 = measureRhythms[randomInt];
+            }
+            if (numberOfMeasures == 4)
+            {
+                while (measureRhythm3.Split(',').Where(w => w == "8").Count() + measureRhythm4.Split(',').Where(w => w == "8").Count() != 2)
+                {
+                    randomInt = NoteHelper.GetRandomInt(0, measureRhythms.Count);
+                    measureRhythm3 = measureRhythms[randomInt];
+                    randomInt = NoteHelper.GetRandomInt(0, measureRhythms.Count);
+                    measureRhythm4 = measureRhythms[randomInt];
+                }
+            }
 
             string[] measureRhythmSplit1 = measureRhythm1.Split(',');
             int numberOfNotes1 = measureRhythmSplit1.Length;

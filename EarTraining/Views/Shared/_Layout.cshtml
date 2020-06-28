@@ -166,7 +166,7 @@
                             Experimental
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownExperimental">
-                            @Html.ActionLink("L2 Major Triad Progressions", "MajorTriadProgressions", "L2", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;L2 Major Triad Progressions"), "MajorTriadProgressions", "L2", null, new { @class = "dropdown-item" })
                             <div class="dropdown-divider"></div>
                             @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Dictation / Transcription"), "DictationTranscription", "L1C2", null, new { @class = "dropdown-item" })
                             @*<div class="dropdown-divider"></div>
