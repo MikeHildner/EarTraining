@@ -24,13 +24,11 @@ textarea {
     max-width: 280px;
 }
 
-/*.spoiler {
-    color: #D9EDF7;
-    background-color: #D9EDF7;
-    padding-left: 5px;
+.spoiler {
     margin-bottom: 5px;
 }
 
+/*
 .spoiler:hover {
     color: #428BCA;
     background-color: #D9EDF7;
@@ -154,7 +152,7 @@ audio {
 }
 
 .card {
-    margin: 0px;
+    margin-bottom: 5px;
 }
 
 .z-index-back {
@@ -167,4 +165,13 @@ audio {
 
 .one-staff-system-margin{
     margin-top: -100px;
+}
+
+.container{
+    max-width: 1600px;
+}
+
+.row{
+    margin-right: 0px;
+    margin-left: 0px;
 }
