@@ -609,7 +609,7 @@ namespace EarTraining.Controllers
             return wavStream;
         }
 
-        public ActionResult AudioAndDictation(int ascentionType, string keySignature, double bpm, int numberOfMeasures)
+        public ActionResult AudioAndDictation(int ascensionType, string keySignature, double bpm, int numberOfMeasures)
         {
             // We'll add stuff to the Dictionary and return as JSON.
             var dict = new Dictionary<string, string>();
@@ -704,7 +704,7 @@ namespace EarTraining.Controllers
             ISampleProvider[] notes4 = new ISampleProvider[numberOfNotes4];
 
             Queue<int> noteNumberQueue;
-            switch (ascentionType)
+            switch (ascensionType)
             {
                 case 1:
                     noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, 32, 1);  // 32 notes max.
@@ -719,7 +719,7 @@ namespace EarTraining.Controllers
                     break;
 
                 default:
-                    throw new NotSupportedException($"AscentionType '{ascentionType}' is not supported.");
+                    throw new NotSupportedException($"AscensionType '{ascensionType}' is not supported.");
             }
 
             int[] measureNoteNumbers1 = NoteHelper.PopulateNoteNumbersFromQueue(numberOfNotes1, noteNumberQueue);
@@ -855,7 +855,7 @@ namespace EarTraining.Controllers
             return measureRhythms;
         }
 
-        private Queue<int> GetIntervalIntQueue(int[] scaleNoteNumbers, int numberOfNotes, int ascentionType)
+        private Queue<int> GetIntervalIntQueue(int[] scaleNoteNumbers, int numberOfNotes, int ascensionType)
         {
             List<Tuple<int, int>> resolutions = new List<Tuple<int, int>>();
             resolutions.Add(new Tuple<int, int>(1, 3));  // DO MI Maj. 3rd.
@@ -871,7 +871,7 @@ namespace EarTraining.Controllers
                 int randomInt = NoteHelper.GetRandomInt(0, resolutions.Count);
                 Tuple<int, int> t = resolutions[randomInt];
 
-                switch (ascentionType)
+                switch (ascensionType)
                 {
                     case 1:
                         q.Enqueue(scaleNoteNumbers[t.Item1]);
@@ -897,7 +897,7 @@ namespace EarTraining.Controllers
                         }
                         break;
                     default:
-                        throw new NotSupportedException($"Ascention type '{ascentionType}' is not supported.");
+                        throw new NotSupportedException($"Ascension type '{ascensionType}' is not supported.");
                 }
             }
 

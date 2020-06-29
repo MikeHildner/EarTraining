@@ -16,8 +16,8 @@
     <div class="col-md-6 card pad-bottom-3">
         <h4>Settings</h4>
         <fieldset>
-            <label for="ascentionTypes" class="font-weight-bold">Ascention Types</label>
-            <select id="ascentionTypes" name="ascentionTypes" class="form-control changer">
+            <label for="ascensionTypes" class="font-weight-bold">Ascension Types</label>
+            <select id="ascensionTypes" name="ascensionTypes" class="form-control changer">
                 <option value="1" selected="selected">Ascending</option>
                 <option value="2">Descending</option>
                 <option value="3">Both</option>
@@ -112,7 +112,7 @@
         function newDictation() {
             $('#spinner').show();
 
-            var ascentionType = $('#ascentionTypes').val();
+            var ascensionType = $('#ascensionTypes').val();
             var keySignature = $('#keySignature').val();
             var bpm = $('#bpm').val();
             var numberOfMeasures = $('#numberOfMeasures').val();
@@ -121,7 +121,7 @@
                 url: rootPath + "L1C2/AudioAndDictation",
                 method: "GET",
                 data: {
-                    ascentionType: ascentionType,
+                    ascensionType: ascensionType,
                     keySignature: keySignature,
                     bpm: bpm,
                     numberOfMeasures: numberOfMeasures
