@@ -432,10 +432,6 @@ namespace EarTraining.Controllers
             return measureRhythms;
         }
 
-        
-
-        
-
         private Queue<int> GetRandomIntQueue(int[] scaleNoteNumbers, int numberOfNotes)
         {
             var q = new Queue<int>();

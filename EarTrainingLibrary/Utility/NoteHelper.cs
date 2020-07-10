@@ -112,7 +112,7 @@ namespace EarTrainingLibrary.Utility
             return scaleNoteNumbers;
         }
 
-        public static int GetRandomInt(int min, int max)
+        public static int GetRandomInt(int inclusiveLowerBound, int exclusiveUpperBound)
         {
             using (var rng = new RNGCryptoServiceProvider())
             {
@@ -120,7 +120,7 @@ namespace EarTrainingLibrary.Utility
 
                 rng.GetBytes(buffer);
                 int result = BitConverter.ToInt32(buffer, 0);
-                int index = new Random(result).Next(min, max);
+                int index = new Random(result).Next(inclusiveLowerBound, exclusiveUpperBound);
                 return index;
             }
         }

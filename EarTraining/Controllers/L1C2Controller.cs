@@ -738,27 +738,30 @@ namespace EarTraining.Controllers
             ISampleProvider[] notes3 = new ISampleProvider[numberOfNotes3];
             ISampleProvider[] notes4 = new ISampleProvider[numberOfNotes4];
 
+            int first2MeasuresNumberOfNotes = numberOfNotes1 + numberOfNotes2;
+            int second2MeasuresNumberOfNotes = numberOfNotes3 + numberOfNotes4;
+
             Queue<int> noteNumberQueue = new Queue<int>();
             switch (ascensionType)
             {
                 case 1:
                     while (!noteNumberQueue.AllStepsWithinRange(12))
                     {
-                        noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, 32, 1);  // 32 notes max.
+                        noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, 1);
                     }
                     break;
 
                 case 2:
                     while (!noteNumberQueue.AllStepsWithinRange(12))
                     {
-                        noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, 32, 2);
+                        noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, 2);
                     }
                     break;
 
                 case 3:
                     while (!noteNumberQueue.AllStepsWithinRange(12))
                     {
-                        noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, 32, 3);
+                        noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, 3);
                     }
                     break;
 
@@ -902,21 +905,35 @@ namespace EarTraining.Controllers
             return measureRhythms;
         }
 
-        private Queue<int> GetIntervalIntQueue(int[] scaleNoteNumbers, int numberOfNotes, int ascensionType)
+        private Queue<int> GetIntervalIntQueue(int[] scaleNoteNumbers, int first2MeasuresNumberOfNotes, int second2MeasuresNumberOfNotes, int ascensionType)
         {
-            List<Tuple<int, int>> resolutions = new List<Tuple<int, int>>();
-            resolutions.Add(new Tuple<int, int>(1, 3));  // DO MI Maj. 3rd.
-            resolutions.Add(new Tuple<int, int>(4, 6));  // FA LA Maj. 3rd.
-            resolutions.Add(new Tuple<int, int>(5, 7));  // SO TI Maj. 3rd.
-            resolutions.Add(new Tuple<int, int>(3, 8));  // MI DO Min. 6th.
-            resolutions.Add(new Tuple<int, int>(6, 11));  // LA FA Min. 6th.
-            resolutions.Add(new Tuple<int, int>(7, 12));  // TI SO Min. 6th.
+            int numberOfNotes = first2MeasuresNumberOfNotes + second2MeasuresNumberOfNotes;
+            bool first2MeasuresHasC2Interval = false;
+            bool first2MeasuresHasC1Resolution = false;
+            bool second2MeasuresHasC2Interval = false;
+            bool second2MeasuresHasC1Resolution = false;
+
+            List<Tuple<int, int>> intervals = new List<Tuple<int, int>>();
+            intervals.Add(new Tuple<int, int>(1, 3));  // DO MI Maj. 3rd.
+            intervals.Add(new Tuple<int, int>(4, 6));  // FA LA Maj. 3rd.
+            intervals.Add(new Tuple<int, int>(5, 7));  // SO TI Maj. 3rd.
+            intervals.Add(new Tuple<int, int>(3, 8));  // MI DO Min. 6th.
+            intervals.Add(new Tuple<int, int>(6, 11));  // LA FA Min. 6th.
+            intervals.Add(new Tuple<int, int>(7, 12));  // TI SO Min. 6th.
+
+            int c1ResolutionsStartIndex = 6;
+            // L1C1 resolutions.
+            intervals.Add(new Tuple<int, int>(2, 1));  // RE DO.
+            intervals.Add(new Tuple<int, int>(4, 3));  // FA MI.
+            intervals.Add(new Tuple<int, int>(6, 5));  // LA SO.
+            intervals.Add(new Tuple<int, int>(7, 8));  // High TI DO.
+            intervals.Add(new Tuple<int, int>(0, 1));  // Low TI DO.
 
             var q = new Queue<int>();
             while (q.Count < numberOfNotes)
             {
-                int randomInt = NoteHelper.GetRandomInt(0, resolutions.Count);
-                Tuple<int, int> t = resolutions[randomInt];
+                int randomInt = NoteHelper.GetRandomInt(0, intervals.Count);
+                Tuple<int, int> t = intervals[randomInt];
 
                 switch (ascensionType)
                 {
@@ -946,6 +963,35 @@ namespace EarTraining.Controllers
                     default:
                         throw new NotSupportedException($"Ascension type '{ascensionType}' is not supported.");
                 }
+
+                // If we're in the first two measures, and this interval is a chapter 2 interval.
+                if (q.Count <= first2MeasuresNumberOfNotes && randomInt < c1ResolutionsStartIndex)
+                {
+                    first2MeasuresHasC2Interval = true;
+                }
+                // If we're in the first two measures, and this interval is a chapter 1 resolution.
+                if (q.Count <= first2MeasuresNumberOfNotes && randomInt >= c1ResolutionsStartIndex)
+                {
+                    first2MeasuresHasC1Resolution = true;
+                }
+
+                // If we're in the second two measures, and this interval is a chapter 2 interval.
+                if (q.Count > first2MeasuresNumberOfNotes && randomInt < c1ResolutionsStartIndex)
+                {
+                    second2MeasuresHasC2Interval = true;
+                }
+                // If we're in the second two measures, and this interval is a chapter 1 resolution.
+                if (q.Count > first2MeasuresNumberOfNotes && randomInt >= c1ResolutionsStartIndex)
+                {
+                    second2MeasuresHasC1Resolution = true;
+                }
+
+            }
+
+            // If we don't have at least one C1 resolution and at least one C2 interval, keep going. Same thing for second two measures.
+            if (!(first2MeasuresHasC1Resolution && first2MeasuresHasC2Interval && second2MeasuresHasC1Resolution && second2MeasuresHasC2Interval))
+            {
+                return GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, ascensionType);
             }
 
             return q;
