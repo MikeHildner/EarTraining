@@ -65,6 +65,14 @@
                 <option value="4">4</option>
             </select>
         </fieldset>
+
+        <fieldset>
+            <label for="smallestRhythmicUnit" class="font-weight-bold">Smallest Rhythmic Unit</label>
+            <select id="smallestRhythmicUnit" name="numberOfMeasures" class="form-control changer">
+                <option value="Eigth" selected="selected">Eigth Note</option>
+                <option value="Quarter">Quarter Note</option>
+            </select>
+        </fieldset>
     </div>
 </div>
 <div class="row margin-top-5">
@@ -116,6 +124,7 @@
             var keySignature = $('#keySignature').val();
             var bpm = $('#bpm').val();
             var numberOfMeasures = $('#numberOfMeasures').val();
+            var smallestRhythmicUnit = $('#smallestRhythmicUnit').val();
 
             var request = $.ajax({
                 url: rootPath + "L1C2/AudioAndDictation",
@@ -124,7 +133,8 @@
                     ascensionType: ascensionType,
                     keySignature: keySignature,
                     bpm: bpm,
-                    numberOfMeasures: numberOfMeasures
+                    numberOfMeasures: numberOfMeasures,
+                    smallestRhythmicUnit: smallestRhythmicUnit
                 }
             });
 

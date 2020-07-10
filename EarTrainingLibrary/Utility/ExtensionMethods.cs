@@ -261,5 +261,39 @@ namespace EarTrainingLibrary.Utility
 
             throw new NotSupportedException($"Converting '{noteNameWithOctave}' AdjustForFSharp is not supported.");
         }
+
+        /// <summary>
+        /// Ensures successive notes fall within the defined range. We don't want, for example, a major 9th interval as that's too wide.
+        /// </summary>
+        /// <param name="queue"></param>
+        /// <param name="inclusiveRange"></param>
+        /// <returns></returns>
+        public static bool AllStepsWithinRange(this Queue<int> queue, int inclusiveRange)
+        {
+            if(queue.Count == 0) { return false; }
+
+            bool everythingWithinRange = true;
+
+            for (int i = 0; i < queue.Count; i++)
+            {
+                if(i + 1 == queue.Count)
+                {
+                    // We're at the last note, so we're done.
+                    break;
+                }
+
+                int thisValue = queue.ElementAt(i);
+                int nextValue = queue.ElementAt(i + 1);
+                int absValue = Math.Abs(thisValue - nextValue);
+
+                if(absValue > inclusiveRange)
+                {
+                    everythingWithinRange = false;
+                    break;
+                }
+            }
+
+            return everythingWithinRange;
+        }
     }
 }

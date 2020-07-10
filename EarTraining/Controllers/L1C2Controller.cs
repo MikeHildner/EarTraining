@@ -609,8 +609,10 @@ namespace EarTraining.Controllers
             return wavStream;
         }
 
-        public ActionResult AudioAndDictation(int ascensionType, string keySignature, double bpm, int numberOfMeasures)
+        public ActionResult AudioAndDictation(int ascensionType, string keySignature, double bpm, int numberOfMeasures, string smallestRhythmicUnit)
         {
+            bool includeEigthNoteRhythms = smallestRhythmicUnit.ToUpper() == "EIGTH";
+
             // We'll add stuff to the Dictionary and return as JSON.
             var dict = new Dictionary<string, string>();
 
@@ -639,74 +641,88 @@ namespace EarTraining.Controllers
                 ticks[i] = NAudioHelper.GetSampleProviderFromFile(tickFile, quarterNoteDuration);
             }
 
-            List<string> measureRhythms = GetEigthNoteRhythms();
+            List<string> measureRhythms = GetNoteRhythms(includeEigthNoteRhythms);
 
-            int randomInt = NoteHelper.GetRandomInt(0, measureRhythms.Count);
-            string measureRhythm1 = measureRhythms[randomInt];
-            randomInt = NoteHelper.GetRandomInt(0, measureRhythms.Count);
-            string measureRhythm2 = measureRhythms[randomInt];
+            int randomInt;
+            string measureRhythm1;
+            string measureRhythm2;
 
             // Ensure an even number of notes, so the interval is complete.
             // Ensure there's exactly one pair of eigth notes for each two measure phrase.
             while (true)
             {
-                int totalNotes = measureRhythm1.Split(',').Count() + measureRhythm2.Split(',').Count();
-                int totalEigthNotes = measureRhythm1.Split(',').Where(w => w == "8").Count() + measureRhythm2.Split(',').Where(w => w == "8").Count();
-
-                if (totalNotes % 2 == 0 && totalEigthNotes == 2)
-                {
-                    break;
-                }
-
                 randomInt = NoteHelper.GetRandomInt(0, measureRhythms.Count);
                 measureRhythm1 = measureRhythms[randomInt];
                 randomInt = NoteHelper.GetRandomInt(0, measureRhythms.Count);
                 measureRhythm2 = measureRhythms[randomInt];
+
+                int totalNotes = measureRhythm1.Split(',').Count() + measureRhythm2.Split(',').Count();
+                int totalEigthNotes = measureRhythm1.Split(',').Where(w => w == "8").Count() + measureRhythm2.Split(',').Where(w => w == "8").Count();
+
+                // Ensure an even number of notes.
+                if(totalNotes % 2 != 0)
+                {
+                    continue;
+                }
+
+                // If quarter note is smallest rhythmic unit, ensure no eigth notes.
+                if (!includeEigthNoteRhythms && totalEigthNotes > 0)
+                {
+                    continue;
+                }
+
+                // If eigth note is smallest rhythic unit, ensure just one pair of eigth notes.
+                if(includeEigthNoteRhythms && totalEigthNotes != 2)
+                {
+                    continue;
+                }
+
+                break;
             }
 
+            string measureRhythm3 = string.Empty;
+            string measureRhythm4 = string.Empty;
+
+            // TODO: Figure out how to refactor this. Kinda messy, but for now we need to populate measures 3 and 4 even if the user
+            // choose just 2 measures.
             randomInt = NoteHelper.GetRandomInt(0, measureRhythms.Count);
-            string measureRhythm3 = measureRhythms[randomInt];
+            measureRhythm3 = measureRhythms[randomInt];
             randomInt = NoteHelper.GetRandomInt(0, measureRhythms.Count);
-            string measureRhythm4 = measureRhythms[randomInt];
+            measureRhythm4 = measureRhythms[randomInt];
 
             if (numberOfMeasures == 4)
             {
                 while (true)
                 {
-                    int totalNotes = measureRhythm3.Split(',').Count() + measureRhythm4.Split(',').Count();
-                    int totalEigthNotes = measureRhythm3.Split(',').Where(w => w == "8").Count() + measureRhythm4.Split(',').Where(w => w == "8").Count();
-
-                    if (totalNotes % 2 == 0 && totalEigthNotes == 2)
-                    {
-                        break;
-                    }
-
                     randomInt = NoteHelper.GetRandomInt(0, measureRhythms.Count);
                     measureRhythm3 = measureRhythms[randomInt];
                     randomInt = NoteHelper.GetRandomInt(0, measureRhythms.Count);
                     measureRhythm4 = measureRhythms[randomInt];
+
+                    int totalNotes = measureRhythm3.Split(',').Count() + measureRhythm4.Split(',').Count();
+                    int totalEigthNotes = measureRhythm3.Split(',').Where(w => w == "8").Count() + measureRhythm4.Split(',').Where(w => w == "8").Count();
+
+                    // Ensure an even number of notes.
+                    if (totalNotes % 2 != 0)
+                    {
+                        continue;
+                    }
+
+                    // If quarter note is smallest rhythmic unit, ensure no eigth notes.
+                    if (!includeEigthNoteRhythms && totalEigthNotes > 0)
+                    {
+                        continue;
+                    }
+
+                    // If eigth note is smallest rhythic unit, ensure just one pair of eigth notes.
+                    if (includeEigthNoteRhythms && totalEigthNotes != 2)
+                    {
+                        continue;
+                    }
+
+                    break;
                 }
             }
-
-            // Ensure that every two measures has exactly one pair of eigth notes.
-            // Always take care of the first two measures, regardless of the number of measures.
-            //while (measureRhythm1.Split(',').Where(w => w == "8").Count() + measureRhythm2.Split(',').Where(w => w == "8").Count() != 2)
-            //{
-            //    randomInt = NoteHelper.GetRandomInt(0, measureRhythms.Count);
-            //    measureRhythm1 = measureRhythms[randomInt];
-            //    randomInt = NoteHelper.GetRandomInt(0, measureRhythms.Count);
-            //    measureRhythm2 = measureRhythms[randomInt];
-            //}
-            //if (numberOfMeasures == 4)
-            //{
-            //    while (measureRhythm3.Split(',').Where(w => w == "8").Count() + measureRhythm4.Split(',').Where(w => w == "8").Count() != 2)
-            //    {
-            //        randomInt = NoteHelper.GetRandomInt(0, measureRhythms.Count);
-            //        measureRhythm3 = measureRhythms[randomInt];
-            //        randomInt = NoteHelper.GetRandomInt(0, measureRhythms.Count);
-            //        measureRhythm4 = measureRhythms[randomInt];
-            //    }
-            //}
 
             string[] measureRhythmSplit1 = measureRhythm1.Split(',');
             int numberOfNotes1 = measureRhythmSplit1.Length;
@@ -722,19 +738,28 @@ namespace EarTraining.Controllers
             ISampleProvider[] notes3 = new ISampleProvider[numberOfNotes3];
             ISampleProvider[] notes4 = new ISampleProvider[numberOfNotes4];
 
-            Queue<int> noteNumberQueue;
+            Queue<int> noteNumberQueue = new Queue<int>();
             switch (ascensionType)
             {
                 case 1:
-                    noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, 32, 1);  // 32 notes max.
+                    while (!noteNumberQueue.AllStepsWithinRange(12))
+                    {
+                        noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, 32, 1);  // 32 notes max.
+                    }
                     break;
 
                 case 2:
-                    noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, 32, 2);
+                    while (!noteNumberQueue.AllStepsWithinRange(12))
+                    {
+                        noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, 32, 2);
+                    }
                     break;
 
                 case 3:
-                    noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, 32, 3);
+                    while (!noteNumberQueue.AllStepsWithinRange(12))
+                    {
+                        noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, 32, 3);
+                    }
                     break;
 
                 default:
@@ -853,7 +878,7 @@ namespace EarTraining.Controllers
             return json;
         }
 
-        private static List<string> GetEigthNoteRhythms()
+        private static List<string> GetNoteRhythms(bool includeEigthNotes)
         {
 
             // Various rhythm possibilities for each measure.
@@ -866,10 +891,13 @@ namespace EarTraining.Controllers
             measureRhythms.Add("4,4,2");
             measureRhythms.Add("2,4,4");
             measureRhythms.Add("4,2,4");
-            measureRhythms.Add("8,8,4,4,4");
-            measureRhythms.Add("8,8,4,2");
-            measureRhythms.Add("4,4,8,8,4");
-            measureRhythms.Add("2,8,8,4");
+            if (includeEigthNotes)
+            {
+                measureRhythms.Add("8,8,4,4,4");
+                measureRhythms.Add("8,8,4,2");
+                measureRhythms.Add("4,4,8,8,4");
+                measureRhythms.Add("2,8,8,4");
+            }
 
             return measureRhythms;
         }

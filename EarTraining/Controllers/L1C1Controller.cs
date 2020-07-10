@@ -247,7 +247,7 @@ namespace EarTraining.Controllers
                 ticks[i] = NAudioHelper.GetSampleProviderFromFile(tickFile, quarterNoteDuration);
             }
 
-            List<string> measureRhythms = GetQuarterNoteRhythms();
+            List<string> measureRhythms = GetNoteRhythms();
 
             int randomInt = NoteHelper.GetRandomInt(0, measureRhythms.Count);
             string measureRhythm1 = measureRhythms[randomInt];
@@ -273,7 +273,6 @@ namespace EarTraining.Controllers
                     measureRhythm4 = measureRhythms[randomInt];
                 }
             }
-
 
             string[] measureRhythmSplit1 = measureRhythm1.Split(',');
             int numberOfNotes1 = measureRhythmSplit1.Length;
@@ -418,9 +417,8 @@ namespace EarTraining.Controllers
             return json;
         }
 
-        private static List<string> GetQuarterNoteRhythms()
+        private static List<string> GetNoteRhythms()
         {
-
             // Various rhythm possibilities for each measure.
             List<string> measureRhythms = new List<string>();
             measureRhythms.Add("1");
