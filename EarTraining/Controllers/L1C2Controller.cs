@@ -3,6 +3,7 @@ using EarTrainingLibrary.NAudio;
 using EarTrainingLibrary.Utility;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -17,6 +18,8 @@ namespace EarTraining.Controllers
 {
     public class L1C2Controller : BaseController
     {
+        //private static readonly Logger _log = LogManager.GetCurrentClassLogger();
+
         public L1C2Controller()
         {
             Pitch pitch = new Pitches().Random();
@@ -646,7 +649,7 @@ namespace EarTraining.Controllers
             int randomInt;
             string measureRhythm1;
             string measureRhythm2;
-
+            // Ensure there's at least 4 notes per 2 measures, as we need at least one C1 resolutiona and at least 1 C2 interval.
             // Ensure an even number of notes, so the interval is complete.
             // Ensure there's exactly one pair of eigth notes for each two measure phrase.
             while (true)
@@ -658,6 +661,12 @@ namespace EarTraining.Controllers
 
                 int totalNotes = measureRhythm1.Split(',').Count() + measureRhythm2.Split(',').Count();
                 int totalEigthNotes = measureRhythm1.Split(',').Where(w => w == "8").Count() + measureRhythm2.Split(',').Where(w => w == "8").Count();
+
+                // Ensure at least 4 notes for the 2 measure phrase.
+                if(totalNotes < 4)
+                {
+                    continue;
+                }
 
                 // Ensure an even number of notes.
                 if(totalNotes % 2 != 0)
@@ -702,6 +711,12 @@ namespace EarTraining.Controllers
                     int totalNotes = measureRhythm3.Split(',').Count() + measureRhythm4.Split(',').Count();
                     int totalEigthNotes = measureRhythm3.Split(',').Where(w => w == "8").Count() + measureRhythm4.Split(',').Where(w => w == "8").Count();
 
+                    // Ensure at least 4 notes for the 2 measure phrase.
+                    if (totalNotes < 4)
+                    {
+                        continue;
+                    }
+
                     // Ensure an even number of notes.
                     if (totalNotes % 2 != 0)
                     {
@@ -742,26 +757,27 @@ namespace EarTraining.Controllers
             int second2MeasuresNumberOfNotes = numberOfNotes3 + numberOfNotes4;
 
             Queue<int> noteNumberQueue = new Queue<int>();
+            bool criteriaSatisfied = false;
             switch (ascensionType)
             {
                 case 1:
-                    while (!noteNumberQueue.AllStepsWithinRange(12))
+                    while (!(noteNumberQueue.AllStepsWithinRange(12) && criteriaSatisfied))
                     {
-                        noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, 1);
+                        noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, 1, out criteriaSatisfied);
                     }
                     break;
 
                 case 2:
                     while (!noteNumberQueue.AllStepsWithinRange(12))
                     {
-                        noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, 2);
+                        noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, 2, out criteriaSatisfied);
                     }
                     break;
 
                 case 3:
                     while (!noteNumberQueue.AllStepsWithinRange(12))
                     {
-                        noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, 3);
+                        noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, 3, out criteriaSatisfied);
                     }
                     break;
 
@@ -905,7 +921,7 @@ namespace EarTraining.Controllers
             return measureRhythms;
         }
 
-        private Queue<int> GetIntervalIntQueue(int[] scaleNoteNumbers, int first2MeasuresNumberOfNotes, int second2MeasuresNumberOfNotes, int ascensionType)
+        private Queue<int> GetIntervalIntQueue(int[] scaleNoteNumbers, int first2MeasuresNumberOfNotes, int second2MeasuresNumberOfNotes, int ascensionType, out bool criteriaSatisfied, int numberOfTries = 1)
         {
             int numberOfNotes = first2MeasuresNumberOfNotes + second2MeasuresNumberOfNotes;
             bool first2MeasuresHasC2Interval = false;
@@ -929,10 +945,13 @@ namespace EarTraining.Controllers
             intervals.Add(new Tuple<int, int>(7, 8));  // High TI DO.
             intervals.Add(new Tuple<int, int>(0, 1));  // Low TI DO.
 
+            //_log.Info($"========== Getting intervals and resolutions, attempt # {numberOfTries} ==========");
             var q = new Queue<int>();
             while (q.Count < numberOfNotes)
             {
                 int randomInt = NoteHelper.GetRandomInt(0, intervals.Count);
+                //_log.Info($"interval index: {randomInt}");
+
                 Tuple<int, int> t = intervals[randomInt];
 
                 switch (ascensionType)
@@ -985,13 +1004,17 @@ namespace EarTraining.Controllers
                 {
                     second2MeasuresHasC1Resolution = true;
                 }
-
             }
 
             // If we don't have at least one C1 resolution and at least one C2 interval, keep going. Same thing for second two measures.
             if (!(first2MeasuresHasC1Resolution && first2MeasuresHasC2Interval && second2MeasuresHasC1Resolution && second2MeasuresHasC2Interval))
             {
-                return GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, ascensionType);
+                criteriaSatisfied = false;
+                //return GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, ascensionType, out criteriaSatisfied, ++numberOfTries);
+            }
+            else
+            {
+                criteriaSatisfied = true;
             }
 
             return q;
