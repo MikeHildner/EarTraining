@@ -768,14 +768,14 @@ namespace EarTraining.Controllers
                     break;
 
                 case 2:
-                    while (!noteNumberQueue.AllStepsWithinRange(12))
+                    while (!(noteNumberQueue.AllStepsWithinRange(12) && criteriaSatisfied))
                     {
                         noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, 2, out criteriaSatisfied);
                     }
                     break;
 
                 case 3:
-                    while (!noteNumberQueue.AllStepsWithinRange(12))
+                    while (!(noteNumberQueue.AllStepsWithinRange(12) && criteriaSatisfied))
                     {
                         noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, 3, out criteriaSatisfied);
                     }
