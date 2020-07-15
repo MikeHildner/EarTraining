@@ -295,5 +295,20 @@ namespace EarTrainingLibrary.Utility
 
             return everythingWithinRange;
         }
+
+        /// <summary>
+        /// Ensures that the entire melody is restricted to the given number of half-steps.
+        /// </summary>
+        /// <param name="queue"></param>
+        /// <param name="inclusiveRange"></param>
+        /// <returns></returns>
+        public static bool AllNotesWithinRange(this Queue<int> queue, int inclusiveRange)
+        {
+            int lowest = queue.Min();
+            int highest = queue.Max();
+            int range = lowest - highest;
+
+            return range <= inclusiveRange;
+        }
     }
 }

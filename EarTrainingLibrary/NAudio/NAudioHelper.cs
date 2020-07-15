@@ -29,7 +29,7 @@ namespace EarTrainingLibrary.NAudio
         public static ISampleProvider GetSampleProvider(string noteName, TimeSpan duration)
         {
             // Get the file name based on the note name.
-            if(noteName.Contains("/"))
+            if (noteName.Contains("/"))
             {
                 noteName = noteName.Split('/')[1];
             }
@@ -99,14 +99,14 @@ namespace EarTrainingLibrary.NAudio
             var reader = new AudioFileReader(fileName);
             //var reader = new Mp3FileReader(fileName);
             //var reader = new MediaFoundationReader(fileName);
-            if(volume == null)
+            if (volume == null)
             {
                 string sVolume = System.Configuration.ConfigurationManager.AppSettings["PlaybackVolume"];
                 volume = float.Parse(sVolume);
             }
             reader.Volume = volume.Value;
             ISampleProvider inSample = reader.ToSampleProvider();
-            
+
             // Shorten to specified duration.
             ISampleProvider outSample = inSample.Take(duration);
             return outSample;

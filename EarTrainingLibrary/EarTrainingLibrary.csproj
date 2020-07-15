@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\Interval.cs" />
+    <Compile Include="Enums\L1C2IntervalType.cs" />
     <Compile Include="Enums\InversionType.cs" />
     <Compile Include="Enums\L1C2MelodicDrillType.cs" />
     <Compile Include="Enums\L1C2HarmonicDrillType.cs" />

@@ -18,7 +18,7 @@ namespace EarTraining.Controllers
 {
     public class L1C2Controller : BaseController
     {
-        //private static readonly Logger _log = LogManager.GetCurrentClassLogger();
+        private static readonly Logger _log = LogManager.GetCurrentClassLogger();
 
         public L1C2Controller()
         {
@@ -612,8 +612,12 @@ namespace EarTraining.Controllers
             return wavStream;
         }
 
-        public ActionResult AudioAndDictation(int ascensionType, string keySignature, double bpm, int numberOfMeasures, string smallestRhythmicUnit)
+        public ActionResult AudioAndDictation(int intervalType, string keySignature, double bpm, int numberOfMeasures, string smallestRhythmicUnit)
         {
+            _log.Info("====================");
+            
+            L1C2IntervalType intType = (L1C2IntervalType)intervalType;
+
             bool includeEighthNoteRhythms = smallestRhythmicUnit.ToUpper() == "EIGHTH";
 
             // We'll add stuff to the Dictionary and return as JSON.
@@ -663,13 +667,13 @@ namespace EarTraining.Controllers
                 int totalEighthNotes = measureRhythm1.Split(',').Where(w => w == "8").Count() + measureRhythm2.Split(',').Where(w => w == "8").Count();
 
                 // Ensure at least 4 notes for the 2 measure phrase.
-                if(totalNotes < 4)
+                if (totalNotes < 4)
                 {
                     continue;
                 }
 
                 // Ensure an even number of notes.
-                if(totalNotes % 2 != 0)
+                if (totalNotes % 2 != 0)
                 {
                     continue;
                 }
@@ -681,7 +685,7 @@ namespace EarTraining.Controllers
                 }
 
                 // If eighth note is smallest rhythic unit, ensure just one pair of eighth notes.
-                if(includeEighthNoteRhythms && totalEighthNotes != 2)
+                if (includeEighthNoteRhythms && totalEighthNotes != 2)
                 {
                     continue;
                 }
@@ -761,52 +765,67 @@ namespace EarTraining.Controllers
             int numberOfTries = 0;
             try
             {
-                switch (ascensionType)
+                while (!(noteNumberQueue.AllStepsWithinRange(12) && noteNumberQueue.AllNotesWithinRange(12) && criteriaSatisfied))
                 {
-                    case 1:
-                        while (!(noteNumberQueue.AllStepsWithinRange(12) && criteriaSatisfied))
-                        {
-                            numberOfTries++;
-                            if (numberOfTries > 19)
-                            {
-                                throw new PhraseGenerationException($"Aborted phrase generation after {numberOfTries} tries.");
-                            }
+                    numberOfTries++;
 
-                            noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, 1, out criteriaSatisfied);
-                        }
-                        break;
+                    _log.Info($"numberOfTries: {numberOfTries}");
+                    _log.Info($"measureRhythm1: {measureRhythm1}");
+                    _log.Info($"measureRhythm2: {measureRhythm2}");
+                    if (numberOfTries > 199)
+                    {
+                        throw new PhraseGenerationException($"Aborted phrase generation after {numberOfTries} tries.");
+                    }
 
-                    case 2:
-                        while (!(noteNumberQueue.AllStepsWithinRange(12) && criteriaSatisfied))
-                        {
-                            numberOfTries++;
-                            if (numberOfTries > 19)
-                            {
-                                throw new PhraseGenerationException($"Aborted phrase generation after {numberOfTries} tries.");
-                            }
-
-                            noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, 2, out criteriaSatisfied);
-                        }
-                        break;
-
-                    case 3:
-                        while (!(noteNumberQueue.AllStepsWithinRange(12) && criteriaSatisfied))
-                        {
-                            numberOfTries++;
-                            if (numberOfTries > 19)
-                            {
-                                throw new PhraseGenerationException($"Aborted phrase generation after {numberOfTries} tries.");
-                            }
-
-                            noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, 3, out criteriaSatisfied);
-                        }
-                        break;
-
-                    default:
-                        throw new NotSupportedException($"AscensionType '{ascensionType}' is not supported.");
+                    noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, intType, out criteriaSatisfied);
                 }
+
+                //switch (intervalType)
+                //{
+                //    case 1:
+                //        while (!(noteNumberQueue.AllStepsWithinRange(12) && criteriaSatisfied))
+                //        {
+                //            numberOfTries++;
+                //            if (numberOfTries > 19)
+                //            {
+                //                throw new PhraseGenerationException($"Aborted phrase generation after {numberOfTries} tries.");
+                //            }
+
+                //            noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, 1, out criteriaSatisfied);
+                //        }
+                //        break;
+
+                //    case 2:
+                //        while (!(noteNumberQueue.AllStepsWithinRange(12) && criteriaSatisfied))
+                //        {
+                //            numberOfTries++;
+                //            if (numberOfTries > 19)
+                //            {
+                //                throw new PhraseGenerationException($"Aborted phrase generation after {numberOfTries} tries.");
+                //            }
+
+                //            noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, 2, out criteriaSatisfied);
+                //        }
+                //        break;
+
+                //    case 3:
+                //        while (!(noteNumberQueue.AllStepsWithinRange(12) && criteriaSatisfied))
+                //        {
+                //            numberOfTries++;
+                //            if (numberOfTries > 19)
+                //            {
+                //                throw new PhraseGenerationException($"Aborted phrase generation after {numberOfTries} tries.");
+                //            }
+
+                //            noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, 3, out criteriaSatisfied);
+                //        }
+                //        break;
+
+                //    default:
+                //        throw new NotSupportedException($"IntervalType '{intervalType}' is not supported.");
+                //}
             }
-            catch(PhraseGenerationException pge)
+            catch (PhraseGenerationException)
             {
                 dict.Add("hasError", "yep");
                 var jsonEx = Json(dict, JsonRequestBehavior.AllowGet);
@@ -949,88 +968,189 @@ namespace EarTraining.Controllers
             return measureRhythms;
         }
 
-        private Queue<int> GetIntervalIntQueue(int[] scaleNoteNumbers, int first2MeasuresNumberOfNotes, int second2MeasuresNumberOfNotes, int ascensionType, out bool criteriaSatisfied, int numberOfTries = 1)
+        private Queue<int> GetIntervalIntQueue(int[] scaleNoteNumbers, int first2MeasuresNumberOfNotes, int second2MeasuresNumberOfNotes, L1C2IntervalType intervalType, out bool criteriaSatisfied, int numberOfTries = 1)
         {
+            _log.Debug("");
             int numberOfNotes = first2MeasuresNumberOfNotes + second2MeasuresNumberOfNotes;
             bool first2MeasuresHasC2Interval = false;
             bool first2MeasuresHasC1Resolution = false;
             bool second2MeasuresHasC2Interval = false;
             bool second2MeasuresHasC1Resolution = false;
 
-            List<Tuple<int, int>> intervals = new List<Tuple<int, int>>();
-            intervals.Add(new Tuple<int, int>(1, 3));  // DO MI Maj. 3rd.
-            intervals.Add(new Tuple<int, int>(4, 6));  // FA LA Maj. 3rd.
-            intervals.Add(new Tuple<int, int>(5, 7));  // SO TI Maj. 3rd.
-            intervals.Add(new Tuple<int, int>(3, 8));  // MI DO Min. 6th.
-            intervals.Add(new Tuple<int, int>(6, 11));  // LA FA Min. 6th.
-            intervals.Add(new Tuple<int, int>(7, 12));  // TI SO Min. 6th.
+            List<Tuple<int, int>> maj3rdIntervals = new List<Tuple<int, int>>
+            {
+                new Tuple<int, int>(1, 3),  // DO MI Maj. 3rd.
+                new Tuple<int, int>(4, 6),  // FA LA Maj. 3rd.
+                new Tuple<int, int>(5, 7)   // SO TI Maj. 3rd.
+            };
 
-            int c1ResolutionsStartIndex = 6;
-            // L1C1 resolutions.
-            intervals.Add(new Tuple<int, int>(2, 1));  // RE DO.
-            intervals.Add(new Tuple<int, int>(4, 3));  // FA MI.
-            intervals.Add(new Tuple<int, int>(6, 5));  // LA SO.
-            intervals.Add(new Tuple<int, int>(7, 8));  // High TI DO.
-            intervals.Add(new Tuple<int, int>(0, 1));  // Low TI DO.
+            List<Tuple<int, int>> min6thIntervals = new List<Tuple<int, int>>
+            {
+                new Tuple<int, int>(3, 8),   // MI DO Min. 6th.
+                new Tuple<int, int>(6, 11),  // LA FA Min. 6th.
+                new Tuple<int, int>(7, 12)   // TI SO Min. 6th.
+            };
+
+            List<Tuple<int, int>> c1Resolutions = new List<Tuple<int, int>>
+            {
+                new Tuple<int, int>(2, 1),  // RE DO.
+                new Tuple<int, int>(4, 3),  // FA MI.
+                new Tuple<int, int>(6, 5),  // LA SO.
+                new Tuple<int, int>(7, 8),  // High TI DO.
+                new Tuple<int, int>(0, 1)   // Low TI DO.
+            };
+
+            List<Tuple<int, int>> bothC2Intervals = maj3rdIntervals.Concat(min6thIntervals).ToList();
 
             //_log.Info($"========== Getting intervals and resolutions, attempt # {numberOfTries} ==========");
             var q = new Queue<int>();
+            int randomInt;
+            Tuple<int, int> notes;
             while (q.Count < numberOfNotes)
             {
-                int randomInt = NoteHelper.GetRandomInt(0, intervals.Count);
+                //int randomInt = NoteHelper.GetRandomInt(0, intervals.Count);
                 //_log.Info($"interval index: {randomInt}");
 
-                Tuple<int, int> t = intervals[randomInt];
+                //Tuple<int, int> t = intervals[randomInt];
 
-                switch (ascensionType)
+                switch (intervalType)
                 {
-                    case 1:
-                        q.Enqueue(scaleNoteNumbers[t.Item1]);
-                        q.Enqueue(scaleNoteNumbers[t.Item2]);
-                        break;
-
-                    case 2:
-                        q.Enqueue(scaleNoteNumbers[t.Item2]);
-                        q.Enqueue(scaleNoteNumbers[t.Item1]);
-                        break;
-
-                    case 3:
-                        int ri = NoteHelper.GetRandomInt(0, 2);
-                        if (ri % 2 == 0)
+                    case L1C2IntervalType.Major3rd:
+                        randomInt = NoteHelper.GetRandomInt(0, 2);
+                        if(randomInt % 2 == 0)
                         {
-                            q.Enqueue(scaleNoteNumbers[t.Item1]);
-                            q.Enqueue(scaleNoteNumbers[t.Item2]);
+                            randomInt = NoteHelper.GetRandomInt(0, maj3rdIntervals.Count);
+                            notes = maj3rdIntervals[randomInt];
+                            if (q.Count < first2MeasuresNumberOfNotes)
+                            {
+                                first2MeasuresHasC2Interval = true;
+                            }
+                            else
+                            {
+                                second2MeasuresHasC2Interval = true;
+                            }
+
+                            randomInt = NoteHelper.GetRandomInt(0, 2);
+                            if(randomInt % 2 == 0)
+                            {
+                                q.Enqueue(scaleNoteNumbers[notes.Item1]);
+                                q.Enqueue(scaleNoteNumbers[notes.Item2]);
+                            }
+                            else
+                            {
+                                q.Enqueue(scaleNoteNumbers[notes.Item2]);
+                                q.Enqueue(scaleNoteNumbers[notes.Item1]);
+                            }
                         }
                         else
                         {
-                            q.Enqueue(scaleNoteNumbers[t.Item2]);
-                            q.Enqueue(scaleNoteNumbers[t.Item1]);
+                            randomInt = NoteHelper.GetRandomInt(0, c1Resolutions.Count);
+                            notes = c1Resolutions[randomInt];
+                            if (q.Count < first2MeasuresNumberOfNotes)
+                            {
+                                first2MeasuresHasC1Resolution = true;
+                            }
+                            else
+                            {
+                                second2MeasuresHasC1Resolution = true;
+                            }
+                            q.Enqueue(scaleNoteNumbers[notes.Item1]);
+                            q.Enqueue(scaleNoteNumbers[notes.Item2]);
                         }
+
+                        break;
+
+                    case L1C2IntervalType.Minor6th:
+                        randomInt = NoteHelper.GetRandomInt(0, 2);
+                        if (randomInt % 2 == 0)
+                        {
+                            randomInt = NoteHelper.GetRandomInt(0, min6thIntervals.Count);
+                            notes = min6thIntervals[randomInt];
+                            if (q.Count < first2MeasuresNumberOfNotes)
+                            {
+                                first2MeasuresHasC2Interval = true;
+                            }
+                            else
+                            {
+                                second2MeasuresHasC2Interval = true;
+                            }
+
+                            randomInt = NoteHelper.GetRandomInt(0, 2);
+                            if (randomInt % 2 == 0)
+                            {
+                                q.Enqueue(scaleNoteNumbers[notes.Item1]);
+                                q.Enqueue(scaleNoteNumbers[notes.Item2]);
+                            }
+                            else
+                            {
+                                q.Enqueue(scaleNoteNumbers[notes.Item2]);
+                                q.Enqueue(scaleNoteNumbers[notes.Item1]);
+                            }
+                        }
+                        else
+                        {
+                            randomInt = NoteHelper.GetRandomInt(0, c1Resolutions.Count);
+                            notes = c1Resolutions[randomInt];
+                            if (q.Count < first2MeasuresNumberOfNotes)
+                            {
+                                first2MeasuresHasC1Resolution = true;
+                            }
+                            else
+                            {
+                                second2MeasuresHasC1Resolution = true;
+                            }
+                            q.Enqueue(scaleNoteNumbers[notes.Item1]);
+                            q.Enqueue(scaleNoteNumbers[notes.Item2]);
+                        }
+
+                        break;
+
+                    case L1C2IntervalType.Both:
+                        randomInt = NoteHelper.GetRandomInt(0, 2);
+                        if (randomInt % 2 == 0)
+                        {
+                            randomInt = NoteHelper.GetRandomInt(0, bothC2Intervals.Count);
+                            notes = bothC2Intervals[randomInt];
+                            if (q.Count < first2MeasuresNumberOfNotes)
+                            {
+                                first2MeasuresHasC2Interval = true;
+                            }
+                            else
+                            {
+                                second2MeasuresHasC2Interval = true;
+                            }
+
+                            randomInt = NoteHelper.GetRandomInt(0, 2);
+                            if (randomInt % 2 == 0)
+                            {
+                                q.Enqueue(scaleNoteNumbers[notes.Item1]);
+                                q.Enqueue(scaleNoteNumbers[notes.Item2]);
+                            }
+                            else
+                            {
+                                q.Enqueue(scaleNoteNumbers[notes.Item2]);
+                                q.Enqueue(scaleNoteNumbers[notes.Item1]);
+                            }
+                        }
+                        else
+                        {
+                            randomInt = NoteHelper.GetRandomInt(0, c1Resolutions.Count);
+                            notes = c1Resolutions[randomInt];
+                            if (q.Count < first2MeasuresNumberOfNotes)
+                            {
+                                first2MeasuresHasC1Resolution = true;
+                            }
+                            else
+                            {
+                                second2MeasuresHasC1Resolution = true;
+                            }
+                            q.Enqueue(scaleNoteNumbers[notes.Item1]);
+                            q.Enqueue(scaleNoteNumbers[notes.Item2]);
+                        }
+
                         break;
                     default:
-                        throw new NotSupportedException($"Ascension type '{ascensionType}' is not supported.");
-                }
-
-                // If we're in the first two measures, and this interval is a chapter 2 interval.
-                if (q.Count <= first2MeasuresNumberOfNotes && randomInt < c1ResolutionsStartIndex)
-                {
-                    first2MeasuresHasC2Interval = true;
-                }
-                // If we're in the first two measures, and this interval is a chapter 1 resolution.
-                if (q.Count <= first2MeasuresNumberOfNotes && randomInt >= c1ResolutionsStartIndex)
-                {
-                    first2MeasuresHasC1Resolution = true;
-                }
-
-                // If we're in the second two measures, and this interval is a chapter 2 interval.
-                if (q.Count > first2MeasuresNumberOfNotes && randomInt < c1ResolutionsStartIndex)
-                {
-                    second2MeasuresHasC2Interval = true;
-                }
-                // If we're in the second two measures, and this interval is a chapter 1 resolution.
-                if (q.Count > first2MeasuresNumberOfNotes && randomInt >= c1ResolutionsStartIndex)
-                {
-                    second2MeasuresHasC1Resolution = true;
+                        throw new NotSupportedException($"Interval type '{intervalType}' is not supported.");
                 }
             }
 
@@ -1038,7 +1158,6 @@ namespace EarTraining.Controllers
             if (!(first2MeasuresHasC1Resolution && first2MeasuresHasC2Interval && second2MeasuresHasC1Resolution && second2MeasuresHasC2Interval))
             {
                 criteriaSatisfied = false;
-                //return GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, ascensionType, out criteriaSatisfied, ++numberOfTries);
             }
             else
             {
