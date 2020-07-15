@@ -157,7 +157,7 @@ namespace EarTrainingLibrary.Utility
         }
 
         // TODO: Refactor this to only receive a whole note duration, and calculate the others from there.
-        public static void CreateSamplesFromRhythmsAndNoteNames(TimeSpan eigthNoteDuration, TimeSpan quarterNoteDuration, TimeSpan halfNoteDuration, TimeSpan dottedHalfNoteDuration, TimeSpan wholeNoteDuration, string[] measureRhythmSplit, ISampleProvider[] notes, int[] measureNoteNumbers)
+        public static void CreateSamplesFromRhythmsAndNoteNames(TimeSpan eighthNoteDuration, TimeSpan quarterNoteDuration, TimeSpan halfNoteDuration, TimeSpan dottedHalfNoteDuration, TimeSpan wholeNoteDuration, string[] measureRhythmSplit, ISampleProvider[] notes, int[] measureNoteNumbers)
         {
             for (int i = 0; i < notes.Length; i++)
             {
@@ -181,7 +181,7 @@ namespace EarTrainingLibrary.Utility
                         break;
 
                     case "8":
-                        duration = eigthNoteDuration;
+                        duration = eighthNoteDuration;
                         break;
 
                     default:
@@ -244,7 +244,7 @@ namespace EarTrainingLibrary.Utility
             var sb = new StringBuilder();
             for (int i = 0; i < noteNames.Length; i++)
             {
-                // Beam if a pair of eigth notes.
+                // Beam if a pair of eighth notes.
                 if (measureRhythms[i] == "8" && measureRhythms[i + 1] == "8")
                 {
                     sb.Append($".concat(score.beam(score.notes('{noteNames[i]}/{measureRhythms[i]},{noteNames[i + 1]}/{measureRhythms[i + 1]}'), {{ autoStem: true }}))");

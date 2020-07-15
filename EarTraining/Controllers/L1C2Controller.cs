@@ -614,7 +614,7 @@ namespace EarTraining.Controllers
 
         public ActionResult AudioAndDictation(int ascensionType, string keySignature, double bpm, int numberOfMeasures, string smallestRhythmicUnit)
         {
-            bool includeEigthNoteRhythms = smallestRhythmicUnit.ToUpper() == "EIGTH";
+            bool includeEighthNoteRhythms = smallestRhythmicUnit.ToUpper() == "EIGHTH";
 
             // We'll add stuff to the Dictionary and return as JSON.
             var dict = new Dictionary<string, string>();
@@ -627,7 +627,7 @@ namespace EarTraining.Controllers
             TimeSpan halfNoteDuration = TimeSpan.FromMilliseconds(quarterNoteMillis * 2);
             TimeSpan dottedHalfNoteDuration = TimeSpan.FromMilliseconds(quarterNoteMillis * 3);
             TimeSpan wholeNoteDuration = TimeSpan.FromMilliseconds(quarterNoteMillis * 4);
-            TimeSpan eigthNoteDuration = TimeSpan.FromMilliseconds(quarterNoteMillis / 2);
+            TimeSpan eighthNoteDuration = TimeSpan.FromMilliseconds(quarterNoteMillis / 2);
 
             // Setup the scale note numbers.
             int[] scaleNoteNumbers = new int[] { 38, 39, 41, 43, 44, 46, 48, 50, 51, 53, 55, 56, 58, 60 };  // C Major, low TI to high SO.
@@ -644,14 +644,14 @@ namespace EarTraining.Controllers
                 ticks[i] = NAudioHelper.GetSampleProviderFromFile(tickFile, quarterNoteDuration);
             }
 
-            List<string> measureRhythms = GetNoteRhythms(includeEigthNoteRhythms);
+            List<string> measureRhythms = GetNoteRhythms(includeEighthNoteRhythms);
 
             int randomInt;
             string measureRhythm1;
             string measureRhythm2;
             // Ensure there's at least 4 notes per 2 measures, as we need at least one C1 resolutiona and at least 1 C2 interval.
             // Ensure an even number of notes, so the interval is complete.
-            // Ensure there's exactly one pair of eigth notes for each two measure phrase.
+            // Ensure there's exactly one pair of eighth notes for each two measure phrase.
             while (true)
             {
                 randomInt = NoteHelper.GetRandomInt(0, measureRhythms.Count);
@@ -660,7 +660,7 @@ namespace EarTraining.Controllers
                 measureRhythm2 = measureRhythms[randomInt];
 
                 int totalNotes = measureRhythm1.Split(',').Count() + measureRhythm2.Split(',').Count();
-                int totalEigthNotes = measureRhythm1.Split(',').Where(w => w == "8").Count() + measureRhythm2.Split(',').Where(w => w == "8").Count();
+                int totalEighthNotes = measureRhythm1.Split(',').Where(w => w == "8").Count() + measureRhythm2.Split(',').Where(w => w == "8").Count();
 
                 // Ensure at least 4 notes for the 2 measure phrase.
                 if(totalNotes < 4)
@@ -674,14 +674,14 @@ namespace EarTraining.Controllers
                     continue;
                 }
 
-                // If quarter note is smallest rhythmic unit, ensure no eigth notes.
-                if (!includeEigthNoteRhythms && totalEigthNotes > 0)
+                // If quarter note is smallest rhythmic unit, ensure no eighth notes.
+                if (!includeEighthNoteRhythms && totalEighthNotes > 0)
                 {
                     continue;
                 }
 
-                // If eigth note is smallest rhythic unit, ensure just one pair of eigth notes.
-                if(includeEigthNoteRhythms && totalEigthNotes != 2)
+                // If eighth note is smallest rhythic unit, ensure just one pair of eighth notes.
+                if(includeEighthNoteRhythms && totalEighthNotes != 2)
                 {
                     continue;
                 }
@@ -709,7 +709,7 @@ namespace EarTraining.Controllers
                     measureRhythm4 = measureRhythms[randomInt];
 
                     int totalNotes = measureRhythm3.Split(',').Count() + measureRhythm4.Split(',').Count();
-                    int totalEigthNotes = measureRhythm3.Split(',').Where(w => w == "8").Count() + measureRhythm4.Split(',').Where(w => w == "8").Count();
+                    int totalEighthNotes = measureRhythm3.Split(',').Where(w => w == "8").Count() + measureRhythm4.Split(',').Where(w => w == "8").Count();
 
                     // Ensure at least 4 notes for the 2 measure phrase.
                     if (totalNotes < 4)
@@ -723,14 +723,14 @@ namespace EarTraining.Controllers
                         continue;
                     }
 
-                    // If quarter note is smallest rhythmic unit, ensure no eigth notes.
-                    if (!includeEigthNoteRhythms && totalEigthNotes > 0)
+                    // If quarter note is smallest rhythmic unit, ensure no eighth notes.
+                    if (!includeEighthNoteRhythms && totalEighthNotes > 0)
                     {
                         continue;
                     }
 
-                    // If eigth note is smallest rhythic unit, ensure just one pair of eigth notes.
-                    if (includeEigthNoteRhythms && totalEigthNotes != 2)
+                    // If eighth note is smallest rhythic unit, ensure just one pair of eighth notes.
+                    if (includeEighthNoteRhythms && totalEighthNotes != 2)
                     {
                         continue;
                     }
@@ -758,31 +758,59 @@ namespace EarTraining.Controllers
 
             Queue<int> noteNumberQueue = new Queue<int>();
             bool criteriaSatisfied = false;
-            switch (ascensionType)
+            int numberOfTries = 0;
+            try
             {
-                case 1:
-                    while (!(noteNumberQueue.AllStepsWithinRange(12) && criteriaSatisfied))
-                    {
-                        noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, 1, out criteriaSatisfied);
-                    }
-                    break;
+                switch (ascensionType)
+                {
+                    case 1:
+                        while (!(noteNumberQueue.AllStepsWithinRange(12) && criteriaSatisfied))
+                        {
+                            numberOfTries++;
+                            if (numberOfTries > 19)
+                            {
+                                throw new PhraseGenerationException($"Aborted phrase generation after {numberOfTries} tries.");
+                            }
 
-                case 2:
-                    while (!(noteNumberQueue.AllStepsWithinRange(12) && criteriaSatisfied))
-                    {
-                        noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, 2, out criteriaSatisfied);
-                    }
-                    break;
+                            noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, 1, out criteriaSatisfied);
+                        }
+                        break;
 
-                case 3:
-                    while (!(noteNumberQueue.AllStepsWithinRange(12) && criteriaSatisfied))
-                    {
-                        noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, 3, out criteriaSatisfied);
-                    }
-                    break;
+                    case 2:
+                        while (!(noteNumberQueue.AllStepsWithinRange(12) && criteriaSatisfied))
+                        {
+                            numberOfTries++;
+                            if (numberOfTries > 19)
+                            {
+                                throw new PhraseGenerationException($"Aborted phrase generation after {numberOfTries} tries.");
+                            }
 
-                default:
-                    throw new NotSupportedException($"AscensionType '{ascensionType}' is not supported.");
+                            noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, 2, out criteriaSatisfied);
+                        }
+                        break;
+
+                    case 3:
+                        while (!(noteNumberQueue.AllStepsWithinRange(12) && criteriaSatisfied))
+                        {
+                            numberOfTries++;
+                            if (numberOfTries > 19)
+                            {
+                                throw new PhraseGenerationException($"Aborted phrase generation after {numberOfTries} tries.");
+                            }
+
+                            noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, 3, out criteriaSatisfied);
+                        }
+                        break;
+
+                    default:
+                        throw new NotSupportedException($"AscensionType '{ascensionType}' is not supported.");
+                }
+            }
+            catch(PhraseGenerationException pge)
+            {
+                dict.Add("hasError", "yep");
+                var jsonEx = Json(dict, JsonRequestBehavior.AllowGet);
+                return jsonEx;
             }
 
             int[] measureNoteNumbers1 = NoteHelper.PopulateNoteNumbersFromQueue(numberOfNotes1, noteNumberQueue);
@@ -790,10 +818,10 @@ namespace EarTraining.Controllers
             int[] measureNoteNumbers3 = NoteHelper.PopulateNoteNumbersFromQueue(numberOfNotes3, noteNumberQueue);
             int[] measureNoteNumbers4 = NoteHelper.PopulateNoteNumbersFromQueue(numberOfNotes4, noteNumberQueue);
 
-            NoteHelper.CreateSamplesFromRhythmsAndNoteNames(eigthNoteDuration, quarterNoteDuration, halfNoteDuration, dottedHalfNoteDuration, wholeNoteDuration, measureRhythmSplit1, notes1, measureNoteNumbers1);
-            NoteHelper.CreateSamplesFromRhythmsAndNoteNames(eigthNoteDuration, quarterNoteDuration, halfNoteDuration, dottedHalfNoteDuration, wholeNoteDuration, measureRhythmSplit2, notes2, measureNoteNumbers2);
-            NoteHelper.CreateSamplesFromRhythmsAndNoteNames(eigthNoteDuration, quarterNoteDuration, halfNoteDuration, dottedHalfNoteDuration, wholeNoteDuration, measureRhythmSplit3, notes3, measureNoteNumbers3);
-            NoteHelper.CreateSamplesFromRhythmsAndNoteNames(eigthNoteDuration, quarterNoteDuration, halfNoteDuration, dottedHalfNoteDuration, wholeNoteDuration, measureRhythmSplit4, notes4, measureNoteNumbers4);
+            NoteHelper.CreateSamplesFromRhythmsAndNoteNames(eighthNoteDuration, quarterNoteDuration, halfNoteDuration, dottedHalfNoteDuration, wholeNoteDuration, measureRhythmSplit1, notes1, measureNoteNumbers1);
+            NoteHelper.CreateSamplesFromRhythmsAndNoteNames(eighthNoteDuration, quarterNoteDuration, halfNoteDuration, dottedHalfNoteDuration, wholeNoteDuration, measureRhythmSplit2, notes2, measureNoteNumbers2);
+            NoteHelper.CreateSamplesFromRhythmsAndNoteNames(eighthNoteDuration, quarterNoteDuration, halfNoteDuration, dottedHalfNoteDuration, wholeNoteDuration, measureRhythmSplit3, notes3, measureNoteNumbers3);
+            NoteHelper.CreateSamplesFromRhythmsAndNoteNames(eighthNoteDuration, quarterNoteDuration, halfNoteDuration, dottedHalfNoteDuration, wholeNoteDuration, measureRhythmSplit4, notes4, measureNoteNumbers4);
 
             ISampleProvider phrase =
                 wholeDoNote;
@@ -897,7 +925,7 @@ namespace EarTraining.Controllers
             return json;
         }
 
-        private static List<string> GetNoteRhythms(bool includeEigthNotes)
+        private static List<string> GetNoteRhythms(bool includeEighthNotes)
         {
 
             // Various rhythm possibilities for each measure.
@@ -910,7 +938,7 @@ namespace EarTraining.Controllers
             measureRhythms.Add("4,4,2");
             measureRhythms.Add("2,4,4");
             measureRhythms.Add("4,2,4");
-            if (includeEigthNotes)
+            if (includeEighthNotes)
             {
                 measureRhythms.Add("8,8,4,4,4");
                 measureRhythms.Add("8,8,4,2");
