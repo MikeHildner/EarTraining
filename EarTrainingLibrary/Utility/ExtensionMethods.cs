@@ -306,7 +306,7 @@ namespace EarTrainingLibrary.Utility
         {
             int lowest = queue.Min();
             int highest = queue.Max();
-            int range = lowest - highest;
+            int range = highest - lowest;
 
             return range <= inclusiveRange;
         }
