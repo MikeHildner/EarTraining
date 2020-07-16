@@ -783,55 +783,11 @@ namespace EarTraining.Controllers
 
                     noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, intType, out criteriaSatisfied);
                 }
-
-                //switch (intervalType)
-                //{
-                //    case 1:
-                //        while (!(noteNumberQueue.AllStepsWithinRange(12) && criteriaSatisfied))
-                //        {
-                //            numberOfTries++;
-                //            if (numberOfTries > 19)
-                //            {
-                //                throw new PhraseGenerationException($"Aborted phrase generation after {numberOfTries} tries.");
-                //            }
-
-                //            noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, 1, out criteriaSatisfied);
-                //        }
-                //        break;
-
-                //    case 2:
-                //        while (!(noteNumberQueue.AllStepsWithinRange(12) && criteriaSatisfied))
-                //        {
-                //            numberOfTries++;
-                //            if (numberOfTries > 19)
-                //            {
-                //                throw new PhraseGenerationException($"Aborted phrase generation after {numberOfTries} tries.");
-                //            }
-
-                //            noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, 2, out criteriaSatisfied);
-                //        }
-                //        break;
-
-                //    case 3:
-                //        while (!(noteNumberQueue.AllStepsWithinRange(12) && criteriaSatisfied))
-                //        {
-                //            numberOfTries++;
-                //            if (numberOfTries > 19)
-                //            {
-                //                throw new PhraseGenerationException($"Aborted phrase generation after {numberOfTries} tries.");
-                //            }
-
-                //            noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, 3, out criteriaSatisfied);
-                //        }
-                //        break;
-
-                //    default:
-                //        throw new NotSupportedException($"IntervalType '{intervalType}' is not supported.");
-                //}
             }
             catch (PhraseGenerationException)
             {
                 dict.Add("hasError", "yep");
+                dict.Add("numberOfTries", numberOfTries.ToString());
                 var jsonEx = Json(dict, JsonRequestBehavior.AllowGet);
                 return jsonEx;
             }
@@ -913,6 +869,7 @@ namespace EarTraining.Controllers
             wavStream.Position = 0;
             wavStream.WavToMp3File(out string fileName);
             dict.Add("src", fileName);
+            dict.Add("numberOfTries", numberOfTries.ToString());
 
             #endregion Audio
 
