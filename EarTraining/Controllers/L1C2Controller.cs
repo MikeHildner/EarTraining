@@ -18,7 +18,7 @@ namespace EarTraining.Controllers
 {
     public class L1C2Controller : BaseController
     {
-        private static readonly Logger _log = LogManager.GetCurrentClassLogger();
+        //private static readonly Logger _log = LogManager.GetCurrentClassLogger();
 
         public L1C2Controller()
         {
@@ -50,6 +50,10 @@ namespace EarTraining.Controllers
 
         public ActionResult DictationTranscription()
         {
+            //for (int i = 0; i < 1000; i++)
+            //{
+            //    AudioAndDictation(2, "C", 60, 4, "Quarter");
+            //}
             ViewBag.ShowDo = false;
             return View();
         }
@@ -614,7 +618,7 @@ namespace EarTraining.Controllers
 
         public ActionResult AudioAndDictation(int intervalType, string keySignature, double bpm, int numberOfMeasures, string smallestRhythmicUnit)
         {
-            _log.Info("====================");
+            //_log.Info("====================");
             
             L1C2IntervalType intType = (L1C2IntervalType)intervalType;
 
@@ -769,10 +773,10 @@ namespace EarTraining.Controllers
                 {
                     numberOfTries++;
 
-                    _log.Info($"numberOfTries: {numberOfTries}");
-                    _log.Info($"measureRhythm1: {measureRhythm1}");
-                    _log.Info($"measureRhythm2: {measureRhythm2}");
-                    if (numberOfTries > 199)
+                    //_log.Info($"numberOfTries: {numberOfTries}");
+                    //_log.Info($"measureRhythm1: {measureRhythm1}");
+                    //_log.Info($"measureRhythm2: {measureRhythm2}");
+                    if (numberOfTries > 499)
                     {
                         throw new PhraseGenerationException($"Aborted phrase generation after {numberOfTries} tries.");
                     }
@@ -831,6 +835,8 @@ namespace EarTraining.Controllers
                 var jsonEx = Json(dict, JsonRequestBehavior.AllowGet);
                 return jsonEx;
             }
+
+            //_log.Info(numberOfTries);
 
             int[] measureNoteNumbers1 = NoteHelper.PopulateNoteNumbersFromQueue(numberOfNotes1, noteNumberQueue);
             int[] measureNoteNumbers2 = NoteHelper.PopulateNoteNumbersFromQueue(numberOfNotes2, noteNumberQueue);
@@ -970,7 +976,6 @@ namespace EarTraining.Controllers
 
         private Queue<int> GetIntervalIntQueue(int[] scaleNoteNumbers, int first2MeasuresNumberOfNotes, int second2MeasuresNumberOfNotes, L1C2IntervalType intervalType, out bool criteriaSatisfied, int numberOfTries = 1)
         {
-            _log.Debug("");
             int numberOfNotes = first2MeasuresNumberOfNotes + second2MeasuresNumberOfNotes;
             bool first2MeasuresHasC2Interval = false;
             bool first2MeasuresHasC1Resolution = false;

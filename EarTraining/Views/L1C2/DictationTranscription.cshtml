@@ -144,17 +144,17 @@
             });
 
             request.done(function (data) {
-                if (data.hasError) {
-                    toastr.error("There was a problem attemtping to generate a phrase. Please report this problem.", "Problem Generating Phrase");
-                    $('#spinner').fadeOut("slow");
-                    return;
-                }
-
                 $('#audMelody').attr('src', rootPath + 'Temp/' + data.src);
                 $("#transcription1").html("");
                 $("#transcription2").html("");
                 $("#transcription3").html("");
                 $("#transcription4").html("");
+
+                if (data.hasError) {
+                    toastr.error("There was a problem attemtping to generate a phrase. Please try again.", "Problem Generating Phrase");
+                    $('#spinner').fadeOut("slow");
+                    return;
+                }
 
                 console.log("========== theScript1==========");
                 console.log(data.theScript1);
