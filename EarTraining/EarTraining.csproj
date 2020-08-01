@@ -437,6 +437,7 @@
     <Content Include="Scripts\opensheetmusicdisplay.min.js.map" />
     <Content Include="Views\Experimental\Osmd.cshtml" />
     <Content Include="Views\Experimental\Ratios.cshtml" />
+    <Content Include="Views\L1C3\DictationTranscription.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
