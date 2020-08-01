@@ -79,5 +79,10 @@ namespace EarTraining.Controllers
 
             return xml;
         }
+
+        public ActionResult Ratios()
+        {
+            return View();
+        }
     }
 }
