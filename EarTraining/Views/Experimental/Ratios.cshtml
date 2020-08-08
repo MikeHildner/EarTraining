@@ -1,34 +1,169 @@
 ﻿
 @{
-    ViewBag.Title = "Ratios";
+    ViewBag.Title = "Ratios (Just Intonation)";
 }
 
-<h2>Ratios</h2>
+<h2>@ViewBag.Title</h2>
 
-<svg id="perfect4th" height="200" width="500">
+<div class="row">
+    <label>Unison (1:1)</label>
+</div>
+<div class="row">
+    <svg id="unison" height="28" width="374" class="border border-primary" />
+</div>
 
-</svg>
+<div class="row">
+    <label>Minor 2nd (16:15)</label>
+</div>
+<div class="row">
+    <svg id="minor2nd" height="28" width="374" class="border border-primary" />
+</div>
+
+<div class="row">
+    <label>Major 2nd (9:8)</label>
+</div>
+<div class="row">
+    <svg id="major2nd" height="28" width="374" class="border border-primary" />
+</div>
+
+<div class="row">
+    <label>Minor 3rd (6:5)</label>
+</div>
+<div class="row">
+    <svg id="minor3rd" height="28" width="374" class="border border-primary" />
+</div>
+
+<div class="row">
+    <label>Major 3rd (5:4)</label>
+</div>
+<div class="row">
+    <svg id="major3rd" height="28" width="374" class="border border-primary" />
+</div>
+
+@*<div class="row">
+        <label>Tritone (7:5)</label>
+    </div>
+    <div class="row">
+        <svg id="tritone75" height="28" width="374" class="border border-primary" />
+    </div>*@
+
+<div class="row">
+    <label>Perfect 4th (4:3)</label>
+</div>
+<div class="row">
+    <svg id="perfect4th" height="28" width="374" class="border border-primary" />
+</div>
+
+<div class="row">
+    <label>Tritone (10:7)</label>
+</div>
+<div class="row">
+    <svg id="tritone107" height="28" width="374" class="border border-primary" />
+</div>
+
+<div class="row">
+    <label>Perfect 5th (3:2)</label>
+</div>
+<div class="row">
+    <svg id="perfect5th" height="28" width="374" class="border border-primary" />
+</div>
+
+<div class="row">
+    <label>Minor 6th (8:5)</label>
+</div>
+<div class="row">
+    <svg id="minor6th" height="28" width="374" class="border border-primary" />
+</div>
+
+<div class="row">
+    <label>Major 6th (5:3)</label>
+</div>
+<div class="row">
+    <svg id="major6th" height="28" width="374" class="border border-primary" />
+</div>
+
+<div class="row">
+    <label>Minor 7th (16:9)</label>
+</div>
+<div class="row">
+    <svg id="minor7th" height="28" width="374" class="border border-primary" />
+</div>
+
+<div class="row">
+    <label>Major 7th (15:8)</label>
+</div>
+<div class="row">
+    <svg id="major7th" height="28" width="374" class="border border-primary" />
+</div>
+
+<div class="row">
+    <label>Perfect Octave (2:1)</label>
+</div>
+<div class="row">
+    <svg id="perfectOctave" height="28" width="374" class="border border-primary" />
+</div>
+
+<hr />
+<div>
+    <img src="~/Content/Images/Ratios.png" />
+</div>
+<div>
+    <label>Image captured from <a href="https://en.wikipedia.org/wiki/Equal_temperament">Wikipedia</a></label>
+</div>
 
 @section scripts
 {
     <script>
         $(function () {
+            drawRatio("unison", 1, 1);
+            drawRatio("minor2nd", 16, 15);
+            drawRatio("major2nd", 9, 8);
+            drawRatio("minor3rd", 6, 5);
+            drawRatio("major3rd", 5, 4);
+            //drawRatio("tritone75", 7, 5);
+            drawRatio("perfect4th", 4, 3);
+            drawRatio("tritone107", 10, 7);
+            drawRatio("perfect5th", 3, 2);
+            drawRatio("minor6th", 8, 5);
+            drawRatio("major6th", 5, 3);
+            drawRatio("minor7th", 16, 9);
+            drawRatio("major7th", 15, 8);
+            drawRatio("perfectOctave", 2, 1);
+        });
+
+        function drawRatio(element, numerator, denominator) {
             var svgns = "http://www.w3.org/2000/svg",
-                container = document.getElementById('perfect4th');
+                container = document.getElementById(element);
             var height = $(container).attr("height");
             var width = $(container).attr("width");
 
-            // Perfect 4th ratio is 4:3.
-            for (var i = 0; i < 4; i++) {
-                var x = (width / 4) * i;
-                var y = 100
+            var circleRadius = 11.5;
+            var svgXCenter = width / 2;
+            var svgYCenter = height / 2;
+            var numeratorStartX = svgXCenter - circleRadius * (numerator - 1);
+            var denominatorStartX = svgXCenter - circleRadius * (denominator - 1);
+
+            for (var i = 0; i < numerator; i++) {
                 var circle = document.createElementNS(svgns, 'circle');
-                circle.setAttributeNS(null, 'cx', x);
-                circle.setAttributeNS(null, 'cy', y);
-                circle.setAttributeNS(null, 'r', 50);
+                circle.setAttributeNS(null, 'cx', numeratorStartX);
+                circle.setAttributeNS(null, 'cy', svgYCenter);
+                circle.setAttributeNS(null, 'r', circleRadius);
                 circle.setAttributeNS(null, 'style', 'fill: none; stroke: blue; stroke-width: 1px;');
                 container.appendChild(circle);
+
+                numeratorStartX += circleRadius * 2;
             }
-        });
+
+            for (var i = 0; i < denominator; i++) {
+                var circle = document.createElementNS(svgns, 'circle');
+                circle.setAttributeNS(null, 'cx', denominatorStartX);
+                circle.setAttributeNS(null, 'cy', svgYCenter);
+                circle.setAttributeNS(null, 'r', circleRadius);
+                circle.setAttributeNS(null, 'style', 'fill: none; stroke: red; stroke-width: 1px;');
+                container.appendChild(circle);
+
+                denominatorStartX += circleRadius * 2;
+            }
+        }
     </script>
 }

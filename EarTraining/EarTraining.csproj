@@ -233,6 +233,7 @@
     <Content Include="Content\Images\Piano.svg" />
     <Content Include="Content\Images\quarter-note-white.png" />
     <Content Include="Content\Images\quarter-note.png" />
+    <Content Include="Content\Images\Ratios.png" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
     <Content Include="favicon.ico" />
