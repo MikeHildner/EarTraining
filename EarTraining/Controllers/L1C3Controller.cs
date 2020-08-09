@@ -502,7 +502,7 @@ namespace EarTraining.Controllers
                 switch (intervalType)
                 {
                     case L1C3IntervalType.Minor3rd:
-                        randomInt = NoteHelper.GetRandomInt(1, 2);
+                        randomInt = NoteHelper.GetRandomInt(0, 2);
                         if (randomInt % 2 == 0)
                         {
                             randomInt = NoteHelper.GetRandomInt(0, min3rdIntervals.Count);
