@@ -118,7 +118,7 @@ namespace EarTraining.Controllers
             return View();
         }
 
-        public ActionResult AudioAndDictation(int intervalType, string keySignature, double bpm, int numberOfMeasures, string smallestRhythmicUnit)
+        public ActionResult AudioAndDictation(int intervalType, string keySignature, double bpm, int numberOfMeasures, string smallestRhythmicUnit, bool includeC2)
         {
             //_log.Info("====================");
 
@@ -172,8 +172,9 @@ namespace EarTraining.Controllers
                 int totalNotes = measureRhythm1.Split(',').Count() + measureRhythm2.Split(',').Count();
                 int totalEighthNotes = measureRhythm1.Split(',').Where(w => w == "8").Count() + measureRhythm2.Split(',').Where(w => w == "8").Count();
 
-                // Ensure at least 4 notes for the 2 measure phrase.
-                if (totalNotes < 4)
+                // Ensure a minimum number of notes for the 2 measure phrase. This could be 4, or 6 if C2 intervals are included.
+                int minimumNumberOfNotes = includeC2 ? 6 : 4;
+                if (totalNotes < minimumNumberOfNotes)
                 {
                     continue;
                 }
@@ -221,8 +222,9 @@ namespace EarTraining.Controllers
                     int totalNotes = measureRhythm3.Split(',').Count() + measureRhythm4.Split(',').Count();
                     int totalEighthNotes = measureRhythm3.Split(',').Where(w => w == "8").Count() + measureRhythm4.Split(',').Where(w => w == "8").Count();
 
-                    // Ensure at least 4 notes for the 2 measure phrase.
-                    if (totalNotes < 4)
+                    // Ensure a minimum number of notes for the 2 measure phrase. This could be 4, or 6 if C2 intervals are included.
+                    int minimumNumberOfNotes = includeC2 ? 6 : 4;
+                    if (totalNotes < minimumNumberOfNotes)
                     {
                         continue;
                     }
@@ -441,6 +443,7 @@ namespace EarTraining.Controllers
             bool second2MeasuresHasC3Interval = false;
             bool second2MeasuresHasC1Resolution = false;
 
+            // C3 intervals.
             List<Tuple<int, int>> min3rdIntervals = new List<Tuple<int, int>>
             {
                 new Tuple<int, int>(2, 4),  // RE FA Min. 3rd.
@@ -457,6 +460,7 @@ namespace EarTraining.Controllers
                 new Tuple<int, int>(5, 10)    // SO MI Maj. 6th.
             };
 
+            // C1 resolutions.
             List<Tuple<int, int>> c1Resolutions = new List<Tuple<int, int>>
             {
                 new Tuple<int, int>(2, 1),  // RE DO.
@@ -465,6 +469,22 @@ namespace EarTraining.Controllers
                 new Tuple<int, int>(7, 8),  // High TI DO.
                 new Tuple<int, int>(0, 1)   // Low TI DO.
             };
+
+            // C2 intervals.
+            List<Tuple<int, int>> maj3rdIntervals = new List<Tuple<int, int>>
+            {
+                new Tuple<int, int>(1, 3),  // DO MI Maj. 3rd.
+                new Tuple<int, int>(4, 6),  // FA LA Maj. 3rd.
+                new Tuple<int, int>(5, 7)   // SO TI Maj. 3rd.
+            };
+
+            List<Tuple<int, int>> min6thIntervals = new List<Tuple<int, int>>
+            {
+                new Tuple<int, int>(3, 8),   // MI DO Min. 6th.
+                new Tuple<int, int>(6, 11),  // LA FA Min. 6th.
+                new Tuple<int, int>(7, 12)   // TI SO Min. 6th.
+            };
+
 
             List<Tuple<int, int>> bothC3Intervals = min3rdIntervals.Concat(maj6thIntervals).ToList();
 
@@ -482,7 +502,7 @@ namespace EarTraining.Controllers
                 switch (intervalType)
                 {
                     case L1C3IntervalType.Minor3rd:
-                        randomInt = NoteHelper.GetRandomInt(0, 2);
+                        randomInt = NoteHelper.GetRandomInt(1, 2);
                         if (randomInt % 2 == 0)
                         {
                             randomInt = NoteHelper.GetRandomInt(0, min3rdIntervals.Count);
