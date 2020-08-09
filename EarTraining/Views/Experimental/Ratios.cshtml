@@ -8,98 +8,98 @@
 <div class="row">
     <label>Unison (1:1)</label>
 </div>
-<div class="row">
+<div class="row ratio-margin">
     <svg id="unison" height="28" width="374" class="border border-primary" />
 </div>
 
 <div class="row">
     <label>Minor 2nd (16:15)</label>
 </div>
-<div class="row">
+<div class="row ratio-margin">
     <svg id="minor2nd" height="28" width="374" class="border border-primary" />
 </div>
 
 <div class="row">
     <label>Major 2nd (9:8)</label>
 </div>
-<div class="row">
+<div class="row ratio-margin">
     <svg id="major2nd" height="28" width="374" class="border border-primary" />
 </div>
 
 <div class="row">
     <label>Minor 3rd (6:5)</label>
 </div>
-<div class="row">
+<div class="row ratio-margin">
     <svg id="minor3rd" height="28" width="374" class="border border-primary" />
 </div>
 
 <div class="row">
     <label>Major 3rd (5:4)</label>
 </div>
-<div class="row">
+<div class="row ratio-margin">
     <svg id="major3rd" height="28" width="374" class="border border-primary" />
+</div>
+
+<div class="row">
+    <label>Perfect 4th (4:3)</label>
+</div>
+<div class="row ratio-margin">
+    <svg id="perfect4th" height="28" width="374" class="border border-primary" />
 </div>
 
 @*<div class="row">
         <label>Tritone (7:5)</label>
     </div>
-    <div class="row">
+    <div class="row ratio-margin">
         <svg id="tritone75" height="28" width="374" class="border border-primary" />
     </div>*@
 
 <div class="row">
-    <label>Perfect 4th (4:3)</label>
-</div>
-<div class="row">
-    <svg id="perfect4th" height="28" width="374" class="border border-primary" />
-</div>
-
-<div class="row">
     <label>Tritone (10:7)</label>
 </div>
-<div class="row">
+<div class="row ratio-margin">
     <svg id="tritone107" height="28" width="374" class="border border-primary" />
 </div>
 
 <div class="row">
     <label>Perfect 5th (3:2)</label>
 </div>
-<div class="row">
+<div class="row ratio-margin">
     <svg id="perfect5th" height="28" width="374" class="border border-primary" />
 </div>
 
 <div class="row">
     <label>Minor 6th (8:5)</label>
 </div>
-<div class="row">
+<div class="row ratio-margin">
     <svg id="minor6th" height="28" width="374" class="border border-primary" />
 </div>
 
 <div class="row">
     <label>Major 6th (5:3)</label>
 </div>
-<div class="row">
+<div class="row ratio-margin">
     <svg id="major6th" height="28" width="374" class="border border-primary" />
 </div>
 
 <div class="row">
     <label>Minor 7th (16:9)</label>
 </div>
-<div class="row">
+<div class="row ratio-margin">
     <svg id="minor7th" height="28" width="374" class="border border-primary" />
 </div>
 
 <div class="row">
     <label>Major 7th (15:8)</label>
 </div>
-<div class="row">
+<div class="row ratio-margin">
     <svg id="major7th" height="28" width="374" class="border border-primary" />
 </div>
 
 <div class="row">
     <label>Perfect Octave (2:1)</label>
 </div>
-<div class="row">
+<div class="row ratio-margin">
     <svg id="perfectOctave" height="28" width="374" class="border border-primary" />
 </div>
 
@@ -139,9 +139,11 @@
 
             var circleRadius = 11.5;
             var svgXCenter = width / 2;
-            var svgYCenter = height / 2;
+            var svgYCenter = (height / 2) -1;
             var numeratorStartX = svgXCenter - circleRadius * (numerator - 1);
             var denominatorStartX = svgXCenter - circleRadius * (denominator - 1);
+            numeratorStartX -= 1;
+            denominatorStartX -= 1;
 
             for (var i = 0; i < numerator; i++) {
                 var circle = document.createElementNS(svgns, 'circle');

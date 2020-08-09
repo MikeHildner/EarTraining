@@ -175,3 +175,8 @@ audio {
     margin-right: 0px;
     margin-left: 0px;
 }
+
+.ratio-margin{
+    margin-top: -8px;
+    margin-bottom: 10px;
+}
