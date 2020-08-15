@@ -117,12 +117,12 @@ namespace EarTraining.Controllers
 
         public ActionResult DictationTranscription()
         {
-            _log.Trace("===== Begin test =====");
-            for (int i = 0; i < 1000; i++)
-            {
-                AudioAndDictation(1, "C", 60, 2, "EIGHTH", true);
-            }
-            _log.Trace("====== end test ======");
+            //_log.Trace("===== Begin test =====");
+            //for (int i = 0; i < 1000; i++)
+            //{
+            //    AudioAndDictation(1, "C", 60, 2, "EIGHTH", true);
+            //}
+            //_log.Trace("====== end test ======");
 
             ViewBag.ShowDo = false;
             return View();
