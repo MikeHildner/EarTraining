@@ -3,6 +3,7 @@ using EarTrainingLibrary.NAudio;
 using EarTrainingLibrary.Utility;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,6 +17,8 @@ namespace EarTraining.Controllers
 {
     public class L1C3Controller : BaseController
     {
+        private static readonly Logger _log = LogManager.GetCurrentClassLogger();
+
         public L1C3Controller()
         {
             Pitch pitch = new Pitches().Random();
@@ -114,13 +117,20 @@ namespace EarTraining.Controllers
 
         public ActionResult DictationTranscription()
         {
+            _log.Trace("===== Begin test =====");
+            for (int i = 0; i < 1000; i++)
+            {
+                AudioAndDictation(1, "C", 60, 2, "EIGHTH", true);
+            }
+            _log.Trace("====== end test ======");
+
             ViewBag.ShowDo = false;
             return View();
         }
 
         public ActionResult AudioAndDictation(int intervalType, string keySignature, double bpm, int numberOfMeasures, string smallestRhythmicUnit, bool includeC2)
         {
-            //_log.Info("====================");
+            _log.Debug($"intervalType: {intervalType}, keySignature: {keySignature}, bpm: {bpm}, numberOfMeasures: {numberOfMeasures}, smallestRhythmicUnit: {smallestRhythmicUnit}, includeC2: {includeC2}");
 
             L1C3IntervalType intType = (L1C3IntervalType)intervalType;
 
@@ -210,7 +220,8 @@ namespace EarTraining.Controllers
             randomInt = NoteHelper.GetRandomInt(0, measureRhythms.Count);
             measureRhythm4 = measureRhythms[randomInt];
 
-            if (numberOfMeasures == 4)
+            //if (numberOfMeasures == 4)
+            if (true)
             {
                 while (true)
                 {
@@ -271,6 +282,9 @@ namespace EarTraining.Controllers
             Queue<int> noteNumberQueue = new Queue<int>();
             bool criteriaSatisfied = false;
             int numberOfTries = 0;
+            int maxNumberOfTries = 1999;
+            var parametersToString = string.Empty;
+
             try
             {
                 while (!(noteNumberQueue.AllStepsWithinRange(12) && noteNumberQueue.AllNotesWithinRange(12) && criteriaSatisfied))
@@ -280,23 +294,26 @@ namespace EarTraining.Controllers
                     //_log.Info($"numberOfTries: {numberOfTries}");
                     //_log.Info($"measureRhythm1: {measureRhythm1}");
                     //_log.Info($"measureRhythm2: {measureRhythm2}");
-                    if (numberOfTries > 499)
+                    if (numberOfTries > maxNumberOfTries)
                     {
                         throw new PhraseGenerationException($"Aborted phrase generation after {numberOfTries} tries.");
                     }
 
-                    noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, intType, out criteriaSatisfied);
+                    noteNumberQueue = GetIntervalIntQueue(scaleNoteNumbers, first2MeasuresNumberOfNotes, second2MeasuresNumberOfNotes, intType, out criteriaSatisfied, includeC2, out parametersToString);
                 }
             }
-            catch (PhraseGenerationException)
+            catch (PhraseGenerationException pgEx)
             {
+                _log.Trace($"{numberOfTries} - {parametersToString}");
+
+                _log.Error(pgEx, $"The maxNumberOfTries ({maxNumberOfTries}) has been exceeded.");
                 dict.Add("hasError", "yep");
                 dict.Add("numberOfTries", numberOfTries.ToString());
                 var jsonEx = Json(dict, JsonRequestBehavior.AllowGet);
                 return jsonEx;
             }
 
-            //_log.Info(numberOfTries);
+            _log.Trace(numberOfTries);
 
             int[] measureNoteNumbers1 = NoteHelper.PopulateNoteNumbersFromQueue(numberOfNotes1, noteNumberQueue);
             int[] measureNoteNumbers2 = NoteHelper.PopulateNoteNumbersFromQueue(numberOfNotes2, noteNumberQueue);
@@ -413,7 +430,6 @@ namespace EarTraining.Controllers
 
         private static List<string> GetNoteRhythms(bool includeEighthNotes)
         {
-
             // Various rhythm possibilities for each measure.
             List<string> measureRhythms = new List<string>();
             measureRhythms.Add("1");
@@ -435,13 +451,19 @@ namespace EarTraining.Controllers
             return measureRhythms;
         }
 
-        private Queue<int> GetIntervalIntQueue(int[] scaleNoteNumbers, int first2MeasuresNumberOfNotes, int second2MeasuresNumberOfNotes, L1C3IntervalType intervalType, out bool criteriaSatisfied, int numberOfTries = 1)
+        private Queue<int> GetIntervalIntQueue(int[] scaleNoteNumbers, int first2MeasuresNumberOfNotes, int second2MeasuresNumberOfNotes, L1C3IntervalType intervalType, out bool criteriaSatisfied, bool includeC2, out string parametersToString)
         {
+            criteriaSatisfied = false;
+            parametersToString = $"scaleNoteNumbers: {scaleNoteNumbers}, first2MeasuresNumberOfNotes: {first2MeasuresNumberOfNotes}, second2MeasuresNumberOfNotes: {second2MeasuresNumberOfNotes}, intervalType: {intervalType}, criteriaSatisfied: {criteriaSatisfied}, includeC2: {includeC2}";
+            //_log.Trace(parameterString);
+
             int numberOfNotes = first2MeasuresNumberOfNotes + second2MeasuresNumberOfNotes;
             bool first2MeasuresHasC3Interval = false;
             bool first2MeasuresHasC1Resolution = false;
+            bool first2MeasuresHasC2Interval = false;
             bool second2MeasuresHasC3Interval = false;
             bool second2MeasuresHasC1Resolution = false;
+            bool second2MeasuresHasC2Interval = false;
 
             // C3 intervals.
             List<Tuple<int, int>> min3rdIntervals = new List<Tuple<int, int>>
@@ -502,8 +524,24 @@ namespace EarTraining.Controllers
                 switch (intervalType)
                 {
                     case L1C3IntervalType.Minor3rd:
-                        randomInt = NoteHelper.GetRandomInt(0, 2);
-                        if (randomInt % 2 == 0)
+                        int exclusiveUpperBound = includeC2 ? 4 : 3;
+                        randomInt = NoteHelper.GetRandomInt(1, exclusiveUpperBound);
+                        if (randomInt == 1)
+                        {
+                            randomInt = NoteHelper.GetRandomInt(0, c1Resolutions.Count);
+                            notes = c1Resolutions[randomInt];
+                            if (q.Count < first2MeasuresNumberOfNotes)
+                            {
+                                first2MeasuresHasC1Resolution = true;
+                            }
+                            else
+                            {
+                                second2MeasuresHasC1Resolution = true;
+                            }
+                            q.Enqueue(scaleNoteNumbers[notes.Item1]);
+                            q.Enqueue(scaleNoteNumbers[notes.Item2]);
+                        }
+                        else if(randomInt == 2)
                         {
                             randomInt = NoteHelper.GetRandomInt(0, min3rdIntervals.Count);
                             notes = min3rdIntervals[randomInt];
@@ -527,21 +565,37 @@ namespace EarTraining.Controllers
                                 q.Enqueue(scaleNoteNumbers[notes.Item2]);
                                 q.Enqueue(scaleNoteNumbers[notes.Item1]);
                             }
+
                         }
-                        else
+                        else if (randomInt == 3)
                         {
-                            randomInt = NoteHelper.GetRandomInt(0, c1Resolutions.Count);
-                            notes = c1Resolutions[randomInt];
+                            randomInt = NoteHelper.GetRandomInt(0, maj3rdIntervals.Count);
+                            notes = maj3rdIntervals[randomInt];
                             if (q.Count < first2MeasuresNumberOfNotes)
                             {
-                                first2MeasuresHasC1Resolution = true;
+                                first2MeasuresHasC2Interval = true;
                             }
                             else
                             {
-                                second2MeasuresHasC1Resolution = true;
+                                second2MeasuresHasC2Interval = true;
                             }
-                            q.Enqueue(scaleNoteNumbers[notes.Item1]);
-                            q.Enqueue(scaleNoteNumbers[notes.Item2]);
+
+                            randomInt = NoteHelper.GetRandomInt(0, 2);
+                            if (randomInt % 2 == 0)
+                            {
+                                q.Enqueue(scaleNoteNumbers[notes.Item1]);
+                                q.Enqueue(scaleNoteNumbers[notes.Item2]);
+                            }
+                            else
+                            {
+                                q.Enqueue(scaleNoteNumbers[notes.Item2]);
+                                q.Enqueue(scaleNoteNumbers[notes.Item1]);
+                            }
+                        }
+
+                        else
+                        {
+                            throw new NotSupportedException($"randomInt {randomInt} is not supported.");
                         }
 
                         break;
@@ -640,14 +694,30 @@ namespace EarTraining.Controllers
                 }
             }
 
-            // If we don't have at least one C1 resolution and at least one C2 interval, keep going. Same thing for second two measures.
-            if (!(first2MeasuresHasC1Resolution && first2MeasuresHasC3Interval && second2MeasuresHasC1Resolution && second2MeasuresHasC3Interval))
+            //_log.Info($"first2MeasuresHasC1Resolution: {first2MeasuresHasC1Resolution}, first2MeasuresHasC2Interval: {first2MeasuresHasC2Interval}, first2MeasuresHasC3Interval: {first2MeasuresHasC3Interval}, second2MeasuresHasC1Resolution: {second2MeasuresHasC1Resolution}, second2MeasuresHasC2Interval: {second2MeasuresHasC2Interval}, second2MeasuresHasC3Interval: {second2MeasuresHasC3Interval}");
+            if(includeC2)
             {
-                criteriaSatisfied = false;
+                // If we don't have at least one C1 resolution, one C2 interval and and at least one C3 interval, keep going. Same thing for second two measures.
+                if (!(first2MeasuresHasC1Resolution && first2MeasuresHasC2Interval && first2MeasuresHasC3Interval && second2MeasuresHasC1Resolution && second2MeasuresHasC2Interval && second2MeasuresHasC3Interval))
+                {
+                    criteriaSatisfied = false;
+                }
+                else
+                {
+                    criteriaSatisfied = true;
+                }
             }
             else
             {
-                criteriaSatisfied = true;
+                // If we don't have at least one C1 resolution and at least one C3 interval, keep going. Same thing for second two measures.
+                if (!(first2MeasuresHasC1Resolution && first2MeasuresHasC3Interval && second2MeasuresHasC1Resolution && second2MeasuresHasC3Interval))
+                {
+                    criteriaSatisfied = false;
+                }
+                else
+                {
+                    criteriaSatisfied = true;
+                }
             }
 
             return q;
