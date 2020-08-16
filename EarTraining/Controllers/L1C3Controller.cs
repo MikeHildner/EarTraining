@@ -101,7 +101,7 @@ namespace EarTraining.Controllers
             msp.AddMixerInput(samples[0]);
             msp.AddMixerInput(samples[1]);
             msp.AddMixerInput(samples[2]);
-            if(samples[3] != null)  // Bass note.
+            if (samples[3] != null)  // Bass note.
             {
                 msp.AddMixerInput(samples[3]);
             }
@@ -509,10 +509,12 @@ namespace EarTraining.Controllers
 
 
             List<Tuple<int, int>> bothC3Intervals = min3rdIntervals.Concat(maj6thIntervals).ToList();
+            List<Tuple<int, int>> bothC2Intervals = maj3rdIntervals.Concat(min6thIntervals).ToList();
 
             //_log.Info($"========== Getting intervals and resolutions, attempt # {numberOfTries} ==========");
             var q = new Queue<int>();
             int randomInt;
+            int exclusiveUpperBound;
             Tuple<int, int> notes;
             while (q.Count < numberOfNotes)
             {
@@ -524,7 +526,7 @@ namespace EarTraining.Controllers
                 switch (intervalType)
                 {
                     case L1C3IntervalType.Minor3rd:
-                        int exclusiveUpperBound = includeC2 ? 4 : 3;
+                        exclusiveUpperBound = includeC2 ? 4 : 3;
                         randomInt = NoteHelper.GetRandomInt(1, exclusiveUpperBound);
                         if (randomInt == 1)
                         {
@@ -541,7 +543,7 @@ namespace EarTraining.Controllers
                             q.Enqueue(scaleNoteNumbers[notes.Item1]);
                             q.Enqueue(scaleNoteNumbers[notes.Item2]);
                         }
-                        else if(randomInt == 2)
+                        else if (randomInt == 2)
                         {
                             randomInt = NoteHelper.GetRandomInt(0, min3rdIntervals.Count);
                             notes = min3rdIntervals[randomInt];
@@ -601,8 +603,25 @@ namespace EarTraining.Controllers
                         break;
 
                     case L1C3IntervalType.Major6th:
-                        randomInt = NoteHelper.GetRandomInt(0, 2);
-                        if (randomInt % 2 == 0)
+                        exclusiveUpperBound = includeC2 ? 4 : 3;
+                        randomInt = NoteHelper.GetRandomInt(1, exclusiveUpperBound);
+                        if (randomInt == 1)
+                        {
+                            randomInt = NoteHelper.GetRandomInt(0, c1Resolutions.Count);
+                            notes = c1Resolutions[randomInt];
+                            if (q.Count < first2MeasuresNumberOfNotes)
+                            {
+                                first2MeasuresHasC1Resolution = true;
+                            }
+                            else
+                            {
+                                second2MeasuresHasC1Resolution = true;
+                            }
+                            q.Enqueue(scaleNoteNumbers[notes.Item1]);
+                            q.Enqueue(scaleNoteNumbers[notes.Item2]);
+                        }
+
+                        else if (randomInt == 2)
                         {
                             randomInt = NoteHelper.GetRandomInt(0, maj6thIntervals.Count);
                             notes = maj6thIntervals[randomInt];
@@ -627,7 +646,42 @@ namespace EarTraining.Controllers
                                 q.Enqueue(scaleNoteNumbers[notes.Item1]);
                             }
                         }
+                        else if (randomInt == 3)
+                        {
+                            randomInt = NoteHelper.GetRandomInt(0, min6thIntervals.Count);
+                            notes = min6thIntervals[randomInt];
+                            if (q.Count < first2MeasuresNumberOfNotes)
+                            {
+                                first2MeasuresHasC2Interval = true;
+                            }
+                            else
+                            {
+                                second2MeasuresHasC2Interval = true;
+                            }
+
+                            randomInt = NoteHelper.GetRandomInt(0, 2);
+                            if (randomInt % 2 == 0)
+                            {
+                                q.Enqueue(scaleNoteNumbers[notes.Item1]);
+                                q.Enqueue(scaleNoteNumbers[notes.Item2]);
+                            }
+                            else
+                            {
+                                q.Enqueue(scaleNoteNumbers[notes.Item2]);
+                                q.Enqueue(scaleNoteNumbers[notes.Item1]);
+                            }
+                        }
                         else
+                        {
+                            throw new NotSupportedException($"randomInt {randomInt} is not supported.");
+                        }
+
+                        break;
+
+                    case L1C3IntervalType.Both:
+                        exclusiveUpperBound = includeC2 ? 4 : 3;
+                        randomInt = NoteHelper.GetRandomInt(1, exclusiveUpperBound);
+                        if (randomInt == 1)
                         {
                             randomInt = NoteHelper.GetRandomInt(0, c1Resolutions.Count);
                             notes = c1Resolutions[randomInt];
@@ -643,11 +697,7 @@ namespace EarTraining.Controllers
                             q.Enqueue(scaleNoteNumbers[notes.Item2]);
                         }
 
-                        break;
-
-                    case L1C3IntervalType.Both:
-                        randomInt = NoteHelper.GetRandomInt(0, 2);
-                        if (randomInt % 2 == 0)
+                        else if (randomInt == 2)
                         {
                             randomInt = NoteHelper.GetRandomInt(0, bothC3Intervals.Count);
                             notes = bothC3Intervals[randomInt];
@@ -672,20 +722,34 @@ namespace EarTraining.Controllers
                                 q.Enqueue(scaleNoteNumbers[notes.Item1]);
                             }
                         }
-                        else
+                        else if (randomInt == 3)
                         {
-                            randomInt = NoteHelper.GetRandomInt(0, c1Resolutions.Count);
-                            notes = c1Resolutions[randomInt];
+                            randomInt = NoteHelper.GetRandomInt(0, bothC2Intervals.Count);
+                            notes = bothC2Intervals[randomInt];
                             if (q.Count < first2MeasuresNumberOfNotes)
                             {
-                                first2MeasuresHasC1Resolution = true;
+                                first2MeasuresHasC2Interval = true;
                             }
                             else
                             {
-                                second2MeasuresHasC1Resolution = true;
+                                second2MeasuresHasC2Interval = true;
                             }
-                            q.Enqueue(scaleNoteNumbers[notes.Item1]);
-                            q.Enqueue(scaleNoteNumbers[notes.Item2]);
+
+                            randomInt = NoteHelper.GetRandomInt(0, 2);
+                            if (randomInt % 2 == 0)
+                            {
+                                q.Enqueue(scaleNoteNumbers[notes.Item1]);
+                                q.Enqueue(scaleNoteNumbers[notes.Item2]);
+                            }
+                            else
+                            {
+                                q.Enqueue(scaleNoteNumbers[notes.Item2]);
+                                q.Enqueue(scaleNoteNumbers[notes.Item1]);
+                            }
+                        }
+                        else
+                        {
+                            throw new NotSupportedException($"randomInt {randomInt} is not supported.");
                         }
 
                         break;
@@ -695,7 +759,7 @@ namespace EarTraining.Controllers
             }
 
             //_log.Info($"first2MeasuresHasC1Resolution: {first2MeasuresHasC1Resolution}, first2MeasuresHasC2Interval: {first2MeasuresHasC2Interval}, first2MeasuresHasC3Interval: {first2MeasuresHasC3Interval}, second2MeasuresHasC1Resolution: {second2MeasuresHasC1Resolution}, second2MeasuresHasC2Interval: {second2MeasuresHasC2Interval}, second2MeasuresHasC3Interval: {second2MeasuresHasC3Interval}");
-            if(includeC2)
+            if (includeC2)
             {
                 // If we don't have at least one C1 resolution, one C2 interval and and at least one C3 interval, keep going. Same thing for second two measures.
                 if (!(first2MeasuresHasC1Resolution && first2MeasuresHasC2Interval && first2MeasuresHasC3Interval && second2MeasuresHasC1Resolution && second2MeasuresHasC2Interval && second2MeasuresHasC3Interval))
