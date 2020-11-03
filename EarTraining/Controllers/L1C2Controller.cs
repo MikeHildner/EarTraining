@@ -33,18 +33,36 @@ namespace EarTraining.Controllers
         //    return View();
         //}
 
-        public ActionResult VocalDrills()
+        public ActionResult VocalDrills(string key)
         {
+            if (!string.IsNullOrWhiteSpace(key))
+            {
+                Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName == key.ToUpper());
+                ViewBag.Pitch = pitch;
+            }
+
             return View();
         }
 
-        public ActionResult MelodicMaj3rdMin6thNoDO()
+        public ActionResult MelodicMaj3rdMin6thNoDO(string key)
         {
+            if (!string.IsNullOrWhiteSpace(key))
+            {
+                Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName == key.ToUpper());
+                ViewBag.Pitch = pitch;
+            }
+
             return View();
         }
 
-        public ActionResult HarmonicMaj3rdMin6th()
+        public ActionResult HarmonicMaj3rdMin6th(string key)
         {
+            if (!string.IsNullOrWhiteSpace(key))
+            {
+                Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName == key.ToUpper());
+                ViewBag.Pitch = pitch;
+            }
+
             return View();
         }
 

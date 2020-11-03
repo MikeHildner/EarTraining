@@ -27,18 +27,36 @@ namespace EarTraining.Controllers
             ViewBag.ShowDo = true;
         }
 
-        public ActionResult SolfegResolutionsDO()
+        public ActionResult SolfegResolutionsDO(string key)
         {
+            if(!string.IsNullOrWhiteSpace(key))
+            {
+                Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName == key.ToUpper());
+                ViewBag.Pitch = pitch;
+            }
+
             return View();
         }
 
-        public ActionResult SolfegResolutionsNoDO()
+        public ActionResult SolfegResolutionsNoDO(string key)
         {
+            if (!string.IsNullOrWhiteSpace(key))
+            {
+                Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName == key.ToUpper());
+                ViewBag.Pitch = pitch;
+            }
+
             return View();
         }
 
-        public ActionResult PitchIdentification()
+        public ActionResult PitchIdentification(string key)
         {
+            if (!string.IsNullOrWhiteSpace(key))
+            {
+                Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName == key.ToUpper());
+                ViewBag.Pitch = pitch;
+            }
+
             return View();
         }
 
