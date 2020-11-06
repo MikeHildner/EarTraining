@@ -27,33 +27,33 @@ namespace EarTraining.Controllers
             ViewBag.ShowDo = true;
         }
 
-        public ActionResult SolfegResolutionsDO(string key)
+        public ActionResult SolfegResolutionsDO(string @do)
         {
-            if(!string.IsNullOrWhiteSpace(key))
+            if(!string.IsNullOrWhiteSpace(@do))
             {
-                Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName == key.ToUpper());
+                Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName == @do.ToUpper());
                 ViewBag.Pitch = pitch;
             }
 
             return View();
         }
 
-        public ActionResult SolfegResolutionsNoDO(string key)
+        public ActionResult SolfegResolutionsNoDO(string @do)
         {
-            if (!string.IsNullOrWhiteSpace(key))
+            if (!string.IsNullOrWhiteSpace(@do))
             {
-                Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName == key.ToUpper());
+                Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName == @do.ToUpper());
                 ViewBag.Pitch = pitch;
             }
 
             return View();
         }
 
-        public ActionResult PitchIdentification(string key)
+        public ActionResult PitchIdentification(string @do)
         {
-            if (!string.IsNullOrWhiteSpace(key))
+            if (!string.IsNullOrWhiteSpace(@do))
             {
-                Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName == key.ToUpper());
+                Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName == @do.ToUpper());
                 ViewBag.Pitch = pitch;
             }
 
