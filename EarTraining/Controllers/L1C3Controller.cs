@@ -27,25 +27,47 @@ namespace EarTraining.Controllers
         }
 
         // GET: L1C3
-        public ActionResult Index()
+        public ActionResult Index(string @do)
         {
-            ViewBag.ShowPlayDoTriad = true;
+            if (!string.IsNullOrWhiteSpace(@do))
+            {
+                Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName == @do.ToUpper());
+                ViewBag.Pitch = pitch;
+            }
 
             return View();
         }
 
-        public ActionResult VocalDrills()
+        public ActionResult VocalDrills(string @do)
         {
+            if (!string.IsNullOrWhiteSpace(@do))
+            {
+                Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName == @do.ToUpper());
+                ViewBag.Pitch = pitch;
+            }
+
             return View();
         }
 
-        public ActionResult MelodicMin3rdMaj6thNoDO()
+        public ActionResult MelodicMin3rdMaj6thNoDO(string @do)
         {
+            if (!string.IsNullOrWhiteSpace(@do))
+            {
+                Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName == @do.ToUpper());
+                ViewBag.Pitch = pitch;
+            }
+
             return View();
         }
 
-        public ActionResult HarmonicMin3rdMaj6th()
+        public ActionResult HarmonicMin3rdMaj6th(string @do)
         {
+            if (!string.IsNullOrWhiteSpace(@do))
+            {
+                Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName == @do.ToUpper());
+                ViewBag.Pitch = pitch;
+            }
+
             return View();
         }
 
