@@ -319,3 +319,11 @@ function previousLetterName(letter) {
     var previousLetter = String.fromCharCode(i);
     return previousLetter;
 }
+
+function invertSelections(callback) {
+    $('.cb-include').each(function () {
+        this.checked = !this.checked;
+    });
+
+    callback();
+}
