@@ -9,12 +9,20 @@ namespace EarTraining.Controllers
 {
     public class SolfegController : BaseController
     {
-        // GET: Solfeg
-        public ActionResult Index()
+        public SolfegController()
         {
             Pitch pitch = new Pitches().Random();
             ViewBag.Pitch = pitch;
             ViewBag.ShowDo = true;
+        }
+        // GET: Solfeg
+        public ActionResult Index(string @do)
+        {
+            if (!string.IsNullOrWhiteSpace(@do))
+            {
+                Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName == @do.ToUpper());
+                ViewBag.Pitch = pitch;
+            }
 
             return View();
         }
