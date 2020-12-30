@@ -23,8 +23,14 @@ namespace EarTraining.Controllers
         }
 
         // GET: L1C4
-        public ActionResult Index()
+        public ActionResult Index(string @do)
         {
+            if (!string.IsNullOrWhiteSpace(@do))
+            {
+                Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName == @do.ToUpper());
+                ViewBag.Pitch = pitch;
+            }
+
             ViewBag.ShowPlayDoTriad = true;
 
             return View();

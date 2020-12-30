@@ -18,7 +18,7 @@ namespace EarTraining.Controllers
 {
     public class L1C2Controller : BaseController
     {
-        //private static readonly Logger _log = LogManager.GetCurrentClassLogger();
+        private static readonly Logger _log = LogManager.GetCurrentClassLogger();
 
         public L1C2Controller()
         {
@@ -929,15 +929,17 @@ namespace EarTraining.Controllers
         {
 
             // Various rhythm possibilities for each measure.
-            List<string> measureRhythms = new List<string>();
-            measureRhythms.Add("1");
-            measureRhythms.Add("2,2");
-            measureRhythms.Add("4,2.");
-            measureRhythms.Add("2.,4");
-            measureRhythms.Add("4,4,4,4");
-            measureRhythms.Add("4,4,2");
-            measureRhythms.Add("2,4,4");
-            measureRhythms.Add("4,2,4");
+            List<string> measureRhythms = new List<string>
+            {
+                "1",
+                "2,2",
+                "4,2.",
+                "2.,4",
+                "4,4,4,4",
+                "4,4,2",
+                "2,4,4",
+                "4,2,4"
+            };
             if (includeEighthNotes)
             {
                 measureRhythms.Add("8,8,4,4,4");
@@ -982,7 +984,7 @@ namespace EarTraining.Controllers
 
             List<Tuple<int, int>> bothC2Intervals = maj3rdIntervals.Concat(min6thIntervals).ToList();
 
-            //_log.Info($"========== Getting intervals and resolutions, attempt # {numberOfTries} ==========");
+            _log.Info($"========== Getting intervals and resolutions, attempt # {numberOfTries} ==========");
             var q = new Queue<int>();
             int randomInt;
             Tuple<int, int> notes;

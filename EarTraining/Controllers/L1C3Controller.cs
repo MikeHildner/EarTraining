@@ -453,15 +453,17 @@ namespace EarTraining.Controllers
         private static List<string> GetNoteRhythms(bool includeEighthNotes)
         {
             // Various rhythm possibilities for each measure.
-            List<string> measureRhythms = new List<string>();
-            measureRhythms.Add("1");
-            measureRhythms.Add("2,2");
-            measureRhythms.Add("4,2.");
-            measureRhythms.Add("2.,4");
-            measureRhythms.Add("4,4,4,4");
-            measureRhythms.Add("4,4,2");
-            measureRhythms.Add("2,4,4");
-            measureRhythms.Add("4,2,4");
+            List<string> measureRhythms = new List<string>
+            {
+                "1",
+                "2,2",
+                "4,2.",
+                "2.,4",
+                "4,4,4,4",
+                "4,4,2",
+                "2,4,4",
+                "4,2,4"
+            };
             if (includeEighthNotes)
             {
                 measureRhythms.Add("8,8,4,4,4");
