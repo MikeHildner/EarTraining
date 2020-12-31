@@ -28,6 +28,7 @@ namespace EarTraining
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/custom.css",
                       "~/Content/site.css",
                       "~/Content/css-toggle-switch.css",
                       "~/Content/font-awesome.css",
