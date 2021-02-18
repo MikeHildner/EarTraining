@@ -27,12 +27,6 @@ namespace EarTraining.Controllers
             ViewBag.ShowDo = true;
         }
 
-        // GET: L1C2
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
-
         public ActionResult VocalDrills(string @do)
         {
             if (!string.IsNullOrWhiteSpace(@do))
