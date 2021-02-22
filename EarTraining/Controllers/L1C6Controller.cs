@@ -23,29 +23,59 @@ namespace EarTraining.Controllers
             ViewBag.ShowDo = true;
         }
 
-        public ActionResult VocalDrills()
+        public ActionResult VocalDrills(string @do)
         {
+            if (!string.IsNullOrWhiteSpace(@do))
+            {
+                Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName == @do.ToUpper());
+                ViewBag.Pitch = pitch;
+            }
+
             return View();
         }
 
-        public ActionResult MelodicIntervals()
+        public ActionResult MelodicIntervals(string @do)
         {
+            if (!string.IsNullOrWhiteSpace(@do))
+            {
+                Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName == @do.ToUpper());
+                ViewBag.Pitch = pitch;
+            }
+
             return View();
         }
 
-        public ActionResult HarmonicIntervals()
+        public ActionResult HarmonicIntervals(string @do)
         {
+            if (!string.IsNullOrWhiteSpace(@do))
+            {
+                Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName == @do.ToUpper());
+                ViewBag.Pitch = pitch;
+            }
+
             return View();
         }
 
-        public ActionResult DiatonicTriadRecognition()
+        public ActionResult DiatonicTriadRecognition(string @do)
         {
+            if (!string.IsNullOrWhiteSpace(@do))
+            {
+                Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName == @do.ToUpper());
+                ViewBag.Pitch = pitch;
+            }
+
             ViewBag.ShowPlayDoTriad = true;
             return View();
         }
 
-        public ActionResult DiatonicTriadProgressions()
+        public ActionResult DiatonicTriadProgressions(string @do)
         {
+            if (!string.IsNullOrWhiteSpace(@do))
+            {
+                Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName == @do.ToUpper());
+                ViewBag.Pitch = pitch;
+            }
+
             ViewBag.ShowPlayDoTriad = true;
             return View();
         }
