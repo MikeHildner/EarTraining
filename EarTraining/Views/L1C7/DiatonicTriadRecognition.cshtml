@@ -44,10 +44,16 @@
 </div>
 
 <div class="row">
-    <div class="col-md-12">
-        <h4>Triads</h4>
+    <div class="col-md-6">
+        <div class="float-left">
+            <h4>Triads</h4>
+        </div>
+        <div class="float-right">
+            <input type="button" class="btn btn-primary margin-bottom-5" value="Invert Selections" onclick="invertSelections(setAudioSrc)" />
+        </div>
     </div>
 </div>
+
 
 <div class="row">
     <div class="col-md-4 card">
@@ -344,6 +350,12 @@
 
             // Get the selected chords.
             var selected = $('.cb-include:checkbox:checked');
+            if (selected.length === 0) {
+                $('#spinner').fadeOut("slow");
+                toastr.warning('Please select at least one triad.', 'No Triads Selected');
+                return;
+            }
+
             // Pick a random one.
             var randElement = selected[Math.floor(Math.random() * selected.length)];
             var randId = $(randElement).attr('id');

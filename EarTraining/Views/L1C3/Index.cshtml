@@ -43,10 +43,16 @@
 </div>
 
 <div class="row">
-    <div class="col-md-12">
-        <h4>Triads</h4>
+    <div class="col-md-6">
+        <div class="float-left">
+            <h4>Triads</h4>
+        </div>
+        <div class="float-right">
+            <input type="button" class="btn btn-primary margin-bottom-5" value="Invert Selections" onclick="invertSelections(setAudioSrc2)" />
+        </div>
     </div>
 </div>
+
 <div class="row">
     <div class="col-md-4 card">
         <figure>
@@ -192,12 +198,6 @@
         </figure>
     </div>
 
-</div>
-<div class="row">
-    <div class="col-md-10"></div>
-    <div class="col-md-2">
-        <input type="button" class="btn btn-primary margin-top-5" value="Invert Selections" onclick="invertSelections(setAudioSrc2)" />
-    </div>
 </div>
 
 @section  scripts {
