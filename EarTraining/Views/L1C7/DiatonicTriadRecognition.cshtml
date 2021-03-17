@@ -446,7 +446,7 @@
                 case "Go!":
                     $("#btnAutomate").text("Stop");
                     playAndShow();
-                    var interval = setInterval(playAndShow, 10000);
+                    var interval = setInterval(playAndShow, 11000);
                     intervals.push(interval);
                     break;
 
@@ -471,8 +471,7 @@
                     $("#revealModal").modal('show');
                     setTimeout(function () {
                         $("#revealModal").modal('hide');
-                    }, 4000);
-
+                    }, 3000);
                 }, 3000);
             }, 3000);
         }
