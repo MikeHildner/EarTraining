@@ -9,7 +9,7 @@
 
 <figure>
     <figcaption>Press the play button to hear the DO</figcaption>
-    <audio class="doAccepter" controls preload='none'>
+    <audio id="doPlayer" class="doAccepter" controls preload='none'>
         <source src='@Url.Action("GetDOEx", "DO", new { doNoteName = ViewBag.Pitch.PitchName })' type='audio/mpeg'>
     </audio>
 </figure>
