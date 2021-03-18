@@ -166,6 +166,19 @@
                             </div>
 
                         </div>
+
+                        <div class="row">
+                            <div class="card">
+                                <div class="card-header bg-warning text-primary">
+                                    <i class="fa fa-gears"></i><label class="margin-left-default">Automation</label>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">Automate the drill process. This respects your "Include in Drills" selections.</p>
+                                    <button id="btnAutomate2" class="btn btn-outline-warning" onclick="automate2();">Go!</button><label class="margin-left-default" id="remainingIterations2"></label>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
                     <div class="tab-pane fade" id="nav-3" role="tabpanel" aria-labelledby="nav-3-tab">
@@ -378,8 +391,21 @@
     </div>
 </section>
 
+<div id="revealModal" class="modal fade modal-sm" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div id="revealModalBody" class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+
 @section  scripts {
     <script>
+        var intervals = [];
+        var iterations = 0;
+        var maxIterations = 3;
+
         $(document).ready(function () {
             setAudProgression2Src();
             setAudProgression3Src();
@@ -499,5 +525,66 @@
             $('#progression3').html(progressionTable);
             $('#spinner3').fadeOut("slow");
         }
+
+        function automate2() {
+            var buttonText = $("#btnAutomate2").text();
+            switch (buttonText) {
+                case "Go!":
+                    $("#btnAutomate2").text("Stop");
+                    playAndShow2();
+                    var interval = setInterval(playAndShow2, 11000);
+                    intervals.push(interval);
+                    break;
+
+                case "Stop":
+                    $("#btnAutomate2").text("Go!");
+                    resetIterationsMessage2();
+                    clearAllIntervals();
+                    break;
+
+                default:
+                    alert("'" + buttonText + "' is not supported.");
+                    break;
+            }
+        }
+
+        function playAndShow2() {
+            iterations += 1;
+            $("#remainingIterations2").text("Playing " + iterations + " of " + maxIterations + " iterations.");
+
+            document.getElementById('doPlayer').play();
+
+            setTimeout(function () {
+                setAudProgression2Src();
+                $('#audProgression2').trigger("play");
+                setTimeout(function () {
+                    $("#revealModalBody").html($("#progression2").html());
+                    $("#revealModal").modal('show');
+                    setTimeout(function () {
+                        $("#revealModal").modal('hide');
+                        if (iterations == maxIterations) {
+                            $("#btnAutomate").text("Go!");
+                            resetIterationsMessage2();
+                            iterations = 0;
+                            clearAllIntervals();
+                        }
+                    }, 3000);
+                }, 3000);
+            }, 3000);
+        }
+
+        function clearAllIntervals() {
+            for (var id of this.intervals) {
+                clearInterval(id);
+            }
+
+            intervals = [];
+        }
+
+        function resetIterationsMessage2() {
+            $("#remainingIterations2").text("Automation will stop after " + maxIterations + " iterations.");
+        }
+
+
     </script>
 }
