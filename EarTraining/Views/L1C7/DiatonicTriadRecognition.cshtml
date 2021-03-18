@@ -354,7 +354,7 @@
 
         var intervals = [];
         var iterations = 0;
-        var maxIterations = 3;
+        var maxIterations = 10;
 
         $(document).ready(function () {
             setAudioSrc();
@@ -363,7 +363,7 @@
             setAudioSrc();
             });
 
-            $("#remainingIterations").text("Automation will stop after " + maxIterations + " iterations.");
+            resetIterationsMessage();
         });
 
         // Note we're using the controller method from L1C3 because most of the code was already written.
@@ -456,6 +456,7 @@
 
                 case "Stop":
                     $("#btnAutomate").text("Go!");
+                    resetIterationsMessage();
                     clearAllIntervals();
                     break;
 
@@ -470,9 +471,11 @@
             $("#remainingIterations").text("Playing " + iterations + " of " + maxIterations + " iterations.");
             
             document.getElementById('doPlayer').play();
+
             setTimeout(function () {
                 setAudioSrc();
-                document.getElementById('audioEx').play();
+                //document.getElementById('audioEx').play();
+                $('#audioEx').trigger("play");
                 setTimeout(function () {
                     $("#revealModalBody").html($("#triad").html());
                     $("#revealModal").modal('show');
@@ -480,7 +483,7 @@
                         $("#revealModal").modal('hide');
                         if (iterations == maxIterations) {
                             $("#btnAutomate").text("Go!");
-                            $("#remainingIterations").text("Automation will stop after " + maxIterations + " iterations.");
+                            resetIterationsMessage();
                             iterations = 0;
                             clearAllIntervals();
                         }
@@ -495,6 +498,10 @@
             }
 
             intervals = [];
+        }
+
+        function resetIterationsMessage() {
+            $("#remainingIterations").text("Automation will stop after " + maxIterations + " iterations.");
         }
 
     </script>
