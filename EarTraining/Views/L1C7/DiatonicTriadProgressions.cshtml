@@ -427,6 +427,9 @@
                 setAudProgression2Src();
                 setAudProgression3Src();
             });
+
+            resetIterationsMessage2();
+            resetIterationsMessage3();
         });
 
         function setAudProgression2Src() {
@@ -545,7 +548,7 @@
                 case "Go!":
                     $("#btnAutomate2").text("Stop");
                     playAndShow2();
-                    var interval = setInterval(playAndShow2, 11000);
+                    var interval = setInterval(playAndShow2, 12000);
                     intervals.push(interval);
                     break;
 
@@ -576,13 +579,13 @@
                     setTimeout(function () {
                         $("#revealModal").modal('hide');
                         if (iterations == maxIterations) {
-                            $("#btnAutomate").text("Go!");
+                            $("#btnAutomate2").text("Go!");
                             resetIterationsMessage2();
                             iterations = 0;
                             clearAllIntervals();
                         }
                     }, 3000);
-                }, 3000);
+                }, 4000);
             }, 3000);
         }
 
@@ -596,7 +599,7 @@
                 case "Go!":
                     $("#btnAutomate3").text("Stop");
                     playAndShow3();
-                    var interval = setInterval(playAndShow3, 12500);
+                    var interval = setInterval(playAndShow3, 13500);
                     intervals.push(interval);
                     break;
 
@@ -633,7 +636,7 @@
                             clearAllIntervals();
                         }
                     }, 3000);
-                }, 5000);
+                }, 6000);
             }, 3000);
         }
 
