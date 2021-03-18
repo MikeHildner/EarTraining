@@ -417,7 +417,17 @@
     <script>
         var intervals = [];
         var iterations = 0;
-        var maxIterations = 3;
+        var maxIterations = 10;
+
+        var delayBeforeProgression2 = 3000;
+        var delayBeforeShowModal2 = 5000;
+        var delayBeforeHideModal2 = 3000;
+        var delayBetweenIterations2 = delayBeforeProgression2 + delayBeforeShowModal2 + delayBeforeHideModal2;
+
+        var delayBeforeProgression3 = 3000;
+        var delayBeforeShowModal3 = 8500;
+        var delayBeforeHideModal3 = 3000;
+        var delayBetweenIterations3 = delayBeforeProgression3 + delayBeforeShowModal3 + delayBeforeHideModal3;
 
         $(document).ready(function () {
             setAudProgression2Src();
@@ -548,7 +558,7 @@
                 case "Go!":
                     $("#btnAutomate2").text("Stop");
                     playAndShow2();
-                    var interval = setInterval(playAndShow2, 12000);
+                    var interval = setInterval(playAndShow2, delayBetweenIterations2);
                     intervals.push(interval);
                     break;
 
@@ -584,9 +594,9 @@
                             iterations = 0;
                             clearAllIntervals();
                         }
-                    }, 3000);
-                }, 4000);
-            }, 3000);
+                    }, delayBeforeHideModal2);
+                }, delayBeforeShowModal2);
+            }, delayBeforeProgression2);
         }
 
         function resetIterationsMessage2() {
@@ -599,7 +609,7 @@
                 case "Go!":
                     $("#btnAutomate3").text("Stop");
                     playAndShow3();
-                    var interval = setInterval(playAndShow3, 13500);
+                    var interval = setInterval(playAndShow3, delayBetweenIterations3);
                     intervals.push(interval);
                     break;
 
@@ -635,9 +645,9 @@
                             iterations = 0;
                             clearAllIntervals();
                         }
-                    }, 3000);
-                }, 6000);
-            }, 3000);
+                    }, delayBeforeHideModal3);
+                }, delayBeforeShowModal3);
+            }, delayBeforeProgression2);
         }
 
         function resetIterationsMessage3() {

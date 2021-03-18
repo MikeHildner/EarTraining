@@ -356,6 +356,11 @@
         var iterations = 0;
         var maxIterations = 10;
 
+        var delayBeforeTriad= 3000;
+        var delayBeforeShowModal = 6000;
+        var delayBeforeHideModal = 3000;
+        var delayBetweenIterations = delayBeforeTriad + delayBeforeShowModal + delayBeforeHideModal;
+
         $(document).ready(function () {
             setAudioSrc();
 
@@ -450,7 +455,7 @@
                 case "Go!":
                     $("#btnAutomate").text("Stop");
                     playAndShow();
-                    var interval = setInterval(playAndShow, 11000);
+                    var interval = setInterval(playAndShow, delayBetweenIterations);
                     intervals.push(interval);
                     break;
 
@@ -474,7 +479,6 @@
 
             setTimeout(function () {
                 setAudioSrc();
-                //document.getElementById('audioEx').play();
                 $('#audioEx').trigger("play");
                 setTimeout(function () {
                     $("#revealModalBody").html($("#triad").html());
@@ -487,9 +491,9 @@
                             iterations = 0;
                             clearAllIntervals();
                         }
-                    }, 3000);
-                }, 3000);
-            }, 3000);
+                    }, delayBeforeHideModal);
+                }, delayBeforeShowModal);
+            }, delayBeforeTriad);
         }
 
         function clearAllIntervals() {
