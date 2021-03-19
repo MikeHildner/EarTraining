@@ -31,7 +31,7 @@ namespace EarTraining.Controllers
         {
             if (!string.IsNullOrWhiteSpace(@do))
             {
-                Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName == @do.ToUpper());
+                Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName.ToUpper().Split('/').Contains(@do.ToUpper()));
                 ViewBag.Pitch = pitch;
             }
 
@@ -42,7 +42,7 @@ namespace EarTraining.Controllers
         {
             if (!string.IsNullOrWhiteSpace(@do))
             {
-                Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName == @do.ToUpper());
+                Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName.ToUpper().Split('/').Contains(@do.ToUpper()));
                 ViewBag.Pitch = pitch;
             }
 
@@ -53,7 +53,7 @@ namespace EarTraining.Controllers
         {
             if (!string.IsNullOrWhiteSpace(@do))
             {
-                Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName == @do.ToUpper());
+                Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName.ToUpper().Split('/').Contains(@do.ToUpper()));
                 ViewBag.Pitch = pitch;
             }
 
