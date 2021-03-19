@@ -15,3 +15,41 @@
 </figure>
 <p>Hover over the below to reveal the DO</p>
 <div class="spoiler" id="doSpoiler">@ViewBag.Pitch.PitchName - @ViewBag.Pitch.Hertz Hz</div>
+<div class="margin-top-5">
+    <fieldset>
+        <select id="chooseDO" name="chooseDO" class="form-control changer ratio-margin" onchange="forceDo();">
+            <option value="" selected="selected">Or choose your DO</option>
+            <option value="F%234">F#</option>
+            <option value="F4">F</option>
+            <option value="E4">E</option>
+            <option value="Eb4">Eb</option>
+            <option value="D4">D</option>
+            <option value="Db4">Db</option>
+            <option value="C4">C</option>
+            <option value="B3">B</option>
+            <option value="Bb3">Bb</option>
+            <option value="A3">A</option>
+            <option value="Ab3">Ab</option>
+            <option value="G3">G</option>
+        </select>
+    </fieldset>
+</div>
+
+<div class="card bg-light text-primary">
+    <div class="card-body">
+        <i class="fa fa-info"></i>
+        <span class="pad-left-10">Chaning the DO will refresh the page, resetting the "Include in Drills" selections.</span>
+    </div>
+</div>
+
+<script>
+    function forceDo() {
+        var key = $("#chooseDO").val();
+        if (!key) {
+            return;
+        }
+
+        var url = location.protocol + "//" + location.host + location.pathname + "?DO=" + key;
+        window.location.href = url;
+    }
+</script>
