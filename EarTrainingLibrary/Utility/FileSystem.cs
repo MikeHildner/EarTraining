@@ -9,7 +9,7 @@ namespace EarTrainingLibrary.Utility
 {
     public class FileSystem
     {
-        public static void CleanFolder(string tempFolder)
+        public void CleanFolder(string tempFolder)
         {
             DirectoryInfo dirInfo = new DirectoryInfo(tempFolder);
             DateTime cutoff = DateTime.Now.AddMinutes(-5);

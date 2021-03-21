@@ -2,10 +2,30 @@
     <div class="float-left">
         <h4>DO</h4>
     </div>
-    <div class="float-right">
-        <input type="button" class="btn btn-primary margin-top-5" value="Get a New DO" onclick="location.href='@Request.Url.AbsoluteUri'" />
+    <div class="float-right text-align-right">
+        <input type="button" class="btn btn-primary margin-top-5 margin-bottom-5" value="Get a Random DO" onclick="location.href='@Request.Url.AbsoluteUri'" />
+        <fieldset class="margin-top-5">
+            <select id="chooseDO" name="chooseDO" class="form-control changer ratio-margin" onchange="forceDo();">
+                <option value="" selected="selected">Or Choose Your DO</option>
+                <option value="F%234">F#</option>
+                <option value="F4">F</option>
+                <option value="E4">E</option>
+                <option value="Eb4">Eb</option>
+                <option value="D4">D</option>
+                <option value="Db4">Db</option>
+                <option value="C4">C</option>
+                <option value="B3">B</option>
+                <option value="Bb3">Bb</option>
+                <option value="A3">A</option>
+                <option value="Ab3">Ab</option>
+                <option value="G3">G</option>
+            </select>
+        </fieldset>
     </div>
+
 </div>
+
+
 
 <figure>
     <figcaption>Press the play button to hear the DO</figcaption>
@@ -15,25 +35,8 @@
 </figure>
 <p>Hover over the below to reveal the DO</p>
 <div class="spoiler" id="doSpoiler">@ViewBag.Pitch.PitchName - @ViewBag.Pitch.Hertz Hz</div>
-<div class="margin-top-5">
-    <fieldset>
-        <select id="chooseDO" name="chooseDO" class="form-control changer ratio-margin" onchange="forceDo();">
-            <option value="" selected="selected">Or choose your DO</option>
-            <option value="F%234">F#</option>
-            <option value="F4">F</option>
-            <option value="E4">E</option>
-            <option value="Eb4">Eb</option>
-            <option value="D4">D</option>
-            <option value="Db4">Db</option>
-            <option value="C4">C</option>
-            <option value="B3">B</option>
-            <option value="Bb3">Bb</option>
-            <option value="A3">A</option>
-            <option value="Ab3">Ab</option>
-            <option value="G3">G</option>
-        </select>
-    </fieldset>
-</div>
+
+
 
 <div class="card bg-light text-primary">
     <div class="card-body">

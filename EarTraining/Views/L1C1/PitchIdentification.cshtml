@@ -181,13 +181,46 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="card">
+        <div class="card-header bg-warning text-primary">
+            <i class="fa fa-gears"></i><label class="margin-left-default">Automation</label>
+        </div>
+        <div class="card-body">
+            <p class="card-text">Automate the drill process. This respects your "Include in Drills" selections.</p>
+            <button id="btnAutomate" class="btn btn-warning" onclick="automate();">Go!</button><label class="margin-left-default" id="remainingIterations"></label>
+        </div>
+    </div>
+</div>
+
+<div id="revealModal" class="modal fade modal-sm" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div id="revealModalBody" class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+
 @section  scripts {
     <script>
+
+        var intervals = [];
+        var iterations = 0;
+        var maxIterations = 10;
+
+        var delayBeforeTriad = 3000;
+        var delayBeforeShowModal = 3000;
+        var delayBeforeHideModal = 3000;
+        var delayBetweenIterations = delayBeforeTriad + delayBeforeShowModal + delayBeforeHideModal;
+
         $(document).ready(function () {
             setAudNoteSrc();
             $('.cb-include').change(function () {
                 setAudNoteSrc();
             });
+
+            resetIterationsMessage();
         });
 
         function setAudNoteSrc() {
@@ -234,6 +267,65 @@
 
             $('#note').text(msg);
             $('#spinner').fadeOut("slow");
+        }
+
+        function automate() {
+            var buttonText = $("#btnAutomate").text();
+            switch (buttonText) {
+                case "Go!":
+                    $("#btnAutomate").text("Stop");
+                    playAndShow();
+                    var interval = setInterval(playAndShow, delayBetweenIterations);
+                    intervals.push(interval);
+                    break;
+
+                case "Stop":
+                    $("#btnAutomate").text("Go!");
+                    resetIterationsMessage();
+                    clearAllIntervals();
+                    break;
+
+                default:
+                    alert("'" + buttonText + "' is not supported.");
+                    break;
+            }
+        }
+
+        function playAndShow() {
+            iterations += 1;
+            $("#remainingIterations").text("Playing " + iterations + " of " + maxIterations + " iterations.");
+
+            document.getElementById('doPlayer').play();
+
+            setTimeout(function () {
+                setAudNoteSrc();
+                $('#audNote').trigger("play");
+                setTimeout(function () {
+                    $("#revealModalBody").html($("#note").html());
+                    $("#revealModal").modal('show');
+                    setTimeout(function () {
+                        $("#revealModal").modal('hide');
+                        if (iterations == maxIterations) {
+                            $("#btnAutomate").text("Go!");
+                            resetIterationsMessage();
+                            iterations = 0;
+                            clearAllIntervals();
+                        }
+                    }, delayBeforeHideModal);
+                }, delayBeforeShowModal);
+            }, delayBeforeTriad);
+        }
+
+        function clearAllIntervals() {
+            for (var id of this.intervals) {
+                clearInterval(id);
+            }
+
+            intervals = [];
+        }
+
+        function resetIterationsMessage() {
+            $("#remainingIterations").text("Automation will stop after " + maxIterations + " iterations.");
         }
 
     </script>

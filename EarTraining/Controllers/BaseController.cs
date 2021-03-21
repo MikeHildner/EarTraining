@@ -3,6 +3,7 @@ using EarTrainingLibrary.Utility;
 using NLog;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Hosting;
 using System.Web.Mvc;
 
@@ -30,7 +31,9 @@ namespace EarTraining.Controllers
         public void DeleteOldFiles()
         {
             string tempFolder = HostingEnvironment.MapPath("~/Temp");
-            EarTrainingLibrary.Utility.FileSystem.CleanFolder(tempFolder);
+            //Task.Run(() => FileSystem.CleanFolder(tempFolder));
+            new Task(() => new FileSystem().CleanFolder(tempFolder)).Start();
+            //FileSystem.CleanFolder(tempFolder);
         }
 
         protected override void OnException(ExceptionContext filterContext)
