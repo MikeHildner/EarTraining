@@ -415,9 +415,9 @@
 
 @section  scripts {
     <script>
-        var intervals = [];
+        var jsIntervals = [];
         var iterations = 0;
-        var maxIterations = 10;
+        var maxIterations = 3;
 
         var delayBeforeProgression2 = 3000;
         var delayBeforeShowModal2 = 5000;
@@ -558,8 +558,8 @@
                 case "Go!":
                     $("#btnAutomate2").text("Stop");
                     playAndShow2();
-                    var interval = setInterval(playAndShow2, delayBetweenIterations2);
-                    intervals.push(interval);
+                    var jsInterval = setInterval(playAndShow2, delayBetweenIterations2);
+                    jsIntervals.push(jsInterval);
                     break;
 
                 case "Stop":
@@ -575,6 +575,39 @@
         }
 
         function playAndShow2() {
+            iterations += 1;
+            if (iterations > maxIterations) {
+                $("#btnAutomate2").text("Go!");
+                resetIterationsMessage2();
+                iterations = 0;
+                clearAllIntervals();
+                return;
+            }
+            else {
+                $("#remainingIterations2").text("Playing " + iterations + " of " + maxIterations + " iterations.");
+            }
+
+            document.getElementById('doPlayer').play();
+            setTimeout(playTriad2, delayBeforeProgression2);
+        }
+
+        function playTriad2() {
+            setAudProgression2Src();
+            $('#audProgression2').trigger("play");
+            setTimeout(showModal2, delayBeforeShowModal2);
+        }
+
+        function showModal2() {
+            $("#revealModalBody").html($("#progression2").html());
+            $("#revealModal").modal('show');
+            setTimeout(hideModal, delayBeforeHideModal2);
+        }
+
+        function hideModal() {
+            $("#revealModal").modal('hide');
+        }
+
+        function playAndShow2XXX() {
             iterations += 1;
             $("#remainingIterations2").text("Playing " + iterations + " of " + maxIterations + " iterations.");
 
@@ -609,8 +642,8 @@
                 case "Go!":
                     $("#btnAutomate3").text("Stop");
                     playAndShow3();
-                    var interval = setInterval(playAndShow3, delayBetweenIterations3);
-                    intervals.push(interval);
+                    var jsInterval = setInterval(playAndShow3, delayBetweenIterations3);
+                    jsIntervals.push(jsInterval);
                     break;
 
                 case "Stop":
@@ -625,7 +658,7 @@
             }
         }
 
-        function playAndShow3() {
+        function playAndShow3XXX() {
             iterations += 1;
             $("#remainingIterations3").text("Playing " + iterations + " of " + maxIterations + " iterations.");
 
@@ -650,16 +683,45 @@
             }, delayBeforeProgression2);
         }
 
+        function playAndShow3() {
+            iterations += 1;
+            if (iterations > maxIterations) {
+                $("#btnAutomate3").text("Go!");
+                resetIterationsMessage3();
+                iterations = 0;
+                clearAllIntervals();
+                return;
+            }
+            else {
+                $("#remainingIterations3").text("Playing " + iterations + " of " + maxIterations + " iterations.");
+            }
+
+            document.getElementById('doPlayer').play();
+            setTimeout(playTriad3, delayBeforeProgression3);
+        }
+
+        function playTriad3() {
+            setAudProgression3Src();
+            $('#audProgression3').trigger("play");
+            setTimeout(showModal3, delayBeforeShowModal3);
+        }
+
+        function showModal3() {
+            $("#revealModalBody").html($("#progression3").html());
+            $("#revealModal").modal('show');
+            setTimeout(hideModal, delayBeforeHideModal3);
+        }
+
         function resetIterationsMessage3() {
             $("#remainingIterations3").text("Automation will stop after " + maxIterations + " iterations.");
         }
 
         function clearAllIntervals() {
-            for (var id of this.intervals) {
+            for (var id of this.jsIntervals) {
                 clearInterval(id);
             }
 
-            intervals = [];
+            jsIntervals = [];
         }
 
     </script>

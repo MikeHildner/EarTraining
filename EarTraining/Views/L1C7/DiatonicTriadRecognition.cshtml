@@ -353,7 +353,7 @@
 @section  scripts {
     <script>
 
-        var intervals = [];
+        var jsIntervals = [];
         var iterations = 0;
         var maxIterations = 10;
 
@@ -456,8 +456,8 @@
                 case "Go!":
                     $("#btnAutomate").text("Stop");
                     playAndShow();
-                    var interval = setInterval(playAndShow, delayBetweenIterations);
-                    intervals.push(interval);
+                    var jsInterval = setInterval(playAndShow, delayBetweenIterations);
+                    jsIntervals.push(jsInterval);
                     break;
 
                 case "Stop":
@@ -474,35 +474,43 @@
 
         function playAndShow() {
             iterations += 1;
-            $("#remainingIterations").text("Playing " + iterations + " of " + maxIterations + " iterations.");
-            
-            document.getElementById('doPlayer').play();
+            if (iterations > maxIterations) {
+                $("#btnAutomate").text("Go!");
+                resetIterationsMessage();
+                iterations = 0;
+                clearAllIntervals();
+                return;
+            }
+            else {
+                $("#remainingIterations").text("Playing " + iterations + " of " + maxIterations + " iterations.");
+            }
 
-            setTimeout(function () {
-                setAudioSrc();
-                $('#audioEx').trigger("play");
-                setTimeout(function () {
-                    $("#revealModalBody").html($("#triad").html());
-                    $("#revealModal").modal('show');
-                    setTimeout(function () {
-                        $("#revealModal").modal('hide');
-                        if (iterations == maxIterations) {
-                            $("#btnAutomate").text("Go!");
-                            resetIterationsMessage();
-                            iterations = 0;
-                            clearAllIntervals();
-                        }
-                    }, delayBeforeHideModal);
-                }, delayBeforeShowModal);
-            }, delayBeforeTriad);
+            document.getElementById('doPlayer').play();
+            setTimeout(playTriad, delayBeforeTriad);
+        }
+
+        function playTriad() {
+            setAudioSrc();
+            $('#audioEx').trigger("play");
+            setTimeout(showModal, delayBeforeShowModal);
+        }
+
+        function showModal() {
+            $("#revealModalBody").html($("#triad").html());
+            $("#revealModal").modal('show');
+            setTimeout(hideModal, delayBeforeHideModal);
+        }
+
+        function hideModal() {
+            $("#revealModal").modal('hide');
         }
 
         function clearAllIntervals() {
-            for (var id of this.intervals) {
+            for (var id of this.jsIntervals) {
                 clearInterval(id);
             }
 
-            intervals = [];
+            jsIntervals = [];
         }
 
         function resetIterationsMessage() {
