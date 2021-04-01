@@ -287,6 +287,56 @@ namespace EarTraining.Controllers
                     samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.SixMinor, InversionType.LowFirst, noteDuration, true);
                     break;
 
+                case ProgressionType3.TwoMin1stThreeMin1st:
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.TwoMinor, InversionType.HighFirst, noteDuration, true);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.ThreeMinor, InversionType.HighFirst, noteDuration, true);
+                    break;
+
+                case ProgressionType3.Five2ndSixMin2nd:
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FiveMajor, InversionType.LowSecond, noteDuration, true);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.SixMinor, InversionType.LowSecond, noteDuration, true);
+                    break;
+
+                case ProgressionType3.Four2ndFive1st:
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FourMajor, InversionType.LowSecond, noteDuration, true);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FiveMajor, InversionType.LowFirst, noteDuration, true);
+                    break;
+
+                case ProgressionType3.ThreeMin1stOne2nd:
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.ThreeMinor, InversionType.HighFirst, noteDuration, true);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.HighSecond, noteDuration, true);
+                    break;
+
+                case ProgressionType3.Five2ndThreeMinRoot:
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FiveMajor, InversionType.LowSecond, noteDuration, true);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.ThreeMinor, InversionType.Root, noteDuration, true);
+                    break;
+
+                case ProgressionType3.TwoMin2ndFour1st:
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.TwoMinor, InversionType.HighSecond, noteDuration, true);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FourMajor, InversionType.HighFirst, noteDuration, true);
+                    break;
+
+                case ProgressionType3.One1stThreeMinRoot:
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.HighFirst, noteDuration, true);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.ThreeMinor, InversionType.Root, noteDuration, true);
+                    break;
+
+                case ProgressionType3.ThreeMinRootTwoMin1st:
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.ThreeMinor, InversionType.Root, noteDuration, true);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.TwoMinor, InversionType.HighFirst, noteDuration, true);
+                    break;
+
+                case ProgressionType3.Five2ndOneRoot:
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FiveMajor, InversionType.LowSecond, noteDuration, true);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.OneMajor, InversionType.Root, noteDuration, true);
+                    break;
+
+                case ProgressionType3.Five2ndFourRoot:
+                    samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FiveMajor, InversionType.LowSecond, noteDuration, true);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FourMajor, InversionType.Root, noteDuration, true);
+                    break;
+
                 default:
                     throw new NotSupportedException($"ProgressionType {progressionType} is not supported.");
             }

@@ -321,7 +321,7 @@ function previousLetterName(letter) {
 }
 
 function invertSelections(callback) {
-    $('.cb-include').each(function () {
+    $('.cb-include:visible').each(function () {
         this.checked = !this.checked;
     });
 
