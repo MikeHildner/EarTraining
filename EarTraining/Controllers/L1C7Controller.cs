@@ -274,7 +274,7 @@ namespace EarTraining.Controllers
 
                 case ProgressionType3.SixMinRootFour1st:
                     samples1 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.SixMinor, InversionType.Root, noteDuration, true);
-                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FourMajor, InversionType.LowFirst, noteDuration, true);
+                    samples2 = Inversion.CreateTriadInversionEx(doNoteNumber, TriadType.FourMajor, InversionType.HighFirst, noteDuration, true);
                     break;
 
                 case ProgressionType3.OneFirstFive2nd:
