@@ -171,6 +171,10 @@ audio {
     margin-left: 5px;
 }
 
+.margin-right-default {
+    margin-right: 5px;
+}
+
 .one-staff-system-margin{
     margin-top: -100px;
 }
