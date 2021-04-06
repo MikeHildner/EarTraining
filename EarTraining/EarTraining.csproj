@@ -219,6 +219,8 @@
     <Content Include="angular-tour-of-heroes\karma.conf.js" />
     <Content Include="angular-tour-of-heroes\src\app\app.component.css" />
     <Content Include="angular-tour-of-heroes\src\app\app.component.html" />
+    <Content Include="angular-tour-of-heroes\src\app\hero-detail\hero-detail.component.css" />
+    <Content Include="angular-tour-of-heroes\src\app\hero-detail\hero-detail.component.html" />
     <Content Include="angular-tour-of-heroes\src\app\heroes\heroes.component.css" />
     <Content Include="angular-tour-of-heroes\src\app\heroes\heroes.component.html" />
     <Content Include="angular-tour-of-heroes\src\favicon.ico" />
@@ -690,6 +692,8 @@
     <TypeScriptCompile Include="angular-tour-of-heroes\src\app\app.component.spec.ts" />
     <TypeScriptCompile Include="angular-tour-of-heroes\src\app\app.component.ts" />
     <TypeScriptCompile Include="angular-tour-of-heroes\src\app\app.module.ts" />
+    <TypeScriptCompile Include="angular-tour-of-heroes\src\app\hero-detail\hero-detail.component.spec.ts" />
+    <TypeScriptCompile Include="angular-tour-of-heroes\src\app\hero-detail\hero-detail.component.ts" />
     <TypeScriptCompile Include="angular-tour-of-heroes\src\app\hero.ts" />
     <TypeScriptCompile Include="angular-tour-of-heroes\src\app\heroes\heroes.component.spec.ts" />
     <TypeScriptCompile Include="angular-tour-of-heroes\src\app\heroes\heroes.component.ts" />
