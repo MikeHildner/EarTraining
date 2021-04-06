@@ -215,6 +215,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="angular-tour-of-heroes\e2e\protractor.conf.js" />
+    <Content Include="angular-tour-of-heroes\karma.conf.js" />
+    <Content Include="angular-tour-of-heroes\src\app\app.component.css" />
+    <Content Include="angular-tour-of-heroes\src\app\app.component.html" />
+    <Content Include="angular-tour-of-heroes\src\app\heroes\heroes.component.css" />
+    <Content Include="angular-tour-of-heroes\src\app\heroes\heroes.component.html" />
+    <Content Include="angular-tour-of-heroes\src\favicon.ico" />
+    <Content Include="angular-tour-of-heroes\src\index.html" />
+    <Content Include="angular-tour-of-heroes\src\styles.css" />
     <Content Include="Angular\e2e\protractor.conf.js" />
     <Content Include="Angular\karma.conf.js" />
     <Content Include="Angular\src\app\app.component.html" />
@@ -454,6 +463,19 @@
     <Content Include="Angular\tsconfig.json" />
     <Content Include="Angular\tsconfig.spec.json" />
     <Content Include="Angular\tslint.json" />
+    <Content Include="angular-tour-of-heroes\e2e\tsconfig.json" />
+    <Content Include="angular-tour-of-heroes\src\assets\.gitkeep" />
+    <Content Include="angular-tour-of-heroes\.browserslistrc" />
+    <Content Include="angular-tour-of-heroes\.editorconfig" />
+    <Content Include="angular-tour-of-heroes\.gitignore" />
+    <Content Include="angular-tour-of-heroes\angular.json" />
+    <Content Include="angular-tour-of-heroes\package-lock.json" />
+    <Content Include="angular-tour-of-heroes\package.json" />
+    <Content Include="angular-tour-of-heroes\README.md" />
+    <Content Include="angular-tour-of-heroes\tsconfig.app.json" />
+    <Content Include="angular-tour-of-heroes\tsconfig.json" />
+    <Content Include="angular-tour-of-heroes\tsconfig.spec.json" />
+    <Content Include="angular-tour-of-heroes\tslint.json" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
@@ -663,6 +685,20 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="angular-tour-of-heroes\e2e\src\app.e2e-spec.ts" />
+    <TypeScriptCompile Include="angular-tour-of-heroes\e2e\src\app.po.ts" />
+    <TypeScriptCompile Include="angular-tour-of-heroes\src\app\app.component.spec.ts" />
+    <TypeScriptCompile Include="angular-tour-of-heroes\src\app\app.component.ts" />
+    <TypeScriptCompile Include="angular-tour-of-heroes\src\app\app.module.ts" />
+    <TypeScriptCompile Include="angular-tour-of-heroes\src\app\hero.ts" />
+    <TypeScriptCompile Include="angular-tour-of-heroes\src\app\heroes\heroes.component.spec.ts" />
+    <TypeScriptCompile Include="angular-tour-of-heroes\src\app\heroes\heroes.component.ts" />
+    <TypeScriptCompile Include="angular-tour-of-heroes\src\app\mock-heroes.ts" />
+    <TypeScriptCompile Include="angular-tour-of-heroes\src\environments\environment.prod.ts" />
+    <TypeScriptCompile Include="angular-tour-of-heroes\src\environments\environment.ts" />
+    <TypeScriptCompile Include="angular-tour-of-heroes\src\main.ts" />
+    <TypeScriptCompile Include="angular-tour-of-heroes\src\polyfills.ts" />
+    <TypeScriptCompile Include="angular-tour-of-heroes\src\test.ts" />
     <TypeScriptCompile Include="Angular\e2e\src\app.e2e-spec.ts" />
     <TypeScriptCompile Include="Angular\e2e\src\app.po.ts" />
     <TypeScriptCompile Include="Angular\src\app\app-routing.module.ts" />
