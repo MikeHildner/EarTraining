@@ -188,6 +188,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Authorization\EarTrainingAuthorizeAttribute.cs" />
+    <Compile Include="Controllers\AngularDataController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DOController.cs" />
@@ -214,6 +215,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Angular\e2e\protractor.conf.js" />
+    <Content Include="Angular\karma.conf.js" />
+    <Content Include="Angular\src\app\app.component.html" />
+    <Content Include="Angular\src\favicon.ico" />
+    <Content Include="Angular\src\index.html" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -433,6 +439,21 @@
     <Content Include="Content\bootstrap\bootstrap-reboot.scss" />
     <Content Include="Content\bootstrap\bootstrap-grid.scss" />
     <Content Include="Content\custom.scss" />
+    <Content Include="Angular\e2e\tsconfig.json" />
+    <Content Include="Angular\src\app\app.component.scss" />
+    <Content Include="Angular\src\assets\.gitkeep" />
+    <Content Include="Angular\src\styles.scss" />
+    <Content Include="Angular\.browserslistrc" />
+    <Content Include="Angular\.editorconfig" />
+    <Content Include="Angular\.gitignore" />
+    <Content Include="Angular\angular.json" />
+    <Content Include="Angular\package-lock.json" />
+    <Content Include="Angular\package.json" />
+    <Content Include="Angular\README.md" />
+    <Content Include="Angular\tsconfig.app.json" />
+    <Content Include="Angular\tsconfig.json" />
+    <Content Include="Angular\tsconfig.spec.json" />
+    <Content Include="Angular\tslint.json" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
@@ -617,6 +638,7 @@
     <Content Include="Views\Experimental\Osmd.cshtml" />
     <Content Include="Views\Experimental\Ratios.cshtml" />
     <Content Include="Views\L1C3\DictationTranscription.cshtml" />
+    <Content Include="Views\AngularData\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -641,6 +663,16 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Angular\e2e\src\app.e2e-spec.ts" />
+    <TypeScriptCompile Include="Angular\e2e\src\app.po.ts" />
+    <TypeScriptCompile Include="Angular\src\app\app-routing.module.ts" />
+    <TypeScriptCompile Include="Angular\src\app\app.component.ts" />
+    <TypeScriptCompile Include="Angular\src\app\app.module.ts" />
+    <TypeScriptCompile Include="Angular\src\environments\environment.prod.ts" />
+    <TypeScriptCompile Include="Angular\src\environments\environment.ts" />
+    <TypeScriptCompile Include="Angular\src\main.ts" />
+    <TypeScriptCompile Include="Angular\src\polyfills.ts" />
+    <TypeScriptCompile Include="Angular\src\test.ts" />
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <PropertyGroup>
