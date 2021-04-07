@@ -219,6 +219,8 @@
     <Content Include="angular-tour-of-heroes\karma.conf.js" />
     <Content Include="angular-tour-of-heroes\src\app\app.component.css" />
     <Content Include="angular-tour-of-heroes\src\app\app.component.html" />
+    <Content Include="angular-tour-of-heroes\src\app\dashboard\dashboard.component.css" />
+    <Content Include="angular-tour-of-heroes\src\app\dashboard\dashboard.component.html" />
     <Content Include="angular-tour-of-heroes\src\app\hero-detail\hero-detail.component.css" />
     <Content Include="angular-tour-of-heroes\src\app\hero-detail\hero-detail.component.html" />
     <Content Include="angular-tour-of-heroes\src\app\heroes\heroes.component.css" />
@@ -691,9 +693,12 @@
   <ItemGroup>
     <TypeScriptCompile Include="angular-tour-of-heroes\e2e\src\app.e2e-spec.ts" />
     <TypeScriptCompile Include="angular-tour-of-heroes\e2e\src\app.po.ts" />
+    <TypeScriptCompile Include="angular-tour-of-heroes\src\app\app-routing.module.ts" />
     <TypeScriptCompile Include="angular-tour-of-heroes\src\app\app.component.spec.ts" />
     <TypeScriptCompile Include="angular-tour-of-heroes\src\app\app.component.ts" />
     <TypeScriptCompile Include="angular-tour-of-heroes\src\app\app.module.ts" />
+    <TypeScriptCompile Include="angular-tour-of-heroes\src\app\dashboard\dashboard.component.spec.ts" />
+    <TypeScriptCompile Include="angular-tour-of-heroes\src\app\dashboard\dashboard.component.ts" />
     <TypeScriptCompile Include="angular-tour-of-heroes\src\app\hero-detail\hero-detail.component.spec.ts" />
     <TypeScriptCompile Include="angular-tour-of-heroes\src\app\hero-detail\hero-detail.component.ts" />
     <TypeScriptCompile Include="angular-tour-of-heroes\src\app\hero.service.spec.ts" />
