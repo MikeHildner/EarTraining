@@ -223,6 +223,8 @@
     <Content Include="angular-tour-of-heroes\src\app\hero-detail\hero-detail.component.html" />
     <Content Include="angular-tour-of-heroes\src\app\heroes\heroes.component.css" />
     <Content Include="angular-tour-of-heroes\src\app\heroes\heroes.component.html" />
+    <Content Include="angular-tour-of-heroes\src\app\messages\messages.component.css" />
+    <Content Include="angular-tour-of-heroes\src\app\messages\messages.component.html" />
     <Content Include="angular-tour-of-heroes\src\favicon.ico" />
     <Content Include="angular-tour-of-heroes\src\index.html" />
     <Content Include="angular-tour-of-heroes\src\styles.css" />
@@ -694,9 +696,15 @@
     <TypeScriptCompile Include="angular-tour-of-heroes\src\app\app.module.ts" />
     <TypeScriptCompile Include="angular-tour-of-heroes\src\app\hero-detail\hero-detail.component.spec.ts" />
     <TypeScriptCompile Include="angular-tour-of-heroes\src\app\hero-detail\hero-detail.component.ts" />
+    <TypeScriptCompile Include="angular-tour-of-heroes\src\app\hero.service.spec.ts" />
+    <TypeScriptCompile Include="angular-tour-of-heroes\src\app\hero.service.ts" />
     <TypeScriptCompile Include="angular-tour-of-heroes\src\app\hero.ts" />
     <TypeScriptCompile Include="angular-tour-of-heroes\src\app\heroes\heroes.component.spec.ts" />
     <TypeScriptCompile Include="angular-tour-of-heroes\src\app\heroes\heroes.component.ts" />
+    <TypeScriptCompile Include="angular-tour-of-heroes\src\app\message.service.spec.ts" />
+    <TypeScriptCompile Include="angular-tour-of-heroes\src\app\message.service.ts" />
+    <TypeScriptCompile Include="angular-tour-of-heroes\src\app\messages\messages.component.spec.ts" />
+    <TypeScriptCompile Include="angular-tour-of-heroes\src\app\messages\messages.component.ts" />
     <TypeScriptCompile Include="angular-tour-of-heroes\src\app\mock-heroes.ts" />
     <TypeScriptCompile Include="angular-tour-of-heroes\src\environments\environment.prod.ts" />
     <TypeScriptCompile Include="angular-tour-of-heroes\src\environments\environment.ts" />
