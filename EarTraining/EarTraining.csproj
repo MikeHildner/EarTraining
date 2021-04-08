@@ -194,6 +194,7 @@
     <Compile Include="Controllers\DOController.cs" />
     <Compile Include="Controllers\DonateController.cs" />
     <Compile Include="Controllers\ErrorHandlerController.cs" />
+    <Compile Include="Controllers\EtangController.cs" />
     <Compile Include="Controllers\ExperimentalController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\L1C1Controller.cs" />
@@ -265,6 +266,11 @@
     <Content Include="Content\Images\Ratios.png" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
+    <Content Include="ETAngular\e2e\protractor.conf.js" />
+    <Content Include="ETAngular\karma.conf.js" />
+    <Content Include="ETAngular\src\app\app.component.html" />
+    <Content Include="ETAngular\src\favicon.ico" />
+    <Content Include="ETAngular\src\index.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
@@ -489,6 +495,21 @@
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
     <Content Include="Content\_variables.scss" />
+    <Content Include="ETAngular\e2e\tsconfig.json" />
+    <Content Include="ETAngular\src\app\app.component.scss" />
+    <Content Include="ETAngular\src\assets\.gitkeep" />
+    <Content Include="ETAngular\src\styles.scss" />
+    <Content Include="ETAngular\.browserslistrc" />
+    <Content Include="ETAngular\.editorconfig" />
+    <Content Include="ETAngular\.gitignore" />
+    <Content Include="ETAngular\angular.json" />
+    <Content Include="ETAngular\package-lock.json" />
+    <Content Include="ETAngular\package.json" />
+    <Content Include="ETAngular\README.md" />
+    <Content Include="ETAngular\tsconfig.app.json" />
+    <Content Include="ETAngular\tsconfig.json" />
+    <Content Include="ETAngular\tsconfig.spec.json" />
+    <Content Include="ETAngular\tslint.json" />
     <None Include="Properties\PublishProfiles\Ear Training Beta.pubxml" />
     <None Include="Properties\PublishProfiles\Ear Training Prod.pubxml" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -669,6 +690,7 @@
     <Content Include="Views\Experimental\Ratios.cshtml" />
     <Content Include="Views\L1C3\DictationTranscription.cshtml" />
     <Content Include="Views\AngularData\Index.cshtml" />
+    <Content Include="Views\Etang\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -732,6 +754,17 @@
     <TypeScriptCompile Include="Angular\src\main.ts" />
     <TypeScriptCompile Include="Angular\src\polyfills.ts" />
     <TypeScriptCompile Include="Angular\src\test.ts" />
+    <TypeScriptCompile Include="ETAngular\e2e\src\app.e2e-spec.ts" />
+    <TypeScriptCompile Include="ETAngular\e2e\src\app.po.ts" />
+    <TypeScriptCompile Include="ETAngular\src\app\app-routing.module.ts" />
+    <TypeScriptCompile Include="ETAngular\src\app\app.component.spec.ts" />
+    <TypeScriptCompile Include="ETAngular\src\app\app.component.ts" />
+    <TypeScriptCompile Include="ETAngular\src\app\app.module.ts" />
+    <TypeScriptCompile Include="ETAngular\src\environments\environment.prod.ts" />
+    <TypeScriptCompile Include="ETAngular\src\environments\environment.ts" />
+    <TypeScriptCompile Include="ETAngular\src\main.ts" />
+    <TypeScriptCompile Include="ETAngular\src\polyfills.ts" />
+    <TypeScriptCompile Include="ETAngular\src\test.ts" />
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <PropertyGroup>

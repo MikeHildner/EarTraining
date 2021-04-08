@@ -35,18 +35,31 @@ namespace EarTraining
                       "~/Content/hover.css",
                       "~/Content/toastr.css"));
 
-            // Angular bundles
-            bundles.Add(new ScriptBundle("~/bundles/Angular")
-              .Include(
-                "~/bundles/AngularOutput/inline.*",
-                "~/bundles/AngularOutput/polyfills.*",
-                "~/bundles/AngularOutput/scripts.*",
-                "~/bundles/AngularOutput/vendor.*",
-                "~/bundles/AngularOutput/runtime.*",
-                "~/bundles/AngularOutput/main.*"));
+            //// Angular bundles
+            //bundles.Add(new ScriptBundle("~/bundles/Angular")
+            //  .Include(
+            //    "~/bundles/AngularOutput/inline.*",
+            //    "~/bundles/AngularOutput/polyfills.*",
+            //    "~/bundles/AngularOutput/scripts.*",
+            //    "~/bundles/AngularOutput/vendor.*",
+            //    "~/bundles/AngularOutput/runtime.*",
+            //    "~/bundles/AngularOutput/main.*"));
 
-            bundles.Add(new StyleBundle("~/Content/Angular")
-              .Include("~/bundles/AngularOutput/styles.*"));
+            //bundles.Add(new StyleBundle("~/Content/Angular")
+            //  .Include("~/bundles/AngularOutput/styles.*"));
+
+            // ETAngular bundles
+            bundles.Add(new Bundle("~/bundles/ETAngular")
+              .Include(
+                "~/bundles/ETAngularOutput/inline.*",
+                "~/bundles/ETAngularOutput/polyfills.*",
+                "~/bundles/ETAngularOutput/scripts.*",
+                "~/bundles/ETAngularOutput/vendor.*",
+                "~/bundles/ETAngularOutput/runtime.*",
+                "~/bundles/ETAngularOutput/main.*"));
+
+            bundles.Add(new StyleBundle("~/Content/ETAngular")
+              .Include("~/bundles/ETAngularOutput/styles.*"));
         }
     }
 }
