@@ -223,6 +223,8 @@
     <Content Include="angular-tour-of-heroes\src\app\dashboard\dashboard.component.html" />
     <Content Include="angular-tour-of-heroes\src\app\hero-detail\hero-detail.component.css" />
     <Content Include="angular-tour-of-heroes\src\app\hero-detail\hero-detail.component.html" />
+    <Content Include="angular-tour-of-heroes\src\app\hero-search\hero-search.component.css" />
+    <Content Include="angular-tour-of-heroes\src\app\hero-search\hero-search.component.html" />
     <Content Include="angular-tour-of-heroes\src\app\heroes\heroes.component.css" />
     <Content Include="angular-tour-of-heroes\src\app\heroes\heroes.component.html" />
     <Content Include="angular-tour-of-heroes\src\app\messages\messages.component.css" />
@@ -701,11 +703,15 @@
     <TypeScriptCompile Include="angular-tour-of-heroes\src\app\dashboard\dashboard.component.ts" />
     <TypeScriptCompile Include="angular-tour-of-heroes\src\app\hero-detail\hero-detail.component.spec.ts" />
     <TypeScriptCompile Include="angular-tour-of-heroes\src\app\hero-detail\hero-detail.component.ts" />
+    <TypeScriptCompile Include="angular-tour-of-heroes\src\app\hero-search\hero-search.component.spec.ts" />
+    <TypeScriptCompile Include="angular-tour-of-heroes\src\app\hero-search\hero-search.component.ts" />
     <TypeScriptCompile Include="angular-tour-of-heroes\src\app\hero.service.spec.ts" />
     <TypeScriptCompile Include="angular-tour-of-heroes\src\app\hero.service.ts" />
     <TypeScriptCompile Include="angular-tour-of-heroes\src\app\hero.ts" />
     <TypeScriptCompile Include="angular-tour-of-heroes\src\app\heroes\heroes.component.spec.ts" />
     <TypeScriptCompile Include="angular-tour-of-heroes\src\app\heroes\heroes.component.ts" />
+    <TypeScriptCompile Include="angular-tour-of-heroes\src\app\in-memory-data.service.spec.ts" />
+    <TypeScriptCompile Include="angular-tour-of-heroes\src\app\in-memory-data.service.ts" />
     <TypeScriptCompile Include="angular-tour-of-heroes\src\app\message.service.spec.ts" />
     <TypeScriptCompile Include="angular-tour-of-heroes\src\app\message.service.ts" />
     <TypeScriptCompile Include="angular-tour-of-heroes\src\app\messages\messages.component.spec.ts" />
