@@ -14,7 +14,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRippleModule } from '@angular/material/core';
 import { MatListModule } from "@angular/material/list";
-
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -31,9 +31,10 @@ import { MatListModule } from "@angular/material/list";
     MatIconModule,
     MatRippleModule,
     MatListModule,
+    MatMenuModule,
   ],
   exports: [
-
+    
   ],
   //providers: [],
   providers: [{ provide: APP_BASE_HREF, useValue: '/angulareartraining' }],

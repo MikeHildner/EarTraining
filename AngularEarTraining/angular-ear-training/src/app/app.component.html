@@ -1,8 +1,61 @@
 <mat-toolbar color="primary">
-  <mat-icon (click)="sidenav.toggle()" class="hamburger" matRipple>menu</mat-icon>
+  <mat-icon class="hamburger" [matMenuTriggerFor]="animals" matRipple>menu</mat-icon>
   <span>My App</span>
 </mat-toolbar>
-<mat-sidenav-container>
+
+<!-- #docregion sub-menu -->
+<mat-menu #animals="matMenu">
+  <button mat-menu-item [matMenuTriggerFor]="level1">Level 1</button>
+  <button mat-menu-item [matMenuTriggerFor]="level2">Level 2</button>
+</mat-menu>
+
+<mat-menu #level1="matMenu">
+  <button mat-menu-item [matMenuTriggerFor]="level1chapter1">Chapter 1</button>
+  <button mat-menu-item [matMenuTriggerFor]="amphibians">Chapter 2</button>
+  <button mat-menu-item [matMenuTriggerFor]="reptiles">Chapter 3</button>
+  <button mat-menu-item>Birds</button>
+  <button mat-menu-item>Mammals</button>
+</mat-menu>
+<!-- #enddocregion sub-menu -->
+
+<mat-menu #level2="matMenu">
+  <button mat-menu-item>Insects</button>
+  <button mat-menu-item>Molluscs</button>
+  <button mat-menu-item>Crustaceans</button>
+  <button mat-menu-item>Corals</button>
+  <button mat-menu-item>Arachnids</button>
+  <button mat-menu-item>Velvet worms</button>
+  <button mat-menu-item>Horseshoe crabs</button>
+</mat-menu>
+
+<mat-menu #level1chapter1="matMenu">
+  <button mat-menu-item>Baikal oilfish</button>
+  <button mat-menu-item>Bala shark</button>
+  <button mat-menu-item>Ballan wrasse</button>
+  <button mat-menu-item>Bamboo shark</button>
+  <button mat-menu-item>Banded killifish</button>
+</mat-menu>
+
+<mat-menu #amphibians="matMenu">
+  <button mat-menu-item>Sonoran desert toad</button>
+  <button mat-menu-item>Western toad</button>
+  <button mat-menu-item>Arroyo toad</button>
+  <button mat-menu-item>Yosemite toad</button>
+</mat-menu>
+
+<mat-menu #reptiles="matMenu">
+  <button mat-menu-item>Banded Day Gecko</button>
+  <button mat-menu-item>Banded Gila Monster</button>
+  <button mat-menu-item>Black Tree Monitor</button>
+  <button mat-menu-item>Blue Spiny Lizard</button>
+  <button mat-menu-item disabled>Velociraptor</button>
+</mat-menu>
+
+
+<!-- Copyright 2020 Google LLC. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->
+<!--<mat-sidenav-container>
   <mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()" (mouseleave)="mouseleave()">
 
     <mat-nav-list>
@@ -52,6 +105,6 @@
     <div>Main</div>
     <div><mat-slider min="1" max="100" step="1" value="1"></mat-slider></div>
   </mat-sidenav-content>
-</mat-sidenav-container>
+</mat-sidenav-container>-->
 
 <router-outlet></router-outlet>

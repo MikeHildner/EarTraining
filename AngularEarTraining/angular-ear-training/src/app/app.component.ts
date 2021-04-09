@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatMenuTrigger } from '@angular/material/menu';
+import { ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -9,20 +12,26 @@ import { MatSidenav } from '@angular/material/sidenav';
 export class AppComponent {
   title = 'angular-ear-training';
   //@ViewChild('sidenav') sidenav: MatSidenav;
-  isExpanded = true;
-  showSubmenu = false;
-  isShowing = false;
-  showSubSubMenu = false;
+  //isExpanded = true;
+  //showSubmenu = false;
+  //isShowing = false;
+  //showSubSubMenu = false;
 
-  mouseenter() {
-    if (!this.isExpanded) {
-      this.isShowing = true;
-    }
-  }
+  //mouseenter() {
+  //  if (!this.isExpanded) {
+  //    this.isShowing = true;
+  //  }
+  //}
 
-  mouseleave() {
-    if (!this.isExpanded) {
-      this.isShowing = false;
-    }
+  //mouseleave() {
+  //  if (!this.isExpanded) {
+  //    this.isShowing = false;
+  //  }
+  //}
+
+  @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
+
+  someMethod() {
+    this.trigger.openMenu();
   }
 }
