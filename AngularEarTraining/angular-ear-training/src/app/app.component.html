@@ -1,0 +1,10 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side">Sidenav</mat-sidenav>
+  <mat-sidenav-content>
+    <button (click)="sidenav.toggle()">Toggle Opened</button>
+    <div>Main</div>
+    <div><mat-slider min="1" max="100" step="1" value="1"></mat-slider></div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<router-outlet></router-outlet>
