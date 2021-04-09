@@ -1,22 +1,22 @@
 <mat-toolbar color="primary">
-  <mat-icon class="hamburger margin-right-default" [matMenuTriggerFor]="animals" matRipple>record_voice_over</mat-icon>
-  <span>My App</span>
+  <mat-icon class="hamburger margin-right-default" [matMenuTriggerFor]="menu" matRipple>record_voice_over</mat-icon>
+  <span>{{title}}</span>
 </mat-toolbar>
 
 <!-- #docregion sub-menu -->
-<mat-menu #animals="matMenu">
+<mat-menu #menu="matMenu">
   <button mat-menu-item routerLink="/home">Home</button>
   <button mat-menu-item [matMenuTriggerFor]="level1">Level 1</button>
-  <button mat-menu-item [matMenuTriggerFor]="level2">Level 2</button>
+  <!--<button mat-menu-item [matMenuTriggerFor]="level2">Level 2</button>-->
   <button mat-menu-item routerLink="/about">About</button>
 </mat-menu>
 
 <mat-menu #level1="matMenu">
   <button mat-menu-item [matMenuTriggerFor]="level1chapter1">Chapter 1</button>
-  <button mat-menu-item [matMenuTriggerFor]="amphibians">Chapter 2</button>
-  <button mat-menu-item [matMenuTriggerFor]="reptiles">Chapter 3</button>
-  <button mat-menu-item>Birds</button>
-  <button mat-menu-item>Mammals</button>
+  <!--<button mat-menu-item [matMenuTriggerFor]="amphibians">Chapter 2</button>
+  <button mat-menu-item [matMenuTriggerFor]="reptiles">Chapter 3</button>-->
+  <!--<button mat-menu-item>Birds</button>
+  <button mat-menu-item>Mammals</button>-->
 </mat-menu>
 <!-- #enddocregion sub-menu -->
 
@@ -31,11 +31,11 @@
 </mat-menu>
 
 <mat-menu #level1chapter1="matMenu">
-  <button mat-menu-item>Baikal oilfish</button>
-  <button mat-menu-item>Bala shark</button>
+  <button mat-menu-item>Solfeg Resolutions</button>
+  <!--<button mat-menu-item>Bala shark</button>
   <button mat-menu-item>Ballan wrasse</button>
   <button mat-menu-item>Bamboo shark</button>
-  <button mat-menu-item>Banded killifish</button>
+  <button mat-menu-item>Banded killifish</button>-->
 </mat-menu>
 
 <mat-menu #amphibians="matMenu">

@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { MatSidenav } from '@angular/material/sidenav';
-import { MatMenuModule } from '@angular/material/menu';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { ViewChild } from '@angular/core';
 
@@ -9,6 +7,7 @@ import { ViewChild } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent {
   title = 'angular-ear-training';
   //@ViewChild('sidenav') sidenav: MatSidenav;
