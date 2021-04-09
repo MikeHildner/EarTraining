@@ -10,6 +10,11 @@ import { FormsModule } from '@angular/forms';
 
 //import { MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, MatButtonModule } from '@angular/material/sidenav';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatRippleModule } from '@angular/material/core';
+import { MatListModule } from "@angular/material/list";
+
 
 @NgModule({
   declarations: [
@@ -22,6 +27,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     FormsModule,
     MatSliderModule,
     MatSidenavModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatRippleModule,
+    MatListModule,
   ],
   exports: [
 
@@ -30,4 +39,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
   providers: [{ provide: APP_BASE_HREF, useValue: '/angulareartraining' }],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  
+}
