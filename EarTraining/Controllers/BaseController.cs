@@ -16,6 +16,8 @@ namespace EarTraining.Controllers
 
         public BaseController()
         {
+            DeleteOldFiles();
+
             var stageNames = new List<string>
             {
                 "Fats Treetop",

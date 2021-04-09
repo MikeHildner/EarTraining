@@ -20,6 +20,12 @@ import { AboutComponent } from './about/about.component';
 import { MatCardModule } from '@angular/material/card';
 import { L1C1VocalDrillsComponent } from './level1/chapter1/l1-c1-vocal-drills/l1-c1-vocal-drills.component';
 import { DoComponent } from './do/do.component';
+import { NgxAudioPlayerModule } from 'ngx-audio-player';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatButtonModule } from '@angular/material/button';
+import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
   declarations: [
@@ -28,6 +34,7 @@ import { DoComponent } from './do/do.component';
     AboutComponent,
     L1C1VocalDrillsComponent,
     DoComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +49,11 @@ import { DoComponent } from './do/do.component';
     MatListModule,
     MatMenuModule,
     MatCardModule,
+    NgxAudioPlayerModule,
+    FlexLayoutModule,
+    MatGridListModule,
+    MatButtonModule,
+    LayoutModule,
   ],
   exports: [
     

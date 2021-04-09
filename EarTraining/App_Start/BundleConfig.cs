@@ -49,17 +49,17 @@ namespace EarTraining
             //  .Include("~/bundles/AngularOutput/styles.*"));
 
             // ETAngular bundles
-            bundles.Add(new Bundle("~/bundles/ETAngular")
-              .Include(
-                "~/bundles/ETAngularOutput/inline.*",
-                "~/bundles/ETAngularOutput/polyfills.*",
-                "~/bundles/ETAngularOutput/scripts.*",
-                "~/bundles/ETAngularOutput/vendor.*",
-                "~/bundles/ETAngularOutput/runtime.*",
-                "~/bundles/ETAngularOutput/main.*"));
+            //bundles.Add(new Bundle("~/bundles/ETAngular")
+            //  .Include(
+            //    "~/bundles/ETAngularOutput/inline.*",
+            //    "~/bundles/ETAngularOutput/polyfills.*",
+            //    "~/bundles/ETAngularOutput/scripts.*",
+            //    "~/bundles/ETAngularOutput/vendor.*",
+            //    "~/bundles/ETAngularOutput/runtime.*",
+            //    "~/bundles/ETAngularOutput/main.*"));
 
-            bundles.Add(new StyleBundle("~/Content/ETAngular")
-              .Include("~/bundles/ETAngularOutput/styles.*"));
+            //bundles.Add(new StyleBundle("~/Content/ETAngular")
+            //  .Include("~/bundles/ETAngularOutput/styles.*"));
         }
     }
 }
