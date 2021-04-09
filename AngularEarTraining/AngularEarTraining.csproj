@@ -8,7 +8,9 @@
     <Content Include="angular-ear-training\karma.conf.js" />
     <Content Include="angular-ear-training\src\app\about\about.component.html" />
     <Content Include="angular-ear-training\src\app\app.component.html" />
+    <Content Include="angular-ear-training\src\app\do\do.component.html" />
     <Content Include="angular-ear-training\src\app\home\home.component.html" />
+    <Content Include="angular-ear-training\src\app\level1\chapter1\l1-c1-vocal-drills\l1-c1-vocal-drills.component.html" />
     <Content Include="angular-ear-training\src\favicon.ico" />
     <Content Include="angular-ear-training\src\index.html" />
   </ItemGroup>
@@ -21,8 +23,12 @@
     <TypeScriptCompile Include="angular-ear-training\src\app\app.component.spec.ts" />
     <TypeScriptCompile Include="angular-ear-training\src\app\app.component.ts" />
     <TypeScriptCompile Include="angular-ear-training\src\app\app.module.ts" />
+    <TypeScriptCompile Include="angular-ear-training\src\app\do\do.component.spec.ts" />
+    <TypeScriptCompile Include="angular-ear-training\src\app\do\do.component.ts" />
     <TypeScriptCompile Include="angular-ear-training\src\app\home\home.component.spec.ts" />
     <TypeScriptCompile Include="angular-ear-training\src\app\home\home.component.ts" />
+    <TypeScriptCompile Include="angular-ear-training\src\app\level1\chapter1\l1-c1-vocal-drills\l1-c1-vocal-drills.component.spec.ts" />
+    <TypeScriptCompile Include="angular-ear-training\src\app\level1\chapter1\l1-c1-vocal-drills\l1-c1-vocal-drills.component.ts" />
     <TypeScriptCompile Include="angular-ear-training\src\environments\environment.prod.ts" />
     <TypeScriptCompile Include="angular-ear-training\src\environments\environment.ts" />
     <TypeScriptCompile Include="angular-ear-training\src\main.ts" />
@@ -40,7 +46,9 @@
     <None Include="angular-ear-training\README.md" />
     <None Include="angular-ear-training\src\app\about\about.component.scss" />
     <None Include="angular-ear-training\src\app\app.component.scss" />
+    <None Include="angular-ear-training\src\app\do\do.component.scss" />
     <None Include="angular-ear-training\src\app\home\home.component.scss" />
+    <None Include="angular-ear-training\src\app\level1\chapter1\l1-c1-vocal-drills\l1-c1-vocal-drills.component.scss" />
     <None Include="angular-ear-training\src\assets\.gitkeep" />
     <None Include="angular-ear-training\src\styles.scss" />
     <None Include="angular-ear-training\tsconfig.app.json" />

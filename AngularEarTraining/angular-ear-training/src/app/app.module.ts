@@ -18,12 +18,16 @@ import { MatMenuModule } from '@angular/material/menu';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { MatCardModule } from '@angular/material/card';
+import { L1C1VocalDrillsComponent } from './level1/chapter1/l1-c1-vocal-drills/l1-c1-vocal-drills.component';
+import { DoComponent } from './do/do.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     AboutComponent,
+    L1C1VocalDrillsComponent,
+    DoComponent,
   ],
   imports: [
     BrowserModule,
