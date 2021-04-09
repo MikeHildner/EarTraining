@@ -1,12 +1,14 @@
 <mat-toolbar color="primary">
-  <mat-icon class="hamburger" [matMenuTriggerFor]="animals" matRipple>menu</mat-icon>
+  <mat-icon class="hamburger margin-right-default" [matMenuTriggerFor]="animals" matRipple>record_voice_over</mat-icon>
   <span>My App</span>
 </mat-toolbar>
 
 <!-- #docregion sub-menu -->
 <mat-menu #animals="matMenu">
+  <button mat-menu-item routerLink="/home">Home</button>
   <button mat-menu-item [matMenuTriggerFor]="level1">Level 1</button>
   <button mat-menu-item [matMenuTriggerFor]="level2">Level 2</button>
+  <button mat-menu-item routerLink="/about">About</button>
 </mat-menu>
 
 <mat-menu #level1="matMenu">

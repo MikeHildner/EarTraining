@@ -15,10 +15,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatRippleModule } from '@angular/material/core';
 import { MatListModule } from "@angular/material/list";
 import { MatMenuModule } from '@angular/material/menu';
+import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
