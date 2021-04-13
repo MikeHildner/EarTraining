@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Track } from 'ngx-audio-player'; 
+import { Track } from 'ngx-audio-player';
+import { map } from 'rxjs/operators';
+import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-do',
@@ -32,7 +34,24 @@ export class DoComponent implements OnInit {
     console.log('onEnded event: ' + event);
   }
 
-  constructor() { }
+  cols = 2;
+  rows = 2;
+
+  /** Based on the screen size, switch from standard to one column per row */
+  cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+    map(({ matches }) => {
+      if (matches) {
+        this.rows = 1;
+        this.cols = 1;
+      }
+      else {
+        this.rows = 2;
+        this.cols = 2;
+      }
+    })
+  );
+
+  constructor(private breakpointObserver: BreakpointObserver) { }
 
   ngOnInit(): void {
   }
