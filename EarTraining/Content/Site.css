@@ -118,6 +118,10 @@ audio {
     height: 25px;*/
 }
 
+.pad-right-10 {
+    padding-right: 10px;
+}
+
 .pad-top-10 {
     padding-top: 10px;
 }

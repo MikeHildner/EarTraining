@@ -617,6 +617,7 @@
     <Content Include="Views\Experimental\Osmd.cshtml" />
     <Content Include="Views\Experimental\Ratios.cshtml" />
     <Content Include="Views\L1C3\DictationTranscription.cshtml" />
+    <Content Include="Views\Experimental\PhrasesPerForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

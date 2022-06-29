@@ -84,5 +84,10 @@ namespace EarTraining.Controllers
         {
             return View();
         }
+
+        public ActionResult PhrasesPerForm()
+        {
+            return View();
+        }
     }
 }

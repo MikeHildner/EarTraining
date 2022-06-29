@@ -1,0 +1,112 @@
+﻿
+@{
+    ViewBag.Title = "Phrases per Form";
+}
+
+<h2>Phrases per Form</h2>
+
+<div class="row">
+    <div class="col-md2 pad-right-10">
+        <div>
+            <label for="timeSignature">Time Signature</label>
+        </div>
+        <div>
+            <select id="timeSignature" class="calculate">
+                <option value="3/4">3/4</option>
+                <option value="4/4">4/4</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md2 pad-right-10">
+        <div>
+            <label for="subDivision">Subdivision</label>
+        </div>
+        <div>
+            <select id="subDivision" class="calculate">
+                <option value="8">Eighth Notes</option>
+                <option value="4">Quarter Notes</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md2">
+        <div>
+            <label for="notesPerPhrase">Notes per Phrase</label>
+        </div>
+        <div class="col-md2">
+            <input type="number" id="notesPerPhrase" class="calculate" />
+        </div>
+    </div>
+    <div class="col-md2 pad-right-10">
+        <div>
+            <label for="numMeasures"># Measures</label>
+        </div>
+        <div class="col-md2">
+            <input type="number" id="numMeasures" class="calculate" />
+        </div>
+    </div>
+</div>
+
+<div id="results">
+
+</div>
+@section scripts
+    {
+    <script>
+        $(document).ready(function () {
+            $('.calculate').change(function () {
+                calculate();
+            });
+        });
+
+        function calculate() {
+            $('#results').html('');
+
+            let timeSignature = $('#timeSignature').val();
+            let subDivision = $('#subDivision').val();
+            let notesPerPhrase = parseInt($('#notesPerPhrase').val());
+            let numMeasures = parseInt($('#numMeasures').val());
+
+            if (isNaN(notesPerPhrase) || isNaN(numMeasures)) {
+                return;
+            }
+
+            let beatsPerMeasure = 0;
+            switch (timeSignature) {
+                case "3/4":
+                    beatsPerMeasure = 3;
+                    break;
+
+                case "4/4":
+                    beatsPerMeasure = 4;
+                    break;
+
+                default:
+                    throw ('Time signature ' + timeSignature + ' is not supported.');
+            }
+
+            let unitsPerMeasure = subDivision / 4 * beatsPerMeasure; // Only supporting */4 time signatures at the moment.
+            let measuresPerPhrase = notesPerPhrase / unitsPerMeasure;
+            console.log('beatsPerMeasure: ' + beatsPerMeasure + ' subDivision: ' + subDivision + ', unitsPerMeasure:' + unitsPerMeasure + ', measuresPerPhrase: ' + measuresPerPhrase)
+
+            let phrasesPerForm = numMeasures / measuresPerPhrase;
+            //console.log('There will be ' + phrasesPerForm + ' phrases.');
+
+            let totalUnitsPerForm = unitsPerMeasure * numMeasures;
+            let html = "<table class='table'>";
+            html += "<thead><tr><th>Notes per Phrase</th><th>Total Phrases</th></tr></thead>"
+            html += "<tbody>";
+
+            for (var i = 1; i <= totalUnitsPerForm; i++) {
+                let remainder = totalUnitsPerForm % i;
+                //console.log('remainder: ' + remainder)
+                if (remainder === 0) {
+                     html += '<tr><td>' + i + '</td><td>' + totalUnitsPerForm / i + '</td></tr>';
+                }
+            }
+
+            html += "</tbody>";
+            html += '</table>'
+            $('#results').append(html);
+        }
+    </script>
+}
