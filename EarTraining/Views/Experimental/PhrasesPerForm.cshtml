@@ -28,14 +28,6 @@
             </select>
         </div>
     </div>
-    <div class="col-md2">
-        <div>
-            <label for="notesPerPhrase">Notes per Phrase</label>
-        </div>
-        <div class="col-md2">
-            <input type="number" id="notesPerPhrase" class="calculate" />
-        </div>
-    </div>
     <div class="col-md2 pad-right-10">
         <div>
             <label for="numMeasures"># Measures</label>
@@ -46,9 +38,12 @@
     </div>
 </div>
 
-<div id="results">
+<div class="row">
+    <div id="results" class="col">
 
+    </div>
 </div>
+
 @section scripts
     {
     <script>
@@ -63,10 +58,9 @@
 
             let timeSignature = $('#timeSignature').val();
             let subDivision = $('#subDivision').val();
-            let notesPerPhrase = parseInt($('#notesPerPhrase').val());
             let numMeasures = parseInt($('#numMeasures').val());
 
-            if (isNaN(notesPerPhrase) || isNaN(numMeasures)) {
+            if (isNaN(numMeasures)) {
                 return;
             }
 
@@ -85,12 +79,8 @@
             }
 
             let unitsPerMeasure = subDivision / 4 * beatsPerMeasure; // Only supporting */4 time signatures at the moment.
-            let measuresPerPhrase = notesPerPhrase / unitsPerMeasure;
-            console.log('beatsPerMeasure: ' + beatsPerMeasure + ' subDivision: ' + subDivision + ', unitsPerMeasure:' + unitsPerMeasure + ', measuresPerPhrase: ' + measuresPerPhrase)
-
-            let phrasesPerForm = numMeasures / measuresPerPhrase;
-            //console.log('There will be ' + phrasesPerForm + ' phrases.');
-
+            //console.log('beatsPerMeasure: ' + beatsPerMeasure + ' subDivision: ' + subDivision + ', unitsPerMeasure:' + unitsPerMeasure + ', measuresPerPhrase: ' + measuresPerPhrase)
+            
             let totalUnitsPerForm = unitsPerMeasure * numMeasures;
             let html = "<table class='table'>";
             html += "<thead><tr><th>Notes per Phrase</th><th>Total Phrases</th></tr></thead>"
