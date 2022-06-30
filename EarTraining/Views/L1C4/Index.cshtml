@@ -149,19 +149,11 @@
                                 </div>
                                 <div class="card-body">
                                     <p class="card-text">Automate the drill process. This respects your "Include in Drills" selections.</p>
-                                    <button id="btnAutomate2" class="btn btn-warning" onclick="automate2();">Go!</button><label class="margin-left-default" id="remainingIterations"></label>
+                                    <button id="btnAutomate2" class="btn btn-warning" onclick="automate2();">Go!</button><label class="margin-left-default" id="remainingIterations2"></label>
                                 </div>
                             </div>
                         </div>
 
-                        <div id="revealModal" class="modal fade modal-sm" tabindex="-1" role="dialog" data-backdrop="false">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div id="revealModalBody" class="modal-body">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="tab-pane fade" id="nav-3" role="tabpanel" aria-labelledby="nav-3-tab">
@@ -285,6 +277,18 @@
                                     </audio>
                                 </figure>
                             </div>
+
+                            <div class="row">
+                                <div class="card">
+                                    <div class="card-header bg-warning text-primary">
+                                        <i class="fa fa-gears"></i><label class="margin-left-default">Automation</label>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">Automate the drill process. This respects your "Include in Drills" selections.</p>
+                                        <button id="btnAutomate3" class="btn btn-warning" onclick="automate3();">Go!</button><label class="margin-left-default" id="remainingIterations3"></label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -293,6 +297,15 @@
     </div>
 </section>
 
+<div id="revealModal" class="modal fade modal-sm" tabindex="-1" role="dialog" data-backdrop="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div id="revealModalBody" class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+
 @section  scripts {
     <script>
         var jsIntervals = [];
@@ -300,9 +313,14 @@
         var maxIterations = 10;
 
         var delayBeforeProgression2 = 0;
-        var delayBeforeShowModal2 = 3000;
+        var delayBeforeShowModal2 = 3500;
         var delayBeforeHideModal2 = 3500;
         var delayBetweenIterations2 = delayBeforeProgression2 + delayBeforeShowModal2 + delayBeforeHideModal2;
+
+        var delayBeforeProgression3 = 0;
+        var delayBeforeShowModal3 = 5000;
+        var delayBeforeHideModal3 = 5000;
+        var delayBetweenIterations3 = delayBeforeProgression3 + delayBeforeShowModal3 + delayBeforeHideModal3;
 
         $(document).ready(function () {
             setAudProgression2Src();
@@ -413,14 +431,14 @@
         function playAndShow2() {
             iterations += 1;
             if (iterations > maxIterations) {
-                $("#btnAutomate").text("Go!");
+                $("#btnAutomate2").text("Go!");
                 resetIterationsMessage();
                 iterations = 0;
                 clearAllIntervals();
                 return;
             }
             else {
-                $("#remainingIterations").text("Playing " + iterations + " of " + maxIterations + " iterations.");
+                $("#remainingIterations2").text("Playing " + iterations + " of " + maxIterations + " iterations.");
             }
 
             //document.getElementById('doPlayer').play();
@@ -430,13 +448,64 @@
         function playProgression2() {
             setAudProgression2Src();
             $('#audProgression2').trigger("play");
-            setTimeout(showModal, delayBeforeShowModal2);
+            setTimeout(showModal2, delayBeforeShowModal2);
         }
 
-        function showModal() {
+        function showModal2() {
             $("#revealModalBody").html($("#progression2").html());
             $("#revealModal").modal('show');
             setTimeout(hideModal, delayBeforeHideModal2);
+        }
+
+        function automate3() {
+            var buttonText = $("#btnAutomate3").text();
+            switch (buttonText) {
+                case "Go!":
+                    $("#btnAutomate3").text("Stop");
+                    playAndShow3();
+                    var jsInterval = setInterval(playAndShow3, delayBetweenIterations3);
+                    jsIntervals.push(jsInterval);
+                    break;
+
+                case "Stop":
+                    $("#btnAutomate3").text("Go!");
+                    resetIterationsMessage();
+                    clearAllIntervals();
+                    break;
+
+                default:
+                    alert("'" + buttonText + "' is not supported.");
+                    break;
+            }
+        }
+
+        function playAndShow3() {
+            iterations += 1;
+            if (iterations > maxIterations) {
+                $("#btnAutomate3").text("Go!");
+                resetIterationsMessage();
+                iterations = 0;
+                clearAllIntervals();
+                return;
+            }
+            else {
+                $("#remainingIterations3").text("Playing " + iterations + " of " + maxIterations + " iterations.");
+            }
+
+            //document.getElementById('doPlayer').play();
+            setTimeout(playProgression3, delayBeforeProgression3);
+        }
+
+        function playProgression3() {
+            setAudProgression3Src();
+            $('#audProgression3').trigger("play");
+            setTimeout(showModal3, delayBeforeShowModal3);
+        }
+
+        function showModal3() {
+            $("#revealModalBody").html($("#progression3").html());
+            $("#revealModal").modal('show');
+            setTimeout(hideModal, delayBeforeHideModal3);
         }
 
         function hideModal() {
@@ -452,7 +521,8 @@
         }
 
         function resetIterationsMessage() {
-            $("#remainingIterations").text("Automation will stop after " + maxIterations + " iterations.");
+            $("#remainingIterations2").text("Automation will stop after " + maxIterations + " iterations.");
+            $("#remainingIterations3").text("Automation will stop after " + maxIterations + " iterations.");
         }
     </script>
 }
