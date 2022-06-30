@@ -162,8 +162,6 @@
                             @*@Html.ActionLink("Solfeg Pitch Identification", "Index", "PitchIdentification", null, new { @class = "dropdown-item" })*@
                             @Html.ActionLink("All Solfeg Syllables", "Index", "Solfeg", null, new { @class = "dropdown-item" })
                             @Html.ActionLink("Ratios", "Ratios", "Experimental", null, new { @class = "dropdown-item" })
-                            @Html.ActionLink("Phrases per Form", "PhrasesPerForm", "Experimental", null, new { @class = "dropdown-item" })
-
                         </div>
                     </li>
 
@@ -175,6 +173,8 @@
                             @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;L2 Major Triad Progressions"), "MajorTriadProgressions", "L2", null, new { @class = "dropdown-item" })
                             <div class="dropdown-divider"></div>
                             @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;L1C3 Dictation / Transcription"), "DictationTranscription", "L1C3", null, new { @class = "dropdown-item" })
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink("Phrases per Form", "PhrasesPerForm", "Experimental", null, new { @class = "dropdown-item" })
                             @*<div class="dropdown-divider"></div>
                                 @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Open Sheet Music Display"), "Osmd", "Experimental", null, new { @class = "dropdown-item" })*@
 
