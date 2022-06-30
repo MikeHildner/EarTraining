@@ -262,7 +262,7 @@ function getExcluded(excluded, index) {
             excluded.push(num);
         }
     });
-    console.log(excluded);
+    //console.log(excluded);
     return excluded;
 }
 

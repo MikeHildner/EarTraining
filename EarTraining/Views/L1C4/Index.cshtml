@@ -63,7 +63,7 @@
                                 <div class="spoiler" id="progression2"></div>
                             </div>
                         </div>
-                        
+
                         <h4>2 Chord Progression Prompts</h4>
                         <div class="row">
                             <div class="col-md-4 card">
@@ -142,6 +142,26 @@
                                 </figure>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="card">
+                                <div class="card-header bg-warning text-primary">
+                                    <i class="fa fa-gears"></i><label class="margin-left-default">Automation</label>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">Automate the drill process. This respects your "Include in Drills" selections.</p>
+                                    <button id="btnAutomate2" class="btn btn-warning" onclick="automate2();">Go!</button><label class="margin-left-default" id="remainingIterations"></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="revealModal" class="modal fade modal-sm" tabindex="-1" role="dialog" data-backdrop="false">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div id="revealModalBody" class="modal-body">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="tab-pane fade" id="nav-3" role="tabpanel" aria-labelledby="nav-3-tab">
@@ -167,7 +187,7 @@
                                 <div class="spoiler" id="progression3"></div>
                             </div>
                         </div>
-                        
+
                         <h4>3 Chord Progression Prompts</h4>
                         <div class="row">
                             <div class="col-md-4 card">
@@ -275,6 +295,15 @@
 
 @section  scripts {
     <script>
+        var jsIntervals = [];
+        var iterations = 0;
+        var maxIterations = 10;
+
+        var delayBeforeProgression2 = 0;
+        var delayBeforeShowModal2 = 3000;
+        var delayBeforeHideModal2 = 3500;
+        var delayBetweenIterations2 = delayBeforeProgression2 + delayBeforeShowModal2 + delayBeforeHideModal2;
+
         $(document).ready(function () {
             setAudProgression2Src();
             setAudProgression3Src();
@@ -357,6 +386,73 @@
             var progressionTable = buildProgressionTable(doInfo, msg);
             $('#progression3').html(progressionTable);
             $('#spinner3').fadeOut("slow");
+        }
+
+        function automate2() {
+            var buttonText = $("#btnAutomate2").text();
+            switch (buttonText) {
+                case "Go!":
+                    $("#btnAutomate2").text("Stop");
+                    playAndShow2();
+                    var jsInterval = setInterval(playAndShow2, delayBetweenIterations2);
+                    jsIntervals.push(jsInterval);
+                    break;
+
+                case "Stop":
+                    $("#btnAutomate2").text("Go!");
+                    resetIterationsMessage();
+                    clearAllIntervals();
+                    break;
+
+                default:
+                    alert("'" + buttonText + "' is not supported.");
+                    break;
+            }
+        }
+
+        function playAndShow2() {
+            iterations += 1;
+            if (iterations > maxIterations) {
+                $("#btnAutomate").text("Go!");
+                resetIterationsMessage();
+                iterations = 0;
+                clearAllIntervals();
+                return;
+            }
+            else {
+                $("#remainingIterations").text("Playing " + iterations + " of " + maxIterations + " iterations.");
+            }
+
+            //document.getElementById('doPlayer').play();
+            setTimeout(playProgression2, delayBeforeProgression2);
+        }
+
+        function playProgression2() {
+            setAudProgression2Src();
+            $('#audProgression2').trigger("play");
+            setTimeout(showModal, delayBeforeShowModal2);
+        }
+
+        function showModal() {
+            $("#revealModalBody").html($("#progression2").html());
+            $("#revealModal").modal('show');
+            setTimeout(hideModal, delayBeforeHideModal2);
+        }
+
+        function hideModal() {
+            $("#revealModal").modal('hide');
+        }
+
+        function clearAllIntervals() {
+            for (var id of this.jsIntervals) {
+                clearInterval(id);
+            }
+
+            jsIntervals = [];
+        }
+
+        function resetIterationsMessage() {
+            $("#remainingIterations").text("Automation will stop after " + maxIterations + " iterations.");
         }
     </script>
 }
