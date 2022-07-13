@@ -46,13 +46,13 @@
             </div>
             <div class="float-right">
                 <span id="spinner" class="spinner-border spinner-border-sm text-primary" role="status" aria-hidden="true"></span>
-                <input type="button" class="btn btn-primary margin-top-5" value="Get a New Interval" onclick="setAudDrill1Src()" />
+                <input type="button" class="btn btn-primary margin-top-5" value="Get a New Interval" onclick="setAudDrillSrc()" />
             </div>
         </div>
 
         <figure>
             <figcaption>Press the play button to hear the interval</figcaption>
-            <audio id="audDrill1" controls preload='none'>
+            <audio id="audDrill" controls preload='none'>
                 <source src='' type='audio/mpeg'>
             </audio>
         </figure>
@@ -162,20 +162,51 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="card">
+        <div class="card-header bg-warning text-primary">
+            <i class="fa fa-gears"></i><label class="margin-left-default">Automation</label>
+        </div>
+        <div class="card-body">
+            <p class="card-text">Automate the drill process. This respects your "Include in Drills" selections.</p>
+            <button id="btnAutomate" class="btn btn-warning" onclick="automate();">Go!</button><label class="margin-left-default" id="remainingIterations"></label>
+        </div>
+    </div>
+</div>
+
+<div id="revealModal" class="modal fade modal-sm" tabindex="-1" role="dialog" data-backdrop="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div id="revealModalBody" class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+
 @section  scripts {
     <script>
+
+        var jsIntervals = [];
+        var iterations = 0;
+        var maxIterations = 10;
+
+        var delayBeforeInterval = 1000;
+        var delayBeforeShowModal = 3500;
+        var delayBeforeHideModal = 3500;
+        var delayBetweenIterations = delayBeforeInterval + delayBeforeShowModal + delayBeforeHideModal;
+
         $(document).ready(function () {
-            setAudDrill1Src();
+            setAudDrillSrc();
 
             $('input[type=radio][name=intervaltype]').change(function () {
-                setAudDrill1Src();
+                setAudDrillSrc();
             });
             $('.cb-include').change(function () {
-                setAudDrill1Src();
+                setAudDrillSrc();
             });
         });
 
-        function setAudDrill1Src() {
+        function setAudDrillSrc() {
             $('#spinner').show();
             var baseSrc = '@Url.Action("GetHarmonicDrillEx", "L1C2", new { doNoteName = ViewBag.Pitch.PitchName })';
 
@@ -216,7 +247,7 @@
             var randomInt = getRandomInt(minDrill, maxDrill, excluded);
 
             var src = baseSrc + '&type=' + randomInt;
-            $('#audDrill1').attr('src', src);
+            $('#audDrill').attr('src', src);
 
             var msg = '';
             switch (randomInt) {
@@ -242,6 +273,72 @@
 
             $('#drill1').text(msg);
             $('#spinner').fadeOut("slow");
+        }
+
+        function automate() {
+            var buttonText = $("#btnAutomate").text();
+            switch (buttonText) {
+                case "Go!":
+                    $("#btnAutomate").text("Stop");
+                    playAndShow();
+                    var jsInterval = setInterval(playAndShow, delayBetweenIterations);
+                    jsIntervals.push(jsInterval);
+                    break;
+
+                case "Stop":
+                    $("#btnAutomate").text("Go!");
+                    resetIterationsMessage();
+                    clearAllIntervals();
+                    break;
+
+                default:
+                    alert("'" + buttonText + "' is not supported.");
+                    break;
+            }
+        }
+
+        function playAndShow() {
+            iterations += 1;
+            if (iterations > maxIterations) {
+                $("#btnAutomate").text("Go!");
+                resetIterationsMessage();
+                iterations = 0;
+                clearAllIntervals();
+                return;
+            }
+            else {
+                $("#remainingIterations").text("Playing " + iterations + " of " + maxIterations + " iterations.");
+            }
+
+            setTimeout(playInterval, delayBeforeInterval);
+        }
+
+        function playInterval() {
+            setAudDrillSrc();
+            $('#audDrill').trigger("play");
+            setTimeout(showModal, delayBeforeShowModal);
+        }
+
+        function showModal() {
+            $("#revealModalBody").html($("#drill1").html());
+            $("#revealModal").modal('show');
+            setTimeout(hideModal, delayBeforeHideModal);
+        }
+
+        function hideModal() {
+            $("#revealModal").modal('hide');
+        }
+
+        function clearAllIntervals() {
+            for (var id of this.jsIntervals) {
+                clearInterval(id);
+            }
+
+            jsIntervals = [];
+        }
+
+        function resetIterationsMessage() {
+            $("#remainingIterations").text("Automation will stop after " + maxIterations + " iterations.");
         }
 
     </script>
