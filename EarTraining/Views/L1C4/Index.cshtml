@@ -25,6 +25,18 @@
                 <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 0, inversion = 0 })' type='audio/mpeg'>
             </audio>
         </figure>
+        <figure>
+            <figcaption>Helper - IV triad (root)</figcaption>
+            <audio id="audio" controls preload='none'>
+                <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 1, inversion = 0 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+        <figure>
+            <figcaption>Helper - V triad (root)</figcaption>
+            <audio id="audio" controls preload='none'>
+                <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 2, inversion = 0 })' type='audio/mpeg'>
+            </audio>
+        </figure>
     </div>
 
 </div>
