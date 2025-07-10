@@ -20,11 +20,11 @@
 </div>
 
 @*<div class="card bg-info text-white margin-top-5">
-    <div class="card-body">
-        <i class="fa fa-pencil"></i>
-        <span class="pad-left-10">Note: When you get a new progression, or change which drills to include, you will also get a new randomly assigned key.</span>
-    </div>
-</div>*@
+        <div class="card-body">
+            <i class="fa fa-pencil"></i>
+            <span class="pad-left-10">Note: When you get a new progression, or change which drills to include, you will also get a new randomly assigned key.</span>
+        </div>
+    </div>*@
 
 <div class="row margin-top-5">
     <div class="col-md-6 card">
@@ -211,8 +211,38 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="card">
+        <div class="card-header bg-warning text-primary">
+            <i class="fa fa-gears"></i><label class="margin-left-default">Automation</label>
+        </div>
+        <div class="card-body">
+            <p class="card-text">Automate the drill process. This respects your "Include in Drills" selections.</p>
+            <button id="btnAutomate" class="btn btn-warning" onclick="automate();">Go!</button><label class="margin-left-default" id="remainingIterations"></label>
+        </div>
+    </div>
+</div>
+
+<div id="revealModal" class="modal fade modal-sm" tabindex="-1" role="dialog" data-backdrop="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div id="revealModalBody" class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+
 @section  scripts {
     <script>
+        var jsIntervals = [];
+        var iterations = 0;
+        var maxIterations = 10;
+
+        var delayBeforeProgression = 1000;
+        var delayBeforeShowModal = 3500;
+        var delayBeforeHideModal = 3500;
+        var delayBetweenIterations = delayBeforeProgression + delayBeforeShowModal + delayBeforeHideModal;
+
         $(document).ready(function () {
             setAudProgressionSrc();
 
@@ -301,6 +331,73 @@
             $('#progression').html(progressionTable);
             $('#spinner').fadeOut("slow");
         }
+
+        function automate() {
+            var buttonText = $("#btnAutomate").text();
+            switch (buttonText) {
+                case "Go!":
+                    $("#btnAutomate").text("Stop");
+                    playAndShow();
+                    var jsInterval = setInterval(playAndShow, delayBetweenIterations);
+                    jsIntervals.push(jsInterval);
+                    break;
+
+                case "Stop":
+                    $("#btnAutomate").text("Go!");
+                    resetIterationsMessage();
+                    clearAllIntervals();
+                    break;
+
+                default:
+                    alert("'" + buttonText + "' is not supported.");
+                    break;
+            }
+        }
+
+        function playAndShow() {
+            iterations += 1;
+            if (iterations > maxIterations) {
+                $("#btnAutomate").text("Go!");
+                resetIterationsMessage();
+                iterations = 0;
+                clearAllIntervals();
+                return;
+            }
+            else {
+                $("#remainingIterations").text("Playing " + iterations + " of " + maxIterations + " iterations.");
+            }
+
+            setTimeout(playProgression, delayBeforeProgression);
+        }
+
+        function playProgression() {
+            setAudProgressionSrc();
+            $('#audProgression').trigger("play");
+            setTimeout(showModal, delayBeforeShowModal);
+        }
+
+        function showModal() {
+            $("#revealModalBody").html($("#progression").html());
+            $("#revealModal").modal('show');
+            setTimeout(hideModal, delayBeforeHideModal);
+        }
+
+        function hideModal() {
+            $("#revealModal").modal('hide');
+        }
+
+        function clearAllIntervals() {
+            for (var id of this.jsIntervals) {
+                clearInterval(id);
+            }
+
+            jsIntervals = [];
+        }
+
+        function resetIterationsMessage() {
+            $("#remainingIterations").text("Automation will stop after " + maxIterations + " iterations.");
+        }
+
     </script>
 }
 
