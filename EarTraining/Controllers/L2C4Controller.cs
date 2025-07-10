@@ -21,8 +21,14 @@ namespace EarTraining.Controllers
             ViewBag.Pitch = pitch;
         }
 
-        public ActionResult MajorTriadProgressions2()
+        public ActionResult MajorTriadProgressions2(string @do)
         {
+            if (!string.IsNullOrWhiteSpace(@do))
+            {
+                Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName.ToUpper().Split('/').Contains(@do.ToUpper()));
+                ViewBag.Pitch = pitch;
+            }
+
             return View();
         }
 

@@ -2,7 +2,6 @@
 @{
     ViewBag.Title = "L2C4 1 - Major Triad Progressions - Pairs";
 }
-<h4 class="text-warning">Not yet fully implemented</h4>
 <h2>Level 2 Chapter 4</h2>
 <h5>@ViewBag.Title</h5>
 
@@ -12,12 +11,20 @@
         <span class="pad-left-10">These are selected from the major triad progression questions on page 63.</span>
     </div>
 </div>
-<div class="card bg-info text-white margin-top-5">
+<div class="row">
+    <div class="col-md-6 card">
+        @{
+            Html.RenderPartial("NewDO");
+        }
+    </div>
+</div>
+
+@*<div class="card bg-info text-white margin-top-5">
     <div class="card-body">
         <i class="fa fa-pencil"></i>
         <span class="pad-left-10">Note: When you get a new progression, or change which drills to include, you will also get a new randomly assigned key.</span>
     </div>
-</div>
+</div>*@
 
 <div class="row margin-top-5">
     <div class="col-md-6 card">
@@ -220,8 +227,8 @@
             var excluded = getExcluded(null, 0);
             var progressiontype = getRandomInt(0, 9, excluded);
             var src = baseSrc + '&progressiontype=' + progressiontype;
-            //$('#audProgression').attr('src', src);
-            $('#audProgression source').attr('src', src);
+            $('#audProgression').attr('src', src);
+            //$('#audProgression source').attr('src', src);
 
             var msg = '';
             var friendlyMessage = 'I\'m a message!';;
@@ -279,12 +286,18 @@
             //var progressionTable = buildProgressionTable(doInfo, msg);
             //$('#progression').html(progressionTable);
 
-            getNewDo(doTheChange, msg, friendlyMessage);
+            //getNewDo(doTheChange, msg, friendlyMessage);
+
+            var doInfo = $('#doSpoiler').text();
+            var progressionTable = buildProgressionTable(doInfo, msg, friendlyMessage, true);
+            $('#progression').html(progressionTable);
+
+            $('#spinner').fadeOut("slow");
         }
 
         function doTheChange(pitchName, msg, friendlyMessage) {
             changeAllDoNoteNames(pitchName);
-            var progressionTable = buildProgressionTable(pitchName, msg, friendlyMessage, true);
+            var progressionTable = buildProgressionTable(pitchName, msg, friendlyMessage, false);
             $('#progression').html(progressionTable);
             $('#spinner').fadeOut("slow");
         }
