@@ -2,7 +2,6 @@
 @{
     ViewBag.Title = "L2C4 1 - Major Triad Progressions - 3 Chords";
 }
-<h4 class="text-warning">Not yet fully implemented</h4>
 <h2>Level 2 Chapter 4</h2>
 <h5>@ViewBag.Title</h5>
 
@@ -12,10 +11,11 @@
         <span class="pad-left-10">These are selected from the major triad progression questions on page 65.</span>
     </div>
 </div>
-<div class="card bg-info text-white margin-top-5">
-    <div class="card-body">
-        <i class="fa fa-pencil"></i>
-        <span class="pad-left-10">Note: When you get a new progression, or change which drills to include, you will also get a new randomly assigned key.</span>
+<div class="row">
+    <div class="col-md-6 card">
+        @{
+            Html.RenderPartial("NewDO");
+        }
     </div>
 </div>
 
@@ -91,7 +91,8 @@
             var excluded = getExcluded(null, 0);
             var progressiontype = getRandomInt(100, 101, excluded);
             var src = baseSrc + '&progressiontype=' + progressiontype;
-            $('#audProgression source').attr('src', src);
+            $('#audProgression').attr('src', src);
+            //$('#audProgression source').attr('src', src);
 
             var msg = '';
             var friendlyMessage = '';
@@ -109,7 +110,14 @@
                     break;
             }
 
-            getNewDo(doTheChange, msg, friendlyMessage);
+            //getNewDo(doTheChange, msg, friendlyMessage);
+
+            var doInfo = $('#doSpoiler').text();
+            var progressionTable = buildProgressionTable(doInfo, msg, friendlyMessage, true);
+            $('#progression').html(progressionTable);
+
+            $('#spinner').fadeOut("slow");
+
         }
 
         function doTheChange(pitchName, msg, friendlyMessage) {

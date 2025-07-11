@@ -33,8 +33,14 @@ namespace EarTraining.Controllers
             return View();
         }
 
-        public ActionResult MajorTriadProgressions3()
+        public ActionResult MajorTriadProgressions3(string @do)
         {
+            if (!string.IsNullOrWhiteSpace(@do))
+            {
+                Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName.ToUpper().Split('/').Contains(@do.ToUpper()));
+                ViewBag.Pitch = pitch;
+            }
+
             return View();
         }
 
