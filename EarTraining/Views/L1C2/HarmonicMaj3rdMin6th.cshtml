@@ -174,14 +174,7 @@
     </div>
 </div>
 
-<div id="revealModal" class="modal fade modal-sm" tabindex="-1" role="dialog" data-backdrop="false">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div id="revealModalBody" class="modal-body">
-            </div>
-        </div>
-    </div>
-</div>
+@{Html.RenderPartial("~/Views/Shared/RevealModal.cshtml");}
 
 @section  scripts {
     <script>
