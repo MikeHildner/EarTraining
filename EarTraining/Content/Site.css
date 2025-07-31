@@ -196,3 +196,7 @@ audio {
     margin-top: -8px;
     margin-bottom: 10px;
 }
+
+.cb-color {
+    accent-color: #4b0085;
+}

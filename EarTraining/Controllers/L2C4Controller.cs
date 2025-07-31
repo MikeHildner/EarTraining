@@ -19,7 +19,7 @@ namespace EarTraining.Controllers
         {
             Pitch pitch = new Pitches().Random();
             ViewBag.Pitch = pitch;
-            ViewBag.ShowDo = true;
+            //ViewBag.ShowDo = true;
         }
 
         public ActionResult MajorTriadProgressions2(string @do)
