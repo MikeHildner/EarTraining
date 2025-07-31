@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "L2C4 1 - Major Triad Progressions - 3 Chords";
 }
+<h4 class="text-warning">Not yet fully implemented</h4>
 <h2>Level 2 Chapter 4</h2>
 <h5>@ViewBag.Title</h5>
 
@@ -11,14 +12,6 @@
         <span class="pad-left-10">These are selected from the major triad progression questions on page 65.</span>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-6 card">
-        @{
-            Html.RenderPartial("NewDO");
-        }
-    </div>
-</div>
-
 <div class="row margin-top-5">
     <div class="col-md-6 card">
         <div>
@@ -75,14 +68,47 @@
     </div>
 </div>
 
+<!-- Automation -->
+<div class="row">
+    <div class="card">
+        <div class="card-header bg-warning text-primary">
+            <i class="fa fa-gears"></i><label class="margin-left-default">Automation</label>
+        </div>
+        <div class="card-body">
+            <p class="card-text">Automate the drill process. This respects your "Include in Drills" selections.</p>
+            <button id="btnAutomate" class="btn btn-warning" onclick="automate();">Go!</button><label class="margin-left-default" id="remainingIterations"></label>
+        </div>
+    </div>
+</div>
+
+@{Html.RenderPartial("~/Views/Shared/RevealModal.cshtml");}
+
 @section  scripts {
     <script>
+        var jsIntervals = [];
+        let iterations = 0;
+        let maxIterations = 10;
+
+        let delayBeforeProgression = 1000;
+        let delayBeforeShowModal = 4500;
+        let delayBeforeHideModal = 3500;
+        let delayBetweenIterations = delayBeforeProgression + delayBeforeShowModal + delayBeforeHideModal;
+
+        let isDoingAutomation = false;
+
         $(document).ready(function () {
             setAudProgressionSrc();
 
             $('.cb-include').change(function () {
                 setAudProgressionSrc();
             });
+
+            $("#audProgression").on("ended", function () {
+                if (isDoingAutomation) {
+                    setAudProgressionSrc();
+                }
+            });
+
         });
 
         function setAudProgressionSrc() {
@@ -110,11 +136,11 @@
                     break;
             }
 
-            //getNewDo(doTheChange, msg, friendlyMessage);
+            getNewDo(doTheChange, msg, friendlyMessage);
 
-            var doInfo = $('#doSpoiler').text();
-            var progressionTable = buildProgressionTable(doInfo, msg, friendlyMessage, true);
-            $('#progression').html(progressionTable);
+            //var doInfo = $('#doSpoiler').text();
+            //var progressionTable = buildProgressionTable(doInfo, msg, friendlyMessage, true);
+            //$('#progression').html(progressionTable);
 
             $('#spinner').fadeOut("slow");
 
@@ -126,6 +152,76 @@
             $('#progression').html(progressionTable);
             $('#spinner').fadeOut("slow");
         }
+
+        function automate() {
+            var buttonText = $("#btnAutomate").text();
+            switch (buttonText) {
+                case "Go!":
+                    isDoingAutomation = true;
+                    $("#btnAutomate").text("Stop");
+                    playAndShow();
+                    var jsInterval = setInterval(playAndShow, delayBetweenIterations);
+                    jsIntervals.push(jsInterval);
+                    break;
+
+                case "Stop":
+                    isDoingAutomation = false;
+                    $("#btnAutomate").text("Go!");
+                    resetIterationsMessage();
+                    clearAllIntervals();
+                    break;
+
+                default:
+                    alert("'" + buttonText + "' is not supported.");
+                    break;
+            }
+        }
+
+        function playAndShow() {
+            iterations += 1;
+            if (iterations > maxIterations) {
+                $("#btnAutomate").text("Go!");
+                resetIterationsMessage();
+                iterations = 0;
+                clearAllIntervals();
+                return;
+            }
+            else {
+                $("#remainingIterations").text("Playing " + iterations + " of " + maxIterations + " iterations.");
+            }
+
+            //document.getElementById('doPlayer').play();
+            setTimeout(playProgression, delayBeforeProgression);
+        }
+
+        function playProgression() {
+            //setAudProgressionSrc();
+            $('#audProgression').trigger("play");
+            setTimeout(showModal, delayBeforeShowModal);
+        }
+
+        function showModal() {
+            $("#revealModalBody").html($("#progression").html());
+            $("#revealModal").modal('show');
+            setTimeout(hideModal, delayBeforeHideModal);
+        }
+
+        function hideModal() {
+            $("#revealModal").modal('hide');
+        }
+
+        function resetIterationsMessage() {
+            $("#remainingIterations").text("Automation will stop after " + maxIterations + " iterations.");
+        }
+
+        function clearAllIntervals() {
+            for (var id of this.jsIntervals) {
+                clearInterval(id);
+            }
+
+            jsIntervals = [];
+        }
+
     </script>
 }
 
