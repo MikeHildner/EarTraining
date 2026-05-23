@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Eartraining</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-primary">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            @Html.ActionLink("Ear Training Home", "Index", "Home", new { area = "Classic" }, new { @class = "navbar-brand image-ear" })
+            <div class="navbar-collapse collapse" id="navbarSupportedContent">
+
+                <ul class="nav navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownL1C1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Level 1 Chapter 1
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownL1C1">
+                            <div class="dropdown-header">Solfeg</div>
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Vocal Drills"), "SolfegResolutionsDO", "L1C1", new { area = "Classic" }, new { @class = "dropdown-item" })
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Resolution Identification"), "SolfegResolutionsNoDO", "L1C1", new { area = "Classic" }, new { @class = "dropdown-item" })
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Pitch Identification"), "PitchIdentification", "L1C1", new { area = "Classic" }, new { @class = "dropdown-item" })
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Dictation / Transcription"), "DictationTranscription", "L1C1", new { area = "Classic" }, new { @class = "dropdown-item" })
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownL1C2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Level 1 Chapter 2
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownL1C2">
+                            <div class="dropdown-header">Maj 3rd and Min 6th Intervals</div>
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Vocal Drills"), "VocalDrills", "L1C2", new { area = "Classic" }, new { @class = "dropdown-item" })
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Melodic Interval Identification"), "MelodicMaj3rdMin6thNoDO", "L1C2", new { area = "Classic" }, new { @class = "dropdown-item" })
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Harmonic Interval Identification"), "HarmonicMaj3rdMin6th", "L1C2", new { area = "Classic" }, new { @class = "dropdown-item" })
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Dictation / Transcription"), "DictationTranscription", "L1C2", new { area = "Classic" }, new { @class = "dropdown-item" })
+
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownL1C3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Level 1 Chapter 3
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownL1C3">
+                            <div class="dropdown-header">Min 3rd and Maj 6th Intervals</div>
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Vocal Drills"), "VocalDrills", "L1C3", new { area = "Classic" }, new { @class = "dropdown-item" })
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Melodic Interval Identification"), "MelodicMin3rdMaj6thNoDO", "L1C3", new { area = "Classic" }, new { @class = "dropdown-item" })
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Harmonic Interval Identification"), "HarmonicMin3rdMaj6th", "L1C3", new { area = "Classic" }, new { @class = "dropdown-item" })
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;I IV V Diatonic Triad Recognition"), "Index", "L1C3", new { area = "Classic" }, new { @class = "dropdown-item" })
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownL1C4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Level 1 Chapter 4
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownL1C4">
+                            <div class="dropdown-header">I IV V Diatonic Triad Progressions</div>
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;2 and 3 Chord Progressions"), "Index", "L1C4", new { area = "Classic" }, new { @class = "dropdown-item" })
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownL1C5" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Level 1 Chapter 5
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownL1C5">
+                            <div class="dropdown-header">Diatonic 4th and 5th Intervals</div>
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Vocal Drills"), "VocalDrills", "L1C5", new { area = "Classic" }, new { @class = "dropdown-item" })
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Melodic Interval Identification"), "MelodicIntervals", "L1C5", new { area = "Classic" }, new { @class = "dropdown-item" })
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Harmonic Interval Identification"), "HarmonicIntervals", "L1C5", new { area = "Classic" }, new { @class = "dropdown-item" })
+                            <div class="dropdown-divider"></div>
+                            <div class="dropdown-header">Diatonic Triads and Progressions</div>
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink("I IV V vi Diatonic Triad Recognition", "DiatonicTriadRecognition", "L1C5", new { area = "Classic" }, new { @class = "dropdown-item" })
+                            @Html.ActionLink("2 and 3 Chord Progressions", "DiatonicTriadProgressions", "L1C5", new { area = "Classic" }, new { @class = "dropdown-item" })
+
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownL1C6" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Level 1 Chapter 6
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownL1C6">
+                            <div class="dropdown-header">Maj 2nd/Min 7th Intervals</div>
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Vocal Drills"), "VocalDrills", "L1C6", new { area = "Classic" }, new { @class = "dropdown-item" })
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Melodic Interval Identification"), "MelodicIntervals", "L1C6", new { area = "Classic" }, new { @class = "dropdown-item" })
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Harmonic Interval Identification"), "HarmonicIntervals", "L1C6", new { area = "Classic" }, new { @class = "dropdown-item" })
+                            <div class="dropdown-divider"></div>
+                            <div class="dropdown-header">Diatonic Triads and Progressions</div>
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;I IV V vi iii Diatonic Triad Recognition"), "DiatonicTriadRecognition", "L1C6", new { area = "Classic" }, new { @class = "dropdown-item" })
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;2 and 3 Chord Progressions"), "DiatonicTriadProgressions", "L1C6", new { area = "Classic" }, new { @class = "dropdown-item" })
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownL1C7" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Level 1 Chapter 7
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownL1C7">
+                            <div class="dropdown-header">Min 2nd/Maj 7th Intervals</div>
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Vocal Drills"), "VocalDrills", "L1C7", new { area = "Classic" }, new { @class = "dropdown-item" })
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Melodic Interval Identification"), "MelodicIntervals", "L1C7", new { area = "Classic" }, new { @class = "dropdown-item" })
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Harmonic Interval Identification"), "HarmonicIntervals", "L1C7", new { area = "Classic" }, new { @class = "dropdown-item" })
+                            <div class="dropdown-divider"></div>
+                            <div class="dropdown-header">Diatonic Triads and Progressions</div>
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;I IV V vi iii ii Diatonic Triad Recognition"), "DiatonicTriadRecognition", "L1C7", new { area = "Classic" }, new { @class = "dropdown-item" })
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;2 and 3 Chord Progressions"), "DiatonicTriadProgressions", "L1C7", new { area = "Classic" }, new { @class = "dropdown-item" })
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownL2C4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Level 2 Chapter 4
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownL2C4">
+                            <div class="dropdown-header">Major Triad Progressions</div>
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Circle of 5ths/4ths and 1/2 Step Movements (pairs)"), "MajorTriadProgressions2", "L2C4", new { area = "Classic" }, new { @class = "dropdown-item" })
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Circle of 5ths/4ths and 1/2 Step Movements (3 chords)"), "MajorTriadProgressions3", "L2C4", new { area = "Classic" }, new { @class = "dropdown-item" })
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownL2C5" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Level 2 Chapter 5
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownL2C5">
+                            <div class="dropdown-header">Diatonic Triad Progressions</div>
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Diatonic Triad Progressions (4 chords)"), "DiatonicTriadProgressions4", "L2C5", new { area = "Classic" }, new { @class = "dropdown-item" })
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownOther" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Other
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownOther">
+                            @Html.ActionLink("Find the DO", "Index", "DO", new { area = "Classic" }, new { @class = "dropdown-item" })
+                            @Html.ActionLink("All Solfeg Syllables", "Index", "Solfeg", new { area = "Classic" }, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Ratios", "Ratios", "Experimental", new { area = "Classic" }, new { @class = "dropdown-item" })
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownExperimental" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Experimental
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownExperimental">
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;L2 Major Triad Progressions"), "MajorTriadProgressions", "L2", new { area = "Classic" }, new { @class = "dropdown-item" })
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;L1C3 Dictation / Transcription"), "DictationTranscription", "L1C3", new { area = "Classic" }, new { @class = "dropdown-item" })
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink("Phrases per Form", "PhrasesPerForm", "Experimental", new { area = "Classic" }, new { @class = "dropdown-item" })
+                        </div>
+                    </li>
+
+                    <li class="nav-item">@Html.ActionLink("About", "About", "Home", new { area = "Classic" }, new { @class = "nav-link" })</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container body-content">
+        @RenderBody()
+
+        @if (ViewBag.ShowPlayDoTriad == true)
+        {
+            <div class="float-button-2 bg-primary">
+                <audio id="triadPlayer" preload='none'>
+                    <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 0, inversion = 0 })' type='audio/mpeg'>
+                </audio>
+                <div>
+                    <img class="my-float-2" src='@Url.Content("~/Content/Images/chord-white.png")' onclick="document.getElementById('triadPlayer').play()" title="Play the DO triad (root)" />
+                </div>
+            </div>
+        }
+
+        @if (ViewBag.ShowDo == true)
+        {
+            <div class="float-button-1 bg-primary">
+                <audio id="doPlayer" preload='none'>
+                    <source src='@Url.Action("GetDOEx", "DO", new { doNoteName = ViewBag.Pitch.PitchName })' type='audio/mpeg'>
+                </audio>
+                <div>
+                    <img class="my-float-1" src='@Url.Content("~/Content/Images/quarter-note-white.png")' onclick="document.getElementById('doPlayer').play()" title="Play the DO" />
+                </div>
+            </div>
+        }
+
+        <hr />
+
+        <footer>
+
+            <div class="card z-index-back">
+                <div class="card-header small bg-light"><i class="fa fa-lock"></i><label class="margin-left-default">Privacy information</label></div>
+                <div class="card-body">
+                    <ul class="small">
+                        <li>We don't use cookies</li>
+                        <li>We don't collect, record or share any personal information</li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/site")
+    @RenderSection("scripts", required: false)
+
+    <script>
+        var rootPath = '@Url.Content("~/")';
+
+        $(document).ready(function () {
+            deleteOldFiles();
+
+            $(window).resize(function () {
+                setBodyMargin();
+            });
+
+            setBodyMargin();
+        });
+
+        function deleteOldFiles() {
+            $.ajax({
+                url: '@Url.Content("~/")' + 'base/DeleteOldFiles'
+            });
+        }
+
+        function setBodyMargin() {
+            var heightSlider = $('.navbar').height();
+            $('.body-content').css({ marginTop: heightSlider + 0 + 'px' });
+        }
+
+    </script>
+</body>
+</html>

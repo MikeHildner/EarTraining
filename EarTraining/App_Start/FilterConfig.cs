@@ -1,4 +1,4 @@
-﻿using System.Web;
+﻿using EarTraining.Areas.Classic.Controllers;
 using System.Web.Mvc;
 
 namespace EarTraining
@@ -8,6 +8,7 @@ namespace EarTraining
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            filters.Add(new ClassicAreaCookieFilter());
         }
     }
 }
