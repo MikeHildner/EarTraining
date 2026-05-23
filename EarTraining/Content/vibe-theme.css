@@ -3,13 +3,69 @@
    Modern facelift layer on top of Bootstrap 4 + Bootswatch Solar
    ============================================================= */
 
-/* ── Font + page background ── */
-body.theme-vibe {
-    font-family: 'Inter', 'Source Sans Pro', system-ui, sans-serif;
-    background-color: #ece8f5;   /* clearly lavender vs Human's white */
+/* ── Keyframe Animations ── */
+@keyframes vibeBackground {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-/* ── Typography ── */
+@keyframes vibeRainbow {
+    0%   { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+}
+
+@keyframes vibeBtnPulse {
+    0%, 100% { opacity: 0.4;  transform: scale(0.96); }
+    50%       { opacity: 0.75; transform: scale(1.04); }
+}
+
+
+/* =============================================================
+   FOUNDATION
+   ============================================================= */
+
+/* ── Animated page background ── */
+body.theme-vibe {
+    font-family: 'Inter', 'Source Sans Pro', system-ui, sans-serif;
+    background: linear-gradient(-45deg, #ede9f7, #e2dbf0, #f0eafb, #d8d0ec, #eae4f6);
+    background-size: 400% 400%;
+    animation: vibeBackground 20s ease infinite;
+}
+
+/* ── Text selection highlight ── */
+body.theme-vibe ::selection {
+    background: rgba(118, 70, 200, 0.22);
+    color: inherit;
+}
+
+/* ── Custom scrollbar (Webkit / Chrome / Edge) ── */
+body.theme-vibe ::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+body.theme-vibe ::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+body.theme-vibe ::-webkit-scrollbar-thumb {
+    background: rgba(118, 70, 200, 0.28);
+    border-radius: 99px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+body.theme-vibe ::-webkit-scrollbar-thumb:hover {
+    background: rgba(118, 70, 200, 0.52);
+    background-clip: padding-box;
+}
+
+
+/* =============================================================
+   TYPOGRAPHY
+   ============================================================= */
+
 body.theme-vibe h1,
 body.theme-vibe h2 {
     font-weight: 700;
@@ -27,9 +83,13 @@ body.theme-vibe h6 {
     font-weight: 600;
 }
 
-/* ── Navbar ── */
+
+/* =============================================================
+   NAVBAR
+   ============================================================= */
+
 body.theme-vibe .navbar {
-    box-shadow: 0 2px 16px rgba(89, 49, 150, 0.22);
+    box-shadow: 0 4px 24px rgba(44, 21, 96, 0.28);
     padding-top: 0.6rem;
     padding-bottom: 0.6rem;
 }
@@ -40,10 +100,30 @@ body.theme-vibe .navbar-brand {
     font-size: 1.05rem;
 }
 
+/* Nav links — sliding underline on hover */
 body.theme-vibe .nav-link {
     font-weight: 500;
     font-size: 0.875rem;
+    position: relative;
     transition: opacity 0.15s;
+}
+
+body.theme-vibe .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    right: 50%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 1px;
+    transition: left 0.2s ease, right 0.2s ease;
+}
+
+body.theme-vibe .nav-link:hover::after,
+body.theme-vibe .nav-link:focus::after {
+    left: 0.75rem;
+    right: 0.75rem;
 }
 
 body.theme-vibe .navbar-text {
@@ -51,13 +131,21 @@ body.theme-vibe .navbar-text {
     letter-spacing: 0.03em;
 }
 
-/* ── Dropdown menus ── */
+
+/* =============================================================
+   DROPDOWNS
+   ============================================================= */
+
+/* Glassmorphism dropdown panels */
 body.theme-vibe .dropdown-menu {
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.6);
     border-radius: 0.6rem;
-    box-shadow: 0 8px 32px rgba(89, 49, 150, 0.18);
+    box-shadow: 0 16px 48px rgba(44, 21, 96, 0.2), 0 4px 16px rgba(44, 21, 96, 0.1);
     padding: 0.4rem;
     margin-top: 0.25rem;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
 }
 
 body.theme-vibe .dropdown-item {
@@ -88,7 +176,7 @@ body.theme-vibe .dropdown-divider {
     border-color: rgba(89, 49, 150, 0.12);
 }
 
-/* ── Mega-dropdown (Level 1) ── */
+/* Mega-dropdown (Level 1) */
 body.theme-vibe .dropdown-mega .dropdown-menu {
     min-width: 680px;
     padding: 0.75rem;
@@ -131,55 +219,98 @@ body.theme-vibe .mega-section-title {
     }
 }
 
-/* ── Cards ── */
+
+/* =============================================================
+   CARDS — glassmorphism
+   ============================================================= */
+
 body.theme-vibe .card {
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.55);
     border-radius: 0.6rem;
-    box-shadow: 0 2px 10px rgba(89, 49, 150, 0.09);
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(10px) saturate(150%);
+    -webkit-backdrop-filter: blur(10px) saturate(150%);
+    box-shadow: 0 2px 12px rgba(89, 49, 150, 0.1), 0 1px 3px rgba(89, 49, 150, 0.06);
     margin-bottom: 1rem;
-    transition: box-shadow 0.2s ease;
+    transition: box-shadow 0.2s ease, transform 0.15s ease;
 }
 
 body.theme-vibe .card:hover {
-    box-shadow: 0 6px 20px rgba(89, 49, 150, 0.17);
+    box-shadow: 0 8px 28px rgba(89, 49, 150, 0.2), 0 2px 8px rgba(89, 49, 150, 0.1);
+    transform: translateY(-1px);
 }
 
 body.theme-vibe .card-header {
     border-radius: 0.6rem 0.6rem 0 0 !important;
     font-weight: 600;
     font-size: 0.875rem;
+    background: rgba(255, 255, 255, 0.4);
 }
 
 /* Info / callout card (bg-light text-primary) */
 body.theme-vibe .card.bg-light {
-    background-color: rgba(169, 145, 212, 0.13) !important;
+    background: rgba(169, 145, 212, 0.15) !important;
+    border: none !important;
     border-left: 3px solid #593196 !important;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
     box-shadow: none;
+    transform: none !important; /* no hover lift on callout cards */
 }
 
-/* ── Buttons ── */
+
+/* =============================================================
+   BUTTONS
+   ============================================================= */
+
 body.theme-vibe .btn {
     border-radius: 0.45rem;
     font-weight: 500;
     letter-spacing: 0.01em;
 }
 
+/* Primary button with pulsing glow halo via ::before */
 body.theme-vibe .btn-primary {
-    box-shadow: 0 2px 8px rgba(89, 49, 150, 0.28);
-    transition: box-shadow 0.15s, transform 0.1s;
+    box-shadow: 0 4px 15px rgba(118, 70, 200, 0.45);
+    transition: box-shadow 0.25s ease, transform 0.15s ease;
+    position: relative;
+    isolation: isolate;
+    overflow: visible;
+}
+
+body.theme-vibe .btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: inherit;
+    background: rgba(118, 70, 200, 0.38);
+    filter: blur(10px);
+    z-index: -1;
+    animation: vibeBtnPulse 2.5s ease-in-out infinite;
+    pointer-events: none;
 }
 
 body.theme-vibe .btn-primary:hover {
-    box-shadow: 0 4px 14px rgba(89, 49, 150, 0.42);
-    transform: translateY(-1px);
+    box-shadow: 0 8px 30px rgba(118, 70, 200, 0.65), 0 0 0 3px rgba(118, 70, 200, 0.15);
+    transform: translateY(-2px);
+}
+
+body.theme-vibe .btn-primary:hover::before {
+    opacity: 0;
+    transition: opacity 0.2s;
+    animation-play-state: paused;
 }
 
 body.theme-vibe .btn-primary:active {
     transform: translateY(0);
-    box-shadow: 0 1px 4px rgba(89, 49, 150, 0.3);
+    box-shadow: 0 2px 8px rgba(118, 70, 200, 0.4);
 }
 
-/* ── Figure + audio layout ── */
+
+/* =============================================================
+   FIGURES + AUDIO
+   ============================================================= */
+
 body.theme-vibe figure {
     margin-bottom: 0;
     padding: 0.25rem 0;
@@ -207,14 +338,37 @@ body.theme-vibe figure audio {
     border-radius: 30px;
 }
 
-/* ── Spoiler ── */
-body.theme-vibe .spoiler:not(:hover) {
-    color: #3b1f70;
-    background-color: #3b1f70;
-    border-radius: 0.35rem;
+
+/* =============================================================
+   SPOILER — modern glow reveal instead of color block
+   ============================================================= */
+
+body.theme-vibe .spoiler,
+body.theme-vibe .spoiler > * {
+    transition: color 0.4s ease, text-shadow 0.4s ease,
+                opacity 0.4s ease, filter 0.4s ease;
 }
 
-/* ── Float buttons ── */
+/* Hidden state: text becomes an unreadable purple glow */
+body.theme-vibe .spoiler:not(:hover) {
+    color: transparent;
+    text-shadow: 0 0 14px rgba(118, 70, 200, 0.72);
+    background-color: transparent;
+    border-radius: 0.35rem;
+    user-select: none;
+}
+
+/* Child elements blur out */
+body.theme-vibe .spoiler:not(:hover) > * {
+    opacity: 0;
+    filter: blur(6px);
+}
+
+
+/* =============================================================
+   FLOAT BUTTONS
+   ============================================================= */
+
 body.theme-vibe .float-button-1,
 body.theme-vibe .float-button-2 {
     box-shadow: 0 4px 18px rgba(89, 49, 150, 0.38);
@@ -227,11 +381,18 @@ body.theme-vibe .float-button-2:hover {
     transform: translateY(-2px) scale(1.05);
 }
 
-/* ── Footer ── */
+
+/* =============================================================
+   FOOTER
+   ============================================================= */
+
 body.theme-vibe footer .card {
     box-shadow: none;
     border: 1px solid rgba(89, 49, 150, 0.14) !important;
-    background-color: transparent !important;
+    background: rgba(255, 255, 255, 0.45) !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transform: none !important;
 }
 
 body.theme-vibe footer .card-header {
@@ -249,18 +410,26 @@ body.theme-vibe .body-content {
     padding-top: 1.25rem;
 }
 
+
 /* =============================================================
    VIBE IDENTITY MARKERS
    Strong visual differences that make it immediately obvious
    you're in Vibe mode vs Human mode.
    ============================================================= */
 
-/* ── 1. Gradient navbar (Human has a flat solid #593196) ── */
+/* ── 1. Glassmorphism gradient navbar (Human has flat solid #593196) ── */
 body.theme-vibe .navbar.bg-primary {
-    background: linear-gradient(125deg, #2c1560 0%, #4f2b91 45%, #7646c8 100%) !important;
+    background: linear-gradient(
+        125deg,
+        rgba(44, 21, 96, 0.90) 0%,
+        rgba(79, 43, 145, 0.86) 45%,
+        rgba(118, 70, 200, 0.82) 100%
+    ) !important;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
 }
 
-/* ── 2. Colorful 3-px accent stripe pinned to top of navbar ── */
+/* ── 2. Animated rainbow accent stripe at top of navbar ── */
 body.theme-vibe .navbar::before {
     content: '';
     position: absolute;
@@ -268,7 +437,12 @@ body.theme-vibe .navbar::before {
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, #a78bfa 0%, #818cf8 33%, #38bdf8 66%, #34d399 100%);
+    background: linear-gradient(
+        90deg,
+        #a78bfa, #818cf8, #38bdf8, #34d399, #f472b6, #a78bfa
+    );
+    background-size: 200% 100%;
+    animation: vibeRainbow 4s linear infinite;
     z-index: 1;
 }
 
@@ -289,18 +463,17 @@ body.theme-vibe .navbar-text strong {
     text-transform: uppercase;
 }
 
-/* ── 4. Page-title accent underline on h2 ── */
+/* ── 4. Gradient text on h2 page titles ── */
 body.theme-vibe h2 {
+    background: linear-gradient(135deg, #3b1f70 0%, #7646c8 60%, #9b6cde 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     border-bottom: 2px solid rgba(118, 70, 200, 0.2);
     padding-bottom: 0.35rem;
     margin-bottom: 0.8rem;
 }
 
-/* ── 5. Content area uses a white card surface vs lavender page ── */
-/*    (reinforces the lavender background by contrast)         */
-body.theme-vibe .card {
-    background-color: #fff;
-}
 
 /* =============================================================
    VIBE WELCOME MODAL
@@ -313,14 +486,14 @@ body.theme-vibe .vibe-welcome-modal {
     box-shadow: 0 24px 60px rgba(44, 21, 96, 0.35);
 }
 
-/* Gradient header strip — matches the navbar gradient */
+/* Gradient header — matches the navbar */
 body.theme-vibe .vibe-welcome-header {
     background: linear-gradient(125deg, #2c1560 0%, #4f2b91 45%, #7646c8 100%);
     padding: 1.5rem 1.5rem 1.25rem;
     position: relative;
 }
 
-/* Rainbow accent stripe at the top — matches the navbar stripe */
+/* Animated rainbow stripe — mirrors the navbar stripe */
 body.theme-vibe .vibe-welcome-header::before {
     content: '';
     position: absolute;
@@ -328,7 +501,12 @@ body.theme-vibe .vibe-welcome-header::before {
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, #a78bfa 0%, #818cf8 33%, #38bdf8 66%, #34d399 100%);
+    background: linear-gradient(
+        90deg,
+        #a78bfa, #818cf8, #38bdf8, #34d399, #f472b6, #a78bfa
+    );
+    background-size: 200% 100%;
+    animation: vibeRainbow 4s linear infinite;
 }
 
 body.theme-vibe .vibe-welcome-pill {
