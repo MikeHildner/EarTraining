@@ -1,0 +1,245 @@
+/* =============================================================
+   Vibe Theme — scoped to body.theme-vibe
+   Modern facelift layer on top of Bootstrap 4 + Bootswatch Solar
+   ============================================================= */
+
+/* ── Font ── */
+body.theme-vibe {
+    font-family: 'Inter', 'Source Sans Pro', system-ui, sans-serif;
+    background-color: #f5f4fb;
+}
+
+/* ── Typography ── */
+body.theme-vibe h1,
+body.theme-vibe h2 {
+    font-weight: 700;
+    letter-spacing: -0.025em;
+}
+
+body.theme-vibe h3,
+body.theme-vibe h4 {
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+body.theme-vibe h5,
+body.theme-vibe h6 {
+    font-weight: 600;
+}
+
+/* ── Navbar ── */
+body.theme-vibe .navbar {
+    box-shadow: 0 2px 16px rgba(89, 49, 150, 0.22);
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+}
+
+body.theme-vibe .navbar-brand {
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    font-size: 1.05rem;
+}
+
+body.theme-vibe .nav-link {
+    font-weight: 500;
+    font-size: 0.875rem;
+    transition: opacity 0.15s;
+}
+
+body.theme-vibe .navbar-text {
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
+}
+
+/* ── Dropdown menus ── */
+body.theme-vibe .dropdown-menu {
+    border: none;
+    border-radius: 0.6rem;
+    box-shadow: 0 8px 32px rgba(89, 49, 150, 0.18);
+    padding: 0.4rem;
+    margin-top: 0.25rem;
+}
+
+body.theme-vibe .dropdown-item {
+    border-radius: 0.35rem;
+    font-size: 0.875rem;
+    padding: 0.375rem 0.75rem;
+    font-weight: 400;
+    transition: background-color 0.1s;
+}
+
+body.theme-vibe .dropdown-item:hover,
+body.theme-vibe .dropdown-item:focus {
+    background-color: rgba(89, 49, 150, 0.09);
+    color: #3d1f8f;
+}
+
+body.theme-vibe .dropdown-header {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #593196;
+    padding: 0.4rem 0.75rem 0.1rem;
+}
+
+body.theme-vibe .dropdown-divider {
+    margin: 0.3rem 0.4rem;
+    border-color: rgba(89, 49, 150, 0.12);
+}
+
+/* ── Mega-dropdown (Level 1) ── */
+body.theme-vibe .dropdown-mega .dropdown-menu {
+    min-width: 680px;
+    padding: 0.75rem;
+}
+
+body.theme-vibe .mega-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 1.5rem;
+}
+
+body.theme-vibe .mega-section {
+    margin-bottom: 0.15rem;
+}
+
+body.theme-vibe .mega-section + .mega-section {
+    border-top: 1px solid rgba(89, 49, 150, 0.1);
+    padding-top: 0.2rem;
+    margin-top: 0.2rem;
+}
+
+body.theme-vibe .mega-section-title {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #593196;
+    padding: 0.35rem 0.75rem 0.1rem;
+}
+
+/* Collapse mega-columns to single column on mobile */
+@media (max-width: 991.98px) {
+    body.theme-vibe .dropdown-mega .dropdown-menu {
+        min-width: 0;
+        width: 100%;
+    }
+
+    body.theme-vibe .mega-columns {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ── Cards ── */
+body.theme-vibe .card {
+    border: none;
+    border-radius: 0.6rem;
+    box-shadow: 0 2px 10px rgba(89, 49, 150, 0.09);
+    margin-bottom: 1rem;
+}
+
+body.theme-vibe .card-header {
+    border-radius: 0.6rem 0.6rem 0 0 !important;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+/* Info / callout card (bg-light text-primary) */
+body.theme-vibe .card.bg-light {
+    background-color: rgba(169, 145, 212, 0.13) !important;
+    border-left: 3px solid #593196 !important;
+    box-shadow: none;
+}
+
+/* ── Buttons ── */
+body.theme-vibe .btn {
+    border-radius: 0.45rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+
+body.theme-vibe .btn-primary {
+    box-shadow: 0 2px 8px rgba(89, 49, 150, 0.28);
+    transition: box-shadow 0.15s, transform 0.1s;
+}
+
+body.theme-vibe .btn-primary:hover {
+    box-shadow: 0 4px 14px rgba(89, 49, 150, 0.42);
+    transform: translateY(-1px);
+}
+
+body.theme-vibe .btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 4px rgba(89, 49, 150, 0.3);
+}
+
+/* ── Figure + audio layout ── */
+body.theme-vibe figure {
+    margin-bottom: 0;
+    padding: 0.25rem 0;
+}
+
+body.theme-vibe figcaption {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    font-size: 0.875rem;
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+}
+
+body.theme-vibe figcaption .float-left,
+body.theme-vibe figcaption .float-right {
+    float: none !important;
+}
+
+body.theme-vibe figure audio {
+    width: 100%;
+    height: 30px;
+    border-radius: 30px;
+}
+
+/* ── Spoiler ── */
+body.theme-vibe .spoiler:not(:hover) {
+    color: #3b1f70;
+    background-color: #3b1f70;
+    border-radius: 0.35rem;
+}
+
+/* ── Float buttons ── */
+body.theme-vibe .float-button-1,
+body.theme-vibe .float-button-2 {
+    box-shadow: 0 4px 18px rgba(89, 49, 150, 0.38);
+    transition: box-shadow 0.15s, transform 0.12s;
+}
+
+body.theme-vibe .float-button-1:hover,
+body.theme-vibe .float-button-2:hover {
+    box-shadow: 0 6px 24px rgba(89, 49, 150, 0.52);
+    transform: translateY(-2px) scale(1.05);
+}
+
+/* ── Footer ── */
+body.theme-vibe footer .card {
+    box-shadow: none;
+    border: 1px solid rgba(89, 49, 150, 0.14) !important;
+    background-color: transparent !important;
+}
+
+body.theme-vibe footer .card-header {
+    background-color: transparent;
+    border-bottom: 1px solid rgba(89, 49, 150, 0.14);
+    font-size: 0.8rem;
+}
+
+body.theme-vibe footer .card-body {
+    font-size: 0.8rem;
+}
+
+/* ── Body content top padding ── */
+body.theme-vibe .body-content {
+    padding-top: 1.25rem;
+}
