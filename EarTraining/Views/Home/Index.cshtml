@@ -1,6 +1,58 @@
 ﻿@{
     ViewBag.Title = "Ear Training Home";
+    var _homeArea = HttpContext.Current.Request.RequestContext.RouteData.DataTokens["area"] as string;
+    var _isVibeMode = !string.Equals(_homeArea, "Human", StringComparison.OrdinalIgnoreCase);
 }
 
 <h2>@ViewBag.Title</h2>
 <p>Please use the menu to explore the pages of this site, or see the @Html.ActionLink("about page", "About", "Home") for information.</p>
+
+@if (_isVibeMode)
+{
+    <!-- Vibe Welcome Modal -->
+    <div class="modal fade" id="vibeWelcomeModal" tabindex="-1" role="dialog" aria-labelledby="vibeWelcomeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content vibe-welcome-modal">
+
+                <div class="vibe-welcome-header">
+                    <span class="vibe-welcome-pill">New</span>
+                    <h5 class="vibe-welcome-title" id="vibeWelcomeModalLabel">You're in Vibe mode</h5>
+                    <p class="vibe-welcome-subtitle">
+                        A refreshed interface — cleaner layout, modern type, and a reorganized navigation menu.
+                    </p>
+                </div>
+
+                <div class="modal-body vibe-welcome-body">
+                    <button type="button" class="btn btn-primary btn-block vibe-welcome-stay" data-dismiss="modal">
+                        Stay in Vibe
+                    </button>
+                    <div class="vibe-welcome-switch-row">
+                        <a href="#" onclick="switchToHuman(); return false;" class="vibe-welcome-switch-link">
+                            Switch to Human mode
+                        </a>
+                        <div class="vibe-welcome-disclaimer">
+                            (Human mode was written by an actual human. Mistakes are possible.)
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts {
+    @if (_isVibeMode)
+    {
+        <script>
+            (function () {
+                if (!sessionStorage.getItem('vibeWelcomeSeen')) {
+                    $('#vibeWelcomeModal').modal('show');
+                }
+                $('#vibeWelcomeModal').on('hide.bs.modal', function () {
+                    sessionStorage.setItem('vibeWelcomeSeen', '1');
+                });
+            })();
+        </script>
+    }
+}
