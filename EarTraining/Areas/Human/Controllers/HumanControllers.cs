@@ -1,4 +1,4 @@
-namespace EarTraining.Areas.Classic.Controllers
+namespace EarTraining.Areas.Human.Controllers
 {
     public class AuthController : EarTraining.Controllers.AuthController { }
     public class DOController : EarTraining.Controllers.DOController { }

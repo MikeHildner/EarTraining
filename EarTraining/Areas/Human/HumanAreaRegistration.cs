@@ -1,16 +1,16 @@
 using System.Web.Mvc;
 
-namespace EarTraining.Areas.Classic
+namespace EarTraining.Areas.Human
 {
-    public class ClassicAreaRegistration : AreaRegistration
+    public class HumanAreaRegistration : AreaRegistration
     {
-        public override string AreaName => "Classic";
+        public override string AreaName => "Human";
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
-                "Classic_default",
-                "Classic/{controller}/{action}/{id}",
+                "Human_default",
+                "Human/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
             );
         }

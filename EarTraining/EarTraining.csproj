@@ -184,10 +184,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Areas\Classic\ClassicAreaRegistration.cs" />
-    <Compile Include="Areas\Classic\Controllers\ClassicAreaCookieFilter.cs" />
-    <Compile Include="Areas\Classic\Controllers\ClassicBaseController.cs" />
-    <Compile Include="Areas\Classic\Controllers\ClassicControllers.cs" />
+    <Compile Include="Areas\Human\HumanAreaRegistration.cs" />
+    <Compile Include="Areas\Human\Controllers\HumanAreaCookieFilter.cs" />
+    <Compile Include="Areas\Human\Controllers\HumanBaseController.cs" />
+    <Compile Include="Areas\Human\Controllers\HumanControllers.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -563,9 +563,9 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Areas\Classic\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Classic\Views\Web.config" />
-    <Content Include="Areas\Classic\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Human\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Human\Views\Web.config" />
+    <Content Include="Areas\Human\Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\DO\Index.cshtml" />
     <Content Include="Views\Donate\Index.cshtml" />
