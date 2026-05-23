@@ -18,7 +18,7 @@
                     <span class="vibe-welcome-pill">New</span>
                     <h5 class="vibe-welcome-title" id="vibeWelcomeModalLabel">You're in Vibe mode</h5>
                     <p class="vibe-welcome-subtitle">
-                        A refreshed interface — cleaner layout, modern type, and a reorganized navigation menu.
+                        A refreshed interface — cleaner layout, modern type, and a reorganized navigation menu. All thanks to AI.
                     </p>
                 </div>
 
@@ -31,8 +31,11 @@
                             Switch to Human mode
                         </a>
                         <div class="vibe-welcome-disclaimer">
-                            (Human mode was written by an actual human. Mistakes are possible.)
+                            (Human mode was written by an actual human - 100% AI free. Mistakes are possible.)
                         </div>
+                    </div>
+                    <div class="vibe-welcome-about-row">
+                        @Html.ActionLink("Wait! — AI?!? Go to the About page for an explanation.", "About", "Home", null, new { @class = "btn btn-outline-secondary btn-block vibe-welcome-about-btn", onclick = "sessionStorage.setItem('vibeWelcomeSeen','1')" })
                     </div>
                 </div>
 

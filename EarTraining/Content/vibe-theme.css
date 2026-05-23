@@ -392,3 +392,24 @@ body.theme-vibe .vibe-welcome-disclaimer {
     color: #888;
     font-style: italic;
 }
+
+body.theme-vibe .vibe-welcome-about-row {
+    margin-top: 1rem;
+    border-top: 1px solid rgba(89, 49, 150, 0.12);
+    padding-top: 1rem;
+}
+
+body.theme-vibe .vibe-welcome-about-btn {
+    font-size: 0.8rem;
+    color: #593196;
+    border-color: rgba(89, 49, 150, 0.3);
+    white-space: normal;
+    line-height: 1.35;
+    padding: 0.45rem 0.75rem;
+}
+
+body.theme-vibe .vibe-welcome-about-btn:hover {
+    background-color: rgba(89, 49, 150, 0.06);
+    border-color: #593196;
+    color: #3d1f8f;
+}
