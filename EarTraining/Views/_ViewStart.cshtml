@@ -1,3 +1,6 @@
-﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+@{
+    var _area = HttpContext.Current.Request.RequestContext.RouteData.DataTokens["area"] as string;
+    Layout = string.Equals(_area, "Human", StringComparison.OrdinalIgnoreCase)
+        ? "~/Areas/Human/Views/Shared/_Layout.cshtml"
+        : "~/Views/Shared/_Layout.cshtml";
 }

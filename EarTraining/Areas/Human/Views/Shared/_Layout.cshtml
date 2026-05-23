@@ -178,6 +178,11 @@
 
                     <li class="nav-item">@Html.ActionLink("About", "About", "Home", new { area = "Human" }, new { @class = "nav-link" })</li>
                 </ul>
+                <span class="navbar-text ml-3 small">
+                    <strong class="text-white">Human</strong>
+                    <span class="text-white-50 mx-1">|</span>
+                    <a href="#" onclick="switchToVibe(); return false;" class="text-white-50">Vibe</a>
+                </span>
             </div>
         </div>
     </nav>
@@ -248,6 +253,11 @@
             $.ajax({
                 url: '@Url.Content("~/")' + 'base/DeleteOldFiles'
             });
+        }
+
+        function switchToVibe() {
+            var path = window.location.pathname.replace(/^\/Human\//i, '/').replace(/^\/Human$/i, '/');
+            window.location.href = path + window.location.search;
         }
 
         function setBodyMargin() {

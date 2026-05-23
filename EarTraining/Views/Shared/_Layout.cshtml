@@ -185,6 +185,11 @@
 
                     <li class="nav-item">@Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })</li>
                 </ul>
+                <span class="navbar-text ml-3 small">
+                    <a href="#" onclick="switchToHuman(); return false;" class="text-white-50">Human</a>
+                    <span class="text-white-50 mx-1">|</span>
+                    <strong class="text-white">Vibe</strong>
+                </span>
             </div>
         </div>
     </nav>
@@ -255,6 +260,12 @@
             $.ajax({
                 url: '@Url.Content("~/")' + 'base/DeleteOldFiles'
             });
+        }
+
+        function switchToHuman() {
+            var path = window.location.pathname;
+            if (/^\/Human(\/|$)/i.test(path)) return;
+            window.location.href = rootPath + 'Human' + path + window.location.search;
         }
 
         function setBodyMargin() {
