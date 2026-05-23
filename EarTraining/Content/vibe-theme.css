@@ -3,10 +3,10 @@
    Modern facelift layer on top of Bootstrap 4 + Bootswatch Solar
    ============================================================= */
 
-/* ── Font ── */
+/* ── Font + page background ── */
 body.theme-vibe {
     font-family: 'Inter', 'Source Sans Pro', system-ui, sans-serif;
-    background-color: #f5f4fb;
+    background-color: #ece8f5;   /* clearly lavender vs Human's white */
 }
 
 /* ── Typography ── */
@@ -137,6 +137,11 @@ body.theme-vibe .card {
     border-radius: 0.6rem;
     box-shadow: 0 2px 10px rgba(89, 49, 150, 0.09);
     margin-bottom: 1rem;
+    transition: box-shadow 0.2s ease;
+}
+
+body.theme-vibe .card:hover {
+    box-shadow: 0 6px 20px rgba(89, 49, 150, 0.17);
 }
 
 body.theme-vibe .card-header {
@@ -242,4 +247,57 @@ body.theme-vibe footer .card-body {
 /* ── Body content top padding ── */
 body.theme-vibe .body-content {
     padding-top: 1.25rem;
+}
+
+/* =============================================================
+   VIBE IDENTITY MARKERS
+   Strong visual differences that make it immediately obvious
+   you're in Vibe mode vs Human mode.
+   ============================================================= */
+
+/* ── 1. Gradient navbar (Human has a flat solid #593196) ── */
+body.theme-vibe .navbar.bg-primary {
+    background: linear-gradient(125deg, #2c1560 0%, #4f2b91 45%, #7646c8 100%) !important;
+}
+
+/* ── 2. Colorful 3-px accent stripe pinned to top of navbar ── */
+body.theme-vibe .navbar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #a78bfa 0%, #818cf8 33%, #38bdf8 66%, #34d399 100%);
+    z-index: 1;
+}
+
+/* Extra top padding so the stripe doesn't overlap navbar content */
+body.theme-vibe .navbar {
+    padding-top: 0.75rem;
+}
+
+/* ── 3. "Vibe" switcher badge — pill highlight vs plain text ── */
+body.theme-vibe .navbar-text strong {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 99px;
+    padding: 0.05rem 0.55rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* ── 4. Page-title accent underline on h2 ── */
+body.theme-vibe h2 {
+    border-bottom: 2px solid rgba(118, 70, 200, 0.2);
+    padding-bottom: 0.35rem;
+    margin-bottom: 0.8rem;
+}
+
+/* ── 5. Content area uses a white card surface vs lavender page ── */
+/*    (reinforces the lavender background by contrast)         */
+body.theme-vibe .card {
+    background-color: #fff;
 }
