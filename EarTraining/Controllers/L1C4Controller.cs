@@ -123,6 +123,17 @@ namespace EarTraining.Controllers
             return Redirect($"~/Temp/{fileName}");
         }
 
+        public ActionResult MelodyHarmonization(string @do)
+        {
+            if (!string.IsNullOrWhiteSpace(@do))
+            {
+                Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName.ToUpper().Split('/').Contains(@do.ToUpper()));
+                ViewBag.Pitch = pitch;
+            }
+
+            return View();
+        }
+
         public ActionResult GetMelodyHarmonizationEx(string doNoteName, int solfegDegree, int triadtype)
         {
             var triadType = (TriadType)triadtype;
