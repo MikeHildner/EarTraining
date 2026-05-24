@@ -35,7 +35,10 @@
                         </div>
                     </div>
                     <div class="vibe-welcome-about-row">
-                        @Html.ActionLink("Wait! — AI?!? Go to the About page for an explanation.", "About", "Home", null, new { @class = "btn btn-outline-secondary btn-block vibe-welcome-about-btn", onclick = "sessionStorage.setItem('vibeWelcomeSeen','1')" })
+                        <a href="@Url.Action("About", "Home")" onclick="sessionStorage.setItem('vibeWelcomeSeen','1')" class="human-note human-note-link">
+                            <i class="fa fa-user human-note-icon"></i>
+                            <span><strong>Human's note:</strong> Wait — AI? Go to the About page for an explanation.</span>
+                        </a>
                     </div>
                 </div>
 

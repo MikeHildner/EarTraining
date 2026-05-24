@@ -221,3 +221,15 @@ audio {
     margin-top: 0.1rem;
     opacity: 0.75;
 }
+
+a.human-note-link {
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.15s ease, box-shadow 0.15s ease;
+}
+
+a.human-note-link:hover {
+    text-decoration: none;
+    opacity: 0.82;
+    box-shadow: 0 2px 10px rgba(89, 49, 150, 0.18);
+}
