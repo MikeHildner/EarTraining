@@ -71,7 +71,7 @@
                             <div class="dropdown-header">I IV V Diatonic Triad Progressions</div>
                             <div class="dropdown-divider"></div>
                             @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;2 and 3 Chord Progressions"), "Index", "L1C4", new { area = "Human" }, new { @class = "dropdown-item" })
-                            @Html.ActionLink(HttpUtility.HtmlDecode("&bull;&nbsp;Melody Harmonization"), "MelodyHarmonization", "L1C4", new { area = "Human" }, new { @class = "dropdown-item" })
+                            <a href="@Url.Action("MelodyHarmonization", "L1C4", new { area = "Human" })" class="dropdown-item">&bull;&nbsp;Melody Harmonization <span class="ai-badge"><i class="fa fa-magic"></i> AI</span></a>
                         </div>
                     </li>
 

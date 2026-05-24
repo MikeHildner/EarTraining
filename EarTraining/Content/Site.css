@@ -201,6 +201,43 @@ audio {
     accent-color: #4b0085;
 }
 
+/* ── AI-generated badge (inline, for nav links) ── */
+.ai-badge {
+    display: inline-block;
+    font-size: 0.6em;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    background-color: #593196;
+    color: #fff;
+    border-radius: 3px;
+    padding: 1px 5px 1px 4px;
+    vertical-align: middle;
+    margin-left: 5px;
+    line-height: 1.6;
+    opacity: 0.85;
+}
+
+/* ── AI-generated callout (page-level banner) ── */
+.ai-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    background-color: #f5f0ff;
+    border-left: 4px solid #7c3aed;
+    border-radius: 0 0.3rem 0.3rem 0;
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #2d1b69;
+}
+
+.ai-note .ai-note-icon {
+    flex-shrink: 0;
+    font-size: 1rem;
+    margin-top: 0.1rem;
+    opacity: 0.75;
+}
+
 /* ── Human's note callout ── */
 .human-note {
     display: flex;
