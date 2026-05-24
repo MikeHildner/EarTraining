@@ -1,0 +1,362 @@
+@{
+    ViewBag.Title = "L1C4 5.3 Melody Harmonization";
+}
+
+<h2>Level 1 Chapter 4</h2>
+<h5>@ViewBag.Title</h5>
+
+<div class="card bg-light text-primary">
+    <div class="card-body">
+        <i class="fa fa-info"></i>
+        <span class="pad-left-10">Identify the harmonizing I, IV, or V triad for each melody note. From page 59.</span>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 card">
+        @{
+            Html.RenderPartial("NewDO");
+        }
+    </div>
+    <div class="col-md-6 card">
+        <figure>
+            <figcaption>Helper - I triad (root)</figcaption>
+            <audio controls preload='none'>
+                <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 0, inversion = 0 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+        <figure>
+            <figcaption>Helper - IV triad (root)</figcaption>
+            <audio controls preload='none'>
+                <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 1, inversion = 0 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+        <figure>
+            <figcaption>Helper - V triad (root)</figcaption>
+            <audio controls preload='none'>
+                <source src='@Url.Action("GetTriadEx", "L1C3", new { doNoteName = ViewBag.Pitch.PitchName, triadtype = 2, inversion = 0 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 card">
+        <div>
+            <div class="float-left">
+                <h4>Drill</h4>
+            </div>
+            <div class="float-right">
+                <span id="spinner" class="spinner-border spinner-border-sm text-primary" role="status" aria-hidden="true"></span>
+                <input type="button" class="btn btn-primary margin-top-5" value="Get a New Chord" onclick="setAudioSrc()" />
+            </div>
+        </div>
+
+        <figure>
+            <figcaption>Press the play button to hear the melody note with its harmonizing triad</figcaption>
+            <audio id="audioEx" controls preload='none'>
+                <source src='' type='audio/mpeg'>
+            </audio>
+        </figure>
+        <p>Hover over the below to see the answer</p>
+        <div class="spoiler" id="melodyHarmony"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>Reference Prompts</h4>
+    </div>
+</div>
+
+<div class="row">
+    @* DO — I *@
+    <div class="col-md-4 card">
+        <figure>
+            <figcaption>
+                <div class="float-left">DO &mdash; I</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-1-0" checked />
+                    <label class="custom-control-label small" for="cb-include-1-0">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
+            <audio controls preload='none'>
+                <source src='@Url.Action("GetMelodyHarmonizationEx", "L1C4", new { doNoteName = ViewBag.Pitch.PitchName, solfegDegree = 1, triadtype = 0 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+
+    @* DO — IV *@
+    <div class="col-md-4 card">
+        <figure>
+            <figcaption>
+                <div class="float-left">DO &mdash; IV</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-1-1" checked />
+                    <label class="custom-control-label small" for="cb-include-1-1">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
+            <audio controls preload='none'>
+                <source src='@Url.Action("GetMelodyHarmonizationEx", "L1C4", new { doNoteName = ViewBag.Pitch.PitchName, solfegDegree = 1, triadtype = 1 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+
+    @* RE — V *@
+    <div class="col-md-4 card">
+        <figure>
+            <figcaption>
+                <div class="float-left">RE &mdash; V</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-2-2" checked />
+                    <label class="custom-control-label small" for="cb-include-2-2">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
+            <audio controls preload='none'>
+                <source src='@Url.Action("GetMelodyHarmonizationEx", "L1C4", new { doNoteName = ViewBag.Pitch.PitchName, solfegDegree = 2, triadtype = 2 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+
+    @* MI — I *@
+    <div class="col-md-4 card">
+        <figure>
+            <figcaption>
+                <div class="float-left">MI &mdash; I</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-3-0" checked />
+                    <label class="custom-control-label small" for="cb-include-3-0">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
+            <audio controls preload='none'>
+                <source src='@Url.Action("GetMelodyHarmonizationEx", "L1C4", new { doNoteName = ViewBag.Pitch.PitchName, solfegDegree = 3, triadtype = 0 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+
+    @* FA — IV *@
+    <div class="col-md-4 card">
+        <figure>
+            <figcaption>
+                <div class="float-left">FA &mdash; IV</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-4-1" checked />
+                    <label class="custom-control-label small" for="cb-include-4-1">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
+            <audio controls preload='none'>
+                <source src='@Url.Action("GetMelodyHarmonizationEx", "L1C4", new { doNoteName = ViewBag.Pitch.PitchName, solfegDegree = 4, triadtype = 1 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+
+    @* SO — I *@
+    <div class="col-md-4 card">
+        <figure>
+            <figcaption>
+                <div class="float-left">SO &mdash; I</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-5-0" checked />
+                    <label class="custom-control-label small" for="cb-include-5-0">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
+            <audio controls preload='none'>
+                <source src='@Url.Action("GetMelodyHarmonizationEx", "L1C4", new { doNoteName = ViewBag.Pitch.PitchName, solfegDegree = 5, triadtype = 0 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+
+    @* SO — V *@
+    <div class="col-md-4 card">
+        <figure>
+            <figcaption>
+                <div class="float-left">SO &mdash; V</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-5-2" checked />
+                    <label class="custom-control-label small" for="cb-include-5-2">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
+            <audio controls preload='none'>
+                <source src='@Url.Action("GetMelodyHarmonizationEx", "L1C4", new { doNoteName = ViewBag.Pitch.PitchName, solfegDegree = 5, triadtype = 2 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+
+    @* LA — IV *@
+    <div class="col-md-4 card">
+        <figure>
+            <figcaption>
+                <div class="float-left">LA &mdash; IV</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-6-1" checked />
+                    <label class="custom-control-label small" for="cb-include-6-1">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
+            <audio controls preload='none'>
+                <source src='@Url.Action("GetMelodyHarmonizationEx", "L1C4", new { doNoteName = ViewBag.Pitch.PitchName, solfegDegree = 6, triadtype = 1 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+
+    @* TI — V *@
+    <div class="col-md-4 card">
+        <figure>
+            <figcaption>
+                <div class="float-left">TI &mdash; V</div>
+                <div class="float-right custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input cb-include" id="cb-include-7-2" checked />
+                    <label class="custom-control-label small" for="cb-include-7-2">Include in Drills</label>
+                </div>
+            </figcaption>
+            <div class="clearfix"></div>
+            <audio controls preload='none'>
+                <source src='@Url.Action("GetMelodyHarmonizationEx", "L1C4", new { doNoteName = ViewBag.Pitch.PitchName, solfegDegree = 7, triadtype = 2 })' type='audio/mpeg'>
+            </audio>
+        </figure>
+    </div>
+</div>
+
+<div class="row">
+    <div class="card">
+        <div class="card-header bg-warning text-primary">
+            <i class="fa fa-gears"></i><label class="margin-left-default">Automation</label>
+        </div>
+        <div class="card-body">
+            <p class="card-text">Automate the drill process. This respects your "Include in Drills" selections.</p>
+            <button id="btnAutomate" class="btn btn-warning" onclick="automate();">Go!</button><label class="margin-left-default" id="remainingIterations"></label>
+        </div>
+    </div>
+</div>
+
+@{Html.RenderPartial("~/Views/Shared/RevealModal.cshtml");}
+
+@section scripts {
+    <script>
+        var jsIntervals = [];
+        var iterations = 0;
+        var maxIterations = 10;
+
+        var delayBeforeChord = 1000;
+        var delayBeforeShowModal = 3500;
+        var delayBeforeHideModal = 3500;
+        var delayBetweenIterations = delayBeforeChord + delayBeforeShowModal + delayBeforeHideModal;
+
+        // Map from checkbox ID suffix (solfeg-triadtype) to display labels.
+        var labelMap = {
+            '1-0': 'DO — I',
+            '1-1': 'DO — IV',
+            '2-2': 'RE — V',
+            '3-0': 'MI — I',
+            '4-1': 'FA — IV',
+            '5-0': 'SO — I',
+            '5-2': 'SO — V',
+            '6-1': 'LA — IV',
+            '7-2': 'TI — V'
+        };
+
+        $(document).ready(function () {
+            setAudioSrc();
+
+            $('.cb-include').change(function () {
+                setAudioSrc();
+            });
+        });
+
+        function setAudioSrc() {
+            $('#spinner').show();
+            var baseSrc = '@Url.Action("GetMelodyHarmonizationEx", "L1C4", new { doNoteName = ViewBag.Pitch.PitchName })';
+
+            // Pick a random checked checkbox.
+            var selected = $('.cb-include:checkbox:checked');
+            var randElement = selected[Math.floor(Math.random() * selected.length)];
+            var randId = $(randElement).attr('id');
+
+            // Parse solfegDegree and triadtype from ID: "cb-include-{solfeg}-{triad}".
+            var tag = randId.replace('cb-include-', '');
+            var parts = tag.split('-');
+            var solfeg = parseInt(parts[0]);
+            var triad = parseInt(parts[1]);
+
+            var src = baseSrc + '&solfegDegree=' + solfeg + '&triadtype=' + triad;
+            $('#audioEx').attr('src', src);
+
+            var msg = labelMap[tag] || (tag);
+            var doInfo = $('#doSpoiler').text();
+            var answerTable = buildProgressionTable(doInfo, msg);
+            $('#melodyHarmony').html(answerTable);
+            $('#spinner').fadeOut("slow");
+        }
+
+        function automate() {
+            var buttonText = $("#btnAutomate").text();
+            switch (buttonText) {
+                case "Go!":
+                    $("#btnAutomate").text("Stop");
+                    playAndShow();
+                    var jsInterval = setInterval(playAndShow, delayBetweenIterations);
+                    jsIntervals.push(jsInterval);
+                    break;
+
+                case "Stop":
+                    $("#btnAutomate").text("Go!");
+                    resetIterationsMessage();
+                    clearAllIntervals();
+                    break;
+
+                default:
+                    alert("'" + buttonText + "' is not supported.");
+                    break;
+            }
+        }
+
+        function playAndShow() {
+            iterations += 1;
+            if (iterations > maxIterations) {
+                $("#btnAutomate").text("Go!");
+                resetIterationsMessage();
+                iterations = 0;
+                clearAllIntervals();
+                return;
+            } else {
+                $("#remainingIterations").text("Playing " + iterations + " of " + maxIterations + " iterations.");
+            }
+
+            setTimeout(playChord, delayBeforeChord);
+        }
+
+        function playChord() {
+            setAudioSrc();
+            $('#audioEx').trigger("play");
+            setTimeout(showModal, delayBeforeShowModal);
+        }
+
+        function showModal() {
+            $("#revealModalBody").html($("#melodyHarmony").html());
+            $("#revealModal").modal('show');
+            setTimeout(hideModal, delayBeforeHideModal);
+        }
+
+        function hideModal() {
+            $("#revealModal").modal('hide');
+        }
+
+        function clearAllIntervals() {
+            for (var id of jsIntervals) {
+                clearInterval(id);
+            }
+            jsIntervals = [];
+        }
+
+        function resetIterationsMessage() {
+            $("#remainingIterations").text("Automation will stop after " + maxIterations + " iterations.");
+        }
+    </script>
+}
