@@ -210,9 +210,12 @@
         }
 
         function switchToHuman() {
+            var appPath = rootPath.replace(/\/$/, ''); // '/eartraining' in prod, '' locally
             var path = window.location.pathname;
-            if (/^\/Human(\/|$)/i.test(path)) return;
-            window.location.href = rootPath + 'Human' + path + window.location.search;
+            var humanPrefix = (appPath + '/Human').toLowerCase();
+            if (path.toLowerCase() === humanPrefix || path.toLowerCase().indexOf(humanPrefix + '/') === 0) return;
+            var relative = path.toLowerCase().indexOf(appPath.toLowerCase()) === 0 ? path.slice(appPath.length) : path;
+            window.location.href = appPath + '/Human' + relative + window.location.search;
         }
 
         function setBodyMargin() {

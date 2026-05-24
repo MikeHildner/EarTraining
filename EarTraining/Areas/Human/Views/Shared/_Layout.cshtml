@@ -256,8 +256,12 @@
         }
 
         function switchToVibe() {
-            var path = window.location.pathname.replace(/^\/Human\//i, '/').replace(/^\/Human$/i, '/');
-            window.location.href = path + window.location.search;
+            var appPath = rootPath.replace(/\/$/, ''); // '/eartraining' in prod, '' locally
+            var path = window.location.pathname;
+            var relative = path.toLowerCase().indexOf(appPath.toLowerCase()) === 0 ? path.slice(appPath.length) : path;
+            relative = relative.replace(/^\/Human(\/|$)/i, function(m, sep) { return sep || '/'; });
+            if (!relative) relative = '/';
+            window.location.href = appPath + relative + window.location.search;
         }
 
         function setBodyMargin() {
