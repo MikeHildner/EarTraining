@@ -254,18 +254,9 @@
         var delayBeforeHideModal = 3500;
         var delayBetweenIterations = delayBeforeChord + delayBeforeShowModal + delayBeforeHideModal;
 
-        // Map from checkbox ID suffix (solfeg-triadtype) to display labels.
-        var labelMap = {
-            '1-0': 'DO — I',
-            '1-1': 'DO — IV',
-            '2-2': 'RE — V',
-            '3-0': 'MI — I',
-            '4-1': 'FA — IV',
-            '5-0': 'SO — I',
-            '5-2': 'SO — V',
-            '6-1': 'LA — IV',
-            '7-2': 'TI — V'
-        };
+        // Lookup tables for building the answer label.
+        var solfegNames = { 1: 'DO', 2: 'RE', 3: 'MI', 4: 'FA', 5: 'SO', 6: 'LA', 7: 'TI' };
+        var triadNames  = { 0: 'I', 1: 'IV', 2: 'V' };
 
         $(document).ready(function () {
             setAudioSrc();
@@ -293,9 +284,14 @@
             var src = baseSrc + '&solfegDegree=' + solfeg + '&triadtype=' + triad;
             $('#audioEx').attr('src', src);
 
-            var msg = labelMap[tag] || (tag);
+            // Pass the Roman numeral as progInfo and the solfeg note as the
+            // friendlyMessage so buildProgressionTable can resolve the chord name.
             var doInfo = $('#doSpoiler').text();
-            var answerTable = buildProgressionTable(doInfo, msg);
+            var answerTable = buildProgressionTable(
+                doInfo,
+                triadNames[triad],
+                'Melody note: ' + solfegNames[solfeg]
+            );
             $('#melodyHarmony').html(answerTable);
             $('#spinner').fadeOut("slow");
         }
