@@ -114,7 +114,7 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownOther">
                             @Html.ActionLink("Find the DO", "Index", "DO", null, new { @class = "dropdown-item" })
                             @Html.ActionLink("All Solfeg Syllables", "Index", "Solfeg", null, new { @class = "dropdown-item" })
-                            @Html.ActionLink("Ratios", "Ratios", "Experimental", null, new { @class = "dropdown-item" })
+                            <a href="@Url.Action("Ratios", "Experimental")" class="dropdown-item">Ratios <span class="ai-badge"><i class="fa fa-magic"></i> AI</span></a>
                         </div>
                     </li>
 

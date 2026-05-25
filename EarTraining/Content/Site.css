@@ -231,6 +231,11 @@ audio {
     color: #2d1b69;
 }
 
+/* Hidden in Human mode; .vibe-theme.css reveals it in Vibe mode */
+.ai-note.vibe-only {
+    display: none;
+}
+
 .ai-note .ai-note-icon {
     flex-shrink: 0;
     font-size: 1rem;

@@ -621,6 +621,10 @@ body.theme-vibe .ai-note {
     color: #2d1b69;
 }
 
+body.theme-vibe .ai-note.vibe-only {
+    display: flex;
+}
+
 body.theme-vibe .ai-badge {
     background: linear-gradient(135deg, #7c3aed 0%, #4b0085 100%);
     opacity: 1;
