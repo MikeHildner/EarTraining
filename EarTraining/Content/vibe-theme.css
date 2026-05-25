@@ -633,3 +633,35 @@ body.theme-vibe .ai-badge {
     background: linear-gradient(135deg, #7c3aed 0%, #4b0085 100%);
     opacity: 1;
 }
+
+
+/* =============================================================
+   DESKTOP LAYOUT ENHANCEMENTS — Vibe mode only
+   Human mode layout is completely unchanged.
+   ============================================================= */
+
+/* A ── Wider container
+   Bootstrap xl caps at 1140 px, leaving huge dead margins on
+   1440 p / 1920 p displays. These overrides reclaim that space. */
+@media (min-width: 1200px) {
+    body.theme-vibe .container {
+        max-width: 1380px;
+    }
+}
+
+@media (min-width: 1600px) {
+    body.theme-vibe .container {
+        max-width: 1560px;
+    }
+}
+
+/* B ── More reference cards per row on large screens
+   col-md-4 (3-per-row at ≥768 px) → 4-per-row at ≥992 px.
+   col-md-6 drill/helper panels and col-md-12 info bars are
+   intentionally left untouched. */
+@media (min-width: 992px) {
+    body.theme-vibe .col-md-4 {
+        flex:      0 0 25%;
+        max-width: 25%;
+    }
+}
