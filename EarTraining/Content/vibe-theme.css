@@ -665,3 +665,49 @@ body.theme-vibe .ai-badge {
         max-width: 25%;
     }
 }
+
+/* C ── Sticky sidebar layout on desktop
+   .vibe-page becomes a 2-column CSS Grid; .newdo-row moves into the
+   right sidebar column and sticks as the user scrolls through the
+   reference cards. On mobile and in Human mode it's just a block div,
+   so the visual order (NewDO above drill) is identical to the original. */
+@media (min-width: 992px) {
+    body.theme-vibe .vibe-page {
+        display: grid;
+        grid-template-columns: 1fr 280px;
+        column-gap: 1.5rem;
+        align-items: start;
+    }
+
+    /* All direct children default to the main (left) column */
+    body.theme-vibe .vibe-page > * {
+        grid-column: 1;
+        min-width: 0;   /* prevent wide children from blowing out the grid */
+    }
+
+    /* Page-level titles and banners span both columns */
+    body.theme-vibe .vibe-page > h2,
+    body.theme-vibe .vibe-page > h5,
+    body.theme-vibe .vibe-page > .ai-note {
+        grid-column: 1 / -1;
+    }
+
+    /* NewDO panel → right sidebar column.
+       Spans 20 implicit rows so position:sticky has a tall enough
+       containing block to remain visible through all the main content. */
+    body.theme-vibe .vibe-page > .newdo-row {
+        grid-column: 2;
+        grid-row: auto / span 20;
+        position: sticky;
+        top: 80px;
+        align-self: start;
+    }
+
+    /* Undo Bootstrap's col-md-6 / col-md-4 half/third widths inside the
+       narrow 280 px sidebar — let the content fill the sidebar naturally. */
+    body.theme-vibe .newdo-row .col-md-6,
+    body.theme-vibe .newdo-row .col-md-4 {
+        flex:      0 0 100%;
+        max-width: 100%;
+    }
+}

@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "L1C5 5.4 I IV V vi Diatonic Triad Progressions";
 }
-
+<div class="vibe-page">
 <h2>Level 1 Chapter 5</h2>
 <h5>@ViewBag.Title</h5>
 
@@ -12,7 +12,7 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row newdo-row">
     <div class="col-md-6 card">
         @{
             Html.RenderPartial("NewDO");
@@ -393,6 +393,7 @@
     </div>
 </section>
 
+</div>
 @section  scripts {
     <script>
         $(document).ready(function () {

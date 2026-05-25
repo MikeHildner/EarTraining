@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "L1C1 3.1 - Solfeg Resolutions Vocal Drills";
 }
-
+<div class="vibe-page">
 <h2>Level 1 Chapter 1</h2>
 <h5>@ViewBag.Title</h5>
 
@@ -17,7 +17,7 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row newdo-row">
     <div class="col-md-6 card">
         @{
             Html.RenderPartial("NewDO");
@@ -143,6 +143,7 @@
     </div>
 </div>
 
+</div>
 @section  scripts {
     <script>
         var isVibe = document.body.classList.contains('theme-vibe');

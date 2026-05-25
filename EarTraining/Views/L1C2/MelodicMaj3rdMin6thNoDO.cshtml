@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "L1C2 5.1 - Melodic Major 3rd / Minor 6th Interval Identification";
 }
-
+<div class="vibe-page">
 <h2>Level 1 Chapter 2</h2>
 <h5>@ViewBag.Title</h5>
 
@@ -12,7 +12,7 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row newdo-row">
     <div class="col-md-6 card">
         @{
             Html.RenderPartial("NewDO");
@@ -267,6 +267,7 @@
 
 @{Html.RenderPartial("~/Views/Shared/RevealModal.cshtml");}
 
+</div>
 @section  scripts {
     <script>
         var jsIntervals = [];
