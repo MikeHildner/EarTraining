@@ -621,8 +621,12 @@ body.theme-vibe .ai-note {
     color: #2d1b69;
 }
 
+body.theme-vibe .vibe-only {
+    display: block;
+}
+
 body.theme-vibe .ai-note.vibe-only {
-    display: flex;
+    display: flex;   /* overrides the block above for ai-note elements */
 }
 
 body.theme-vibe .ai-badge {

@@ -33,7 +33,7 @@
                                 <div>
                                     <div class="mega-section">
                                         <div class="mega-section-title">Ch 1 — Solfeg</div>
-                                        @Html.ActionLink("Vocal Drills", "SolfegResolutionsDO", "L1C1", null, new { @class = "dropdown-item" })
+                                        <a href="@Url.Action("SolfegResolutionsDO", "L1C1")" class="dropdown-item">Vocal Drills <span class="ai-badge"><i class="fa fa-magic"></i> AI</span></a>
                                         @Html.ActionLink("Resolution Identification", "SolfegResolutionsNoDO", "L1C1", null, new { @class = "dropdown-item" })
                                         @Html.ActionLink("Pitch Identification", "PitchIdentification", "L1C1", null, new { @class = "dropdown-item" })
                                         @Html.ActionLink("Dictation / Transcription", "DictationTranscription", "L1C1", null, new { @class = "dropdown-item" })
