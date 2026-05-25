@@ -443,6 +443,8 @@
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
     <Content Include="Content\_variables.scss" />
+    <Content Include="doc\eartraininglevelonebook.pdf" />
+    <Content Include="doc\eartrainingleveltwobook.pdf" />
     <None Include="Properties\PublishProfiles\Ear Training Beta.pubxml" />
     <None Include="Properties\PublishProfiles\Ear Training Prod.pubxml" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -575,6 +577,7 @@
     <Content Include="Views\Auth\Unauthorized.cshtml" />
     <Content Include="Views\L1C3\Index.cshtml" />
     <Content Include="Views\L1C4\Index.cshtml" />
+    <Content Include="Views\L1C4\MelodyHarmonization.cshtml" />
     <Content Include="Views\Solfeg\Index.cshtml" />
     <Content Include="Views\L1C2\Index.DeleteMe.cshtml" />
     <Content Include="Views\Shared\NewDO.cshtml" />

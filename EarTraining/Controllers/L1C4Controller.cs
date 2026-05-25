@@ -123,6 +123,127 @@ namespace EarTraining.Controllers
             return Redirect($"~/Temp/{fileName}");
         }
 
+        public ActionResult MelodyHarmonization(string @do)
+        {
+            if (!string.IsNullOrWhiteSpace(@do))
+            {
+                Pitch pitch = new Pitches().PitchesList.Single(s => s.PitchName.ToUpper().Split('/').Contains(@do.ToUpper()));
+                ViewBag.Pitch = pitch;
+            }
+
+            return View();
+        }
+
+        public ActionResult GetMelodyHarmonizationEx(string doNoteName, int solfegDegree, int triadtype)
+        {
+            var triadType = (TriadType)triadtype;
+
+            TimeSpan noteDuration = TimeSpan.FromSeconds(3);
+
+            string doFileName = NAudioHelper.GetFileNameFromNoteName(doNoteName);
+            doFileName = Path.GetFileName(doFileName);
+            int doNoteNumber = int.Parse(doFileName.Split('.')[0]);
+
+            ISampleProvider[] samples;
+            int bassNoteNumber;
+
+            // solfegDegree: 1=DO, 2=RE, 3=MI, 4=FA, 5=SO, 6=LA, 7=TI
+            // Each combination puts the melody note at the top of the chord.
+            switch (solfegDegree)
+            {
+                case 1: // DO — I (HighFirst) or IV (Root)
+                    switch (triadType)
+                    {
+                        case TriadType.OneMajor:
+                            // [DO, MI, SO] + HighFirst → [MI, SO, DO+8va] top = DO
+                            bassNoteNumber = doNoteNumber.BassNoteNumber();
+                            samples = Inversion.CreateTriadInversionEx(InversionType.HighFirst, noteDuration,
+                                doNoteNumber, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpPerfect5th, bassNoteNumber);
+                            break;
+                        case TriadType.FourMajor:
+                            // [FA, LA, DO+8va] + Root → top = DO+8va
+                            bassNoteNumber = (doNoteNumber + Interval.UpPerfect4th).BassNoteNumber();
+                            samples = Inversion.CreateTriadInversionEx(InversionType.Root, noteDuration,
+                                doNoteNumber + Interval.UpPerfect4th, doNoteNumber + Interval.UpMajor6th, doNoteNumber + Interval.UpPerfectOctave, bassNoteNumber);
+                            break;
+                        default:
+                            throw new NotSupportedException($"solfegDegree=1 does not support TriadType {triadType}.");
+                    }
+                    break;
+
+                case 2: // RE — V only (Root): [SO, TI, RE] top = RE
+                    bassNoteNumber = (doNoteNumber + Interval.UpPerfect5th).BassNoteNumber();
+                    samples = Inversion.CreateTriadInversionEx(InversionType.Root, noteDuration,
+                        doNoteNumber + Interval.UpPerfect5th, doNoteNumber + Interval.UpMajor7th, doNoteNumber + Interval.UpMajor9th, bassNoteNumber);
+                    break;
+
+                case 3: // MI — I only (LowSecond): [SO-8va, DO, MI] top = MI
+                    bassNoteNumber = doNoteNumber.BassNoteNumber();
+                    samples = Inversion.CreateTriadInversionEx(InversionType.LowSecond, noteDuration,
+                        doNoteNumber, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpPerfect5th, bassNoteNumber);
+                    break;
+
+                case 4: // FA — IV only (HighFirst): [LA, DO+8va, FA+8va] top = FA
+                    bassNoteNumber = (doNoteNumber + Interval.UpPerfect4th).BassNoteNumber();
+                    samples = Inversion.CreateTriadInversionEx(InversionType.HighFirst, noteDuration,
+                        doNoteNumber + Interval.UpPerfect4th, doNoteNumber + Interval.UpMajor6th, doNoteNumber + Interval.UpPerfectOctave, bassNoteNumber);
+                    break;
+
+                case 5: // SO — I (Root) or V (HighFirst)
+                    switch (triadType)
+                    {
+                        case TriadType.OneMajor:
+                            // [DO, MI, SO] + Root → top = SO
+                            bassNoteNumber = doNoteNumber.BassNoteNumber();
+                            samples = Inversion.CreateTriadInversionEx(InversionType.Root, noteDuration,
+                                doNoteNumber, doNoteNumber + Interval.UpMajor3rd, doNoteNumber + Interval.UpPerfect5th, bassNoteNumber);
+                            break;
+                        case TriadType.FiveMajor:
+                            // [SO, TI, RE] + HighFirst → [TI, RE, SO+8va] top = SO
+                            bassNoteNumber = (doNoteNumber + Interval.UpPerfect5th).BassNoteNumber();
+                            samples = Inversion.CreateTriadInversionEx(InversionType.HighFirst, noteDuration,
+                                doNoteNumber + Interval.UpPerfect5th, doNoteNumber + Interval.UpMajor7th, doNoteNumber + Interval.UpMajor9th, bassNoteNumber);
+                            break;
+                        default:
+                            throw new NotSupportedException($"solfegDegree=5 does not support TriadType {triadType}.");
+                    }
+                    break;
+
+                case 6: // LA — IV only (LowSecond): [FA, LA, DO-8va] top = LA
+                    bassNoteNumber = (doNoteNumber + Interval.UpPerfect4th).BassNoteNumber();
+                    samples = Inversion.CreateTriadInversionEx(InversionType.LowSecond, noteDuration,
+                        doNoteNumber + Interval.UpPerfect4th, doNoteNumber + Interval.UpMajor6th, doNoteNumber + Interval.UpPerfectOctave, bassNoteNumber);
+                    break;
+
+                case 7: // TI — V only (LowSecond): [RE-8va, SO, TI] top = TI
+                    bassNoteNumber = (doNoteNumber + Interval.UpPerfect5th).BassNoteNumber();
+                    samples = Inversion.CreateTriadInversionEx(InversionType.LowSecond, noteDuration,
+                        doNoteNumber + Interval.UpPerfect5th, doNoteNumber + Interval.UpMajor7th, doNoteNumber + Interval.UpMajor9th, bassNoteNumber);
+                    break;
+
+                default:
+                    throw new NotSupportedException($"solfegDegree {solfegDegree} is not supported.");
+            }
+
+            MixingSampleProvider msp = new MixingSampleProvider(samples[0].WaveFormat);
+            msp.AddMixerInput(samples[0]);
+            msp.AddMixerInput(samples[1]);
+            msp.AddMixerInput(samples[2]);
+            if (samples[3] != null)  // Bass note.
+            {
+                msp.AddMixerInput(samples[3]);
+            }
+
+            var stwp = new SampleToWaveProvider(msp);
+
+            MemoryStream wavStream = new MemoryStream();
+            WaveFileWriter.WriteWavFileToStream(wavStream, stwp);
+            wavStream.Position = 0;
+
+            wavStream.WavToMp3File(out string fileName);
+            return Redirect($"~/Temp/{fileName}");
+        }
+
         public ActionResult Get3ChordProgressionEx(string doNoteName, int progressiontype)
         {
             var progressionType = (ProgressionType)progressiontype;

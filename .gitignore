@@ -262,3 +262,5 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/EarTraining/doc/eartraininglevelonebook.pdf
+/EarTraining/doc/eartrainingleveltwobook.pdf
