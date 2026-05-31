@@ -231,6 +231,12 @@ audio {
     color: #2d1b69;
 }
 
+/* Hidden in Human mode; revealed in Vibe mode via vibe-theme.css.
+   .ai-note.vibe-only gets display:flex via a more-specific rule there. */
+.vibe-only {
+    display: none;
+}
+
 .ai-note .ai-note-icon {
     flex-shrink: 0;
     font-size: 1rem;

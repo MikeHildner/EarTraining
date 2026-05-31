@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="@Url.Content("~/Content/vibe-theme.css")" />
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body class="theme-vibe">
@@ -34,7 +33,7 @@
                                 <div>
                                     <div class="mega-section">
                                         <div class="mega-section-title">Ch 1 — Solfeg</div>
-                                        @Html.ActionLink("Vocal Drills", "SolfegResolutionsDO", "L1C1", null, new { @class = "dropdown-item" })
+                                        <a href="@Url.Action("SolfegResolutionsDO", "L1C1")" class="dropdown-item">Vocal Drills <span class="ai-badge"><i class="fa fa-magic"></i> AI</span></a>
                                         @Html.ActionLink("Resolution Identification", "SolfegResolutionsNoDO", "L1C1", null, new { @class = "dropdown-item" })
                                         @Html.ActionLink("Pitch Identification", "PitchIdentification", "L1C1", null, new { @class = "dropdown-item" })
                                         @Html.ActionLink("Dictation / Transcription", "DictationTranscription", "L1C1", null, new { @class = "dropdown-item" })
@@ -114,7 +113,7 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownOther">
                             @Html.ActionLink("Find the DO", "Index", "DO", null, new { @class = "dropdown-item" })
                             @Html.ActionLink("All Solfeg Syllables", "Index", "Solfeg", null, new { @class = "dropdown-item" })
-                            @Html.ActionLink("Ratios", "Ratios", "Experimental", null, new { @class = "dropdown-item" })
+                            <a href="@Url.Action("Ratios", "Experimental")" class="dropdown-item">Ratios <span class="ai-badge"><i class="fa fa-magic"></i> AI</span></a>
                         </div>
                     </li>
 

@@ -33,7 +33,8 @@ namespace EarTraining
                       "~/Content/css-toggle-switch.css",
                       "~/Content/font-awesome.css",
                       "~/Content/hover.css",
-                      "~/Content/toastr.css"));
+                      "~/Content/toastr.css",
+                      "~/Content/vibe-theme.css"));
         }
     }
 }
