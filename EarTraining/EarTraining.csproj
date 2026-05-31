@@ -443,8 +443,6 @@
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
     <Content Include="Content\_variables.scss" />
-    <Content Include="doc\eartraininglevelonebook.pdf" />
-    <Content Include="doc\eartrainingleveltwobook.pdf" />
     <None Include="Properties\PublishProfiles\Ear Training Beta.pubxml" />
     <None Include="Properties\PublishProfiles\Ear Training Prod.pubxml" />
     <Content Include="Scripts\bootstrap.bundle.js" />
