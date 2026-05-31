@@ -389,10 +389,10 @@
         }
 
         function gaugeTierFor(pct) {
-            if (pct >= 90) return { color: '#c99700', label: 'Mastery!',       glow: true };
-            if (pct >= 70) return { color: '#28a745', label: 'Great!',         glow: false };
-            if (pct >= 50) return { color: '#fd7e14', label: 'Getting there',  glow: false };
-            return             { color: '#dc3545', label: 'Keep practicing', glow: false };
+            if (pct >= 90) return { color: '#c99700', label: 'Quite Good', glow: true };
+            if (pct >= 70) return { color: '#28a745', label: 'Very Good',  glow: false };
+            if (pct >= 50) return { color: '#fd7e14', label: 'Good Work',  glow: false };
+            return             { color: '#dc3545', label: 'Good Start', glow: false };
         }
 
         function updateGauge() {
