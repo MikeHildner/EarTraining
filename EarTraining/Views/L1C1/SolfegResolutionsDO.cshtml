@@ -193,6 +193,10 @@
             </div>
             <div class="card-body">
                 <p class="card-text">Automate the drill process. This respects your "Include in Drills" selections.</p>
+                <div class="custom-control custom-checkbox mb-2">
+                    <input type="checkbox" class="custom-control-input" id="cbScoreAuto" />
+                    <label class="custom-control-label" for="cbScoreAuto">Score me — quiz me on each drill (an unanswered drill counts as incorrect)</label>
+                </div>
                 <button id="btnAutomate" class="btn btn-warning" onclick="automate();">Go!</button><label class="margin-left-default" id="remainingIterations"></label>
             </div>
         </div>
@@ -209,9 +213,11 @@
         var maxIterations = 10;
 
         var delayBeforeDrill       = 1500;
-        var delayBeforeShowModal   = 4000;
+        var delayBeforeShowModal   = 4000;   // passive run: delay from drill playing to answer reveal
+        var delayBeforeShowScored  = 8000;   // scored run: longer reveal delay = more time to answer
         var delayBeforeHideModal   = 3500;
-        var delayBetweenIterations = delayBeforeDrill + delayBeforeShowModal + delayBeforeHideModal;
+        var revealDelay            = delayBeforeShowModal;   // effective drill->reveal delay for the current run
+        var delayBetweenIterations = delayBeforeDrill + revealDelay + delayBeforeHideModal;
 
         // ── Scoring quiz state (Vibe mode only) ──
         var resolutionLabels = ['DO DO RE DO', 'DO DO FA MI', 'DO DO LA SO', 'DO DO (high)TI DO', 'DO DO (low)TI DO'];
@@ -220,6 +226,7 @@
         var quizCorrect = 0;
         var quizTotal = 0;
         var quizStreak = 0;
+        var autoScoring = false;   // true only during a "Score me" automated run
 
         var GAUGE_RADIUS = 52;
         var GAUGE_CIRCUMFERENCE = 2 * Math.PI * GAUGE_RADIUS;   // ~326.726
@@ -265,12 +272,17 @@
             var buttonText = $("#btnAutomate").text();
             switch (buttonText) {
                 case "Go!":
+                    autoScoring = isVibe && $('#cbScoreAuto').is(':checked');
+                    if (autoScoring) resetScore();   // each scored run starts fresh
+                    revealDelay = autoScoring ? delayBeforeShowScored : delayBeforeShowModal;
+                    delayBetweenIterations = delayBeforeDrill + revealDelay + delayBeforeHideModal;
                     $("#btnAutomate").text("Stop");
                     playAndShow();
                     var jsInterval = setInterval(playAndShow, delayBetweenIterations);
                     jsIntervals.push(jsInterval);
                     break;
                 case "Stop":
+                    autoScoring = false;
                     $("#btnAutomate").text("Go!");
                     resetIterationsMessage();
                     clearAllIntervals();
@@ -287,6 +299,7 @@
                 $("#btnAutomate").text("Go!");
                 resetIterationsMessage();
                 iterations = 0;
+                autoScoring = false;
                 clearAllIntervals();
                 return;
             } else {
@@ -299,10 +312,21 @@
         function playDrill() {
             setAudResolutionSrc();
             $('#audResolution').trigger("play");
-            setTimeout(showModal, delayBeforeShowModal);
+            setTimeout(showModal, revealDelay);
         }
 
         function showModal() {
+            // Scored automation: a drill not answered before the reveal counts as incorrect.
+            if (autoScoring && !quizAnswered) {
+                quizAnswered = true;
+                quizTotal += 1;
+                quizStreak = 0;
+                $('.quiz-option').prop('disabled', true)
+                    .filter('[data-answer="' + currentAnswer + '"]').removeClass('btn-outline-primary').addClass('btn-success');
+                $('#quizFeedback').html('<i class="fa fa-times"></i> Time\'s up — the answer was "' + resolutionLabels[currentAnswer] + '".')
+                    .removeClass('text-success').addClass('text-danger');
+                updateScoreDisplay();
+            }
             $("#revealModalBody").html($("#resolution").html());
             $("#revealModal").modal('show');
             setTimeout(hideModal, delayBeforeHideModal);
