@@ -6,3 +6,12 @@
         </div>
     </div>
 </div>
+
+<style>
+    /* The reveal modal is a passive, auto-dismissed overlay with no interactive
+       content. Its full-viewport container would otherwise intercept clicks meant
+       for the page beneath it (e.g. the Automation "Stop" button) for the ~3.5s it
+       is shown each cycle. Make it click-through. */
+    #revealModal,
+    #revealModal .modal-content { pointer-events: none; }
+</style>
