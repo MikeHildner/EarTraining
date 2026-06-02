@@ -373,8 +373,19 @@
         var delayBetweenIterations = delayBeforeDrill + revealDelay + delayBeforeHideModal;
 
         // ── Scoring quiz state (Vibe only) ──
-        var categoryNames = { min3: 'Minor 3rd', maj6: 'Major 6th' };
-        var currentCategory = null;
+        // Each drill type maps to its solfège pattern. Several types share a sequence
+        // (and TI TI RE RE DO covers high/low), so the quiz matches on the syllables —
+        // the user identifies the pattern they heard, not the interval.
+        var drillSyllables = {
+            12: 'RE RE FA FA MI', 13: 'MI MI SO SO SO', 14: 'LA LA DO DO DO',
+            15: 'TI TI RE RE DO', 16: 'TI TI RE RE DO', 17: 'DO DO LA LA SO',
+            18: 'RE RE TI TI DO', 19: 'FA FA RE RE DO', 20: 'SO SO MI MI MI',
+            21: 'LA LA DO DO DO', 22: 'TI TI RE RE DO', 23: 'RE RE FA FA MI',
+            24: 'MI MI SO SO SO'
+        };
+        // Unique sequences, in a stable order, used as the quiz buttons.
+        var quizSyllableOptions = ['RE RE FA FA MI', 'MI MI SO SO SO', 'LA LA DO DO DO', 'TI TI RE RE DO', 'DO DO LA LA SO', 'RE RE TI TI DO', 'FA FA RE RE DO', 'SO SO MI MI MI'];
+        var currentSyllables = null;
         var quizAnswered = false;
         var quizCorrect = 0;
         var quizTotal = 0;
@@ -389,10 +400,12 @@
 
             $('input[type=radio][name=intervaltype]').change(function () {
                 setAudDrill1Src();
+                if (isVibe) renderQuizOptions();   // available patterns changed
             });
 
             $('.cb-include').change(function () {
                 setAudDrill1Src();
+                if (isVibe) renderQuizOptions();   // available patterns changed
             });
 
             if (isVibe) {
@@ -494,7 +507,7 @@
             $('#drill1').text(msg);
 
             if (isVibe) {
-                currentCategory = (randomInt <= 16) ? 'min3' : 'maj6';   // 12-16 = Min 3rd, 17-24 = Maj 6th
+                currentSyllables = drillSyllables[randomInt] || null;
                 resetQuizQuestion();
             }
             $('#spinner').fadeOut("slow");
@@ -575,7 +588,7 @@
             renderQuizOptions();
             $('#quizOptions').on('click', '.quiz-option', function () {
                 if (!$(this).prop('disabled')) {
-                    submitGuess($(this).attr('data-cat'));
+                    submitGuess($(this).attr('data-syl'));
                 }
             });
             var gaugeFill = document.getElementById('gaugeFill');
@@ -587,26 +600,44 @@
             resetQuizQuestion();
         }
 
+        // The drills that can actually play depend on the Min 3rd / Maj 6th / Both
+        // toggle and the "Include in Drills" checkboxes — only offer those patterns.
+        function getPlayableSyllables() {
+            var intervalType = $("input[type=radio][name=intervaltype]:checked").attr('id');
+            var min = 12, max = 24;
+            if (intervalType === 'min3rds') { max = 16; }
+            else if (intervalType === 'maj6ths') { min = 17; }
+            var available = {};
+            for (var t = min; t <= max; t++) {
+                if (drillSyllables[t] && $('#cb-include-' + t).is(':checked')) {
+                    available[drillSyllables[t]] = true;
+                }
+            }
+            return quizSyllableOptions.filter(function (s) { return available[s]; });
+        }
+
         function renderQuizOptions() {
+            var opts = getPlayableSyllables();
             var html = '';
-            html += '<button type="button" class="btn btn-outline-primary quiz-option mr-2 mb-2" data-cat="min3">Minor 3rd</button>';
-            html += '<button type="button" class="btn btn-outline-primary quiz-option mr-2 mb-2" data-cat="maj6">Major 6th</button>';
+            for (var i = 0; i < opts.length; i++) {
+                html += '<button type="button" class="btn btn-outline-primary quiz-option mr-2 mb-2" data-syl="' + opts[i] + '">' + opts[i] + '</button>';
+            }
             $('#quizOptions').html(html);
         }
 
         function answerLabel() {
-            return currentCategory ? categoryNames[currentCategory] : '';
+            return currentSyllables || '';
         }
 
         function submitGuess(guess) {
-            if (quizAnswered || !currentCategory) return;
+            if (quizAnswered || !currentSyllables) return;
             quizAnswered = true;
             quizTotal += 1;
 
             var $options = $('.quiz-option');
             $options.prop('disabled', true);
 
-            if (guess === currentCategory) {
+            if (guess === currentSyllables) {
                 quizCorrect += 1;
                 quizStreak += 1;
                 $('#quizFeedback').html('<i class="fa fa-check"></i> Correct!')
@@ -615,9 +646,9 @@
                 quizStreak = 0;
                 $('#quizFeedback').html('<i class="fa fa-times"></i> Not quite — it was ' + answerLabel() + '.')
                     .removeClass('text-success').addClass('text-danger');
-                $options.filter('[data-cat="' + guess + '"]').removeClass('btn-outline-primary').addClass('btn-danger');
+                $options.filter('[data-syl="' + guess + '"]').removeClass('btn-outline-primary').addClass('btn-danger');
             }
-            $options.filter('[data-cat="' + currentCategory + '"]').removeClass('btn-outline-primary').addClass('btn-success');
+            $options.filter('[data-syl="' + currentSyllables + '"]').removeClass('btn-outline-primary').addClass('btn-success');
             updateScoreDisplay();
         }
 
@@ -626,7 +657,7 @@
             quizTotal += 1;
             quizStreak = 0;
             $('.quiz-option').prop('disabled', true)
-                .filter('[data-cat="' + currentCategory + '"]').removeClass('btn-outline-primary').addClass('btn-success');
+                .filter('[data-syl="' + currentSyllables + '"]').removeClass('btn-outline-primary').addClass('btn-success');
             $('#quizFeedback').html('<i class="fa fa-times"></i> Time\'s up — it was ' + answerLabel() + '.')
                 .removeClass('text-success').addClass('text-danger');
             updateScoreDisplay();
