@@ -264,3 +264,6 @@ __pycache__/
 *.pyc
 /EarTraining/doc/eartraininglevelonebook.pdf
 /EarTraining/doc/eartrainingleveltwobook.pdf
+
+# Claude Code local config (machine-specific IIS Express launch settings)
+.claude/launch.json
