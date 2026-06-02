@@ -405,6 +405,7 @@
                     if (autoScoring) resetScore();   // each scored run starts fresh
                     revealDelay = autoScoring ? delayBeforeShowScored : delayBeforeShowModal;
                     delayBetweenIterations = delayBeforeTriad + revealDelay + delayBeforeHideModal;
+                    iterations = 0;   // start each run fresh (don't carry over from a prior Stop)
                     $("#btnAutomate").text("Stop");
                     playAndShow();
                     var jsInterval = setInterval(playAndShow, delayBetweenIterations);
