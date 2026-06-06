@@ -50,3 +50,26 @@ and L1C3 drill pages:
 - Optional **"Score me"** toggle integrates scoring with the Automation
   feature: a scored run quizzes every drill and counts an unanswered drill
   as incorrect (with a slightly longer reveal/guess window).
+- **Quiz buttons track the user's "Include in Drills" selections** (and any
+  drill-type toggle): `renderQuizOptions()` offers only the patterns that can
+  actually play and re-runs on each checkbox/toggle `change`. Dedupe where
+  several drills share a label. (Most relevant where buttons map to specific
+  drills, e.g. `SolfegResolutionsDO`, `VocalDrills`.)
+- **The gauge re-animates on every answer** — even when the % is unchanged
+  (e.g. consecutive correct answers at 100%):
+  - *Fill sweep replay:* in `updateGauge()`, set the fill `transition:none`,
+    reset `stroke-dashoffset` to empty (`GAUGE_CIRCUMFERENCE`), force one
+    reflow, then restore the transition and set the target offset so the 0.7s
+    sweep replays from empty.
+  - *Scale pop:* `@keyframes gauge-pulse` (write `@@keyframes` in the Razor
+    view) on `.score-gauge`, re-triggered by remove-class → reflow → add-class.
+
+### Rollout status — IN PROGRESS (finish this)
+
+- **Button-tracking** done on: `L1C3/VocalDrills`, `L1C1/SolfegResolutionsDO`.
+- **Gauge re-animation (sweep + pop)** done on: `L1C1/SolfegResolutionsDO` only.
+- **TODO — roll both out to the remaining scoring-gauge pages:** L1C1
+  (`SolfegResolutionsNoDO`, `PitchIdentification`), L1C2 (`VocalDrills`,
+  `HarmonicMaj3rdMin6th`, `MelodicMaj3rdMin6thNoDO`), L1C3 (`Index`,
+  `HarmonicMin3rdMaj6th`, `MelodicMin3rdMaj6thNoDO`), L1C4, L1C7, L2C4. Find
+  them via the `id="gaugeFill"` / `function updateGauge` markup.
