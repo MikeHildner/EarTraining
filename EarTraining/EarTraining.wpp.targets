@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Web publish customizations, auto-imported by the publish pipeline for every
+  publish profile (FileSystem, FTP, etc.).
+
+  Exclude the native LAME MP3 encoder DLLs from deployment. They come from the
+  NAudio.Lame NuGet package (via NAudio.Lame.targets) and never change between
+  deploys, so there's no need to re-upload them every publish. Excluding them
+  also avoids the FTP 550 "file unavailable" error that occurs when the running
+  app on the server holds libmp3lame.32.dll locked. They remain in bin\ locally
+  so the app still runs, and the copies already on the server are left in place
+  (DeleteExistingFiles is false on the FTP profiles).
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ExcludeFilesFromDeployment>$(ExcludeFilesFromDeployment);bin\libmp3lame.32.dll;bin\libmp3lame.64.dll</ExcludeFilesFromDeployment>
+  </PropertyGroup>
+</Project>

@@ -638,6 +638,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="EarTraining.wpp.targets" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EarTrainingLibrary\EarTrainingLibrary.csproj">
