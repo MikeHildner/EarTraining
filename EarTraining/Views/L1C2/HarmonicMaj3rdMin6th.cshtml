@@ -88,6 +88,14 @@
     .score-gauge-pct { font-size: 1.8rem; font-weight: 700; line-height: 1; color: #2d1b69; }
     .score-gauge-tier { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; margin-top: 0.15rem; color: #6c757d; }
     #quizFeedback { min-height: 1.5rem; }
+    /* Brief pulse, re-triggered on every answer, so the gauge reacts even when the
+       percentage is unchanged (e.g. consecutive correct answers holding at 100%). */
+    @@keyframes gauge-pulse {
+        0%   { transform: scale(1); }
+        30%  { transform: scale(1.07); }
+        100% { transform: scale(1); }
+    }
+    .score-gauge.gauge-pulse { animation: gauge-pulse 0.5s ease-out; }
 </style>
 
 <div class="vibe-only">
@@ -275,9 +283,11 @@
 
             $('input[type=radio][name=intervaltype]').change(function () {
                 setAudDrillSrc();
+                if (isVibe) renderQuizOptions();   // available drills changed
             });
             $('.cb-include').change(function () {
                 setAudDrillSrc();
+                if (isVibe) renderQuizOptions();   // available drills changed
             });
 
             if (isVibe) initQuiz();
@@ -444,10 +454,25 @@
             resetQuizQuestion();
         }
 
+        // The drills that can actually play depend on the Maj 3rd / Min 6th / Both toggle
+        // and the "Include in Drills" checkboxes — only offer those drills' labels.
+        function getPlayableLabels() {
+            var intervalType = $("input[type=radio][name=intervaltype]:checked").attr('id');
+            var min = 0, max = 5;
+            if (intervalType === 'maj3rds') { max = 2; }
+            else if (intervalType === 'min6ths') { min = 3; }
+            var labels = [];
+            for (var t = min; t <= max; t++) {
+                if ($('#cb-include-' + t).is(':checked')) labels.push(quizLabels[t]);
+            }
+            return labels;
+        }
+
         function renderQuizOptions() {
+            var opts = getPlayableLabels();
             var html = '';
-            for (var i = 0; i < quizLabels.length; i++) {
-                html += '<button type="button" class="btn btn-outline-primary quiz-option mr-2 mb-2" data-answer="' + quizLabels[i] + '">' + quizLabels[i] + '</button>';
+            for (var i = 0; i < opts.length; i++) {
+                html += '<button type="button" class="btn btn-outline-primary quiz-option mr-2 mb-2" data-answer="' + opts[i] + '">' + opts[i] + '</button>';
             }
             $('#quizOptions').html(html);
         }
@@ -532,8 +557,19 @@
             tierEl.textContent = tier.label;
             tierEl.style.color = tier.color;
             fill.style.stroke = tier.color;
-            fill.style.strokeDashoffset = GAUGE_CIRCUMFERENCE * (1 - pct / 100);
             fill.classList.toggle('gauge-glow', tier.glow);
+
+            // Re-animate on every answer, even when pct is unchanged: replay the ring's fill
+            // sweep from empty up to the current value, plus a brief scale pop.
+            var gauge = document.querySelector('.score-gauge');
+            var target = GAUGE_CIRCUMFERENCE * (1 - pct / 100);
+            fill.style.transition = 'none';
+            fill.style.strokeDashoffset = GAUGE_CIRCUMFERENCE;   // reset ring to empty
+            if (gauge) gauge.classList.remove('gauge-pulse');
+            void (gauge ? gauge.offsetWidth : fill.getBoundingClientRect());   // one reflow commits the reset
+            fill.style.transition = '';                          // restore the CSS 0.7s sweep
+            fill.style.strokeDashoffset = target;                // sweep empty -> current value
+            if (gauge) gauge.classList.add('gauge-pulse');       // replay the scale pop
         }
 
         function resetScore() {

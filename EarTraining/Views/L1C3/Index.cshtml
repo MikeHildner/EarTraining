@@ -71,6 +71,14 @@
     .score-gauge-tier { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; margin-top: 0.15rem; color: #6c757d; }
     /* Reserve the feedback line's height so the card doesn't jump as Correct / Not-quite show & hide */
     #quizFeedback { min-height: 1.5rem; }
+    /* Brief pulse, re-triggered on every answer, so the gauge reacts even when the
+       percentage is unchanged (e.g. consecutive correct answers holding at 100%). */
+    @@keyframes gauge-pulse {
+        0%   { transform: scale(1); }
+        30%  { transform: scale(1.07); }
+        100% { transform: scale(1); }
+    }
+    .score-gauge.gauge-pulse { animation: gauge-pulse 0.5s ease-out; }
 </style>
 
 <div class="vibe-only">
@@ -122,7 +130,7 @@
             <h4>Triads</h4>
         </div>
         <div class="float-right">
-            <input type="button" class="btn btn-primary margin-bottom-5" value="Invert Selections" onclick="invertSelections(setAudioSrc2)" />
+            <input type="button" class="btn btn-primary margin-bottom-5" value="Invert Selections" onclick="invertDrillSelections()" />
         </div>
     </div>
 </div>
@@ -328,6 +336,7 @@
             setAudioSrc2();
             $('.cb-include').change(function () {
                 setAudioSrc2();
+                if (isVibe) renderQuizOptions();   // available triads changed
             });
             if (isVibe) {
                 resetIterationsMessage();
@@ -502,15 +511,30 @@
             resetQuizQuestion();
         }
 
+        // The Invert Selections button toggles the checkboxes directly (no change event),
+        // so refresh the playable quiz options after it runs.
+        function invertDrillSelections() {
+            invertSelections(setAudioSrc2);
+            if (isVibe) renderQuizOptions();
+        }
+
         function renderQuizOptions() {
+            // Only offer triads/inversions that can actually play (checked in "Include in Drills").
+            // In "triad" mode a triad is offered if any of its inversions is included.
             var mode = quizMode();
             var html = '';
             for (var t = 0; t < triadNames.length; t++) {
                 if (mode === 'both') {
                     for (var inv = 0; inv < inversionNames.length; inv++) {
+                        if (!$('#cb-include-' + t + '-' + inv).is(':checked')) continue;
                         html += '<button type="button" class="btn btn-outline-primary quiz-option mr-2 mb-2" data-triad="' + t + '" data-inv="' + inv + '">' + triadNames[t] + ' (' + inversionNames[inv] + ')</button>';
                     }
                 } else {
+                    var anyInv = false;
+                    for (var inv2 = 0; inv2 < inversionNames.length; inv2++) {
+                        if ($('#cb-include-' + t + '-' + inv2).is(':checked')) { anyInv = true; break; }
+                    }
+                    if (!anyInv) continue;
                     html += '<button type="button" class="btn btn-outline-primary quiz-option mr-2 mb-2" data-triad="' + t + '" data-inv="-1">' + triadNames[t] + '</button>';
                 }
             }
@@ -599,8 +623,19 @@
             tierEl.textContent = tier.label;
             tierEl.style.color = tier.color;
             fill.style.stroke = tier.color;
-            fill.style.strokeDashoffset = GAUGE_CIRCUMFERENCE * (1 - pct / 100);
             fill.classList.toggle('gauge-glow', tier.glow);
+
+            // Re-animate on every answer, even when pct is unchanged: replay the ring's fill
+            // sweep from empty up to the current value, plus a brief scale pop.
+            var gauge = document.querySelector('.score-gauge');
+            var target = GAUGE_CIRCUMFERENCE * (1 - pct / 100);
+            fill.style.transition = 'none';
+            fill.style.strokeDashoffset = GAUGE_CIRCUMFERENCE;   // reset ring to empty
+            if (gauge) gauge.classList.remove('gauge-pulse');
+            void (gauge ? gauge.offsetWidth : fill.getBoundingClientRect());   // one reflow commits the reset
+            fill.style.transition = '';                          // restore the CSS 0.7s sweep
+            fill.style.strokeDashoffset = target;                // sweep empty -> current value
+            if (gauge) gauge.classList.add('gauge-pulse');       // replay the scale pop
         }
 
         function resetScore() {

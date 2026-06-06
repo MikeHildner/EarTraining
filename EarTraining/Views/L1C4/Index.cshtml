@@ -71,6 +71,14 @@
     .score-gauge-tier { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; margin-top: 0.15rem; color: #6c757d; }
     /* Reserve the feedback line's height so the card doesn't jump as Correct / Not-quite show & hide */
     .quiz-feedback { min-height: 1.5rem; }
+    /* Brief pulse, re-triggered on every answer, so the gauge reacts even when the
+       percentage is unchanged (e.g. consecutive correct answers holding at 100%). */
+    @@keyframes gauge-pulse {
+        0%   { transform: scale(1); }
+        30%  { transform: scale(1.07); }
+        100% { transform: scale(1); }
+    }
+    .score-gauge.gauge-pulse { animation: gauge-pulse 0.5s ease-out; }
 </style>
 
 <section id="tabs">
@@ -442,12 +450,14 @@
         var GAUGE_CIRCUMFERENCE = 2 * Math.PI * GAUGE_RADIUS;   // ~326.726
 
         // ── Scoring quiz state (Vibe mode only); one instance per tab ──
-        function newQuiz(labels, sfx) {
-            return { labels: labels, sfx: sfx, currentAnswer: '', answered: false,
+        // `types` parallels `labels`: each label's progressionType, i.e. its "Include in
+        // Drills" checkbox id (cb-include-{type}), used to track which buttons can play.
+        function newQuiz(labels, types, sfx) {
+            return { labels: labels, types: types, sfx: sfx, currentAnswer: '', answered: false,
                      correct: 0, total: 0, streak: 0, autoScoring: false };
         }
-        var quiz2 = newQuiz(['IV (2nd) - I (root)', 'V (1st) - I (root)', 'V (root) - IV (root)', 'I (root) - IV (2nd)', 'I (root) - V (1st)'], '2');
-        var quiz3 = newQuiz(['IV (2nd) - V (1st) - I (root)', 'V (1st) - IV (2nd) - I (root)', 'I (root) - IV (2nd) - V (1st)', 'V (1st) - I (root) - IV (2nd)', 'I (root) - V (1st) - IV (2nd)', 'IV (2nd) - I (root) - V (1st)'], '3');
+        var quiz2 = newQuiz(['IV (2nd) - I (root)', 'V (1st) - I (root)', 'V (root) - IV (root)', 'I (root) - IV (2nd)', 'I (root) - V (1st)'], [0, 1, 2, 3, 23], '2');
+        var quiz3 = newQuiz(['IV (2nd) - V (1st) - I (root)', 'V (1st) - IV (2nd) - I (root)', 'I (root) - IV (2nd) - V (1st)', 'V (1st) - I (root) - IV (2nd)', 'I (root) - V (1st) - IV (2nd)', 'IV (2nd) - I (root) - V (1st)'], [4, 5, 6, 7, 8, 9], '3');
 
         $(document).ready(function () {
             setAudProgression2Src();
@@ -456,6 +466,7 @@
             $('.cb-include').change(function () {
                 setAudProgression2Src();
                 setAudProgression3Src();
+                if (isVibe) { renderQuizOptions(quiz2); renderQuizOptions(quiz3); }   // available progressions changed
             });
 
             if (isVibe) { initQuiz(quiz2); initQuiz(quiz3); }
@@ -690,8 +701,10 @@
         }
 
         function renderQuizOptions(q) {
+            // Only offer progressions that can actually play (checked in "Include in Drills").
             var html = '';
             for (var i = 0; i < q.labels.length; i++) {
+                if (!$('#cb-include-' + q.types[i]).is(':checked')) continue;
                 html += '<button type="button" class="btn btn-outline-primary quiz-option mr-2 mb-2" data-answer="' + q.labels[i] + '">' + q.labels[i] + '</button>';
             }
             $('#quizOptions' + q.sfx).html(html);
@@ -777,8 +790,20 @@
             tierEl.textContent = tier.label;
             tierEl.style.color = tier.color;
             fill.style.stroke = tier.color;
-            fill.style.strokeDashoffset = GAUGE_CIRCUMFERENCE * (1 - pct / 100);
             fill.classList.toggle('gauge-glow', tier.glow);
+
+            // Re-animate on every answer, even when pct is unchanged: replay the ring's fill
+            // sweep from empty up to the current value, plus a brief scale pop. Scope to this
+            // tab's gauge (the page has two) via the fill's own .score-gauge ancestor.
+            var gauge = fill.closest('.score-gauge');
+            var target = GAUGE_CIRCUMFERENCE * (1 - pct / 100);
+            fill.style.transition = 'none';
+            fill.style.strokeDashoffset = GAUGE_CIRCUMFERENCE;   // reset ring to empty
+            if (gauge) gauge.classList.remove('gauge-pulse');
+            void (gauge ? gauge.offsetWidth : fill.getBoundingClientRect());   // one reflow commits the reset
+            fill.style.transition = '';                          // restore the CSS 0.7s sweep
+            fill.style.strokeDashoffset = target;                // sweep empty -> current value
+            if (gauge) gauge.classList.add('gauge-pulse');       // replay the scale pop
         }
 
         function resetScore(q) {

@@ -50,3 +50,40 @@ and L1C3 drill pages:
 - Optional **"Score me"** toggle integrates scoring with the Automation
   feature: a scored run quizzes every drill and counts an unanswered drill
   as incorrect (with a slightly longer reveal/guess window).
+- **Quiz buttons track the user's "Include in Drills" selections** (and any
+  drill-type toggle): `renderQuizOptions()` offers only the patterns that can
+  actually play and re-runs on each checkbox/toggle `change`. Dedupe where
+  several drills share a label. (Most relevant where buttons map to specific
+  drills, e.g. `SolfegResolutionsDO`, `VocalDrills`.)
+- **The gauge re-animates on every answer** — even when the % is unchanged
+  (e.g. consecutive correct answers at 100%):
+  - *Fill sweep replay:* in `updateGauge()`, set the fill `transition:none`,
+    reset `stroke-dashoffset` to empty (`GAUGE_CIRCUMFERENCE`), force one
+    reflow, then restore the transition and set the target offset so the 0.7s
+    sweep replays from empty.
+  - *Scale pop:* `@keyframes gauge-pulse` (write `@@keyframes` in the Razor
+    view) on `.score-gauge`, re-triggered by remove-class → reflow → add-class.
+
+### Rollout status — COMPLETE
+
+Both features now ship on **all 11 scoring-gauge pages** (find them via the
+`id="gaugeFill"` / `function updateGauge` markup):
+
+- **Gauge re-animation (sweep + pop)** — on every gauge page. (L1C4/Index has
+  two gauges, so its `updateGauge(q)` scopes the pulse to the answered tab via
+  `fill.closest('.score-gauge')` instead of `document.querySelector`.)
+- **Button-tracking** — `renderQuizOptions()` offers only patterns that can
+  actually play, re-running on each `cb-include` / drill-type-toggle change
+  (and after L1C3/Index's "Invert Selections", via the `invertDrillSelections`
+  wrapper). Dedupes shared labels where needed:
+  `PitchIdentification` (DO/TI appear twice) and the Min3rd/Maj6th **category**
+  quizzes (`L1C3/HarmonicMin3rdMaj6th`, `L1C3/MelodicMin3rdMaj6thNoDO`), whose
+  two buttons are gated by the interval-type toggle + includes.
+
+Done: L1C1 (`SolfegResolutionsDO`, `SolfegResolutionsNoDO`,
+`PitchIdentification`), L1C2 (`VocalDrills`, `HarmonicMaj3rdMin6th`,
+`MelodicMaj3rdMin6thNoDO`), L1C3 (`Index`, `VocalDrills`,
+`HarmonicMin3rdMaj6th`, `MelodicMin3rdMaj6thNoDO`), L1C4 (`Index`).
+
+L1C7 and L2C4 (listed in the old TODO) have **no** scoring gauge, so there was
+nothing to roll out there — out of scope.
