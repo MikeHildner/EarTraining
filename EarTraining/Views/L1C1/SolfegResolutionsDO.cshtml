@@ -237,6 +237,7 @@
             setAudResolutionSrc();
             $('.cb-include').change(function () {
                 setAudResolutionSrc();
+                if (isVibe) renderQuizOptions();   // available patterns changed
             });
             if (isVibe) {
                 resetIterationsMessage();
@@ -368,8 +369,10 @@
         }
 
         function renderQuizOptions() {
+            // Only offer drills that can actually play (those checked in "Include in Drills").
             var html = '';
             for (var i = 0; i < resolutionLabels.length; i++) {
+                if (!$('#cb-include-' + i).is(':checked')) continue;
                 html += '<button type="button" class="btn btn-outline-primary quiz-option mr-2 mb-2" data-answer="' + i + '">' + resolutionLabels[i] + '</button>';
             }
             $('#quizOptions').html(html);
