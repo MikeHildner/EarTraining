@@ -64,12 +64,26 @@ and L1C3 drill pages:
   - *Scale pop:* `@keyframes gauge-pulse` (write `@@keyframes` in the Razor
     view) on `.score-gauge`, re-triggered by remove-class → reflow → add-class.
 
-### Rollout status — IN PROGRESS (finish this)
+### Rollout status — COMPLETE
 
-- **Button-tracking** done on: `L1C3/VocalDrills`, `L1C1/SolfegResolutionsDO`.
-- **Gauge re-animation (sweep + pop)** done on: `L1C1/SolfegResolutionsDO` only.
-- **TODO — roll both out to the remaining scoring-gauge pages:** L1C1
-  (`SolfegResolutionsNoDO`, `PitchIdentification`), L1C2 (`VocalDrills`,
-  `HarmonicMaj3rdMin6th`, `MelodicMaj3rdMin6thNoDO`), L1C3 (`Index`,
-  `HarmonicMin3rdMaj6th`, `MelodicMin3rdMaj6thNoDO`), L1C4, L1C7, L2C4. Find
-  them via the `id="gaugeFill"` / `function updateGauge` markup.
+Both features now ship on **all 11 scoring-gauge pages** (find them via the
+`id="gaugeFill"` / `function updateGauge` markup):
+
+- **Gauge re-animation (sweep + pop)** — on every gauge page. (L1C4/Index has
+  two gauges, so its `updateGauge(q)` scopes the pulse to the answered tab via
+  `fill.closest('.score-gauge')` instead of `document.querySelector`.)
+- **Button-tracking** — `renderQuizOptions()` offers only patterns that can
+  actually play, re-running on each `cb-include` / drill-type-toggle change
+  (and after L1C3/Index's "Invert Selections", via the `invertDrillSelections`
+  wrapper). Dedupes shared labels where needed:
+  `PitchIdentification` (DO/TI appear twice) and the Min3rd/Maj6th **category**
+  quizzes (`L1C3/HarmonicMin3rdMaj6th`, `L1C3/MelodicMin3rdMaj6thNoDO`), whose
+  two buttons are gated by the interval-type toggle + includes.
+
+Done: L1C1 (`SolfegResolutionsDO`, `SolfegResolutionsNoDO`,
+`PitchIdentification`), L1C2 (`VocalDrills`, `HarmonicMaj3rdMin6th`,
+`MelodicMaj3rdMin6thNoDO`), L1C3 (`Index`, `VocalDrills`,
+`HarmonicMin3rdMaj6th`, `MelodicMin3rdMaj6thNoDO`), L1C4 (`Index`).
+
+L1C7 and L2C4 (listed in the old TODO) have **no** scoring gauge, so there was
+nothing to roll out there — out of scope.
