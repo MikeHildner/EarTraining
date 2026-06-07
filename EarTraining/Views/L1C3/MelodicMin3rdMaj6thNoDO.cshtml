@@ -386,8 +386,16 @@
         var delayBetweenIterations = delayBeforeDrill + revealDelay + delayBeforeHideModal;
 
         // ── Scoring quiz state (Vibe only) ──
-        var categoryNames = { min3: 'Minor 3rd', maj6: 'Major 6th' };
-        var currentCategory = null;
+        // The quiz identifies the specific prompt heard (one button per playable prompt),
+        // not just the Min 3rd / Maj 6th category. Each drill type maps to its label.
+        var drillLabels = {
+            12: 'RE FA (Min 3rd)', 13: 'MI SO (Min 3rd)', 14: 'LA DO (Min 3rd)',
+            15: 'TI RE (high) (Min 3rd)', 16: 'TI RE (low) (Min 3rd)',
+            17: 'DO LA (Maj 6th)', 18: 'RE TI (Maj 6th)', 19: 'FA RE (Maj 6th)',
+            20: 'SO MI (Maj 6th)', 21: 'LA DO (Maj 6th)', 22: 'TI RE (Maj 6th)',
+            23: 'RE FA (Maj 6th)', 24: 'MI SO (Maj 6th)'
+        };
+        var currentAnswer = null;
         var quizAnswered = false;
         var quizCorrect = 0;
         var quizTotal = 0;
@@ -402,11 +410,11 @@
 
             $('input[type=radio][name=intervaltype]').change(function () {
                 setAudDrill1Src();
-                if (isVibe) renderQuizOptions();   // available categories changed
+                if (isVibe) renderQuizOptions();   // available prompts changed
             });
             $('.cb-include').change(function () {
                 setAudDrill1Src();
-                if (isVibe) renderQuizOptions();   // available categories changed
+                if (isVibe) renderQuizOptions();   // available prompts changed
             });
             if (isVibe) {
                 resetIterationsMessage();
@@ -508,7 +516,7 @@
             $('#drill1').text(msg);
 
             if (isVibe) {
-                currentCategory = (randomInt <= 16) ? 'min3' : 'maj6';   // 12-16 = Min 3rd, 17-24 = Maj 6th
+                currentAnswer = msg;   // the qualified prompt label (matches a quiz button)
                 resetQuizQuestion();
             }
             $('#spinner').fadeOut("slow");
@@ -589,7 +597,7 @@
             renderQuizOptions();
             $('#quizOptions').on('click', '.quiz-option', function () {
                 if (!$(this).prop('disabled')) {
-                    submitGuess($(this).attr('data-cat'));
+                    submitGuess($(this).attr('data-answer'));
                 }
             });
             var gaugeFill = document.getElementById('gaugeFill');
@@ -601,40 +609,43 @@
             resetQuizQuestion();
         }
 
-        // Only offer the categories that can actually play, given the Min 3rd / Maj 6th / Both
-        // toggle and the "Include in Drills" checkboxes (types 12-16 = Min 3rd, 17-24 = Maj 6th).
-        function anyChecked(min, max) {
+        // The prompts that can actually play depend on the Min 3rd / Maj 6th / Both toggle
+        // and the "Include in Drills" checkboxes (types 12-16 = Min 3rd, 17-24 = Maj 6th) —
+        // offer one button per playable prompt.
+        function getPlayableLabels() {
+            var intervalType = $("input[type=radio][name=intervaltype]:checked").attr('id');
+            var min = 12, max = 24;
+            if (intervalType === 'min3rds') { max = 16; }
+            else if (intervalType === 'maj6ths') { min = 17; }
+            var labels = [];
             for (var t = min; t <= max; t++) {
-                if ($('#cb-include-' + t).is(':checked')) return true;
+                if (drillLabels[t] && $('#cb-include-' + t).is(':checked')) labels.push(drillLabels[t]);
             }
-            return false;
+            return labels;
         }
 
         function renderQuizOptions() {
-            var intervalType = $("input[type=radio][name=intervaltype]:checked").attr('id');
+            var opts = getPlayableLabels();
             var html = '';
-            if (intervalType !== 'maj6ths' && anyChecked(12, 16)) {
-                html += '<button type="button" class="btn btn-outline-primary quiz-option mr-2 mb-2" data-cat="min3">Minor 3rd</button>';
-            }
-            if (intervalType !== 'min3rds' && anyChecked(17, 24)) {
-                html += '<button type="button" class="btn btn-outline-primary quiz-option mr-2 mb-2" data-cat="maj6">Major 6th</button>';
+            for (var i = 0; i < opts.length; i++) {
+                html += '<button type="button" class="btn btn-outline-primary quiz-option mr-2 mb-2" data-answer="' + opts[i] + '">' + opts[i] + '</button>';
             }
             $('#quizOptions').html(html);
         }
 
         function answerLabel() {
-            return currentCategory ? categoryNames[currentCategory] : '';
+            return currentAnswer || '';
         }
 
         function submitGuess(guess) {
-            if (quizAnswered || !currentCategory) return;
+            if (quizAnswered || !currentAnswer) return;
             quizAnswered = true;
             quizTotal += 1;
 
             var $options = $('.quiz-option');
             $options.prop('disabled', true);
 
-            if (guess === currentCategory) {
+            if (guess === currentAnswer) {
                 quizCorrect += 1;
                 quizStreak += 1;
                 $('#quizFeedback').html('<i class="fa fa-check"></i> Correct!')
@@ -643,9 +654,9 @@
                 quizStreak = 0;
                 $('#quizFeedback').html('<i class="fa fa-times"></i> Not quite — it was ' + answerLabel() + '.')
                     .removeClass('text-success').addClass('text-danger');
-                $options.filter('[data-cat="' + guess + '"]').removeClass('btn-outline-primary').addClass('btn-danger');
+                $options.filter('[data-answer="' + guess + '"]').removeClass('btn-outline-primary').addClass('btn-danger');
             }
-            $options.filter('[data-cat="' + currentCategory + '"]').removeClass('btn-outline-primary').addClass('btn-success');
+            $options.filter('[data-answer="' + currentAnswer + '"]').removeClass('btn-outline-primary').addClass('btn-success');
             updateScoreDisplay();
         }
 
@@ -654,7 +665,7 @@
             quizTotal += 1;
             quizStreak = 0;
             $('.quiz-option').prop('disabled', true)
-                .filter('[data-cat="' + currentCategory + '"]').removeClass('btn-outline-primary').addClass('btn-success');
+                .filter('[data-answer="' + currentAnswer + '"]').removeClass('btn-outline-primary').addClass('btn-success');
             $('#quizFeedback').html('<i class="fa fa-times"></i> Time\'s up — it was ' + answerLabel() + '.')
                 .removeClass('text-success').addClass('text-danger');
             updateScoreDisplay();
