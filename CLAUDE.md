@@ -75,10 +75,11 @@ Both features now ship on **all 11 scoring-gauge pages** (find them via the
 - **Button-tracking** — `renderQuizOptions()` offers only patterns that can
   actually play, re-running on each `cb-include` / drill-type-toggle change
   (and after L1C3/Index's "Invert Selections", via the `invertDrillSelections`
-  wrapper). Dedupes shared labels where needed:
-  `PitchIdentification` (DO/TI appear twice) and the Min3rd/Maj6th **category**
-  quizzes (`L1C3/HarmonicMin3rdMaj6th`, `L1C3/MelodicMin3rdMaj6thNoDO`), whose
-  two buttons are gated by the interval-type toggle + includes.
+  wrapper). Dedupes shared labels where needed — `PitchIdentification` (DO/TI
+  appear twice). The Min3rd/Maj6th interval pages (`L1C3/HarmonicMin3rdMaj6th`,
+  `L1C3/MelodicMin3rdMaj6thNoDO`) quiz the **specific prompt** heard — one
+  button per playable prompt, gated by the interval-type toggle + includes,
+  like the L1C2 interval pages — not a Min-3rd-vs-Maj-6th category choice.
 
 Done: L1C1 (`SolfegResolutionsDO`, `SolfegResolutionsNoDO`,
 `PitchIdentification`), L1C2 (`VocalDrills`, `HarmonicMaj3rdMin6th`,
