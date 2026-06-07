@@ -39,8 +39,8 @@ work.
 
 ## Scoring / self-quiz feature
 
-Per-page multiple-choice self-scoring quiz (Vibe only), used on several L1C1
-and L1C3 drill pages:
+Per-page multiple-choice self-scoring quiz (Vibe only), used across the
+L1C1–L1C7 drill pages:
 
 - Quiz options derived from the page's answer set, plus an animated SVG
   **accuracy gauge** with tiers: **Good Start / Good Work / Very Good /
@@ -86,5 +86,33 @@ Done: L1C1 (`SolfegResolutionsDO`, `SolfegResolutionsNoDO`,
 `MelodicMaj3rdMin6thNoDO`), L1C3 (`Index`, `VocalDrills`,
 `HarmonicMin3rdMaj6th`, `MelodicMin3rdMaj6thNoDO`), L1C4 (`Index`).
 
-L1C7 and L2C4 (listed in the old TODO) have **no** scoring gauge, so there was
-nothing to roll out there — out of scope.
+(At the time, L1C7 and L2C4 had **no** scoring gauge. L1C7 has since gained
+scoring — see below; L2C4 still has none.)
+
+### Scoring expansion — L1C5–L1C7 interval ID + triad recognition
+
+Scoring (gauge + quiz, same conventions as above) now also ships on the nine
+L1C5/L1C6/L1C7 drill pages below. These were the original, un-AI'd pages, so
+each also gained a Vibe `.ai-note` banner and a nav AI badge + scoring icon:
+
+- **Interval ID** (`MelodicIntervals`, `HarmonicIntervals` in L1C5/6/7) — the
+  quiz identifies the **interval quality**, *not* the specific solfège pair
+  (several pairs share a quality, so the pair is unguessable by ear and would
+  be 14–28 buttons). A `drillCategory` map sends each drill type → a quality
+  label; `getPlayableCategories()` offers one button per category that has a
+  checked prompt in the toggle's range. Melodic pages add direction
+  (`Perfect 4th Asc` / `Desc`, …); harmonic don't. On harmonic L1C6/L1C7 each
+  toggle side is a single quality, so a one-category toggle shows a single
+  button — the real discrimination quiz is the **Both** view.
+- **Triad Recognition** (`DiatonicTriadRecognition` in L1C5/6/7) — mirrors
+  `L1C3/Index`: Triad vs Triad+inversion `scoreMode`, includes-filtered,
+  composite `cb-include-{triad}-{inv}` ids. L1C7 also has an Invert Selections
+  button (→ `invertDrillSelections` wrapper) and Automation wired to a working
+  **"Score me"** toggle.
+
+Fixed in passing: a wrong checkbox id on `L1C5/MelodicIntervals`
+(`cb-include-42` → `41`).
+
+Still un-scored (deliberately deferred): the chord-progression pages
+(L1C5/6/7 `DiatonicTriadProgressions`, plus L2/L2C4/L2C5), the `VocalDrills`
+pages, and `L1C4/MelodyHarmonization`.
