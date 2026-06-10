@@ -113,6 +113,28 @@ each also gained a Vibe `.ai-note` banner and a nav AI badge + scoring icon:
 Fixed in passing: a wrong checkbox id on `L1C5/MelodicIntervals`
 (`cb-include-42` → `41`).
 
-Still un-scored (deliberately deferred): the chord-progression pages
-(L1C5/6/7 `DiatonicTriadProgressions`, plus L2/L2C4/L2C5), the `VocalDrills`
-pages, and `L1C4/MelodyHarmonization`.
+### Scoring expansion — progressions, vocal drills, harmonization
+
+Scoring now also ships on the chord-progression pages, the Vocal Drills, and
+Melody Harmonization (same gauge + quiz conventions):
+
+- **Progression ID** — L1C5/6/7 `DiatonicTriadProgressions` mirror `L1C4/Index`
+  (a per-tab quiz + gauge for the 2- and 3-chord tabs; per-prompt labels, since
+  the key is fixed). `L2C4/MajorTriadProgressions2` & `3` instead quiz the
+  progression **type** (Circle of 5th / 4th / ½-step up / down) — those pages
+  re-randomize the key every drill, so the exact inversions aren't guessable by
+  ear (same reasoning as the interval-quality model).
+- **Vocal Drills** — L1C5/6/7 `VocalDrills` identify the sung pattern. L1C5 &
+  L1C7 use unique full labels; L1C6 reuses the same 10 patterns across both
+  intervals, so it dedupes by syllable (like `L1C3/VocalDrills`).
+- **Melody Harmonization** (`L1C4`) — quizzes the harmonizing triad (I / IV /
+  V), gated by which (note, triad) prompts are included.
+
+**Not scorable** (no finite answer set — they build a *random* progression):
+`L2C5/DiatonicTriadProgressions4` and `L2/MajorTriadProgressions`. The
+Dictation/Transcription pages and the standalone (nav-unlinked)
+`PitchIdentification` page also remain out of scope.
+
+Automation-bearing pages currently get **standalone** scoring (no "Score me"
+auto-run): L1C7 `DiatonicTriadProgressions`, `L2C4/MajorTriadProgressions2`/`3`,
+and `L1C4/MelodyHarmonization` — a quick follow-up to wire in if wanted.
