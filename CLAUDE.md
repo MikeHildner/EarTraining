@@ -7,22 +7,20 @@ hand-written site) and **Vibe** (enhanced). New AI-built features live in
 
 ## Conventions
 
-**Mark AI-generated features with an AI badge — this is the desired default,
-add it without asking.** When a page gains an AI-built feature (scoring,
-automation, etc.), add an AI badge to its nav link in the **main layout**
-(`EarTraining/Views/Shared/_Layout.cshtml`):
+**Do not add per-page "AI" badges.** Vibe mode already implies AI
+involvement, so the nav no longer carries `.ai-badge` chips — they were
+removed to reduce clutter, along with their now-dead CSS in `Site.css` and
+`vibe-theme.css`. Don't reintroduce them.
 
-```html
-<span class="ai-badge"><i class="fa fa-magic"></i> AI</span>
-```
-
-Pages with the scoring quiz also get a scoring icon right after it:
+Pages with the scoring quiz still get a scoring icon on their nav link in the
+**main layout** (`EarTraining/Views/Shared/_Layout.cshtml`), right after the
+link text:
 
 ```html
 <i class="fa fa-bullseye text-success ml-1" title="Supports scoring"></i>
 ```
 
-Do **not** add these to the Human-mode layout
+Do **not** add this to the Human-mode layout
 (`EarTraining/Areas/Human/Views/Shared/_Layout.cshtml`) — Human mode is the
 original, unmarked site.
 
@@ -93,7 +91,7 @@ scoring — see below; L2C4 still has none.)
 
 Scoring (gauge + quiz, same conventions as above) now also ships on the nine
 L1C5/L1C6/L1C7 drill pages below. These were the original, un-AI'd pages, so
-each also gained a Vibe `.ai-note` banner and a nav AI badge + scoring icon:
+each also gained a Vibe `.ai-note` banner and a nav scoring icon:
 
 - **Interval ID** (`MelodicIntervals`, `HarmonicIntervals` in L1C5/6/7) — the
   quiz identifies the **interval quality**, *not* the specific solfège pair
