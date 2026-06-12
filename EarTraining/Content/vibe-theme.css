@@ -463,6 +463,17 @@ body.theme-vibe .navbar-text strong {
     text-transform: uppercase;
 }
 
+/* ── 4. Gradient text on h2 page titles ── */
+body.theme-vibe h2 {
+    background: linear-gradient(135deg, #3b1f70 0%, #7646c8 60%, #9b6cde 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    border-bottom: 2px solid rgba(118, 70, 200, 0.2);
+    padding-bottom: 0.35rem;
+    margin-bottom: 0.8rem;
+}
+
 /* =============================================================
    HUMAN'S NOTE CALLOUT
    Glassmorphism upgrade for Vibe mode; base styles in Site.css

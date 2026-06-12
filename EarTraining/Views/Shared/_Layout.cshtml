@@ -9,40 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     @Scripts.Render("~/bundles/modernizr")
-
-    <style>
-        /* Animated page-title headers (Vibe). Kept in-view because bundled CSS
-           doesn't reliably cache-bust in this app (same reason as the score
-           gauge). Flowing rainbow gradient text + animated underline stripe —
-           the effect carried over from the removed Vibe welcome popup. */
-        @@keyframes vibeRainbow {
-            0%   { background-position: 0% 50%; }
-            100% { background-position: 200% 50%; }
-        }
-        body.theme-vibe h2 {
-            background: linear-gradient(90deg, #a78bfa, #818cf8, #38bdf8, #34d399, #f472b6, #a78bfa);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: vibeRainbow 4s linear infinite;
-            position: relative;
-            border-bottom: none;
-            padding-bottom: 0.5rem;
-            margin-bottom: 0.8rem;
-        }
-        body.theme-vibe h2::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #a78bfa, #818cf8, #38bdf8, #34d399, #f472b6, #a78bfa);
-            background-size: 200% 100%;
-            animation: vibeRainbow 4s linear infinite;
-        }
-    </style>
 </head>
 <body class="theme-vibe">
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-primary">
