@@ -38,11 +38,7 @@ CSS) were removed.
 
 **Vibe is the default; no welcome popup.** The "You're in Vibe mode" modal
 that used to greet visitors on the Home page is gone — Vibe is simply the
-default experience (Human mode lives under the `/Human` area). The page-title
-(`h2`) animation (flowing rainbow gradient text + an animated underline
-stripe, reusing the `vibeRainbow` keyframe) lives in an in-view `<style>` in
-`_Layout.cshtml`, **not** the CSS bundle — same cache-bust reasoning as the
-score gauge.
+default experience (Human mode lives under the `/Human` area).
 
 ## Scoring / self-quiz feature
 
