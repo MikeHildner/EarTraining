@@ -429,11 +429,11 @@ body.theme-vibe .navbar.bg-primary {
     -webkit-backdrop-filter: blur(20px) saturate(180%);
 }
 
-/* ── 2. Animated rainbow accent stripe at top of navbar ── */
+/* ── 2. Animated rainbow accent stripe at bottom of navbar ── */
 body.theme-vibe .navbar::before {
     content: '';
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
     right: 0;
     height: 3px;
@@ -446,9 +446,9 @@ body.theme-vibe .navbar::before {
     z-index: 1;
 }
 
-/* Extra top padding so the stripe doesn't overlap navbar content */
+/* Extra bottom padding so the stripe doesn't overlap navbar content */
 body.theme-vibe .navbar {
-    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
 }
 
 /* ── 3. "Vibe" switcher badge — pill highlight vs plain text ── */
