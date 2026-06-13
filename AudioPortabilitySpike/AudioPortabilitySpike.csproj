@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Mobile-portability spike. Targets net10.0 here only because this offline
+       box has the net10 ref pack; the real port targets net8.0 (LTS). The point
+       is proving the audio render runs on the modern cross-platform runtime with
+       zero Windows / native / 3rd-party dependencies. Standalone — not in the
+       .sln, build with `dotnet build`. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>AudioPortabilitySpike</AssemblyName>
+    <RootNamespace>AudioPortabilitySpike</RootNamespace>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+</Project>
