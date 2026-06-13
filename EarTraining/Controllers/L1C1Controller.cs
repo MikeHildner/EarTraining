@@ -12,7 +12,6 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web.Hosting;
 using System.Web.Mvc;
-using System.Windows.Forms;
 using WaveLibrary;
 
 namespace EarTraining.Controllers
