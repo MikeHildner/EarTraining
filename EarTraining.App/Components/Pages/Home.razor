@@ -1,0 +1,49 @@
+@page "/"
+@using EarTraining.Core.Audio
+@using EarTraining.App.Services
+@using Microsoft.JSInterop
+@inject SampleLibrary Samples
+@inject IJSRuntime JS
+
+<h1>Ear Training</h1>
+<p>C-major triad, rendered on-device from the piano samples by <code>EarTraining.Core</code> — no server, no MP3.</p>
+
+<div class="d-grid gap-2 col-8">
+    <button class="btn btn-primary" @onclick="PlayHarmonic" disabled="@busy">Play harmonic (notes together)</button>
+    <button class="btn btn-outline-primary" @onclick="PlayMelodic" disabled="@busy">Play melodic (C - E - G)</button>
+</div>
+
+<p class="mt-3 text-muted">@status</p>
+
+@code {
+    static readonly string[] Triad = { "39.C4.wav", "43.E4.wav", "46.G4.wav" };
+    bool busy;
+    string status = "Ready.";
+
+    Task PlayHarmonic() => Play(notes => AudioRenderer.RenderHarmonic(notes), "harmonic");
+    Task PlayMelodic() => Play(notes => AudioRenderer.RenderMelodic(notes), "melodic");
+
+    async Task Play(Func<IReadOnlyList<byte[]>, byte[]> render, string label)
+    {
+        busy = true;
+        status = $"Rendering {label}...";
+        try
+        {
+            var notes = new List<byte[]>();
+            foreach (var f in Triad)
+                notes.Add(await Samples.LoadAsync(f));
+
+            var wav = render(notes);
+            await JS.InvokeVoidAsync("playWavBase64", Convert.ToBase64String(wav));
+            status = $"Played {label} ({wav.Length:N0} bytes).";
+        }
+        catch (Exception ex)
+        {
+            status = "Error: " + ex.Message;
+        }
+        finally
+        {
+            busy = false;
+        }
+    }
+}

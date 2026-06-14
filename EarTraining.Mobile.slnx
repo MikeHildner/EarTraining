@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="EarTraining.App/EarTraining.App.csproj" />
+  <Project Path="EarTraining.Core/EarTraining.Core.csproj" />
+</Solution>
