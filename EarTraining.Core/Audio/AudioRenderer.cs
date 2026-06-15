@@ -17,7 +17,7 @@ public static class AudioRenderer
     }
 
     /// <summary>Notes played together (overlaid), with headroom to avoid clipping.</summary>
-    public static byte[] RenderHarmonic(IReadOnlyList<byte[]> noteWavs, double seconds = 1.2, double gain = 0.7)
+    public static byte[] RenderHarmonic(IReadOnlyList<byte[]> noteWavs, double seconds = 1.2, double gain = 0.6)
     {
         var notes = noteWavs.Select(b => Slice(WavBuffer.Read(b), seconds)).ToArray();
         return Mix(gain, notes).Write();
