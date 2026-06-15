@@ -1,41 +1,67 @@
 @page "/"
 @using EarTraining.Core.Audio
+@using EarTraining.Core.Theory
+@using EarTraining.Core.Drills
 @using EarTraining.App.Services
 @using Microsoft.JSInterop
 @inject SampleLibrary Samples
 @inject IJSRuntime JS
 
-<h1>Ear Training</h1>
-<p>C-major triad, rendered on-device from the piano samples by <code>EarTraining.Core</code> — no server, no MP3.</p>
+<h1 class="mb-1">Interval ID</h1>
+<p class="text-muted mb-3">Play the interval, then pick what you heard.</p>
 
-<div class="d-grid gap-2 col-8">
-    <button class="btn btn-primary" @onclick="PlayHarmonic" disabled="@busy">Play harmonic (notes together)</button>
-    <button class="btn btn-outline-primary" @onclick="PlayMelodic" disabled="@busy">Play melodic (C - E - G)</button>
+<div class="d-grid gap-2 col-10 mx-auto mb-3">
+    <button class="btn btn-primary btn-lg" @onclick="PlayMelodic" disabled="@busy">Play (melodic)</button>
+    <button class="btn btn-outline-primary" @onclick="PlayHarmonic" disabled="@busy">Play (harmonic)</button>
 </div>
 
-<p class="mt-3 text-muted">@status</p>
+<div class="d-flex flex-wrap gap-2 justify-content-center mb-3">
+    @foreach (var opt in IntervalDrill.Options)
+    {
+        <button class="btn @ButtonClass(opt)" style="min-width:64px"
+                @onclick="() => Answer(opt)" disabled="@(answered || busy || drill is null)">
+            @opt.ShortName
+        </button>
+    }
+</div>
+
+<p class="text-center fw-semibold" style="min-height:1.5rem">@status</p>
+
+@if (answered)
+{
+    <div class="d-grid col-6 mx-auto mb-3">
+        <button class="btn btn-dark" @onclick="Next">Next</button>
+    </div>
+}
+
+<p class="text-center text-muted">Score: @correct / @total</p>
 
 @code {
-    static readonly string[] Triad = { "39.C4.wav", "43.E4.wav", "46.G4.wav" };
+    readonly Random rng = new();
+    IntervalDrill? drill;
     bool busy;
-    string status = "Ready.";
+    bool answered;
+    int correct;
+    int total;
+    int? pickedSemitones;
+    string status = "";
 
-    Task PlayHarmonic() => Play(notes => AudioRenderer.RenderHarmonic(notes), "harmonic");
-    Task PlayMelodic() => Play(notes => AudioRenderer.RenderMelodic(notes), "melodic");
+    protected override void OnInitialized() => drill = IntervalDrill.Next(rng);
 
-    async Task Play(Func<IReadOnlyList<byte[]>, byte[]> render, string label)
+    Task PlayMelodic() => Play(melodic: true);
+    Task PlayHarmonic() => Play(melodic: false);
+
+    async Task Play(bool melodic)
     {
+        if (drill is null || busy) return;
         busy = true;
-        status = $"Rendering {label}...";
         try
         {
-            var notes = new List<byte[]>();
-            foreach (var f in Triad)
-                notes.Add(await Samples.LoadAsync(f));
-
-            var wav = render(notes);
+            var lo = await Samples.LoadAsync(Note.SampleFile(drill.LowNote));
+            var hi = await Samples.LoadAsync(Note.SampleFile(drill.HighNote));
+            var notes = new[] { lo, hi };
+            var wav = melodic ? AudioRenderer.RenderMelodic(notes) : AudioRenderer.RenderHarmonic(notes);
             await JS.InvokeVoidAsync("playWavBase64", Convert.ToBase64String(wav));
-            status = $"Played {label} ({wav.Length:N0} bytes).";
         }
         catch (Exception ex)
         {
@@ -45,5 +71,33 @@
         {
             busy = false;
         }
+    }
+
+    void Answer(Interval opt)
+    {
+        if (drill is null || answered) return;
+        answered = true;
+        pickedSemitones = opt.Semitones;
+        total++;
+        status = opt.Semitones == drill.Answer.Semitones
+            ? $"Correct - {drill.Answer.Name}  ({drill.LowName} to {drill.HighName})"
+            : $"Nope - it was {drill.Answer.Name}  ({drill.LowName} to {drill.HighName})";
+        if (opt.Semitones == drill.Answer.Semitones) correct++;
+    }
+
+    void Next()
+    {
+        drill = IntervalDrill.Next(rng);
+        answered = false;
+        pickedSemitones = null;
+        status = "";
+    }
+
+    string ButtonClass(Interval opt)
+    {
+        if (!answered || drill is null) return "btn-outline-secondary";
+        if (opt.Semitones == drill.Answer.Semitones) return "btn-success";
+        if (pickedSemitones == opt.Semitones) return "btn-danger";
+        return "btn-outline-secondary";
     }
 }
