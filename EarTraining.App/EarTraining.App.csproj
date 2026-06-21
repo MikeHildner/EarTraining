@@ -1,8 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <!-- Android-only for now; re-add ios/maccatalyst/windows later. -->
+        <!-- Per build-OS so each machine only needs its own platform toolchain:
+             Windows builds the Android head, the Mac builds the iOS head. This also
+             stops a no-framework `dotnet build` from trying a head the current OS
+             can't build. Add net10.0-maccatalyst to the osx line later if wanted. -->
         <TargetFrameworks>net10.0-android</TargetFrameworks>
+        <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('osx'))">net10.0-ios</TargetFrameworks>
 
         <OutputType>Exe</OutputType>
         <RootNamespace>EarTraining.App</RootNamespace>
