@@ -30,6 +30,42 @@ public static class AudioRenderer
         return Mix(gain, staggerSeconds, notes).Write();
     }
 
+    /// <summary>
+    /// A melodic-dictation phrase: a DO whole-note lead-in, four count-in ticks, then
+    /// the melody (each note held for its rhythmic duration), with a metronome click
+    /// on every melody beat mixed underneath. Each note is fit to its exact duration
+    /// (zero-padded if the sample is shorter than the beat), so timing stays correct
+    /// regardless of sample length. Mirrors L1C1Controller.AudioAndDictation.
+    /// </summary>
+    public static byte[] RenderDictation(
+        byte[] doSample,
+        IReadOnlyList<(byte[] sample, double seconds)> melody,
+        byte[] tick,
+        double bpm,
+        double gain = 0.7)
+    {
+        var doBuf = WavBuffer.Read(doSample);
+        var tickBuf = WavBuffer.Read(tick);
+        int sampleRate = doBuf.SampleRate, channels = doBuf.Channels;
+        double quarter = 60.0 / bpm;
+
+        // Audible voice: DO whole note, 4 count-in ticks, then the melody notes.
+        var melodyParts = new List<WavBuffer> { Fit(doBuf, quarter * 4) };
+        for (int i = 0; i < 4; i++) melodyParts.Add(Fit(tickBuf, quarter));
+        foreach (var (sample, seconds) in melody)
+            melodyParts.Add(Fit(WavBuffer.Read(sample), seconds));
+        var melodyVoice = Concat(melodyParts);
+
+        // Metronome voice: silent through the DO + count-in (8 beats), then a click on
+        // each melody beat, scaled to sit under the melody.
+        int melodyBeats = (int)Math.Round(melody.Sum(m => m.seconds) / quarter);
+        var metroParts = new List<WavBuffer> { Silence(quarter * 8, sampleRate, channels) };
+        for (int i = 0; i < melodyBeats; i++) metroParts.Add(Fit(tickBuf, quarter));
+        var metroVoice = Gain(Concat(metroParts), 0.5);
+
+        return Mix(gain, 0, [melodyVoice, metroVoice]).Write();
+    }
+
     private static WavBuffer Slice(WavBuffer w, double seconds)
     {
         int count = Math.Min(w.Samples.Length, (int)(seconds * w.SampleRate) * w.Channels);
@@ -70,5 +106,28 @@ public static class AudioRenderer
         for (int i = 0; i < len; i++)
             s[i] = (short)Math.Clamp(acc[i], short.MinValue, short.MaxValue);
         return new WavBuffer { SampleRate = first.SampleRate, Channels = first.Channels, Samples = s };
+    }
+
+    /// <summary>Slice or zero-pad to exactly <paramref name="seconds"/> (whole frames).</summary>
+    private static WavBuffer Fit(WavBuffer w, double seconds)
+    {
+        int target = (int)(seconds * w.SampleRate) * w.Channels;
+        var s = new short[target];
+        Array.Copy(w.Samples, s, Math.Min(target, w.Samples.Length));
+        return new WavBuffer { SampleRate = w.SampleRate, Channels = w.Channels, Samples = s };
+    }
+
+    private static WavBuffer Silence(double seconds, int sampleRate, int channels)
+    {
+        int n = (int)(seconds * sampleRate) * channels;
+        return new WavBuffer { SampleRate = sampleRate, Channels = channels, Samples = new short[n] };
+    }
+
+    private static WavBuffer Gain(WavBuffer w, double factor)
+    {
+        var s = new short[w.Samples.Length];
+        for (int i = 0; i < s.Length; i++)
+            s[i] = (short)Math.Clamp(w.Samples[i] * factor, short.MinValue, short.MaxValue);
+        return new WavBuffer { SampleRate = w.SampleRate, Channels = w.Channels, Samples = s };
     }
 }

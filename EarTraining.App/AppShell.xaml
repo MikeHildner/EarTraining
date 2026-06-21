@@ -8,6 +8,7 @@
     <TabBar>
         <ShellContent Title="Interval ID" ContentTemplate="{DataTemplate pages:IntervalPage}" />
         <ShellContent Title="Triad ID" ContentTemplate="{DataTemplate pages:TriadPage}" />
+        <ShellContent Title="Dictation" ContentTemplate="{DataTemplate pages:DictationPage}" />
     </TabBar>
 
 </Shell>
