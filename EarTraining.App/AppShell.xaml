@@ -3,12 +3,19 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:pages="clr-namespace:EarTraining.App.Pages"
        x:Class="EarTraining.App.AppShell"
+       FlyoutBehavior="Flyout"
        Title="Ear Training">
 
-    <TabBar>
+    <FlyoutItem Title="Level 1 · Chapter 1">
+        <ShellContent Title="Vocal Drills" ContentTemplate="{DataTemplate pages:VocalDrillsPage}" />
+        <ShellContent Title="Resolution ID" ContentTemplate="{DataTemplate pages:ResolutionIdPage}" />
+        <ShellContent Title="Pitch ID" ContentTemplate="{DataTemplate pages:PitchIdPage}" />
+        <ShellContent Title="Dictation" ContentTemplate="{DataTemplate pages:DictationPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Other drills">
         <ShellContent Title="Interval ID" ContentTemplate="{DataTemplate pages:IntervalPage}" />
         <ShellContent Title="Triad ID" ContentTemplate="{DataTemplate pages:TriadPage}" />
-        <ShellContent Title="Dictation" ContentTemplate="{DataTemplate pages:DictationPage}" />
-    </TabBar>
+    </FlyoutItem>
 
 </Shell>

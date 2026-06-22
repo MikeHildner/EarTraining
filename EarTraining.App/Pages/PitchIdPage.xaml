@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:EarTraining.App.Components"
+             x:Class="EarTraining.App.Pages.PitchIdPage"
+             Title="Pitch ID">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="14">
+            <Label Text="Pitch Identification" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="Play DO for reference, play the note, then name the syllable."
+                   HorizontalOptions="Center" TextColor="Gray" />
+            <c:TonicHeader x:Name="DoHeader" />
+            <Button Text="Play note" Clicked="OnPlay" />
+            <Label Text="Which syllable did you hear?" FontAttributes="Bold" HorizontalOptions="Center" />
+            <FlexLayout x:Name="AnswersLayout" Wrap="Wrap" JustifyContent="Center" AlignItems="Center" />
+            <Label x:Name="StatusLabel" HorizontalOptions="Center" FontAttributes="Bold" />
+            <Button x:Name="NextButton" Text="New Note" Clicked="OnNext" HorizontalOptions="Center" WidthRequest="200" />
+            <c:ScoreGauge x:Name="Gauge" HorizontalOptions="Center" />
+            <c:IncludeToggles x:Name="Includes" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

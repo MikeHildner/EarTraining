@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EarTraining.App.Components.ScoreGauge">
+    <VerticalStackLayout Spacing="4" HorizontalOptions="Center">
+        <GraphicsView x:Name="GaugeView" WidthRequest="130" HeightRequest="130" HorizontalOptions="Center" />
+        <Label x:Name="TierLabel" Text="Play a drill" HorizontalOptions="Center" FontAttributes="Bold" />
+        <Label x:Name="ScoreLabel" Text="Score: 0 / 0" HorizontalOptions="Center" TextColor="Gray" />
+        <Label x:Name="StreakLabel" Text="Streak: 0" HorizontalOptions="Center" TextColor="Gray" FontSize="13" />
+    </VerticalStackLayout>
+</ContentView>
