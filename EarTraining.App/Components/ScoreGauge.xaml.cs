@@ -73,7 +73,13 @@ public partial class ScoreGauge : ContentView
             canvas.DrawCircle(cx, cy, r);
 
             int pct = Percent < 0 ? 0 : Percent;
-            if (pct > 0)
+            if (pct >= 100)
+            {
+                // A 360° arc has start == end and draws nothing — use a full circle.
+                canvas.StrokeColor = FillColor;
+                canvas.DrawCircle(cx, cy, r);
+            }
+            else if (pct > 0)
             {
                 canvas.StrokeColor = FillColor;
                 canvas.DrawArc(box.X, box.Y, box.Width, box.Height, 90f, 90f - 360f * pct / 100f, true, false);
