@@ -66,6 +66,14 @@ public static class AudioRenderer
         return Mix(gain, 0, [melodyVoice, metroVoice]).Write();
     }
 
+    /// <summary>A bare melodic sequence: each note fit to its exact duration, then
+    /// concatenated. Used by the resolution drills and the single-note pitch drill.</summary>
+    public static byte[] RenderSequence(IReadOnlyList<(byte[] sample, double seconds)> notes)
+    {
+        var parts = notes.Select(n => Fit(WavBuffer.Read(n.sample), n.seconds)).ToList();
+        return Concat(parts).Write();
+    }
+
     private static WavBuffer Slice(WavBuffer w, double seconds)
     {
         int count = Math.Min(w.Samples.Length, (int)(seconds * w.SampleRate) * w.Channels);
