@@ -5,7 +5,10 @@ namespace EarTraining.App.Components;
 /// <summary>
 /// Reusable scoring control: running score, streak, and a tiered accuracy ring
 /// (Good Start / Good Work / Very Good / Quite Good) matching the web app's thresholds
-/// and colors. Pages call Record(correct) / Reset(); the gauge owns its own tally.
+/// and colors. On each answer the ring sweeps from empty up to the new value (ease-out)
+/// and the gauge gives a brief scale "pop" — so it reacts even when the percentage is
+/// unchanged (e.g. consecutive correct answers at 100%). Pages call Record(correct) /
+/// Reset(); the gauge owns its own tally.
 /// </summary>
 public partial class ScoreGauge : ContentView
 {
@@ -16,33 +19,57 @@ public partial class ScoreGauge : ContentView
     {
         InitializeComponent();
         GaugeView.Drawable = _drawable;
-        Refresh();
+        Refresh(animate: false);
     }
 
     public void Record(bool correct)
     {
         _total++;
         if (correct) { _correct++; _streak++; } else { _streak = 0; }
-        Refresh();
+        Refresh(animate: true);
     }
 
     public void Reset()
     {
         _correct = _total = _streak = 0;
-        Refresh();
+        Refresh(animate: false);
     }
 
-    private void Refresh()
+    private void Refresh(bool animate)
     {
         int pct = _total == 0 ? -1 : (int)Math.Round(100.0 * _correct / _total);
         var (color, label) = TierFor(pct);
-        _drawable.Percent = pct;
+
+        // Percent text, tier, color, and score/streak snap to the final value immediately;
+        // only the ring sweeps.
+        _drawable.DisplayPercent = pct;
         _drawable.FillColor = color;
         TierLabel.Text = label;
         TierLabel.TextColor = color;
         ScoreLabel.Text = $"Score: {_correct} / {_total}";
         StreakLabel.Text = $"Streak: {_streak}";
-        GaugeView.Invalidate();
+
+        double target = pct < 0 ? 0 : pct;
+        this.AbortAnimation("gaugeSweep");
+
+        if (animate && pct >= 0)
+        {
+            _drawable.SweepPercent = 0;
+            new Animation(v => { _drawable.SweepPercent = v; GaugeView.Invalidate(); }, 0, target, Easing.CubicOut)
+                .Commit(this, "gaugeSweep", length: 700, finished: (_, _) => { _drawable.SweepPercent = target; GaugeView.Invalidate(); });
+            _ = PopAsync();
+        }
+        else
+        {
+            _drawable.SweepPercent = target;
+            GaugeView.Invalidate();
+        }
+    }
+
+    private async Task PopAsync()
+    {
+        await GaugeView.ScaleToAsync(1.08, 120, Easing.CubicOut);
+        await GaugeView.ScaleToAsync(1.0, 250, Easing.CubicOut);
     }
 
     private static (Color color, string label) TierFor(int pct) => pct switch
@@ -56,7 +83,8 @@ public partial class ScoreGauge : ContentView
 
     private sealed class GaugeDrawable : IDrawable
     {
-        public int Percent { get; set; } = -1;
+        public int DisplayPercent { get; set; } = -1;   // -1 = no data; drives the center text
+        public double SweepPercent { get; set; }          // 0..100, animated; drives the arc
         public Color FillColor { get; set; } = Color.FromArgb("#ADB5BD");
 
         public void Draw(ICanvas canvas, RectF rect)
@@ -72,22 +100,22 @@ public partial class ScoreGauge : ContentView
             canvas.StrokeColor = Color.FromArgb("#E9ECEF");
             canvas.DrawCircle(cx, cy, r);
 
-            int pct = Percent < 0 ? 0 : Percent;
-            if (pct >= 100)
+            double sweep = SweepPercent;
+            if (sweep >= 99.95)
             {
                 // A 360° arc has start == end and draws nothing — use a full circle.
                 canvas.StrokeColor = FillColor;
                 canvas.DrawCircle(cx, cy, r);
             }
-            else if (pct > 0)
+            else if (sweep > 0.05)
             {
                 canvas.StrokeColor = FillColor;
-                canvas.DrawArc(box.X, box.Y, box.Width, box.Height, 90f, 90f - 360f * pct / 100f, true, false);
+                canvas.DrawArc(box.X, box.Y, box.Width, box.Height, 90f, (float)(90.0 - 360.0 * sweep / 100.0), true, false);
             }
 
             canvas.FontColor = Color.FromArgb("#2D1B69");
             canvas.FontSize = size * 0.24f;
-            canvas.DrawString(Percent < 0 ? "—" : pct + "%",
+            canvas.DrawString(DisplayPercent < 0 ? "—" : DisplayPercent + "%",
                 rect.X, rect.Y, rect.Width, rect.Height,
                 HorizontalAlignment.Center, VerticalAlignment.Center);
         }
