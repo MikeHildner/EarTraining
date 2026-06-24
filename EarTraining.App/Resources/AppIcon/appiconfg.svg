@@ -3,7 +3,7 @@
     <!-- "ET" wordmark, built from rects (font-independent) and centered in the icon
          safe zone. Drawn in a 160x100 space, scaled + centered into the 456 canvas.
          Transparent background; the purple comes from the icon Color. -->
-    <g transform="translate(78 134) scale(1.875)" fill="#ffffff">
+    <g transform="translate(124 163) scale(1.3)" fill="#ffffff">
         <rect x="0" y="0" width="26" height="100" rx="3" />
         <rect x="0" y="0" width="68" height="26" rx="3" />
         <rect x="0" y="37" width="56" height="26" rx="3" />
