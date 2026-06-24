@@ -29,6 +29,7 @@ public partial class DictationPage : ContentPage
         KeyPicker.SelectedIndexChanged += OnSettingChanged;
         BpmPicker.SelectedIndexChanged += OnSettingChanged;
         MeasuresPicker.SelectedIndexChanged += OnSettingChanged;
+        NotationWeb.Navigated += OnNotationNavigated;
         NewDrill();
     }
 
@@ -103,7 +104,7 @@ public partial class DictationPage : ContentPage
         {
             StatusLabel.Text = "Rendering notation…";
             string html = await _notation.BuildHtmlAsync(_drill);
-            NotationWeb.HeightRequest = _drill.Measures.Count * 200 + 40;
+            NotationWeb.HeightRequest = _drill.Measures.Count * 160 + 30; // generous upper bound; OnNotationNavigated trims to the exact content height
             NotationWeb.Source = new HtmlWebViewSource { Html = html };
             NotationWeb.IsVisible = true;
             RevealButton.Text = "Hide transcription";
@@ -113,5 +114,18 @@ public partial class DictationPage : ContentPage
         {
             StatusLabel.Text = "Notation error: " + ex.Message;
         }
+    }
+
+    // Once the notation has rendered, shrink the WebView to the exact content height so the
+    // staves sit snug instead of being padded out by the generous initial estimate.
+    private async void OnNotationNavigated(object? sender, WebNavigatedEventArgs e)
+    {
+        try
+        {
+            var result = await NotationWeb.EvaluateJavaScriptAsync("document.body.scrollHeight");
+            if (int.TryParse(result, out int px) && px > 0)
+                NotationWeb.HeightRequest = px + 8;
+        }
+        catch { /* keep the estimate */ }
     }
 }

@@ -36,6 +36,23 @@ public static class VexScore
         system.addConnector('singleRight');
 
         vf.draw();
+
+        // Crop the SVG to its actual content (clef + staff + notes). The Factory canvas
+        // defaults to ~200px tall — far more than one treble staff needs — which otherwise
+        // leaves a big empty band below each measure.
+        var _el = document.getElementById('{elementId}');
+        var _svg = _el ? _el.querySelector('svg') : null;
+        if (_svg && _svg.getBBox) {{
+            var _bb = _svg.getBBox();
+            if (_bb.height > 0) {{
+                var _m = 6;
+                var _w = Math.ceil(_bb.width + _m * 2);
+                var _h = Math.ceil(_bb.height + _m * 2);
+                _svg.setAttribute('viewBox', (_bb.x - _m) + ' ' + (_bb.y - _m) + ' ' + _w + ' ' + _h);
+                _svg.setAttribute('width', _w);
+                _svg.setAttribute('height', _h);
+            }}
+        }}
         ";
     }
 }
