@@ -40,7 +40,7 @@
              name must be "appicon" — iOS actool and the Android manifest both reference the
              "appicon" catalog/mipmap, so any other Include name fails the resource lookup. -->
         <MauiIcon Include="Resources\AppIcon\appicon.png" ForegroundFile="Resources\AppIcon\appicon_fg.png" Color="#8478F5" />
-        <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+        <MauiSplashScreen Include="Resources\Splash\splash.png" Color="#8478F5" BaseSize="220,220" />
         <MauiImage Include="Resources\Images\*" />
         <MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
         <MauiFont Include="Resources\Fonts\*" />
