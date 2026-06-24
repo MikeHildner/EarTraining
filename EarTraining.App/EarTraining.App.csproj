@@ -35,7 +35,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+        <!-- iOS: the full-bleed 1024 master (iOS rounds the corners). Android: the two
+             432 adaptive layers (gradient background + ear foreground) for a proper masked
+             adaptive icon. Per-platform so each uses the asset Claude Design built for it. -->
+        <MauiIcon Condition="$(TargetFramework.Contains('-ios'))" Include="Resources\AppIcon\appicon_ios.png" />
+        <MauiIcon Condition="$(TargetFramework.Contains('-android'))" Include="Resources\AppIcon\appicon_bg.png" ForegroundFile="Resources\AppIcon\appicon_fg.png" Color="#8478F5" />
         <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
         <MauiImage Include="Resources\Images\*" />
         <MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
