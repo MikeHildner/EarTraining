@@ -22,6 +22,13 @@ public partial class DictationPage : ContentPage
     {
         InitializeComponent();
         BuildPickers();
+        // Wire change handlers after the initial selections are set, so a settings change
+        // regenerates the dictation immediately (matching the includes/DO behavior elsewhere)
+        // without firing mid-setup when some pickers have no selection yet.
+        ResolutionPicker.SelectedIndexChanged += OnSettingChanged;
+        KeyPicker.SelectedIndexChanged += OnSettingChanged;
+        BpmPicker.SelectedIndexChanged += OnSettingChanged;
+        MeasuresPicker.SelectedIndexChanged += OnSettingChanged;
         NewDrill();
     }
 
@@ -56,6 +63,8 @@ public partial class DictationPage : ContentPage
     }
 
     private void OnNewDictation(object? sender, EventArgs e) => NewDrill();
+
+    private void OnSettingChanged(object? sender, EventArgs e) => NewDrill();
 
     private async void OnPlay(object? sender, EventArgs e)
     {
