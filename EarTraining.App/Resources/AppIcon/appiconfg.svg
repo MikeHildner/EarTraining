@@ -1,25 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg width="456" height="456" viewBox="0 0 456 456" version="1.1" xmlns="http://www.w3.org/2000/svg">
-    <!-- Jogging-ear foreground (drawn in a 100x100 space, scaled + centered into the
-         456 safe zone). Transparent background; the purple comes from the icon Color.
-         The concha swirl is drawn in the background purple so it reads as carved. -->
-    <g transform="translate(70 38) scale(3.8)">
-        <g fill="#A9DCFF">
-            <g transform="translate(34 31) rotate(135) scale(0.95)"><path d="M0 -7 C4 -2 3.6 3 0 3.6 C-3.6 3 -4 -2 0 -7 Z"/></g>
-            <g transform="translate(24 23) rotate(135) scale(1.05)"><path d="M0 -7 C4 -2 3.6 3 0 3.6 C-3.6 3 -4 -2 0 -7 Z"/></g>
-            <g transform="translate(15 17) rotate(135) scale(0.8)"><path d="M0 -7 C4 -2 3.6 3 0 3.6 C-3.6 3 -4 -2 0 -7 Z"/></g>
-        </g>
-        <g stroke="#ffffff" stroke-width="8" stroke-linecap="round" fill="none">
-            <path d="M50 69 C40 73 30 77 24 80"/>
-            <path d="M58 67 C70 65 75 74 66 79 C63 81 62 83 62 84"/>
-        </g>
-        <g fill="#FF6B6B">
-            <ellipse cx="22" cy="81" rx="7" ry="4"/>
-            <ellipse cx="62" cy="85" rx="7" ry="4"/>
-        </g>
-        <g transform="rotate(15 52 46)">
-            <path d="M51 13 C64 12 73 23 73 39 C73 49 70 57 64 64 C61 71 56 77 49 77 C42 77 37 72 36 64 C31 57 30 37 36 24 C40 16 43 13 51 13 Z" fill="#ffffff"/>
-            <path d="M56 31 C45 27 38 36 39 47 C40 57 50 61 57 55 C61 51 60 45 54 46" fill="none" stroke="#512BD4" stroke-width="8" stroke-linecap="round"/>
-        </g>
+    <!-- "ET" wordmark, built from rects (font-independent) and centered in the icon
+         safe zone. Drawn in a 160x100 space, scaled + centered into the 456 canvas.
+         Transparent background; the purple comes from the icon Color. -->
+    <g transform="translate(78 134) scale(1.875)" fill="#ffffff">
+        <rect x="0" y="0" width="26" height="100" rx="3" />
+        <rect x="0" y="0" width="68" height="26" rx="3" />
+        <rect x="0" y="37" width="56" height="26" rx="3" />
+        <rect x="0" y="74" width="68" height="26" rx="3" />
+        <rect x="92" y="0" width="68" height="26" rx="3" />
+        <rect x="113" y="0" width="26" height="100" rx="3" />
     </g>
 </svg>
