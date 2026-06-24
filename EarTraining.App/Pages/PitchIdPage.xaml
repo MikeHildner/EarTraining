@@ -13,8 +13,8 @@
             <Button Text="Play note" Clicked="OnPlay" />
             <Label Text="Which syllable did you hear?" FontAttributes="Bold" HorizontalOptions="Center" />
             <FlexLayout x:Name="AnswersLayout" Wrap="Wrap" JustifyContent="Center" AlignItems="Center" />
-            <Label x:Name="StatusLabel" HorizontalOptions="Center" FontAttributes="Bold" />
             <Button x:Name="NextButton" Text="New Note" Clicked="OnNext" HorizontalOptions="Center" WidthRequest="200" />
+            <Label x:Name="StatusLabel" HorizontalOptions="Center" FontAttributes="Bold" />
             <c:ScoreGauge x:Name="Gauge" HorizontalOptions="Center" />
             <c:IncludeToggles x:Name="Includes" />
         </VerticalStackLayout>

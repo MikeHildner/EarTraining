@@ -20,7 +20,7 @@ public partial class ResolutionIdPage : ContentPage
         InitializeComponent();
         DoHeader.DoChanged += (_, _) => NewDrill();
         Includes.Changed += (_, _) => { BuildAnswers(); NewDrill(); };
-        Includes.Build(ResolutionDrill.All.Select(t => (t.ToString(), ResolutionDrill.LabelOf(t))));
+        Includes.Build(ResolutionDrill.All.Select(t => (t.ToString(), ResolutionDrill.ShortLabelOf(t))));
         BuildAnswers();
         NewDrill();
     }
@@ -35,7 +35,7 @@ public partial class ResolutionIdPage : ContentPage
         foreach (var type in IncludedTypes)
         {
             var t = type;
-            var button = new Button { Text = ResolutionDrill.LabelOf(t), Margin = new Thickness(4) };
+            var button = new Button { Text = ResolutionDrill.ShortLabelOf(t), Margin = new Thickness(4) };
             button.Clicked += (_, _) => OnAnswer(t);
             _answerButtons[t] = button;
             AnswersLayout.Children.Add(button);
@@ -83,7 +83,7 @@ public partial class ResolutionIdPage : ContentPage
             else if (type == guess) button.BackgroundColor = Colors.IndianRed;
         }
 
-        StatusLabel.Text = correct ? "Correct!" : $"Nope — {_drill.Label}";
+        StatusLabel.Text = correct ? "Correct!" : $"Nope — {_drill.ShortLabel}";
     }
 
     private void OnNext(object? sender, EventArgs e) => NewDrill();

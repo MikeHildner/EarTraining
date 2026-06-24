@@ -94,6 +94,7 @@ public partial class DictationPage : ContentPage
         {
             StatusLabel.Text = "Rendering notation…";
             string html = await _notation.BuildHtmlAsync(_drill);
+            NotationWeb.HeightRequest = _drill.Measures.Count * 200 + 40;
             NotationWeb.Source = new HtmlWebViewSource { Html = html };
             NotationWeb.IsVisible = true;
             RevealButton.Text = "Hide transcription";

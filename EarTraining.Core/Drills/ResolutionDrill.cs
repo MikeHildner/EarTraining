@@ -13,20 +13,21 @@ public sealed record ResolutionDrill(
     ResolutionType Type,
     int DoNote,
     string Label,
+    string ShortLabel,
     IReadOnlyList<(int note, double seconds)> WithDo,
     IReadOnlyList<(int note, double seconds)> ResolutionOnly)
 {
     private const double Quarter = 1.0, Half = 2.0, Whole = 4.0;
 
     // (interval offset, resolution offset, label) per type — matches the web controller.
-    private static readonly IReadOnlyDictionary<ResolutionType, (int interval, int resolution, string label)> Spec =
-        new Dictionary<ResolutionType, (int, int, string)>
+    private static readonly IReadOnlyDictionary<ResolutionType, (int interval, int resolution, string label, string shortLabel)> Spec =
+        new Dictionary<ResolutionType, (int, int, string, string)>
         {
-            [ResolutionType.DoDoReDo]     = (2, 0, "DO DO RE DO"),
-            [ResolutionType.DoDoFaMi]     = (5, 4, "DO DO FA MI"),
-            [ResolutionType.DoDoLaSo]     = (9, 7, "DO DO LA SO"),
-            [ResolutionType.DoDoTiHighDo] = (11, 12, "DO DO (high)TI DO"),
-            [ResolutionType.DoDoLowTiDo]  = (-1, 0, "DO DO (low)TI DO"),
+            [ResolutionType.DoDoReDo]     = (2, 0, "DO DO RE DO", "RE DO"),
+            [ResolutionType.DoDoFaMi]     = (5, 4, "DO DO FA MI", "FA MI"),
+            [ResolutionType.DoDoLaSo]     = (9, 7, "DO DO LA SO", "LA SO"),
+            [ResolutionType.DoDoTiHighDo] = (11, 12, "DO DO (high)TI DO", "(high)TI DO"),
+            [ResolutionType.DoDoLowTiDo]  = (-1, 0, "DO DO (low)TI DO", "(low)TI DO"),
         };
 
     public static IReadOnlyList<ResolutionType> All { get; } =
@@ -36,10 +37,11 @@ public sealed record ResolutionDrill(
     ];
 
     public static string LabelOf(ResolutionType type) => Spec[type].label;
+    public static string ShortLabelOf(ResolutionType type) => Spec[type].shortLabel;
 
     public static ResolutionDrill Build(ResolutionType type, int doNote)
     {
-        var (interval, resolution, label) = Spec[type];
+        var (interval, resolution, label, shortLabel) = Spec[type];
         var withDo = new (int, double)[]
         {
             (doNote, Quarter), (doNote, Quarter), (doNote + interval, Half), (doNote + resolution, Whole),
@@ -48,7 +50,7 @@ public sealed record ResolutionDrill(
         {
             (doNote + interval, Half), (doNote + resolution, Whole),
         };
-        return new ResolutionDrill(type, doNote, label, withDo, resolutionOnly);
+        return new ResolutionDrill(type, doNote, label, shortLabel, withDo, resolutionOnly);
     }
 
     public static ResolutionDrill Next(int doNote, IReadOnlyList<ResolutionType> included, Random rng) =>
