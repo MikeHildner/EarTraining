@@ -1,18 +1,5 @@
 namespace EarTraining.Core.Drills;
 
-/// <summary>The two interval qualities drilled in L1C2 — a Major 3rd and its inversion, the Minor 6th.</summary>
-public enum IntervalQuality { Major3rd, Minor6th }
-
-public static class IntervalQualityNames
-{
-    public static string Display(this IntervalQuality q) => q switch
-    {
-        IntervalQuality.Major3rd => "Maj 3rd",
-        IntervalQuality.Minor6th => "Min 6th",
-        _ => q.ToString(),
-    };
-}
-
 /// <summary>
 /// One Level 1 Chapter 2 drill prompt (Major 3rd / Minor 6th), built relative to DO.
 /// Ported note-for-note from <c>L1C2Controller</c>: <see cref="Vocal"/> = the 5-note vocal

@@ -8,6 +8,7 @@ namespace EarTraining.App.Components;
 public partial class IncludeToggles : ContentView
 {
     private readonly Dictionary<string, Switch> _switches = new();
+    private bool _suppress;
 
     public event EventHandler? Changed;
 
@@ -23,7 +24,7 @@ public partial class IncludeToggles : ContentView
         foreach (var (key, label) in items)
         {
             var toggle = new Switch { IsToggled = true };
-            toggle.Toggled += (_, _) => Changed?.Invoke(this, EventArgs.Empty);
+            toggle.Toggled += (_, _) => { if (!_suppress) Changed?.Invoke(this, EventArgs.Empty); };
             _switches[key] = toggle;
 
             var row = new HorizontalStackLayout { Spacing = 4, Margin = new Thickness(0, 0, 14, 0) };
@@ -41,5 +42,14 @@ public partial class IncludeToggles : ContentView
             var on = _switches.Where(kv => kv.Value.IsToggled).Select(kv => kv.Key).ToList();
             return on.Count > 0 ? on : _switches.Keys.Take(1).ToList();
         }
+    }
+
+    /// <summary>Flip every switch (for an "Invert Selections" button); fires <see cref="Changed"/> once.</summary>
+    public void InvertAll()
+    {
+        _suppress = true;
+        foreach (var sw in _switches.Values) sw.IsToggled = !sw.IsToggled;
+        _suppress = false;
+        Changed?.Invoke(this, EventArgs.Empty);
     }
 }

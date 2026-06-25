@@ -5,8 +5,8 @@
     <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
         <Label Text="Drill these intervals:" HorizontalOptions="Center" FontSize="13" TextColor="Gray" />
         <HorizontalStackLayout Spacing="14" HorizontalOptions="Center">
-            <RadioButton x:Name="Maj3" Content="Maj 3rd" GroupName="ivltype" IsChecked="True" CheckedChanged="OnChanged" />
-            <RadioButton x:Name="Min6" Content="Min 6th" GroupName="ivltype" CheckedChanged="OnChanged" />
+            <RadioButton x:Name="LeftBtn" Content="Maj 3rd" GroupName="ivltype" IsChecked="True" CheckedChanged="OnChanged" />
+            <RadioButton x:Name="RightBtn" Content="Min 6th" GroupName="ivltype" CheckedChanged="OnChanged" />
             <RadioButton x:Name="BothBtn" Content="Both" GroupName="ivltype" CheckedChanged="OnChanged" />
         </HorizontalStackLayout>
     </VerticalStackLayout>
