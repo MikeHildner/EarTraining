@@ -9,14 +9,16 @@
             <Label Text="Melodic Intervals — Maj 3rd / Min 6th" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
             <Label Text="Play the two notes, then identify the interval."
                    HorizontalOptions="Center" TextColor="Gray" />
+            <c:InfoNote Text="Selected from the interval identification questions on p. 29." />
             <c:TonicHeader x:Name="DoHeader" />
             <c:IntervalTypeToggle x:Name="Toggle" />
-            <Button Text="Play interval" Clicked="OnPlay" />
+            <Button Text="▶ Play interval" Clicked="OnPlay" />
             <Label Text="Which interval did you hear?" FontAttributes="Bold" HorizontalOptions="Center" />
             <FlexLayout x:Name="AnswersLayout" Wrap="Wrap" JustifyContent="Center" AlignItems="Center" />
-            <Button x:Name="NextButton" Text="New Drill" Clicked="OnNext" HorizontalOptions="Center" WidthRequest="200" />
+            <Button x:Name="NextButton" Text="↻ New Drill" Clicked="OnNext" HorizontalOptions="Center" WidthRequest="200" />
             <Label x:Name="StatusLabel" HorizontalOptions="Center" FontAttributes="Bold" />
             <c:ScoreGauge x:Name="Gauge" HorizontalOptions="Center" />
+            <c:AutomationBar x:Name="Automation" />
             <c:IncludeToggles x:Name="Includes" />
         </VerticalStackLayout>
     </ScrollView>

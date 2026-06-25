@@ -7,5 +7,8 @@
         <Label x:Name="TierLabel" Text="Play a drill" HorizontalOptions="Center" FontAttributes="Bold" />
         <Label x:Name="ScoreLabel" Text="Score: 0 / 0" HorizontalOptions="Center" TextColor="Gray" />
         <Label x:Name="StreakLabel" Text="Streak: 0" HorizontalOptions="Center" TextColor="Gray" FontSize="13" />
+        <Button x:Name="ResetButton" Text="Reset score" Clicked="OnReset"
+                BackgroundColor="Transparent" TextColor="#6C757D" BorderColor="#CED4DA" BorderWidth="1"
+                FontSize="13" Padding="14,4" Margin="0,4,0,0" HorizontalOptions="Center" />
     </VerticalStackLayout>
 </ContentView>

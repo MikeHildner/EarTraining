@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EarTraining.App.Components.AutomationBar">
+    <VerticalStackLayout Spacing="6" HorizontalOptions="Center">
+        <Label Text="Automation" FontAttributes="Bold" HorizontalOptions="Center" />
+        <HorizontalStackLayout Spacing="8" HorizontalOptions="Center">
+            <Switch x:Name="ScoreSwitch" />
+            <Label Text="Score me (unanswered = wrong)" VerticalOptions="Center" FontSize="13" />
+        </HorizontalStackLayout>
+        <Button x:Name="GoButton" Text="▶ Automate" Clicked="OnGoStop" WidthRequest="200" HorizontalOptions="Center" BackgroundColor="#C99700" TextColor="White" />
+        <Label x:Name="StatusLabel" HorizontalOptions="Center" TextColor="Gray" FontSize="13" />
+    </VerticalStackLayout>
+</ContentView>

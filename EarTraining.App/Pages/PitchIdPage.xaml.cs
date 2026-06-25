@@ -1,3 +1,4 @@
+using EarTraining.App.Components;
 using EarTraining.App.Services;
 using EarTraining.Core.Audio;
 using EarTraining.Core.Drills;
@@ -6,7 +7,7 @@ using Plugin.Maui.Audio;
 
 namespace EarTraining.App.Pages;
 
-public partial class PitchIdPage : ContentPage
+public partial class PitchIdPage : ContentPage, IAutomatableDrill
 {
     private readonly SampleLibrary _samples = new();
     private readonly DrillAudioPlayer _audio = new(AudioManager.Current);
@@ -29,6 +30,7 @@ public partial class PitchIdPage : ContentPage
         DoHeader.DoChanged += (_, _) => NewDrill();
         Includes.Changed += (_, _) => { BuildAnswers(); NewDrill(); };
         Includes.Build(PracticeNotes.Select(p => (p.offset.ToString(), p.label)));
+        Automation.Target = this;
         BuildAnswers();
         NewDrill();
     }
@@ -48,6 +50,7 @@ public partial class PitchIdPage : ContentPage
         {
             var s = syllable;
             var button = new Button { Text = s, WidthRequest = 84, Margin = new Thickness(4) };
+            button.Style = (Style)Application.Current!.Resources["AnswerButton"];
             button.Clicked += (_, _) => OnAnswer(s);
             _answerButtons[s] = button;
             AnswersLayout.Children.Add(button);
@@ -63,20 +66,20 @@ public partial class PitchIdPage : ContentPage
         {
             button.IsEnabled = true;
             button.ClearValue(Button.BackgroundColorProperty);
+            button.ClearValue(Button.TextColorProperty);
         }
     }
 
     private async void OnPlay(object? sender, EventArgs e)
     {
-        try
-        {
-            var sample = await _samples.LoadAsync(Note.SampleFile(_drill.NoteNumber));
-            _audio.Play(AudioRenderer.RenderSequence(new[] { (sample, PitchDrill.Seconds) }));
-        }
-        catch (Exception ex)
-        {
-            StatusLabel.Text = "Audio error: " + ex.Message;
-        }
+        try { await PlayCurrentAsync(); }
+        catch (Exception ex) { StatusLabel.Text = "Audio error: " + ex.Message; }
+    }
+
+    private async Task PlayCurrentAsync()
+    {
+        var sample = await _samples.LoadAsync(Note.SampleFile(_drill.NoteNumber));
+        _audio.Play(AudioRenderer.RenderSequence(new[] { (sample, PitchDrill.Seconds) }));
     }
 
     private void OnAnswer(string guess)
@@ -89,12 +92,39 @@ public partial class PitchIdPage : ContentPage
         foreach (var (syllable, button) in _answerButtons)
         {
             button.IsEnabled = false;
-            if (syllable == _drill.Syllable) button.BackgroundColor = Colors.SeaGreen;
-            else if (syllable == guess) button.BackgroundColor = Colors.IndianRed;
+            if (syllable == _drill.Syllable) { button.BackgroundColor = Colors.SeaGreen; button.TextColor = Colors.White; }
+            else if (syllable == guess) { button.BackgroundColor = Colors.IndianRed; button.TextColor = Colors.White; }
         }
 
-        StatusLabel.Text = correct ? "Correct!" : $"Nope — {_drill.Syllable}";
+        StatusLabel.Text = correct ? "Correct!" : $"Not Quite — {_drill.Syllable}";
     }
 
     private void OnNext(object? sender, EventArgs e) => NewDrill();
+
+    // ── Automation (IAutomatableDrill) ──
+    public double AutoPlay()
+    {
+        NewDrill();
+        _ = PlayCurrentAsync();
+        return PitchDrill.Seconds;
+    }
+
+    public void AutoReveal(bool scored)
+    {
+        if (_answered) return;
+        _answered = true;
+        if (scored) Gauge.Record(false);
+        foreach (var (syllable, button) in _answerButtons)
+        {
+            button.IsEnabled = false;
+            if (syllable == _drill.Syllable) { button.BackgroundColor = Colors.SeaGreen; button.TextColor = Colors.White; }
+        }
+        StatusLabel.Text = (scored ? "Time's up — " : "Answer: ") + _drill.Syllable;
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        Automation.Stop();
+    }
 }

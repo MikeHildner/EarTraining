@@ -26,7 +26,7 @@ public partial class ScoreGauge : ContentView
     public bool ShowTally
     {
         get => ScoreLabel.IsVisible;
-        set { ScoreLabel.IsVisible = value; StreakLabel.IsVisible = value; }
+        set { ScoreLabel.IsVisible = value; StreakLabel.IsVisible = value; ResetButton.IsVisible = value; }
     }
 
     /// <summary>Ring diameter in device-independent units (default 130).</summary>
@@ -55,6 +55,8 @@ public partial class ScoreGauge : ContentView
         _correct = _total = _streak = 0;
         Refresh(animate: false);
     }
+
+    private void OnReset(object? sender, EventArgs e) => Reset();
 
     private void Refresh(bool animate)
     {

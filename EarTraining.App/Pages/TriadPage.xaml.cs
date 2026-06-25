@@ -30,6 +30,7 @@ public partial class TriadPage : ContentPage
         {
             string name = option.Name;
             var button = new Button { Text = option.ShortName, WidthRequest = 92, Margin = new Thickness(4) };
+            button.Style = (Style)Application.Current!.Resources["AnswerButton"];
             button.Clicked += (_, _) => OnAnswer(name);
             _optionButtons[name] = button;
             OptionsLayout.Children.Add(button);
@@ -46,6 +47,7 @@ public partial class TriadPage : ContentPage
         {
             button.IsEnabled = true;
             button.ClearValue(Button.BackgroundColorProperty);
+            button.ClearValue(Button.TextColorProperty);
         }
     }
 
@@ -73,11 +75,11 @@ public partial class TriadPage : ContentPage
         foreach (var (qualityName, button) in _optionButtons)
         {
             button.IsEnabled = false;
-            if (qualityName == _drill.Answer.Name) button.BackgroundColor = Colors.SeaGreen;
-            else if (qualityName == name) button.BackgroundColor = Colors.IndianRed;
+            if (qualityName == _drill.Answer.Name) { button.BackgroundColor = Colors.SeaGreen; button.TextColor = Colors.White; }
+            else if (qualityName == name) { button.BackgroundColor = Colors.IndianRed; button.TextColor = Colors.White; }
         }
 
-        StatusLabel.Text = $"{(correct ? "Correct" : "Nope")} — {_drill.Answer.Name} ({_drill.RootName})";
+        StatusLabel.Text = $"{(correct ? "Correct" : "Not Quite")} — {_drill.Answer.Name} ({_drill.RootName})";
         ScoreLabel.Text = $"Score: {_correct} / {_total}";
         NextButton.IsVisible = true;
     }

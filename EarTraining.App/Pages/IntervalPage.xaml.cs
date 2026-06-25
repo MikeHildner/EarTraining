@@ -30,6 +30,7 @@ public partial class IntervalPage : ContentPage
         {
             int semitones = option.Semitones;
             var button = new Button { Text = option.ShortName, WidthRequest = 78, Margin = new Thickness(4) };
+            button.Style = (Style)Application.Current!.Resources["AnswerButton"];
             button.Clicked += (_, _) => OnAnswer(semitones);
             _optionButtons[semitones] = button;
             OptionsLayout.Children.Add(button);
@@ -46,6 +47,7 @@ public partial class IntervalPage : ContentPage
         {
             button.IsEnabled = true;
             button.ClearValue(Button.BackgroundColorProperty);
+            button.ClearValue(Button.TextColorProperty);
         }
     }
 
@@ -72,11 +74,11 @@ public partial class IntervalPage : ContentPage
         foreach (var (semis, button) in _optionButtons)
         {
             button.IsEnabled = false;
-            if (semis == _drill.Answer.Semitones) button.BackgroundColor = Colors.SeaGreen;
-            else if (semis == semitones) button.BackgroundColor = Colors.IndianRed;
+            if (semis == _drill.Answer.Semitones) { button.BackgroundColor = Colors.SeaGreen; button.TextColor = Colors.White; }
+            else if (semis == semitones) { button.BackgroundColor = Colors.IndianRed; button.TextColor = Colors.White; }
         }
 
-        StatusLabel.Text = $"{(correct ? "Correct" : "Nope")} — {_drill.Answer.Name} ({_drill.LowName} to {_drill.HighName})";
+        StatusLabel.Text = $"{(correct ? "Correct" : "Not Quite")} — {_drill.Answer.Name} ({_drill.LowName} to {_drill.HighName})";
         ScoreLabel.Text = $"Score: {_correct} / {_total}";
         NextButton.IsVisible = true;
     }

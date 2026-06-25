@@ -4,7 +4,7 @@
              x:Class="EarTraining.App.Components.TonicHeader">
     <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8" RowDefinitions="Auto">
         <Label x:Name="DoLabel" Grid.Column="0" VerticalOptions="Center" FontAttributes="Bold" FontSize="18" />
-        <Button x:Name="PlayDoButton" Grid.Column="1" Text="Play DO" Clicked="OnPlayDo" />
-        <Button x:Name="NewDoButton" Grid.Column="2" Text="New DO" Clicked="OnNewDo" />
+        <Button x:Name="PlayDoButton" Grid.Column="1" Text="▶ Play DO" Clicked="OnPlayDo" />
+        <Button x:Name="NewDoButton" Grid.Column="2" Text="↻ New DO" Clicked="OnNewDo" />
     </Grid>
 </ContentView>
