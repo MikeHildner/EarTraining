@@ -22,6 +22,27 @@ public partial class ScoreGauge : ContentView
         Refresh(animate: false);
     }
 
+    /// <summary>Welcome/hero use: hide the score + streak tally, leaving just the ring + tier label.</summary>
+    public bool ShowTally
+    {
+        get => ScoreLabel.IsVisible;
+        set { ScoreLabel.IsVisible = value; StreakLabel.IsVisible = value; }
+    }
+
+    /// <summary>Ring diameter in device-independent units (default 130).</summary>
+    public double GaugeSize
+    {
+        get => GaugeView.WidthRequest;
+        set { GaugeView.WidthRequest = value; GaugeView.HeightRequest = value; }
+    }
+
+    /// <summary>Color of the centered percent text (default dark; set light on dark backgrounds).</summary>
+    public Color PercentTextColor
+    {
+        get => _drawable.PercentColor;
+        set { _drawable.PercentColor = value; GaugeView.Invalidate(); }
+    }
+
     public void Record(bool correct)
     {
         _total++;
@@ -86,6 +107,7 @@ public partial class ScoreGauge : ContentView
         public int DisplayPercent { get; set; } = -1;   // -1 = no data; drives the center text
         public double SweepPercent { get; set; }          // 0..100, animated; drives the arc
         public Color FillColor { get; set; } = Color.FromArgb("#ADB5BD");
+        public Color PercentColor { get; set; } = Color.FromArgb("#2D1B69");
 
         public void Draw(ICanvas canvas, RectF rect)
         {
@@ -113,7 +135,7 @@ public partial class ScoreGauge : ContentView
                 canvas.DrawArc(box.X, box.Y, box.Width, box.Height, 90f, (float)(90.0 - 360.0 * sweep / 100.0), true, false);
             }
 
-            canvas.FontColor = Color.FromArgb("#2D1B69");
+            canvas.FontColor = PercentColor;
             canvas.FontSize = size * 0.24f;
             canvas.DrawString(DisplayPercent < 0 ? "—" : DisplayPercent + "%",
                 rect.X, rect.Y, rect.Width, rect.Height,
