@@ -28,4 +28,8 @@
         <ShellContent Title="Triad ID" Route="triad" ContentTemplate="{DataTemplate pages:TriadPage}" />
     </FlyoutItem>
 
+    <FlyoutItem Title="About">
+        <ShellContent Route="about" ContentTemplate="{DataTemplate pages:AboutPage}" />
+    </FlyoutItem>
+
 </Shell>

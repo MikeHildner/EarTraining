@@ -32,6 +32,12 @@
             <Label Text="Other drills" FontAttributes="Bold" FontSize="15" TextColor="#512BD4" Margin="0,8,0,0" />
             <Button Text="Interval ID" CommandParameter="interval" Clicked="OnDrill" />
             <Button Text="Triad ID" CommandParameter="triad" Clicked="OnDrill" />
+
+            <Label Text="About &amp; credits" TextColor="#512BD4" HorizontalOptions="Center" Margin="0,14,0,6">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnAbout" />
+                </Label.GestureRecognizers>
+            </Label>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

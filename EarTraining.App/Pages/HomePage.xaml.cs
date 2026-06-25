@@ -17,4 +17,7 @@ public partial class HomePage : ContentPage
         if (sender is Button { CommandParameter: string route })
             await Shell.Current.GoToAsync($"//{route}");
     }
+
+    private async void OnAbout(object? sender, TappedEventArgs e) =>
+        await Shell.Current.GoToAsync("//about");
 }

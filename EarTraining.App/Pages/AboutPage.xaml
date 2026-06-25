@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EarTraining.App.Pages.AboutPage"
+             Title="About">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="12">
+            <Border StrokeShape="RoundRectangle 18" HeightRequest="78" WidthRequest="78"
+                    HorizontalOptions="Center" Padding="9" Stroke="Transparent" Margin="0,6,0,0">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#9B8CEF" Offset="0" />
+                        <GradientStop Color="#6A5AE6" Offset="1" />
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Image Source="welcome_ear.png" Aspect="AspectFit" />
+            </Border>
+            <Label Text="Ear Training" FontSize="22" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="Version 1.0" FontSize="13" TextColor="Gray" HorizontalOptions="Center" />
+
+            <Label Text="Extra ear-training drills — randomized and available in any key. Built by Mike Hildner."
+                   HorizontalTextAlignment="Center" Margin="0,4,0,0" />
+
+            <Label Text="These exercises extend Mark Harrison's &quot;Contemporary Eartraining&quot; series (published by Hal Leonard)."
+                   HorizontalTextAlignment="Center" />
+            <Label Text="harrisonmusic.com" TextColor="#512BD4" HorizontalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OpenUrl}" CommandParameter="https://www.harrisonmusic.com" />
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Text="Thanks to Mark Harrison for guidance, review, and bug reports over the years."
+                   FontSize="13" TextColor="Gray" HorizontalTextAlignment="Center" />
+
+            <BoxView HeightRequest="1" Color="#E0E0E0" Margin="0,6" />
+
+            <Label Text="Built with" FontAttributes="Bold" FontSize="16" />
+            <Label Text="• .NET MAUI (MIT)" TextColor="#512BD4">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OpenUrl}" CommandParameter="https://github.com/dotnet/maui" />
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Text="• Plugin.Maui.Audio (MIT) — audio playback" TextColor="#512BD4">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OpenUrl}" CommandParameter="https://github.com/jfversluis/Plugin.Maui.Audio" />
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Text="• VexFlow (MIT) — music notation" TextColor="#512BD4">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OpenUrl}" CommandParameter="https://www.vexflow.com/" />
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Text="• Open Sans (Apache 2.0) — app font" TextColor="#512BD4">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OpenUrl}" CommandParameter="https://fonts.google.com/specimen/Open+Sans" />
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Text="• Piano samples rendered with MuseScore" TextColor="#512BD4">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OpenUrl}" CommandParameter="https://musescore.org/" />
+                </Label.GestureRecognizers>
+            </Label>
+
+            <Button x:Name="LicenseToggle" Text="Open-source licenses" Clicked="OnToggleLicenses"
+                    BackgroundColor="Transparent" TextColor="#512BD4" HorizontalOptions="Start"
+                    Padding="0" Margin="0,4,0,0" />
+            <Label x:Name="LicenseText" IsVisible="False" FontSize="12" TextColor="#555555" />
+
+            <BoxView HeightRequest="1" Color="#E0E0E0" Margin="0,6" />
+
+            <Label Text="This app treats C4 as Middle C (261.63 Hz)."
+                   FontSize="13" TextColor="Gray" HorizontalTextAlignment="Center" />
+
+            <BoxView HeightRequest="1" Color="#E0E0E0" Margin="0,6" />
+
+            <Button Text="View source on GitHub" Command="{Binding OpenUrl}"
+                    CommandParameter="https://github.com/MikeHildner/EarTraining" />
+            <Button Text="Report an issue" Command="{Binding OpenUrl}"
+                    CommandParameter="https://github.com/MikeHildner/EarTraining/issues" />
+            <Label Text="mike.hildner@gmail.com" TextColor="Gray" FontSize="13"
+                   HorizontalOptions="Center" Margin="0,4,0,8">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OpenUrl}" CommandParameter="mailto:mike.hildner@gmail.com" />
+                </Label.GestureRecognizers>
+            </Label>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
