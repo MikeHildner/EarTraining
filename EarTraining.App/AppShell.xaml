@@ -6,22 +6,26 @@
        FlyoutBehavior="Flyout"
        Title="Ear Training">
 
+    <FlyoutItem Title="Home">
+        <ShellContent Route="home" ContentTemplate="{DataTemplate pages:HomePage}" />
+    </FlyoutItem>
+
     <FlyoutItem Title="Level 1 · Chapter 1">
-        <ShellContent Title="Vocal Drills" ContentTemplate="{DataTemplate pages:VocalDrillsPage}" />
-        <ShellContent Title="Resolution ID" ContentTemplate="{DataTemplate pages:ResolutionIdPage}" />
-        <ShellContent Title="Pitch ID" ContentTemplate="{DataTemplate pages:PitchIdPage}" />
-        <ShellContent Title="Dictation" ContentTemplate="{DataTemplate pages:DictationPage}" />
+        <ShellContent Title="Vocal Drills" Route="l1c1vocal" ContentTemplate="{DataTemplate pages:VocalDrillsPage}" />
+        <ShellContent Title="Resolution ID" Route="l1c1resolution" ContentTemplate="{DataTemplate pages:ResolutionIdPage}" />
+        <ShellContent Title="Pitch ID" Route="l1c1pitch" ContentTemplate="{DataTemplate pages:PitchIdPage}" />
+        <ShellContent Title="Dictation" Route="l1c1dictation" ContentTemplate="{DataTemplate pages:DictationPage}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Level 1 · Chapter 2">
-        <ShellContent Title="Vocal Drills" ContentTemplate="{DataTemplate pages:VocalDrillsL1C2Page}" />
-        <ShellContent Title="Melodic Intervals" ContentTemplate="{DataTemplate pages:MelodicIntervalL1C2Page}" />
-        <ShellContent Title="Harmonic Intervals" ContentTemplate="{DataTemplate pages:HarmonicIntervalL1C2Page}" />
+        <ShellContent Title="Vocal Drills" Route="l1c2vocal" ContentTemplate="{DataTemplate pages:VocalDrillsL1C2Page}" />
+        <ShellContent Title="Melodic Intervals" Route="l1c2melodic" ContentTemplate="{DataTemplate pages:MelodicIntervalL1C2Page}" />
+        <ShellContent Title="Harmonic Intervals" Route="l1c2harmonic" ContentTemplate="{DataTemplate pages:HarmonicIntervalL1C2Page}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Other drills">
-        <ShellContent Title="Interval ID" ContentTemplate="{DataTemplate pages:IntervalPage}" />
-        <ShellContent Title="Triad ID" ContentTemplate="{DataTemplate pages:TriadPage}" />
+        <ShellContent Title="Interval ID" Route="interval" ContentTemplate="{DataTemplate pages:IntervalPage}" />
+        <ShellContent Title="Triad ID" Route="triad" ContentTemplate="{DataTemplate pages:TriadPage}" />
     </FlyoutItem>
 
 </Shell>

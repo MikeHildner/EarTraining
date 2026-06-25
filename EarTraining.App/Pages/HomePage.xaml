@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EarTraining.App.Pages.HomePage"
+             Title="Home">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="12">
+            <Border StrokeShape="RoundRectangle 22" HeightRequest="104" WidthRequest="104"
+                    HorizontalOptions="Center" Padding="10" Stroke="Transparent" Margin="0,8,0,0">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#9B8CEF" Offset="0" />
+                        <GradientStop Color="#6A5AE6" Offset="1" />
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Image Source="welcome_ear.png" Aspect="AspectFit" />
+            </Border>
+            <Label Text="Ear Training" FontSize="26" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="What would you like to practice?" HorizontalOptions="Center" TextColor="Gray" Margin="0,0,0,6" />
+
+            <Label Text="Level 1 · Chapter 1" FontAttributes="Bold" FontSize="15" TextColor="#512BD4" />
+            <Button Text="Vocal Drills" CommandParameter="l1c1vocal" Clicked="OnDrill" />
+            <Button Text="Resolution ID" CommandParameter="l1c1resolution" Clicked="OnDrill" />
+            <Button Text="Pitch ID" CommandParameter="l1c1pitch" Clicked="OnDrill" />
+            <Button Text="Dictation" CommandParameter="l1c1dictation" Clicked="OnDrill" />
+
+            <Label Text="Level 1 · Chapter 2" FontAttributes="Bold" FontSize="15" TextColor="#512BD4" Margin="0,8,0,0" />
+            <Button Text="Vocal Drills" CommandParameter="l1c2vocal" Clicked="OnDrill" />
+            <Button Text="Melodic Intervals" CommandParameter="l1c2melodic" Clicked="OnDrill" />
+            <Button Text="Harmonic Intervals" CommandParameter="l1c2harmonic" Clicked="OnDrill" />
+
+            <Label Text="Other drills" FontAttributes="Bold" FontSize="15" TextColor="#512BD4" Margin="0,8,0,0" />
+            <Button Text="Interval ID" CommandParameter="interval" Clicked="OnDrill" />
+            <Button Text="Triad ID" CommandParameter="triad" Clicked="OnDrill" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
