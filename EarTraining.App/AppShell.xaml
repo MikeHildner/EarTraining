@@ -13,6 +13,12 @@
         <ShellContent Title="Dictation" ContentTemplate="{DataTemplate pages:DictationPage}" />
     </FlyoutItem>
 
+    <FlyoutItem Title="Level 1 · Chapter 2">
+        <ShellContent Title="Vocal Drills" ContentTemplate="{DataTemplate pages:VocalDrillsL1C2Page}" />
+        <ShellContent Title="Melodic Intervals" ContentTemplate="{DataTemplate pages:MelodicIntervalL1C2Page}" />
+        <ShellContent Title="Harmonic Intervals" ContentTemplate="{DataTemplate pages:HarmonicIntervalL1C2Page}" />
+    </FlyoutItem>
+
     <FlyoutItem Title="Other drills">
         <ShellContent Title="Interval ID" ContentTemplate="{DataTemplate pages:IntervalPage}" />
         <ShellContent Title="Triad ID" ContentTemplate="{DataTemplate pages:TriadPage}" />
