@@ -8,7 +8,7 @@ namespace EarTraining.Core.Drills;
 /// </summary>
 public sealed record DiatonicTriadDrill(int TriadIndex, int InversionIndex, IReadOnlyList<int> Offsets)
 {
-    public static readonly string[] TriadNames = ["I", "IV", "V", "vi", "iii"];
+    public static readonly string[] TriadNames = ["I", "IV", "V", "vi", "iii", "ii"];
     public static readonly string[] InversionNames = ["root", "1st", "2nd"];
 
     public string TriadName => TriadNames[TriadIndex];
@@ -28,6 +28,7 @@ public sealed record DiatonicTriadDrill(int TriadIndex, int InversionIndex, IRea
         [7, 11, 14],  // V  : SO TI RE
         [9, 12, 16],  // vi : LA DO MI (minor) — used by L1C5
         [4, 7, 11],   // iii: MI SO TI (minor) — used by L1C6
+        [2, 5, 9],    // ii : RE FA LA (minor) — used by L1C7
     ];
 
     /// <summary>
@@ -44,9 +45,9 @@ public sealed record DiatonicTriadDrill(int TriadIndex, int InversionIndex, IRea
     }
 
     /// <summary>
-    /// All (triad × inversion) drills in I/IV/V[/vi/iii] × root/1st/2nd order. <paramref name="triadCount"/>
-    /// = 3 (L1C3: I/IV/V), 4 (L1C5: adds vi), or 5 (L1C6: adds iii). Triad order matches the
-    /// controllers' triadtype numbering, so a longer list never disturbs the smaller chapters.
+    /// All (triad × inversion) drills in I/IV/V[/vi/iii/ii] × root/1st/2nd order. <paramref name="triadCount"/>
+    /// = 3 (L1C3: I/IV/V), 4 (L1C5: adds vi), 5 (L1C6: adds iii), or 6 (L1C7: adds ii). Triad order
+    /// matches the controllers' triadtype numbering, so a longer list never disturbs the smaller chapters.
     /// </summary>
     public static IReadOnlyList<DiatonicTriadDrill> All(int triadCount = 3)
     {
