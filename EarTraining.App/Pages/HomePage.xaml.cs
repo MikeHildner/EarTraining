@@ -4,12 +4,18 @@ namespace EarTraining.App.Pages;
 
 /// <summary>
 /// The app's landing hub: branding plus a single-open accordion of the chapters. Each chapter
-/// is a tappable card that expands to reveal its drills (tapping another chapter collapses the
-/// previous one), so Home stays a short, scannable list as chapters grow. Each drill button
-/// carries its ShellContent route in CommandParameter; tapping navigates there via Shell.
+/// is a tappable card that expands to reveal its drills; opening one collapses the others, and
+/// the open card is highlighted. All chapters start collapsed, so Home stays a short, scannable
+/// list as chapters grow. Each drill button carries its ShellContent route in CommandParameter.
 /// </summary>
 public partial class HomePage : ContentPage
 {
+    private static readonly Color HeaderText = Color.FromArgb("#512BD4");
+    private static readonly Color CollapsedBg = Color.FromArgb("#F5F3FC");
+    private static readonly Color CollapsedStroke = Color.FromArgb("#E0DCF5");
+    private static readonly Color OpenBg = Color.FromArgb("#ECE6FB");
+    private static readonly Color OpenStroke = Color.FromArgb("#512BD4");
+
     // Chapters and their drills, in display order. Adding a chapter = one entry here
     // (plus the matching ShellContent routes in AppShell).
     private static readonly (string Title, (string Label, string Route)[] Drills)[] Chapters =
@@ -21,7 +27,7 @@ public partial class HomePage : ContentPage
         ("Other drills", new[] { ("Interval ID", "interval"), ("Triad ID", "triad") }),
     };
 
-    private readonly List<(Label Chevron, View Content)> _sections = new();
+    private readonly List<(Label Chevron, View Content, Border Header)> _sections = new();
 
     public HomePage()
     {
@@ -31,12 +37,9 @@ public partial class HomePage : ContentPage
 
     private void BuildChapters()
     {
-        for (int i = 0; i < Chapters.Length; i++)
+        foreach (var (title, drills) in Chapters)
         {
-            var (title, drills) = Chapters[i];
-            bool expanded = i == 0;   // open the first chapter by default
-
-            var content = new VerticalStackLayout { Spacing = 8, Margin = new Thickness(4, 6, 4, 0), IsVisible = expanded };
+            var content = new VerticalStackLayout { Spacing = 8, Margin = new Thickness(4, 6, 4, 0), IsVisible = false };
             foreach (var (label, route) in drills)
             {
                 var button = new Button { Text = label, CommandParameter = route };
@@ -44,19 +47,13 @@ public partial class HomePage : ContentPage
                 content.Add(button);
             }
 
-            var chevron = new Label
-            {
-                Text = expanded ? "▾" : "▸",
-                FontSize = 18,
-                TextColor = Color.FromArgb("#512BD4"),
-                VerticalOptions = LayoutOptions.Center,
-            };
+            var chevron = new Label { Text = "▸", FontSize = 18, TextColor = HeaderText, VerticalOptions = LayoutOptions.Center };
             var titleLabel = new Label
             {
                 Text = title,
                 FontAttributes = FontAttributes.Bold,
                 FontSize = 16,
-                TextColor = Color.FromArgb("#512BD4"),
+                TextColor = HeaderText,
                 VerticalOptions = LayoutOptions.Center,
             };
 
@@ -71,11 +68,12 @@ public partial class HomePage : ContentPage
             var headerBorder = new Border
             {
                 StrokeShape = new RoundRectangle { CornerRadius = 10 },
-                Stroke = Color.FromArgb("#E0DCF5"),
-                BackgroundColor = Color.FromArgb("#F5F3FC"),
+                Stroke = CollapsedStroke,
+                StrokeThickness = 1,
+                BackgroundColor = CollapsedBg,
                 Content = header,
             };
-            int index = i;
+            int index = _sections.Count;
             var tap = new TapGestureRecognizer();
             tap.Tapped += (_, _) => Toggle(index);
             headerBorder.GestureRecognizers.Add(tap);
@@ -85,7 +83,7 @@ public partial class HomePage : ContentPage
             section.Add(content);
             ChaptersContainer.Add(section);
 
-            _sections.Add((chevron, content));
+            _sections.Add((chevron, content, headerBorder));
         }
     }
 
@@ -94,11 +92,17 @@ public partial class HomePage : ContentPage
     {
         bool willOpen = !_sections[idx].Content.IsVisible;
         for (int i = 0; i < _sections.Count; i++)
-        {
-            bool open = i == idx && willOpen;
-            _sections[i].Content.IsVisible = open;
-            _sections[i].Chevron.Text = open ? "▾" : "▸";
-        }
+            SetOpen(i, i == idx && willOpen);
+    }
+
+    private void SetOpen(int i, bool open)
+    {
+        var (chevron, content, header) = _sections[i];
+        content.IsVisible = open;
+        chevron.Text = open ? "▾" : "▸";
+        header.BackgroundColor = open ? OpenBg : CollapsedBg;
+        header.Stroke = open ? OpenStroke : CollapsedStroke;
+        header.StrokeThickness = open ? 1.5 : 1;
     }
 
     private async void OnDrill(object? sender, EventArgs e)
