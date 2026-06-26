@@ -95,11 +95,6 @@
                             <TapGestureRecognizer Command="{Binding OpenUrl}" CommandParameter="https://www.vexflow.com/" />
                         </Label.GestureRecognizers>
                     </Label>
-                    <Label Text="• Open Sans (Apache 2.0) — app font" FontSize="13.5" TextColor="#512BD4">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding OpenUrl}" CommandParameter="https://fonts.google.com/specimen/Open+Sans" />
-                        </Label.GestureRecognizers>
-                    </Label>
                     <Label Text="• Font Awesome 4.7 (SIL OFL 1.1) — icons" FontSize="13.5" TextColor="#512BD4">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding OpenUrl}" CommandParameter="https://fontawesome.com/v4/" />
