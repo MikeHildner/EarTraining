@@ -2,9 +2,48 @@
 <Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:pages="clr-namespace:EarTraining.App.Pages"
+       xmlns:local="clr-namespace:EarTraining.App"
        x:Class="EarTraining.App.AppShell"
        FlyoutBehavior="Flyout"
+       FlyoutBackgroundColor="White"
        Title="Ear Training">
+
+    <Shell.Resources>
+        <local:FlyoutIconConverter x:Key="FlyoutIcon" />
+    </Shell.Resources>
+
+    <Shell.FlyoutHeader>
+        <Grid BackgroundColor="#512BD4" Padding="18,26,18,18" ColumnSpacing="14" ColumnDefinitions="Auto,*">
+            <Image Source="welcome_ear.png" WidthRequest="40" HeightRequest="40" VerticalOptions="Center" />
+            <VerticalStackLayout Grid.Column="1" Spacing="1" VerticalOptions="Center">
+                <Label Text="Ear Training" TextColor="White" FontSize="18" FontAttributes="Bold" />
+                <Label Text="Contemporary ear training" TextColor="#CECBF6" FontSize="12" />
+            </VerticalStackLayout>
+        </Grid>
+    </Shell.FlyoutHeader>
+
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid Padding="18,12" ColumnSpacing="14" ColumnDefinitions="24,*">
+                <Image Source="{Binding Title, Converter={StaticResource FlyoutIcon}}" HeightRequest="20" WidthRequest="20" VerticalOptions="Center" />
+                <Label Grid.Column="1" Text="{Binding Title}" FontSize="15" TextColor="#3C3489" VerticalOptions="Center" />
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="Transparent" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="#ECE6FB" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
 
     <FlyoutItem Title="Home">
         <ShellContent Route="home" ContentTemplate="{DataTemplate pages:HomePage}" />
