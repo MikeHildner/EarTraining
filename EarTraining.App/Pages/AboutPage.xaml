@@ -21,12 +21,18 @@
             <Label Text="Extra ear-training drills — randomized and available in any key. Built by Mike Hildner."
                    HorizontalTextAlignment="Center" Margin="0,4,0,0" />
 
-            <Label Text="These exercises extend Mark Harrison's &quot;Contemporary Eartraining&quot; series (published by Hal Leonard)."
-                   HorizontalTextAlignment="Center" />
-            <Label Text="harrisonmusic.com" TextColor="#512BD4" HorizontalOptions="Center">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding OpenUrl}" CommandParameter="https://www.harrisonmusic.com" />
-                </Label.GestureRecognizers>
+            <Label HorizontalTextAlignment="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="These exercises extend " />
+                        <Span Text="Mark Harrison" TextColor="#512BD4" TextDecorations="Underline">
+                            <Span.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OpenUrl}" CommandParameter="https://www.harrisonmusic.com" />
+                            </Span.GestureRecognizers>
+                        </Span>
+                        <Span Text="&apos;s &quot;Contemporary Eartraining&quot; series (published by Hal Leonard)." />
+                    </FormattedString>
+                </Label.FormattedText>
             </Label>
 
             <BoxView HeightRequest="1" Color="#E0E0E0" Margin="0,6" />
