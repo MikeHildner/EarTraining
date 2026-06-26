@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:EarTraining.App.Components"
+             x:Class="EarTraining.App.Pages.TriadProgressionsL1C6Page"
+             Title="Triad Progressions">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="14">
+            <Label Text="Diatonic Triad Progressions" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="Play the progression, then identify it (now with iii)."
+                   HorizontalOptions="Center" TextColor="Gray" />
+            <c:InfoNote Text="Selected from the diatonic triad progression questions on p. 134." />
+            <c:TonicHeader x:Name="DoHeader" />
+
+            <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
+                <Label Text="How many chords:" HorizontalOptions="Center" FontSize="13" TextColor="Gray" />
+                <HorizontalStackLayout Spacing="14" HorizontalOptions="Center">
+                    <RadioButton x:Name="TwoChordRadio" Content="2 chords" GroupName="progmode" IsChecked="True" CheckedChanged="OnModeChanged" />
+                    <RadioButton x:Name="ThreeChordRadio" Content="3 chords" GroupName="progmode" CheckedChanged="OnModeChanged" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <Button Text="▶ Play progression" Clicked="OnPlay" />
+            <Label Text="Which progression did you hear?" FontAttributes="Bold" HorizontalOptions="Center" />
+            <FlexLayout x:Name="AnswersLayout" Wrap="Wrap" JustifyContent="Center" AlignItems="Center" />
+            <Button x:Name="NextButton" Text="↻ New Progression" Clicked="OnNext" HorizontalOptions="Center" WidthRequest="220" />
+            <Label x:Name="StatusLabel" HorizontalOptions="Center" FontAttributes="Bold" />
+            <c:ScoreGauge x:Name="Gauge" HorizontalOptions="Center" />
+            <c:AutomationBar x:Name="Automation" />
+            <c:IncludeToggles x:Name="Includes" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
