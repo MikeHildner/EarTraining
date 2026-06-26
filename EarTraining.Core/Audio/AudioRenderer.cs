@@ -74,6 +74,18 @@ public static class AudioRenderer
         return Concat(parts).Write();
     }
 
+    /// <summary>
+    /// A chord progression: each step is a chord (its note samples mixed as a block chord and
+    /// fit to the step's duration), played one after another. Used by the L1C4 triad progressions.
+    /// </summary>
+    public static byte[] RenderProgression(IReadOnlyList<(IReadOnlyList<byte[]> chord, double seconds)> steps, double gain = 0.5)
+    {
+        var parts = steps
+            .Select(step => Mix(gain, 0, step.chord.Select(b => Fit(WavBuffer.Read(b), step.seconds)).ToList()))
+            .ToList();
+        return Concat(parts).Write();
+    }
+
     private static WavBuffer Slice(WavBuffer w, double seconds)
     {
         int count = Math.Min(w.Samples.Length, (int)(seconds * w.SampleRate) * w.Channels);

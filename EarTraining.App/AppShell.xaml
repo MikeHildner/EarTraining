@@ -31,6 +31,11 @@
         <ShellContent Title="Dictation" Route="l1c3dictation" ContentTemplate="{DataTemplate pages:DictationL1C3Page}" />
     </FlyoutItem>
 
+    <FlyoutItem Title="Level 1 · Chapter 4">
+        <ShellContent Title="Melody Harmonization" Route="l1c4harmonize" ContentTemplate="{DataTemplate pages:MelodyHarmonizationPage}" />
+        <ShellContent Title="Triad Progressions" Route="l1c4progressions" ContentTemplate="{DataTemplate pages:TriadProgressionsPage}" />
+    </FlyoutItem>
+
     <FlyoutItem Title="Other drills">
         <ShellContent Title="Interval ID" Route="interval" ContentTemplate="{DataTemplate pages:IntervalPage}" />
         <ShellContent Title="Triad ID" Route="triad" ContentTemplate="{DataTemplate pages:TriadPage}" />

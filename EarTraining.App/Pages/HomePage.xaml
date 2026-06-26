@@ -36,6 +36,10 @@
             <Button Text="Triad Recognition" CommandParameter="l1c3triad" Clicked="OnDrill" />
             <Button Text="Dictation" CommandParameter="l1c3dictation" Clicked="OnDrill" />
 
+            <Label Text="Level 1 · Chapter 4" FontAttributes="Bold" FontSize="15" TextColor="#512BD4" Margin="0,8,0,0" />
+            <Button Text="Melody Harmonization" CommandParameter="l1c4harmonize" Clicked="OnDrill" />
+            <Button Text="Triad Progressions" CommandParameter="l1c4progressions" Clicked="OnDrill" />
+
             <Label Text="Other drills" FontAttributes="Bold" FontSize="15" TextColor="#512BD4" Margin="0,8,0,0" />
             <Button Text="Interval ID" CommandParameter="interval" Clicked="OnDrill" />
             <Button Text="Triad ID" CommandParameter="triad" Clicked="OnDrill" />
