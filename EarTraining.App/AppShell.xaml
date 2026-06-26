@@ -41,6 +41,7 @@
         <ShellContent Title="Melodic Intervals" Route="l1c5melodic" ContentTemplate="{DataTemplate pages:MelodicIntervalIdL1C5Page}" />
         <ShellContent Title="Harmonic Intervals" Route="l1c5harmonic" ContentTemplate="{DataTemplate pages:HarmonicIntervalIdL1C5Page}" />
         <ShellContent Title="Triad Recognition" Route="l1c5triad" ContentTemplate="{DataTemplate pages:TriadRecognitionL1C5Page}" />
+        <ShellContent Title="Triad Progressions" Route="l1c5progressions" ContentTemplate="{DataTemplate pages:TriadProgressionsL1C5Page}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Other drills">
