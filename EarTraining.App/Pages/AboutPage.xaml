@@ -95,6 +95,11 @@
                             <TapGestureRecognizer Command="{Binding OpenUrl}" CommandParameter="https://fontawesome.com/v4/" />
                         </Label.GestureRecognizers>
                     </Label>
+                    <Label Text="• .NET MAUI (MIT)" FontSize="13.5" TextColor="#512BD4">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenUrl}" CommandParameter="https://github.com/dotnet/maui" />
+                        </Label.GestureRecognizers>
+                    </Label>
                     <Button x:Name="LicenseToggle" Text="Open-source licenses" Clicked="OnToggleLicenses"
                             BackgroundColor="Transparent" TextColor="#512BD4" HorizontalOptions="Start"
                             Padding="0" Margin="0,2,0,0" />
