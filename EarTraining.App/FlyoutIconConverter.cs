@@ -14,8 +14,7 @@ public sealed class FlyoutIconConverter : IValueConverter
         string title = value as string ?? string.Empty;
         int code =
             title == "Home" ? 0xF015 :              // fa-home
-            title == "Other drills" ? 0xF03A :      // fa-list
-            title == "Experimental" ? 0xF0C3 :      // fa-flask
+            title == "Not in the Books" ? 0xF03A :  // fa-list
             title == "About" ? 0xF05A :             // fa-info-circle
             title.StartsWith("Level 2") ? 0xF1B3 :  // fa-cubes (progressions)
             0xF001;                                 // fa-music (Level 1 chapters + default)
@@ -39,7 +38,7 @@ public sealed class FlyoutIconConverter : IValueConverter
 /// </summary>
 public sealed class WipIconConverter : IValueConverter
 {
-    public static bool IsWip(string title) => title.StartsWith("Level 2") || title == "Experimental";
+    public static bool IsWip(string title) => title.StartsWith("Level 2");
 
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {

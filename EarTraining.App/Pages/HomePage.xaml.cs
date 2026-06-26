@@ -45,15 +45,12 @@ public partial class HomePage : ContentPage
             Chapter("Chapter 4", "Major triad progressions", new Drill("Major Triad Progressions", "l2c4")),
             Chapter("Chapter 5", "Diatonic triad progressions", new Drill("Diatonic Triad Progressions", "l2c5")),
         }),
-        new("Other drills", new[]
+        new("Not in the Books", new[]
         {
             Leaf("Interval ID", "interval"),
             Leaf("Triad ID", "triad"),
             Leaf("Find the DO", "finddo"),
             Leaf("Solfège Syllables", "solfeg"),
-        }),
-        new("Experimental", new[]
-        {
             Leaf("Major Triad Movements", "l2major"),
         }),
     };
