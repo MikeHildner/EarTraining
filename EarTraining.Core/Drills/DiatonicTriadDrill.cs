@@ -8,7 +8,7 @@ namespace EarTraining.Core.Drills;
 /// </summary>
 public sealed record DiatonicTriadDrill(int TriadIndex, int InversionIndex, IReadOnlyList<int> Offsets)
 {
-    public static readonly string[] TriadNames = ["I", "IV", "V"];
+    public static readonly string[] TriadNames = ["I", "IV", "V", "vi"];
     public static readonly string[] InversionNames = ["root", "1st", "2nd"];
 
     public string TriadName => TriadNames[TriadIndex];
@@ -26,6 +26,7 @@ public sealed record DiatonicTriadDrill(int TriadIndex, int InversionIndex, IRea
         [0, 4, 7],    // I  : DO MI SO
         [5, 9, 12],   // IV : FA LA (high DO)
         [7, 11, 14],  // V  : SO TI RE
+        [9, 12, 16],  // vi : LA DO MI (minor) — used by L1C5
     ];
 
     /// <summary>
@@ -41,11 +42,14 @@ public sealed record DiatonicTriadDrill(int TriadIndex, int InversionIndex, IRea
         return new DiatonicTriadDrill(triad, inversion, o);
     }
 
-    /// <summary>All nine (triad × inversion) drills, in I/IV/V × root/1st/2nd order.</summary>
-    public static IReadOnlyList<DiatonicTriadDrill> All()
+    /// <summary>
+    /// All (triad × inversion) drills in I/IV/V[/vi] × root/1st/2nd order. <paramref name="triadCount"/>
+    /// = 3 (L1C3: I/IV/V) or 4 (L1C5: adds vi).
+    /// </summary>
+    public static IReadOnlyList<DiatonicTriadDrill> All(int triadCount = 3)
     {
-        var list = new List<DiatonicTriadDrill>(9);
-        for (int t = 0; t < TriadNames.Length; t++)
+        var list = new List<DiatonicTriadDrill>(triadCount * InversionNames.Length);
+        for (int t = 0; t < triadCount; t++)
             for (int inv = 0; inv < InversionNames.Length; inv++)
                 list.Add(Build(t, inv));
         return list;
