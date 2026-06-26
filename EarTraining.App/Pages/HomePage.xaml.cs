@@ -27,8 +27,10 @@ public partial class HomePage : ContentPage
         ("Level 1 · Chapter 5", new[] { ("Vocal Drills", "l1c5vocal"), ("Melodic Intervals", "l1c5melodic"), ("Harmonic Intervals", "l1c5harmonic"), ("Triad Recognition", "l1c5triad"), ("Triad Progressions", "l1c5progressions") }),
         ("Level 1 · Chapter 6", new[] { ("Vocal Drills", "l1c6vocal"), ("Melodic Intervals", "l1c6melodic"), ("Harmonic Intervals", "l1c6harmonic"), ("Triad Recognition", "l1c6triad"), ("Triad Progressions", "l1c6progressions") }),
         ("Level 1 · Chapter 7", new[] { ("Vocal Drills", "l1c7vocal"), ("Melodic Intervals", "l1c7melodic"), ("Harmonic Intervals", "l1c7harmonic"), ("Triad Recognition", "l1c7triad"), ("Triad Progressions", "l1c7progressions") }),
-        ("Level 2", new[] { ("Major Triad Progressions", "l2c4"), ("Major Triad Movements", "l2major"), ("Diatonic Progressions", "l2c5") }),
+        ("Level 2 · Chapter 4", new[] { ("Major Triad Progressions", "l2c4") }),
+        ("Level 2 · Chapter 5", new[] { ("Diatonic Triad Progressions", "l2c5") }),
         ("Other drills", new[] { ("Interval ID", "interval"), ("Triad ID", "triad") }),
+        ("Experimental", new[] { ("Major Triad Movements", "l2major") }),
     };
 
     private readonly List<(Label Chevron, View Content, Border Header)> _sections = new();

@@ -61,15 +61,21 @@
         <ShellContent Title="Triad Progressions" Route="l1c7progressions" ContentTemplate="{DataTemplate pages:TriadProgressionsL1C7Page}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Level 2">
+    <FlyoutItem Title="Level 2 · Chapter 4">
         <ShellContent Title="Major Triad Progressions" Route="l2c4" ContentTemplate="{DataTemplate pages:L2C4ProgressionsPage}" />
-        <ShellContent Title="Major Triad Movements" Route="l2major" ContentTemplate="{DataTemplate pages:L2ProgressionsExplorerPage}" />
-        <ShellContent Title="Diatonic Progressions" Route="l2c5" ContentTemplate="{DataTemplate pages:L2C5ProgressionsExplorerPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Level 2 · Chapter 5">
+        <ShellContent Title="Diatonic Triad Progressions" Route="l2c5" ContentTemplate="{DataTemplate pages:L2C5ProgressionsExplorerPage}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Other drills">
         <ShellContent Title="Interval ID" Route="interval" ContentTemplate="{DataTemplate pages:IntervalPage}" />
         <ShellContent Title="Triad ID" Route="triad" ContentTemplate="{DataTemplate pages:TriadPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Experimental">
+        <ShellContent Title="Major Triad Movements" Route="l2major" ContentTemplate="{DataTemplate pages:L2ProgressionsExplorerPage}" />
     </FlyoutItem>
 
     <FlyoutItem Title="About">
