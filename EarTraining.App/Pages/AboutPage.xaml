@@ -28,8 +28,6 @@
                     <TapGestureRecognizer Command="{Binding OpenUrl}" CommandParameter="https://www.harrisonmusic.com" />
                 </Label.GestureRecognizers>
             </Label>
-            <Label Text="Thanks to Mark Harrison for guidance, review, and bug reports over the years."
-                   FontSize="13" TextColor="Gray" HorizontalTextAlignment="Center" />
 
             <BoxView HeightRequest="1" Color="#E0E0E0" Margin="0,6" />
 
