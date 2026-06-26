@@ -44,6 +44,14 @@
         <ShellContent Title="Triad Progressions" Route="l1c5progressions" ContentTemplate="{DataTemplate pages:TriadProgressionsL1C5Page}" />
     </FlyoutItem>
 
+    <FlyoutItem Title="Level 1 · Chapter 6">
+        <ShellContent Title="Vocal Drills" Route="l1c6vocal" ContentTemplate="{DataTemplate pages:VocalDrillsL1C6Page}" />
+        <ShellContent Title="Melodic Intervals" Route="l1c6melodic" ContentTemplate="{DataTemplate pages:MelodicIntervalIdL1C6Page}" />
+        <ShellContent Title="Harmonic Intervals" Route="l1c6harmonic" ContentTemplate="{DataTemplate pages:HarmonicIntervalIdL1C6Page}" />
+        <ShellContent Title="Triad Recognition" Route="l1c6triad" ContentTemplate="{DataTemplate pages:TriadRecognitionL1C6Page}" />
+        <ShellContent Title="Triad Progressions" Route="l1c6progressions" ContentTemplate="{DataTemplate pages:TriadProgressionsL1C6Page}" />
+    </FlyoutItem>
+
     <FlyoutItem Title="Other drills">
         <ShellContent Title="Interval ID" Route="interval" ContentTemplate="{DataTemplate pages:IntervalPage}" />
         <ShellContent Title="Triad ID" Route="triad" ContentTemplate="{DataTemplate pages:TriadPage}" />
