@@ -80,11 +80,6 @@
                         <Label Text="&#xf121;" FontFamily="FA" FontSize="15" TextColor="#512BD4" VerticalOptions="Center" />
                         <Label Text="Built with" FontAttributes="Bold" FontSize="16" TextColor="#3C3489" VerticalOptions="Center" />
                     </HorizontalStackLayout>
-                    <Label Text="• .NET MAUI (MIT)" FontSize="13.5" TextColor="#512BD4">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding OpenUrl}" CommandParameter="https://github.com/dotnet/maui" />
-                        </Label.GestureRecognizers>
-                    </Label>
                     <Label Text="• Plugin.Maui.Audio (MIT) — audio playback" FontSize="13.5" TextColor="#512BD4">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding OpenUrl}" CommandParameter="https://github.com/jfversluis/Plugin.Maui.Audio" />
@@ -98,11 +93,6 @@
                     <Label Text="• Font Awesome 4.7 (SIL OFL 1.1) — icons" FontSize="13.5" TextColor="#512BD4">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding OpenUrl}" CommandParameter="https://fontawesome.com/v4/" />
-                        </Label.GestureRecognizers>
-                    </Label>
-                    <Label Text="• Piano samples rendered with MuseScore" FontSize="13.5" TextColor="#512BD4">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding OpenUrl}" CommandParameter="https://musescore.org/" />
                         </Label.GestureRecognizers>
                     </Label>
                     <Button x:Name="LicenseToggle" Text="Open-source licenses" Clicked="OnToggleLicenses"
@@ -119,8 +109,8 @@
                         <Label Text="&#xf023;" FontFamily="FA" FontSize="15" TextColor="#512BD4" VerticalOptions="Center" />
                         <Label Text="Privacy" FontAttributes="Bold" FontSize="16" TextColor="#3C3489" VerticalOptions="Center" />
                     </HorizontalStackLayout>
-                    <Label Text="Works fully offline — no account, no network calls, no tracking or analytics."
-                           FontSize="13.5" TextColor="#444444" />
+                    <Label Text="Works fully offline — no account, no network calls." FontSize="13.5" TextColor="#444444" />
+                    <Label Text="No tracking, no analytics, no advertisements." FontSize="13.5" TextColor="#444444" />
                 </VerticalStackLayout>
             </Border>
 

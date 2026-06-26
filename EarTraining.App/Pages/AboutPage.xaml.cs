@@ -5,7 +5,7 @@ namespace EarTraining.App.Pages;
 
 /// <summary>
 /// About / credits: app + book attribution and the license notices for the
-/// open-source components actually bundled in the app (MIT/Apache require the
+/// open-source components actually bundled in the app (MIT/OFL require the
 /// notice to travel with distributions). Links open in the system browser.
 /// </summary>
 public partial class AboutPage : ContentPage
@@ -36,7 +36,6 @@ public partial class AboutPage : ContentPage
 
     private const string LicenseNotice =
 @"The following are used under the MIT License:
-  • .NET MAUI — Copyright (c) .NET Foundation and Contributors
   • Plugin.Maui.Audio — Copyright (c) Gerald Versluis
   • VexFlow — Copyright (c) Mohit Muthanna Cheppudira
 
@@ -46,7 +45,5 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED ""AS IS"", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-Font Awesome 4.7 — icon font by Dave Gandy, licensed under the SIL Open Font License 1.1. https://fontawesome.com/v4/
-
-Piano samples were rendered with MuseScore.";
+Font Awesome 4.7 — icon font by Dave Gandy, licensed under the SIL Open Font License 1.1. https://fontawesome.com/v4/";
 }
