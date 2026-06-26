@@ -5,12 +5,19 @@ namespace EarTraining.Core.Drills;
 /// <summary>Which interval class the L1C3 dictation emphasizes (alongside C1 resolutions and, optionally, C2 intervals).</summary>
 public enum L1C3DictationInterval { Minor3rd, Major6th, Both }
 
+/// <summary>Which interval class the L1C2 dictation emphasizes (alongside C1 resolutions).</summary>
+public enum L1C2DictationInterval { Major3rd, Minor6th, Both }
+
 /// <summary>
-/// A Level 1 Chapter 3 melodic dictation: like <see cref="DictationDrill"/> but the phrase is
-/// woven from C1 resolutions, C3 intervals (min 3rd / maj 6th) and — optionally — C2 intervals
-/// (maj 3rd / min 6th), and it may contain a pair of eighth notes per phrase. Faithful port of
-/// L1C3Controller.AudioAndDictation generation (GetIntervalIntQueue + GetNoteRhythms + the
-/// step ≤ 12 / span ≤ 12 constraints). Reuses <see cref="DictationMeasure"/>.
+/// A Level 1 melodic dictation woven from C1 resolutions plus an interval class, optionally with a
+/// second interval class, and possibly a pair of eighth notes per phrase. Faithful port of the
+/// L1C2 / L1C3 AudioAndDictation generators (GetIntervalIntQueue + GetNoteRhythms + the step ≤ 12 /
+/// span ≤ 12 constraints):
+/// <list type="bullet">
+/// <item><b>L1C3</b> (<see cref="Next"/>): C1 + C3 (min 3rd / maj 6th), optionally + C2 (maj 3rd / min 6th).</item>
+/// <item><b>L1C2</b> (<see cref="NextC2"/>): C1 + C2 (maj 3rd / min 6th); no second class.</item>
+/// </list>
+/// Reuses <see cref="DictationMeasure"/>.
 /// </summary>
 public sealed record IntervalDictationDrill(
     IReadOnlyList<DictationMeasure> Measures,
@@ -28,21 +35,61 @@ public sealed record IntervalDictationDrill(
     private static readonly (int, int)[] Maj3rdC2 = [(1, 3), (4, 6), (5, 7)];
     private static readonly (int, int)[] Min6thC2 = [(3, 8), (6, 11), (7, 12)];
 
+    /// <summary>L1C3 dictation: C1 + C3 (min 3rd / maj 6th), optionally + C2 (maj 3rd / min 6th).</summary>
     public static IntervalDictationDrill Next(
         L1C3DictationInterval interval, string key, double bpm,
         int numberOfMeasures, bool includeEighths, bool includeC2, Random rng)
     {
-        int[] scale = Keys.Transpose(CMajorScale, key);
+        (int, int)[] primary = interval switch
+        {
+            L1C3DictationInterval.Minor3rd => Min3rdC3,
+            L1C3DictationInterval.Major6th => Maj6thC3,
+            _ => Min3rdC3.Concat(Maj6thC3).ToArray(),
+        };
+        (int, int)[]? secondary = includeC2
+            ? interval switch
+            {
+                L1C3DictationInterval.Minor3rd => Maj3rdC2,
+                L1C3DictationInterval.Major6th => Min6thC2,
+                _ => Maj3rdC2.Concat(Min6thC2).ToArray(),
+            }
+            : null;
+        return Build(key, bpm, numberOfMeasures, includeEighths, primary, secondary, rng);
+    }
 
-        var (m1, m2) = PickPhrase(includeEighths, includeC2, rng);
-        var (m3, m4) = PickPhrase(includeEighths, includeC2, rng);
+    /// <summary>L1C2 dictation: C1 + C2 (maj 3rd / min 6th); no second interval class.</summary>
+    public static IntervalDictationDrill NextC2(
+        L1C2DictationInterval interval, string key, double bpm,
+        int numberOfMeasures, bool includeEighths, Random rng)
+    {
+        (int, int)[] primary = interval switch
+        {
+            L1C2DictationInterval.Major3rd => Maj3rdC2,
+            L1C2DictationInterval.Minor6th => Min6thC2,
+            _ => Maj3rdC2.Concat(Min6thC2).ToArray(),
+        };
+        return Build(key, bpm, numberOfMeasures, includeEighths, primary, secondary: null, rng);
+    }
+
+    // Shared engine: pick two 2-measure phrases, generate a note queue satisfying the criteria
+    // (each half has a C1 resolution + the primary interval [+ the secondary, if any]) within the
+    // step/span limits, then lay the notes onto the chosen rhythms.
+    private static IntervalDictationDrill Build(
+        string key, double bpm, int numberOfMeasures, bool includeEighths,
+        (int, int)[] primary, (int, int)[]? secondary, Random rng)
+    {
+        int[] scale = Keys.Transpose(CMajorScale, key);
+        bool hasSecondary = secondary is not null;
+
+        var (m1, m2) = PickPhrase(includeEighths, hasSecondary, rng);
+        var (m3, m4) = PickPhrase(includeEighths, hasSecondary, rng);
 
         string[] patterns = numberOfMeasures == 4 ? [m1, m2, m3, m4] : [m1, m2];
 
         int first2 = m1.Split(',').Length + m2.Split(',').Length;
         int second2 = m3.Split(',').Length + m4.Split(',').Length;
 
-        var queue = BuildNotes(scale, first2, second2, interval, includeC2, rng);
+        var queue = BuildNotes(scale, first2, second2, primary, secondary, rng);
 
         var measures = new List<DictationMeasure>(patterns.Length);
         foreach (string pattern in patterns)
@@ -69,13 +116,13 @@ public sealed record IntervalDictationDrill(
         return r;
     }
 
-    // One 2-measure phrase: enough notes (>= 4, or >= 6 with C2), an even total (so each
-    // interval/resolution completes), and exactly one eighth-pair when eighths are on (none
+    // One 2-measure phrase: enough notes (>= 4, or >= 6 with a secondary class), an even total (so
+    // each interval/resolution completes), and exactly one eighth-pair when eighths are on (none
     // otherwise) — mirrors the controller's rhythm-selection while-loops.
-    private static (string, string) PickPhrase(bool includeEighths, bool includeC2, Random rng)
+    private static (string, string) PickPhrase(bool includeEighths, bool hasSecondary, Random rng)
     {
         var rhythms = NoteRhythms(includeEighths);
-        int minNotes = includeC2 ? 6 : 4;
+        int minNotes = hasSecondary ? 6 : 4;
         while (true)
         {
             string a = rhythms[rng.Next(rhythms.Count)];
@@ -90,39 +137,26 @@ public sealed record IntervalDictationDrill(
         }
     }
 
-    private static Queue<int> BuildNotes(int[] scale, int first2, int second2, L1C3DictationInterval interval, bool includeC2, Random rng)
+    private static Queue<int> BuildNotes(int[] scale, int first2, int second2, (int, int)[] primary, (int, int)[]? secondary, Random rng)
     {
         for (int tries = 0; tries < 2000; tries++)
         {
-            var q = Generate(scale, first2, second2, interval, includeC2, rng, out bool criteria);
+            var q = Generate(scale, first2, second2, primary, secondary, rng, out bool criteria);
             if (criteria && StepsWithin(q, 12) && SpanWithin(q, 12)) return new Queue<int>(q);
         }
-        return new Queue<int>(Generate(scale, first2, second2, interval, includeC2, rng, out _)); // fallback
+        return new Queue<int>(Generate(scale, first2, second2, primary, secondary, rng, out _)); // fallback
     }
 
-    private static List<int> Generate(int[] scale, int first2, int second2, L1C3DictationInterval interval, bool includeC2, Random rng, out bool criteria)
+    private static List<int> Generate(int[] scale, int first2, int second2, (int, int)[] primary, (int, int)[]? secondary, Random rng, out bool criteria)
     {
         int total = first2 + second2;
-        bool f1 = false, f2 = false, f3 = false, s1 = false, s2 = false, s3 = false;
-
-        (int, int)[] c3 = interval switch
-        {
-            L1C3DictationInterval.Minor3rd => Min3rdC3,
-            L1C3DictationInterval.Major6th => Maj6thC3,
-            _ => Min3rdC3.Concat(Maj6thC3).ToArray(),
-        };
-        (int, int)[] c2 = interval switch
-        {
-            L1C3DictationInterval.Minor3rd => Maj3rdC2,
-            L1C3DictationInterval.Major6th => Min6thC2,
-            _ => Maj3rdC2.Concat(Min6thC2).ToArray(),
-        };
+        bool f1 = false, fp = false, fs = false, s1 = false, sp = false, ss = false;
 
         var q = new List<int>();
         while (q.Count < total)
         {
             bool first = q.Count < first2;
-            int kind = rng.Next(1, includeC2 ? 4 : 3);   // 1 = C1 resolution, 2 = C3 interval, 3 = C2 interval
+            int kind = rng.Next(1, secondary is null ? 3 : 4);   // 1 = C1 resolution, 2 = primary interval, 3 = secondary interval
             if (kind == 1)
             {
                 var (a, b) = C1Resolutions[rng.Next(C1Resolutions.Length)];
@@ -131,25 +165,25 @@ public sealed record IntervalDictationDrill(
             }
             else if (kind == 2)
             {
-                var (a, b) = c3[rng.Next(c3.Length)];
-                if (first) f3 = true; else s3 = true;
+                var (a, b) = primary[rng.Next(primary.Length)];
+                if (first) fp = true; else sp = true;
                 AddPair(q, scale, a, b, rng);
             }
             else
             {
-                var (a, b) = c2[rng.Next(c2.Length)];
-                if (first) f2 = true; else s2 = true;
+                var (a, b) = secondary![rng.Next(secondary.Length)];
+                if (first) fs = true; else ss = true;
                 AddPair(q, scale, a, b, rng);
             }
         }
 
-        criteria = includeC2
-            ? (f1 && f2 && f3 && s1 && s2 && s3)
-            : (f1 && f3 && s1 && s3);
+        criteria = secondary is null
+            ? (f1 && fp && s1 && sp)
+            : (f1 && fp && fs && s1 && sp && ss);
         return q;
     }
 
-    // C3/C2 intervals can sound ascending or descending; C1 resolutions keep their order.
+    // Intervals can sound ascending or descending; C1 resolutions keep their order.
     private static void AddPair(List<int> q, int[] scale, int a, int b, Random rng)
     {
         if (rng.Next(2) == 0) { q.Add(scale[a]); q.Add(scale[b]); }

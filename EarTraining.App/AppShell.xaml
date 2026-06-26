@@ -21,6 +21,7 @@
         <ShellContent Title="Vocal Drills" Route="l1c2vocal" ContentTemplate="{DataTemplate pages:VocalDrillsL1C2Page}" />
         <ShellContent Title="Melodic Intervals" Route="l1c2melodic" ContentTemplate="{DataTemplate pages:MelodicIntervalL1C2Page}" />
         <ShellContent Title="Harmonic Intervals" Route="l1c2harmonic" ContentTemplate="{DataTemplate pages:HarmonicIntervalL1C2Page}" />
+        <ShellContent Title="Dictation" Route="l1c2dictation" ContentTemplate="{DataTemplate pages:DictationL1C2Page}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Level 1 · Chapter 3">
