@@ -18,31 +18,8 @@
             <Label Text="Ear Training" FontSize="26" FontAttributes="Bold" HorizontalOptions="Center" />
             <Label Text="What would you like to practice?" HorizontalOptions="Center" TextColor="Gray" Margin="0,0,0,6" />
 
-            <Label Text="Level 1 · Chapter 1" FontAttributes="Bold" FontSize="15" TextColor="#512BD4" />
-            <Button Text="Vocal Drills" CommandParameter="l1c1vocal" Clicked="OnDrill" />
-            <Button Text="Resolution ID" CommandParameter="l1c1resolution" Clicked="OnDrill" />
-            <Button Text="Pitch ID" CommandParameter="l1c1pitch" Clicked="OnDrill" />
-            <Button Text="Dictation" CommandParameter="l1c1dictation" Clicked="OnDrill" />
-
-            <Label Text="Level 1 · Chapter 2" FontAttributes="Bold" FontSize="15" TextColor="#512BD4" Margin="0,8,0,0" />
-            <Button Text="Vocal Drills" CommandParameter="l1c2vocal" Clicked="OnDrill" />
-            <Button Text="Melodic Intervals" CommandParameter="l1c2melodic" Clicked="OnDrill" />
-            <Button Text="Harmonic Intervals" CommandParameter="l1c2harmonic" Clicked="OnDrill" />
-
-            <Label Text="Level 1 · Chapter 3" FontAttributes="Bold" FontSize="15" TextColor="#512BD4" Margin="0,8,0,0" />
-            <Button Text="Vocal Drills" CommandParameter="l1c3vocal" Clicked="OnDrill" />
-            <Button Text="Melodic Intervals" CommandParameter="l1c3melodic" Clicked="OnDrill" />
-            <Button Text="Harmonic Intervals" CommandParameter="l1c3harmonic" Clicked="OnDrill" />
-            <Button Text="Triad Recognition" CommandParameter="l1c3triad" Clicked="OnDrill" />
-            <Button Text="Dictation" CommandParameter="l1c3dictation" Clicked="OnDrill" />
-
-            <Label Text="Level 1 · Chapter 4" FontAttributes="Bold" FontSize="15" TextColor="#512BD4" Margin="0,8,0,0" />
-            <Button Text="Melody Harmonization" CommandParameter="l1c4harmonize" Clicked="OnDrill" />
-            <Button Text="Triad Progressions" CommandParameter="l1c4progressions" Clicked="OnDrill" />
-
-            <Label Text="Other drills" FontAttributes="Bold" FontSize="15" TextColor="#512BD4" Margin="0,8,0,0" />
-            <Button Text="Interval ID" CommandParameter="interval" Clicked="OnDrill" />
-            <Button Text="Triad ID" CommandParameter="triad" Clicked="OnDrill" />
+            <!-- Chapters are built in code-behind as a single-open accordion. -->
+            <VerticalStackLayout x:Name="ChaptersContainer" Spacing="0" />
 
             <Label Text="About &amp; credits" TextColor="#512BD4" HorizontalOptions="Center" Margin="0,14,0,6">
                 <Label.GestureRecognizers>
