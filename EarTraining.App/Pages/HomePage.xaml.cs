@@ -24,7 +24,7 @@ public partial class HomePage : ContentPage
         ("Level 1 · Chapter 2", new[] { ("Vocal Drills", "l1c2vocal"), ("Melodic Intervals", "l1c2melodic"), ("Harmonic Intervals", "l1c2harmonic") }),
         ("Level 1 · Chapter 3", new[] { ("Vocal Drills", "l1c3vocal"), ("Melodic Intervals", "l1c3melodic"), ("Harmonic Intervals", "l1c3harmonic"), ("Triad Recognition", "l1c3triad"), ("Dictation", "l1c3dictation") }),
         ("Level 1 · Chapter 4", new[] { ("Melody Harmonization", "l1c4harmonize"), ("Triad Progressions", "l1c4progressions") }),
-        ("Level 1 · Chapter 5", new[] { ("Melodic Intervals", "l1c5melodic"), ("Harmonic Intervals", "l1c5harmonic"), ("Triad Recognition", "l1c5triad") }),
+        ("Level 1 · Chapter 5", new[] { ("Vocal Drills", "l1c5vocal"), ("Melodic Intervals", "l1c5melodic"), ("Harmonic Intervals", "l1c5harmonic"), ("Triad Recognition", "l1c5triad") }),
         ("Other drills", new[] { ("Interval ID", "interval"), ("Triad ID", "triad") }),
     };
 
