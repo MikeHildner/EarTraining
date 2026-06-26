@@ -10,6 +10,7 @@
 
     <Shell.Resources>
         <local:FlyoutIconConverter x:Key="FlyoutIcon" />
+        <local:WipIconConverter x:Key="WipIcon" />
     </Shell.Resources>
 
     <Shell.FlyoutHeader>
@@ -24,9 +25,10 @@
 
     <Shell.ItemTemplate>
         <DataTemplate>
-            <Grid Padding="18,12" ColumnSpacing="14" ColumnDefinitions="24,*">
+            <Grid Padding="18,12" ColumnSpacing="14" ColumnDefinitions="24,*,Auto">
                 <Image Source="{Binding Title, Converter={StaticResource FlyoutIcon}}" HeightRequest="20" WidthRequest="20" VerticalOptions="Center" />
                 <Label Grid.Column="1" Text="{Binding Title}" FontSize="15" TextColor="#3C3489" VerticalOptions="Center" />
+                <Image Grid.Column="2" Source="{Binding Title, Converter={StaticResource WipIcon}}" HeightRequest="14" WidthRequest="14" VerticalOptions="Center" />
                 <VisualStateManager.VisualStateGroups>
                     <VisualStateGroup x:Name="CommonStates">
                         <VisualState x:Name="Normal">

@@ -109,7 +109,7 @@ public partial class HomePage : ContentPage
                 }
             }
 
-            var (groupSection, groupAcc) = BuildCard(group.Title, null, groupContent, chapter: false);
+            var (groupSection, groupAcc) = BuildCard(group.Title, null, groupContent, chapter: false, wip: WipIconConverter.IsWip(group.Title));
             ChaptersContainer.Add(groupSection);
             _groups.Add(groupAcc);
             _chapters[groupAcc] = chapterAccs;
@@ -123,7 +123,7 @@ public partial class HomePage : ContentPage
 
     // Builds a header card over its (already-created) content as one section. Group cards are the
     // larger top-level rows; chapter cards are smaller, indented, and carry a description line.
-    private (View section, Acc acc) BuildCard(string title, string? desc, View content, bool chapter)
+    private (View section, Acc acc) BuildCard(string title, string? desc, View content, bool chapter, bool wip = false)
     {
         var chevron = new Label { Text = "▸", FontSize = chapter ? 15 : 18, TextColor = HeaderText, VerticalOptions = LayoutOptions.Center };
 
@@ -147,9 +147,16 @@ public partial class HomePage : ContentPage
         var header = new Grid { Padding = new Thickness(chapter ? 12 : 14, chapter ? 9 : 12), ColumnSpacing = 8 };
         header.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Star));
         header.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Auto));
+        header.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Auto));
         Grid.SetColumn(titleView, 0);
-        Grid.SetColumn(chevron, 1);
         header.Add(titleView);
+        if (wip)
+        {
+            var badge = new Label { Text = char.ConvertFromUtf32(0xF0AD), FontFamily = "FA", FontSize = 13, TextColor = Color.FromArgb("#BA7517"), VerticalOptions = LayoutOptions.Center };
+            Grid.SetColumn(badge, 1);
+            header.Add(badge);
+        }
+        Grid.SetColumn(chevron, 2);
         header.Add(chevron);
 
         var border = new Border

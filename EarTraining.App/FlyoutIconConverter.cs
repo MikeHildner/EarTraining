@@ -32,3 +32,23 @@ public sealed class FlyoutIconConverter : IValueConverter
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
         => throw new NotSupportedException();
 }
+
+/// <summary>
+/// Returns an amber FontAwesome "wrench" glyph for nav items that are still a work in progress
+/// (Level 2 + Experimental), or null otherwise — used as a trailing badge in AppShell's flyout.
+/// </summary>
+public sealed class WipIconConverter : IValueConverter
+{
+    public static bool IsWip(string title) => title.StartsWith("Level 2") || title == "Experimental";
+
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        string title = value as string ?? string.Empty;
+        return IsWip(title)
+            ? new FontImageSource { Glyph = char.ConvertFromUtf32(0xF0AD), FontFamily = "FA", Color = Color.FromArgb("#BA7517"), Size = 13 }
+            : null;
+    }
+
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+        => throw new NotSupportedException();
+}
