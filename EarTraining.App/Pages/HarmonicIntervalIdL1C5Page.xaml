@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:EarTraining.App.Components"
+             x:Class="EarTraining.App.Pages.HarmonicIntervalIdL1C5Page"
+             Title="Harmonic Intervals">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="14">
+            <Label Text="Harmonic Intervals — 4ths / 5ths" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="Play the two notes together, then identify the interval."
+                   HorizontalOptions="Center" TextColor="Gray" />
+            <c:InfoNote Text="Selected from the harmonic identification questions on pp. 96–97." />
+            <c:TonicHeader x:Name="DoHeader" />
+
+            <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
+                <Label Text="Drill these:" HorizontalOptions="Center" FontSize="13" TextColor="Gray" />
+                <HorizontalStackLayout Spacing="14" HorizontalOptions="Center">
+                    <RadioButton x:Name="FourthsRadio" Content="4ths" GroupName="l1c5harm" IsChecked="True" CheckedChanged="OnGroupChanged" />
+                    <RadioButton x:Name="FifthsRadio" Content="5ths" GroupName="l1c5harm" CheckedChanged="OnGroupChanged" />
+                    <RadioButton x:Name="BothRadio" Content="Both" GroupName="l1c5harm" CheckedChanged="OnGroupChanged" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <Button Text="▶ Play interval" Clicked="OnPlay" />
+            <Label Text="Which interval did you hear?" FontAttributes="Bold" HorizontalOptions="Center" />
+            <FlexLayout x:Name="AnswersLayout" Wrap="Wrap" JustifyContent="Center" AlignItems="Center" />
+            <Button x:Name="NextButton" Text="↻ New Drill" Clicked="OnNext" HorizontalOptions="Center" WidthRequest="200" />
+            <Label x:Name="StatusLabel" HorizontalOptions="Center" FontAttributes="Bold" />
+            <c:ScoreGauge x:Name="Gauge" HorizontalOptions="Center" />
+            <c:AutomationBar x:Name="Automation" />
+            <c:IncludeToggles x:Name="Includes" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
