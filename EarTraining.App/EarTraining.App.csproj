@@ -22,7 +22,7 @@
         <MauiXamlInflator>SourceGen</MauiXamlInflator>
 
         <ApplicationTitle>Ear Training</ApplicationTitle>
-        <ApplicationId>com.companyname.eartraining.app</ApplicationId>
+        <ApplicationId>org.hildner.eartraining</ApplicationId>
         <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
         <ApplicationVersion>1</ApplicationVersion>
         <WindowsPackageType>None</WindowsPackageType>
