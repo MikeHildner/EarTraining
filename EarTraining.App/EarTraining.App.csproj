@@ -47,6 +47,13 @@
         <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
     </ItemGroup>
 
+    <!-- iOS App Store privacy manifest: declares no tracking / no data collected, plus the
+         required-reason API categories the .NET runtime touches (file timestamp, user
+         defaults, system boot time, disk space). LogicalName roots it in the .app bundle. -->
+    <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
+        <BundleResource Include="Platforms\iOS\PrivacyInfo.xcprivacy" LogicalName="PrivacyInfo.xcprivacy" />
+    </ItemGroup>
+
     <ItemGroup>
         <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0" />
