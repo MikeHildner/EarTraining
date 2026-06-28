@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EarTraining.App.Pages.HomePage"
+             Title="Home">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="12">
+            <Border StrokeShape="RoundRectangle 22" HeightRequest="104" WidthRequest="104"
+                    HorizontalOptions="Center" Padding="10" Stroke="Transparent" Margin="0,8,0,0">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#9B8CEF" Offset="0" />
+                        <GradientStop Color="#6A5AE6" Offset="1" />
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Image Source="welcome_ear.png" Aspect="AspectFit" />
+            </Border>
+            <Label Text="Ear Training" FontSize="26" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="What would you like to practice?" HorizontalOptions="Center" TextColor="Gray" Margin="0,0,0,6" />
+
+            <!-- Chapters are built in code-behind as a single-open accordion. -->
+            <VerticalStackLayout x:Name="ChaptersContainer" Spacing="0" />
+
+            <Label Text="About &amp; credits" TextColor="#512BD4" HorizontalOptions="Center" Margin="0,14,0,6">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnAbout" />
+                </Label.GestureRecognizers>
+            </Label>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:EarTraining.App.Components"
+             x:Class="EarTraining.App.Pages.L2C4ProgressionsPage"
+             Title="Major Triad Progressions">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="14">
+            <Label Text="Major Triad Progressions" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="Identify the chord movement. The key is random each drill — listen to the motion, not the pitches."
+                   HorizontalOptions="Center" TextColor="Gray" />
+            <Border HorizontalOptions="Center" BackgroundColor="#FAEEDA" Stroke="#EF9F27" StrokeThickness="1"
+                    StrokeShape="RoundRectangle 8" Padding="10,3" Margin="0,2,0,0">
+                <Label Text="Work in progress" TextColor="#854F0B" FontSize="12" />
+            </Border>
+            <c:InfoNote Text="Selected from the major triad progression questions on pp. 63 &amp; 65." />
+
+            <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
+                <Label Text="How many chords:" HorizontalOptions="Center" FontSize="13" TextColor="Gray" />
+                <HorizontalStackLayout Spacing="14" HorizontalOptions="Center">
+                    <RadioButton x:Name="TwoChordRadio" Content="2 chords" GroupName="l2c4mode" IsChecked="True" CheckedChanged="OnModeChanged" />
+                    <RadioButton x:Name="ThreeChordRadio" Content="3 chords" GroupName="l2c4mode" CheckedChanged="OnModeChanged" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <Button Text="▶ Play progression" Clicked="OnPlay" />
+            <Button x:Name="NextButton" Text="↻ New Progression" Clicked="OnNext" HorizontalOptions="Center" WidthRequest="220" />
+            <Label Text="Which movement did you hear?" FontAttributes="Bold" HorizontalOptions="Center" />
+            <FlexLayout x:Name="AnswersLayout" Wrap="Wrap" JustifyContent="Center" AlignItems="Center" />
+            <Label x:Name="StatusLabel" HorizontalOptions="Center" FontAttributes="Bold" />
+            <c:ScoreGauge x:Name="Gauge" HorizontalOptions="Center" />
+            <c:AutomationBar x:Name="Automation" />
+            <c:IncludeToggles x:Name="Includes" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

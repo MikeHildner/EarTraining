@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Portable core for the mobile port: theory + audio rendering, no Windows /
+       ASP.NET / native deps. Referenced by the MAUI app (net10.0-android/-ios)
+       and build-verifiable on its own. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>

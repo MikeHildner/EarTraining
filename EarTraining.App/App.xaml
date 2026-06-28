@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:EarTraining.App"
+             x:Class="EarTraining.App.App">
+    <Application.Resources>
+        <ResourceDictionary>
+
+            <!-- Shared filled-button look so iOS matches Android (UIKit's default
+                 Button is borderless text). Implicit style -> applies to every Button.
+                 Deliberately no Disabled visual-state BackgroundColor setter, so the
+                 drill pages' programmatic correct/incorrect colors (SeaGreen/IndianRed
+                 on answered, disabled buttons) are not clobbered. -->
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#512BD4" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="Padding" Value="16,10" />
+                <Setter Property="MinimumHeightRequest" Value="44" />
+            </Style>
+
+            <!-- Outline look for quiz answer buttons, so the choices read as one group,
+                 visually distinct from the filled action buttons; they fill green/red on answer. -->
+            <Style x:Key="AnswerButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="TextColor" Value="#512BD4" />
+                <Setter Property="BorderColor" Value="#512BD4" />
+                <Setter Property="BorderWidth" Value="1" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="Padding" Value="16,10" />
+                <Setter Property="MinimumHeightRequest" Value="44" />
+            </Style>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

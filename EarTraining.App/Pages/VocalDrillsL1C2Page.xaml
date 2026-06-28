@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:EarTraining.App.Components"
+             x:Class="EarTraining.App.Pages.VocalDrillsL1C2Page"
+             Title="Vocal Drills">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="14">
+            <Label Text="Vocal Drills — Maj 3rd / Min 6th" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="Play the drill, sing along, then identify the pattern."
+                   HorizontalOptions="Center" TextColor="Gray" />
+            <c:InfoNote Text="Selected from the vocal drills on pp. 23–25." />
+            <c:TonicHeader x:Name="DoHeader" />
+            <c:IntervalTypeToggle x:Name="Toggle" />
+            <Button Text="▶ Play drill" Clicked="OnPlay" />
+            <Label Text="Which pattern did you hear?" FontAttributes="Bold" HorizontalOptions="Center" />
+            <FlexLayout x:Name="AnswersLayout" Wrap="Wrap" JustifyContent="Center" AlignItems="Center" />
+            <Button x:Name="NextButton" Text="↻ New Drill" Clicked="OnNext" HorizontalOptions="Center" WidthRequest="200" />
+            <Label x:Name="StatusLabel" HorizontalOptions="Center" FontAttributes="Bold" />
+            <c:ScoreGauge x:Name="Gauge" HorizontalOptions="Center" />
+            <c:AutomationBar x:Name="Automation" />
+            <c:IncludeToggles x:Name="Includes" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

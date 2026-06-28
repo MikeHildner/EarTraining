@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:EarTraining.App.Components"
+             x:Class="EarTraining.App.Pages.L2ProgressionsExplorerPage"
+             Title="Major Triad Movements">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="14">
+            <Label Text="Major Triad Movements" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="An explorer: pick the movement types, and it builds a random major-triad progression in a random key. No scoring — just listen."
+                   HorizontalOptions="Center" TextColor="Gray" />
+            <Border HorizontalOptions="Center" BackgroundColor="#FAEEDA" Stroke="#EF9F27" StrokeThickness="1"
+                    StrokeShape="RoundRectangle 8" Padding="10,3" Margin="0,2,0,0">
+                <Label Text="Work in progress" TextColor="#854F0B" FontSize="12" />
+            </Border>
+
+            <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
+                <Label Text="How many chords:" HorizontalOptions="Center" FontSize="13" TextColor="Gray" />
+                <HorizontalStackLayout Spacing="14" HorizontalOptions="Center">
+                    <RadioButton x:Name="ThreeRadio" Content="3" GroupName="l2count" />
+                    <RadioButton x:Name="FourRadio" Content="4" GroupName="l2count" IsChecked="True" />
+                    <RadioButton x:Name="FiveRadio" Content="5" GroupName="l2count" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <Button Text="▶ Play progression" Clicked="OnPlay" />
+            <Button x:Name="NextButton" Text="↻ New Progression" Clicked="OnNext" HorizontalOptions="Center" WidthRequest="220" />
+            <Label x:Name="StatusLabel" HorizontalOptions="Center" TextColor="Gray" />
+
+            <Label Text="Include these movements:" HorizontalOptions="Center" FontSize="13" TextColor="Gray" Margin="0,8,0,0" />
+            <c:IncludeToggles x:Name="Includes" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

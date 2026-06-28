@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:EarTraining.App.Components"
+             x:Class="EarTraining.App.Pages.FindTheDoPage"
+             Title="Find the DO">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="14">
+            <Label Text="Find the DO" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="Listen to the DO, sing it, then find it on your instrument. Tap New DO for a fresh key."
+                   HorizontalOptions="Center" TextColor="Gray" />
+            <c:TonicHeader x:Name="DoHeader" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

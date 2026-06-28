@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EarTraining.App.Pages.DictationPage"
+             Title="Dictation">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="14">
+            <Label Text="Melodic Dictation" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="Play the melody, transcribe it, then reveal the answer."
+                   HorizontalOptions="Center" TextColor="Gray" />
+
+            <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto"
+                  ColumnSpacing="12" RowSpacing="8">
+                <Label Text="Resolution" VerticalOptions="Center" Grid.Row="0" Grid.Column="0" />
+                <Picker x:Name="ResolutionPicker" Grid.Row="0" Grid.Column="1" />
+                <Label Text="Key" VerticalOptions="Center" Grid.Row="1" Grid.Column="0" />
+                <Picker x:Name="KeyPicker" Grid.Row="1" Grid.Column="1" />
+                <Label Text="BPM" VerticalOptions="Center" Grid.Row="2" Grid.Column="0" />
+                <Picker x:Name="BpmPicker" Grid.Row="2" Grid.Column="1" />
+                <Label Text="Measures" VerticalOptions="Center" Grid.Row="3" Grid.Column="0" />
+                <Picker x:Name="MeasuresPicker" Grid.Row="3" Grid.Column="1" />
+            </Grid>
+
+            <Button Text="New Dictation" Clicked="OnNewDictation" />
+            <Button x:Name="PlayButton" Text="Play" Clicked="OnPlay" />
+            <Button x:Name="RevealButton" Text="Reveal transcription" Clicked="OnReveal" />
+
+            <Label x:Name="StatusLabel" HorizontalOptions="Center" FontAttributes="Bold" />
+
+            <WebView x:Name="NotationWeb" HeightRequest="420" IsVisible="False" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

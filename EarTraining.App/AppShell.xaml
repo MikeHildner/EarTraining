@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:pages="clr-namespace:EarTraining.App.Pages"
+       xmlns:local="clr-namespace:EarTraining.App"
+       x:Class="EarTraining.App.AppShell"
+       FlyoutBehavior="Flyout"
+       FlyoutBackgroundColor="White"
+       Title="Ear Training">
+
+    <Shell.Resources>
+        <local:FlyoutIconConverter x:Key="FlyoutIcon" />
+        <local:WipIconConverter x:Key="WipIcon" />
+    </Shell.Resources>
+
+    <Shell.FlyoutHeader>
+        <Grid BackgroundColor="#512BD4" Padding="18,26,18,18" ColumnSpacing="14" ColumnDefinitions="Auto,*">
+            <Image Source="welcome_ear.png" WidthRequest="40" HeightRequest="40" VerticalOptions="Center" />
+            <VerticalStackLayout Grid.Column="1" Spacing="1" VerticalOptions="Center">
+                <Label Text="Ear Training" TextColor="White" FontSize="18" FontAttributes="Bold" />
+                <Label Text="Contemporary ear training" TextColor="#CECBF6" FontSize="12" />
+            </VerticalStackLayout>
+        </Grid>
+    </Shell.FlyoutHeader>
+
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid Padding="18,12" ColumnSpacing="14" ColumnDefinitions="24,*,Auto">
+                <Image Source="{Binding Title, Converter={StaticResource FlyoutIcon}}" HeightRequest="20" WidthRequest="20" VerticalOptions="Center" />
+                <Label Grid.Column="1" Text="{Binding Title}" FontSize="15" TextColor="#3C3489" VerticalOptions="Center" />
+                <Image Grid.Column="2" Source="{Binding Title, Converter={StaticResource WipIcon}}" HeightRequest="14" WidthRequest="14" VerticalOptions="Center" />
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="Transparent" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="#ECE6FB" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+
+    <FlyoutItem Title="Home">
+        <ShellContent Route="home" ContentTemplate="{DataTemplate pages:HomePage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Level 1 · Chapter 1">
+        <ShellContent Title="Vocal Drills" Route="l1c1vocal" ContentTemplate="{DataTemplate pages:VocalDrillsPage}" />
+        <ShellContent Title="Resolution ID" Route="l1c1resolution" ContentTemplate="{DataTemplate pages:ResolutionIdPage}" />
+        <ShellContent Title="Pitch ID" Route="l1c1pitch" ContentTemplate="{DataTemplate pages:PitchIdPage}" />
+        <ShellContent Title="Dictation" Route="l1c1dictation" ContentTemplate="{DataTemplate pages:DictationPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Level 1 · Chapter 2">
+        <ShellContent Title="Vocal Drills" Route="l1c2vocal" ContentTemplate="{DataTemplate pages:VocalDrillsL1C2Page}" />
+        <ShellContent Title="Melodic Intervals" Route="l1c2melodic" ContentTemplate="{DataTemplate pages:MelodicIntervalL1C2Page}" />
+        <ShellContent Title="Harmonic Intervals" Route="l1c2harmonic" ContentTemplate="{DataTemplate pages:HarmonicIntervalL1C2Page}" />
+        <ShellContent Title="Dictation" Route="l1c2dictation" ContentTemplate="{DataTemplate pages:DictationL1C2Page}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Level 1 · Chapter 3">
+        <ShellContent Title="Vocal Drills" Route="l1c3vocal" ContentTemplate="{DataTemplate pages:VocalDrillsL1C3Page}" />
+        <ShellContent Title="Melodic Intervals" Route="l1c3melodic" ContentTemplate="{DataTemplate pages:MelodicIntervalL1C3Page}" />
+        <ShellContent Title="Harmonic Intervals" Route="l1c3harmonic" ContentTemplate="{DataTemplate pages:HarmonicIntervalL1C3Page}" />
+        <ShellContent Title="Triad Recognition" Route="l1c3triad" ContentTemplate="{DataTemplate pages:TriadRecognitionL1C3Page}" />
+        <ShellContent Title="Dictation" Route="l1c3dictation" ContentTemplate="{DataTemplate pages:DictationL1C3Page}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Level 1 · Chapter 4">
+        <ShellContent Title="Melody Harmonization" Route="l1c4harmonize" ContentTemplate="{DataTemplate pages:MelodyHarmonizationPage}" />
+        <ShellContent Title="Triad Progressions" Route="l1c4progressions" ContentTemplate="{DataTemplate pages:TriadProgressionsPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Level 1 · Chapter 5">
+        <ShellContent Title="Vocal Drills" Route="l1c5vocal" ContentTemplate="{DataTemplate pages:VocalDrillsL1C5Page}" />
+        <ShellContent Title="Melodic Intervals" Route="l1c5melodic" ContentTemplate="{DataTemplate pages:MelodicIntervalIdL1C5Page}" />
+        <ShellContent Title="Harmonic Intervals" Route="l1c5harmonic" ContentTemplate="{DataTemplate pages:HarmonicIntervalIdL1C5Page}" />
+        <ShellContent Title="Triad Recognition" Route="l1c5triad" ContentTemplate="{DataTemplate pages:TriadRecognitionL1C5Page}" />
+        <ShellContent Title="Triad Progressions" Route="l1c5progressions" ContentTemplate="{DataTemplate pages:TriadProgressionsL1C5Page}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Level 1 · Chapter 6">
+        <ShellContent Title="Vocal Drills" Route="l1c6vocal" ContentTemplate="{DataTemplate pages:VocalDrillsL1C6Page}" />
+        <ShellContent Title="Melodic Intervals" Route="l1c6melodic" ContentTemplate="{DataTemplate pages:MelodicIntervalIdL1C6Page}" />
+        <ShellContent Title="Harmonic Intervals" Route="l1c6harmonic" ContentTemplate="{DataTemplate pages:HarmonicIntervalIdL1C6Page}" />
+        <ShellContent Title="Triad Recognition" Route="l1c6triad" ContentTemplate="{DataTemplate pages:TriadRecognitionL1C6Page}" />
+        <ShellContent Title="Triad Progressions" Route="l1c6progressions" ContentTemplate="{DataTemplate pages:TriadProgressionsL1C6Page}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Level 1 · Chapter 7">
+        <ShellContent Title="Vocal Drills" Route="l1c7vocal" ContentTemplate="{DataTemplate pages:VocalDrillsL1C7Page}" />
+        <ShellContent Title="Melodic Intervals" Route="l1c7melodic" ContentTemplate="{DataTemplate pages:MelodicIntervalIdL1C7Page}" />
+        <ShellContent Title="Harmonic Intervals" Route="l1c7harmonic" ContentTemplate="{DataTemplate pages:HarmonicIntervalIdL1C7Page}" />
+        <ShellContent Title="Triad Recognition" Route="l1c7triad" ContentTemplate="{DataTemplate pages:TriadRecognitionL1C7Page}" />
+        <ShellContent Title="Triad Progressions" Route="l1c7progressions" ContentTemplate="{DataTemplate pages:TriadProgressionsL1C7Page}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Level 2 · Chapter 4">
+        <ShellContent Title="Major Triad Progressions" Route="l2c4" ContentTemplate="{DataTemplate pages:L2C4ProgressionsPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Level 2 · Chapter 5">
+        <ShellContent Title="Diatonic Triad Progressions" Route="l2c5" ContentTemplate="{DataTemplate pages:L2C5ProgressionsExplorerPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Not in the Books">
+        <ShellContent Title="Interval ID" Route="interval" ContentTemplate="{DataTemplate pages:IntervalPage}" />
+        <ShellContent Title="Triad ID" Route="triad" ContentTemplate="{DataTemplate pages:TriadPage}" />
+        <ShellContent Title="Find the DO" Route="finddo" ContentTemplate="{DataTemplate pages:FindTheDoPage}" />
+        <ShellContent Title="Solfège Syllables" Route="solfeg" ContentTemplate="{DataTemplate pages:SolfegSyllablesPage}" />
+        <ShellContent Title="Major Triad Movements" Route="l2major" ContentTemplate="{DataTemplate pages:L2ProgressionsExplorerPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="About">
+        <ShellContent Route="about" ContentTemplate="{DataTemplate pages:AboutPage}" />
+    </FlyoutItem>
+
+</Shell>
