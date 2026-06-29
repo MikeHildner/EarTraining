@@ -23,6 +23,10 @@ public partial class TonicHeader : ContentView
     {
         InitializeComponent();
         Roll();
+        SyncToSettings();
+        // Shell keeps drill pages alive, so Loaded re-fires on every re-appear — re-sync then
+        // (e.g. the user changed the practice key in Settings and came back to a cached page).
+        Loaded += (_, _) => SyncToSettings();
     }
 
     private void Roll()
@@ -30,8 +34,34 @@ public partial class TonicHeader : ContentView
         // Honor a fixed practice key from Settings; otherwise a fresh random DO each drill.
         var key = SettingsStore.FixedKey;
         Do = string.IsNullOrEmpty(key) ? Tonic.RandomDo(_rng) : Keys.DoNote(key);
-        DoLabel.Text = $"DO = {Note.Name(Do)}";
+        UpdateLabel();
     }
+
+    // Reflects the current Settings practice key: hides the now-pointless "New DO" when the key
+    // is fixed, and (for cached pages) re-rolls to a newly chosen fixed key, notifying the page.
+    // With no fixed key we leave the existing random DO untouched — only the chrome updates — so
+    // revisiting a page doesn't silently change the tonic.
+    private void SyncToSettings()
+    {
+        var key = SettingsStore.FixedKey;
+        bool isFixed = !string.IsNullOrEmpty(key);
+        NewDoButton.IsVisible = !isFixed;
+
+        bool reRolled = false;
+        if (isFixed)
+        {
+            int target = Keys.DoNote(key);
+            if (Do != target) { Do = target; reRolled = true; }
+        }
+
+        UpdateLabel();
+        if (reRolled) DoChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void UpdateLabel() =>
+        DoLabel.Text = string.IsNullOrEmpty(SettingsStore.FixedKey)
+            ? $"DO = {Note.Name(Do)}"
+            : $"DO = {Note.Name(Do)} · fixed";
 
     private async void OnPlayDo(object? sender, EventArgs e)
     {
