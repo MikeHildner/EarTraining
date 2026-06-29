@@ -1,9 +1,13 @@
+using EarTraining.App.Services;
+
 namespace EarTraining.App.Components;
 
 /// <summary>
 /// A row of per-pattern include switches. Pages call Build(items) with (key, label) pairs;
 /// Included exposes the checked keys, and Changed fires on any toggle so the page can
-/// re-filter the random drill and the quiz options.
+/// re-filter the random drill and the quiz options. If a page sets <see cref="Play"/>, each
+/// row also gets a ▶ that plays that specific pattern on demand (restores the website's
+/// per-pattern playback) — independent of the include switch.
 /// </summary>
 public partial class IncludeToggles : ContentView
 {
@@ -11,6 +15,9 @@ public partial class IncludeToggles : ContentView
     private bool _suppress;
 
     public event EventHandler? Changed;
+
+    /// <summary>Optional: when set, each row shows a ▶ that calls this with the row's key to play it.</summary>
+    public Action<string>? Play { get; set; }
 
     public IncludeToggles()
     {
@@ -21,6 +28,7 @@ public partial class IncludeToggles : ContentView
     {
         Container.Children.Clear();
         _switches.Clear();
+        Hint.IsVisible = Play is not null;
         foreach (var (key, label) in items)
         {
             var toggle = new Switch { IsToggled = true };
@@ -30,6 +38,19 @@ public partial class IncludeToggles : ContentView
             var row = new HorizontalStackLayout { Spacing = 4, Margin = new Thickness(0, 0, 14, 0) };
             row.Add(toggle);
             row.Add(new Label { Text = label, VerticalOptions = LayoutOptions.Center, FontSize = 13 });
+            if (Play is { } play)
+            {
+                var k = key;
+                var playBtn = new Label
+                {
+                    Text = "▶", FontSize = 16, TextColor = Theme.Accent,
+                    VerticalOptions = LayoutOptions.Center, Padding = new Thickness(10, 4),
+                };
+                var tap = new TapGestureRecognizer();
+                tap.Tapped += (_, _) => play(k);
+                playBtn.GestureRecognizers.Add(tap);
+                row.Add(playBtn);
+            }
             Container.Add(row);
         }
     }

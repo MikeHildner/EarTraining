@@ -22,6 +22,7 @@ public partial class HarmonicIntervalL1C2Page : ContentPage, IAutomatableDrill
         DoHeader.DoChanged += (_, _) => NewDrill();
         Toggle.Changed += (_, _) => Rebuild();
         Includes.Changed += (_, _) => { BuildAnswers(); NewDrill(); };
+        Includes.Play = PlayKey;
         Automation.Target = this;
         Rebuild();
     }
@@ -83,15 +84,22 @@ public partial class HarmonicIntervalL1C2Page : ContentPage, IAutomatableDrill
 
     private async void OnPlay(object? sender, EventArgs e)
     {
-        try { await PlayCurrentAsync(); }
+        try { await PlayDrillAsync(_drill); }
         catch (Exception ex) { StatusLabel.Text = "Audio error: " + ex.Message; }
     }
 
-    private async Task PlayCurrentAsync()
+    // Plays one specific pattern on demand from the Include list's ▶.
+    private async void PlayKey(string key)
+    {
+        try { await PlayDrillAsync(L1C2Drill.Harmonic[int.Parse(key)]); }
+        catch (Exception ex) { StatusLabel.Text = "Audio error: " + ex.Message; }
+    }
+
+    private async Task PlayDrillAsync(L1C2Drill drill)
     {
         // Two notes played together (with a slight upward roll so both pitches are heard).
-        var low = await _samples.LoadAsync(Note.SampleFile(DoHeader.Do + _drill.Offsets[0]));
-        var high = await _samples.LoadAsync(Note.SampleFile(DoHeader.Do + _drill.Offsets[1]));
+        var low = await _samples.LoadAsync(Note.SampleFile(DoHeader.Do + drill.Offsets[0]));
+        var high = await _samples.LoadAsync(Note.SampleFile(DoHeader.Do + drill.Offsets[1]));
         _audio.Play(AudioRenderer.RenderHarmonic(new[] { low, high }, seconds: 3.0));
     }
 
@@ -116,7 +124,7 @@ public partial class HarmonicIntervalL1C2Page : ContentPage, IAutomatableDrill
     public double AutoPlay()
     {
         NewDrill();
-        _ = PlayCurrentAsync();
+        _ = PlayDrillAsync(_drill);
         return 3.0;
     }
 
