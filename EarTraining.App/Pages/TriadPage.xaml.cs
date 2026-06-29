@@ -71,6 +71,7 @@ public partial class TriadPage : ContentPage
         _total++;
         bool correct = name == _drill.Answer.Name;
         if (correct) _correct++;
+        ProgressStore.Record("triad", correct);
 
         foreach (var (qualityName, button) in _optionButtons)
         {

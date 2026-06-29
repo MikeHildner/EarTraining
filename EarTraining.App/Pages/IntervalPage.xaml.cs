@@ -70,6 +70,7 @@ public partial class IntervalPage : ContentPage
         _total++;
         bool correct = semitones == _drill.Answer.Semitones;
         if (correct) _correct++;
+        ProgressStore.Record("interval", correct);
 
         foreach (var (semis, button) in _optionButtons)
         {

@@ -209,4 +209,7 @@ public partial class HomePage : ContentPage
 
     private async void OnAbout(object? sender, TappedEventArgs e) =>
         await Shell.Current.GoToAsync("//about");
+
+    private async void OnProgress(object? sender, TappedEventArgs e) =>
+        await Shell.Current.GoToAsync("//progress");
 }

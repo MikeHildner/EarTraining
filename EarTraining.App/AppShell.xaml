@@ -118,6 +118,10 @@
         <ShellContent Title="Major Triad Movements" Route="l2major" ContentTemplate="{DataTemplate pages:L2ProgressionsExplorerPage}" />
     </FlyoutItem>
 
+    <FlyoutItem Title="Progress">
+        <ShellContent Route="progress" ContentTemplate="{DataTemplate pages:ProgressPage}" />
+    </FlyoutItem>
+
     <FlyoutItem Title="About">
         <ShellContent Route="about" ContentTemplate="{DataTemplate pages:AboutPage}" />
     </FlyoutItem>

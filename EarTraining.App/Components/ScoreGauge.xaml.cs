@@ -1,3 +1,4 @@
+using EarTraining.App.Services;
 using Microsoft.Maui.Graphics;
 
 namespace EarTraining.App.Components;
@@ -48,6 +49,16 @@ public partial class ScoreGauge : ContentView
         _total++;
         if (correct) { _correct++; _streak++; } else { _streak = 0; }
         Refresh(animate: true);
+        ProgressStore.Record(CurrentDrillRoute(), correct);   // persist all-time stats (ignored for non-drill routes)
+    }
+
+    // Persistent-stats key = the last segment of the current Shell route (e.g. "//l1c2melodic" →
+    // "l1c2melodic"). Null/unknown routes (e.g. the Welcome hero gauge before the Shell exists) are
+    // ignored by ProgressStore, so only real drill answers are recorded.
+    private static string? CurrentDrillRoute()
+    {
+        var loc = Shell.Current?.CurrentState?.Location?.OriginalString;
+        return string.IsNullOrEmpty(loc) ? null : loc.Trim('/').Split('/').LastOrDefault();
     }
 
     public void Reset()

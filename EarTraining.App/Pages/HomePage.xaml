@@ -21,7 +21,13 @@
             <!-- Chapters are built in code-behind as a single-open accordion. -->
             <VerticalStackLayout x:Name="ChaptersContainer" Spacing="0" />
 
-            <Label Text="About &amp; credits" TextColor="#512BD4" HorizontalOptions="Center" Margin="0,14,0,6">
+            <Label Text="Your Progress" TextColor="#512BD4" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,14,0,0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnProgress" />
+                </Label.GestureRecognizers>
+            </Label>
+
+            <Label Text="About &amp; credits" TextColor="#512BD4" HorizontalOptions="Center" Margin="0,6,0,6">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnAbout" />
                 </Label.GestureRecognizers>
