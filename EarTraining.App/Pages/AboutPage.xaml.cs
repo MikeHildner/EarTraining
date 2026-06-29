@@ -1,5 +1,7 @@
 using System.Windows.Input;
 using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.ApplicationModel.DataTransfer;
+using Microsoft.Maui.Devices;
 
 namespace EarTraining.App.Pages;
 
@@ -32,6 +34,31 @@ public partial class AboutPage : ContentPage
     {
         LicenseText.IsVisible = !LicenseText.IsVisible;
         LicenseToggle.Text = LicenseText.IsVisible ? "Hide licenses" : "Open-source licenses";
+    }
+
+    // Opens a pre-filled support email (subject + app/device footer for triage). The mail app is
+    // optional — if none is configured (e.g. a simulator), copy the address to the clipboard and
+    // tell the user, so the address is never a dead end.
+    private async void OnReportEmail(object? sender, EventArgs e)
+    {
+        const string address = "eartraining@hildner.org";
+        var d = DeviceInfo.Current;
+        string subject = $"Ear Training feedback (v{AppInfo.Current.VersionString})";
+        string body =
+            "\n\n\n--- for support (you can edit or delete this) ---\n" +
+            $"App {AppInfo.Current.VersionString} (build {AppInfo.Current.BuildString}) · " +
+            $"{d.Platform} {d.VersionString} · {d.Manufacturer} {d.Model}";
+        string url = $"mailto:{address}?subject={Uri.EscapeDataString(subject)}&body={Uri.EscapeDataString(body)}";
+
+        try
+        {
+            if (await Launcher.Default.OpenAsync(url)) return;
+        }
+        catch { /* no mail handler — fall through */ }
+
+        try { await Clipboard.Default.SetTextAsync(address); } catch { }
+        await DisplayAlertAsync("No mail app found",
+            $"Email us at {address} — the address has been copied to your clipboard.", "OK");
     }
 
     private const string LicenseNotice =

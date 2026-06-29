@@ -120,10 +120,13 @@
             </Border>
 
             <!-- Footer -->
+            <Button Text="✉ Report an issue by email" Clicked="OnReportEmail" Margin="0,4,0,0" />
+            <Button Text="Report an issue on GitHub" Command="{Binding OpenUrl}"
+                    CommandParameter="https://github.com/MikeHildner/EarTraining/issues" />
+            <Label Text="Opening a GitHub issue needs a free account." FontSize="12" TextColor="Gray"
+                   HorizontalTextAlignment="Center" HorizontalOptions="Center" />
             <Button Text="View source on GitHub" Command="{Binding OpenUrl}"
                     CommandParameter="https://github.com/MikeHildner/EarTraining" Margin="0,4,0,0" />
-            <Button Text="Report an issue" Command="{Binding OpenUrl}"
-                    CommandParameter="https://github.com/MikeHildner/EarTraining/issues" />
             <Label Text="Made by Mike Hildner" FontSize="13" TextColor="Gray" HorizontalOptions="Center" Margin="0,6,0,0" />
             <Label Text="This app treats C4 as Middle C (261.63 Hz)."
                    FontSize="12" TextColor="Gray" HorizontalTextAlignment="Center" Margin="0,0,0,8" />
