@@ -92,8 +92,10 @@ public partial class ProgressPage : ContentPage
         foreach (var (route, name, correct, total) in ProgressStore.PerDrill())
         {
             int pct = (int)Math.Round(100.0 * correct / total);
-            var row = new Grid { ColumnSpacing = 8 };
+            // Whole row taps through to that drill; the › chevron signals it navigates.
+            var row = new Grid { ColumnSpacing = 8, Padding = new Thickness(0, 3) };
             row.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Star));
+            row.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Auto));
             row.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Auto));
             row.Add(new Label { Text = name, FontSize = 13.5, TextColor = Body, VerticalOptions = LayoutOptions.Center });
             var right = new Label
@@ -104,6 +106,20 @@ public partial class ProgressPage : ContentPage
             };
             Grid.SetColumn(right, 1);
             row.Add(right);
+
+            var chevron = new Label
+            {
+                Text = "›", FontSize = 18, TextColor = Accent,
+                VerticalOptions = LayoutOptions.Center, Margin = new Thickness(2, 0, 0, 0),
+            };
+            Grid.SetColumn(chevron, 2);
+            row.Add(chevron);
+
+            var r = route;
+            var tap = new TapGestureRecognizer();
+            tap.Tapped += async (_, _) => await Shell.Current.GoToAsync($"//{r}");
+            row.GestureRecognizers.Add(tap);
+
             stack.Add(row);
         }
         return Card(stack);
