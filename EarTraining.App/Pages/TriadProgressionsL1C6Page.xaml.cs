@@ -22,6 +22,7 @@ public partial class TriadProgressionsL1C6Page : ContentPage, IAutomatableDrill
         InitializeComponent();
         DoHeader.DoChanged += (_, _) => NewDrill();
         Includes.Changed += (_, _) => { BuildAnswers(); NewDrill(); };
+        Includes.Play = PlayKey;
         Automation.Target = this;
         Rebuild();
         _ready = true;
@@ -76,23 +77,30 @@ public partial class TriadProgressionsL1C6Page : ContentPage, IAutomatableDrill
 
     private async void OnPlay(object? sender, EventArgs e)
     {
-        try { await PlayCurrentAsync(); }
+        try { await PlayDrillAsync(_drill); }
         catch (Exception ex) { StatusLabel.Text = "Audio error: " + ex.Message; }
     }
 
-    private async Task PlayCurrentAsync()
+    // Plays one specific progression on demand from the Include list's ▶.
+    private async void PlayKey(string key)
+    {
+        try { await PlayDrillAsync(Set[int.Parse(key)]); }
+        catch (Exception ex) { StatusLabel.Text = "Audio error: " + ex.Message; }
+    }
+
+    private async Task PlayDrillAsync(L1C6ProgressionDrill drill)
     {
         var steps = new List<(IReadOnlyList<byte[]> chord, double seconds)>();
-        for (int i = 0; i < _drill.Chords.Count; i++)
+        for (int i = 0; i < drill.Chords.Count; i++)
         {
-            var chord = _drill.Chords[i];
+            var chord = drill.Chords[i];
             var samples = new List<byte[]>
             {
                 await _samples.LoadAsync(Note.SampleFile(Voicing.BassNoteNumber(DoHeader.Do + chord.BassRootOffset))),
             };
             foreach (var offset in chord.ToneOffsets)
                 samples.Add(await _samples.LoadAsync(Note.SampleFile(DoHeader.Do + offset)));
-            double seconds = i == _drill.Chords.Count - 1 ? 4.0 : 2.0;
+            double seconds = i == drill.Chords.Count - 1 ? 4.0 : 2.0;
             steps.Add((samples, seconds));
         }
         _audio.Play(AudioRenderer.RenderProgression(steps));
@@ -126,7 +134,7 @@ public partial class TriadProgressionsL1C6Page : ContentPage, IAutomatableDrill
     public double AutoPlay()
     {
         NewDrill();
-        _ = PlayCurrentAsync();
+        _ = PlayDrillAsync(_drill);
         return (_drill.Chords.Count - 1) * 2.0 + 4.0;
     }
 

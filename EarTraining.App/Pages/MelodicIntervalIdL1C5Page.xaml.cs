@@ -22,6 +22,7 @@ public partial class MelodicIntervalIdL1C5Page : ContentPage, IAutomatableDrill
         InitializeComponent();
         DoHeader.DoChanged += (_, _) => NewDrill();
         Includes.Changed += (_, _) => { BuildAnswers(); NewDrill(); };
+        Includes.Play = PlayKey;
         Automation.Target = this;
         Rebuild();
         _ready = true;
@@ -89,15 +90,22 @@ public partial class MelodicIntervalIdL1C5Page : ContentPage, IAutomatableDrill
 
     private async void OnPlay(object? sender, EventArgs e)
     {
-        try { await PlayCurrentAsync(); }
+        try { await PlayDrillAsync(_drill); }
         catch (Exception ex) { StatusLabel.Text = "Audio error: " + ex.Message; }
     }
 
-    private async Task PlayCurrentAsync()
+    // Plays one specific prompt on demand from the Include list's ▶.
+    private async void PlayKey(string key)
+    {
+        try { await PlayDrillAsync(L1C5IntervalDrill.Melodic[int.Parse(key)]); }
+        catch (Exception ex) { StatusLabel.Text = "Audio error: " + ex.Message; }
+    }
+
+    private async Task PlayDrillAsync(L1C5IntervalDrill drill)
     {
         // Two notes in sequence (half notes), in the drill's direction.
         var notes = new List<(byte[] sample, double seconds)>();
-        foreach (var offset in _drill.Offsets)
+        foreach (var offset in drill.Offsets)
             notes.Add((await _samples.LoadAsync(Note.SampleFile(DoHeader.Do + offset)), 2.0));
         _audio.Play(AudioRenderer.RenderSequence(notes));
     }
@@ -129,7 +137,7 @@ public partial class MelodicIntervalIdL1C5Page : ContentPage, IAutomatableDrill
     public double AutoPlay()
     {
         NewDrill();
-        _ = PlayCurrentAsync();
+        _ = PlayDrillAsync(_drill);
         return _drill.Offsets.Count * 2.0;
     }
 

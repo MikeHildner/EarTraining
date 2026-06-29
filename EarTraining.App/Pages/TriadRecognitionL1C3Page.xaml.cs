@@ -23,6 +23,7 @@ public partial class TriadRecognitionL1C3Page : ContentPage, IAutomatableDrill
         InitializeComponent();
         DoHeader.DoChanged += (_, _) => NewDrill();
         Includes.Changed += (_, _) => { BuildAnswers(); NewDrill(); };
+        Includes.Play = PlayKey;
         Automation.Target = this;
         Includes.Build(_all.Select(d => (d.Key, d.FullLabel)));
         BuildAnswers();
@@ -87,14 +88,21 @@ public partial class TriadRecognitionL1C3Page : ContentPage, IAutomatableDrill
 
     private async void OnPlay(object? sender, EventArgs e)
     {
-        try { await PlayCurrentAsync(); }
+        try { await PlayDrillAsync(_drill); }
         catch (Exception ex) { StatusLabel.Text = "Audio error: " + ex.Message; }
     }
 
-    private async Task PlayCurrentAsync()
+    // Plays one specific triad on demand from the Include list's ▶.
+    private async void PlayKey(string key)
+    {
+        try { await PlayDrillAsync(_all.First(d => d.Key == key)); }
+        catch (Exception ex) { StatusLabel.Text = "Audio error: " + ex.Message; }
+    }
+
+    private async Task PlayDrillAsync(DiatonicTriadDrill drill)
     {
         var samples = new List<byte[]>();
-        foreach (var offset in _drill.Offsets)
+        foreach (var offset in drill.Offsets)
             samples.Add(await _samples.LoadAsync(Note.SampleFile(DoHeader.Do + offset)));
         _audio.Play(AudioRenderer.RenderHarmonic(samples, seconds: 3.0));
     }
@@ -131,7 +139,7 @@ public partial class TriadRecognitionL1C3Page : ContentPage, IAutomatableDrill
     public double AutoPlay()
     {
         NewDrill();
-        _ = PlayCurrentAsync();
+        _ = PlayDrillAsync(_drill);
         return 3.0;
     }
 

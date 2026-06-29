@@ -22,6 +22,7 @@ public partial class VocalDrillsL1C6Page : ContentPage, IAutomatableDrill
         InitializeComponent();
         DoHeader.DoChanged += (_, _) => NewDrill();
         Includes.Changed += (_, _) => { BuildAnswers(); NewDrill(); };
+        Includes.Play = PlayKey;
         Automation.Target = this;
         Rebuild();
         _ready = true;
@@ -90,15 +91,22 @@ public partial class VocalDrillsL1C6Page : ContentPage, IAutomatableDrill
 
     private async void OnPlay(object? sender, EventArgs e)
     {
-        try { await PlayCurrentAsync(); }
+        try { await PlayDrillAsync(_drill); }
         catch (Exception ex) { StatusLabel.Text = "Audio error: " + ex.Message; }
     }
 
-    private async Task PlayCurrentAsync()
+    // Plays one specific pattern on demand from the Include list's ▶.
+    private async void PlayKey(string key)
+    {
+        try { await PlayDrillAsync(L1C6VocalDrill.All[int.Parse(key)]); }
+        catch (Exception ex) { StatusLabel.Text = "Audio error: " + ex.Message; }
+    }
+
+    private async Task PlayDrillAsync(L1C6VocalDrill drill)
     {
         var notes = new List<(byte[] sample, double seconds)>();
-        for (int i = 0; i < _drill.Offsets.Count; i++)
-            notes.Add((await _samples.LoadAsync(Note.SampleFile(DoHeader.Do + _drill.Offsets[i])), _drill.Rhythm[i]));
+        for (int i = 0; i < drill.Offsets.Count; i++)
+            notes.Add((await _samples.LoadAsync(Note.SampleFile(DoHeader.Do + drill.Offsets[i])), drill.Rhythm[i]));
         _audio.Play(AudioRenderer.RenderSequence(notes));
     }
 
@@ -129,7 +137,7 @@ public partial class VocalDrillsL1C6Page : ContentPage, IAutomatableDrill
     public double AutoPlay()
     {
         NewDrill();
-        _ = PlayCurrentAsync();
+        _ = PlayDrillAsync(_drill);
         return _drill.Rhythm.Sum();
     }
 

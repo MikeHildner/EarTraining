@@ -21,6 +21,7 @@ public partial class ResolutionIdPage : ContentPage, IAutomatableDrill
         InitializeComponent();
         DoHeader.DoChanged += (_, _) => NewDrill();
         Includes.Changed += (_, _) => { BuildAnswers(); NewDrill(); };
+        Includes.Play = PlayKey;
         Includes.Build(ResolutionDrill.All.Select(t => (t.ToString(), ResolutionDrill.ShortLabelOf(t))));
         Automation.Target = this;
         BuildAnswers();
@@ -60,14 +61,21 @@ public partial class ResolutionIdPage : ContentPage, IAutomatableDrill
 
     private async void OnPlay(object? sender, EventArgs e)
     {
-        try { await PlayCurrentAsync(); }
+        try { await PlayDrillAsync(_drill); }
         catch (Exception ex) { StatusLabel.Text = "Audio error: " + ex.Message; }
     }
 
-    private async Task PlayCurrentAsync()
+    // Plays one specific pattern on demand from the Include list's ▶ (a fresh drill of that type).
+    private async void PlayKey(string key)
+    {
+        try { await PlayDrillAsync(ResolutionDrill.Next(DoHeader.Do, new[] { Enum.Parse<ResolutionType>(key) }, _rng)); }
+        catch (Exception ex) { StatusLabel.Text = "Audio error: " + ex.Message; }
+    }
+
+    private async Task PlayDrillAsync(ResolutionDrill drill)
     {
         var notes = new List<(byte[] sample, double seconds)>();
-        foreach (var (note, seconds) in _drill.ResolutionOnly)
+        foreach (var (note, seconds) in drill.ResolutionOnly)
             notes.Add((await _samples.LoadAsync(Note.SampleFile(note)), seconds));
         _audio.Play(AudioRenderer.RenderSequence(notes));
     }
@@ -95,7 +103,7 @@ public partial class ResolutionIdPage : ContentPage, IAutomatableDrill
     public double AutoPlay()
     {
         NewDrill();
-        _ = PlayCurrentAsync();
+        _ = PlayDrillAsync(_drill);
         return _drill.ResolutionOnly.Sum(n => n.seconds);
     }
 

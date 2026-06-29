@@ -29,6 +29,7 @@ public partial class PitchIdPage : ContentPage, IAutomatableDrill
         InitializeComponent();
         DoHeader.DoChanged += (_, _) => NewDrill();
         Includes.Changed += (_, _) => { BuildAnswers(); NewDrill(); };
+        Includes.Play = PlayKey;
         Includes.Build(PracticeNotes.Select(p => (p.offset.ToString(), p.label)));
         Automation.Target = this;
         BuildAnswers();
@@ -72,13 +73,20 @@ public partial class PitchIdPage : ContentPage, IAutomatableDrill
 
     private async void OnPlay(object? sender, EventArgs e)
     {
-        try { await PlayCurrentAsync(); }
+        try { await PlayNoteAsync(_drill.NoteNumber); }
         catch (Exception ex) { StatusLabel.Text = "Audio error: " + ex.Message; }
     }
 
-    private async Task PlayCurrentAsync()
+    // Plays one specific pitch on demand from the Include list's ▶ (key = semitone offset from DO).
+    private async void PlayKey(string key)
     {
-        var sample = await _samples.LoadAsync(Note.SampleFile(_drill.NoteNumber));
+        try { await PlayNoteAsync(DoHeader.Do + int.Parse(key)); }
+        catch (Exception ex) { StatusLabel.Text = "Audio error: " + ex.Message; }
+    }
+
+    private async Task PlayNoteAsync(int noteNumber)
+    {
+        var sample = await _samples.LoadAsync(Note.SampleFile(noteNumber));
         _audio.Play(AudioRenderer.RenderSequence(new[] { (sample, PitchDrill.Seconds) }));
     }
 
@@ -105,7 +113,7 @@ public partial class PitchIdPage : ContentPage, IAutomatableDrill
     public double AutoPlay()
     {
         NewDrill();
-        _ = PlayCurrentAsync();
+        _ = PlayNoteAsync(_drill.NoteNumber);
         return PitchDrill.Seconds;
     }
 
