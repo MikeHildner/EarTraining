@@ -41,14 +41,24 @@ public partial class IncludeToggles : ContentView
             if (Play is { } play)
             {
                 var k = key;
-                var playBtn = new Label
+                // Compact outline button (overrides the global filled Button style) so it reads as
+                // a control, not a floating glyph.
+                var playBtn = new Button
                 {
-                    Text = "▶", FontSize = 16, TextColor = Theme.Accent,
-                    VerticalOptions = LayoutOptions.Center, Padding = new Thickness(10, 4),
+                    Text = "▶",
+                    FontSize = 13,
+                    BackgroundColor = Colors.Transparent,
+                    TextColor = Theme.Accent,
+                    BorderColor = Theme.Accent,
+                    BorderWidth = 1,
+                    CornerRadius = 8,
+                    Padding = new Thickness(12, 0),
+                    MinimumHeightRequest = 0,
+                    MinimumWidthRequest = 0,
+                    HeightRequest = 32,
+                    VerticalOptions = LayoutOptions.Center,
                 };
-                var tap = new TapGestureRecognizer();
-                tap.Tapped += (_, _) => play(k);
-                playBtn.GestureRecognizers.Add(tap);
+                playBtn.Clicked += (_, _) => play(k);
                 row.Add(playBtn);
             }
             Container.Add(row);
