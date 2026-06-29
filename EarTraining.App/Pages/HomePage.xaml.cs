@@ -1,3 +1,4 @@
+using EarTraining.App.Services;
 using Microsoft.Maui.Controls.Shapes;
 
 namespace EarTraining.App.Pages;
@@ -12,12 +13,13 @@ namespace EarTraining.App.Pages;
 /// </summary>
 public partial class HomePage : ContentPage
 {
-    private static readonly Color HeaderText = Color.FromArgb("#512BD4");
-    private static readonly Color DescText = Color.FromArgb("#6B7280");
-    private static readonly Color CollapsedBg = Color.FromArgb("#F5F3FC");
-    private static readonly Color CollapsedStroke = Color.FromArgb("#E0DCF5");
-    private static readonly Color OpenBg = Color.FromArgb("#ECE6FB");
-    private static readonly Color OpenStroke = Color.FromArgb("#512BD4");
+    // Theme-aware (resolve to light/dark at build time; the accordion rebuilds on theme change).
+    private static Color HeaderText => Theme.Accent;
+    private static Color DescText => Theme.Muted;
+    private static Color CollapsedBg => Theme.CardBg;
+    private static Color CollapsedStroke => Theme.CardStroke;
+    private static Color OpenBg => Theme.OpenBg;
+    private static Color OpenStroke => Theme.Accent;
 
     private sealed record Drill(string Label, string Route);
     private sealed record Item(string Title, string? Desc, string? Route, Drill[]? Drills);
@@ -68,6 +70,16 @@ public partial class HomePage : ContentPage
     public HomePage()
     {
         InitializeComponent();
+        BuildGroups();
+        if (Application.Current is { } app)
+            app.RequestedThemeChanged += (_, _) => Rebuild();
+    }
+
+    private void Rebuild()
+    {
+        ChaptersContainer.Children.Clear();
+        _groups.Clear();
+        _chapters.Clear();
         BuildGroups();
     }
 
@@ -212,4 +224,7 @@ public partial class HomePage : ContentPage
 
     private async void OnProgress(object? sender, TappedEventArgs e) =>
         await Shell.Current.GoToAsync("//progress");
+
+    private async void OnSettings(object? sender, TappedEventArgs e) =>
+        await Shell.Current.GoToAsync("//settings");
 }

@@ -15,6 +15,7 @@ public sealed class FlyoutIconConverter : IValueConverter
         int code =
             title == "Home" ? 0xF015 :              // fa-home
             title == "Progress" ? 0xF201 :          // fa-line-chart
+            title == "Settings" ? 0xF013 :          // fa-cog
             title == "Not in the Books" ? 0xF03A :  // fa-list
             title == "About" ? 0xF05A :             // fa-info-circle
             title.StartsWith("Level 2") ? 0xF1B3 :  // fa-cubes (progressions)
@@ -24,7 +25,7 @@ public sealed class FlyoutIconConverter : IValueConverter
         {
             Glyph = char.ConvertFromUtf32(code),
             FontFamily = "FA",
-            Color = Color.FromArgb("#512BD4"),
+            Color = Services.Theme.Accent,
             Size = 18,
         };
     }

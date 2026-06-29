@@ -15,6 +15,7 @@ public partial class ScoreGauge : ContentView
 {
     private readonly GaugeDrawable _drawable = new();
     private int _correct, _total, _streak;
+    private bool _percentExplicit;   // true once a page sets PercentTextColor (e.g. the Welcome hero)
 
     public ScoreGauge()
     {
@@ -41,7 +42,7 @@ public partial class ScoreGauge : ContentView
     public Color PercentTextColor
     {
         get => _drawable.PercentColor;
-        set { _drawable.PercentColor = value; GaugeView.Invalidate(); }
+        set { _drawable.PercentColor = value; _percentExplicit = true; GaugeView.Invalidate(); }
     }
 
     public void Record(bool correct)
@@ -78,6 +79,8 @@ public partial class ScoreGauge : ContentView
         // only the ring sweeps.
         _drawable.DisplayPercent = pct;
         _drawable.FillColor = color;
+        _drawable.TrackColor = Theme.GaugeTrack;
+        if (!_percentExplicit) _drawable.PercentColor = Theme.GaugeText;
         TierLabel.Text = label;
         TierLabel.TextColor = color;
         ScoreLabel.Text = $"Score: {_correct} / {_total}";
@@ -121,6 +124,7 @@ public partial class ScoreGauge : ContentView
         public double SweepPercent { get; set; }          // 0..100, animated; drives the arc
         public Color FillColor { get; set; } = Color.FromArgb("#ADB5BD");
         public Color PercentColor { get; set; } = Color.FromArgb("#2D1B69");
+        public Color TrackColor { get; set; } = Color.FromArgb("#E9ECEF");
 
         public void Draw(ICanvas canvas, RectF rect)
         {
@@ -132,7 +136,7 @@ public partial class ScoreGauge : ContentView
 
             canvas.StrokeSize = stroke;
             canvas.StrokeLineCap = LineCap.Round;
-            canvas.StrokeColor = Color.FromArgb("#E9ECEF");
+            canvas.StrokeColor = TrackColor;
             canvas.DrawCircle(cx, cy, r);
 
             double sweep = SweepPercent;

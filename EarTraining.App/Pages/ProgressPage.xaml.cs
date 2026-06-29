@@ -13,12 +13,13 @@ public partial class ProgressPage : ContentPage
 {
     private const int TrendWindow = 14;
 
-    private static readonly Color CardBg = Color.FromArgb("#F5F3FC");
-    private static readonly Color CardStroke = Color.FromArgb("#E0DCF5");
-    private static readonly Color Accent = Color.FromArgb("#512BD4");
-    private static readonly Color Heading = Color.FromArgb("#3C3489");
-    private static readonly Color Body = Color.FromArgb("#444444");
-    private static readonly Color Muted = Color.FromArgb("#6B7280");
+    // Theme-aware (resolved at Build() time, which runs on each OnAppearing).
+    private static Color CardBg => Theme.CardBg;
+    private static Color CardStroke => Theme.CardStroke;
+    private static Color Accent => Theme.Accent;
+    private static Color Heading => Theme.Heading;
+    private static Color Body => Theme.Body;
+    private static Color Muted => Theme.Muted;
 
     public ProgressPage() => InitializeComponent();
 
@@ -127,7 +128,7 @@ public partial class ProgressPage : ContentPage
     }
 
     private static Label Heading2(string text) =>
-        new() { Text = text, FontAttributes = FontAttributes.Bold, FontSize = 16, TextColor = Color.FromArgb("#3C3489") };
+        new() { Text = text, FontAttributes = FontAttributes.Bold, FontSize = 16, TextColor = Heading };
 
     private static Border Card(View content) => new()
     {
@@ -170,7 +171,7 @@ public partial class ProgressPage : ContentPage
             {
                 var d = _days[i];
                 float x = pad + i * (w + gap);
-                canvas.FillColor = Color.FromArgb("#ECECF3");
+                canvas.FillColor = Theme.GaugeTrack;
                 canvas.FillRoundedRectangle(x, top, w, maxH, 2);
                 if (d.Answered > 0)
                 {
@@ -181,7 +182,7 @@ public partial class ProgressPage : ContentPage
                 }
             }
 
-            canvas.FontColor = Color.FromArgb("#9AA0AA");
+            canvas.FontColor = Theme.Muted;
             canvas.FontSize = 10;
             canvas.DrawString(_days[0].Date.ToString("M/d"), rect.X + pad, baseY + 2, 44, 12, HorizontalAlignment.Left, VerticalAlignment.Top);
             canvas.DrawString(_days[n - 1].Date.ToString("M/d"), rect.Right - 48, baseY + 2, 44, 12, HorizontalAlignment.Right, VerticalAlignment.Top);

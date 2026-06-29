@@ -20,6 +20,7 @@ public sealed class DrillAudioPlayer
         _current?.Stop();
         _current?.Dispose();
         _current = _audioManager.CreatePlayer(new MemoryStream(wav));
+        _current.Volume = SettingsStore.Volume;   // master volume from user settings
         _current.Play();
     }
 }

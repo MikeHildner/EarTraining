@@ -31,6 +31,17 @@ public static class Keys
         _ => throw new NotSupportedException($"Key signature '{key}' is not supported."),
     };
 
+    /// <summary>
+    /// The DO (tonic) note number for a key — the single note of that pitch class within the Tonic
+    /// singing range (34=G3 … 45=Gb4 spans all 12 pitch classes). Used by the "fixed practice key"
+    /// setting so every DO-relative drill builds on that key. e.g. "C" → 39 (C4), "G" → 34 (G3).
+    /// </summary>
+    public static int DoNote(string key)
+    {
+        int pc = ((Offset(key) % 12) + 12) % 12;   // pitch class 0..11 (C=0)
+        return pc <= 6 ? 39 + pc : 34 + (pc - 7);  // C4..Gb4 (39..45) wrapping to G3..B3 (34..38)
+    }
+
     /// <summary>Transpose C-major scale note numbers into <paramref name="key"/>.</summary>
     public static int[] Transpose(int[] scaleNoteNumbers, string key)
     {

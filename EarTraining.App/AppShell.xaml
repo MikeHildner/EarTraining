@@ -5,7 +5,7 @@
        xmlns:local="clr-namespace:EarTraining.App"
        x:Class="EarTraining.App.AppShell"
        FlyoutBehavior="Flyout"
-       FlyoutBackgroundColor="White"
+       FlyoutBackgroundColor="{AppThemeBinding Light=White, Dark=#1B1825}"
        Title="Ear Training">
 
     <Shell.Resources>
@@ -27,7 +27,7 @@
         <DataTemplate>
             <Grid Padding="18,12" ColumnSpacing="14" ColumnDefinitions="24,*,Auto">
                 <Image Source="{Binding Title, Converter={StaticResource FlyoutIcon}}" HeightRequest="20" WidthRequest="20" VerticalOptions="Center" />
-                <Label Grid.Column="1" Text="{Binding Title}" FontSize="15" TextColor="#3C3489" VerticalOptions="Center" />
+                <Label Grid.Column="1" Text="{Binding Title}" FontSize="15" TextColor="{AppThemeBinding Light=#3C3489, Dark=#CFC6F2}" VerticalOptions="Center" />
                 <Image Grid.Column="2" Source="{Binding Title, Converter={StaticResource WipIcon}}" HeightRequest="14" WidthRequest="14" VerticalOptions="Center" />
                 <VisualStateManager.VisualStateGroups>
                     <VisualStateGroup x:Name="CommonStates">
@@ -38,7 +38,7 @@
                         </VisualState>
                         <VisualState x:Name="Selected">
                             <VisualState.Setters>
-                                <Setter Property="BackgroundColor" Value="#ECE6FB" />
+                                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#ECE6FB, Dark=#2C2742}" />
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>
@@ -120,6 +120,10 @@
 
     <FlyoutItem Title="Progress">
         <ShellContent Route="progress" ContentTemplate="{DataTemplate pages:ProgressPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Settings">
+        <ShellContent Route="settings" ContentTemplate="{DataTemplate pages:SettingsPage}" />
     </FlyoutItem>
 
     <FlyoutItem Title="About">

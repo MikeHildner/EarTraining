@@ -27,7 +27,9 @@ public partial class TonicHeader : ContentView
 
     private void Roll()
     {
-        Do = Tonic.RandomDo(_rng);
+        // Honor a fixed practice key from Settings; otherwise a fresh random DO each drill.
+        var key = SettingsStore.FixedKey;
+        Do = string.IsNullOrEmpty(key) ? Tonic.RandomDo(_rng) : Keys.DoNote(key);
         DoLabel.Text = $"DO = {Note.Name(Do)}";
     }
 
