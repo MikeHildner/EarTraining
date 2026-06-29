@@ -4,13 +4,13 @@
              xmlns:c="clr-namespace:EarTraining.App.Components"
              x:Class="EarTraining.App.Pages.HarmonicIntervalL1C2Page"
              Title="Harmonic Intervals">
-    <ScrollView>
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView Grid.Row="0">
         <VerticalStackLayout Padding="20" Spacing="14">
             <Label Text="Harmonic Intervals — Maj 3rd / Min 6th" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
             <Label Text="Play the two notes together, then identify the interval."
                    HorizontalOptions="Center" TextColor="Gray" />
             <c:InfoNote Text="Selected from the harmonic identification questions on p. 30." />
-            <c:TonicHeader x:Name="DoHeader" />
             <c:IntervalTypeToggle x:Name="Toggle" />
             <Button Text="▶ Play interval" Clicked="OnPlay" />
             <Label Text="Which interval did you hear?" FontAttributes="Bold" HorizontalOptions="Center" />
@@ -21,5 +21,9 @@
             <c:AutomationBar x:Name="Automation" />
             <c:IncludeToggles x:Name="Includes" />
         </VerticalStackLayout>
-    </ScrollView>
+        </ScrollView>
+        <Border Grid.Row="1" Style="{StaticResource PinnedDoBar}">
+            <c:TonicHeader x:Name="DoHeader" />
+        </Border>
+    </Grid>
 </ContentPage>

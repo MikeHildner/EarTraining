@@ -48,6 +48,17 @@
                 <Setter Property="Padding" Value="16" />
             </Style>
 
+            <!-- Pinned bottom DO bar on drill pages: holds the TonicHeader so Play DO stays reachable
+                 while the answer grid scrolls above it. Top hairline + themed bar bg; bottom padding
+                 clears the iOS home indicator / Android nav bar. -->
+            <Style x:Key="PinnedDoBar" TargetType="Border">
+                <Setter Property="StrokeShape" Value="Rectangle" />
+                <Setter Property="Stroke" Value="{AppThemeBinding Light=#E0DCF5, Dark=#383150}" />
+                <Setter Property="StrokeThickness" Value="1" />
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#F7F5FD, Dark=#1B1825}" />
+                <Setter Property="Padding" Value="16,10,16,18" />
+            </Style>
+
             <!-- Themed section heading label. -->
             <Style x:Key="Heading" TargetType="Label">
                 <Setter Property="TextColor" Value="{AppThemeBinding Light=#3C3489, Dark=#CFC6F2}" />

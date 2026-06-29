@@ -4,13 +4,13 @@
              xmlns:c="clr-namespace:EarTraining.App.Components"
              x:Class="EarTraining.App.Pages.TriadRecognitionL1C7Page"
              Title="Triad Recognition">
-    <ScrollView>
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView Grid.Row="0">
         <VerticalStackLayout Padding="20" Spacing="14">
             <Label Text="Diatonic Triad Recognition" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
             <Label Text="Play the triad, then identify it (all six diatonic triads)."
                    HorizontalOptions="Center" TextColor="Gray" />
             <c:InfoNote Text="Selected from the diatonic triad identification questions on p. 163." />
-            <c:TonicHeader x:Name="DoHeader" />
             <Button Text="▶ Play triad" Clicked="OnPlay" />
 
             <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
@@ -31,5 +31,9 @@
                     BackgroundColor="Transparent" TextColor="#512BD4" BorderColor="#512BD4" BorderWidth="1" />
             <c:IncludeToggles x:Name="Includes" />
         </VerticalStackLayout>
-    </ScrollView>
+        </ScrollView>
+        <Border Grid.Row="1" Style="{StaticResource PinnedDoBar}">
+            <c:TonicHeader x:Name="DoHeader" />
+        </Border>
+    </Grid>
 </ContentPage>

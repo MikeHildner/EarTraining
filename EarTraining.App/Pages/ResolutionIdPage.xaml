@@ -4,13 +4,13 @@
              xmlns:c="clr-namespace:EarTraining.App.Components"
              x:Class="EarTraining.App.Pages.ResolutionIdPage"
              Title="Resolution ID">
-    <ScrollView>
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView Grid.Row="0">
         <VerticalStackLayout Padding="20" Spacing="14">
             <Label Text="Resolution Identification" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
             <Label Text="Play DO for reference, play the resolution, then identify it."
                    HorizontalOptions="Center" TextColor="Gray" />
             <c:InfoNote Text="Selected from the resolution identification questions on p. 13." />
-            <c:TonicHeader x:Name="DoHeader" />
             <Button Text="▶ Play resolution" Clicked="OnPlay" />
             <Label Text="Which resolution did you hear?" FontAttributes="Bold" HorizontalOptions="Center" />
             <FlexLayout x:Name="AnswersLayout" Wrap="Wrap" JustifyContent="Center" AlignItems="Center" />
@@ -20,5 +20,9 @@
             <c:AutomationBar x:Name="Automation" />
             <c:IncludeToggles x:Name="Includes" />
         </VerticalStackLayout>
-    </ScrollView>
+        </ScrollView>
+        <Border Grid.Row="1" Style="{StaticResource PinnedDoBar}">
+            <c:TonicHeader x:Name="DoHeader" />
+        </Border>
+    </Grid>
 </ContentPage>

@@ -4,13 +4,13 @@
              xmlns:c="clr-namespace:EarTraining.App.Components"
              x:Class="EarTraining.App.Pages.MelodicIntervalIdL1C7Page"
              Title="Melodic Intervals">
-    <ScrollView>
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView Grid.Row="0">
         <VerticalStackLayout Padding="20" Spacing="14">
             <Label Text="Melodic Intervals — 2nds / 7ths" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
             <Label Text="Play the two notes, then identify the interval (quality + direction)."
                    HorizontalOptions="Center" TextColor="Gray" />
             <c:InfoNote Text="Selected from the melodic interval identification questions on p. 158." />
-            <c:TonicHeader x:Name="DoHeader" />
 
             <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
                 <Label Text="Drill these:" HorizontalOptions="Center" FontSize="13" TextColor="Gray" />
@@ -30,5 +30,9 @@
             <c:AutomationBar x:Name="Automation" />
             <c:IncludeToggles x:Name="Includes" />
         </VerticalStackLayout>
-    </ScrollView>
+        </ScrollView>
+        <Border Grid.Row="1" Style="{StaticResource PinnedDoBar}">
+            <c:TonicHeader x:Name="DoHeader" />
+        </Border>
+    </Grid>
 </ContentPage>

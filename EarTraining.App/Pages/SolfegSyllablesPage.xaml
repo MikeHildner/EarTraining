@@ -4,13 +4,17 @@
              xmlns:c="clr-namespace:EarTraining.App.Components"
              x:Class="EarTraining.App.Pages.SolfegSyllablesPage"
              Title="Solfège Syllables">
-    <ScrollView>
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView Grid.Row="0">
         <VerticalStackLayout Padding="20" Spacing="14">
             <Label Text="Solfège Syllables" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
             <Label Text="A reference of every syllable from DO to DO. Tap one to hear it relative to the current DO."
                    HorizontalOptions="Center" TextColor="Gray" />
-            <c:TonicHeader x:Name="DoHeader" />
             <FlexLayout x:Name="SyllablesLayout" Wrap="Wrap" JustifyContent="Center" AlignItems="Center" />
         </VerticalStackLayout>
-    </ScrollView>
+        </ScrollView>
+        <Border Grid.Row="1" Style="{StaticResource PinnedDoBar}">
+            <c:TonicHeader x:Name="DoHeader" />
+        </Border>
+    </Grid>
 </ContentPage>
