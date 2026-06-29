@@ -5,6 +5,6 @@
     <VerticalStackLayout Spacing="2">
         <Label Text="Include in drills" FontAttributes="Bold" TextColor="Gray" FontSize="13" />
         <Label x:Name="Hint" Text="Tap ▶ to hear a pattern." TextColor="Gray" FontSize="11" IsVisible="False" />
-        <FlexLayout x:Name="Container" Wrap="Wrap" />
+        <VerticalStackLayout x:Name="Container" Spacing="2" />
     </VerticalStackLayout>
 </ContentView>
