@@ -27,7 +27,7 @@
 
             <Label x:Name="StatusLabel" HorizontalOptions="Center" FontAttributes="Bold" />
 
-            <WebView x:Name="NotationWeb" HeightRequest="0" BackgroundColor="White" />
+            <WebView x:Name="NotationWeb" HeightRequest="420" IsVisible="False" BackgroundColor="White" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
