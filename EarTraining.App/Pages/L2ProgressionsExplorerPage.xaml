@@ -9,10 +9,6 @@
             <Label Text="Major Triad Movements" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
             <Label Text="An explorer: pick the movement types, and it builds a random major-triad progression in a random key. No scoring — just listen."
                    HorizontalOptions="Center" TextColor="Gray" />
-            <Border HorizontalOptions="Center" BackgroundColor="#FAEEDA" Stroke="#EF9F27" StrokeThickness="1"
-                    StrokeShape="RoundRectangle 8" Padding="10,3" Margin="0,2,0,0">
-                <Label Text="Work in progress" TextColor="#854F0B" FontSize="12" />
-            </Border>
 
             <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
                 <Label Text="How many chords:" HorizontalOptions="Center" FontSize="13" TextColor="Gray" />

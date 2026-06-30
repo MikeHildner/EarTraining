@@ -9,10 +9,6 @@
             <Label Text="Major Triad Progressions" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
             <Label Text="Identify the chord movement. The key is random each drill — listen to the motion, not the pitches."
                    HorizontalOptions="Center" TextColor="Gray" />
-            <Border HorizontalOptions="Center" BackgroundColor="#FAEEDA" Stroke="#EF9F27" StrokeThickness="1"
-                    StrokeShape="RoundRectangle 8" Padding="10,3" Margin="0,2,0,0">
-                <Label Text="Work in progress" TextColor="#854F0B" FontSize="12" />
-            </Border>
             <c:InfoNote Text="Selected from the major triad progression questions on pp. 63 &amp; 65." />
 
             <VerticalStackLayout Spacing="2" HorizontalOptions="Center">

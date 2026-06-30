@@ -120,7 +120,7 @@ public partial class HomePage : ContentPage
                 }
             }
 
-            var (groupSection, groupAcc) = BuildCard(group.Title, null, groupContent, chapter: false, wip: WipIconConverter.IsWip(group.Title));
+            var (groupSection, groupAcc) = BuildCard(group.Title, null, groupContent, chapter: false);
             ChaptersContainer.Add(groupSection);
             _groups.Add(groupAcc);
             _chapters[groupAcc] = chapterAccs;
@@ -134,7 +134,7 @@ public partial class HomePage : ContentPage
 
     // Builds a header card over its (already-created) content as one section. Group cards are the
     // larger top-level rows; chapter cards are smaller, indented, and carry a description line.
-    private (View section, Acc acc) BuildCard(string title, string? desc, View content, bool chapter, bool wip = false)
+    private (View section, Acc acc) BuildCard(string title, string? desc, View content, bool chapter)
     {
         var chevron = new Label { Text = "▸", FontSize = chapter ? 15 : 18, TextColor = HeaderText, VerticalOptions = LayoutOptions.Center };
 
@@ -161,12 +161,6 @@ public partial class HomePage : ContentPage
         header.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Auto));
         Grid.SetColumn(titleView, 0);
         header.Add(titleView);
-        if (wip)
-        {
-            var badge = new Label { Text = char.ConvertFromUtf32(0xF0AD), FontFamily = "FA", FontSize = 13, TextColor = Color.FromArgb("#BA7517"), VerticalOptions = LayoutOptions.Center };
-            Grid.SetColumn(badge, 1);
-            header.Add(badge);
-        }
         Grid.SetColumn(chevron, 2);
         header.Add(chevron);
 
