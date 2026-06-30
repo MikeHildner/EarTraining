@@ -29,4 +29,14 @@ public static class SettingsStore
         get => Preferences.Get("set.volume", 1.0);
         set => Preferences.Set("set.volume", Math.Clamp(value, 0.0, 1.0));
     }
+
+    /// <summary>Automation pacing — the silent gap after each phrase. Default Normal.</summary>
+    public static AutomationPace AutoPace
+    {
+        get => (AutomationPace)Preferences.Get("set.autopace", (int)AutomationPace.Normal);
+        set => Preferences.Set("set.autopace", (int)value);
+    }
 }
+
+/// <summary>How long Automation pauses after each phrase (beat before + dwell after the answer reveal).</summary>
+public enum AutomationPace { Relaxed, Normal, Quick }

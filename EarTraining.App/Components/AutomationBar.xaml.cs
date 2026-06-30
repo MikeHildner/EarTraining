@@ -1,3 +1,5 @@
+using EarTraining.App.Services;
+
 namespace EarTraining.App.Components;
 
 /// <summary>
@@ -10,10 +12,16 @@ public partial class AutomationBar : ContentView
     public IAutomatableDrill? Target { get; set; }
     public int MaxIterations { get; set; } = 10;
 
-    // Seconds added after the audio finishes: a short beat to register it (passive), or a
-    // window to actually answer (scored).
-    public double PassivePause { get; set; } = 1.5;
+    // Scored mode gives a fixed window to actually answer; the passive beat before the reveal and
+    // the post-reveal dwell come from the user's Automation-pace setting (Relaxed/Normal/Quick).
     public double AnswerWindow { get; set; } = 4.0;
+
+    private static (double pause, double dwell) PaceFor(AutomationPace p) => p switch
+    {
+        AutomationPace.Relaxed => (1.5, 2.0),
+        AutomationPace.Quick => (0.5, 0.8),
+        _ => (1.0, 1.0),   // Normal
+    };
 
     private CancellationTokenSource? _cts;
 
@@ -28,6 +36,7 @@ public partial class AutomationBar : ContentView
         if (Target is null) return;
 
         bool scored = ScoreSwitch.IsToggled;
+        var (pause, dwell) = PaceFor(SettingsStore.AutoPace);
         ScoreSwitch.IsEnabled = false;
         GoButton.Text = "Stop ■";
         _cts = new CancellationTokenSource();
@@ -40,9 +49,9 @@ public partial class AutomationBar : ContentView
                 ct.ThrowIfCancellationRequested();
                 StatusLabel.Text = $"Playing {i} of {MaxIterations}…";
                 double len = Target.AutoPlay();
-                await Task.Delay(TimeSpan.FromSeconds(len + (scored ? AnswerWindow : PassivePause)), ct);
+                await Task.Delay(TimeSpan.FromSeconds(len + (scored ? AnswerWindow : pause)), ct);
                 Target.AutoReveal(scored);
-                await Task.Delay(TimeSpan.FromSeconds(2.0), ct);   // let the answer land
+                await Task.Delay(TimeSpan.FromSeconds(dwell), ct);   // let the answer land
             }
         }
         catch (OperationCanceledException) { /* Stop pressed or page left */ }

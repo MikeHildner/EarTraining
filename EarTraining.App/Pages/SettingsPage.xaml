@@ -30,6 +30,15 @@
                     <Label x:Name="VolumeLabel" TextColor="Gray" FontSize="12.5" HorizontalOptions="Center" />
                 </VerticalStackLayout>
             </Border>
+
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Automation" Style="{StaticResource Heading}" />
+                    <Label Text="How long Automation waits between drills."
+                           TextColor="Gray" FontSize="12.5" />
+                    <Picker x:Name="PacePicker" Title="Pace" />
+                </VerticalStackLayout>
+            </Border>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

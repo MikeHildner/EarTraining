@@ -29,9 +29,13 @@ public partial class SettingsPage : ContentPage
         VolumeSlider.Value = SettingsStore.Volume;
         UpdateVolumeLabel(SettingsStore.Volume);
 
+        PacePicker.ItemsSource = new List<string> { "Relaxed", "Normal", "Quick" };
+        PacePicker.SelectedIndex = (int)SettingsStore.AutoPace;
+
         ThemePicker.SelectedIndexChanged += OnThemeChanged;
         KeyPicker.SelectedIndexChanged += OnKeyChanged;
         VolumeSlider.ValueChanged += OnVolumeChanged;
+        PacePicker.SelectedIndexChanged += OnPaceChanged;
     }
 
     private void OnThemeChanged(object? sender, EventArgs e)
@@ -52,6 +56,9 @@ public partial class SettingsPage : ContentPage
         SettingsStore.Volume = e.NewValue;
         UpdateVolumeLabel(e.NewValue);
     }
+
+    private void OnPaceChanged(object? sender, EventArgs e) =>
+        SettingsStore.AutoPace = (AutomationPace)Math.Max(0, PacePicker.SelectedIndex);
 
     private void UpdateVolumeLabel(double v) => VolumeLabel.Text = $"{v * 100:0}%";
 }
