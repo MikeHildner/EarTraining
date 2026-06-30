@@ -33,6 +33,8 @@
                     <Label FontSize="13.5" Text="• Level 2 — major and diatonic triad progressions." />
                     <Label FontSize="13.5" Text="• Not in the Books — Interval &amp; Triad ID, Find the DO, Solfège Syllables, Major-Triad Movements." />
                     <Label FontSize="13.5" Text="• A score gauge and hands-free Automation on every quiz." />
+                    <Label FontSize="13.5" Text="• Progress &amp; Stats — track your accuracy, daily streak, and recent trend." />
+                    <Label FontSize="13.5" Text="• Settings — dark mode, a fixed practice key, and volume." />
                 </VerticalStackLayout>
             </Border>
 
@@ -47,6 +49,7 @@
                     <Label FontSize="13.5" Text="2.  Set or hear the DO (tonic); tap New DO for a fresh key." />
                     <Label FontSize="13.5" Text="3.  Play the drill, then tap what you heard." />
                     <Label FontSize="13.5" Text="4.  Watch the score gauge — or tap Automate for hands-free rounds." />
+                    <Label FontSize="13.5" Text="5.  Check Progress anytime to see your accuracy and streaks." />
                 </VerticalStackLayout>
             </Border>
 
