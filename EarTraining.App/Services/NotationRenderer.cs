@@ -57,7 +57,7 @@ public sealed class NotationRenderer
         string vexFlow = await VexFlowJsAsync();
         return $@"<!DOCTYPE html>
 <html>
-<head><meta name=""viewport"" content=""width=device-width, initial-scale=1""><style>svg{{display:block;margin:0 auto}}</style></head>
+<head><meta name=""viewport"" content=""width=device-width, initial-scale=1""><style>svg{{display:block;margin:0 auto;max-width:100%;height:auto}}</style></head>
 <body style=""margin:0;background:#ffffff;"">
 {divs}
 <script>{vexFlow}</script>

@@ -17,6 +17,7 @@ public partial class DictationPage : ContentPage
         [("Resolutions", 1), ("Reverse Resolutions", 2), ("Both", 3)];
 
     private DictationDrill _drill = null!;
+    private bool _revealed;
 
     public DictationPage()
     {
@@ -30,6 +31,8 @@ public partial class DictationPage : ContentPage
         BpmPicker.SelectedIndexChanged += OnSettingChanged;
         MeasuresPicker.SelectedIndexChanged += OnSettingChanged;
         NotationWeb.Navigated += OnNotationNavigated;
+        // Pre-warm the WebView (esp. Android) so the first Reveal isn't a cold white flash.
+        NotationWeb.Source = new HtmlWebViewSource { Html = "<!doctype html><html><body style=\"margin:0;background:#fff\"></body></html>" };
         NewDrill();
     }
 
@@ -58,7 +61,8 @@ public partial class DictationPage : ContentPage
     private void NewDrill()
     {
         _drill = DictationDrill.Next(ResolutionType, Key, Bpm, Measures, _rng);
-        NotationWeb.IsVisible = false;
+        NotationWeb.HeightRequest = 0;
+        _revealed = false;
         RevealButton.Text = "Reveal transcription";
         StatusLabel.Text = $"New dictation in {_drill.Key} at {_drill.Bpm:0} bpm — press Play.";
     }
@@ -93,9 +97,10 @@ public partial class DictationPage : ContentPage
 
     private async void OnReveal(object? sender, EventArgs e)
     {
-        if (NotationWeb.IsVisible)
+        if (_revealed)
         {
-            NotationWeb.IsVisible = false;
+            _revealed = false;
+            NotationWeb.HeightRequest = 0;
             RevealButton.Text = "Reveal transcription";
             return;
         }
@@ -104,11 +109,10 @@ public partial class DictationPage : ContentPage
         {
             StatusLabel.Text = "Rendering notation…";
             string html = await _notation.BuildHtmlAsync(_drill);
-            NotationWeb.HeightRequest = _drill.Measures.Count * 160 + 30; // generous upper bound; OnNotationNavigated trims to the exact content height
             NotationWeb.Source = new HtmlWebViewSource { Html = html };
-            NotationWeb.IsVisible = true;
+            _revealed = true;
             RevealButton.Text = "Hide transcription";
-            StatusLabel.Text = string.Empty;
+            StatusLabel.Text = string.Empty;   // OnNotationNavigated sizes it once it renders
         }
         catch (Exception ex)
         {

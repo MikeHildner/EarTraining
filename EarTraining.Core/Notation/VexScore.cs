@@ -25,7 +25,7 @@ public static class VexScore
         }});
 
         const score = vf.EasyScore();
-        var system = vf.System({{width: 320}});
+        var system = vf.System({{width: Math.min(320, (window.innerWidth || 320) - 12)}});
 
         system.addStave({{
             voices: [
@@ -87,7 +87,7 @@ public static class VexScore
         }});
 
         const score = vf.EasyScore();
-        var system = vf.System({{width: 320}});
+        var system = vf.System({{width: Math.min(320, (window.innerWidth || 320) - 12)}});
 
         system.addStave({{
             voices: [
