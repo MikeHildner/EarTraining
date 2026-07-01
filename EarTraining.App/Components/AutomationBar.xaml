@@ -6,7 +6,7 @@
         <Label Text="Automation" FontAttributes="Bold" HorizontalOptions="Center" />
         <HorizontalStackLayout Spacing="8" HorizontalOptions="Center">
             <Switch x:Name="ScoreSwitch" />
-            <Label Text="Score me (unanswered = wrong)" VerticalOptions="Center" FontSize="13" />
+            <Label Text="Timed — answer before the reveal" VerticalOptions="Center" FontSize="13" />
         </HorizontalStackLayout>
         <Button x:Name="GoButton" Text="▶ Automate" Clicked="OnGoStop" WidthRequest="200" HorizontalOptions="Center" BackgroundColor="#C99700" TextColor="White" />
         <Label x:Name="StatusLabel" HorizontalOptions="Center" TextColor="Gray" FontSize="13" />

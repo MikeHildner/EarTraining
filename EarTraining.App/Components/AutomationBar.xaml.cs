@@ -5,7 +5,7 @@ namespace EarTraining.App.Components;
 /// <summary>
 /// Hands-free drill runner. Set <see cref="Target"/> to the hosting page (which implements
 /// <see cref="IAutomatableDrill"/>); "Automate" then loops: play a new drill, wait, reveal
-/// (scoring misses if "Score me" is on), for <see cref="MaxIterations"/> rounds or until Stop.
+/// (scoring misses if the "Timed" toggle is on), for <see cref="MaxIterations"/> rounds or until Stop.
 /// </summary>
 public partial class AutomationBar : ContentView
 {
