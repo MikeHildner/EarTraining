@@ -1,3 +1,4 @@
+using EarTraining.App.Components;
 using EarTraining.App.Services;
 using EarTraining.Core.Audio;
 using EarTraining.Core.Drills;
@@ -6,7 +7,7 @@ using Plugin.Maui.Audio;
 
 namespace EarTraining.App.Pages;
 
-public partial class IntervalPage : ContentPage
+public partial class IntervalPage : ContentPage, IAutomatableDrill
 {
     private readonly SampleLibrary _samples = new();
     private readonly DrillAudioPlayer _audio = new(AudioManager.Current);
@@ -14,13 +15,14 @@ public partial class IntervalPage : ContentPage
     private readonly Dictionary<int, Button> _optionButtons = new();
     private IntervalDrill _drill = null!;
     private bool _answered;
-    private int _correct;
-    private int _total;
+
+    private const double PlaySeconds = 1.5;   // harmonic render (~1.2s) + margin; drives the automation timer
 
     public IntervalPage()
     {
         InitializeComponent();
         BuildOptions();
+        Automation.Target = this;
         NewDrill();
     }
 
@@ -42,7 +44,6 @@ public partial class IntervalPage : ContentPage
         _drill = IntervalDrill.Next(_rng);
         _answered = false;
         StatusLabel.Text = string.Empty;
-        NextButton.IsVisible = false;
         foreach (var button in _optionButtons.Values)
         {
             button.IsEnabled = true;
@@ -67,10 +68,8 @@ public partial class IntervalPage : ContentPage
     {
         if (_answered) return;
         _answered = true;
-        _total++;
         bool correct = semitones == _drill.Answer.Semitones;
-        if (correct) _correct++;
-        ProgressStore.Record("interval", correct);
+        Gauge.Record(correct);
 
         foreach (var (semis, button) in _optionButtons)
         {
@@ -80,9 +79,34 @@ public partial class IntervalPage : ContentPage
         }
 
         StatusLabel.Text = $"{(correct ? "Correct" : "Not Quite")} — {_drill.Answer.Name} ({_drill.LowName} to {_drill.HighName})";
-        ScoreLabel.Text = $"Score: {_correct} / {_total}";
-        NextButton.IsVisible = true;
     }
 
     private void OnNext(object? sender, EventArgs e) => NewDrill();
+
+    // ── Automation (IAutomatableDrill) ──
+    public double AutoPlay()
+    {
+        NewDrill();
+        _ = PlayAsync(melodic: false);   // harmonic — both notes together
+        return PlaySeconds;
+    }
+
+    public void AutoReveal(bool scored)
+    {
+        if (_answered) return;
+        _answered = true;
+        if (scored) Gauge.Record(false);
+        foreach (var (semis, button) in _optionButtons)
+        {
+            button.IsEnabled = false;
+            if (semis == _drill.Answer.Semitones) { button.BackgroundColor = Colors.SeaGreen; button.TextColor = Colors.White; }
+        }
+        StatusLabel.Text = (scored ? "Time's up — " : "Answer: ") + $"{_drill.Answer.Name} ({_drill.LowName} to {_drill.HighName})";
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        Automation.Stop();
+    }
 }
