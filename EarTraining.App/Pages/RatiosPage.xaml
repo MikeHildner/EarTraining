@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EarTraining.App.Pages.RatiosPage"
+             Title="Ratios">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="18">
+            <Label Text="Ratios" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="Just-intonation frequency ratios. Each interval's two notes relate as a simple whole-number ratio — the simpler the ratio, the more consonant the interval."
+                   HorizontalOptions="Center" TextColor="Gray" />
+            <VerticalStackLayout x:Name="Rows" Spacing="18" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

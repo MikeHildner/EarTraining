@@ -53,6 +53,7 @@ public partial class HomePage : ContentPage
             Leaf("Triad ID", "triad"),
             Leaf("Find the DO", "finddo"),
             Leaf("Solfège Syllables", "solfeg"),
+            Leaf("Ratios", "ratios"),
             Leaf("Major Triad Movements", "l2major"),
         }),
     };
