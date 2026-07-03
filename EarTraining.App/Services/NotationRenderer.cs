@@ -35,7 +35,11 @@ public sealed class NotationRenderer
     public Task<string> BuildHtmlAsync(IntervalDictationDrill drill) =>
         BuildHtmlAsync(drill.Measures, drill.Key, beamed: true);
 
-    private async Task<string> BuildHtmlAsync(IReadOnlyList<DictationMeasure> measures, string key, bool beamed)
+    /// <summary>Bass-line dictation (bass clef; may contain beamed eighth-note pairs).</summary>
+    public Task<string> BuildHtmlAsync(BassLineDictationDrill drill) =>
+        BuildHtmlAsync(drill.Measures, drill.Key, beamed: true, clef: "bass");
+
+    private async Task<string> BuildHtmlAsync(IReadOnlyList<DictationMeasure> measures, string key, bool beamed, string clef = "treble")
     {
         var divs = new StringBuilder();
         var scripts = new StringBuilder();
@@ -45,8 +49,8 @@ public sealed class NotationRenderer
             divs.Append($"<div id=\"{id}\"></div>");
             var m = measures[i];
             string script = beamed
-                ? VexScore.EasyScoreBeamed(id, m.NoteNames, m.Rhythms, key, showTimeSignature: i == 0)
-                : VexScore.EasyScore(id, m.NoteNames, m.Rhythms, key, showTimeSignature: i == 0);
+                ? VexScore.EasyScoreBeamed(id, m.NoteNames, m.Rhythms, key, showTimeSignature: i == 0, clef)
+                : VexScore.EasyScore(id, m.NoteNames, m.Rhythms, key, showTimeSignature: i == 0, clef);
             // Each snippet declares `const vf`/`const score`; wrap in an IIFE so concatenating
             // measures doesn't throw "Identifier 'vf' has already been declared".
             scripts.Append("(function(){");

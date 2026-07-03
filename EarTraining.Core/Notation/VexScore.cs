@@ -10,7 +10,7 @@ namespace EarTraining.Core.Notation;
 /// </summary>
 public static class VexScore
 {
-    public static string EasyScore(string elementId, IReadOnlyList<string> noteNames, IReadOnlyList<string> rhythms, string key, bool showTimeSignature)
+    public static string EasyScore(string elementId, IReadOnlyList<string> noteNames, IReadOnlyList<string> rhythms, string key, bool showTimeSignature, string clef = "treble")
     {
         string timeSignature = showTimeSignature ? ".addTimeSignature('4/4')" : string.Empty;
 
@@ -29,9 +29,9 @@ public static class VexScore
 
         system.addStave({{
             voices: [
-                score.voice(score.notes('{easyScoreNotes}', {{ stem: 'up' }})),
+                score.voice(score.notes('{easyScoreNotes}', {{ stem: 'up', clef: '{clef}' }})),
             ]
-        }}).addClef('treble'){timeSignature}.addKeySignature('{key}');
+        }}).addClef('{clef}'){timeSignature}.addKeySignature('{key}');
         system.addConnector('singleLeft');
         system.addConnector('singleRight');
 
@@ -62,7 +62,7 @@ public static class VexScore
     /// becomes <c>score.beam(score.notes('a/8,b/8'), {{ autoStem: true }})</c>; everything
     /// else is a plain note. Same getBBox crop so measures sit snug.
     /// </summary>
-    public static string EasyScoreBeamed(string elementId, IReadOnlyList<string> noteNames, IReadOnlyList<string> rhythms, string key, bool showTimeSignature)
+    public static string EasyScoreBeamed(string elementId, IReadOnlyList<string> noteNames, IReadOnlyList<string> rhythms, string key, bool showTimeSignature, string clef = "treble")
     {
         string timeSignature = showTimeSignature ? ".addTimeSignature('4/4')" : string.Empty;
 
@@ -71,12 +71,12 @@ public static class VexScore
         {
             if (i + 1 < noteNames.Count && rhythms[i] == "8" && rhythms[i + 1] == "8")
             {
-                sb.Append($".concat(score.beam(score.notes('{noteNames[i]}/{rhythms[i]},{noteNames[i + 1]}/{rhythms[i + 1]}'), {{ autoStem: true }}))");
+                sb.Append($".concat(score.beam(score.notes('{noteNames[i]}/{rhythms[i]},{noteNames[i + 1]}/{rhythms[i + 1]}', {{ clef: '{clef}' }}), {{ autoStem: true }}))");
                 i++;
             }
             else
             {
-                sb.Append($".concat(score.notes('{noteNames[i]}/{rhythms[i]},'))");
+                sb.Append($".concat(score.notes('{noteNames[i]}/{rhythms[i]},', {{ clef: '{clef}' }}))");
             }
         }
         string easyScoreNotes = sb.ToString();
@@ -93,7 +93,7 @@ public static class VexScore
             voices: [
                 score.voice(score.notes('') {easyScoreNotes}),
             ]
-        }}).addClef('treble'){timeSignature}.addKeySignature('{key}');
+        }}).addClef('{clef}'){timeSignature}.addKeySignature('{key}');
         system.addConnector('singleLeft');
         system.addConnector('singleRight');
 

@@ -84,6 +84,7 @@
         <ShellContent Title="Triad Recognition" Route="l1c5triad" ContentTemplate="{DataTemplate pages:TriadRecognitionL1C5Page}" />
         <ShellContent Title="Triad Progressions" Route="l1c5progressions" ContentTemplate="{DataTemplate pages:TriadProgressionsL1C5Page}" />
         <ShellContent Title="Dictation" Route="l1c5dictation" ContentTemplate="{DataTemplate pages:DictationL1C5Page}" />
+        <ShellContent Title="Bass Line Dictation" Route="l1c5bassline" ContentTemplate="{DataTemplate pages:BassLineL1C5Page}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Level 1 · Chapter 6">
@@ -93,6 +94,7 @@
         <ShellContent Title="Triad Recognition" Route="l1c6triad" ContentTemplate="{DataTemplate pages:TriadRecognitionL1C6Page}" />
         <ShellContent Title="Triad Progressions" Route="l1c6progressions" ContentTemplate="{DataTemplate pages:TriadProgressionsL1C6Page}" />
         <ShellContent Title="Dictation" Route="l1c6dictation" ContentTemplate="{DataTemplate pages:DictationL1C6Page}" />
+        <ShellContent Title="Bass Line Dictation" Route="l1c6bassline" ContentTemplate="{DataTemplate pages:BassLineL1C6Page}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Level 1 · Chapter 7">
@@ -102,6 +104,7 @@
         <ShellContent Title="Triad Recognition" Route="l1c7triad" ContentTemplate="{DataTemplate pages:TriadRecognitionL1C7Page}" />
         <ShellContent Title="Triad Progressions" Route="l1c7progressions" ContentTemplate="{DataTemplate pages:TriadProgressionsL1C7Page}" />
         <ShellContent Title="Dictation" Route="l1c7dictation" ContentTemplate="{DataTemplate pages:DictationL1C7Page}" />
+        <ShellContent Title="Bass Line Dictation" Route="l1c7bassline" ContentTemplate="{DataTemplate pages:BassLineL1C7Page}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Level 2 · Chapter 4">
