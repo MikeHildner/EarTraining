@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:EarTraining.App.Components"
+             x:Class="EarTraining.App.Pages.IntervalReviewPage"
+             Title="Interval Review">
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView Grid.Row="0">
+        <VerticalStackLayout Padding="20" Spacing="14">
+            <Label x:Name="HeadingLabel" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="Play the interval, then identify its quality."
+                   HorizontalOptions="Center" TextColor="Gray" />
+            <c:InfoNote x:Name="BookNote" />
+
+            <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
+                <Label Text="Interval type:" HorizontalOptions="Center" FontSize="13" TextColor="Gray" />
+                <HorizontalStackLayout Spacing="14" HorizontalOptions="Center">
+                    <RadioButton x:Name="MelodicRadio" Content="Melodic" GroupName="reviewmode" IsChecked="True" CheckedChanged="OnModeChanged" />
+                    <RadioButton x:Name="HarmonicRadio" Content="Harmonic" GroupName="reviewmode" CheckedChanged="OnModeChanged" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <Button Text="▶ Play interval" Clicked="OnPlay" />
+            <Label Text="Which interval did you hear?" FontAttributes="Bold" HorizontalOptions="Center" />
+            <FlexLayout x:Name="AnswersLayout" Wrap="Wrap" JustifyContent="Center" AlignItems="Center" />
+            <Button x:Name="NextButton" Text="↻ New Drill" Clicked="OnNext" HorizontalOptions="Center" WidthRequest="220" />
+            <Label x:Name="StatusLabel" HorizontalOptions="Center" FontAttributes="Bold" />
+            <c:ScoreGauge x:Name="Gauge" HorizontalOptions="Center" />
+            <c:AutomationBar x:Name="Automation" />
+            <c:IncludeToggles x:Name="Includes" />
+        </VerticalStackLayout>
+        </ScrollView>
+        <Border Grid.Row="1" Style="{StaticResource PinnedDoBar}">
+            <c:TonicHeader x:Name="DoHeader" />
+        </Border>
+    </Grid>
+</ContentPage>

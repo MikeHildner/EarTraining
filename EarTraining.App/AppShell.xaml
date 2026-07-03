@@ -74,6 +74,7 @@
     <FlyoutItem Title="Level 1 · Chapter 4">
         <ShellContent Title="Melody Harmonization" Route="l1c4harmonize" ContentTemplate="{DataTemplate pages:MelodyHarmonizationPage}" />
         <ShellContent Title="Triad Progressions" Route="l1c4progressions" ContentTemplate="{DataTemplate pages:TriadProgressionsPage}" />
+        <ShellContent Title="Mixed Intervals" Route="l1c4intervals" ContentTemplate="{DataTemplate pages:MixedIntervalsL1C4Page}" />
         <ShellContent Title="Dictation" Route="l1c4dictation" ContentTemplate="{DataTemplate pages:DictationL1C4Page}" />
     </FlyoutItem>
 
@@ -105,6 +106,12 @@
         <ShellContent Title="Triad Progressions" Route="l1c7progressions" ContentTemplate="{DataTemplate pages:TriadProgressionsL1C7Page}" />
         <ShellContent Title="Dictation" Route="l1c7dictation" ContentTemplate="{DataTemplate pages:DictationL1C7Page}" />
         <ShellContent Title="Bass Line Dictation" Route="l1c7bassline" ContentTemplate="{DataTemplate pages:BassLineL1C7Page}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Level 1 · Chapter 8">
+        <ShellContent Title="All-Interval Review" Route="l1c8review" ContentTemplate="{DataTemplate pages:IntervalReviewL1C8Page}" />
+        <ShellContent Title="Dictation" Route="l1c8dictation" ContentTemplate="{DataTemplate pages:DictationL1C8Page}" />
+        <ShellContent Title="Bass Line Dictation" Route="l1c8bassline" ContentTemplate="{DataTemplate pages:BassLineL1C8Page}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Level 2 · Chapter 4">

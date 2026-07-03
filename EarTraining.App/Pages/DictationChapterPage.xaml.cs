@@ -169,3 +169,10 @@ public sealed class DictationL1C7Page : DictationChapterPage
     public DictationL1C7Page()
         : base(L1DictationChapter.C7, "Melodic Dictation — all diatonic intervals", 162, DictationRhythmStyle.Anticipations) { }
 }
+
+/// <summary>L1C8 review dictation: the full C7 pool + every rhythm style (book p. 182).</summary>
+public sealed class DictationL1C8Page : DictationChapterPage
+{
+    public DictationL1C8Page()
+        : base(L1DictationChapter.C7, "Melodic Dictation — review", 182, DictationRhythmStyle.Anticipations) { }
+}

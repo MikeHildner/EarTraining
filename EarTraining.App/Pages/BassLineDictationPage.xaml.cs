@@ -164,3 +164,10 @@ public sealed class BassLineL1C7Page : BassLineDictationPage
     public BassLineL1C7Page()
         : base(L1DictationChapter.C7, "Bass Line Dictation — adds anticipations", 165, DictationRhythmStyle.Anticipations) { }
 }
+
+/// <summary>L1C8 review bass lines: all six triads + every rhythm style (book p. 185).</summary>
+public sealed class BassLineL1C8Page : BassLineDictationPage
+{
+    public BassLineL1C8Page()
+        : base(L1DictationChapter.C7, "Bass Line Dictation — review", 185, DictationRhythmStyle.Anticipations) { }
+}
