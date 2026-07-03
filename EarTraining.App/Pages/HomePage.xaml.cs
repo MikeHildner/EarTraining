@@ -48,6 +48,7 @@ public partial class HomePage : ContentPage
             Chapter("Chapter 4", "Major triad progressions", new Drill("Major Triad Progressions", "l2c4")),
             Chapter("Chapter 5", "Diatonic triad progressions", new Drill("Diatonic Triad Progressions", "l2c5")),
             Chapter("Chapter 6", "Modal scale recognition", new Drill("Modal Scales", "l2c6")),
+            Chapter("Chapter 7", "II-V-I progressions", new Drill("II-V-I Progressions", "l2c7")),
         }),
         new("Not in the Books", new[]
         {

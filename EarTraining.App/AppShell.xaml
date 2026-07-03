@@ -126,6 +126,10 @@
         <ShellContent Title="Modal Scales" Route="l2c6" ContentTemplate="{DataTemplate pages:ModalRecognitionPage}" />
     </FlyoutItem>
 
+    <FlyoutItem Title="Level 2 · Chapter 7">
+        <ShellContent Title="II-V-I Progressions" Route="l2c7" ContentTemplate="{DataTemplate pages:L2C7ProgressionsPage}" />
+    </FlyoutItem>
+
     <FlyoutItem Title="Not in the Books">
         <ShellContent Title="Interval ID" Route="interval" ContentTemplate="{DataTemplate pages:IntervalPage}" />
         <ShellContent Title="Triad ID" Route="triad" ContentTemplate="{DataTemplate pages:TriadPage}" />

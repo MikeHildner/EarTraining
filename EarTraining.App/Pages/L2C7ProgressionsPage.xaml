@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:EarTraining.App.Components"
+             x:Class="EarTraining.App.Pages.L2C7ProgressionsPage"
+             Title="II-V-I Progressions">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="14">
+            <Label Text="II–V–I Progressions" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="Two II–V–I sequences in different keys — how did the key center move?"
+                   HorizontalOptions="Center" TextColor="Gray" />
+            <c:InfoNote Text="Selected from the II-V-I progression questions on pp. 75–76. Root-3-7 voicings; the key re-randomizes every drill, so you identify the movement, not the chords." />
+
+            <Button Text="▶ Play progressions" Clicked="OnPlay" />
+            <Label Text="How did the key center move?" FontAttributes="Bold" HorizontalOptions="Center" />
+            <FlexLayout x:Name="AnswersLayout" Wrap="Wrap" JustifyContent="Center" AlignItems="Center" />
+            <Button x:Name="NextButton" Text="↻ New Progression" Clicked="OnNext" HorizontalOptions="Center" WidthRequest="220" />
+            <Label x:Name="StatusLabel" HorizontalOptions="Center" FontAttributes="Bold" />
+            <c:ScoreGauge x:Name="Gauge" HorizontalOptions="Center" />
+            <c:AutomationBar x:Name="Automation" />
+            <c:IncludeToggles x:Name="Includes" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
