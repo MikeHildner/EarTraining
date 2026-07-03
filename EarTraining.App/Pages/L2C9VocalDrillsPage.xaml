@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:EarTraining.App.Components"
+             x:Class="EarTraining.App.Pages.L2C9VocalDrillsPage"
+             Title="Vocal Drills">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="14">
+            <Label Text="Vocal Drills — Around the Circle" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="Sing along through all twelve keys. Moveable DO repeats the same syllables in every key; Fixed DO uses chromatic solfège from the home C."
+                   HorizontalOptions="Center" TextColor="Gray" />
+            <c:InfoNote Text="The four circle vocal drills from pp. 51–58 (practice drills — no scoring). Each row is one key station: sing its four syllables as they play." />
+
+            <Picker x:Name="DrillPicker" Title="Drill" />
+
+            <Button Text="▶ Play (sing along)" Clicked="OnPlay" />
+            <Label x:Name="StatusLabel" HorizontalOptions="Center" TextColor="Gray" />
+
+            <VerticalStackLayout x:Name="StationsLayout" Spacing="4" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
