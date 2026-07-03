@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:EarTraining.App.Components"
+             x:Class="EarTraining.App.Pages.ModalRecognitionPage"
+             Title="Modal Scales">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="14">
+            <Label Text="Modal Scale Recognition" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="Middle C plays as a reference, then a modal scale — name the mode."
+                   HorizontalOptions="Center" TextColor="Gray" />
+            <c:InfoNote Text="Selected from the modal scale questions on pp. 72–73. The reveal also names the implied (relative) major, as the book's answers require." />
+
+            <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
+                <Label Text="Scale starts on:" HorizontalOptions="Center" FontSize="13" TextColor="Gray" />
+                <HorizontalStackLayout Spacing="14" HorizontalOptions="Center">
+                    <RadioButton x:Name="CRadio" Content="C" GroupName="modalstart" IsChecked="True" CheckedChanged="OnStartChanged" />
+                    <RadioButton x:Name="CsRadio" Content="C#" GroupName="modalstart" CheckedChanged="OnStartChanged" />
+                    <RadioButton x:Name="BothRadio" Content="Both" GroupName="modalstart" CheckedChanged="OnStartChanged" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <Button Text="▶ Play scale" Clicked="OnPlay" />
+            <Label Text="Which mode did you hear?" FontAttributes="Bold" HorizontalOptions="Center" />
+            <FlexLayout x:Name="AnswersLayout" Wrap="Wrap" JustifyContent="Center" AlignItems="Center" />
+            <Button x:Name="NextButton" Text="↻ New Scale" Clicked="OnNext" HorizontalOptions="Center" WidthRequest="200" />
+            <Label x:Name="StatusLabel" HorizontalOptions="Center" FontAttributes="Bold" />
+            <c:ScoreGauge x:Name="Gauge" HorizontalOptions="Center" />
+            <c:AutomationBar x:Name="Automation" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

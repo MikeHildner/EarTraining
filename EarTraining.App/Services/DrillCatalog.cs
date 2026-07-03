@@ -42,6 +42,7 @@ public static class DrillCatalog
         ("l1c8review",      "L1 C8 · All-Interval Review"),
         ("l2c4",            "L2 C4 · Major Triad Progressions"),
         ("l2c5",            "L2 C5 · Diatonic Triad Progressions"),
+        ("l2c6",            "L2 C6 · Modal Scales"),
         ("interval",        "Interval ID"),
         ("triad",           "Triad ID"),
         ("finddo",          "Find the DO"),
