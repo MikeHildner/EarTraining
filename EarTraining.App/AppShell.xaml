@@ -130,6 +130,10 @@
         <ShellContent Title="II-V-I Progressions" Route="l2c7" ContentTemplate="{DataTemplate pages:L2C7ProgressionsPage}" />
     </FlyoutItem>
 
+    <FlyoutItem Title="Level 2 · Chapter 8">
+        <ShellContent Title="7-3 Lines" Route="l2c8" ContentTemplate="{DataTemplate pages:L2C8LinesPage}" />
+    </FlyoutItem>
+
     <FlyoutItem Title="Not in the Books">
         <ShellContent Title="Interval ID" Route="interval" ContentTemplate="{DataTemplate pages:IntervalPage}" />
         <ShellContent Title="Triad ID" Route="triad" ContentTemplate="{DataTemplate pages:TriadPage}" />
