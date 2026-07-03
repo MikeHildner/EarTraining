@@ -119,7 +119,7 @@
     </FlyoutItem>
 
     <FlyoutItem Title="Level 2 · Chapter 5">
-        <ShellContent Title="Diatonic Triad Progressions" Route="l2c5" ContentTemplate="{DataTemplate pages:L2C5ProgressionsExplorerPage}" />
+        <ShellContent Title="Diatonic Triad Progressions" Route="l2c5" ContentTemplate="{DataTemplate pages:L2C5ProgressionsQuizPage}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Not in the Books">

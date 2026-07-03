@@ -95,16 +95,31 @@ public static class L2Explorer
     /// Four random, distinct diatonic triads (scale degrees 1-7), each with a random inversion. When
     /// <paramref name="tonicFirst"/>, the first chord is the tonic (I). Returns tone offsets from DO.
     /// </summary>
-    public static IReadOnlyList<IReadOnlyList<int>> DiatonicWalk(bool tonicFirst, Random rng)
+    public static IReadOnlyList<IReadOnlyList<int>> DiatonicWalk(bool tonicFirst, Random rng) =>
+        DiatonicQuizWalk(tonicFirst, rng).Chords;
+
+    /// <summary>Roman-numeral labels for scale degrees 1-7 (case follows triad quality).</summary>
+    public static readonly IReadOnlyList<string> RomanLabels = ["I", "ii", "iii", "IV", "V", "vi", "vii°"];
+
+    /// <summary>
+    /// The quiz form of <see cref="DiatonicWalk"/> (book Ch. 5 workbook, pp. 69-71): also returns
+    /// the answer — the four scale degrees — and each chord's root offset from DO so the page can
+    /// supply the bass voice ("hearing the root in the bass voice, and voiceled upper triads").
+    /// </summary>
+    public static (IReadOnlyList<int> Degrees, IReadOnlyList<int> Roots, IReadOnlyList<IReadOnlyList<int>> Chords)
+        DiatonicQuizWalk(bool tonicFirst, Random rng)
     {
-        var degrees = Enumerable.Range(1, 7).OrderBy(_ => rng.Next()).ToList();
+        var degrees = Enumerable.Range(1, 7).OrderBy(_ => rng.Next()).Take(7).ToList();
         if (tonicFirst) { degrees.Remove(1); degrees.Insert(0, 1); }
+        degrees = degrees.Take(4).ToList();
+        var roots = new List<int>(4);
         var chords = new List<IReadOnlyList<int>>(4);
-        for (int i = 0; i < 4; i++)
+        foreach (int degree in degrees)
         {
-            var (r, t, f) = DiatonicTones(degrees[i]);
+            var (r, t, f) = DiatonicTones(degree);
+            roots.Add(r);
             chords.Add(Invert(r, t, f, AllInv[rng.Next(AllInv.Length)]));
         }
-        return chords;
+        return (degrees, roots, chords);
     }
 }
