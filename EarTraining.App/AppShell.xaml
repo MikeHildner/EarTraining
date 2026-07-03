@@ -74,6 +74,7 @@
     <FlyoutItem Title="Level 1 · Chapter 4">
         <ShellContent Title="Melody Harmonization" Route="l1c4harmonize" ContentTemplate="{DataTemplate pages:MelodyHarmonizationPage}" />
         <ShellContent Title="Triad Progressions" Route="l1c4progressions" ContentTemplate="{DataTemplate pages:TriadProgressionsPage}" />
+        <ShellContent Title="Dictation" Route="l1c4dictation" ContentTemplate="{DataTemplate pages:DictationL1C4Page}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Level 1 · Chapter 5">
@@ -82,6 +83,7 @@
         <ShellContent Title="Harmonic Intervals" Route="l1c5harmonic" ContentTemplate="{DataTemplate pages:HarmonicIntervalIdL1C5Page}" />
         <ShellContent Title="Triad Recognition" Route="l1c5triad" ContentTemplate="{DataTemplate pages:TriadRecognitionL1C5Page}" />
         <ShellContent Title="Triad Progressions" Route="l1c5progressions" ContentTemplate="{DataTemplate pages:TriadProgressionsL1C5Page}" />
+        <ShellContent Title="Dictation" Route="l1c5dictation" ContentTemplate="{DataTemplate pages:DictationL1C5Page}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Level 1 · Chapter 6">
@@ -90,6 +92,7 @@
         <ShellContent Title="Harmonic Intervals" Route="l1c6harmonic" ContentTemplate="{DataTemplate pages:HarmonicIntervalIdL1C6Page}" />
         <ShellContent Title="Triad Recognition" Route="l1c6triad" ContentTemplate="{DataTemplate pages:TriadRecognitionL1C6Page}" />
         <ShellContent Title="Triad Progressions" Route="l1c6progressions" ContentTemplate="{DataTemplate pages:TriadProgressionsL1C6Page}" />
+        <ShellContent Title="Dictation" Route="l1c6dictation" ContentTemplate="{DataTemplate pages:DictationL1C6Page}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Level 1 · Chapter 7">
@@ -98,6 +101,7 @@
         <ShellContent Title="Harmonic Intervals" Route="l1c7harmonic" ContentTemplate="{DataTemplate pages:HarmonicIntervalIdL1C7Page}" />
         <ShellContent Title="Triad Recognition" Route="l1c7triad" ContentTemplate="{DataTemplate pages:TriadRecognitionL1C7Page}" />
         <ShellContent Title="Triad Progressions" Route="l1c7progressions" ContentTemplate="{DataTemplate pages:TriadProgressionsL1C7Page}" />
+        <ShellContent Title="Dictation" Route="l1c7dictation" ContentTemplate="{DataTemplate pages:DictationL1C7Page}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Level 2 · Chapter 4">
