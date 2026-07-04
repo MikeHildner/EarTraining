@@ -25,7 +25,7 @@
                 <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
                     <Label Text="&#xf002;" FontFamily="FA" FontSize="15" VerticalOptions="Center"
                            TextColor="{AppThemeBinding Light=#512BD4, Dark=#B7A6FF}" />
-                    <Entry x:Name="SearchEntry" Grid.Column="1" Placeholder="Search drills…"
+                    <Entry x:Name="SearchEntry" Grid.Column="1" Placeholder="Search…"
                            PlaceholderColor="{AppThemeBinding Light=#6B7280, Dark=#9AA0AA}"
                            TextColor="{AppThemeBinding Light=#1C1C1E, Dark=#E4E2EA}"
                            BackgroundColor="Transparent" ReturnType="Search"

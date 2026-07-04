@@ -45,7 +45,7 @@ public partial class BassLineDictationPage : ContentPage
     private void BuildPickers(DictationRhythmStyle maxStyle)
     {
         KeyPicker.ItemsSource = Keys.All.ToList();
-        KeyPicker.SelectedIndex = 0; // C
+        new PracticeKeyDefault(this, KeyPicker);   // Settings practice key, else C
 
         var bpms = new List<string>();
         for (int b = 50; b <= 100; b += 5) bpms.Add(b.ToString());
