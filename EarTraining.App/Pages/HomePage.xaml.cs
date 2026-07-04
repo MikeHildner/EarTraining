@@ -71,10 +71,16 @@ public partial class HomePage : ContentPage
     private readonly List<Acc> _groups = new();
     private readonly Dictionary<Acc, List<Acc>> _chapters = new();
 
+    // Flat search index over the same Groups table (label + where it lives + the chapter's
+    // description, so "min 6th" finds the Chapter 2/3 drills), plus the utility pages.
+    private sealed record SearchHit(string Label, string Context, string Route, string Haystack);
+    private readonly List<SearchHit> _searchIndex = new();
+
     public HomePage()
     {
         InitializeComponent();
         BuildGroups();
+        BuildSearchIndex();
         if (Application.Current is { } app)
             app.RequestedThemeChanged += (_, _) => Rebuild();
     }
@@ -85,6 +91,85 @@ public partial class HomePage : ContentPage
         _groups.Clear();
         _chapters.Clear();
         BuildGroups();
+        RenderSearch(SearchEntry.Text);   // re-render any active results in the new theme's colors
+    }
+
+    private void BuildSearchIndex()
+    {
+        foreach (var group in Groups)
+        {
+            string prefix = group.Title.Split('·')[0].Trim();   // "Level 1" / "Level 2" / "Not in the Books"
+            foreach (var item in group.Items)
+            {
+                if (item.Drills is { } drills)
+                {
+                    string context = $"{prefix} · {item.Title}";
+                    foreach (var d in drills)
+                        _searchIndex.Add(new(d.Label, context, d.Route, $"{d.Label} {context} {item.Desc}".ToLowerInvariant()));
+                }
+                else if (item.Route is { } route)
+                {
+                    _searchIndex.Add(new(item.Title, prefix, route, $"{item.Title} {prefix}".ToLowerInvariant()));
+                }
+            }
+        }
+        foreach (var (label, route) in new[] { ("Progress", "progress"), ("Settings", "settings"), ("About", "about") })
+            _searchIndex.Add(new(label, "App", route, label.ToLowerInvariant()));
+    }
+
+    private void OnSearchChanged(object? sender, TextChangedEventArgs e) => RenderSearch(e.NewTextValue);
+
+    private void OnSearchClear(object? sender, TappedEventArgs e) => SearchEntry.Text = "";
+
+    private void RenderSearch(string? query)
+    {
+        string q = (query ?? "").Trim().ToLowerInvariant();
+        bool active = q.Length > 0;
+        SearchClear.IsVisible = active;
+        SearchResults.IsVisible = active;
+        ChaptersContainer.IsVisible = !active;
+        SearchResults.Children.Clear();
+        if (!active) return;
+
+        var hits = _searchIndex
+            .Where(h => h.Haystack.Contains(q))
+            .OrderBy(h => h.Label.StartsWith(q, StringComparison.OrdinalIgnoreCase) ? 0
+                        : h.Label.Contains(q, StringComparison.OrdinalIgnoreCase) ? 1 : 2)
+            .ThenBy(h => h.Context, StringComparer.Ordinal)
+            .Take(15)
+            .ToList();
+
+        if (hits.Count == 0)
+        {
+            SearchResults.Add(new Label { Text = "No drills match.", TextColor = DescText, HorizontalOptions = LayoutOptions.Center, Margin = new Thickness(0, 8) });
+            return;
+        }
+
+        foreach (var hit in hits)
+        {
+            var row = new Border
+            {
+                StrokeShape = new RoundRectangle { CornerRadius = 10 },
+                Stroke = CollapsedStroke,
+                StrokeThickness = 1,
+                BackgroundColor = CollapsedBg,
+                Padding = new Thickness(14, 10),
+                Content = new VerticalStackLayout
+                {
+                    Spacing = 1,
+                    Children =
+                    {
+                        new Label { Text = hit.Label, FontAttributes = FontAttributes.Bold, FontSize = 15, TextColor = HeaderText },
+                        new Label { Text = hit.Context, FontSize = 12, TextColor = DescText },
+                    },
+                },
+            };
+            var route = hit.Route;
+            var tap = new TapGestureRecognizer();
+            tap.Tapped += async (_, _) => await Shell.Current.GoToAsync($"//{route}");
+            row.GestureRecognizers.Add(tap);
+            SearchResults.Add(row);
+        }
     }
 
     private void BuildGroups()
