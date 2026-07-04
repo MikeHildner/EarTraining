@@ -21,12 +21,24 @@ public partial class HomePage : ContentPage
     private static Color OpenBg => Theme.OpenBg;
     private static Color OpenStroke => Theme.Accent;
 
-    private sealed record Drill(string Label, string Route);
-    private sealed record Item(string Title, string? Desc, string? Route, Drill[]? Drills);
+    private sealed record Drill(string Label, string Route, string? Keywords = null);
+    private sealed record Item(string Title, string? Desc, string? Route, Drill[]? Drills, string? Keywords = null);
     private sealed record Group(string Title, Item[] Items);
 
     private static Item Chapter(string title, string desc, params Drill[] drills) => new(title, desc, null, drills);
-    private static Item Leaf(string title, string route) => new(title, null, route, null);
+    private static Item Leaf(string title, string route, string? keywords = null) => new(title, null, route, null, keywords);
+
+    // Search keywords: the concepts a page teaches, so queries like "anticipation", "tritone",
+    // or "mode" find it even though no label carries the word. Shared bases for the pages that
+    // repeat across chapters; chapter-specific concepts are appended inline in the table.
+    private const string KwDictation = "dictation transcription melody rhythm notation staff write";
+    private const string KwDictEighths = KwDictation + " eighth notes";
+    private const string KwDictDotted = KwDictEighths + " dotted";
+    private const string KwDictAnticip = KwDictEighths + " anticipation anticipations syncopation";
+    private const string KwBass = " bass clef";
+    private const string KwVocal = "sing singing voice solfege patterns";
+    private const string KwTriadRecog = "triad chord recognition inversion root I IV V";
+    private const string KwTriadProg = "progression chords roman numerals I IV V";
 
     // Top-level groups → chapters (with descriptions, from the book) → drills. Adding a chapter =
     // one entry here (plus the matching ShellContent routes in AppShell).
@@ -34,31 +46,72 @@ public partial class HomePage : ContentPage
     {
         new("Level 1 · Foundations", new[]
         {
-            Chapter("Chapter 1", "Solfège & pitch", new("Vocal Drills", "l1c1vocal"), new("Resolution ID", "l1c1resolution"), new("Pitch ID", "l1c1pitch"), new("Dictation", "l1c1dictation")),
-            Chapter("Chapter 2", "Maj 3rd & min 6th", new("Vocal Drills", "l1c2vocal"), new("Melodic Intervals", "l1c2melodic"), new("Harmonic Intervals", "l1c2harmonic"), new("Dictation", "l1c2dictation")),
-            Chapter("Chapter 3", "Min 3rd & maj 6th", new("Vocal Drills", "l1c3vocal"), new("Melodic Intervals", "l1c3melodic"), new("Harmonic Intervals", "l1c3harmonic"), new("Triad Recognition", "l1c3triad"), new("Dictation", "l1c3dictation")),
-            Chapter("Chapter 4", "I, IV, V triads", new("Melody Harmonization", "l1c4harmonize"), new("Triad Progressions", "l1c4progressions"), new("Mixed Intervals", "l1c4intervals"), new("Dictation", "l1c4dictation")),
-            Chapter("Chapter 5", "Diatonic 4ths & 5ths", new("Vocal Drills", "l1c5vocal"), new("Melodic Intervals", "l1c5melodic"), new("Harmonic Intervals", "l1c5harmonic"), new("Triad Recognition", "l1c5triad"), new("Triad Progressions", "l1c5progressions"), new("Dictation", "l1c5dictation"), new("Bass Line Dictation", "l1c5bassline")),
-            Chapter("Chapter 6", "Maj 2nd & min 7th", new("Vocal Drills", "l1c6vocal"), new("Melodic Intervals", "l1c6melodic"), new("Harmonic Intervals", "l1c6harmonic"), new("Triad Recognition", "l1c6triad"), new("Triad Progressions", "l1c6progressions"), new("Dictation", "l1c6dictation"), new("Bass Line Dictation", "l1c6bassline")),
-            Chapter("Chapter 7", "Min 2nd & maj 7th", new("Vocal Drills", "l1c7vocal"), new("Melodic Intervals", "l1c7melodic"), new("Harmonic Intervals", "l1c7harmonic"), new("Triad Recognition", "l1c7triad"), new("Triad Progressions", "l1c7progressions"), new("Dictation", "l1c7dictation"), new("Bass Line Dictation", "l1c7bassline")),
-            Chapter("Chapter 8", "Review — all areas", new("All-Interval Review", "l1c8review"), new("Dictation", "l1c8dictation"), new("Bass Line Dictation", "l1c8bassline")),
+            Chapter("Chapter 1", "Solfège & pitch",
+                new("Vocal Drills", "l1c1vocal", KwVocal),
+                new("Resolution ID", "l1c1resolution", "resolve resolution tendency tones re do fa mi ti"),
+                new("Pitch ID", "l1c1pitch", "pitch identify solfege syllable"),
+                new("Dictation", "l1c1dictation", KwDictation)),
+            Chapter("Chapter 2", "Maj 3rd & min 6th",
+                new("Vocal Drills", "l1c2vocal", KwVocal),
+                new("Melodic Intervals", "l1c2melodic", "interval major third minor sixth"),
+                new("Harmonic Intervals", "l1c2harmonic", "interval major third minor sixth"),
+                new("Dictation", "l1c2dictation", KwDictEighths)),
+            Chapter("Chapter 3", "Min 3rd & maj 6th",
+                new("Vocal Drills", "l1c3vocal", KwVocal),
+                new("Melodic Intervals", "l1c3melodic", "interval minor third major sixth"),
+                new("Harmonic Intervals", "l1c3harmonic", "interval minor third major sixth"),
+                new("Triad Recognition", "l1c3triad", KwTriadRecog),
+                new("Dictation", "l1c3dictation", KwDictEighths)),
+            Chapter("Chapter 4", "I, IV, V triads",
+                new("Melody Harmonization", "l1c4harmonize", "harmonize harmonization chord I IV V"),
+                new("Triad Progressions", "l1c4progressions", KwTriadProg),
+                new("Mixed Intervals", "l1c4intervals", "interval mixed major minor third sixth"),
+                new("Dictation", "l1c4dictation", KwDictEighths)),
+            Chapter("Chapter 5", "Diatonic 4ths & 5ths",
+                new("Vocal Drills", "l1c5vocal", KwVocal),
+                new("Melodic Intervals", "l1c5melodic", "interval perfect fourth fifth tritone augmented diminished"),
+                new("Harmonic Intervals", "l1c5harmonic", "interval perfect fourth fifth tritone augmented diminished"),
+                new("Triad Recognition", "l1c5triad", KwTriadRecog + " vi"),
+                new("Triad Progressions", "l1c5progressions", KwTriadProg + " vi"),
+                new("Dictation", "l1c5dictation", KwDictEighths),
+                new("Bass Line Dictation", "l1c5bassline", KwDictation + KwBass)),
+            Chapter("Chapter 6", "Maj 2nd & min 7th",
+                new("Vocal Drills", "l1c6vocal", KwVocal),
+                new("Melodic Intervals", "l1c6melodic", "interval major second minor seventh"),
+                new("Harmonic Intervals", "l1c6harmonic", "interval major second minor seventh"),
+                new("Triad Recognition", "l1c6triad", KwTriadRecog + " vi iii"),
+                new("Triad Progressions", "l1c6progressions", KwTriadProg + " vi iii"),
+                new("Dictation", "l1c6dictation", KwDictDotted),
+                new("Bass Line Dictation", "l1c6bassline", KwDictDotted + KwBass)),
+            Chapter("Chapter 7", "Min 2nd & maj 7th",
+                new("Vocal Drills", "l1c7vocal", KwVocal),
+                new("Melodic Intervals", "l1c7melodic", "interval minor second major seventh"),
+                new("Harmonic Intervals", "l1c7harmonic", "interval minor second major seventh"),
+                new("Triad Recognition", "l1c7triad", KwTriadRecog + " vi iii ii"),
+                new("Triad Progressions", "l1c7progressions", KwTriadProg + " vi iii ii"),
+                new("Dictation", "l1c7dictation", KwDictAnticip),
+                new("Bass Line Dictation", "l1c7bassline", KwDictAnticip + KwBass)),
+            Chapter("Chapter 8", "Review — all areas",
+                new("All-Interval Review", "l1c8review", "interval review qualities tritone augmented diminished"),
+                new("Dictation", "l1c8dictation", KwDictAnticip),
+                new("Bass Line Dictation", "l1c8bassline", KwDictAnticip + KwBass)),
         }),
         new("Level 2 · Progressions", new[]
         {
-            Chapter("Chapter 4", "Major triad progressions", new Drill("Major Triad Progressions", "l2c4")),
-            Chapter("Chapter 5", "Diatonic triad progressions", new Drill("Diatonic Triad Progressions", "l2c5")),
-            Chapter("Chapter 6", "Modal scale recognition", new Drill("Modal Scales", "l2c6")),
-            Chapter("Chapter 7", "II-V-I progressions", new Drill("II-V-I Progressions", "l2c7")),
-            Chapter("Chapter 8", "7-3 melodic lines", new Drill("7-3 Lines", "l2c8")),
-            Chapter("Chapter 9", "Vocal drills — the circle", new Drill("Vocal Drills", "l2c9")),
+            Chapter("Chapter 4", "Major triad progressions", new Drill("Major Triad Progressions", "l2c4", "major triad progression movement circle fifths fourths half-step")),
+            Chapter("Chapter 5", "Diatonic triad progressions", new Drill("Diatonic Triad Progressions", "l2c5", "diatonic progression four chords roman numerals vii diminished")),
+            Chapter("Chapter 6", "Modal scale recognition", new Drill("Modal Scales", "l2c6", "mode modes modal scale dorian phrygian lydian mixolydian aeolian ionian locrian relative major")),
+            Chapter("Chapter 7", "II-V-I progressions", new Drill("II-V-I Progressions", "l2c7", "jazz two five one II V I progression key change circle")),
+            Chapter("Chapter 8", "7-3 melodic lines", new Drill("7-3 Lines", "l2c8", "seven three line guide tones voice leading")),
+            Chapter("Chapter 9", "Vocal drills — the circle", new Drill("Vocal Drills", "l2c9", "sing circle fifths fourths fixed moveable do solfege")),
         }),
         new("Not in the Books", new[]
         {
-            Leaf("Interval ID", "interval"),
-            Leaf("Triad ID", "triad"),
-            Leaf("Find the DO", "finddo"),
-            Leaf("Ratios", "ratios"),
-            Leaf("Blank Sheet Music", "blanksheet"),
+            Leaf("Interval ID", "interval", "interval chromatic quality octave tritone"),
+            Leaf("Triad ID", "triad", "triad quality major minor diminished augmented chord"),
+            Leaf("Find the DO", "finddo", "tonic key center find do"),
+            Leaf("Ratios", "ratios", "ratio just intonation tuning frequency"),
+            Leaf("Blank Sheet Music", "blanksheet", "blank sheet staff paper manuscript print pdf share clef"),
         }),
     };
 
@@ -73,9 +126,13 @@ public partial class HomePage : ContentPage
     private readonly Dictionary<Acc, List<Acc>> _chapters = new();
 
     // Flat search index over the same Groups table (label + where it lives + the chapter's
-    // description, so "min 6th" finds the Chapter 2/3 drills), plus the utility pages.
-    private sealed record SearchHit(string Label, string Context, string Route, string Haystack);
+    // description + curated concept keywords, so "min 6th", "anticipation", or "mode" all
+    // find their pages), plus the utility pages. Words is the pre-split haystack for the
+    // word-aware matching in TokenMatches.
+    private sealed record SearchHit(string Label, string Context, string Route, string Haystack, string[] Words);
     private readonly List<SearchHit> _searchIndex = new();
+
+    private static readonly char[] NonWord = [' ', '·', '-', '–', '—', ',', '.', '&', '/', '(', ')', '\''];
 
     public HomePage()
     {
@@ -97,6 +154,13 @@ public partial class HomePage : ContentPage
 
     private void BuildSearchIndex()
     {
+        void Add(string label, string context, string route, string haystack)
+        {
+            string lower = haystack.ToLowerInvariant();
+            _searchIndex.Add(new(label, context, route, lower,
+                lower.Split(NonWord, StringSplitOptions.RemoveEmptyEntries).Distinct().ToArray()));
+        }
+
         foreach (var group in Groups)
         {
             string prefix = group.Title.Split('·')[0].Trim();   // "Level 1" / "Level 2" / "Not in the Books"
@@ -106,16 +170,40 @@ public partial class HomePage : ContentPage
                 {
                     string context = $"{prefix} · {item.Title}";
                     foreach (var d in drills)
-                        _searchIndex.Add(new(d.Label, context, d.Route, $"{d.Label} {context} {item.Desc}".ToLowerInvariant()));
+                        Add(d.Label, context, d.Route, $"{d.Label} {context} {item.Desc} {d.Keywords}");
                 }
                 else if (item.Route is { } route)
                 {
-                    _searchIndex.Add(new(item.Title, prefix, route, $"{item.Title} {prefix}".ToLowerInvariant()));
+                    Add(item.Title, prefix, route, $"{item.Title} {prefix} {item.Keywords}");
                 }
             }
         }
-        foreach (var (label, route) in new[] { ("Progress", "progress"), ("Settings", "settings"), ("About", "about") })
-            _searchIndex.Add(new(label, "App", route, label.ToLowerInvariant()));
+        Add("Progress", "App", "progress", "progress stats statistics streak accuracy trend");
+        Add("Settings", "App", "settings", "settings theme dark mode light volume practice key appearance");
+        Add("About", "App", "about", "about version credits licenses");
+    }
+
+    // A token matches when the haystack contains it (mid-word hits like "6th"), a word starts
+    // with it ("ant" -> "anticipation"), it's a slightly longer form of a word ("modes" ->
+    // "mode"), or it shares a 4+ letter prefix with a word ("dictate" -> "dictation"). No
+    // typo/edit-distance matching — results stay predictable.
+    private static bool TokenMatches(SearchHit h, string token)
+    {
+        if (h.Haystack.Contains(token, StringComparison.Ordinal)) return true;
+        foreach (string w in h.Words)
+        {
+            if (w.StartsWith(token, StringComparison.Ordinal)) return true;
+            if (token.StartsWith(w, StringComparison.Ordinal) && token.Length - w.Length <= 2) return true;
+            if (token.Length >= 4 && w.Length >= 4 && CommonPrefix(w, token) >= 4) return true;
+        }
+        return false;
+    }
+
+    private static int CommonPrefix(string a, string b)
+    {
+        int n = Math.Min(a.Length, b.Length), i = 0;
+        while (i < n && a[i] == b[i]) i++;
+        return i;
     }
 
     private void OnSearchChanged(object? sender, TextChangedEventArgs e) => RenderSearch(e.NewTextValue);
@@ -132,11 +220,12 @@ public partial class HomePage : ContentPage
         SearchResults.Children.Clear();
         if (!active) return;
 
+        string[] tokens = q.Split(' ', StringSplitOptions.RemoveEmptyEntries);
         var hits = _searchIndex
-            .Where(h => h.Haystack.Contains(q))
+            .Where(h => tokens.All(t => TokenMatches(h, t)))
             .OrderBy(h => h.Label.StartsWith(q, StringComparison.OrdinalIgnoreCase) ? 0
-                        : h.Label.Contains(q, StringComparison.OrdinalIgnoreCase) ? 1 : 2)
-            .ThenBy(h => h.Context, StringComparer.Ordinal)
+                        : h.Label.Contains(q, StringComparison.OrdinalIgnoreCase) ? 1
+                        : tokens.All(t => h.Label.ToLowerInvariant().Split(' ').Any(w => w.StartsWith(t))) ? 2 : 3)
             .Take(15)
             .ToList();
 
