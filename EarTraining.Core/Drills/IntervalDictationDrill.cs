@@ -12,8 +12,10 @@ public enum L1C2DictationInterval { Major3rd, Minor6th, Both }
 /// Cumulative rhythm difficulty, following the book's progression: quarters/halves (C1),
 /// eighth-note pairs (C2+), the dotted quarter-eighth figure (C6), and eighth-note
 /// anticipations (C7). Anticipations are written as within-measure syncopation — an "8"
-/// followed by a held "4." — because each measure renders as its own stave (no cross-barline
-/// ties in EasyScore); the pushed-attack sound is the same.
+/// followed by a held note — because each measure renders as its own stave (no cross-barline
+/// ties); the pushed-attack sound is the same. A push across the half-bar is the "8~4" token:
+/// one sounding note displayed as eighth tied to quarter, so beat 3 is always visible
+/// (standard engraving — burying the half-bar makes the figure hard to sight-read).
 /// </summary>
 public enum DictationRhythmStyle { Basic = 0, Eighths = 1, Dotted = 2, Anticipations = 3 }
 
@@ -160,7 +162,7 @@ public sealed record IntervalDictationDrill(
     private static readonly string[] DottedPatterns =           // "4.,8" figure starting on a beat
         ["4.,8,2", "2,4.,8", "4.,8,4,4", "4,4,4.,8"];
     private static readonly string[] AnticipationPatterns =     // "8,4." push: attack off the beat, held over it
-        ["8,4.,2", "8,4.,4,4", "4,8,4.,4", "2,8,4.", "4,4,8,4."];
+        ["8,4.,2", "8,4.,4,4", "4,8,8~4,4", "2,8,4.", "4,4,8,4."]; // the beat-3 push is tied ("8~4") so the half-bar shows
 
     private static List<string> NoteRhythms(DictationRhythmStyle style)
     {

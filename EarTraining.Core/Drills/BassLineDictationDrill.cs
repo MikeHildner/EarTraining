@@ -7,7 +7,8 @@ namespace EarTraining.Core.Drills;
 /// (Ch. 5 §1.15-1.21) — each measure implies one diatonic triad, the strong beats (1 and 3)
 /// carry chord tones of that triad, weak beats move by diatonic step (passing/neighbor
 /// tones), and the line resolves to DO in the nearer octave. An anticipated note (an "8"
-/// pushed into a held "4.") carries the following strong beat's chord tone, per the idiom.
+/// pushed into a held "4.", or the tied "8~4" across the half-bar) carries the following
+/// strong beat's chord tone, per the idiom.
 /// Renders on a bass clef; reuses <see cref="DictationMeasure"/> and the dictation audio.
 /// </summary>
 public sealed record BassLineDictationDrill(
@@ -42,7 +43,7 @@ public sealed record BassLineDictationDrill(
     private static readonly string[] BasicPatterns = ["2,2", "4,4,2", "2,4,4", "4,2,4", "4,4,4,4"];
     private static readonly string[] EighthPatterns = ["4,4,8,8,4", "8,8,4,2", "2,8,8,4", "8,8,4,4,4"];
     private static readonly string[] DottedPatterns = ["4.,8,2", "2,4.,8", "4,4,4.,8"];
-    private static readonly string[] AnticipationPatterns = ["8,4.,2", "4,8,4.,4", "2,8,4.", "4,4,8,4."];
+    private static readonly string[] AnticipationPatterns = ["8,4.,2", "4,8,8~4,4", "2,8,4.", "4,4,8,4."]; // beat-3 push tied ("8~4") so the half-bar shows
 
     public static BassLineDictationDrill Next(
         L1DictationChapter chapter, string key, double bpm,
@@ -115,7 +116,7 @@ public sealed record BassLineDictationDrill(
             double onset = 0;
             for (int s = 0; s < codes.Length; s++)
             {
-                bool anticipated = codes[s] == "4." && s > 0 && codes[s - 1] == "8";
+                bool anticipated = codes[s] == "8~4" || (codes[s] == "4." && s > 0 && codes[s - 1] == "8");
                 bool strong = onset == 0.0 || onset == 2.0 || anticipated;
                 bool finalNote = lastMeasure && s == codes.Length - 1;
 
