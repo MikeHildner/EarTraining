@@ -27,11 +27,14 @@ public partial class BlankSheetPage : ContentPage
         TimePicker.SelectedIndex = 0;
         MeasuresPicker.ItemsSource = new List<string> { "Off", "2", "4" };
         MeasuresPicker.SelectedIndex = 0;   // default: classic unbarred manuscript
+        StavesPicker.ItemsSource = new List<string> { "Default", "4", "5", "6", "7", "8", "10", "12" };
+        StavesPicker.SelectedIndex = 0;     // Default = 10 portrait / 7 landscape
 
         ClefPicker.SelectedIndexChanged += OnOptionChanged;
         KeyPicker.SelectedIndexChanged += OnOptionChanged;
         TimePicker.SelectedIndexChanged += OnOptionChanged;
         MeasuresPicker.SelectedIndexChanged += OnOptionChanged;
+        StavesPicker.SelectedIndexChanged += OnOptionChanged;
         LandscapeSwitch.Toggled += OnOptionChanged;
 
         RebuildPreview();
@@ -44,7 +47,8 @@ public partial class BlankSheetPage : ContentPage
             : (string)KeyPicker.SelectedItem,
         FourFour: TimePicker.SelectedIndex == 1,
         MeasuresPerLine: MeasuresPicker.SelectedIndex switch { 1 => 2, 2 => 4, _ => 0 },
-        Landscape: LandscapeSwitch.IsToggled);
+        Landscape: LandscapeSwitch.IsToggled,
+        StavesPerPage: StavesPicker.SelectedIndex <= 0 ? 0 : int.Parse((string)StavesPicker.SelectedItem));
 
     private void OnOptionChanged(object? sender, EventArgs e)
     {

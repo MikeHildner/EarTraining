@@ -44,7 +44,7 @@ public sealed class NotationRenderer
     {
         var divs = new StringBuilder();
         var scripts = new StringBuilder();
-        int rows = BlankSheet.Rows(options.Landscape);
+        int rows = BlankSheet.Rows(options);
         for (int i = 0; i < rows; i++)
         {
             string id = $"sheetrow{i + 1}";

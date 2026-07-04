@@ -6,32 +6,49 @@ namespace EarTraining.Core.Notation;
 /// <paramref name="Clef"/> is "treble", "bass", or null for plain 5-line staves;
 /// <paramref name="KeySignature"/> is a <see cref="Theory.Keys"/> name or null (and is
 /// ignored when there is no clef — accidental positions need a clef); a
-/// <paramref name="MeasuresPerLine"/> of 0 means classic unbarred manuscript paper.</summary>
+/// <paramref name="MeasuresPerLine"/> of 0 means classic unbarred manuscript paper; a
+/// <paramref name="StavesPerPage"/> of 0 means the orientation default (10 portrait,
+/// 7 landscape) — fewer staves print proportionally BIGGER.</summary>
 public sealed record BlankSheetOptions(
     string? Clef,
     string? KeySignature,
     bool FourFour,
     int MeasuresPerLine,
-    bool Landscape);
+    bool Landscape,
+    int StavesPerPage = 0);
 
 /// <summary>
 /// Builds the VexFlow scripts for a page of blank staves — raw <c>Vex.Flow.Stave</c> API,
-/// no voices and no getBBox crop (the geometry is fixed, so each row sets its own viewBox;
-/// without one the <c>max-width:100%</c> scaling breaks). Sized for one Letter page with
-/// 0.4-inch margins at 96 CSS px/in: the printable box is 739×979 px portrait / 979×739
-/// landscape, so 10 rows × 730 px (portrait) or 7 rows × 970 px (landscape) at 94 px per
-/// row. A stave at y = −6 puts its 5 lines at 34..74 within the row, leaving headroom for
-/// the clef and key signature and ~0.56 in of writing room between systems.
+/// no voices and no getBBox crop (each row sets its own viewBox; without one the
+/// <c>max-width:100%</c> scaling breaks). Every row is drawn 94 px tall at a LOGICAL width
+/// derived so that N rows scaled to the printable width fill the printable height exactly
+/// (Letter, 0.4-inch margins): the fewer the staves per page, the smaller the logical width,
+/// so the uniform scale-up makes the whole staff — line spacing, clef, key signature, and
+/// the writing gap between systems — proportionally larger, like children's manuscript
+/// paper. A stave at y = −6 puts its 5 lines at 34..74 within the row, leaving headroom
+/// for the clef and key signature.
 /// </summary>
 public static class BlankSheet
 {
-    public const int PortraitRows = 10, LandscapeRows = 7;
-    public const int PortraitWidth = 730, LandscapeWidth = 970;
+    // Letter printable box with 0.4-in margins, in points — the geometry SheetPdfWriter
+    // targets. 554.4 = 8.5in − 0.8in; 734.4 = 11in − 0.8in.
+    private const double PrintableShort = 554.4;
+    private const double PrintableLong = 734.4;
+
     public const int RowHeight = 94;
     private const int StaveY = -6;
 
-    public static int Rows(bool landscape) => landscape ? LandscapeRows : PortraitRows;
-    public static int Width(bool landscape) => landscape ? LandscapeWidth : PortraitWidth;
+    public static int Rows(BlankSheetOptions o) =>
+        o.StavesPerPage > 0 ? o.StavesPerPage : o.Landscape ? 7 : 10;
+
+    /// <summary>The row's logical pixel width: printableW × (N × RowHeight) / printableH,
+    /// so N rows fill the page and staff size scales inversely with the count.</summary>
+    public static int LogicalWidth(BlankSheetOptions o)
+    {
+        double printW = o.Landscape ? PrintableLong : PrintableShort;
+        double printH = o.Landscape ? PrintableShort : PrintableLong;
+        return (int)Math.Round(printW * Rows(o) * RowHeight / printH);
+    }
 
     /// <summary>
     /// The script for one row div. Unbarred rows are a single full-width stave with both
@@ -42,7 +59,7 @@ public static class BlankSheet
     /// </summary>
     public static string RowScript(string elementId, BlankSheetOptions o, bool firstRow)
     {
-        int w = Width(o.Landscape);
+        int w = LogicalWidth(o);
         int n = Math.Max(1, o.MeasuresPerLine);
         int mw = w / n;
 

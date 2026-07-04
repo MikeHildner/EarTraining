@@ -10,7 +10,7 @@
                    HorizontalTextAlignment="Center" TextColor="Gray" />
 
             <Border Style="{StaticResource Card}">
-                <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnSpacing="12" RowSpacing="8">
+                <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnSpacing="12" RowSpacing="8">
                     <Label Text="Clef" VerticalOptions="Center" />
                     <Picker x:Name="ClefPicker" Grid.Column="1" />
                     <Label Text="Key signature" Grid.Row="1" VerticalOptions="Center" />
@@ -19,8 +19,10 @@
                     <Picker x:Name="TimePicker" Grid.Row="2" Grid.Column="1" />
                     <Label Text="Measures per line" Grid.Row="3" VerticalOptions="Center" />
                     <Picker x:Name="MeasuresPicker" Grid.Row="3" Grid.Column="1" />
-                    <Label Text="Landscape" Grid.Row="4" VerticalOptions="Center" />
-                    <Switch x:Name="LandscapeSwitch" Grid.Row="4" Grid.Column="1" HorizontalOptions="Start" />
+                    <Label Text="Staves per page" Grid.Row="4" VerticalOptions="Center" />
+                    <Picker x:Name="StavesPicker" Grid.Row="4" Grid.Column="1" />
+                    <Label Text="Landscape" Grid.Row="5" VerticalOptions="Center" />
+                    <Switch x:Name="LandscapeSwitch" Grid.Row="5" Grid.Column="1" HorizontalOptions="Start" />
                 </Grid>
             </Border>
 

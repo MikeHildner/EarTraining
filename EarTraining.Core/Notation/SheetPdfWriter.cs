@@ -31,8 +31,15 @@ public static class SheetPdfWriter
 
         double pageW = landscape ? 792 : 612;
         double pageH = landscape ? 612 : 792;
-        double scale = (pageW - 2 * Margin) / BlankSheet.Width(landscape);
-        double rowPitch = BlankSheet.RowHeight * scale;
+
+        // Self-describing geometry: the rows' viewBox carries the logical size BlankSheet
+        // derived for the chosen staves-per-page, so scaling to the printable width makes
+        // the N rows fill the printable height by construction.
+        var vb = Regex.Match(rowsHtml, "viewBox=\"0 0 ([0-9.]+) ([0-9.]+)\"");
+        double vbW = vb.Success ? double.Parse(vb.Groups[1].Value, CultureInfo.InvariantCulture) : 730;
+        double vbH = vb.Success ? double.Parse(vb.Groups[2].Value, CultureInfo.InvariantCulture) : BlankSheet.RowHeight;
+        double scale = (pageW - 2 * Margin) / vbW;
+        double rowPitch = vbH * scale;
 
         var content = new StringBuilder();
         for (int r = 0; r < svgs.Count; r++)
