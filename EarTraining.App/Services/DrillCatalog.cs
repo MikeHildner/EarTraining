@@ -3,7 +3,7 @@ namespace EarTraining.App.Services;
 /// <summary>
 /// The set of drills that produce a score, mapped from their Shell route to a friendly display name,
 /// in Level → chapter order. Used by <see cref="ProgressStore"/> to validate which routes to record
-/// (so non-scoring pages — dictation, the play-only explorers, Solfège Syllables — are
+/// (so non-scoring pages — dictation and the reference pages — are
 /// ignored) and by the Progress page to label per-drill stats. Routes match AppShell.xaml / HomePage.
 /// </summary>
 public static class DrillCatalog

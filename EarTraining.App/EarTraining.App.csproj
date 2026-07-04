@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <!-- Per build-OS so each machine only needs its own platform toolchain:
@@ -23,8 +23,8 @@
 
         <ApplicationTitle>Ear Training</ApplicationTitle>
         <ApplicationId>org.hildner.eartraining</ApplicationId>
-        <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
-        <ApplicationVersion>3</ApplicationVersion>
+        <ApplicationDisplayVersion>1.1</ApplicationDisplayVersion>
+        <ApplicationVersion>4</ApplicationVersion>
         <WindowsPackageType>None</WindowsPackageType>
 
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
@@ -37,7 +37,7 @@
     <ItemGroup>
         <!-- Ear/swirl icon (Claude Design): gradient background (appicon.png) + white ear
              foreground (appicon_fg.png). Composited on iOS, adaptive on Android. The base
-             name must be "appicon" — iOS actool and the Android manifest both reference the
+             name must be "appicon" â€” iOS actool and the Android manifest both reference the
              "appicon" catalog/mipmap, so any other Include name fails the resource lookup. -->
         <MauiIcon Include="Resources\AppIcon\appicon.png" ForegroundFile="Resources\AppIcon\appicon_fg.png" Color="#8478F5" />
         <MauiSplashScreen Include="Resources\Splash\splash.png" Color="#8478F5" BaseSize="220,220" />

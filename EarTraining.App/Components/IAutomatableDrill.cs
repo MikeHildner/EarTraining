@@ -1,7 +1,7 @@
 namespace EarTraining.App.Components;
 
 /// <summary>
-/// A drill page the <see cref="AutomationBar"/> can run hands-free: it advances to a new
+/// A drill page the <see cref="AutomationBar"/> can run automatically: it advances to a new
 /// drill, plays it, waits, then reveals (and optionally scores) the answer, on a loop.
 /// </summary>
 public interface IAutomatableDrill

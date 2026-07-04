@@ -142,9 +142,7 @@
         <ShellContent Title="Interval ID" Route="interval" ContentTemplate="{DataTemplate pages:IntervalPage}" />
         <ShellContent Title="Triad ID" Route="triad" ContentTemplate="{DataTemplate pages:TriadPage}" />
         <ShellContent Title="Find the DO" Route="finddo" ContentTemplate="{DataTemplate pages:FindTheDoPage}" />
-        <ShellContent Title="Solfège Syllables" Route="solfeg" ContentTemplate="{DataTemplate pages:SolfegSyllablesPage}" />
         <ShellContent Title="Ratios" Route="ratios" ContentTemplate="{DataTemplate pages:RatiosPage}" />
-        <ShellContent Title="Major Triad Movements" Route="l2major" ContentTemplate="{DataTemplate pages:L2ProgressionsExplorerPage}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Progress">
