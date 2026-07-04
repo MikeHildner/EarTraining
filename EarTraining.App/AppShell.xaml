@@ -143,6 +143,7 @@
         <ShellContent Title="Triad ID" Route="triad" ContentTemplate="{DataTemplate pages:TriadPage}" />
         <ShellContent Title="Find the DO" Route="finddo" ContentTemplate="{DataTemplate pages:FindTheDoPage}" />
         <ShellContent Title="Ratios" Route="ratios" ContentTemplate="{DataTemplate pages:RatiosPage}" />
+        <ShellContent Title="Blank Sheet Music" Route="blanksheet" ContentTemplate="{DataTemplate pages:BlankSheetPage}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Progress">

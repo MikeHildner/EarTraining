@@ -58,6 +58,7 @@ public partial class HomePage : ContentPage
             Leaf("Triad ID", "triad"),
             Leaf("Find the DO", "finddo"),
             Leaf("Ratios", "ratios"),
+            Leaf("Blank Sheet Music", "blanksheet"),
         }),
     };
 

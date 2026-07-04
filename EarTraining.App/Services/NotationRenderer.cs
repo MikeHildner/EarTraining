@@ -39,6 +39,39 @@ public sealed class NotationRenderer
     public Task<string> BuildHtmlAsync(BassLineDictationDrill drill) =>
         BuildHtmlAsync(drill.Measures, drill.Key, beamed: true, clef: "bass");
 
+    /// <summary>Blank Sheet Music: one Letter page of empty staves, one div+script per row.</summary>
+    public async Task<string> BuildBlankSheetHtmlAsync(BlankSheetOptions options)
+    {
+        var divs = new StringBuilder();
+        var scripts = new StringBuilder();
+        int rows = BlankSheet.Rows(options.Landscape);
+        for (int i = 0; i < rows; i++)
+        {
+            string id = $"sheetrow{i + 1}";
+            divs.Append($"<div class=\"row\" id=\"{id}\"></div>");
+            scripts.Append("(function(){");
+            scripts.Append(BlankSheet.RowScript(id, options, firstRow: i == 0));
+            scripts.Append("})();\n");
+        }
+
+        string vexFlow = await VexFlowJsAsync();
+        // Preview-only surface: the shared PDF is written by SheetPdfWriter from the rows
+        // harvested out of this page, so this shell just has to display well on screen.
+        return $@"<!DOCTYPE html>
+<html>
+<head><meta name=""viewport"" content=""width=device-width, initial-scale=1""><style>svg{{display:block;margin:0 auto;max-width:100%;height:auto}}</style></head>
+<body style=""margin:0;background:#ffffff;"">
+{divs}
+<script>{vexFlow}</script>
+<script>
+try {{
+{scripts}
+}} catch (e) {{ document.body.innerHTML += '<pre style=""color:red"">' + e + '</pre>'; }}
+</script>
+</body>
+</html>";
+    }
+
     private async Task<string> BuildHtmlAsync(IReadOnlyList<DictationMeasure> measures, string key, bool beamed, string clef = "treble")
     {
         var divs = new StringBuilder();
