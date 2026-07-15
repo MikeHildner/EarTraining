@@ -3,7 +3,7 @@ namespace EarTraining.App.Services;
 /// <summary>
 /// The set of drills that produce a score, mapped from their Shell route to a friendly display name,
 /// in Level → chapter order. Used by <see cref="ProgressStore"/> to validate which routes to record
-/// (so non-scoring pages — dictation, the play-only explorers, Solfège Syllables — are
+/// (so non-scoring pages — dictation and the reference pages — are
 /// ignored) and by the Progress page to label per-drill stats. Routes match AppShell.xaml / HomePage.
 /// </summary>
 public static class DrillCatalog
@@ -23,6 +23,7 @@ public static class DrillCatalog
         ("l1c3triad",       "L1 C3 · Triad Recognition"),
         ("l1c4harmonize",   "L1 C4 · Melody Harmonization"),
         ("l1c4progressions","L1 C4 · Triad Progressions"),
+        ("l1c4intervals",   "L1 C4 · Mixed Intervals"),
         ("l1c5vocal",       "L1 C5 · Vocal Drills"),
         ("l1c5melodic",     "L1 C5 · Melodic Intervals"),
         ("l1c5harmonic",    "L1 C5 · Harmonic Intervals"),
@@ -38,7 +39,12 @@ public static class DrillCatalog
         ("l1c7harmonic",    "L1 C7 · Harmonic Intervals"),
         ("l1c7triad",       "L1 C7 · Triad Recognition"),
         ("l1c7progressions","L1 C7 · Triad Progressions"),
+        ("l1c8review",      "L1 C8 · All-Interval Review"),
         ("l2c4",            "L2 C4 · Major Triad Progressions"),
+        ("l2c5",            "L2 C5 · Diatonic Triad Progressions"),
+        ("l2c6",            "L2 C6 · Modal Scales"),
+        ("l2c7",            "L2 C7 · II-V-I Progressions"),
+        ("l2c8",            "L2 C8 · 7-3 Lines"),
         ("interval",        "Interval ID"),
         ("triad",           "Triad ID"),
         ("finddo",          "Find the DO"),

@@ -10,7 +10,7 @@ namespace EarTraining.Core.Notation;
 /// </summary>
 public static class VexScore
 {
-    public static string EasyScore(string elementId, IReadOnlyList<string> noteNames, IReadOnlyList<string> rhythms, string key, bool showTimeSignature)
+    public static string EasyScore(string elementId, IReadOnlyList<string> noteNames, IReadOnlyList<string> rhythms, string key, bool showTimeSignature, string clef = "treble")
     {
         string timeSignature = showTimeSignature ? ".addTimeSignature('4/4')" : string.Empty;
 
@@ -29,9 +29,9 @@ public static class VexScore
 
         system.addStave({{
             voices: [
-                score.voice(score.notes('{easyScoreNotes}', {{ stem: 'up' }})),
+                score.voice(score.notes('{easyScoreNotes}', {{ stem: 'up', clef: '{clef}' }})),
             ]
-        }}).addClef('treble'){timeSignature}.addKeySignature('{key}');
+        }}).addClef('{clef}'){timeSignature}.addKeySignature('{key}');
         system.addConnector('singleLeft');
         system.addConnector('singleRight');
 
@@ -60,9 +60,12 @@ public static class VexScore
     /// Like <see cref="EasyScore"/> but beams consecutive eighth-note pairs (for the L1C3
     /// dictation). Ported from the web's NoteHelper.GetEasyScoreScript3 — a pair of "8"s
     /// becomes <c>score.beam(score.notes('a/8,b/8'), {{ autoStem: true }})</c>; everything
-    /// else is a plain note. Same getBBox crop so measures sit snug.
+    /// else is a plain note. The composite "8~4" rhythm (one sounding note pushed at the
+    /// half-bar) draws as an eighth tied to a quarter of the same pitch, so beat 3 stays
+    /// visible; a preceding lone "8" beams with the tie's eighth half (one beat-2 pair).
+    /// Same getBBox crop so measures sit snug.
     /// </summary>
-    public static string EasyScoreBeamed(string elementId, IReadOnlyList<string> noteNames, IReadOnlyList<string> rhythms, string key, bool showTimeSignature)
+    public static string EasyScoreBeamed(string elementId, IReadOnlyList<string> noteNames, IReadOnlyList<string> rhythms, string key, bool showTimeSignature, string clef = "treble")
     {
         string timeSignature = showTimeSignature ? ".addTimeSignature('4/4')" : string.Empty;
 
@@ -71,12 +74,21 @@ public static class VexScore
         {
             if (i + 1 < noteNames.Count && rhythms[i] == "8" && rhythms[i + 1] == "8")
             {
-                sb.Append($".concat(score.beam(score.notes('{noteNames[i]}/{rhythms[i]},{noteNames[i + 1]}/{rhythms[i + 1]}'), {{ autoStem: true }}))");
+                sb.Append($".concat(score.beam(score.notes('{noteNames[i]}/{rhythms[i]},{noteNames[i + 1]}/{rhythms[i + 1]}', {{ clef: '{clef}' }}), {{ autoStem: true }}))");
                 i++;
+            }
+            else if (i + 1 < noteNames.Count && rhythms[i] == "8" && rhythms[i + 1] == "8~4")
+            {
+                sb.Append($".concat((function() {{ var b = score.beam(score.notes('{noteNames[i]}/8,{noteNames[i + 1]}/8', {{ clef: '{clef}' }}), {{ autoStem: true }}); var q = score.notes('{noteNames[i + 1]}/4', {{ clef: '{clef}' }}); vf.StaveTie({{ from: b[1], to: q[0] }}); return b.concat(q); }})())");
+                i++;
+            }
+            else if (rhythms[i] == "8~4")
+            {
+                sb.Append($".concat((function() {{ var n = score.notes('{noteNames[i]}/8,{noteNames[i]}/4', {{ clef: '{clef}' }}); vf.StaveTie({{ from: n[0], to: n[1] }}); return n; }})())");
             }
             else
             {
-                sb.Append($".concat(score.notes('{noteNames[i]}/{rhythms[i]},'))");
+                sb.Append($".concat(score.notes('{noteNames[i]}/{rhythms[i]},', {{ clef: '{clef}' }}))");
             }
         }
         string easyScoreNotes = sb.ToString();
@@ -93,7 +105,7 @@ public static class VexScore
             voices: [
                 score.voice(score.notes('') {easyScoreNotes}),
             ]
-        }}).addClef('treble'){timeSignature}.addKeySignature('{key}');
+        }}).addClef('{clef}'){timeSignature}.addKeySignature('{key}');
         system.addConnector('singleLeft');
         system.addConnector('singleRight');
 

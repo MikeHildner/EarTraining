@@ -2,14 +2,14 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:c="clr-namespace:EarTraining.App.Components"
-             x:Class="EarTraining.App.Pages.L2C5ProgressionsExplorerPage"
+             x:Class="EarTraining.App.Pages.L2C5ProgressionsQuizPage"
              Title="Diatonic Triad Progressions">
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="14">
             <Label Text="Diatonic Triad Progressions" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
-            <Label Text="An explorer: a random four-chord diatonic progression in a random key. No scoring — just listen and follow the harmony."
+            <Label Text="Four diatonic triads in a random key — play them, then enter the chords in order."
                    HorizontalOptions="Center" TextColor="Gray" />
-            <c:InfoNote Text="Designed from the diatonic triad progression questions on pp. 69–71." />
+            <c:InfoNote Text="Selected from the diatonic triad progression questions on pp. 69–71. DO is played as a reference before each progression." />
 
             <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
                 <Label Text="Start on the tonic (I)" VerticalOptions="Center" />
@@ -17,8 +17,18 @@
             </HorizontalStackLayout>
 
             <Button Text="▶ Play progression" Clicked="OnPlay" />
+            <Label Text="Enter the four chords you heard:" FontAttributes="Bold" HorizontalOptions="Center" />
+            <FlexLayout x:Name="AnswersLayout" Wrap="Wrap" JustifyContent="Center" AlignItems="Center" />
+
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Label x:Name="EntryLabel" Text="Your answer: —" FontAttributes="Bold" VerticalOptions="Center" />
+                <Button x:Name="ClearButton" Text="Clear" Clicked="OnClear" Padding="14,4" />
+            </HorizontalStackLayout>
+
             <Button x:Name="NextButton" Text="↻ New Progression" Clicked="OnNext" HorizontalOptions="Center" WidthRequest="220" />
-            <Label x:Name="StatusLabel" HorizontalOptions="Center" TextColor="Gray" />
+            <Label x:Name="StatusLabel" HorizontalOptions="Center" FontAttributes="Bold" />
+            <c:ScoreGauge x:Name="Gauge" HorizontalOptions="Center" />
+            <c:AutomationBar x:Name="Automation" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

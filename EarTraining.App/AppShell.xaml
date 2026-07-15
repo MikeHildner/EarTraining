@@ -74,6 +74,8 @@
     <FlyoutItem Title="Level 1 · Chapter 4">
         <ShellContent Title="Melody Harmonization" Route="l1c4harmonize" ContentTemplate="{DataTemplate pages:MelodyHarmonizationPage}" />
         <ShellContent Title="Triad Progressions" Route="l1c4progressions" ContentTemplate="{DataTemplate pages:TriadProgressionsPage}" />
+        <ShellContent Title="Mixed Intervals" Route="l1c4intervals" ContentTemplate="{DataTemplate pages:MixedIntervalsL1C4Page}" />
+        <ShellContent Title="Dictation" Route="l1c4dictation" ContentTemplate="{DataTemplate pages:DictationL1C4Page}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Level 1 · Chapter 5">
@@ -82,6 +84,8 @@
         <ShellContent Title="Harmonic Intervals" Route="l1c5harmonic" ContentTemplate="{DataTemplate pages:HarmonicIntervalIdL1C5Page}" />
         <ShellContent Title="Triad Recognition" Route="l1c5triad" ContentTemplate="{DataTemplate pages:TriadRecognitionL1C5Page}" />
         <ShellContent Title="Triad Progressions" Route="l1c5progressions" ContentTemplate="{DataTemplate pages:TriadProgressionsL1C5Page}" />
+        <ShellContent Title="Dictation" Route="l1c5dictation" ContentTemplate="{DataTemplate pages:DictationL1C5Page}" />
+        <ShellContent Title="Bass Line Dictation" Route="l1c5bassline" ContentTemplate="{DataTemplate pages:BassLineL1C5Page}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Level 1 · Chapter 6">
@@ -90,6 +94,8 @@
         <ShellContent Title="Harmonic Intervals" Route="l1c6harmonic" ContentTemplate="{DataTemplate pages:HarmonicIntervalIdL1C6Page}" />
         <ShellContent Title="Triad Recognition" Route="l1c6triad" ContentTemplate="{DataTemplate pages:TriadRecognitionL1C6Page}" />
         <ShellContent Title="Triad Progressions" Route="l1c6progressions" ContentTemplate="{DataTemplate pages:TriadProgressionsL1C6Page}" />
+        <ShellContent Title="Dictation" Route="l1c6dictation" ContentTemplate="{DataTemplate pages:DictationL1C6Page}" />
+        <ShellContent Title="Bass Line Dictation" Route="l1c6bassline" ContentTemplate="{DataTemplate pages:BassLineL1C6Page}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Level 1 · Chapter 7">
@@ -98,6 +104,14 @@
         <ShellContent Title="Harmonic Intervals" Route="l1c7harmonic" ContentTemplate="{DataTemplate pages:HarmonicIntervalIdL1C7Page}" />
         <ShellContent Title="Triad Recognition" Route="l1c7triad" ContentTemplate="{DataTemplate pages:TriadRecognitionL1C7Page}" />
         <ShellContent Title="Triad Progressions" Route="l1c7progressions" ContentTemplate="{DataTemplate pages:TriadProgressionsL1C7Page}" />
+        <ShellContent Title="Dictation" Route="l1c7dictation" ContentTemplate="{DataTemplate pages:DictationL1C7Page}" />
+        <ShellContent Title="Bass Line Dictation" Route="l1c7bassline" ContentTemplate="{DataTemplate pages:BassLineL1C7Page}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Level 1 · Chapter 8">
+        <ShellContent Title="All-Interval Review" Route="l1c8review" ContentTemplate="{DataTemplate pages:IntervalReviewL1C8Page}" />
+        <ShellContent Title="Dictation" Route="l1c8dictation" ContentTemplate="{DataTemplate pages:DictationL1C8Page}" />
+        <ShellContent Title="Bass Line Dictation" Route="l1c8bassline" ContentTemplate="{DataTemplate pages:BassLineL1C8Page}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Level 2 · Chapter 4">
@@ -105,16 +119,31 @@
     </FlyoutItem>
 
     <FlyoutItem Title="Level 2 · Chapter 5">
-        <ShellContent Title="Diatonic Triad Progressions" Route="l2c5" ContentTemplate="{DataTemplate pages:L2C5ProgressionsExplorerPage}" />
+        <ShellContent Title="Diatonic Triad Progressions" Route="l2c5" ContentTemplate="{DataTemplate pages:L2C5ProgressionsQuizPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Level 2 · Chapter 6">
+        <ShellContent Title="Modal Scales" Route="l2c6" ContentTemplate="{DataTemplate pages:ModalRecognitionPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Level 2 · Chapter 7">
+        <ShellContent Title="II-V-I Progressions" Route="l2c7" ContentTemplate="{DataTemplate pages:L2C7ProgressionsPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Level 2 · Chapter 8">
+        <ShellContent Title="7-3 Lines" Route="l2c8" ContentTemplate="{DataTemplate pages:L2C8LinesPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Level 2 · Chapter 9">
+        <ShellContent Title="Vocal Drills" Route="l2c9" ContentTemplate="{DataTemplate pages:L2C9VocalDrillsPage}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Not in the Books">
         <ShellContent Title="Interval ID" Route="interval" ContentTemplate="{DataTemplate pages:IntervalPage}" />
         <ShellContent Title="Triad ID" Route="triad" ContentTemplate="{DataTemplate pages:TriadPage}" />
         <ShellContent Title="Find the DO" Route="finddo" ContentTemplate="{DataTemplate pages:FindTheDoPage}" />
-        <ShellContent Title="Solfège Syllables" Route="solfeg" ContentTemplate="{DataTemplate pages:SolfegSyllablesPage}" />
         <ShellContent Title="Ratios" Route="ratios" ContentTemplate="{DataTemplate pages:RatiosPage}" />
-        <ShellContent Title="Major Triad Movements" Route="l2major" ContentTemplate="{DataTemplate pages:L2ProgressionsExplorerPage}" />
+        <ShellContent Title="Blank Sheet Music" Route="blanksheet" ContentTemplate="{DataTemplate pages:BlankSheetPage}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Progress">

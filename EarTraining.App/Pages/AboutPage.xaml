@@ -29,10 +29,10 @@
                         <Label Text="&#xf03a;" FontFamily="FA" FontSize="15" TextColor="{AppThemeBinding Light=#512BD4, Dark=#B7A6FF}" VerticalOptions="Center" />
                         <Label Text="What's inside" Style="{StaticResource Heading}" VerticalOptions="Center" />
                     </HorizontalStackLayout>
-                    <Label FontSize="13.5" Text="• Level 1 · Chapters 1–7 — vocal drills, interval &amp; triad ID, triad recognition, progressions, and dictation." />
-                    <Label FontSize="13.5" Text="• Level 2 — major and diatonic triad progressions." />
-                    <Label FontSize="13.5" Text="• Not in the Books — Interval &amp; Triad ID, Find the DO, Solfège Syllables, Major-Triad Movements." />
-                    <Label FontSize="13.5" Text="• A score gauge and hands-free Automation on every quiz." />
+                    <Label FontSize="13.5" Text="• Level 1 · Chapters 1–8 — vocal drills, interval ID, triad recognition, progressions, melodic &amp; bass-line dictation, and the all-interval review." />
+                    <Label FontSize="13.5" Text="• Level 2 · Chapters 4–9 — triad progressions, modal scales, II-V-I, 7-3 lines, and the circle vocal drills." />
+                    <Label FontSize="13.5" Text="• Not in the Books — Interval &amp; Triad ID, Find the DO, Ratios." />
+                    <Label FontSize="13.5" Text="• A score gauge and an Automation runner on every quiz." />
                     <Label FontSize="13.5" Text="• Progress &amp; Stats — track your accuracy, daily streak, and recent trend." />
                     <Label FontSize="13.5" Text="• Settings — dark mode, a fixed practice key, and volume." />
                 </VerticalStackLayout>
@@ -48,7 +48,7 @@
                     <Label FontSize="13.5" Text="1.  Pick a chapter from Home or the menu." />
                     <Label FontSize="13.5" Text="2.  Set or hear the DO (tonic); tap New DO for a fresh key." />
                     <Label FontSize="13.5" Text="3.  Play the drill, then tap what you heard." />
-                    <Label FontSize="13.5" Text="4.  Watch the score gauge — or tap Automate for hands-free rounds." />
+                    <Label FontSize="13.5" Text="4.  Watch the score gauge — or tap Automate to run drills back-to-back." />
                     <Label FontSize="13.5" Text="5.  Check Progress anytime to see your accuracy and streaks." />
                 </VerticalStackLayout>
             </Border>
@@ -69,7 +69,7 @@
                                         <TapGestureRecognizer Command="{Binding OpenUrl}" CommandParameter="https://www.harrisonmusic.com" />
                                     </Span.GestureRecognizers>
                                 </Span>
-                                <Span Text="&apos;s &quot;Contemporary Eartraining&quot; series (published by Hal Leonard)." />
+                                <Span Text="&apos;s &quot;Contemporary Eartraining&quot; series (published by Hal Leonard) — both books covered chapter for chapter." />
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>

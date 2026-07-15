@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Dark-mode overrides. colorAccent tints the native bits MAUI styles can't reach
+     (picker-dialog radios, RadioButton dots); the light-mode deep purple is near-invisible
+     on dark surfaces, so use the app's dark accent (#B7A6FF, per App.xaml / Theme.cs). -->
+<resources>
+    <color name="colorAccent">#B7A6FF</color>
+</resources>

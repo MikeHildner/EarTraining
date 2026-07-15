@@ -15,6 +15,23 @@
                 <Setter Property="TextColor" Value="{AppThemeBinding Light=#1C1C1E, Dark=#E4E2EA}" />
             </Style>
 
+            <!-- Form controls (Settings + the dictation option rows). Explicit theming so they never
+                 fall back to platform defaults — the light-mode purples are near-invisible on dark
+                 surfaces. Dark accent matches AnswerButton / Theme.Accent (#B7A6FF); Android's native
+                 radio/dialog tint gets the same treatment via values-night/colors.xml. -->
+            <Style TargetType="Picker">
+                <Setter Property="TextColor" Value="{AppThemeBinding Light=#1C1C1E, Dark=#E4E2EA}" />
+                <Setter Property="TitleColor" Value="{AppThemeBinding Light=#6B7280, Dark=#9AA0AA}" />
+            </Style>
+            <Style TargetType="Slider">
+                <Setter Property="MinimumTrackColor" Value="{AppThemeBinding Light=#512BD4, Dark=#B7A6FF}" />
+                <Setter Property="MaximumTrackColor" Value="{AppThemeBinding Light=#E0DCF5, Dark=#383150}" />
+                <Setter Property="ThumbColor" Value="{AppThemeBinding Light=#512BD4, Dark=#B7A6FF}" />
+            </Style>
+            <Style TargetType="Switch">
+                <Setter Property="OnColor" Value="{AppThemeBinding Light=#512BD4, Dark=#B7A6FF}" />
+            </Style>
+
             <!-- Filled action buttons (▶ play / ↻ new). White text on purple; the purple is nudged
                  lighter in dark so white text stays legible. No Disabled bg setter, so the drill pages'
                  programmatic correct/incorrect colors (SeaGreen/IndianRed) aren't clobbered. -->

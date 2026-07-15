@@ -1,41 +1,14 @@
 namespace EarTraining.Core.Drills;
 
 /// <summary>
-/// Level 2 progression "explorers" — these build a RANDOM progression each time, so there's no
-/// finite answer set (no quiz/scoring): you just listen. Two generators:
-/// <list type="bullet">
-/// <item><b>MajorWalk</b> (L2/MajorTriadProgressions) — a chain of major triads whose root steps by
-/// a chosen movement each chord (Circle of 5ths / 4ths / half-step up / down), random inversions.</item>
-/// <item><b>DiatonicWalk</b> (L2C5/DiatonicTriadProgressions4) — four random distinct diatonic triads
-/// (optionally starting on the tonic), random inversions.</item>
-/// </list>
-/// Chords are returned as tone offsets from DO (post-inversion, sorted); the page supplies a random
-/// key. Ported from the L2 / L2C5 view generators + L2Controller.CreateMajorTriad / L2C5 GetTriad.
+/// The Level 2 Chapter 5 progression walk: four random distinct diatonic triads (optionally
+/// starting on the tonic), each with a random inversion, returned as tone offsets from DO
+/// (post-inversion, sorted) plus the answer degrees/roots — the page supplies a random key.
+/// Ported from the L2C5 view generator + GetTriad. (The class also once held the play-only
+/// "Major Triad Movements" explorer, removed with its page — the L2C4 quiz covers that ground.)
 /// </summary>
 public static class L2Explorer
 {
-    public enum Movement { CircleOf5ths, CircleOf4ths, HalfStepUp, HalfStepDown }
-
-    // Root pitch-class step per movement (semitones). Circle of 5ths = down a 5th (≡ up a 4th),
-    // Circle of 4ths = down a 4th (≡ up a 5th); roots are folded back near DO so they don't drift.
-    private static int Delta(Movement m) => m switch
-    {
-        Movement.CircleOf5ths => -7,
-        Movement.CircleOf4ths => -5,
-        Movement.HalfStepUp => 1,
-        Movement.HalfStepDown => -1,
-        _ => 0,
-    };
-
-    public static string Label(Movement m) => m switch
-    {
-        Movement.CircleOf5ths => "Circle of 5ths",
-        Movement.CircleOf4ths => "Circle of 4ths",
-        Movement.HalfStepUp => "Half-step up",
-        Movement.HalfStepDown => "Half-step down",
-        _ => "",
-    };
-
     private enum Inv { Root, HighFirst, HighSecond, LowFirst, LowSecond }
     private static readonly Inv[] AllInv = [Inv.Root, Inv.HighFirst, Inv.HighSecond, Inv.LowFirst, Inv.LowSecond];
 
@@ -53,32 +26,6 @@ public static class L2Explorer
         return t;
     }
 
-    // Fold a root pitch-class into the octave nearest DO (offset 0), i.e. into [-6, 5].
-    private static int FoldNearDo(int offset)
-    {
-        while (offset > 5) offset -= 12;
-        while (offset < -6) offset += 12;
-        return offset;
-    }
-
-    /// <summary>
-    /// A chain of <paramref name="count"/> major triads. The first root is DO; each subsequent root
-    /// steps by a randomly chosen included <paramref name="movements"/>. Every chord gets a random
-    /// inversion. Returns each chord's tone offsets from DO.
-    /// </summary>
-    public static IReadOnlyList<IReadOnlyList<int>> MajorWalk(int count, IReadOnlyList<Movement> movements, Random rng)
-    {
-        var chords = new List<IReadOnlyList<int>>(count);
-        int root = 0;
-        for (int i = 0; i < count; i++)
-        {
-            if (i > 0) root = FoldNearDo(root + Delta(movements[rng.Next(movements.Count)]));
-            var inv = AllInv[rng.Next(3)]; // root / 1st / 2nd, matching the web's three inversions
-            chords.Add(Invert(root, root + 4, root + 7, inv)); // major triad on the moving root
-        }
-        return chords;
-    }
-
     private static readonly int[] MajorScale = [0, 2, 4, 5, 7, 9, 11];
 
     // Diatonic triad (stacked thirds in the major scale) for scale degree 1-7, as offsets from DO.
@@ -91,20 +38,28 @@ public static class L2Explorer
         return (root, third, fifth);
     }
 
+    /// <summary>Roman-numeral labels for scale degrees 1-7 (case follows triad quality).</summary>
+    public static readonly IReadOnlyList<string> RomanLabels = ["I", "ii", "iii", "IV", "V", "vi", "vii°"];
+
     /// <summary>
-    /// Four random, distinct diatonic triads (scale degrees 1-7), each with a random inversion. When
-    /// <paramref name="tonicFirst"/>, the first chord is the tonic (I). Returns tone offsets from DO.
+    /// The scored walk (book Ch. 5 workbook, pp. 69-71): returns the answer — the four scale
+    /// degrees — and each chord's root offset from DO so the page can supply the bass voice
+    /// ("hearing the root in the bass voice, and voiceled upper triads").
     /// </summary>
-    public static IReadOnlyList<IReadOnlyList<int>> DiatonicWalk(bool tonicFirst, Random rng)
+    public static (IReadOnlyList<int> Degrees, IReadOnlyList<int> Roots, IReadOnlyList<IReadOnlyList<int>> Chords)
+        DiatonicQuizWalk(bool tonicFirst, Random rng)
     {
-        var degrees = Enumerable.Range(1, 7).OrderBy(_ => rng.Next()).ToList();
+        var degrees = Enumerable.Range(1, 7).OrderBy(_ => rng.Next()).Take(7).ToList();
         if (tonicFirst) { degrees.Remove(1); degrees.Insert(0, 1); }
+        degrees = degrees.Take(4).ToList();
+        var roots = new List<int>(4);
         var chords = new List<IReadOnlyList<int>>(4);
-        for (int i = 0; i < 4; i++)
+        foreach (int degree in degrees)
         {
-            var (r, t, f) = DiatonicTones(degrees[i]);
+            var (r, t, f) = DiatonicTones(degree);
+            roots.Add(r);
             chords.Add(Invert(r, t, f, AllInv[rng.Next(AllInv.Length)]));
         }
-        return chords;
+        return (degrees, roots, chords);
     }
 }

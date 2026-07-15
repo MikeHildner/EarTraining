@@ -1,3 +1,4 @@
+using EarTraining.App.Components;
 using EarTraining.App.Services;
 using EarTraining.Core.Audio;
 using EarTraining.Core.Drills;
@@ -6,40 +7,43 @@ using Plugin.Maui.Audio;
 
 namespace EarTraining.App.Pages;
 
-public partial class DictationPage : ContentPage
+/// <summary>
+/// Shared bass-line dictation page for L1 chapters 5-7 (book coverage Tier 1): melodies in
+/// the bass register whose strong beats carry chord tones of an implied diatonic triad
+/// (book Ch. 5 §1.15-1.21), revealed on a bass clef. The triad pool and rhythm styles grow
+/// with the chapter; one thin subclass per chapter supplies them (Shell templates need
+/// parameterless types). Same play/reveal flow as the melodic dictation pages.
+/// </summary>
+public partial class BassLineDictationPage : ContentPage
 {
     private readonly SampleLibrary _samples = new();
     private readonly DrillAudioPlayer _audio = new(AudioManager.Current);
     private readonly NotationRenderer _notation = new();
     private readonly Random _rng = new();
 
-    private static readonly (string Label, int Value)[] ResolutionOptions =
-        [("Resolutions", 1), ("Reverse Resolutions", 2), ("Both", 3)];
+    private readonly L1DictationChapter _chapter;
+    private BassLineDictationDrill _drill = null!;
 
-    private DictationDrill _drill = null!;
-
-    public DictationPage()
+    protected BassLineDictationPage(
+        L1DictationChapter chapter, string heading, int bookPage, DictationRhythmStyle maxStyle)
     {
         InitializeComponent();
-        BuildPickers();
-        // Wire change handlers after the initial selections are set, so a settings change
-        // regenerates the dictation immediately (matching the includes/DO behavior elsewhere)
-        // without firing mid-setup when some pickers have no selection yet.
-        ResolutionPicker.SelectedIndexChanged += OnSettingChanged;
+        _chapter = chapter;
+        HeadingLabel.Text = heading;
+        BookNote.Text = $"Selected from the bass line dictation / transcription questions on p. {bookPage}.";
+        BuildPickers(maxStyle);
         KeyPicker.SelectedIndexChanged += OnSettingChanged;
         BpmPicker.SelectedIndexChanged += OnSettingChanged;
         MeasuresPicker.SelectedIndexChanged += OnSettingChanged;
+        RhythmPicker.SelectedIndexChanged += OnSettingChanged;
         NotationWeb.Navigated += OnNotationNavigated;
         // Pre-warm the WebView while hidden so the first Reveal isn't a cold white flash (esp. Android).
         NotationWeb.Source = new HtmlWebViewSource { Html = "<!doctype html><html><body style=\"margin:0;background:#fff\"></body></html>" };
         NewDrill();
     }
 
-    private void BuildPickers()
+    private void BuildPickers(DictationRhythmStyle maxStyle)
     {
-        ResolutionPicker.ItemsSource = ResolutionOptions.Select(o => o.Label).ToList();
-        ResolutionPicker.SelectedIndex = 0;
-
         KeyPicker.ItemsSource = Keys.All.ToList();
         new PracticeKeyDefault(this, KeyPicker);   // Settings practice key, else C
 
@@ -50,19 +54,28 @@ public partial class DictationPage : ContentPage
 
         MeasuresPicker.ItemsSource = new List<string> { "2", "4" };
         MeasuresPicker.SelectedIndex = 0;
+
+        // Item index == DictationRhythmStyle value, so the mapping is a cast.
+        var styles = new List<string> { "Halves & quarters" };
+        if (maxStyle >= DictationRhythmStyle.Eighths) styles.Add("Eighth notes");
+        if (maxStyle >= DictationRhythmStyle.Dotted) styles.Add("Dotted quarter–eighth");
+        if (maxStyle >= DictationRhythmStyle.Anticipations) styles.Add("Anticipations");
+        RhythmPicker.ItemsSource = styles;
+        RhythmPicker.SelectedIndex = 0;
+        RhythmPicker.IsEnabled = styles.Count > 1;
     }
 
-    private int ResolutionType => ResolutionOptions[Math.Max(0, ResolutionPicker.SelectedIndex)].Value;
     private string Key => (string)KeyPicker.SelectedItem;
     private double Bpm => double.Parse((string)BpmPicker.SelectedItem);
     private int Measures => int.Parse((string)MeasuresPicker.SelectedItem);
+    private DictationRhythmStyle Style => (DictationRhythmStyle)RhythmPicker.SelectedIndex;
 
     private void NewDrill()
     {
-        _drill = DictationDrill.Next(ResolutionType, Key, Bpm, Measures, _rng);
+        _drill = BassLineDictationDrill.Next(_chapter, Key, Bpm, Measures, Style, _rng);
         NotationWeb.IsVisible = false;
         RevealButton.Text = "Reveal transcription";
-        StatusLabel.Text = $"New dictation in {_drill.Key} at {_drill.Bpm:0} bpm — press Play.";
+        StatusLabel.Text = $"New bass line in {_drill.Key} at {_drill.Bpm:0} bpm — press Play.";
     }
 
     private void OnNewDictation(object? sender, EventArgs e) => NewDrill();
@@ -106,7 +119,7 @@ public partial class DictationPage : ContentPage
         {
             StatusLabel.Text = "Rendering notation…";
             string html = await _notation.BuildHtmlAsync(_drill);
-            NotationWeb.HeightRequest = _drill.Measures.Count * 160 + 30; // generous upper bound; OnNotationNavigated trims to the exact content height
+            NotationWeb.HeightRequest = _drill.Measures.Count * 160 + 30; // generous upper bound; trimmed after render
             NotationWeb.Source = new HtmlWebViewSource { Html = html };
             NotationWeb.IsVisible = true;
             RevealButton.Text = "Hide transcription";
@@ -118,8 +131,7 @@ public partial class DictationPage : ContentPage
         }
     }
 
-    // Once the notation has rendered, shrink the WebView to the exact content height so the
-    // staves sit snug instead of being padded out by the generous initial estimate.
+    // Once the notation has rendered, shrink the WebView to the exact content height.
     private async void OnNotationNavigated(object? sender, WebNavigatedEventArgs e)
     {
         try
@@ -130,4 +142,32 @@ public partial class DictationPage : ContentPage
         }
         catch { /* keep the estimate */ }
     }
+}
+
+/// <summary>L1C5 bass lines: I/IV/V/VI implied triads, halves &amp; quarters (book p. 102).</summary>
+public sealed class BassLineL1C5Page : BassLineDictationPage
+{
+    public BassLineL1C5Page()
+        : base(L1DictationChapter.C5, "Bass Line Dictation — halves & quarters", 102, DictationRhythmStyle.Basic) { }
+}
+
+/// <summary>L1C6 bass lines: adds the III triad, eighth pairs, and the dotted figure (book p. 135).</summary>
+public sealed class BassLineL1C6Page : BassLineDictationPage
+{
+    public BassLineL1C6Page()
+        : base(L1DictationChapter.C6, "Bass Line Dictation — adds eighths & dotted", 135, DictationRhythmStyle.Dotted) { }
+}
+
+/// <summary>L1C7 bass lines: all six diatonic triads, with anticipations (book p. 165).</summary>
+public sealed class BassLineL1C7Page : BassLineDictationPage
+{
+    public BassLineL1C7Page()
+        : base(L1DictationChapter.C7, "Bass Line Dictation — adds anticipations", 165, DictationRhythmStyle.Anticipations) { }
+}
+
+/// <summary>L1C8 review bass lines: all six triads + every rhythm style (book p. 185).</summary>
+public sealed class BassLineL1C8Page : BassLineDictationPage
+{
+    public BassLineL1C8Page()
+        : base(L1DictationChapter.C7, "Bass Line Dictation — review", 185, DictationRhythmStyle.Anticipations) { }
 }
