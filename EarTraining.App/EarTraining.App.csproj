@@ -23,8 +23,8 @@
 
         <ApplicationTitle>Ear Training</ApplicationTitle>
         <ApplicationId>org.hildner.eartraining</ApplicationId>
-        <ApplicationDisplayVersion>1.1</ApplicationDisplayVersion>
-        <ApplicationVersion>4</ApplicationVersion>
+        <ApplicationDisplayVersion>1.2</ApplicationDisplayVersion>
+        <ApplicationVersion>5</ApplicationVersion>
         <WindowsPackageType>None</WindowsPackageType>
 
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
