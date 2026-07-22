@@ -48,7 +48,7 @@ public partial class HarmonicIntervalL1C3Page : ContentPage, IAutomatableDrill
 
     private void Rebuild()
     {
-        Includes.Build(Pool().Select(p => (p.idx.ToString(), p.drill.Label)));
+        Includes.Build(Pool().Select(p => (p.idx.ToString(), Toggle.Quality is null ? p.drill.QuizLabel : p.drill.Label)));
         BuildAnswers();
         NewDrill();
     }
