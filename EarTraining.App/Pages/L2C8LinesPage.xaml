@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:c="clr-namespace:EarTraining.App.Components"
              x:Class="EarTraining.App.Pages.L2C8LinesPage"
-             Title="7-3 Lines">
+             Title="L2 C8 · 7-3 Lines">
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="14">
             <Label Text="7–3 Melodic Lines" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />

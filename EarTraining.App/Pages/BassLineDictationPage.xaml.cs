@@ -148,26 +148,26 @@ public partial class BassLineDictationPage : ContentPage
 public sealed class BassLineL1C5Page : BassLineDictationPage
 {
     public BassLineL1C5Page()
-        : base(L1DictationChapter.C5, "Bass Line Dictation — halves & quarters", 102, DictationRhythmStyle.Basic) { }
+        : base(L1DictationChapter.C5, "Bass Line Dictation — halves & quarters", 102, DictationRhythmStyle.Basic) { Title = "L1 C5 · Bass Line Dictation"; }
 }
 
 /// <summary>L1C6 bass lines: adds the III triad, eighth pairs, and the dotted figure (book p. 135).</summary>
 public sealed class BassLineL1C6Page : BassLineDictationPage
 {
     public BassLineL1C6Page()
-        : base(L1DictationChapter.C6, "Bass Line Dictation — adds eighths & dotted", 135, DictationRhythmStyle.Dotted) { }
+        : base(L1DictationChapter.C6, "Bass Line Dictation — adds eighths & dotted", 135, DictationRhythmStyle.Dotted) { Title = "L1 C6 · Bass Line Dictation"; }
 }
 
 /// <summary>L1C7 bass lines: all six diatonic triads, with anticipations (book p. 165).</summary>
 public sealed class BassLineL1C7Page : BassLineDictationPage
 {
     public BassLineL1C7Page()
-        : base(L1DictationChapter.C7, "Bass Line Dictation — adds anticipations", 165, DictationRhythmStyle.Anticipations) { }
+        : base(L1DictationChapter.C7, "Bass Line Dictation — adds anticipations", 165, DictationRhythmStyle.Anticipations) { Title = "L1 C7 · Bass Line Dictation"; }
 }
 
 /// <summary>L1C8 review bass lines: all six triads + every rhythm style (book p. 185).</summary>
 public sealed class BassLineL1C8Page : BassLineDictationPage
 {
     public BassLineL1C8Page()
-        : base(L1DictationChapter.C7, "Bass Line Dictation — review", 185, DictationRhythmStyle.Anticipations) { }
+        : base(L1DictationChapter.C7, "Bass Line Dictation — review", 185, DictationRhythmStyle.Anticipations) { Title = "L1 C8 · Bass Line Dictation"; }
 }

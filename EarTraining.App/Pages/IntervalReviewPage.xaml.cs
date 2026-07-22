@@ -185,7 +185,7 @@ public sealed class MixedIntervalsL1C4Page : IntervalReviewPage
     public MixedIntervalsL1C4Page()
         : base("Mixed Intervals — 3rds & 6ths",
                "Selected from the interval identification questions on pp. 63–64.",
-               ReviewIntervalDrill.MelodicC4, ReviewIntervalDrill.HarmonicC4) { }
+               ReviewIntervalDrill.MelodicC4, ReviewIntervalDrill.HarmonicC4) { Title = "L1 C4 · Mixed Intervals"; }
 }
 
 /// <summary>L1C8 review: every diatonic interval from chapters 2-7 (book pp. 180-181).</summary>
@@ -194,5 +194,5 @@ public sealed class IntervalReviewL1C8Page : IntervalReviewPage
     public IntervalReviewL1C8Page()
         : base("All-Interval Review",
                "Selected from the review interval identification questions on pp. 180–181.",
-               ReviewIntervalDrill.MelodicC8, ReviewIntervalDrill.HarmonicC8) { }
+               ReviewIntervalDrill.MelodicC8, ReviewIntervalDrill.HarmonicC8) { Title = "L1 C8 · All-Interval Review"; }
 }

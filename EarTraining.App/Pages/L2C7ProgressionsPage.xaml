@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:c="clr-namespace:EarTraining.App.Components"
              x:Class="EarTraining.App.Pages.L2C7ProgressionsPage"
-             Title="II-V-I Progressions">
+             Title="L2 C7 · II-V-I Progressions">
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="14">
             <Label Text="II–V–I Progressions" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />

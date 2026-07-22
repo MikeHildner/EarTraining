@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:c="clr-namespace:EarTraining.App.Components"
              x:Class="EarTraining.App.Pages.L2C5ProgressionsQuizPage"
-             Title="Diatonic Triad Progressions">
+             Title="L2 C5 · Diatonic Triad Progressions">
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="14">
             <Label Text="Diatonic Triad Progressions" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />

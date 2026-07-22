@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EarTraining.App.Pages.DictationPage"
-             Title="Dictation">
+             Title="L1 C1 · Dictation">
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="14">
             <Label Text="Melodic Dictation" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />

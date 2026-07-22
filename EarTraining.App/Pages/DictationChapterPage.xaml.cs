@@ -146,33 +146,33 @@ public partial class DictationChapterPage : ContentPage
 public sealed class DictationL1C4Page : DictationChapterPage
 {
     public DictationL1C4Page()
-        : base(L1DictationChapter.C4, "Melodic Dictation — 3rds & 6ths", 64, DictationRhythmStyle.Eighths) { }
+        : base(L1DictationChapter.C4, "Melodic Dictation — 3rds & 6ths", 64, DictationRhythmStyle.Eighths) { Title = "L1 C4 · Dictation"; }
 }
 
 /// <summary>L1C5 dictation: adds 4ths &amp; 5ths (incl. the FA-TI / TI-FA tritones).</summary>
 public sealed class DictationL1C5Page : DictationChapterPage
 {
     public DictationL1C5Page()
-        : base(L1DictationChapter.C5, "Melodic Dictation — adds 4ths & 5ths", 98, DictationRhythmStyle.Eighths) { }
+        : base(L1DictationChapter.C5, "Melodic Dictation — adds 4ths & 5ths", 98, DictationRhythmStyle.Eighths) { Title = "L1 C5 · Dictation"; }
 }
 
 /// <summary>L1C6 dictation: adds Maj 2nd / Min 7th and the dotted quarter-eighth figure.</summary>
 public sealed class DictationL1C6Page : DictationChapterPage
 {
     public DictationL1C6Page()
-        : base(L1DictationChapter.C6, "Melodic Dictation — adds 2nds & 7ths", 131, DictationRhythmStyle.Dotted) { }
+        : base(L1DictationChapter.C6, "Melodic Dictation — adds 2nds & 7ths", 131, DictationRhythmStyle.Dotted) { Title = "L1 C6 · Dictation"; }
 }
 
 /// <summary>L1C7 dictation: all diatonic intervals, with eighth-note anticipations.</summary>
 public sealed class DictationL1C7Page : DictationChapterPage
 {
     public DictationL1C7Page()
-        : base(L1DictationChapter.C7, "Melodic Dictation — all diatonic intervals", 162, DictationRhythmStyle.Anticipations) { }
+        : base(L1DictationChapter.C7, "Melodic Dictation — all diatonic intervals", 162, DictationRhythmStyle.Anticipations) { Title = "L1 C7 · Dictation"; }
 }
 
 /// <summary>L1C8 review dictation: the full C7 pool + every rhythm style (book p. 182).</summary>
 public sealed class DictationL1C8Page : DictationChapterPage
 {
     public DictationL1C8Page()
-        : base(L1DictationChapter.C7, "Melodic Dictation — review", 182, DictationRhythmStyle.Anticipations) { }
+        : base(L1DictationChapter.C7, "Melodic Dictation — review", 182, DictationRhythmStyle.Anticipations) { Title = "L1 C8 · Dictation"; }
 }

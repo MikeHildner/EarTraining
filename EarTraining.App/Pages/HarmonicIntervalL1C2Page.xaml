@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:c="clr-namespace:EarTraining.App.Components"
              x:Class="EarTraining.App.Pages.HarmonicIntervalL1C2Page"
-             Title="Harmonic Intervals">
+             Title="L1 C2 · Harmonic Intervals">
     <Grid RowDefinitions="*,Auto">
         <ScrollView Grid.Row="0">
         <VerticalStackLayout Padding="20" Spacing="14">
