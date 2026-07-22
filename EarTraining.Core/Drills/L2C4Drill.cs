@@ -34,9 +34,12 @@ public sealed record L2C4Drill(string Category, IReadOnlyList<IReadOnlyList<int>
     private static IReadOnlyList<int> FlatTwo(Inv i) => Tri(1, 5, 8, i);    // ♭II  (half-step above)
     private static IReadOnlyList<int> SevenBelow(Inv i) => Tri(-1, 3, 6, i);// major triad a half-step below
     private static IReadOnlyList<int> SharpFour(Inv i) => Tri(6, 10, 13, i);// the 3-chord tail (♭V major)
+    private static IReadOnlyList<int> FlatSix(Inv i) => Tri(8, 12, 15, i);  // ♭VI major (½-up → 4th tail)
+    private static IReadOnlyList<int> Three(Inv i) => Tri(4, 8, 11, i);     // III major (½-down → 5th tail)
 
     public static readonly string[] TwoChordCategories = ["Circle of 5th", "Circle of 4th", "Half-step up", "Half-step down"];
-    public static readonly string[] ThreeChordCategories = ["5th → ½ up", "4th → ½ down"];
+    public static readonly string[] ThreeChordCategories =
+        ["5th → ½ up", "4th → ½ down", "½ up → 5th", "½ up → 4th", "½ down → 5th", "½ down → 4th"];
 
     /// <summary>10 two-chord voicings (controller types 0-9), tagged by movement category.</summary>
     public static readonly IReadOnlyList<L2C4Drill> TwoChord =
@@ -53,10 +56,16 @@ public sealed record L2C4Drill(string Category, IReadOnlyList<IReadOnlyList<int>
         new("Half-step down", [One(Inv.Root), SevenBelow(Inv.HighFirst)]),
     ];
 
-    /// <summary>2 three-chord voicings (controller types 100 + 101).</summary>
+    /// <summary>3-chord voicings: the two web-era movements (controller types 100 + 101) plus the
+    /// four reversed, ½-step-first movements from the book's 3-chord answer key (p. 93) — GitHub #11.
+    /// Roots mod 12: ½U→5th lands on ♯IV, ½U→4th on ♭VI, ½D→5th on III, ½D→4th on ♯IV.</summary>
     public static readonly IReadOnlyList<L2C4Drill> ThreeChord =
     [
         new("5th → ½ up", [One(Inv.LowSecond), Four(Inv.LowFirst), SharpFour(Inv.LowFirst)]),
         new("4th → ½ down", [One(Inv.Root), Five(Inv.LowFirst), SharpFour(Inv.LowFirst)]),
+        new("½ up → 5th", [One(Inv.Root), FlatTwo(Inv.Root), SharpFour(Inv.LowSecond)]),
+        new("½ up → 4th", [One(Inv.Root), FlatTwo(Inv.Root), FlatSix(Inv.LowFirst)]),
+        new("½ down → 5th", [One(Inv.Root), SevenBelow(Inv.Root), Three(Inv.LowSecond)]),
+        new("½ down → 4th", [One(Inv.Root), SevenBelow(Inv.Root), SharpFour(Inv.LowFirst)]),
     ];
 }
