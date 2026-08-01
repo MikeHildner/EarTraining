@@ -112,6 +112,7 @@ public partial class HomePage : ContentPage
             Leaf("Find the DO", "finddo", "tonic key center find do"),
             Leaf("Ratios", "ratios", "ratio just intonation tuning frequency"),
             Leaf("Blank Sheet Music", "blanksheet", "blank sheet staff paper manuscript print pdf share clef"),
+            Leaf("Metronome", "metronome", "metronome tempo bpm beat click pulse tap time practice"),
         }),
     };
 

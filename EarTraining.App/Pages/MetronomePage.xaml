@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EarTraining.App.Pages.MetronomePage"
+             Title="Metronome">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="14">
+            <Label Text="Metronome" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="A steady click for practice — accented downbeat. Dial the tempo in, or tap it."
+                   HorizontalTextAlignment="Center" TextColor="Gray" />
+
+            <Label x:Name="BpmLabel" FontSize="44" FontAttributes="Bold" HorizontalOptions="Center" />
+
+            <HorizontalStackLayout x:Name="PulseRow" HorizontalOptions="Center" Spacing="10" />
+
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="10">
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                        <Button x:Name="MinusButton" Text="−" WidthRequest="52" Clicked="OnMinus" />
+                        <Slider x:Name="BpmSlider" Grid.Column="1" Minimum="40" Maximum="208"
+                                VerticalOptions="Center" ValueChanged="OnSliderChanged" />
+                        <Button x:Name="PlusButton" Grid.Column="2" Text="+" WidthRequest="52" Clicked="OnPlus" />
+                    </Grid>
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                        <Label Text="Beats per measure" VerticalOptions="Center" />
+                        <Picker x:Name="BeatsPicker" Grid.Column="1" SelectedIndexChanged="OnBeatsChanged" />
+                    </Grid>
+                    <Button x:Name="TapButton" Text="Tap tempo" Clicked="OnTap" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Button x:Name="StartStopButton" Text="▶ Start" Clicked="OnStartStop" />
+            <Label x:Name="StatusLabel" HorizontalOptions="Center" FontAttributes="Bold" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
