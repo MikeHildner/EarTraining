@@ -144,7 +144,8 @@
         <ShellContent Title="Find the DO" Route="finddo" ContentTemplate="{DataTemplate pages:FindTheDoPage}" />
         <ShellContent Title="Ratios" Route="ratios" ContentTemplate="{DataTemplate pages:RatiosPage}" />
         <ShellContent Title="Blank Sheet Music" Route="blanksheet" ContentTemplate="{DataTemplate pages:BlankSheetPage}" />
-        <ShellContent Title="Metronome" Route="metronome" ContentTemplate="{DataTemplate pages:MetronomePage}" />
+        <!-- Metronome parked (Mike, 2026-08-01) — page + Core engine remain; restore this entry (and the HomePage leaf) to bring it back.
+        <ShellContent Title="Metronome" Route="metronome" ContentTemplate="{DataTemplate pages:MetronomePage}" /> -->
     </FlyoutItem>
 
     <FlyoutItem Title="Progress">
