@@ -160,7 +160,7 @@ public sealed class DictationL1C5Page : DictationChapterPage
 public sealed class DictationL1C6Page : DictationChapterPage
 {
     public DictationL1C6Page()
-        : base(L1DictationChapter.C6, "Melodic Dictation — adds 2nds & 7ths", 131, DictationRhythmStyle.Dotted) { Title = "L1 C6 · Dictation"; }
+        : base(L1DictationChapter.C6, "Melodic Dictation — adds Maj 2nds & Min 7ths", 131, DictationRhythmStyle.Dotted) { Title = "L1 C6 · Dictation"; }
 }
 
 /// <summary>L1C7 dictation: all diatonic intervals, with eighth-note anticipations.</summary>

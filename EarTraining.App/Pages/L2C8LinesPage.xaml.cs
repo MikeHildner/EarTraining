@@ -25,6 +25,7 @@ public partial class L2C8LinesPage : ContentPage, IAutomatableDrill
 
     private const double ChordSeconds = 2.0;
     private const double FinalSeconds = 3.5;
+    private const double MelodyBoost = 1.7;   // top-line gain so the 7-3 melody cuts through on phone speakers (Mark)
 
     public L2C8LinesPage()
     {
@@ -81,7 +82,7 @@ public partial class L2C8LinesPage : ContentPage, IAutomatableDrill
                 samples.Add(await _samples.LoadAsync(Note.SampleFile(_do + tone)));
             steps.Add((samples, i == chords.Count - 1 ? FinalSeconds : ChordSeconds));
         }
-        _audio.Play(AudioRenderer.RenderProgression(steps));
+        _audio.Play(AudioRenderer.RenderProgression(steps, topGain: MelodyBoost));
     }
 
     private void OnAnswer(string guess)

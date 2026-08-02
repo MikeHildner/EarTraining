@@ -7,7 +7,7 @@
     <Grid RowDefinitions="*,Auto">
         <ScrollView Grid.Row="0">
         <VerticalStackLayout Padding="20" Spacing="14">
-            <Label Text="Vocal Drills — 2nds / 7ths" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="Vocal Drills — Min 2nd / Maj 7th" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
             <Label Text="Play the pattern, sing it back, then identify what you heard."
                    HorizontalOptions="Center" TextColor="Gray" />
             <c:InfoNote Text="Selected from the vocal drills on pp. 153–154." />

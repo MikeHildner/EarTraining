@@ -13,6 +13,11 @@
 
             <Picker x:Name="DrillPicker" Title="Drill" />
 
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                <Label Text="Tempo" VerticalOptions="Center" />
+                <Picker x:Name="TempoPicker" Grid.Column="1" />
+            </Grid>
+
             <Button Text="▶ Play (sing along)" Clicked="OnPlay" />
             <Label x:Name="StatusLabel" HorizontalOptions="Center" TextColor="Gray" />
 

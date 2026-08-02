@@ -26,6 +26,7 @@ public partial class L2C7ProgressionsPage : ContentPage, IAutomatableDrill
 
     private const double ChordSeconds = 1.6;
     private const double FinalSeconds = 3.0;
+    private const double FirstResolveSeconds = 3.2;   // hold the first key's I ~4 beats before the next key (Mark's original audio)
 
     public L2C7ProgressionsPage()
     {
@@ -92,7 +93,9 @@ public partial class L2C7ProgressionsPage : ContentPage, IAutomatableDrill
             };
             foreach (int upper in chords[i].Upper)
                 samples.Add(await _samples.LoadAsync(Note.SampleFile(_do + upper)));
-            steps.Add((samples, i == chords.Count - 1 ? FinalSeconds : ChordSeconds));
+            double seconds = i == 2 ? FirstResolveSeconds                      // first key's I: let it settle
+                           : i == chords.Count - 1 ? FinalSeconds : ChordSeconds;
+            steps.Add((samples, seconds));
         }
         _audio.Play(AudioRenderer.RenderProgression(steps));
     }
@@ -119,7 +122,7 @@ public partial class L2C7ProgressionsPage : ContentPage, IAutomatableDrill
     {
         NewDrill();
         _ = PlayDrillAsync();
-        return ChordSeconds * 5 + FinalSeconds;
+        return ChordSeconds * 4 + FirstResolveSeconds + FinalSeconds;
     }
 
     public void AutoReveal(bool scored)

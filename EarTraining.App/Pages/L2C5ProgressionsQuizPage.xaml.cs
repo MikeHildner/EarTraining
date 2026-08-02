@@ -63,6 +63,7 @@ public partial class L2C5ProgressionsQuizPage : ContentPage, IAutomatableDrill
     private void OnChordTapped(int degree)
     {
         if (_answered || _entry.Count >= 4) return;
+        FlashTapped(_chordButtons[degree - 1]);
         _entry.Add(degree);
         EntryLabel.Text = "Your answer: " + string.Join(" – ", _entry.Select(d => L2Explorer.RomanLabels[d - 1]));
         if (_entry.Count < 4) return;
@@ -71,6 +72,16 @@ public partial class L2C5ProgressionsQuizPage : ContentPage, IAutomatableDrill
         bool correct = _entry.SequenceEqual(_drill.Degrees);
         Gauge.Record(correct);
         StatusLabel.Text = correct ? "Correct!" : $"Not Quite — {AnswerText}";
+    }
+
+    /// <summary>Brief press highlight so each tap visibly registers (Mark's feedback).</summary>
+    private static async void FlashTapped(Button button)
+    {
+        button.SetAppThemeColor(Button.BackgroundColorProperty, Color.FromArgb("#512BD4"), Color.FromArgb("#B7A6FF"));
+        button.SetAppThemeColor(Button.TextColorProperty, Colors.White, Color.FromArgb("#1C1C1E"));
+        await Task.Delay(180);
+        button.ClearValue(Button.BackgroundColorProperty);
+        button.ClearValue(Button.TextColorProperty);
     }
 
     private void OnClear(object? sender, EventArgs e)

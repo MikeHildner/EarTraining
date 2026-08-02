@@ -77,11 +77,20 @@ public static class AudioRenderer
     /// <summary>
     /// A chord progression: each step is a chord (its note samples mixed as a block chord and
     /// fit to the step's duration), played one after another. Used by the L1C4 triad progressions.
+    /// When <paramref name="topGain"/> ≠ 1, the LAST sample of each multi-note chord is treated
+    /// as the top/melody voice and scaled by it — so a doubled melody line can sit above the
+    /// pad (the L2C8 7-3 lines, per Mark's feedback that the melody didn't cut through).
     /// </summary>
-    public static byte[] RenderProgression(IReadOnlyList<(IReadOnlyList<byte[]> chord, double seconds)> steps, double gain = 0.5)
+    public static byte[] RenderProgression(IReadOnlyList<(IReadOnlyList<byte[]> chord, double seconds)> steps, double gain = 0.5, double topGain = 1.0)
     {
         var parts = steps
-            .Select(step => Mix(gain, 0, step.chord.Select(b => Fit(WavBuffer.Read(b), step.seconds)).ToList()))
+            .Select(step =>
+            {
+                var voices = step.chord.Select(b => Fit(WavBuffer.Read(b), step.seconds)).ToList();
+                if (topGain != 1.0 && voices.Count > 1)
+                    voices[^1] = Gain(voices[^1], topGain);
+                return Mix(gain, 0, voices);
+            })
             .ToList();
         return Concat(parts).Write();
     }
