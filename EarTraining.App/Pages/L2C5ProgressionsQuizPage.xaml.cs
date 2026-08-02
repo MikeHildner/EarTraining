@@ -74,11 +74,13 @@ public partial class L2C5ProgressionsQuizPage : ContentPage, IAutomatableDrill
         StatusLabel.Text = correct ? "Correct!" : $"Not Quite — {AnswerText}";
     }
 
-    /// <summary>Brief press highlight so each tap visibly registers (Mark's feedback).</summary>
+    /// <summary>Brief press highlight so each tap visibly registers (Mark's feedback).
+    /// Direct set + ClearValue — the same restore idiom as the answer-reveal colors;
+    /// a SetAppThemeColor binding is NOT reliably removed by ClearValue on Android.</summary>
     private static async void FlashTapped(Button button)
     {
-        button.SetAppThemeColor(Button.BackgroundColorProperty, Color.FromArgb("#512BD4"), Color.FromArgb("#B7A6FF"));
-        button.SetAppThemeColor(Button.TextColorProperty, Colors.White, Color.FromArgb("#1C1C1E"));
+        button.BackgroundColor = Color.FromArgb("#512BD4");
+        button.TextColor = Colors.White;
         await Task.Delay(180);
         button.ClearValue(Button.BackgroundColorProperty);
         button.ClearValue(Button.TextColorProperty);
