@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:EarTraining.App.Components"
+             x:Class="EarTraining.App.Pages.CircleOfFifthsPage"
+             Title="L2 C2 · Circle of 5ths &amp; 4ths">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="14">
+            <Label Text="Circle of 5ths &amp; 4ths" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="Two much-debated terms — and exactly what they mean in this course."
+                   HorizontalOptions="Center" TextColor="Gray" />
+            <c:InfoNote Text="Summarized from Chapter 2, pp. 5–9 of the Level 2 book — the circle every Level 2 progression drill is built on." />
+
+            <GraphicsView x:Name="CircleView" HeightRequest="330" />
+
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Circle of 5ths — clockwise" Style="{StaticResource Heading}" />
+                    <Label FontSize="13.5" Text="Moving clockwise, every step is a V→I resolution: C to F is V–I in the key of F, F to Bb is V–I in Bb, and so on around. A chain of dominant resolutions — the strongest, most 'leading' root motion in tonal music." />
+                    <Button Text="▶ Play C → F  (V–I in F)" Clicked="OnPlayFifths" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Circle of 4ths — counter-clockwise" Style="{StaticResource Heading}" />
+                    <Label FontSize="13.5" Text="Moving counter-clockwise, every step is a IV→I ('plagal') resolution: C to G is IV–I in the key of G, G to D is IV–I in D, and so on." />
+                    <Button Text="▶ Play C → G  (IV–I in G)" Clicked="OnPlayFourths" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Two schools, one circle" Style="{StaticResource Heading}" />
+                    <Label FontSize="13.5" Text="If you learned theory traditionally, you may name the circle by intervals — C up a 5th to G, up a 5th to D — and call that direction the circle of fifths. This course names the directions by what the ear hears instead: clockwise = V→I = 5ths, counter-clockwise = IV→I = 4ths. The result: the direction a traditional text calls 'fifths' is the direction this course calls 'fourths'." />
+                    <Label FontSize="13.5" FontAttributes="Italic" Text="Neither school is right or wrong — it's just terminology. Everywhere in this app (and in the books), the terms mean the definitions above." />
+                </VerticalStackLayout>
+            </Border>
+
+            <Label FontSize="12.5" TextColor="{AppThemeBinding Light=#6B7280, Dark=#9AA0AA}" HorizontalTextAlignment="Center"
+                   Text="Why neighbors on the circle sound so related: adjacent keys share a tetrachord and differ by exactly one accidental — C's upper tetrachord (G–A–B–C) is G's lower one." />
+
+            <Label x:Name="StatusLabel" HorizontalOptions="Center" FontAttributes="Bold" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

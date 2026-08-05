@@ -114,6 +114,10 @@
         <ShellContent Title="Bass Line Dictation" Route="l1c8bassline" ContentTemplate="{DataTemplate pages:BassLineL1C8Page}" />
     </FlyoutItem>
 
+    <FlyoutItem Title="Level 2 · Chapter 2">
+        <ShellContent Title="Circle of 5ths &amp; 4ths" Route="l2c2" ContentTemplate="{DataTemplate pages:CircleOfFifthsPage}" />
+    </FlyoutItem>
+
     <FlyoutItem Title="Level 2 · Chapter 4">
         <ShellContent Title="Major Triad Progressions" Route="l2c4" ContentTemplate="{DataTemplate pages:L2C4ProgressionsPage}" />
     </FlyoutItem>
@@ -127,6 +131,7 @@
     </FlyoutItem>
 
     <FlyoutItem Title="Level 2 · Chapter 7">
+        <ShellContent Title="The Five Movements" Route="l2c7movements" ContentTemplate="{DataTemplate pages:FiveMovementsPage}" />
         <ShellContent Title="II-V-I Progressions" Route="l2c7" ContentTemplate="{DataTemplate pages:L2C7ProgressionsPage}" />
     </FlyoutItem>
 

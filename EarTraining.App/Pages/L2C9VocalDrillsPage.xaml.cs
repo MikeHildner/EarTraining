@@ -88,4 +88,7 @@ public partial class L2C9VocalDrillsPage : ContentPage
             StatusLabel.Text = "Audio error: " + ex.Message;
         }
     }
+
+    private async void OnReferenceLink(object? sender, TappedEventArgs e) =>
+        await Shell.Current.GoToAsync("//l2c2");
 }

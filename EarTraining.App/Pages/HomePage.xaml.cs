@@ -98,10 +98,13 @@ public partial class HomePage : ContentPage
         }),
         new("Level 2 · Progressions", new[]
         {
+            Chapter("Chapter 2", "The circle — 5ths & 4ths", new Drill("Circle of 5ths & 4ths", "l2c2", "circle fifths fourths fifth fourth reference terminology tetrachord clockwise explanation definition")),
             Chapter("Chapter 4", "Major triad progressions", new Drill("Major Triad Progressions", "l2c4", "major triad progression movement circle fifths fourths half-step")),
             Chapter("Chapter 5", "Diatonic triad progressions", new Drill("Diatonic Triad Progressions", "l2c5", "diatonic progression four chords roman numerals vii diminished")),
             Chapter("Chapter 6", "Modal scale recognition", new Drill("Modal Scales", "l2c6", "mode modes modal scale dorian phrygian lydian mixolydian aeolian ionian locrian relative major")),
-            Chapter("Chapter 7", "II-V-I progressions", new Drill("II-V-I Progressions", "l2c7", "jazz two five one II V I progression key change circle")),
+            Chapter("Chapter 7", "II-V-I progressions",
+                new Drill("The Five Movements", "l2c7movements", "five movements movement reference half-step commontone key change modulation listening cues"),
+                new Drill("II-V-I Progressions", "l2c7", "jazz two five one II V I progression key change circle")),
             Chapter("Chapter 8", "7-3 melodic lines", new Drill("7-3 Lines", "l2c8", "seven three line guide tones voice leading")),
             Chapter("Chapter 9", "Vocal drills — the circle", new Drill("Vocal Drills", "l2c9", "sing circle fifths fourths fixed moveable do solfege")),
         }),

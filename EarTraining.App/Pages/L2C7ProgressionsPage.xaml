@@ -10,6 +10,13 @@
             <Label Text="Two II–V–I sequences in different keys — how did the key center move?"
                    HorizontalOptions="Center" TextColor="Gray" />
             <c:InfoNote Text="Selected from the II-V-I progression questions on pp. 75–76. Root-3-7 voicings; the key re-randomizes every drill, so you identify the movement, not the chords." />
+            <Label Text="Read first: The Five Movements ›"
+                   TextColor="{AppThemeBinding Light=#512BD4, Dark=#B7A6FF}"
+                   FontSize="13" HorizontalOptions="Center" HorizontalTextAlignment="Center" Padding="8,6">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnReferenceLink" />
+                </Label.GestureRecognizers>
+            </Label>
 
             <Button Text="▶ Play progressions" Clicked="OnPlay" />
             <Label Text="How did the key center move?" FontAttributes="Bold" HorizontalOptions="Center" />

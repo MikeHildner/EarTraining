@@ -10,6 +10,13 @@
             <Label Text="Sing along through all twelve keys. Moveable DO repeats the same syllables in every key; Fixed DO uses chromatic solfège from the home C."
                    HorizontalOptions="Center" TextColor="Gray" />
             <c:InfoNote Text="The four circle vocal drills from pp. 51–58 (practice drills — no scoring). Each row is one key station: sing its four syllables as they play." />
+            <Label Text="What are the circles? ›"
+                   TextColor="{AppThemeBinding Light=#512BD4, Dark=#B7A6FF}"
+                   FontSize="13" HorizontalOptions="Center" HorizontalTextAlignment="Center" Padding="8,6">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnReferenceLink" />
+                </Label.GestureRecognizers>
+            </Label>
 
             <Picker x:Name="DrillPicker" Title="Drill" />
 

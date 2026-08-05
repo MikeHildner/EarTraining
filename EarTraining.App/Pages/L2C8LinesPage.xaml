@@ -10,6 +10,13 @@
             <Label Text="A II–V–I plays with one of its two 7-3 lines on top — which line did you hear?"
                    HorizontalOptions="Center" TextColor="Gray" />
             <c:InfoNote Text="Selected from the 7-3 melodic line questions on pp. 79–82. The 7–3–7 line moves DO–TI–TI (half-step, then commontone); the 3–7–3 line moves FA–FA–MI (commontone, then half-step)." />
+            <Label Text="The five movements, explained ›"
+                   TextColor="{AppThemeBinding Light=#512BD4, Dark=#B7A6FF}"
+                   FontSize="13" HorizontalOptions="Center" HorizontalTextAlignment="Center" Padding="8,6">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnReferenceLink" />
+                </Label.GestureRecognizers>
+            </Label>
 
             <Button Text="▶ Play II–V–I with melody" Clicked="OnPlay" />
             <Label Text="Which 7-3 line was the melody?" FontAttributes="Bold" HorizontalOptions="Center" />

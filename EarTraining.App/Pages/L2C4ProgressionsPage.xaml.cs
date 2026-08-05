@@ -144,6 +144,9 @@ public partial class L2C4ProgressionsPage : ContentPage, IAutomatableDrill
         StatusLabel.Text = (scored ? "Time's up — " : "Answer: ") + _drill.Category;
     }
 
+    private async void OnReferenceLink(object? sender, TappedEventArgs e) =>
+        await Shell.Current.GoToAsync("//l2c2");
+
     protected override void OnDisappearing()
     {
         base.OnDisappearing();

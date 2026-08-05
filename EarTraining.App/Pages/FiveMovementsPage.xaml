@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:EarTraining.App.Components"
+             x:Class="EarTraining.App.Pages.FiveMovementsPage"
+             Title="L2 C7 · The Five Movements">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="14">
+            <Label Text="The Five Movements" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="How a II–V–I hands off to the next key — what the five names really mean, and how to hear each one."
+                   HorizontalOptions="Center" TextColor="Gray" />
+            <c:InfoNote Text="From Chapter 7, pp. 37–45 of the Level 2 book. Every demo starts from Dmi7–G7–Cma7 in C — the book's reference key." />
+
+            <Border Style="{StaticResource Card}" Stroke="{AppThemeBinding Light=#512BD4, Dark=#B7A6FF}">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Read this first" Style="{StaticResource Heading}" />
+                    <Label FontSize="13.5" Text="The names describe the bass interval you hear at the seam — from the I chord you're leaving to the II chord that follows. They do NOT describe where the key center goes. 'Half-step up' really does move the bass up a half-step (Cma7 to C#mi7) — but the key lands a half-step LOWER (C to B)." />
+                </VerticalStackLayout>
+            </Border>
+
+            <VerticalStackLayout x:Name="Cards" Spacing="14" />
+
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Quick listening cues" Style="{StaticResource Heading}" />
+                    <Label FontSize="13.5" Text="• Top notes frozen across the seam → Half-step up.&#10;• Bass frozen across the seam → Root commontone.&#10;• Seam still sounds in-key → a circle move (on Circle of 4ths the new II is diatonic to the old key).&#10;• Strong dominant pull in the bass → Circle of 5ths." />
+                </VerticalStackLayout>
+            </Border>
+
+            <Label x:Name="StatusLabel" HorizontalOptions="Center" FontAttributes="Bold" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

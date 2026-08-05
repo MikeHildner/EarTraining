@@ -10,6 +10,13 @@
             <Label Text="Identify the chord movement. The key is random each drill — listen to the motion, not the pitches."
                    HorizontalOptions="Center" TextColor="Gray" />
             <c:InfoNote Text="Selected from the major triad progression questions on pp. 63 &amp; 65." />
+            <Label Text="New to these terms? Circle of 5ths &amp; 4ths ›"
+                   TextColor="{AppThemeBinding Light=#512BD4, Dark=#B7A6FF}"
+                   FontSize="13" HorizontalOptions="Center" HorizontalTextAlignment="Center" Padding="8,6">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnReferenceLink" />
+                </Label.GestureRecognizers>
+            </Label>
 
             <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
                 <Label Text="How many chords:" HorizontalOptions="Center" FontSize="13" TextColor="Gray" />

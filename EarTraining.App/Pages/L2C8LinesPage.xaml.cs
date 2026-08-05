@@ -125,6 +125,9 @@ public partial class L2C8LinesPage : ContentPage, IAutomatableDrill
         StatusLabel.Text = (scored ? "Time's up — " : "Answer: ") + $"{_drill.Line} ({_drill.Solfeg})";
     }
 
+    private async void OnReferenceLink(object? sender, TappedEventArgs e) =>
+        await Shell.Current.GoToAsync("//l2c7movements");
+
     protected override void OnDisappearing()
     {
         base.OnDisappearing();

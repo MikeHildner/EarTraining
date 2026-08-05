@@ -2,7 +2,7 @@ namespace EarTraining.Core.Drills;
 
 /// <summary>
 /// L2C4 Major Triad Progressions (2- and 3-chord, pp. 63 & 65): all-major-triad progressions that
-/// demonstrate a root-MOVEMENT type — Circle of 5th (V→I), Circle of 4th (IV→I), Half-step up
+/// demonstrate a root-MOVEMENT type — Circle of 5ths (V→I), Circle of 4ths (IV→I), Half-step up
 /// (I→♭II), Half-step down (I→♭VII). The key is re-randomized every drill, so the exact inversions
 /// aren't guessable by ear — the quiz identifies the <see cref="Category"/> (movement type). Ported
 /// from L2C4Controller.Get2/3ChordProgression. Each chord is 3 tone offsets from DO (post-inversion,
@@ -37,19 +37,19 @@ public sealed record L2C4Drill(string Category, IReadOnlyList<IReadOnlyList<int>
     private static IReadOnlyList<int> FlatSix(Inv i) => Tri(8, 12, 15, i);  // ♭VI major (½-up → 4th tail)
     private static IReadOnlyList<int> Three(Inv i) => Tri(4, 8, 11, i);     // III major (½-down → 5th tail)
 
-    public static readonly string[] TwoChordCategories = ["Circle of 5th", "Circle of 4th", "Half-step up", "Half-step down"];
+    public static readonly string[] TwoChordCategories = ["Circle of 5ths", "Circle of 4ths", "Half-step up", "Half-step down"];
     public static readonly string[] ThreeChordCategories =
         ["5th → ½ up", "4th → ½ down", "½ up → 5th", "½ up → 4th", "½ down → 5th", "½ down → 4th"];
 
     /// <summary>10 two-chord voicings (controller types 0-9), tagged by movement category.</summary>
     public static readonly IReadOnlyList<L2C4Drill> TwoChord =
     [
-        new("Circle of 5th", [Five(Inv.LowSecond), One(Inv.HighFirst)]),
-        new("Circle of 5th", [Five(Inv.LowFirst), One(Inv.Root)]),
-        new("Circle of 5th", [Five(Inv.Root), One(Inv.HighSecond)]),
-        new("Circle of 4th", [Four(Inv.LowFirst), One(Inv.LowSecond)]),
-        new("Circle of 4th", [Four(Inv.Root), One(Inv.HighFirst)]),
-        new("Circle of 4th", [Four(Inv.LowSecond), One(Inv.Root)]),
+        new("Circle of 5ths", [Five(Inv.LowSecond), One(Inv.HighFirst)]),
+        new("Circle of 5ths", [Five(Inv.LowFirst), One(Inv.Root)]),
+        new("Circle of 5ths", [Five(Inv.Root), One(Inv.HighSecond)]),
+        new("Circle of 4ths", [Four(Inv.LowFirst), One(Inv.LowSecond)]),
+        new("Circle of 4ths", [Four(Inv.Root), One(Inv.HighFirst)]),
+        new("Circle of 4ths", [Four(Inv.LowSecond), One(Inv.Root)]),
         new("Half-step up", [One(Inv.Root), FlatTwo(Inv.Root)]),
         new("Half-step up", [One(Inv.Root), FlatTwo(Inv.LowSecond)]),
         new("Half-step down", [One(Inv.Root), SevenBelow(Inv.Root)]),
