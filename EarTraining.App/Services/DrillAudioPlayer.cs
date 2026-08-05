@@ -15,21 +15,12 @@ public sealed class DrillAudioPlayer
 
     public DrillAudioPlayer(IAudioManager audioManager) => _audioManager = audioManager;
 
-    public void Play(byte[] wav, bool loop = false)
+    public void Play(byte[] wav)
     {
         _current?.Stop();
         _current?.Dispose();
         _current = _audioManager.CreatePlayer(new MemoryStream(wav));
-        _current.Loop = loop;                     // the metronome loops its click track
         _current.Volume = SettingsStore.Volume;   // master volume from user settings
         _current.Play();
-    }
-
-    /// <summary>Stop and release the in-flight sound, if any.</summary>
-    public void Stop()
-    {
-        _current?.Stop();
-        _current?.Dispose();
-        _current = null;
     }
 }

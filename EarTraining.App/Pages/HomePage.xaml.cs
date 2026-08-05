@@ -109,11 +109,8 @@ public partial class HomePage : ContentPage
         {
             Leaf("Interval ID", "interval", "interval chromatic quality octave tritone"),
             Leaf("Triad ID", "triad", "triad quality major minor diminished augmented chord"),
-            Leaf("Find the DO", "finddo", "tonic key center find do"),
             Leaf("Ratios", "ratios", "ratio just intonation tuning frequency"),
             Leaf("Blank Sheet Music", "blanksheet", "blank sheet staff paper manuscript print pdf share clef"),
-            // Metronome parked (Mike, 2026-08-01) — restore with the AppShell entry:
-            // Leaf("Metronome", "metronome", "metronome tempo bpm beat click pulse tap time practice"),
         }),
     };
 

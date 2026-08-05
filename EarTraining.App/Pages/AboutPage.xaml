@@ -31,7 +31,7 @@
                     </HorizontalStackLayout>
                     <Label FontSize="13.5" Text="• Level 1 · Chapters 1–8 — vocal drills, interval ID, triad recognition, progressions, melodic &amp; bass-line dictation, and the all-interval review." />
                     <Label FontSize="13.5" Text="• Level 2 · Chapters 4–9 — triad progressions, modal scales, II-V-I, 7-3 lines, and the circle vocal drills." />
-                    <Label FontSize="13.5" Text="• Not in the Books — Interval &amp; Triad ID, Find the DO, Ratios, Blank Sheet Music." />
+                    <Label FontSize="13.5" Text="• Not in the Books — Interval &amp; Triad ID, Ratios, Blank Sheet Music." />
                     <Label FontSize="13.5" Text="• A score gauge and an Automation runner on every quiz." />
                     <Label FontSize="13.5" Text="• Progress &amp; Stats — track your accuracy, daily streak, and recent trend." />
                     <Label FontSize="13.5" Text="• Settings — dark mode, a fixed practice key, and volume." />

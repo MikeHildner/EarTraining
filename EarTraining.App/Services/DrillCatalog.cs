@@ -47,7 +47,6 @@ public static class DrillCatalog
         ("l2c8",            "L2 C8 · 7-3 Lines"),
         ("interval",        "Interval ID"),
         ("triad",           "Triad ID"),
-        ("finddo",          "Find the DO"),
     };
 
     private static readonly Dictionary<string, string> Names =

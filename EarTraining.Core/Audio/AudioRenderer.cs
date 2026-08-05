@@ -95,43 +95,6 @@ public static class AudioRenderer
         return Concat(parts).Write();
     }
 
-    /// <summary>
-    /// A seamless metronome click loop: <paramref name="bars"/> bars of
-    /// <paramref name="beatsPerBar"/> beats at <paramref name="bpm"/>, beat 1 of each
-    /// bar at <paramref name="accentGain"/> and the rest at <paramref name="beatGain"/>.
-    /// Every tick is placed at its absolute frame offset (round(i · rate·60/bpm)), so
-    /// spacing carries no cumulative rounding drift, and the buffer is exactly
-    /// round(totalBeats · framesPerBeat) frames so a looping player restarts on the
-    /// grid. The tick is trimmed to at most one beat (500 ms cap) and anything that
-    /// would spill past the loop edge wraps to the front — what the next pass would
-    /// be playing anyway — keeping the seam clean at any tempo.
-    /// </summary>
-    public static byte[] RenderMetronome(byte[] tickWav, int bpm, int beatsPerBar, int bars, double accentGain = 1.0, double beatGain = 0.55)
-    {
-        var tick = WavBuffer.Read(tickWav);
-        double secondsPerBeat = 60.0 / bpm;
-        var hit = Slice(tick, Math.Min(0.5, secondsPerBeat));
-
-        double framesPerBeat = tick.SampleRate * secondsPerBeat;
-        int totalBeats = beatsPerBar * bars;
-        int totalFrames = (int)Math.Round(totalBeats * framesPerBeat);
-        int channels = tick.Channels;
-
-        var acc = new double[totalFrames * channels];
-        for (int i = 0; i < totalBeats; i++)
-        {
-            double gain = i % beatsPerBar == 0 ? accentGain : beatGain;
-            int start = (int)Math.Round(i * framesPerBeat) * channels;
-            for (int j = 0; j < hit.Samples.Length; j++)
-                acc[(start + j) % acc.Length] += hit.Samples[j] * gain;
-        }
-
-        var s = new short[acc.Length];
-        for (int i = 0; i < s.Length; i++)
-            s[i] = (short)Math.Clamp(acc[i], short.MinValue, short.MaxValue);
-        return new WavBuffer { SampleRate = tick.SampleRate, Channels = channels, Samples = s }.Write();
-    }
-
     private static WavBuffer Slice(WavBuffer w, double seconds)
     {
         int count = Math.Min(w.Samples.Length, (int)(seconds * w.SampleRate) * w.Channels);
