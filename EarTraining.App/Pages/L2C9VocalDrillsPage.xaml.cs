@@ -28,6 +28,7 @@ public partial class L2C9VocalDrillsPage : ContentPage
     private readonly SampleLibrary _samples = new();
     private readonly DrillAudioPlayer _audio = new(AudioManager.Current);
     private bool _playing;
+    private int _playToken;   // bumped by Stop / a new Play; a stale load-and-render abandons instead of playing
 
     public L2C9VocalDrillsPage()
     {
@@ -69,6 +70,11 @@ public partial class L2C9VocalDrillsPage : ContentPage
             StopPlayback("Stopped — Play starts from the top.");
             return;
         }
+        // Flip to Stop immediately: the sample loads take a moment on first play, and a
+        // second tap during that window must read as Stop, not start a duplicate build.
+        int token = ++_playToken;
+        _playing = true;
+        PlayButton.Text = "◼ Stop";
         try
         {
             StatusLabel.Text = "Loading…";
@@ -103,19 +109,19 @@ public partial class L2C9VocalDrillsPage : ContentPage
                     steps.Add((dominant, restSeconds));
                 }
             }
+            if (token != _playToken) return;   // stopped (or left the page) while loading
             _audio.Play(AudioRenderer.RenderProgression(steps, gain: 0.65));
-            _playing = true;
-            PlayButton.Text = "◼ Stop";
             StatusLabel.Text = "Playing — sing along!";
         }
         catch (Exception ex)
         {
-            ResetPlayButton("Audio error: " + ex.Message);
+            if (token == _playToken) ResetPlayButton("Audio error: " + ex.Message);
         }
     }
 
     private void StopPlayback(string status = "")
     {
+        _playToken++;   // abandon any load still in flight
         _audio.Stop();
         ResetPlayButton(status);
     }
