@@ -8,7 +8,7 @@
         <ScrollView Grid.Row="0">
         <VerticalStackLayout Padding="20" Spacing="14">
             <Label Text="Melodic Intervals — Maj 2nd / Min 7th" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
-            <Label Text="Play the two notes, then identify the interval (quality + direction)."
+            <Label Text="Play the two notes, then identify the interval."
                    HorizontalOptions="Center" TextColor="Gray" />
             <c:InfoNote Text="Selected from the melodic interval identification questions on p. 127." />
 

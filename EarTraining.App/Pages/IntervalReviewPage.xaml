@@ -8,7 +8,7 @@
         <ScrollView Grid.Row="0">
         <VerticalStackLayout Padding="20" Spacing="14">
             <Label x:Name="HeadingLabel" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
-            <Label Text="Play the interval, then identify its quality."
+            <Label Text="Play the interval, then identify what you heard."
                    HorizontalOptions="Center" TextColor="Gray" />
             <c:InfoNote x:Name="BookNote" />
 

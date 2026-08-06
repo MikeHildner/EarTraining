@@ -8,18 +8,18 @@ using Plugin.Maui.Audio;
 namespace EarTraining.App.Pages;
 
 /// <summary>
-/// Shared mixed/review interval-identification page (book coverage Tier 1): a Melodic /
-/// Harmonic mode toggle over combined chapter tables, quizzing the interval quality
-/// (the book's description column — no direction). Used by L1C4 "Mixed Intervals"
-/// (chapters 2+3, pp. 63-64) and the L1C8 "All-Interval Review" (chapters 2-7,
-/// pp. 180-181). Same category-quiz model as the L1C5-C7 interval pages.
+/// Shared mixed/review interval-identification page: a Melodic / Harmonic mode toggle
+/// over combined chapter tables, quizzing the specific solfège pair — one answer button
+/// per included prompt, mirroring the include list (Mark's model, matching C2/C3).
+/// Used by L1C4 "Mixed Intervals" (chapters 2+3, pp. 63-64) and the L1C8 "All-Interval
+/// Review" (chapters 2-7, pp. 180-181).
 /// </summary>
 public partial class IntervalReviewPage : ContentPage, IAutomatableDrill
 {
     private readonly SampleLibrary _samples = new();
     private readonly DrillAudioPlayer _audio = new(AudioManager.Current);
     private readonly Random _rng = new();
-    private readonly Dictionary<string, Button> _answerButtons = new(); // category -> button
+    private readonly Dictionary<string, Button> _answerButtons = new(); // include label -> button
     private readonly IReadOnlyList<ReviewIntervalDrill> _melodic;
     private readonly IReadOnlyList<ReviewIntervalDrill> _harmonic;
     private ReviewIntervalDrill _drill = null!;
@@ -67,15 +67,21 @@ public partial class IntervalReviewPage : ContentPage, IAutomatableDrill
     {
         AnswersLayout.Children.Clear();
         _answerButtons.Clear();
-        // One button per distinct quality among the playable prompts, in table order.
+        // One button per included prompt, in table order — the answers mirror the
+        // include list ("DO MI (Maj 3rd)"), so the pair and its quality are one answer.
         foreach (var drill in Playable())
         {
-            string cat = drill.Category;
-            if (_answerButtons.ContainsKey(cat)) continue;
-            var button = new Button { Text = cat, Margin = new Thickness(4) };
+            string label = drill.IncludeLabel;
+            if (_answerButtons.ContainsKey(label)) continue;
+            // Width from the text, not from auto-measure: MAUI's FlexLayout sizes auto-width
+            // buttons inconsistently on Android and can pack a row tight enough to clip a
+            // label's suffix — which would make "SO RE (4th)" and "SO RE (5th)" look alike.
+            var button = new Button { Margin = new Thickness(4) };
             button.Style = (Style)Application.Current!.Resources["AnswerButton"];
-            button.Clicked += (_, _) => OnAnswer(cat);
-            _answerButtons[cat] = button;
+            button.Text = label;
+            button.WidthRequest = 30 + 8.0 * label.Length;
+            button.Clicked += (_, _) => OnAnswer(label);
+            _answerButtons[label] = button;
             AnswersLayout.Children.Add(button);
         }
     }
@@ -131,15 +137,15 @@ public partial class IntervalReviewPage : ContentPage, IAutomatableDrill
     {
         if (_answered) return;
         _answered = true;
-        bool correct = guess == _drill.Category;
+        bool correct = guess == _drill.IncludeLabel;
         Gauge.Record(correct);
-        foreach (var (cat, b) in _answerButtons)
+        foreach (var (label, b) in _answerButtons)
         {
             b.IsEnabled = false;
-            if (cat == _drill.Category) { b.BackgroundColor = Colors.SeaGreen; b.TextColor = Colors.White; }
-            else if (cat == guess) { b.BackgroundColor = Colors.IndianRed; b.TextColor = Colors.White; }
+            if (label == _drill.IncludeLabel) { b.BackgroundColor = Colors.SeaGreen; b.TextColor = Colors.White; }
+            else if (label == guess) { b.BackgroundColor = Colors.IndianRed; b.TextColor = Colors.White; }
         }
-        StatusLabel.Text = correct ? "Correct!" : $"Not Quite — {_drill.Label} ({_drill.Category})";
+        StatusLabel.Text = correct ? "Correct!" : $"Not Quite — {_drill.IncludeLabel}";
     }
 
     private void OnNext(object? sender, EventArgs e) => NewDrill();
@@ -164,12 +170,12 @@ public partial class IntervalReviewPage : ContentPage, IAutomatableDrill
         if (_answered) return;
         _answered = true;
         if (scored) Gauge.Record(false);
-        foreach (var (cat, b) in _answerButtons)
+        foreach (var (label, b) in _answerButtons)
         {
             b.IsEnabled = false;
-            if (cat == _drill.Category) { b.BackgroundColor = Colors.SeaGreen; b.TextColor = Colors.White; }
+            if (label == _drill.IncludeLabel) { b.BackgroundColor = Colors.SeaGreen; b.TextColor = Colors.White; }
         }
-        StatusLabel.Text = (scored ? "Time's up — " : "Answer: ") + $"{_drill.Label} ({_drill.Category})";
+        StatusLabel.Text = (scored ? "Time's up — " : "Answer: ") + _drill.IncludeLabel;
     }
 
     protected override void OnDisappearing()

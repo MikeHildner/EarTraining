@@ -12,7 +12,7 @@ public partial class MelodyHarmonizationPage : ContentPage, IAutomatableDrill
     private readonly SampleLibrary _samples = new();
     private readonly DrillAudioPlayer _audio = new(AudioManager.Current);
     private readonly Random _rng = new();
-    private readonly Dictionary<string, Button> _answerButtons = new(); // triad name -> button
+    private readonly Dictionary<string, Button> _answerButtons = new(); // prompt label -> button
     private readonly IReadOnlyList<MelodyHarmonizationDrill> _all = MelodyHarmonizationDrill.All;
     private MelodyHarmonizationDrill _drill = null!;
     private bool _answered;
@@ -39,16 +39,20 @@ public partial class MelodyHarmonizationPage : ContentPage, IAutomatableDrill
     {
         AnswersLayout.Children.Clear();
         _answerButtons.Clear();
-        var playable = Playable();
-        // Offer a triad button only if some playable prompt harmonizes with it.
-        for (int t = 0; t < MelodyHarmonizationDrill.TriadNames.Length; t++)
+        // One button per included (note, triad) prompt — the answers mirror the include
+        // list (Mark: identify the melody note AND the harmonizing triad together).
+        foreach (var drill in Playable())
         {
-            if (!playable.Any(d => d.TriadType == t)) continue;
-            string name = MelodyHarmonizationDrill.TriadNames[t];
-            var button = new Button { Text = name, WidthRequest = 84, Margin = new Thickness(4) };
+            string label = drill.Label;
+            // Width from the text, not from auto-measure: MAUI's FlexLayout sizes auto-width
+            // buttons inconsistently on Android and can pack a row tight enough to clip a
+            // label's suffix — which would make "SO RE (4th)" and "SO RE (5th)" look alike.
+            var button = new Button { Margin = new Thickness(4) };
             button.Style = (Style)Application.Current!.Resources["AnswerButton"];
-            button.Clicked += (_, _) => OnAnswer(name);
-            _answerButtons[name] = button;
+            button.Text = label;
+            button.WidthRequest = 30 + 8.0 * label.Length;
+            button.Clicked += (_, _) => OnAnswer(label);
+            _answerButtons[label] = button;
             AnswersLayout.Children.Add(button);
         }
     }
@@ -96,12 +100,12 @@ public partial class MelodyHarmonizationPage : ContentPage, IAutomatableDrill
     {
         if (_answered) return;
         _answered = true;
-        bool correct = guess == _drill.TriadName;
+        bool correct = guess == _drill.Label;
         Gauge.Record(correct);
         foreach (var (name, button) in _answerButtons)
         {
             button.IsEnabled = false;
-            if (name == _drill.TriadName) { button.BackgroundColor = Colors.SeaGreen; button.TextColor = Colors.White; }
+            if (name == _drill.Label) { button.BackgroundColor = Colors.SeaGreen; button.TextColor = Colors.White; }
             else if (name == guess) { button.BackgroundColor = Colors.IndianRed; button.TextColor = Colors.White; }
         }
         StatusLabel.Text = correct ? "Correct!" : $"Not Quite — {_drill.Label}";
@@ -125,7 +129,7 @@ public partial class MelodyHarmonizationPage : ContentPage, IAutomatableDrill
         foreach (var (name, button) in _answerButtons)
         {
             button.IsEnabled = false;
-            if (name == _drill.TriadName) { button.BackgroundColor = Colors.SeaGreen; button.TextColor = Colors.White; }
+            if (name == _drill.Label) { button.BackgroundColor = Colors.SeaGreen; button.TextColor = Colors.White; }
         }
         StatusLabel.Text = (scored ? "Time's up — " : "Answer: ") + _drill.Label;
     }

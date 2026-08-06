@@ -12,7 +12,7 @@ public partial class HarmonicIntervalIdL1C7Page : ContentPage, IAutomatableDrill
     private readonly SampleLibrary _samples = new();
     private readonly DrillAudioPlayer _audio = new(AudioManager.Current);
     private readonly Random _rng = new();
-    private readonly Dictionary<string, Button> _answerButtons = new(); // category -> button
+    private readonly Dictionary<string, Button> _answerButtons = new(); // prompt label -> button
     private L1C7IntervalDrill _drill = null!;
     private bool _answered;
     private bool _ready;
@@ -49,10 +49,14 @@ public partial class HarmonicIntervalIdL1C7Page : ContentPage, IAutomatableDrill
         return Pool().Where(p => included.Contains(p.idx)).Select(p => p.drill).ToList();
     }
 
+    // The include-row / answer-button text for a prompt: the bare pair in single-group
+    // mode, "PAIR (Group)" in Both mode. Includes.Build and BuildAnswers share this —
+    // the answers mirror the include list.
+    private string LabelFor(L1C7IntervalDrill d) => Group is null ? $"{d.Label} ({d.Group})" : d.Label;
+
     private void Rebuild()
     {
-        bool both = Group is null;
-        Includes.Build(Pool().Select(p => (p.idx.ToString(), both ? $"{p.drill.Label} ({p.drill.Group})" : p.drill.Label)));
+        Includes.Build(Pool().Select(p => (p.idx.ToString(), LabelFor(p.drill))));
         BuildAnswers();
         NewDrill();
     }
@@ -61,14 +65,20 @@ public partial class HarmonicIntervalIdL1C7Page : ContentPage, IAutomatableDrill
     {
         AnswersLayout.Children.Clear();
         _answerButtons.Clear();
+        // One button per included prompt, in table order — the answers mirror the include list.
         foreach (var drill in Playable())
         {
-            string cat = drill.Category;
-            if (_answerButtons.ContainsKey(cat)) continue;
-            var button = new Button { Text = cat, Margin = new Thickness(4) };
+            string label = LabelFor(drill);
+            if (_answerButtons.ContainsKey(label)) continue;
+            // Width from the text, not from auto-measure: MAUI's FlexLayout sizes auto-width
+            // buttons inconsistently on Android and can pack a row tight enough to clip a
+            // label's suffix — which would make "SO RE (4th)" and "SO RE (5th)" look alike.
+            var button = new Button { Margin = new Thickness(4) };
             button.Style = (Style)Application.Current!.Resources["AnswerButton"];
-            button.Clicked += (_, _) => OnAnswer(cat);
-            _answerButtons[cat] = button;
+            button.Text = label;
+            button.WidthRequest = 30 + 8.0 * label.Length;
+            button.Clicked += (_, _) => OnAnswer(label);
+            _answerButtons[label] = button;
             AnswersLayout.Children.Add(button);
         }
     }
@@ -111,13 +121,13 @@ public partial class HarmonicIntervalIdL1C7Page : ContentPage, IAutomatableDrill
     {
         if (_answered) return;
         _answered = true;
-        bool correct = guess == _drill.Category;
+        bool correct = guess == LabelFor(_drill);
         Gauge.Record(correct);
-        foreach (var (cat, b) in _answerButtons)
+        foreach (var (label, b) in _answerButtons)
         {
             b.IsEnabled = false;
-            if (cat == _drill.Category) { b.BackgroundColor = Colors.SeaGreen; b.TextColor = Colors.White; }
-            else if (cat == guess) { b.BackgroundColor = Colors.IndianRed; b.TextColor = Colors.White; }
+            if (label == LabelFor(_drill)) { b.BackgroundColor = Colors.SeaGreen; b.TextColor = Colors.White; }
+            else if (label == guess) { b.BackgroundColor = Colors.IndianRed; b.TextColor = Colors.White; }
         }
         StatusLabel.Text = correct ? "Correct!" : $"Not Quite — {_drill.Label} ({_drill.Category})";
     }
@@ -143,10 +153,10 @@ public partial class HarmonicIntervalIdL1C7Page : ContentPage, IAutomatableDrill
         if (_answered) return;
         _answered = true;
         if (scored) Gauge.Record(false);
-        foreach (var (cat, b) in _answerButtons)
+        foreach (var (label, b) in _answerButtons)
         {
             b.IsEnabled = false;
-            if (cat == _drill.Category) { b.BackgroundColor = Colors.SeaGreen; b.TextColor = Colors.White; }
+            if (label == LabelFor(_drill)) { b.BackgroundColor = Colors.SeaGreen; b.TextColor = Colors.White; }
         }
         StatusLabel.Text = (scored ? "Time's up — " : "Answer: ") + $"{_drill.Label} ({_drill.Category})";
     }
