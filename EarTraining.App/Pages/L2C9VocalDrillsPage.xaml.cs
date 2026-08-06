@@ -1,4 +1,3 @@
-using EarTraining.App.Components;
 using EarTraining.App.Services;
 using EarTraining.Core.Audio;
 using EarTraining.Core.Drills;
@@ -12,6 +11,8 @@ namespace EarTraining.App.Pages;
 /// complete circle of 5ths / 4ths, in Moveable-DO or Fixed-DO (chromatic) solfège.
 /// A practice page like the book's — thirteen 4-note key stations play through while
 /// the syllable table is on screen; no quiz/scoring (the pitches are the drill).
+/// Playback follows the notation: pickups alone, the arrival DO together with its
+/// tonic chord, and on the 5ths drills the next key's dominant 7th between stations.
 /// </summary>
 public partial class L2C9VocalDrillsPage : ContentPage
 {
@@ -23,20 +24,22 @@ public partial class L2C9VocalDrillsPage : ContentPage
         ("Standard", 0.55, 0.90),
         ("Brisk", 0.42, 0.70),
     ];
-    private const double TriadSeconds = 1.4;   // tonic-triad orientation before each station (Mark)
 
     private readonly SampleLibrary _samples = new();
     private readonly DrillAudioPlayer _audio = new(AudioManager.Current);
+    private bool _playing;
 
     public L2C9VocalDrillsPage()
     {
         InitializeComponent();
         DrillPicker.ItemsSource = L2C9VocalDrill.All.Select(d => d.Name).ToList();
-        DrillPicker.SelectedIndexChanged += (_, _) => ShowStations();
+        DrillPicker.SelectedIndexChanged += (_, _) => { StopPlayback(); ShowStations(); };
         DrillPicker.SelectedIndex = 0;
         TempoPicker.ItemsSource = Tempos.Select(t => t.Name).ToList();
         TempoPicker.SelectedIndex = Math.Clamp(Preferences.Get("l2c9.tempo", 1), 0, Tempos.Length - 1);
         TempoPicker.SelectedIndexChanged += (_, _) => Preferences.Set("l2c9.tempo", TempoPicker.SelectedIndex);
+        _audio.PlaybackEnded += (_, _) =>
+            MainThread.BeginInvokeOnMainThread(() => ResetPlayButton("Done — sing it again?"));
     }
 
     private L2C9VocalDrill Drill => L2C9VocalDrill.All[Math.Max(0, DrillPicker.SelectedIndex)];
@@ -61,34 +64,75 @@ public partial class L2C9VocalDrillsPage : ContentPage
 
     private async void OnPlay(object? sender, EventArgs e)
     {
+        if (_playing)
+        {
+            StopPlayback("Stopped — Play starts from the top.");
+            return;
+        }
         try
         {
             StatusLabel.Text = "Loading…";
             var drill = Drill;
             var (_, noteSeconds, restSeconds) = Tempo;
-            // Each station: its tonic triad (root position, an octave below DO) to set the
-            // key in the ear, then the four sung notes. Single notes ride as 1-note "chords".
+            double holdSeconds = restSeconds * 1.8;   // the printed whole-note DO + chord
+
+            // As printed (pp. 51-54): the pickup notes sound alone, the arrival DO carries
+            // its tonic triad (root position an octave below, sung DO on top), and on the
+            // circle-of-5ths drills the dominant 7th of the NEXT key — same root, add the
+            // flat-7 — fills the gap to the next station. The 4ths drills print no
+            // dominants, so there the held DO chord is the gap.
             var steps = new List<(IReadOnlyList<byte[]> chord, double seconds)>();
-            foreach (var station in drill.StationNotes)
+            var stations = drill.StationNotes;
+            for (int s = 0; s < stations.Count; s++)
             {
+                var station = stations[s];
                 int stationDo = station[^1];   // both circle patterns end on the station's DO
-                var triad = new List<byte[]>();
-                foreach (int offset in new[] { -12, -8, -5 })
-                    triad.Add(await _samples.LoadAsync(Note.SampleFile(stationDo + offset)));
-                steps.Add((triad, TriadSeconds));
-                for (int n = 0; n < station.Count; n++)
-                    steps.Add((new[] { await _samples.LoadAsync(Note.SampleFile(station[n])) },
-                               n == station.Count - 1 ? restSeconds : noteSeconds));
+                for (int n = 0; n < station.Count - 1; n++)
+                    steps.Add((new[] { await _samples.LoadAsync(Note.SampleFile(station[n])) }, noteSeconds));
+
+                var arrival = new List<byte[]>();
+                foreach (int offset in new[] { -12, -8, -5, 0 })
+                    arrival.Add(await _samples.LoadAsync(Note.SampleFile(stationDo + offset)));
+                steps.Add((arrival, holdSeconds));
+
+                if (drill.HasDominants && s < stations.Count - 1)
+                {
+                    var dominant = new List<byte[]>();
+                    foreach (int offset in new[] { -12, -8, -5, -2 })
+                        dominant.Add(await _samples.LoadAsync(Note.SampleFile(stationDo + offset)));
+                    steps.Add((dominant, restSeconds));
+                }
             }
             _audio.Play(AudioRenderer.RenderProgression(steps, gain: 0.65));
+            _playing = true;
+            PlayButton.Text = "◼ Stop";
             StatusLabel.Text = "Playing — sing along!";
         }
         catch (Exception ex)
         {
-            StatusLabel.Text = "Audio error: " + ex.Message;
+            ResetPlayButton("Audio error: " + ex.Message);
         }
+    }
+
+    private void StopPlayback(string status = "")
+    {
+        _audio.Stop();
+        ResetPlayButton(status);
+    }
+
+    private void ResetPlayButton(string status)
+    {
+        _playing = false;
+        PlayButton.Text = "▶ Play (sing along)";
+        StatusLabel.Text = status;
     }
 
     private async void OnReferenceLink(object? sender, TappedEventArgs e) =>
         await Shell.Current.GoToAsync("//l2c2");
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        StopPlayback();
+    }
 }

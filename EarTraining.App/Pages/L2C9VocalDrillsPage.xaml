@@ -9,7 +9,7 @@
             <Label Text="Vocal Drills — Around the Circle" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
             <Label Text="Sing along through all twelve keys. Moveable DO repeats the same syllables in every key; Fixed DO uses chromatic solfège from the home C."
                    HorizontalOptions="Center" TextColor="Gray" />
-            <c:InfoNote Text="The four circle vocal drills from pp. 51–58 (practice drills — no scoring). Each row is one key station: sing its four syllables as they play." />
+            <c:InfoNote Text="The four circle vocal drills from pp. 51–58 (practice drills — no scoring). Each row is one key station: sing its four syllables as they play. As printed in the book, the tonic chord sounds together with each arrival DO, and on the Circle-of-5ths drills the dominant 7th then leads into the next key." />
             <Label Text="What are the circles? ›"
                    TextColor="{AppThemeBinding Light=#512BD4, Dark=#B7A6FF}"
                    FontSize="13" HorizontalOptions="Center" HorizontalTextAlignment="Center" Padding="8,6">
@@ -25,7 +25,7 @@
                 <Picker x:Name="TempoPicker" Grid.Column="1" />
             </Grid>
 
-            <Button Text="▶ Play (sing along)" Clicked="OnPlay" />
+            <Button x:Name="PlayButton" Text="▶ Play (sing along)" Clicked="OnPlay" />
             <Label x:Name="StatusLabel" HorizontalOptions="Center" TextColor="Gray" />
 
             <VerticalStackLayout x:Name="StationsLayout" Spacing="4" />

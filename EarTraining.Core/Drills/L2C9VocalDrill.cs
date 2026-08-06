@@ -7,12 +7,16 @@ namespace EarTraining.Core.Drills;
 /// transcribed verbatim from the book's tables). Thirteen 4-note stations each; the
 /// pitches are identical between the Moveable and Fixed variants of a circle — only the
 /// syllables differ. Station DOs fold into the singable G3..Gb4 window.
+/// As printed, every arrival DO carries its tonic chord, and the two circle-of-5ths
+/// drills also interleave the dominant 7th of the next key between stations
+/// (<see cref="HasDominants"/>); the 4ths drills print no sevenths.
 /// </summary>
 public sealed record L2C9VocalDrill(
     string Name,
     IReadOnlyList<string> StationKeys,
     IReadOnlyList<IReadOnlyList<string>> StationSyllables,
-    IReadOnlyList<IReadOnlyList<int>> StationNotes)
+    IReadOnlyList<IReadOnlyList<int>> StationNotes,
+    bool HasDominants)
 {
     private const int HomeDo = 39;   // C4
 
@@ -44,14 +48,14 @@ public sealed record L2C9VocalDrill(
 
     public static readonly IReadOnlyList<L2C9VocalDrill> All =
     [
-        Build("Circle of 5ths — Moveable DO", Circle5Keys, -7, Circle5Pattern, i => Circle5Moveable),
-        Build("Circle of 5ths — Fixed DO", Circle5Keys, -7, Circle5Pattern, i => Circle5Fixed[i]),
-        Build("Circle of 4ths — Moveable DO", Circle4Keys, 7, Circle4Pattern, i => Circle4Moveable),
-        Build("Circle of 4ths — Fixed DO", Circle4Keys, 7, Circle4Pattern, i => Circle4Fixed[i]),
+        Build("Circle of 5ths — Moveable DO", Circle5Keys, -7, Circle5Pattern, i => Circle5Moveable, hasDominants: true),
+        Build("Circle of 5ths — Fixed DO", Circle5Keys, -7, Circle5Pattern, i => Circle5Fixed[i], hasDominants: true),
+        Build("Circle of 4ths — Moveable DO", Circle4Keys, 7, Circle4Pattern, i => Circle4Moveable, hasDominants: false),
+        Build("Circle of 4ths — Fixed DO", Circle4Keys, 7, Circle4Pattern, i => Circle4Fixed[i], hasDominants: false),
     ];
 
     private static L2C9VocalDrill Build(
-        string name, string[] keys, int delta, int[] pattern, Func<int, string[]> syllables)
+        string name, string[] keys, int delta, int[] pattern, Func<int, string[]> syllables, bool hasDominants)
     {
         var stationSyllables = new List<IReadOnlyList<string>>(keys.Length);
         var stationNotes = new List<IReadOnlyList<int>>(keys.Length);
@@ -62,7 +66,7 @@ public sealed record L2C9VocalDrill(
             stationSyllables.Add(syllables(i));
             stationNotes.Add(pattern.Select(offset => stationDo + offset).ToArray());
         }
-        return new L2C9VocalDrill(name, keys, stationSyllables, stationNotes);
+        return new L2C9VocalDrill(name, keys, stationSyllables, stationNotes, hasDominants);
     }
 
     // Keep each station's DO in the singable G3..Gb4 window (34..45), like Tonic.RandomDo's range.
