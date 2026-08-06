@@ -7,15 +7,49 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="14">
             <Label Text="The Five Movements" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
-            <Label Text="How a II–V–I hands off to the next key — what the five names really mean, and how to hear each one."
+            <Label Text="How a II–V–I hands off to the next key — where the key center goes, and how to hear each move."
                    HorizontalOptions="Center" TextColor="Gray" />
             <c:InfoNote Text="From Chapter 7, pp. 37–45 of the Level 2 book. Every demo starts from Dmi7–G7–Cma7 in C — the book's reference key." />
 
             <Border Style="{StaticResource Card}" Stroke="{AppThemeBinding Light=#512BD4, Dark=#B7A6FF}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Where the key goes" Style="{StaticResource Heading}" />
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10" RowSpacing="4"
+                          RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
+                        <Label Grid.Row="0" Grid.Column="0" Text="Movement" FontSize="12" FontAttributes="Bold" />
+                        <Label Grid.Row="0" Grid.Column="1" Text="Key center moves" FontSize="12" FontAttributes="Bold" />
+                        <Label Grid.Row="0" Grid.Column="2" Text="From C" FontSize="12" FontAttributes="Bold" />
+
+                        <Label Grid.Row="1" Grid.Column="0" Text="Half-step up" FontSize="12.5" />
+                        <Label Grid.Row="1" Grid.Column="1" Text="down a minor 2nd" FontSize="12.5" />
+                        <Label Grid.Row="1" Grid.Column="2" Text="C → B" FontSize="12.5" />
+
+                        <Label Grid.Row="2" Grid.Column="0" Text="Root commontone" FontSize="12.5" />
+                        <Label Grid.Row="2" Grid.Column="1" Text="down a major 2nd" FontSize="12.5" />
+                        <Label Grid.Row="2" Grid.Column="2" Text="C → Bb" FontSize="12.5" />
+
+                        <Label Grid.Row="3" Grid.Column="0" Text="Half-step down" FontSize="12.5" />
+                        <Label Grid.Row="3" Grid.Column="1" Text="down a minor 3rd" FontSize="12.5" />
+                        <Label Grid.Row="3" Grid.Column="2" Text="C → A" FontSize="12.5" />
+
+                        <Label Grid.Row="4" Grid.Column="0" Text="Circle of 4ths" FontSize="12.5" />
+                        <Label Grid.Row="4" Grid.Column="1" Text="down a perfect 4th" FontSize="12.5" />
+                        <Label Grid.Row="4" Grid.Column="2" Text="C → G" FontSize="12.5" />
+
+                        <Label Grid.Row="5" Grid.Column="0" Text="Circle of 5ths" FontSize="12.5" />
+                        <Label Grid.Row="5" Grid.Column="1" Text="down a perfect 5th" FontSize="12.5" />
+                        <Label Grid.Row="5" Grid.Column="2" Text="C → F" FontSize="12.5" />
+                    </Grid>
+                    <Label FontSize="13.5" Text="All five take the key center DOWN — by 1, 2, 3, 5 or 7 half-steps. They are simply the five nearest keys below the one you're leaving." />
+                    <Label FontSize="13.5" Text="How far the key travels around the circle is exactly how many new accidentals you pick up — so it also tells you how chromatic the move will sound. The two circle moves are one step (one new accidental); Root commontone two; Half-step down three; Half-step up five — the most chromatic of the five." />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource Card}">
                 <VerticalStackLayout Spacing="6">
-                    <Label Text="Read this first" Style="{StaticResource Heading}" />
-                    <Label FontSize="13.5" Text="The five names split into two families — the book says so itself (workbook p. 75). Circle of 5ths and Circle of 4ths describe the relationship between the two KEY CENTERS: one step clockwise or counter-clockwise on the circle. Half-step up, Half-step down and Root commontone describe the bass interval at the seam — from the root of the I chord you're leaving to the root of the II chord that follows." />
-                    <Label FontSize="13.5" Text="The seam names do NOT say where the key goes: 'Half-step up' really does move the bass up a half-step (Cma7 to C#mi7) — but the key center lands a half-step LOWER (C to B)." />
+                    <Label Text="About the names" Style="{StaticResource Heading}" />
+                    <Label FontSize="13.5" Text="Two of the names describe where the key goes — the circle moves. The other three describe the bass interval at the seam instead: from the root of the I chord you're leaving to the root of the II chord that follows. That's why 'Half-step up' moves the bass up a half-step but lands the key a half-step LOWER." />
+                    <Label FontSize="13.5" Text="Each card below gives the key-center move first, then where the name comes from — which doubles as your fastest listening cue, since the seam is what the ear catches first." />
                 </VerticalStackLayout>
             </Border>
 
