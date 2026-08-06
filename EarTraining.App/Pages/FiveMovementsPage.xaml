@@ -14,7 +14,8 @@
             <Border Style="{StaticResource Card}" Stroke="{AppThemeBinding Light=#512BD4, Dark=#B7A6FF}">
                 <VerticalStackLayout Spacing="6">
                     <Label Text="Read this first" Style="{StaticResource Heading}" />
-                    <Label FontSize="13.5" Text="The names describe the bass interval you hear at the seam — from the I chord you're leaving to the II chord that follows. They do NOT describe where the key center goes. 'Half-step up' really does move the bass up a half-step (Cma7 to C#mi7) — but the key lands a half-step LOWER (C to B)." />
+                    <Label FontSize="13.5" Text="The five names split into two families — the book says so itself (workbook p. 75). Circle of 5ths and Circle of 4ths describe the relationship between the two KEY CENTERS: one step clockwise or counter-clockwise on the circle. Half-step up, Half-step down and Root commontone describe the bass interval at the seam — from the root of the I chord you're leaving to the root of the II chord that follows." />
+                    <Label FontSize="13.5" Text="The seam names do NOT say where the key goes: 'Half-step up' really does move the bass up a half-step (Cma7 to C#mi7) — but the key center lands a half-step LOWER (C to B)." />
                 </VerticalStackLayout>
             </Border>
 
