@@ -6,7 +6,7 @@ using EarTraining.Core.Theory;
 namespace EarTraining.App.Pages;
 
 /// <summary>
-/// Blank Sheet Music (Not in the Books): options + a live preview of one Letter page of empty
+/// Blank Sheet Music (Extras): options + a live preview of one Letter page of empty
 /// staves, and a Share button that renders the same page to a vector PDF (see
 /// <see cref="SheetPdf"/>) and hands it to the system share sheet — print, email, text, save.
 /// </summary>

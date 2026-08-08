@@ -16,7 +16,7 @@ public sealed class FlyoutIconConverter : IValueConverter
             title == "Home" ? 0xF015 :              // fa-home
             title == "Progress" ? 0xF201 :          // fa-line-chart
             title == "Settings" ? 0xF013 :          // fa-cog
-            title == "Not in the Books" ? 0xF03A :  // fa-list
+            title == "Extras" ? 0xF03A :            // fa-list
             title == "About" ? 0xF05A :             // fa-info-circle
             title.StartsWith("Level 2") ? 0xF1B3 :  // fa-cubes (progressions)
             0xF001;                                 // fa-music (Level 1 chapters + default)

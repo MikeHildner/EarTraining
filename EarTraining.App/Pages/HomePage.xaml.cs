@@ -5,11 +5,11 @@ namespace EarTraining.App.Pages;
 
 /// <summary>
 /// The app's landing hub: branding plus a two-level, single-open accordion. The top level is the
-/// Level / group (Level 1, Level 2, Other drills, Experimental) — so Home opens as a short list of
-/// four rows. Opening a Level reveals its chapters (each with a one-line description); opening a
-/// chapter reveals its drills. "Other drills" / "Experimental" have no chapters, so they expand
-/// straight to their drill buttons. Opening a row collapses its siblings; the open row is
-/// highlighted. Each drill button carries its ShellContent route in CommandParameter.
+/// Level / group (Level 1, Level 2, Extras) — so Home opens as a short list of three rows.
+/// Opening a Level reveals its chapters (each with a one-line description); opening a chapter
+/// reveals its drills. "Extras" has no chapters, so it expands straight to its drill buttons.
+/// Opening a row collapses its siblings; the open row is highlighted. Each drill button carries
+/// its ShellContent route in CommandParameter.
 /// </summary>
 public partial class HomePage : ContentPage
 {
@@ -108,11 +108,8 @@ public partial class HomePage : ContentPage
             Chapter("Chapter 8", "7-3 melodic lines", new Drill("7-3 Lines", "l2c8", "seven three line guide tones voice leading")),
             Chapter("Chapter 9", "Vocal drills — the circle", new Drill("Vocal Drills", "l2c9", "sing circle fifths fourths fixed moveable do solfege")),
         }),
-        new("Not in the Books", new[]
+        new("Extras", new[]
         {
-            Leaf("Interval ID", "interval", "interval chromatic quality octave tritone"),
-            Leaf("Triad ID", "triad", "triad quality major minor diminished augmented chord"),
-            Leaf("Ratios", "ratios", "ratio just intonation tuning frequency"),
             Leaf("Blank Sheet Music", "blanksheet", "blank sheet staff paper manuscript print pdf share clef"),
         }),
     };
@@ -165,7 +162,7 @@ public partial class HomePage : ContentPage
 
         foreach (var group in Groups)
         {
-            string prefix = group.Title.Split('·')[0].Trim();   // "Level 1" / "Level 2" / "Not in the Books"
+            string prefix = group.Title.Split('·')[0].Trim();   // "Level 1" / "Level 2" / "Extras"
             foreach (var item in group.Items)
             {
                 if (item.Drills is { } drills)

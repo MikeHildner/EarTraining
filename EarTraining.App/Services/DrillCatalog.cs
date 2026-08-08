@@ -45,8 +45,6 @@ public static class DrillCatalog
         ("l2c6",            "L2 C6 · Modal Scales"),
         ("l2c7",            "L2 C7 · II-V-I Progressions"),
         ("l2c8",            "L2 C8 · 7-3 Lines"),
-        ("interval",        "Interval ID"),
-        ("triad",           "Triad ID"),
     };
 
     private static readonly Dictionary<string, string> Names =
