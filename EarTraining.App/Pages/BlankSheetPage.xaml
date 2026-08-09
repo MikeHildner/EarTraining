@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:EarTraining.App.Components"
              x:Class="EarTraining.App.Pages.BlankSheetPage"
              Title="Blank Sheet Music">
     <ScrollView>
@@ -12,15 +13,25 @@
             <Border Style="{StaticResource Card}">
                 <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnSpacing="12" RowSpacing="8">
                     <Label Text="Clef" VerticalOptions="Center" />
-                    <Picker x:Name="ClefPicker" Grid.Column="1" />
+                    <c:PickerField Grid.Column="1">
+                        <Picker x:Name="ClefPicker" />
+                    </c:PickerField>
                     <Label Text="Key signature" Grid.Row="1" VerticalOptions="Center" />
-                    <Picker x:Name="KeyPicker" Grid.Row="1" Grid.Column="1" />
+                    <c:PickerField Grid.Row="1" Grid.Column="1">
+                        <Picker x:Name="KeyPicker" />
+                    </c:PickerField>
                     <Label Text="Time signature" Grid.Row="2" VerticalOptions="Center" />
-                    <Picker x:Name="TimePicker" Grid.Row="2" Grid.Column="1" />
+                    <c:PickerField Grid.Row="2" Grid.Column="1">
+                        <Picker x:Name="TimePicker" />
+                    </c:PickerField>
                     <Label Text="Measures per line" Grid.Row="3" VerticalOptions="Center" />
-                    <Picker x:Name="MeasuresPicker" Grid.Row="3" Grid.Column="1" />
+                    <c:PickerField Grid.Row="3" Grid.Column="1">
+                        <Picker x:Name="MeasuresPicker" />
+                    </c:PickerField>
                     <Label Text="Staves per page" Grid.Row="4" VerticalOptions="Center" />
-                    <Picker x:Name="StavesPicker" Grid.Row="4" Grid.Column="1" />
+                    <c:PickerField Grid.Row="4" Grid.Column="1">
+                        <Picker x:Name="StavesPicker" />
+                    </c:PickerField>
                     <Label Text="Landscape" Grid.Row="5" VerticalOptions="Center" />
                     <Switch x:Name="LandscapeSwitch" Grid.Row="5" Grid.Column="1" HorizontalOptions="Start" />
                 </Grid>

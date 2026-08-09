@@ -18,11 +18,15 @@
                 </Label.GestureRecognizers>
             </Label>
 
-            <Picker x:Name="DrillPicker" Title="Drill" />
+            <c:PickerField>
+                <Picker x:Name="DrillPicker" Title="Drill" />
+            </c:PickerField>
 
             <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
                 <Label Text="Tempo" VerticalOptions="Center" />
-                <Picker x:Name="TempoPicker" Grid.Column="1" />
+                <c:PickerField Grid.Column="1">
+                    <Picker x:Name="TempoPicker" />
+                </c:PickerField>
             </Grid>
 
             <Button x:Name="PlayButton" Text="▶ Play (sing along)" Clicked="OnPlay" />

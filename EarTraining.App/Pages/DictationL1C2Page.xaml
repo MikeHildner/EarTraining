@@ -15,13 +15,21 @@
             <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto"
                   ColumnSpacing="12" RowSpacing="8">
                 <Label Text="Key" VerticalOptions="Center" Grid.Row="0" Grid.Column="0" />
-                <Picker x:Name="KeyPicker" Grid.Row="0" Grid.Column="1" />
+                <c:PickerField Grid.Row="0" Grid.Column="1">
+                    <Picker x:Name="KeyPicker" />
+                </c:PickerField>
                 <Label Text="BPM" VerticalOptions="Center" Grid.Row="1" Grid.Column="0" />
-                <Picker x:Name="BpmPicker" Grid.Row="1" Grid.Column="1" />
+                <c:PickerField Grid.Row="1" Grid.Column="1">
+                    <Picker x:Name="BpmPicker" />
+                </c:PickerField>
                 <Label Text="Measures" VerticalOptions="Center" Grid.Row="2" Grid.Column="0" />
-                <Picker x:Name="MeasuresPicker" Grid.Row="2" Grid.Column="1" />
+                <c:PickerField Grid.Row="2" Grid.Column="1">
+                    <Picker x:Name="MeasuresPicker" />
+                </c:PickerField>
                 <Label Text="Smallest note" VerticalOptions="Center" Grid.Row="3" Grid.Column="0" />
-                <Picker x:Name="RhythmPicker" Grid.Row="3" Grid.Column="1" />
+                <c:PickerField Grid.Row="3" Grid.Column="1">
+                    <Picker x:Name="RhythmPicker" />
+                </c:PickerField>
             </Grid>
 
             <Button Text="↻ New Dictation" Clicked="OnNewDictation" />

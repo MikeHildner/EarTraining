@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:EarTraining.App.Components"
              x:Class="EarTraining.App.Pages.DictationPage"
              Title="L1 C1 · Dictation">
     <ScrollView>
@@ -12,13 +13,21 @@
             <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto"
                   ColumnSpacing="12" RowSpacing="8">
                 <Label Text="Resolution" VerticalOptions="Center" Grid.Row="0" Grid.Column="0" />
-                <Picker x:Name="ResolutionPicker" Grid.Row="0" Grid.Column="1" />
+                <c:PickerField Grid.Row="0" Grid.Column="1">
+                    <Picker x:Name="ResolutionPicker" />
+                </c:PickerField>
                 <Label Text="Key" VerticalOptions="Center" Grid.Row="1" Grid.Column="0" />
-                <Picker x:Name="KeyPicker" Grid.Row="1" Grid.Column="1" />
+                <c:PickerField Grid.Row="1" Grid.Column="1">
+                    <Picker x:Name="KeyPicker" />
+                </c:PickerField>
                 <Label Text="BPM" VerticalOptions="Center" Grid.Row="2" Grid.Column="0" />
-                <Picker x:Name="BpmPicker" Grid.Row="2" Grid.Column="1" />
+                <c:PickerField Grid.Row="2" Grid.Column="1">
+                    <Picker x:Name="BpmPicker" />
+                </c:PickerField>
                 <Label Text="Measures" VerticalOptions="Center" Grid.Row="3" Grid.Column="0" />
-                <Picker x:Name="MeasuresPicker" Grid.Row="3" Grid.Column="1" />
+                <c:PickerField Grid.Row="3" Grid.Column="1">
+                    <Picker x:Name="MeasuresPicker" />
+                </c:PickerField>
             </Grid>
 
             <Button Text="New Dictation" Clicked="OnNewDictation" />

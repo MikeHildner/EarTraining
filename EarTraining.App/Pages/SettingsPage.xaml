@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:EarTraining.App.Components"
              x:Class="EarTraining.App.Pages.SettingsPage"
              Title="Settings">
     <ScrollView>
@@ -10,7 +11,9 @@
             <Border Style="{StaticResource Card}">
                 <VerticalStackLayout Spacing="8">
                     <Label Text="Appearance" Style="{StaticResource Heading}" />
-                    <Picker x:Name="ThemePicker" Title="Theme" />
+                    <c:PickerField>
+                        <Picker x:Name="ThemePicker" Title="Theme" />
+                    </c:PickerField>
                 </VerticalStackLayout>
             </Border>
 
@@ -19,7 +22,9 @@
                     <Label Text="Practice key" Style="{StaticResource Heading}" />
                     <Label Text="Fix the DO for every drill, or keep it random. Applies to the DO-based drills and sets the default key for Dictation (not Level 2)."
                            TextColor="Gray" FontSize="12.5" />
-                    <Picker x:Name="KeyPicker" Title="Key" />
+                    <c:PickerField>
+                        <Picker x:Name="KeyPicker" Title="Key" />
+                    </c:PickerField>
                 </VerticalStackLayout>
             </Border>
 
@@ -36,7 +41,9 @@
                     <Label Text="Automation" Style="{StaticResource Heading}" />
                     <Label Text="How long Automation waits between drills."
                            TextColor="Gray" FontSize="12.5" />
-                    <Picker x:Name="PacePicker" Title="Pace" />
+                    <c:PickerField>
+                        <Picker x:Name="PacePicker" Title="Pace" />
+                    </c:PickerField>
                 </VerticalStackLayout>
             </Border>
         </VerticalStackLayout>
