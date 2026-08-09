@@ -110,7 +110,7 @@ public partial class HomePage : ContentPage
         }),
         new("Extras", new[]
         {
-            Leaf("Blank Sheet Music", "blanksheet", "blank sheet staff paper manuscript print pdf share clef"),
+            Leaf("Blank Sheet Music", "blanksheet", "blank sheet staff paper manuscript print pdf share clef treble bass alto tenor viola"),
         }),
     };
 

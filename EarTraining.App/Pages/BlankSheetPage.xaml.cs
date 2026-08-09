@@ -14,21 +14,30 @@ public partial class BlankSheetPage : ContentPage
 {
     private readonly NotationRenderer _notation = new();
     private bool _previewReady;
+    private bool _suppress;   // guards the re-entrant SelectedIndexChanged while relabelling Staves
+
+    // VexFlow clef names, keyed by the picker's label. "None" = plain 5-line staves.
+    // Alto covers viola, tenor covers cello/trombone/bassoon — the app isn't just for
+    // piano, guitar and bass players.
+    private static readonly (string Label, string? Clef)[] Clefs =
+    [
+        ("None", null), ("Treble", "treble"), ("Bass", "bass"), ("Alto", "alto"), ("Tenor", "tenor"),
+    ];
 
     public BlankSheetPage()
     {
         InitializeComponent();
 
-        ClefPicker.ItemsSource = new List<string> { "Treble", "Bass", "None" };
-        ClefPicker.SelectedIndex = 0;
+        ClefPicker.ItemsSource = Clefs.Select(c => c.Label).ToList();
+        ClefPicker.SelectedIndex = 0;       // start clean: no clef, no key
         KeyPicker.ItemsSource = new[] { "None" }.Concat(Keys.All).ToList();
         KeyPicker.SelectedIndex = 0;
+        KeyPicker.IsEnabled = false;        // no clef yet, so nothing for a key signature to sit on
         TimePicker.ItemsSource = new List<string> { "None", "4/4" };
         TimePicker.SelectedIndex = 0;
         MeasuresPicker.ItemsSource = new List<string> { "Off", "2", "4" };
         MeasuresPicker.SelectedIndex = 0;   // default: classic unbarred manuscript
-        StavesPicker.ItemsSource = new List<string> { "Default", "4", "5", "6", "7", "8", "10", "12" };
-        StavesPicker.SelectedIndex = 0;     // Default = 10 portrait / 7 landscape
+        BuildStavesPicker(0);               // "Default (10)" portrait / "Default (7)" landscape
 
         ClefPicker.SelectedIndexChanged += OnOptionChanged;
         KeyPicker.SelectedIndexChanged += OnOptionChanged;
@@ -40,9 +49,12 @@ public partial class BlankSheetPage : ContentPage
         RebuildPreview();
     }
 
+    private string? SelectedClef =>
+        ClefPicker.SelectedIndex >= 0 ? Clefs[ClefPicker.SelectedIndex].Clef : null;
+
     private BlankSheetOptions Options => new(
-        Clef: ClefPicker.SelectedIndex switch { 0 => "treble", 1 => "bass", _ => null },
-        KeySignature: ClefPicker.SelectedIndex == 2 || KeyPicker.SelectedIndex <= 0
+        Clef: SelectedClef,
+        KeySignature: SelectedClef is null || KeyPicker.SelectedIndex <= 0
             ? null
             : (string)KeyPicker.SelectedItem,
         FourFour: TimePicker.SelectedIndex == 1,
@@ -50,13 +62,32 @@ public partial class BlankSheetPage : ContentPage
         Landscape: LandscapeSwitch.IsToggled,
         StavesPerPage: StavesPicker.SelectedIndex <= 0 ? 0 : int.Parse((string)StavesPicker.SelectedItem));
 
+    // The first entry names the number it actually produces, so nobody has to guess what
+    // "Default" means — and it follows the orientation (Core: 10 portrait, 7 landscape).
+    private void BuildStavesPicker(int selectedIndex)
+    {
+        _suppress = true;
+        StavesPicker.ItemsSource = new List<string>
+        {
+            LandscapeSwitch.IsToggled ? "Default (7)" : "Default (10)", "4", "5", "6", "7", "8", "10", "12",
+        };
+        StavesPicker.SelectedIndex = selectedIndex;
+        _suppress = false;
+    }
+
     private void OnOptionChanged(object? sender, EventArgs e)
     {
+        if (_suppress) return;
+
         // A key signature needs a clef to sit on: Clef "None" disables the key picker and
         // snaps it to None (the re-entrant SelectedIndexChanged does the rebuild).
-        bool clefless = ClefPicker.SelectedIndex == 2;
+        bool clefless = SelectedClef is null;
         KeyPicker.IsEnabled = !clefless;
         if (clefless && KeyPicker.SelectedIndex != 0) { KeyPicker.SelectedIndex = 0; return; }
+
+        // Flipping orientation changes what "Default" means; relabel it, keeping the choice.
+        if (sender == LandscapeSwitch) BuildStavesPicker(StavesPicker.SelectedIndex);
+
         RebuildPreview();
     }
 
