@@ -68,11 +68,11 @@ public partial class BassLineDictationPage : ContentPage
     private string Key => (string)KeyPicker.SelectedItem;
     private double Bpm => double.Parse((string)BpmPicker.SelectedItem);
     private int Measures => int.Parse((string)MeasuresPicker.SelectedItem);
-    private DictationRhythmStyle Style => (DictationRhythmStyle)RhythmPicker.SelectedIndex;
+    private DictationRhythmStyle RhythmStyle => (DictationRhythmStyle)RhythmPicker.SelectedIndex;
 
     private void NewDrill()
     {
-        _drill = BassLineDictationDrill.Next(_chapter, Key, Bpm, Measures, Style, _rng);
+        _drill = BassLineDictationDrill.Next(_chapter, Key, Bpm, Measures, RhythmStyle, _rng);
         NotationWeb.IsVisible = false;
         RevealButton.Text = "Reveal transcription";
         StatusLabel.Text = $"New bass line in {_drill.Key} at {_drill.Bpm:0} bpm — press Play.";
