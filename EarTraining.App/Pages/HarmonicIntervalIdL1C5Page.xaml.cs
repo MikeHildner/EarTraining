@@ -112,7 +112,7 @@ public partial class HarmonicIntervalIdL1C5Page : ContentPage, IAutomatableDrill
 
     private async Task PlayDrillAsync(L1C5IntervalDrill drill)
     {
-        // Two notes played together (with a slight upward roll so both pitches are heard).
+        // Two notes played together.
         var low = await _samples.LoadAsync(Note.SampleFile(DoHeader.Do + drill.Offsets[0]));
         var high = await _samples.LoadAsync(Note.SampleFile(DoHeader.Do + drill.Offsets[1]));
         _audio.Play(AudioRenderer.RenderHarmonic(new[] { low, high }, seconds: 3.0));

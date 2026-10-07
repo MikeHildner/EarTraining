@@ -3,7 +3,7 @@ namespace EarTraining.Core.Drills;
 /// <summary>
 /// A diatonic triad recognition drill (L1C3 "Index", p.54): the I, IV and V major triads of
 /// the key, each at root / 1st / 2nd inversion, played as a chord. <see cref="Offsets"/> are
-/// semitones from DO (sorted ascending for a clean low→high roll). Ported from
+/// semitones from DO, sorted ascending (low→high). Ported from
 /// L1C3Controller.GetTriadEx + Inversion.CreateTriadInversionEx (no bass note).
 /// </summary>
 public sealed record DiatonicTriadDrill(int TriadIndex, int InversionIndex, IReadOnlyList<int> Offsets)

@@ -17,17 +17,14 @@ public static class AudioRenderer
     }
 
     /// <summary>
-    /// Notes played together (overlaid), with headroom to avoid clipping. Each
-    /// successive (higher) voice enters <paramref name="staggerSeconds"/> later — a
-    /// slight upward roll. A small onset asynchrony is the ear's strongest cue for
-    /// hearing two pitches instead of one fused tone (the octave is the worst case:
-    /// the upper fundamental lands on the lower note's 2nd harmonic). Pass 0 for a
-    /// dead-simultaneous block chord.
+    /// Notes played together (overlaid), with headroom to avoid clipping. Every note starts
+    /// at the same instant, by design: Mark wants no roll, even though a harmonic octave
+    /// struck this way tends to fuse into one tone (a 50 ms roll shipped through v1.4).
     /// </summary>
-    public static byte[] RenderHarmonic(IReadOnlyList<byte[]> noteWavs, double seconds = 1.2, double gain = 0.6, double staggerSeconds = 0.05)
+    public static byte[] RenderHarmonic(IReadOnlyList<byte[]> noteWavs, double seconds = 1.2, double gain = 0.6)
     {
         var notes = noteWavs.Select(b => Slice(WavBuffer.Read(b), seconds)).ToArray();
-        return Mix(gain, staggerSeconds, notes).Write();
+        return Mix(gain, notes).Write();
     }
 
     /// <summary>
@@ -63,7 +60,7 @@ public static class AudioRenderer
         for (int i = 0; i < melodyBeats; i++) metroParts.Add(Fit(tickBuf, quarter));
         var metroVoice = Gain(Concat(metroParts), 0.5);
 
-        return Mix(gain, 0, [melodyVoice, metroVoice]).Write();
+        return Mix(gain, [melodyVoice, metroVoice]).Write();
     }
 
     /// <summary>A bare melodic sequence: each note fit to its exact duration, then
@@ -89,7 +86,7 @@ public static class AudioRenderer
                 var voices = step.chord.Select(b => Fit(WavBuffer.Read(b), step.seconds)).ToList();
                 if (topGain != 1.0 && voices.Count > 1)
                     voices[^1] = Gain(voices[^1], topGain);
-                return Mix(gain, 0, voices);
+                return Mix(gain, voices);
             })
             .ToList();
         return Concat(parts).Write();
@@ -112,28 +109,18 @@ public static class AudioRenderer
         return new WavBuffer { SampleRate = first.SampleRate, Channels = first.Channels, Samples = s };
     }
 
-    private static WavBuffer Mix(double gain, double staggerSeconds, IReadOnlyList<WavBuffer> voices)
+    private static WavBuffer Mix(double gain, IReadOnlyList<WavBuffer> voices)
     {
         var first = voices[0];
-        // Per-voice delay in interleaved samples; computed in whole frames then
-        // x channels so L/R stay aligned. Voice v starts at v * stagger.
-        int stagger = (int)(staggerSeconds * first.SampleRate) * first.Channels;
-        int len = 0;
-        for (int v = 0; v < voices.Count; v++)
-            len = Math.Max(len, v * stagger + voices[v].Samples.Length);
-
-        var acc = new double[len];
-        for (int v = 0; v < voices.Count; v++)
-        {
-            int offset = v * stagger;
-            var samples = voices[v].Samples;
-            for (int i = 0; i < samples.Length; i++)
-                acc[offset + i] += samples[i] * gain;
-        }
-
+        int len = voices.Max(v => v.Samples.Length);
         var s = new short[len];
         for (int i = 0; i < len; i++)
-            s[i] = (short)Math.Clamp(acc[i], short.MinValue, short.MaxValue);
+        {
+            double sum = 0;
+            foreach (var v in voices)
+                if (i < v.Samples.Length) sum += v.Samples[i] * gain;
+            s[i] = (short)Math.Clamp(sum, short.MinValue, short.MaxValue);
+        }
         return new WavBuffer { SampleRate = first.SampleRate, Channels = first.Channels, Samples = s };
     }
 

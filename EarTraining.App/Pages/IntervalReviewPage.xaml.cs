@@ -118,7 +118,7 @@ public partial class IntervalReviewPage : ContentPage, IAutomatableDrill
     {
         if (Harmonic)
         {
-            // Two notes together (slight upward roll so both pitches are heard).
+            // Two notes together.
             var low = await _samples.LoadAsync(Note.SampleFile(DoHeader.Do + drill.Offsets[0]));
             var high = await _samples.LoadAsync(Note.SampleFile(DoHeader.Do + drill.Offsets[1]));
             _audio.Play(AudioRenderer.RenderHarmonic(new[] { low, high }, seconds: 3.0));
